@@ -1,6 +1,5 @@
 import discord
 import os
-from boto.s3.connection import S3Connection
 
 intents = discord.Intents.default()
 intents.members = True
@@ -20,5 +19,4 @@ async def on_message(message):
         await message.channel.send("hi!")
     return
 
-#TOKEN = S3Connection(os.environ['TOKEN'])
 client.run(os.environ['TOKEN'])
