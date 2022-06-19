@@ -152,6 +152,24 @@ async def on_message(message):
                     await message.channel.send("I didn't find anyone with that combination of Name and Tag.")
                     return
 
+            if "remove" in msg and "ckr" in msg:
+                if usr.id == 267014823315898368:
+                    server = client.get_guild(624227331720085528)
+                    role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                    message_split = msg.split(" ")
+                    target = message_split[1]
+
+                    for member in server.members:
+                        if member.name + "#" + member.discriminator == target:
+                            await asyncio.sleep(5)
+                            await member.remove_roles(role)
+                            await asyncio.sleep(2)
+                            await message.channel.send("Done. Don't do it again.")
+                            return
+                            
+                    await message.channel.send("I didn't find anyone with that combination of Name and Tag.")
+                    return
+
             msg = msg.lower()
 
             if len(usr.display_name) == 12:
