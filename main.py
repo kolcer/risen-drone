@@ -540,7 +540,7 @@ async def on_message(message):
                         (id SERIAL PRIMARY KEY,
                         content TEXT NOT NULL); '''
                     for alignment in alignments:
-                        cursor.execute(create_table_query,(alignment))
+                        cursor.execute(create_table_query,(alignment,))
                         created = created + alignment + " tips db created, "
                         cursor.execute(create_table_query,(alignment + 'T'))
                         created = created + alignment + " trivia db created, "
