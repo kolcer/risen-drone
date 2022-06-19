@@ -19,4 +19,13 @@ async def on_message(message):
         await message.channel.send("hi!")
     return
 
+    if "morph to architect" in msg:
+        role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
+          
+        if role in usr.roles:
+            await message.channel.send("You are already an Architect, smh.")
+        else:
+            await message.channel.send("You should boost the server if you crave for that role.")
+        return
+
 client.run(os.environ['TOKEN'])
