@@ -139,12 +139,11 @@ async def on_message(message):
 
                     for member in server.members:
                         if member.name == target:
-                            print("entered")
                             await asyncio.sleep(5)
                             await member.add_roles(role)
                             await asyncio.sleep(2)
                             await channel.send(member.name + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
-                        return
+                    return
 
             msg = msg.lower()
 
