@@ -15,7 +15,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content == "hi":
+    if message.content.lower() == "hi":
         await message.channel.send("hi!")
     return
 
