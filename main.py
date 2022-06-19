@@ -15,15 +15,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.lower() == "hi":
-        await message.channel.send("hi!")
-    return
-
-async def on_message(message):
     msg = message.content
     usr = message.author
 
-    if message.content.lower() == "morph to architect":
+    if message.content.lower() == "hi":
+        await message.channel.send("hi!")
+        return
+
+    if "morph to architect" in msg:
         role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
           
         if role in usr.roles:
