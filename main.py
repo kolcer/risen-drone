@@ -106,32 +106,8 @@ thiefname = [
 
 k_role = "Ultimate Chat Killer"
 
-#create table in the database, used only once per table
 
-def create_tables():
-    try:
-        connection = psycopg2.connect(DATABASE_URL)
-        cursor = connection.cursor()
-        # SQL query to create a new table
-        create_table_query = '''CREATE TABLE %s 
-            (id SERIAL PRIMARY KEY,
-            content TEXT NOT NULL); '''
-        for alignment in alignments:
-            cursor.execute(create_table_query,(alignment))
-            asyncio.sleep(3)
-            await channel.send("Created " + alignment + " tips database")
-            cursor.execute(create_table_query,(alignment + 'T'))
-            asyncio.sleep(3)
-            await channel.send("Created " + alignment + " trivia database.")
-        record = "Succesfully created all databases!"
-    except (Exception, Error) as error:
-        record = error
-    finally:
-        if (connection):
-            cursor.close()
-            connection.close()
-            await channel.send(record)
-    return
+
 
 intents = discord.Intents.default()
 intents.members = True
@@ -555,8 +531,28 @@ async def on_message(message):
         else:
             if msg == "]create" and usr.id == 481893862864846861:
                 await message.channel.send("Let do this.")
-                create_tables()
-                return
+                    try:
+                        connection = psycopg2.connect(DATABASE_URL)
+                        cursor = connection.cursor()
+                        # SQL query to create a new table
+                        create_table_query = '''CREATE TABLE %s 
+                            (id SERIAL PRIMARY KEY,
+                            content TEXT NOT NULL); '''
+                        for alignment in alignments:
+                            cursor.execute(create_table_query,(alignment))
+                            asyncio.sleep(3)
+                            await channel.send("Created " + alignment + " tips database")
+                            cursor.execute(create_table_query,(alignment + 'T'))
+                            asyncio.sleep(3)
+                            await channel.send("Created " + alignment + " trivia database.")
+                        record = "Succesfully created all databases!"
+                    except (Exception, Error) as error:
+                        record = error
+                    finally:
+                        if (connection):
+                            cursor.close()
+                            connection.close()
+                            await channel.send(record)
 
 
         
