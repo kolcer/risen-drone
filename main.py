@@ -20,6 +20,6 @@ async def on_message(message):
 
     if msg.lower() == "hi":
         await message.channel.send("hi!")
-    return
+        return
 
 client.run(os.environ['TOKEN'])
