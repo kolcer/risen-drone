@@ -474,7 +474,7 @@ async def on_message(message):
                     await message.channel.send("It is not that time of the year, yet.")
                 return
 
-            if '<:cs_Stairbonk:812813052822421555>' in msg:
+            if ':csStairBonk:' == msg:
                 await message.channel.send('Tsk.')
                 return  
             
