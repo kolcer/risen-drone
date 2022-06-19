@@ -536,7 +536,7 @@ async def on_message(message):
                     cursor = connection.cursor()
                     # SQL query to create a new table
                     record = "Created "
-                    create_table_query = '''CREATE TABLE %s 
+                    create_table_query = '''CREATE TABLE %s IF NOT EXISTS
                         (id SERIAL PRIMARY KEY,
                         content TEXT NOT NULL); '''
                     for alignment in alignments:
@@ -551,6 +551,6 @@ async def on_message(message):
                     if (connection):
                         cursor.close()
                         connection.close()
-                        await channel.send(record)
+                        await message.channel.send(record)
         
 client.run(os.environ['TOKEN'])
