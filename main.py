@@ -553,7 +553,7 @@ async def on_message(message):
             #         return    
                     
         else:
-            if msg == "]create" and usr.id = 481893862864846861:
+            if msg == "]create" and usr.id == 481893862864846861:
                 await message.channel.send("Let do this.")
                 create_tables()
                 return
