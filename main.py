@@ -468,7 +468,11 @@ async def on_message(message):
                     #     await member.remove_roles(good_role)
                     # await asyncio.sleep(5)
                     # await usr.add_roles(good_role)
-                    return       
+                    return    
+        else:
+
+            await message.channel.send("Add the rest here.")
+
 
         
 
