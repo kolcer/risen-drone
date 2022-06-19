@@ -108,7 +108,7 @@ k_role = "Ultimate Chat Killer"
 
 #create table in the database, used only once per table
 
-def create_tables()
+def create_tables():
     try:
         connection = psycopg2.connect(DATABASE_URL)
         cursor = connection.cursor()
