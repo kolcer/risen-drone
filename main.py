@@ -18,7 +18,7 @@ async def on_message(message):
     msg = message.content
     usr = message.author
 
-    if usr.id != 956138107282022440:
+    if usr.bot == False:
 
         if "hi" in msg:
             await message.channel.send("hi!")
