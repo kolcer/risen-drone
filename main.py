@@ -22,4 +22,8 @@ async def on_message(message):
         await message.channel.send("hi!")
         return
 
+    if msg.lower() == "rip":
+        await message.channel.send("RIP")
+        return
+
 client.run(os.environ['TOKEN'])
