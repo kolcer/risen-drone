@@ -3,6 +3,7 @@ import os
 import random
 import asyncio
 from datetime import datetime
+from datetime import date
 
 best_alignment = ["best", "alignment", "?"]
 tutorial_abuse = ["bug", "tutorial"]
@@ -467,7 +468,7 @@ async def on_message(message):
                 return
 
             if "happy birthday fallen drone" in msg:
-                if datetime.today().date() == "2022-06-19":
+                if datetime.today().date() == date(2022, 6, 19):
                     await message.channel.send("Thank you for remembering. Where's my gift?")
                 else:
                     await message.channel.send("It is not that time of the year, yet.")
