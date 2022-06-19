@@ -476,16 +476,19 @@ async def on_message(message):
                     message = msg.split(" ")
                     target = message[1]
 
-                    for member in discord.Guild.members:
-                        if member == target:
-                            await asyncio.sleep(5)
-                            await member.add_roles(role)
-                            await asyncio.sleep(2)
-                            await message.channel.send(member + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
+                    await message.channel.send(target)
+                    await message.channel.send(target.name)
 
-                            await asyncio.sleep(10)
-                            await member.remove_roles(role)
-                            await message.channel.send("Role removed because this is a test.")
+                    # for member in discord.Guild.members:
+                    #     if member == target:
+                    #         await asyncio.sleep(5)
+                    #         await member.add_roles(role)
+                    #         await asyncio.sleep(2)
+                    #         await message.channel.send(member + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
+
+                    #         await asyncio.sleep(10)
+                    #         await member.remove_roles(role)
+                    #         await message.channel.send("Role removed because this is a test.")
 
 
                     
