@@ -112,7 +112,8 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     game = discord.Game("Sane Ladders")
     await client.change_presence(activity=game)
-    client.channels.cache.get("813882658156838923").send("I have been updated!")
+    channel = client.get_channel(813882658156838923)
+    await channel.send('I have been updated!')
     return
 
 @client.event
