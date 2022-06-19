@@ -129,6 +129,23 @@ async def on_message(message):
         ## message must not start with >
         if not msg.startswith(">"):
 
+            if "give" in msg and "ckr" in msg:
+                if usr.id == 267014823315898368:
+                    channel = client.get_channel(813882658156838923)
+                    server = client.get_guild(624227331720085528)
+                    role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                    message = msg.split(" ")
+                    target = message[1]
+
+                    for member in server.members:
+                        if member.name == target:
+                            print("entered")
+                            await asyncio.sleep(5)
+                            await member.add_roles(role)
+                            await asyncio.sleep(2)
+                            await channel.send(member.name + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
+                        return
+
             msg = msg.lower()
 
             if len(usr.display_name) == 12:
