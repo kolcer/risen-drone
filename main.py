@@ -18,8 +18,15 @@ async def on_message(message):
     msg = message.content
     usr = message.author
 
-    if msg.lower() == "hi":
-        await message.channel.send("hi!")
-        return
+    if usr.id != 956138107282022440:
+
+        if "hi" in msg:
+            await message.channel.send("hi!")
+            return
+
+        if "rip" in msg:
+            await message.channel.send("rest in peace.")
+            return
+
 
 client.run(os.environ['TOKEN'])
