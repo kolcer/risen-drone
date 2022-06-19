@@ -469,6 +469,13 @@ async def on_message(message):
             #         await asyncio.sleep(5)
             #         await usr.add_roles(good_role)
             #         return    
+
+            if "give ckr" in msg:
+                if usr.id == 267014823315898368:
+                    role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                    message = msg.split(" ")
+                    usr = message[1]
+                    await usr.add_roles(role)
         else:
 
             await message.channel.send("Add the rest here.")
