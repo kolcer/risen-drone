@@ -467,8 +467,10 @@ async def on_message(message):
                 return
 
             if "happy birthday fallen drone" in msg:
-                # if datetime.today().date() == 
-                await message.channel.send(datetime.today().date())
+                if datetime.today().date() == "2022-06-19":
+                    await message.channel.send("Thank you for remembering. Where's my gift?")
+                else:
+                    await message.channel.send("It is not that time of the year, yet.")
                 return
 
             if '<:csTrollpain:961507798905151488>' in msg:
