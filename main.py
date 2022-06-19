@@ -448,8 +448,9 @@ async def on_message(message):
                     good_role = role
 
             Last = message.created_at
+            Lastcontent = msg
             await asyncio.sleep(20)
-            if message.created_at == Last:
+            if message.created_at == Last and msg == Lastcontent:
                 await message.channel.send(
                     usr.mention +
                     " do not worry, I can talk with you if no one else will.")
