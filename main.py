@@ -449,26 +449,26 @@ async def on_message(message):
                 await message.channel.send('Tsk.')
                 return  
             
-            if message.channel.id == 813882658156838923:
+            # if message.channel.id == 813882658156838923:
 
-                good_roles = {}
-                server_roles = message.guild.roles
+            #     good_roles = {}
+            #     server_roles = message.guild.roles
 
-                for role in server_roles:
-                    if role.name in k_role:
-                        good_role = role
+            #     for role in server_roles:
+            #         if role.name in k_role:
+            #             good_role = role
 
-                Last = message.created_at
-                await asyncio.sleep(20)
-                if message.created_at == Last:
-                    await message.channel.send(
-                        usr.mention +
-                        " do not worry, I can talk with you if no one else will.")
-                    # for member in good_role.members:
-                    #     await member.remove_roles(good_role)
-                    # await asyncio.sleep(5)
-                    # await usr.add_roles(good_role)
-                    return    
+            #     Last = message.created_at
+            #     await asyncio.sleep(20)
+            #     if message.created_at == Last:
+            #         await message.channel.send(
+            #             usr.mention +
+            #             " do not worry, I can talk with you if no one else will.")
+            #         for member in good_role.members:
+            #             await member.remove_roles(good_role)
+            #         await asyncio.sleep(5)
+            #         await usr.add_roles(good_role)
+            #         return    
         else:
 
             await message.channel.send("Add the rest here.")
