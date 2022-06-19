@@ -2,6 +2,7 @@ import discord
 import os
 import random
 import asyncio
+from datetime import datetime
 
 best_alignment = ["best", "alignment", "?"]
 tutorial_abuse = ["bug", "tutorial"]
@@ -466,7 +467,8 @@ async def on_message(message):
                 return
 
             if "happy birthday fallen drone" in msg:
-                await message.channel.send("It is not that time of the year, yet.")
+                # if datetime.today().date() == 
+                await message.channel.send(datetime.today().date())
                 return
 
             if '<:csTrollpain:961507798905151488>' in msg:
