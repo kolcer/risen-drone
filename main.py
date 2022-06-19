@@ -488,10 +488,10 @@ async def on_message(message):
                     await message.channel.send(
                         usr.mention +
                         " do not worry, I can talk with you if no one else will.")
-                    for member in good_role.members:
-                        await member.remove_roles(good_role)
-                    await asyncio.sleep(5)
-                    await usr.add_roles(good_role)
+                    # for member in good_role.members:
+                    #     await member.remove_roles(good_role)
+                    # await asyncio.sleep(5)
+                    # await usr.add_roles(good_role)
                     return    
                     
         else:
