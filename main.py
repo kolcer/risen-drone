@@ -2,6 +2,8 @@ import discord
 import os
 import random
 import asyncio
+import psycopg2
+from psycopg2 import Error
 from datetime import date
 
 best_alignment = ["best", "alignment", "?"]
@@ -116,7 +118,19 @@ async def on_ready():
 
     channel = client.get_channel(813882658156838923)
     await channel.send('The last code edited is now effective.')
-
+    record = ''
+    try:
+        connection = psycopg2.connect(DATABASE_URL)
+        cursor = connection.cursor()
+        cursor.execute("SELECT version();")
+        record = cursor.fetchone()
+    except (Exception, Error) as error:
+        record = error
+    finally:
+        if (connection):
+            cursor.close()
+            connection.close()
+            await channel.send(record)
     return
 
 Last = 0
