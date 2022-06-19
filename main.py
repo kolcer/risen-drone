@@ -490,27 +490,6 @@ async def on_message(message):
             #         await asyncio.sleep(5)
             #         await usr.add_roles(good_role)
             #         return    
-
-            # if "give ckr" in msg:
-            #     if usr.id == 267014823315898368:
-            #         role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
-            #         message = msg.split(" ")
-            #         target = message[1]
-
-            #         await message.channel.send(target)
-
-            #         for member in discord.Guild.members:
-            #             if member == target:
-            #                 await asyncio.sleep(5)
-            #                 await member.add_roles(role)
-            #                 await asyncio.sleep(2)
-            #                 await message.channel.send(member + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
-
-            #                 await asyncio.sleep(10)
-            #                 await member.remove_roles(role)
-            #                 await message.channel.send("Role removed because this is a test.")
-
-
                     
         else:
 
