@@ -112,8 +112,10 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     game = discord.Game("Sane Ladders")
     await client.change_presence(activity=game)
+
     channel = client.get_channel(813882658156838923)
     await channel.send('The last code edited is now effective.')
+
     return
 
 @client.event
@@ -121,8 +123,10 @@ async def on_message(message):
     msg = message.content
     usr = message.author
 
+    ## user must not be a bot
     if usr.bot == False:
 
+        ## message must not start with >
         if not msg.startswith(">"):
 
             msg = msg.lower()
@@ -276,191 +280,195 @@ async def on_message(message):
                                 await usr.remove_roles(good_roles[role])
                                 await message.channel.send(
                                     "You have unsubscribed from " + pingable + ".")
-                                return
+                                return 
+
+            if "morph to architect" in msg:
+                role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
+            
+                if role in usr.roles:
+                    await message.channel.send("You are already an Architect, smh.")
+                else:
+                    await message.channel.send("You should boost the server if you crave for that role.")
+                return
+
+            if "demorph from architect" in msg:
+                role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
+            
+                if role in usr.roles:
+                    await message.channel.send("Just wait for the boost to expire.")
+                else:
+                    await message.channel.send("You are no longer an Architect.")
+                return
+            
+        
+            if "gun" in msg:
+                await message.channel.send("<:cs_Stairbonk:812813052822421555>")
+                return
+
+            if all(word in msg for word in best_alignment):
+                await message.channel.send(
+                    'Keeper obviously. Stop asking stupid questions.')
+                return
+
+            if all(word in msg for word in tutorial_abuse):
+                await message.channel.send(
+                    'Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...'
+                )
+                return
+
+            if all(word in msg for word in trapped):
+                await message.channel.send('Haha. You got stuck in stairs!')
+                return
+
+            if all(word in msg for word in about_me):
+                await message.channel.send('I fell, okay?')
+                return
+
+            if "<@!827952429290618943>" in msg:
+                #print(msg)
+                await message.channel.send(usr.mention +
+                                        ' <:csRbxangryping:786325219727638535>')
+                return
+
+            if all(word in msg for word in when_infinite):
+                await message.channel.send(
+                    'Infinite Tower has already been released.')
+                return
+
+            if all(word in msg for word in worst_alignment):
+                await message.channel.send(
+                    'Are you expecting me to answer with None?')
+                return
+
+            if all(word in msg for word in secret):
+                await message.channel.send(usr.mention +
+                                        " is a true stair jumper.")
+                return
+
+            if any(word in msg for word in salute) and "fallen drone" in msg:
+                await message.channel.send('Hello!')
+                return
+
+            if all(word in msg for word in when_muggle):
+                await message.channel.send(
+                    'Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.'
+                )
+                return
+
+            if all(word in msg for word in how_to) and any(
+                    word in msg for word in leecher) and any(word in msg
+                                                            for word in rid):
+                await message.channel.send(
+                    'Are you being followed by someone? Who is that? Surely not me.'
+                )
+                return
+
+            if all(word in msg for word in good_bot):
+                await message.channel.send('Thanks.')
+                return
+
+            if all(word in msg for word in bad_bot):
+                await message.channel.send('Nobody is perfect. Robots included.')
+                return
+
+            if all(word in msg for word in deadchat):
+                await message.channel.send('Not on my watch.')
+                return
+
+            if "drone" in msg and any(word in msg for word in dronedown):
+                await message.channel.send('Wrong.')
+                return
+
+            if "morph to admin" in msg:
+                role = discord.utils.find(lambda r: r.name == 'Admin', message.guild.roles)
+            
+                if role in usr.roles:
+                    await message.channel.send("How funny!")
+                else:
+                    await message.channel.send("You are now an Admin! ...Wait, what?")
+                return
+
+            if "demorph from admin" in msg:
+                role = discord.utils.find(lambda r: r.name == 'Admin', message.guild.roles)
+            
+                if role in usr.roles:
+                    await message.channel.send("I think you could just go and do it yourself.")
+                else:
+                    await message.channel.send("You are no longer an Admin... You never were.")
+                return
+
+            if "morph to climber" in msg:
+                await message.channel.send("To the tower you go!")
+                return
+
+            if "demorph from climber" in msg:
+                role = discord.utils.find(lambda r: r.name == 'Climbers', message.guild.roles)
+                
+                await message.channel.send("You are no longer a Climber. Goodbye.")
+                await asyncio.sleep(3)
+                await usr.remove_roles(role)
+                await asyncio.sleep(10)
+                await usr.add_roles(role)
+                await message.channel.send("Actually no. I was just pulling your leg.")
+                return
+
+            if "demorph from ultimate chat killer" in msg:
+                await message.channel.send('There was an attempt.')
+                return
+
+            if "morph to ultimate chat killer" in msg:
+                await message.channel.send('Nope.')
+                return
+
+            if "happy birthday fallen drone" in msg:
+                await message.channel.send("It is not that time of the year, yet.")
+                return
+
+            if '<:csTrollpain:961507798905151488>' in msg:
+                await message.channel.send('Tsk.')
+                return  
+            
+            if message.channel.id == 813882658156838923:
+
+                good_roles = {}
+                server_roles = message.guild.roles
+
+                for role in server_roles:
+                    if role.name in k_role:
+                        good_role = role
+
+                Last = message.created_at
+                await asyncio.sleep(20)
+                if message.created_at == Last:
+                    await message.channel.send(
+                        usr.mention +
+                        " do not worry, I can talk with you if no one else will.")
+                    # for member in good_role.members:
+                    #     await member.remove_roles(good_role)
+                    # await asyncio.sleep(5)
+                    # await usr.add_roles(good_role)
+                    return  
+
+        ## add else here
 
         if len(usr.display_name) == 12:
-          dn = usr.display_name.upper()
-          fallendrone = "FALLEN DRONE"
-          notmatch = 0
+                dn = usr.display_name.upper()
+                fallendrone = "FALLEN DRONE"
+                notmatch = 0
 
-          for i in range(len(fallendrone)):
-            if dn[i] != fallendrone[i]:
-              notmatch += 1
+                for i in range(len(fallendrone)):
+                    if dn[i] != fallendrone[i]:
+                        notmatch += 1
 
-          if notmatch <= 5:
-            await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
-            await usr.edit(nick=random.choice(thiefname))   
-          return
-
-        if "morph to architect" in msg:
-          role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
-          
-          if role in usr.roles:
-            await message.channel.send("You are already an Architect, smh.")
-          else:
-            await message.channel.send("You should boost the server if you crave for that role.")
-          return
-
-        if "demorph from architect" in msg:
-          role = discord.utils.find(lambda r: r.name == 'Architect (Booster)', message.guild.roles)
-          
-          if role in usr.roles:
-            await message.channel.send("Just wait for the boost to expire.")
-          else:
-            await message.channel.send("You are no longer an Architect.")
-          return
-          
-      
-        if "gun" in msg:
-            await message.channel.send("<:cs_Stairbonk:812813052822421555>")
-            return
-
-        if all(word in msg for word in best_alignment):
-            await message.channel.send(
-                'Keeper obviously. Stop asking stupid questions.')
-            return
-
-        if all(word in msg for word in tutorial_abuse):
-            await message.channel.send(
-                'Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...'
-            )
-            return
-
-        if all(word in msg for word in trapped):
-            await message.channel.send('Haha. You got stuck in stairs!')
-            return
-
-        if all(word in msg for word in about_me):
-            await message.channel.send('I fell, okay?')
-            return
-
-        if "<@!827952429290618943>" in msg:
-            #print(msg)
-            await message.channel.send(usr.mention +
-                                       ' <:csRbxangryping:786325219727638535>')
-            return
-
-        if all(word in msg for word in when_infinite):
-            await message.channel.send(
-                'Infinite Tower has already been released.')
-            return
-
-        if all(word in msg for word in worst_alignment):
-            await message.channel.send(
-                'Are you expecting me to answer with None?')
-            return
-
-        if all(word in msg for word in secret):
-            await message.channel.send(usr.mention +
-                                       " is a true stair jumper.")
-            return
-
-        if any(word in msg for word in salute) and "fallen drone" in msg:
-            await message.channel.send('Hello!')
-            return
-
-        if all(word in msg for word in when_muggle):
-            await message.channel.send(
-                'Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.'
-            )
-            return
-
-        if all(word in msg for word in how_to) and any(
-                word in msg for word in leecher) and any(word in msg
-                                                         for word in rid):
-            await message.channel.send(
-                'Are you being followed by someone? Who is that? Surely not me.'
-            )
-            return
-
-        if all(word in msg for word in good_bot):
-            await message.channel.send('Thanks.')
-            return
-
-        if all(word in msg for word in bad_bot):
-            await message.channel.send('Nobody is perfect. Robots included.')
-            return
-
-        if all(word in msg for word in deadchat):
-            await message.channel.send('Not on my watch.')
-            return
-
-        if "drone" in msg and any(word in msg for word in dronedown):
-            await message.channel.send('Wrong.')
-            return
-
-        if "morph to admin" in msg:
-          role = discord.utils.find(lambda r: r.name == 'Admin', message.guild.roles)
-          
-          if role in usr.roles:
-            await message.channel.send("How funny!")
-          else:
-            await message.channel.send("You are now an Admin! ...Wait, what?")
-          return
-
-        if "demorph from admin" in msg:
-          role = discord.utils.find(lambda r: r.name == 'Admin', message.guild.roles)
-          
-          if role in usr.roles:
-            await message.channel.send("I think you could just go and do it yourself.")
-          else:
-            await message.channel.send("You are no longer an Admin... You never were.")
-          return
-
-        if "morph to climber" in msg:
-          await message.channel.send("To the tower you go!")
-          return
-
-        if "demorph from climber" in msg:
-          role = discord.utils.find(lambda r: r.name == 'Climbers', message.guild.roles)
-          
-          await message.channel.send("You are no longer a Climber. Goodbye.")
-          await asyncio.sleep(3)
-          await usr.remove_roles(role)
-          await asyncio.sleep(10)
-          await usr.add_roles(role)
-          await message.channel.send("Did you actually believe that?")
-          return
-
-        if "demorph from ultimate chat killer" in msg:
-            await message.channel.send('There was an attempt.')
-            return
-
-        if "happy birthday fallen drone" in msg:
-            await message.channel.send("It is not that time of the year, yet.")
-            return
-
-        if '<:csTrollpain:961507798905151488>' in msg:
-            await message.channel.send('Tsk.')
-            return
-          
+                if notmatch <= 5:
+                    await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
+                    await usr.edit(nick=random.choice(thiefname))   
+                return     
 
         if all(word in usr.display_name.lower().replace("i", "l") for word in fd):
-          await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
-          await usr.edit(nick=random.choice(thiefname))  
-          print(usr.display_name)
-          
-        if message.channel.id == 813882658156838923:
-
-            good_roles = {}
-            server_roles = message.guild.roles
-
-            for role in server_roles:
-                if role.name in k_role:
-                    good_role = role
-
-            Last = message.created_at
-            Lastcontent = msg
-            await asyncio.sleep(20)
-            if message.created_at == Last and msg == Lastcontent:
-                await message.channel.send(
-                    usr.mention +
-                    " do not worry, I can talk with you if no one else will.")
-                # for member in good_role.members:
-                #     await member.remove_roles(good_role)
-                # await asyncio.sleep(5)
-                # await usr.add_roles(good_role)
-            return             
+                await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
+                await usr.edit(nick=random.choice(thiefname))
+                return
 
 
 client.run(os.environ['TOKEN'])
