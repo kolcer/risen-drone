@@ -531,31 +531,26 @@ async def on_message(message):
         else:
             if msg == "]create" and usr.id == 481893862864846861:
                 await message.channel.send("Let do this.")
-                    try:
-                        connection = psycopg2.connect(DATABASE_URL)
-                        cursor = connection.cursor()
-                        # SQL query to create a new table
-                        create_table_query = '''CREATE TABLE %s 
-                            (id SERIAL PRIMARY KEY,
-                            content TEXT NOT NULL); '''
-                        for alignment in alignments:
-                            cursor.execute(create_table_query,(alignment))
-                            asyncio.sleep(3)
-                            await channel.send("Created " + alignment + " tips database")
-                            cursor.execute(create_table_query,(alignment + 'T'))
-                            asyncio.sleep(3)
-                            await channel.send("Created " + alignment + " trivia database.")
-                        record = "Succesfully created all databases!"
-                    except (Exception, Error) as error:
-                        record = error
-                    finally:
-                        if (connection):
-                            cursor.close()
-                            connection.close()
-                            await channel.send(record)
-
-
+                try:
+                    connection = psycopg2.connect(DATABASE_URL)
+                    cursor = connection.cursor()
+                    # SQL query to create a new table
+                    record = "Created "
+                    create_table_query = '''CREATE TABLE %s 
+                        (id SERIAL PRIMARY KEY,
+                        content TEXT NOT NULL); '''
+                    for alignment in alignments:
+                        cursor.execute(create_table_query,(alignment))
+                        created = created + alignment + " tips db created, "
+                        cursor.execute(create_table_query,(alignment + 'T'))
+                        created = created + alignment + " trivia db created, "
+                    record = "all done!"
+                except (Exception, Error) as error:
+                    record = error
+                finally:
+                    if (connection):
+                        cursor.close()
+                        connection.close()
+                        await channel.send(record)
         
-
-
 client.run(os.environ['TOKEN'])
