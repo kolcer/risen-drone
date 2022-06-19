@@ -136,23 +136,20 @@ async def on_message(message):
 
             if "give" in msg and "ckr" in msg:
                 if usr.id == 267014823315898368:
-                    found = False
-                    channel = client.get_channel(813882658156838923)
                     server = client.get_guild(624227331720085528)
                     role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
-                    message = msg.split(" ")
-                    target = message[1]
+                    message_split = msg.split(" ")
+                    target = message_split[1]
 
                     for member in server.members:
                         if member.name + "#" + member.discriminator == target:
-                            found = True
                             await asyncio.sleep(5)
                             await member.add_roles(role)
                             await asyncio.sleep(2)
-                            await channel.send(member.name + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
+                            await message.channel.send(member.name + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
+                            return
                             
-                    if found == False:
-                        await channel.send("I didn't find anyone with that combination of Name and Tag.")
+                    await message.channel.send("I didn't find anyone with that combination of Name and Tag.")
                     return
 
             msg = msg.lower()
