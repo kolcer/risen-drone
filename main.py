@@ -457,7 +457,7 @@ async def on_message(message):
                 #    await member.remove_roles(good_role)
                 #await asyncio.sleep(5)
                 #await usr.add_roles(good_role)
-                return             
+            return             
 
 
 client.run(os.environ['TOKEN'])
