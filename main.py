@@ -138,7 +138,7 @@ async def on_message(message):
                     target = message[1]
 
                     for member in server.members:
-                        if member.name == target:
+                        if member.name + "#" + member.discriminator == target:
                             await asyncio.sleep(5)
                             await member.add_roles(role)
                             await asyncio.sleep(2)
