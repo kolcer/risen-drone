@@ -119,6 +119,7 @@ async def on_ready():
     channel = client.get_channel(813882658156838923)
     await channel.send('The last code edited is now effective.')
     record = ''
+    connection = None
     try:
         connection = psycopg2.connect(DATABASE_URL)
         cursor = connection.cursor()
