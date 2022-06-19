@@ -468,7 +468,7 @@ async def on_message(message):
                 return
 
             if "happy birthday fallen drone" in msg:
-                if date.today() == date(date.today().year, 6, 19):
+                if date.today() == date(date.today().year, 4, 3):
                     await message.channel.send("Thank you for remembering. Where's my gift?")
                 else:
                     await message.channel.send("It is not that time of the year, yet.")
