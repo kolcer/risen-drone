@@ -1,6 +1,8 @@
 import discord
 import os
 
+salute = ["hi", "hello", "howdy", "sup"]
+
 intents = discord.Intents.default()
 intents.members = True
 
@@ -20,8 +22,8 @@ async def on_message(message):
 
     if usr.bot == False:
 
-        if "hi" in msg:
-            await message.channel.send("hi!")
+        if any(word in msg for word in salute) and "risen drone" in msg:
+            await message.channel.send('Hello!')
             return
 
         if "rip" in msg:
