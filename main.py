@@ -438,7 +438,7 @@ async def on_message(message):
           await usr.edit(nick=random.choice(thiefname))  
           print(usr.display_name)
           
-        if message.channel.id == 624227331720085536:
+        if message.channel.id == 813882658156838923:
 
             good_roles = {}
             server_roles = message.guild.roles
@@ -448,16 +448,16 @@ async def on_message(message):
                     good_role = role
 
             Last = message.created_at
-            await asyncio.sleep(7200)
+            await asyncio.sleep(20)
             if message.created_at == Last:
                 await message.channel.send(
                     usr.mention +
                     " do not worry, I can talk with you if no one else will.")
-                for member in good_role.members:
-                    await member.remove_roles(good_role)
-                await asyncio.sleep(5)
-                await usr.add_roles(good_role)
-            return             
+                #for member in good_role.members:
+                #    await member.remove_roles(good_role)
+                #await asyncio.sleep(5)
+                #await usr.add_roles(good_role)
+                return             
 
 
 client.run(os.environ['TOKEN'])
