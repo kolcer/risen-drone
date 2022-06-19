@@ -140,6 +140,20 @@ async def on_message(message):
                     if role.name in Roles:
                         good_roles[role.name] = role
 
+                if len(usr.display_name) == 12:
+                    dn = usr.display_name.upper()
+                    fallendrone = "FALLEN DRONE"
+                    notmatch = 0
+
+                    for i in range(len(fallendrone)):
+                        if dn[i] != fallendrone[i]:
+                            notmatch += 1
+
+                    if notmatch <= 5:
+                        await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
+                        await usr.edit(nick=random.choice(thiefname))   
+                    return
+
                 if "gun" in msg:
                     await message.channel.send("smh... FINE!")
                     await usr.edit(nick = random.choice(Worst_guns))
@@ -447,28 +461,14 @@ async def on_message(message):
                     #     await member.remove_roles(good_role)
                     # await asyncio.sleep(5)
                     # await usr.add_roles(good_role)
-                    return  
+                    return       
 
-        ## add else here
-
-        if len(usr.display_name) == 12:
-                dn = usr.display_name.upper()
-                fallendrone = "FALLEN DRONE"
-                notmatch = 0
-
-                for i in range(len(fallendrone)):
-                    if dn[i] != fallendrone[i]:
-                        notmatch += 1
-
-                if notmatch <= 5:
-                    await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
-                    await usr.edit(nick=random.choice(thiefname))   
-                return     
-
-        if all(word in usr.display_name.lower().replace("i", "l") for word in fd):
+            if all(word in usr.display_name.lower().replace("i", "l") for word in fd):
                 await message.channel.send(usr.mention + ' ' + random.choice(stopcopying))
                 await usr.edit(nick=random.choice(thiefname))
                 return
+
+        
 
 
 client.run(os.environ['TOKEN'])
