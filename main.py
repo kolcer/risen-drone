@@ -2,7 +2,6 @@ import discord
 import os
 import random
 import asyncio
-from datetime import datetime
 from datetime import date
 
 best_alignment = ["best", "alignment", "?"]
