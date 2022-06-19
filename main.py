@@ -18,7 +18,7 @@ async def on_message(message):
     msg = message.content
     usr = message.author
 
-    if "hi" in msg:
+    if message.content.lower() == "hi":
         await message.channel.send("hi!")
     return
 
