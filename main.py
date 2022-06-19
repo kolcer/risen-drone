@@ -137,7 +137,7 @@ async def on_message(message):
                     message = msg.split(" ")
                     target = message[1]
 
-                    for member in server.members:
+                    for member in message.server.members:
                         if member.name == target:
                             await asyncio.sleep(5)
                             await member.add_roles(role)
