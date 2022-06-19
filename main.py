@@ -6,6 +6,8 @@ import psycopg2
 from psycopg2 import Error
 from datetime import date
 
+DATABASE_URL = os.environ['DATABASE_URL']
+
 best_alignment = ["best", "alignment", "?"]
 tutorial_abuse = ["bug", "tutorial"]
 trapped = ["stuck", "stairs", "in"]
