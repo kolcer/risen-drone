@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 
 best_alignment = ["best", "alignment", "?"]
 tutorial_abuse = ["bug", "tutorial"]
@@ -118,7 +119,7 @@ async def on_message(message):
 
                 if "gun" in msg:
                     await message.channel.send("smh... FINE!")
-                    await usr.edit(nick=random.choice(Worst_guns))
+                    await usr.edit(nick = random.choice(Worst_guns))
                     await usr.add_roles(good_roles["Guns"])
                     return
 
