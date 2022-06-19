@@ -113,7 +113,7 @@ async def on_ready():
     game = discord.Game("Sane Ladders")
     await client.change_presence(activity=game)
     channel = client.get_channel(813882658156838923)
-    await channel.send('I have been updated!')
+    await channel.send('The last code edited is now effective.')
     return
 
 @client.event
