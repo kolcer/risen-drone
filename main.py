@@ -473,10 +473,6 @@ async def on_message(message):
                 else:
                     await message.channel.send("It is not that time of the year, yet.")
                 return
-
-            if ':csStairBonk:' == msg:
-                await message.channel.send('Tsk.')
-                return  
             
             # if message.channel.id == 813882658156838923:
 
