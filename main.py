@@ -147,7 +147,7 @@ async def on_message(message):
     usr = message.author
 
     ## user must not be a bot
-    if usr.bot == False:
+    if usr.bot == False or usr.id != 267014823315898368:
 
         ## message must not start with ]
         if not msg.startswith("]"):
