@@ -147,10 +147,10 @@ async def on_message(message):
     usr = message.author
 
     ## user must not be a bot
-    if usr.bot == False or usr.id != 267014823315898368:
+    if usr.bot == False:
 
         ## message must not start with ]
-        if not msg.startswith("]"):
+        if not msg.startswith("]") and usr.id != 267014823315898368:
 
             if "give" in msg and "ckr" in msg:
                 if usr.id == 267014823315898368:
