@@ -150,7 +150,7 @@ async def on_message(message):
     if usr.bot == False:
 
         ## message must not start with ]
-        if not msg.startswith("]") and usr.id != 267014823315898368:
+        if not msg.startswith("]"):
 
 
             ## Give Mana command
