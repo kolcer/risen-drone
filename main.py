@@ -152,24 +152,6 @@ async def on_message(message):
         ## message must not start with ]
         if not msg.startswith("]") and usr.id != 267014823315898368:
 
-            # Give Mana command
-            if msg.lower().startswith("give mana to "):
-                server = client.get_guild(624227331720085528)
-                role = discord.utils.find(lambda r: r.name == 'Possessed (rig)', message.guild.roles)
-                split_message = msg.split(" ", 3)
-                target = split_message[3].lower()
-                for member in server.members:
-                    if member.name.lower() + "#" + member.discriminator == target:
-                        if role in member.roles:
-                            await message.channel.send(member.display_name + " has received some Mana and is no longer Possessed!")
-                            await asyncio.sleep(3)
-                            await member.remove_roles(role)
-                        else:
-                            await message.channel.send(member.display_name + " received your Mana, but they do not seem to need it.")
-                        return     
-                await message.channel.send("Who are you trying to share your Mana with?")
-                return
-
             if "give" in msg and "ckr" in msg:
                 if usr.id == 267014823315898368:
                     server = client.get_guild(624227331720085528)
