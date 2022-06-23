@@ -117,7 +117,7 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("Sane Ladders")
+    game = discord.Game("Lucid Ladders")
     await client.change_presence(activity=game)
 
     channel = client.get_channel(813882658156838923)
