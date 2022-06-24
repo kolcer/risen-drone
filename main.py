@@ -177,17 +177,17 @@ async def on_message(message):
                 split_message = msg.split(" ", 3)
                 target = split_message[3].lower()
 
-                for member in server.members:
-                    if member.name.lower() + "#" + member.discriminator == target:
-                        member.add_roles(role)
+                for m in server.members:   
+                    for r in m.roles:
+                        if r == roletar:
+                            m.remove_roles(role)
+                            
+                for m in server.members:
+                    if m.name.lower() + "#" + m.discriminator == target:
+                        m.add_roles(role)
                         break
-
-                for member in server.members:   
-                    for roles in member.roles:
-                        if roles == roletar:
-                            member.remove_roles(role)
-                            return
                 return
+
 
             msg = msg.lower()
 
