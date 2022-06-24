@@ -172,6 +172,7 @@ async def on_message(message):
                 return
 
             if msg.lower().startswith("give ckr to "):
+                await message.channel.send("I entered the method")
                 server = client.get_guild(624227331720085528)
                 roletar = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
                 split_message = msg.split(" ", 3)
@@ -181,11 +182,15 @@ async def on_message(message):
                     for r in m.roles:
                         if r == roletar:
                             m.remove_roles(role)
+                
+                await message.channel.send("I removed the role")
                             
                 for m in server.members:
                     if m.name.lower() + "#" + m.discriminator == target:
                         m.add_roles(role)
                         break
+                
+                await message.channel.send("I added the role")
                 return
 
 
