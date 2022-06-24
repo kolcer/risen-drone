@@ -181,13 +181,13 @@ async def on_message(message):
 
                     for mem in server.members:   
                         if roletar in mem.roles:
-                            mem.remove_roles(roletar)
+                            await mem.remove_roles(roletar)
                     
                     await message.channel.send("I removed the role")
                                 
                     for mem in server.members:
                         if mem.name.lower() + "#" + mem.discriminator == target:
-                            mem.add_roles(roletar)
+                            await mem.add_roles(roletar)
                             break
                     
                     await message.channel.send("I added the role")
