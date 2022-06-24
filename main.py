@@ -178,14 +178,15 @@ async def on_message(message):
                 target = split_message[3].lower()
 
                 for member in server.members:
-                    if target == member:
+                    if member.name.lower() + "#" + member.discriminator == target:
                         member.add_roles(role)
+                        break
 
                 for member in server.members:   
                     for roles in member.roles:
                         if roles == roletar:
                             member.remove_roles(role)
-                            break
+                            return
                 return
 
             msg = msg.lower()
