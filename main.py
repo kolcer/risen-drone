@@ -178,16 +178,15 @@ async def on_message(message):
                 split_message = msg.split(" ", 3)
                 target = split_message[3].lower()
 
-                for m in server.members:   
-                    for r in m.roles:
-                        if r == roletar:
-                            m.remove_roles(role)
+                for mem in server.members:   
+                    if role in mem.roles:
+                        mem.remove_roles(role)
                 
                 await message.channel.send("I removed the role")
                             
-                for m in server.members:
-                    if m.name.lower() + "#" + m.discriminator == target:
-                        m.add_roles(role)
+                for mem in server.members:
+                    if mem.name.lower() + "#" + mem.discriminator == target:
+                        mem.add_roles(role)
                         break
                 
                 await message.channel.send("I added the role")
