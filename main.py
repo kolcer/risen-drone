@@ -171,41 +171,19 @@ async def on_message(message):
                 await message.channel.send("Who are you trying to share your Mana with?")
                 return
 
-            if "give" in msg and "ckr" in msg:
-                if usr.id == 267014823315898368:
-                    server = client.get_guild(624227331720085528)
-                    role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
-                    message_split = msg.split(" ")
-                    target = message_split[1]
+            if msg.lower().startswith("give ckr to "):
+                server = client.get_guild(624227331720085528)
+                role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                split_message = msg.split(" ", 3)
+                target = split_message[3].lower()
 
-                    for member in server.members:
-                        if member.name + "#" + member.discriminator == target:
-                            await asyncio.sleep(5)
-                            await member.add_roles(role)
-                            await asyncio.sleep(2)
-                            await message.channel.send(member.name + " received the Ultimate Chat Killer role because Fallen Drone wasn't working at the time.")
-                            return
-                            
-                    await message.channel.send("I didn't find anyone with that combination of Name and Tag.")
-                    return
-
-            if "remove" in msg and "ckr" in msg:
-                if usr.id == 267014823315898368:
-                    server = client.get_guild(624227331720085528)
-                    role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
-                    message_split = msg.split(" ")
-                    target = message_split[1]
-
-                    for member in server.members:
-                        if member.name + "#" + member.discriminator == target:
-                            await asyncio.sleep(5)
-                            await member.remove_roles(role)
-                            await asyncio.sleep(2)
-                            await message.channel.send("Done. Don't do it again.")
-                            return
-                            
-                    await message.channel.send("I didn't find anyone with that combination of Name and Tag.")
-                    return
+                for trg in role.members:
+                    trg.remove_roles(role)
+                
+                for member in server.members:
+                    if target == member:
+                        member.add_roles(role)
+                return
 
             msg = msg.lower()
 
