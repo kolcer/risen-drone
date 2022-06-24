@@ -173,16 +173,19 @@ async def on_message(message):
 
             if msg.lower().startswith("give ckr to "):
                 server = client.get_guild(624227331720085528)
-                role = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                roletar = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
                 split_message = msg.split(" ", 3)
                 target = split_message[3].lower()
 
-                for trg in role.members:
-                    trg.remove_roles(role)
-                
                 for member in server.members:
                     if target == member:
                         member.add_roles(role)
+
+                for member in server.members:   
+                    for roles in member.roles:
+                        if roles == roletar:
+                            member.remove_roles(role)
+                            break
                 return
 
             msg = msg.lower()
