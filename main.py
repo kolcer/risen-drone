@@ -179,7 +179,7 @@ async def on_message(message):
                 target = split_message[3].lower()
 
                 for mem in server.members:   
-                    if role in mem.roles:
+                    if roletar in mem.roles:
                         mem.remove_roles(role)
                 
                 await message.channel.send("I removed the role")
