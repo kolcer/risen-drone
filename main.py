@@ -172,27 +172,19 @@ async def on_message(message):
                 return
 
             if msg.lower().startswith("give ckr to "):
-                try:
-                    await message.channel.send("I entered the method")
-                    server = client.get_guild(624227331720085528)
-                    roletar = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
-                    split_message = msg.split(" ", 3)
-                    target = split_message[3].lower()
+                server = client.get_guild(624227331720085528)
+                roletar = discord.utils.find(lambda r: r.name == 'Ultimate Chat Killer', message.guild.roles)
+                split_message = msg.split(" ", 3)
+                target = split_message[3].lower()
 
-                    for mem in server.members:   
-                        if roletar in mem.roles:
-                            await mem.remove_roles(roletar)
-                    
-                    await message.channel.send("I removed the role")
-                                
-                    for mem in server.members:
-                        if mem.name.lower() + "#" + mem.discriminator == target:
-                            await mem.add_roles(roletar)
-                            break
-                    
-                    await message.channel.send("I added the role")
-                except Exception as e:
-                     await message.channel.send(e)
+                for mem in server.members:   
+                    if roletar in mem.roles:
+                        await mem.remove_roles(roletar)
+                            
+                for mem in server.members:
+                    if mem.name.lower() + "#" + mem.discriminator == target:
+                        await mem.add_roles(roletar)
+                        break
                 return
 
 
