@@ -58,13 +58,13 @@ async def PRINT_TIPS(channel,key):
     tips = list_tips(key)
     combined_string = ""
     for i in range(len(tips)):
-        new_string = combined_string + str(i) + ") " + str(tips[i]) + "\n"
+        new_string = combined_string + str(i) + ") " + tips[i].decode("utf-8") + "\n"
         if len(new_string) > 2000:
             await SEND(channel,combined_string)
-            combined_string = str(i) + ") " + str(tips[i]) + "\n"
+            combined_string = str(i) + ") " + tips[i].decode("utf-8") + "\n"
         else:
             combined_string = new_string
-            await SEND(channel,combined_string)
+        await SEND(channel,combined_string)
 
 
 @client.event
