@@ -120,7 +120,7 @@ async def on_message(message):
             #list tips
             if msg.startswith("]l"):
                await SEND(channel,split[1] + " " + tot + "(s):")
-               await SEND(channel,list_tips(key))
+               print(channel,list_tips(key))
                await PRINT_TIPS(channel, key)
                return
             
