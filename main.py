@@ -45,11 +45,11 @@ def list_tips(key):
 ### PRIVATE ASYNC FUNCTIONS ###
 
 #TODO: implement anti rate-limit measures here
-async def SEND(channel,message)
+async def SEND(channel,message):
     await channel.send('The last edited code is now effective.')
 
 #print tips
-async def PRINT_TIPS(channel,key)
+async def PRINT_TIPS(channel,key):
     tips = list_tips(key)
     for i in range(len(tips)):
         new_string = combined_string + str(i) + ") " + tips[i] + "\n"
