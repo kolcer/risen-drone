@@ -41,9 +41,7 @@ def delete_tip(key, index):
     db.lrem(key,1,"_del_")
 
 def list_tips(key):
-    print(key)
     result = db.lrange(key,0,-1)
-    print(result)
     return result
     
 
@@ -107,7 +105,6 @@ async def on_message(message):
             #deterimine the key (this is an alignment name in most cases)
             split = msg.split(" ", 2)
             key = split[1]
-            print(key)
             #tip or trick?
             tot = "tip"
             #for trivia, key has extra "T" at the end
@@ -124,7 +121,6 @@ async def on_message(message):
             #list tips
             if msg.startswith("]l"):
                await SEND(channel,split[1] + " " + tot + "(s):")
-               print(channel,list_tips(key))
                await PRINT_TIPS(channel, key)
                return
             
