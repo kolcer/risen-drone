@@ -28,7 +28,7 @@ intents.members = True
 client = discord.Client(intents=intents)
 
 # Set up the data base
-db = redis.StrictRedis(host = 'localhost',port = 6379, db = 0)
+db = redis.from_url(os.environ.get("REDIS_URL"))
 
 ### PRIVATE SYNC FUNTIONS ###
 
