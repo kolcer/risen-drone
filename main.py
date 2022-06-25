@@ -51,6 +51,7 @@ async def SEND(channel,message):
 #print tips
 async def PRINT_TIPS(channel,key):
     tips = list_tips(key)
+    combined_string = ""
     for i in range(len(tips)):
         new_string = combined_string + str(i) + ") " + tips[i] + "\n"
         if len(new_string) > 2000:
