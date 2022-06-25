@@ -77,7 +77,8 @@ async def on_message(message):
 
     msg = message.content
     usr = message.author
-
+    channel = message.channel
+    
     ## user must not be a bot
     if usr.bot == False:
         
