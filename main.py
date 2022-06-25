@@ -46,7 +46,7 @@ def list_tips(key):
 
 #TODO: implement anti rate-limit measures here
 async def SEND(channel,message):
-    await channel.send('The last edited code is now effective.')
+    await channel.send(message)
 
 #print tips
 async def PRINT_TIPS(channel,key):
