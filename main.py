@@ -68,7 +68,7 @@ async def on_ready():
     await client.change_presence(activity=game)
 
     channel = client.get_channel(813882658156838923)
-    await send_message(channel,'The last edited code is now effective.')
+    await SEND(channel,'The last edited code is now effective.')
     return
 
 
