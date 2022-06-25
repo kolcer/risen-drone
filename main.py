@@ -16,7 +16,8 @@ TIPS_KEYS = [
 ]
 
 ADMINS = [
-  481893862864846861,
+    481893862864846861,
+    267014823315898368,
 ] 
 
 ### INITIAL SETUP ###
@@ -40,7 +41,8 @@ def delete_tip(key, index):
     db.lrem(key,1,"_del_")
 
 def list_tips(key):
-    return db.lrange(key,0,-1)
+    result = db.lrange(key,0,-1)
+    
 
 ### PRIVATE ASYNC FUNCTIONS ###
 
@@ -118,6 +120,7 @@ async def on_message(message):
             #list tips
             if msg.startswith("]l"):
                await SEND(channel,split[1] + " " + tot + "(s):")
+               await SEND(channel,list_tips(key))
                await PRINT_TIPS(channel, key)
                return
             
