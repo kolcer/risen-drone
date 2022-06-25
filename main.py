@@ -64,7 +64,7 @@ async def PRINT_TIPS(channel,key):
             combined_string = str(i) + ") " + tips[i].decode("utf-8") + "\n"
         else:
             combined_string = new_string
-        await SEND(channel,combined_string)
+    await SEND(channel,combined_string)
 
 
 @client.event
