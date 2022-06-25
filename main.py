@@ -86,7 +86,7 @@ async def on_message(message):
 
             #check for admin
             is_admin = False
-            for admin in admins:
+            for admin in ADMINS:
                 if admin == str(usr.id):
                     is_admin = True
                     break
