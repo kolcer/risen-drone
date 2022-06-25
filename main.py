@@ -42,7 +42,9 @@ def delete_tip(key, index):
 
 def list_tips(key):
     print(key)
-    return db.lrange(key,0,-1)
+    result = db.lrange(key,0,-1)
+    print(result)
+    return result
     
 
 ### PRIVATE ASYNC FUNCTIONS ###
