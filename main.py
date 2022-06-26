@@ -303,7 +303,7 @@ async def on_message(message):
             split = lmsg.split(" ",2)
             role = split[2].capitalize()
             if role in MORPHABLE_ROLES:
-                if role == "Guns" then
+                if role == "Guns":
                     await EDIT_NICK(usr,nick=random.choice(Worst_guns))
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
