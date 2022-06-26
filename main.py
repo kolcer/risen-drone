@@ -249,15 +249,17 @@ async def on_message(message):
         #morph command
         if lmsg.startswith("morph to"):
             split = lmsg.split(" ",2)
-            if split[2].capitalize() in MORPHABLE_ROLES:
-                await SEND(ch,MORPHABLE_ROLES[1])
-                await ADD_ROLES(usr,MORPHABLE_ROLES[0])
+            role = split[2].capitalize()
+            if role in MORPHABLE_ROLES:
+                await SEND(ch,MORPHABLE_ROLES[role][1])
+                await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 
         if lmsg.startswith("unmorph from") or lmsg.startswith("demorph from"):
             split = lmsg.split(" ",2)
-            if split[2].capitalize() in MORPHABLE_ROLES:
-                await SEND(ch,MORPHABLE_ROLES[2])
-                await REMOVE_ROLES(usr,MORPHABLE_ROLES[0])
+            role = split[2].capitalize()
+            if role in MORPHABLE_ROLES:
+                await SEND(ch,MORPHABLE_ROLES[role][2])
+                await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
