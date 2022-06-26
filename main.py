@@ -53,7 +53,7 @@ def list_tips(key):
 
 #TODO: implement anti rate-limit measures here
 async def SEND(channel,message):
-    if message == None:
+    if message == None or message == "":
         #cannot send empty message
         retrun
     await channel.send(message)
