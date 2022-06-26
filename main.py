@@ -121,19 +121,19 @@ async def on_message(message):
             return
         
         #add tip   
-        if msg.startswith("]n"):
+        if msg.startswith("n",1):
            add_tip(key,split[2])
            await SEND(channel,"New " + split[1] + " " + tot + "  added.")
            return
 
         #list tips
-        if msg.startswith("]l"):
+        if msg.startswith("l",1):
            await SEND(channel,split[1] + " " + tot + "(s):")
            await PRINT_TIPS(channel, key)
            return
             
         #delete tip
-        if msg.startswith("]d"):
+        if msg.startswith("d",1):
            delete_tip(key,int(split[2]))
            await SEND(channel,split[1] + " " + tot + "(s):")
            await PRINT_TIPS(channel, key)
