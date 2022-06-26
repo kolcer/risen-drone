@@ -229,7 +229,7 @@ async def PRINT_TIPS(channel,key):
     await SEND(channel,combined_string)
 
 #edit nick
-async def EDIT_NICK(usr,new_nick)
+async def EDIT_NICK(usr,new_nick):
     await usr.edit(new_nick)
     
     
