@@ -88,53 +88,59 @@ async def on_message(message):
     channel = message.channel
     
     ## user must not be a bot
-    if usr.bot == False:
+    if usr.bot == True:
+        return
         
-        ## tips/tricks command
-        if msg.startswith("]"):
+    ## tips/tricks admin command
+    if msg.startswith("]"):
 
-            #check for admin
-            is_admin = False
-            for admin in ADMINS:
-                if admin == usr.id:
-                    is_admin = True
-                    break
-            if is_admin == False:
-                await SEND(channel,"You are not allowed to use this command.")
-                return
+        #check for admin
+        if not usr.id in ADMINS:
+            await SEND(channel,"You are not allowed to use this command.")
+            return
             
-            #lowercase the message
-            msg = msg.lower()
-            
-            #deterimine the key (this is an alignment name in most cases)
-            split = msg.split(" ", 2)
-            key = split[1]
-            #tip or trick?
-            tot = "tip"
-            #for trivia, key has extra "T" at the end
-            if "triv" in msg:
-                key = key + "T"
-                tot = "trivia"
+        #lowercase the message
+        msg = msg.lower()
+        
+        #tip or trick?
+        tip = True
+        if msg.startswith("triv",2):
+            tip = False
+        elif not msg.startsith("tip",2):
+            await SEND(channel,"Invalid command.")
+            return
+        
+        #deterimine the key (this is an alignment name in most cases)
+        split = msg.split(" ", 2)
+        key = split[1]
+        
+        if not key in TIPS_KEYS:
+            await SEND(channel,"Invalid alignment.")
+            return
+           
+        
+        #for trivia, key has extra "T" at the end
+        if tip == False:
+            key = key + "T"
                 
-            #add tip   
-            if msg.startswith("]n"):
-               add_tip(key,split[2])
-               await SEND(channel,"New " + split[1] + " " + tot + "  added.")
-               return
+        #add tip   
+        if msg.startswith("]n"):
+           add_tip(key,split[2])
+           await SEND(channel,"New " + split[1] + " " + tot + "  added.")
+           return
 
-            #list tips
-            if msg.startswith("]l"):
-               await SEND(channel,split[1] + " " + tot + "(s):")
-               await PRINT_TIPS(channel, key)
-               return
+        #list tips
+        if msg.startswith("]l"):
+           await SEND(channel,split[1] + " " + tot + "(s):")
+           await PRINT_TIPS(channel, key)
+           return
             
-            #delete tip
-            if msg.startswith("]d"):
-               delete_tip(key,int(split[2]))
-               await SEND(channel,split[1] + " " + tot + "(s):")
-               await PRINT_TIPS(channel, key)
-               return
-
-            
+        #delete tip
+        if msg.startswith("]d"):
+           delete_tip(key,int(split[2]))
+           await SEND(channel,split[1] + " " + tot + "(s):")
+           await PRINT_TIPS(channel, key)
+           return
+           
 #run the bot 
 client.run(os.environ['TOKEN'])
