@@ -230,7 +230,7 @@ async def PRINT_TIPS(channel,key):
 
 #edit nick
 async def EDIT_NICK(usr,new_nick):
-    await usr.edit(new_nick)
+    await usr.edit(nick=new_nick)
     
     
 #drone start up, prepare roles here
@@ -274,7 +274,7 @@ async def on_member_update(before, after):
     if after.nick in Worst_guns:
         return
 
-    await EDIT_NICK(usr,nick=random.choice(WORST_GUNS))
+    await EDIT_NICK(usr,random.choice(WORST_GUNS))
     return
 
 @client.event
@@ -306,7 +306,7 @@ async def on_message(message):
                 role = "Guns"
             if role in MORPHABLE_ROLES:
                 if role == "Guns":
-                    await EDIT_NICK(usr,nick=random.choice(WORST_GUNS))
+                    await EDIT_NICK(usr,random.choice(WORST_GUNS))
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 
