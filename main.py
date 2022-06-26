@@ -137,7 +137,7 @@ async def on_message(message):
            
         #tip or trick?
         tot = "ti"
-        if msg.startswith("triv",2):
+        if msg.startswith("tr",2):
             tot = "tr"
             #for trivia, key has extra "T" at the end
             key = key + "T"
