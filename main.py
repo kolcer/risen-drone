@@ -105,7 +105,7 @@ async def on_message(message):
     #normal non-admin usage
     if not msg.startswith("|"):
         
-        lmsg = msg.lowercase()
+        lmsg = msg.lower()
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
