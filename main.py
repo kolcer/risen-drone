@@ -53,7 +53,6 @@ def show_random_tip(key):
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
     
-tips[i].decode("utf-8")
 ### PRIVATE ASYNC FUNCTIONS ###
 
 #TODO: implement anti rate-limit measures here
