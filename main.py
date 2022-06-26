@@ -184,11 +184,11 @@ async def SEND(channel,message):
     await channel.send(message)
 
 #add roles
-async def ADD_ROLES(usr,roles)
+async def ADD_ROLES(usr,roles):
     await usr.add_roles(roles)
     
 #remove roles
-async def REMOVE_ROLES(usr,roles)
+async def REMOVE_ROLES(usr,roles):
     await usr.remove_roles(roles)
 
 #print tips
