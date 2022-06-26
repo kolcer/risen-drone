@@ -178,7 +178,7 @@ async def on_message(message):
                 return
        
         #mixed word trigger
-        for i, v in MIXED_WORD_TRIGGERS.items()
+        for i, v in MIXED_WORD_TRIGGERS.items():
             if v[0] in lmsg:
                 if any(word in lmsg for word in v[1]):
                     await SEND(ch,i)
