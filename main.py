@@ -106,7 +106,7 @@ async def on_message(message):
         tip = True
         if msg.startswith("triv",2):
             tip = False
-        elif not msg.startsith("tip",2):
+        elif not msg.startswith("tip",2):
             await SEND(channel,"Invalid command.")
             return
         
