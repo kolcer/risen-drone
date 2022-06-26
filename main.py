@@ -309,6 +309,7 @@ async def on_message(message):
                     await EDIT_NICK(usr,random.choice(WORST_GUNS))
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
+                return
                 
         if lmsg.startswith("unmorph from") or lmsg.startswith("demorph from"):
             split = lmsg.split(" ",2)
@@ -318,6 +319,7 @@ async def on_message(message):
             if role in MORPHABLE_ROLES:
                 await SEND(ch,MORPHABLE_ROLES[role][2])
                 await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
+                return
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
