@@ -136,12 +136,12 @@ async def on_message(message):
             return
            
         #tip or trick?
-        tot = "tip"
+        tot = "ti"
         if msg.startswith("triv",2):
-            tot = "trivia"
+            tot = "tr"
             #for trivia, key has extra "T" at the end
             key = key + "T"
-        elif not msg.startswith("tip",2):
+        elif not msg.startswith("ti",2):
             await SEND(ch,"Invalid command.")
             return
         
