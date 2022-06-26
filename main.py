@@ -9,13 +9,6 @@ from datetime import date
 
 ## CONSTANTS ##
 
-#this is for tips and trivia database
-TIPS_KEYS = [
-    "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
-    "thief", "hacker", "archon", "drifter", "heretic", "none", "general",
-    "possessed", "architect",
-]
-
 #this is for administrating tips and trivia database
 ADMINS = [
     481893862864846861, #sleazel
@@ -25,6 +18,86 @@ ADMINS = [
     380938705667620874, #jeff
     786743350950494219, #td
 ] 
+
+#this is for tips and trivia database
+TIPS_KEYS = [
+    "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
+    "thief", "hacker", "archon", "drifter", "heretic", "none", "general",
+    "possessed", "architect",
+]
+
+#this roles can be assigned via a morph to command
+#at 0 index we will put a role object during the login proccess.
+#make sure indexes match role name in the server!
+MORPHABLE_ROLES = {
+    "Patron": [ 
+        None,
+        "Go help those noobs, you are now a Patron!",
+        "What about protecting the noobs? Without a Patron around they will be lost.",
+    ],
+    "Joker": [ 
+        None,
+        "As if there weren't enough clowns here, you are now a Joker!",
+        "Did you run out of jokes? The Joker guild will hear about this.",
+    ],
+    "Wicked": [ 
+        None,
+        "Unleash all your wickedness, you are now a Wicked!",
+        "You destroyed everything and left nothing behind. Thank you for your services, a Wicked is not needed anymore.",
+    ],
+    "Spectre": [ 
+       None,
+       "Our quote's founder has been identified, you are now a Spectre",
+       "Once again, Spectre's Founder went MIA.",
+    ],
+    "Keeper": [ 
+       None,
+       "The staircase is now under your supervision, you successfully became a Keeper."
+       "You failed to take care of the stairs, and so you are no longer a Keeper.",
+    ],
+    "Muggle": [ 
+       None,
+       "Work smarter, not harder. You are now a Muggle!",
+       "The tower was too overwhelming for a weakling like you. Your Muggle license has been revoked.",
+    ],
+    "Chameleon": [ 
+       None,
+       "Do not let them know your next move, you are now a Chameleon!"
+       "You had many options, yet you came back. You do not get to be a Chameleon anymore.",
+    ],
+    "Hacker": [ 
+        None,
+       "Welcome to the backdoor, you are now a Hacker!",
+       "You tried to execute some code but as a result you accidentally removed your Hacker permissions.",
+    ],
+    "Thief": [ 
+        None,
+        "Is it really called borrowing? You are now a Thief!",
+        "You actually gave me back the role? How generous. But also that doesn't make you a Thief anymore.",
+     ],
+    "Archon": [ 
+        None,
+        "Typo fixed, happy? You are now an Archon!",
+        "Traveling between portals has been fun, but fun eventually comes to an end. You are no longer an Archon.",
+     ],
+     "Drifter": [ 
+        None,
+        "You took the elevator and rose to the top. You are now a Drifter.",
+        "I saw you taking the stairs, you are no longer a Drifter",
+     ],
+     "Heretic": [ 
+        None,
+        "We have banned dark magic, but you do not seem to care. You successfully became a Heretic."
+        "The circle has made their decision. You are permanently banned from being a Heretic ever again.",
+    ],
+     "Guns": [ 
+         None,
+        "smh, FINE!",
+        "Finally you came to your senses.",
+     ],
+}
+
+
 
 #this keywords will trigger the bot with a single occurence
 #key is the trigger, value is the response
@@ -36,7 +109,7 @@ SINGLE_WORD_TRIGGERS = {
     'csTrollpain': "Tsk." 
 }
 
-#all words need to be present for this trigger to occur
+#all words nedd to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
     "Keeper obviously. Stop asking stupid questions.": 
@@ -65,6 +138,11 @@ MIXED_WORD_TRIGGERS = {
         'fallen drone', 
         ["hi", "hello", "howdy", "sup"],
     ],
+    "Wrong.": [
+        'drone',
+        ["dead", "down", "off", "vacation", "sleep"],
+    ],
+    
     
 }
 ### INITIAL SETUP ###
@@ -105,6 +183,14 @@ async def SEND(channel,message):
         return
     await channel.send(message)
 
+#add roles
+async def ADD_ROLES(usr,roles)
+    await usr.add_roles(roles)
+    
+#remove roles
+async def REMOVE_ROLES(usr,roles)
+    await usr.remove_roles(roles)
+
 #print tips
 async def PRINT_TIPS(channel,key):
     tips = list_tips(key)
@@ -124,7 +210,15 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     game = discord.Game("Lucid Ladders")
     await client.change_presence(activity=game)
-
+    
+    #prepare roles
+    server_roles = message.guild.roles
+    
+    #morphable
+    for role in server_roles:
+        if role.name in MORPHABLE_ROLES:
+            MORPHABLE_ROLES[role.name][0] = role
+    
     channel = client.get_channel(813882658156838923)
     await SEND(channel,'The last edited code is now effective.')
     return
@@ -151,6 +245,18 @@ async def on_message(message):
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
         
+        #morph command
+        if lmsg.startswith("morph to"):
+            split = lmsg.split(" ",2)
+            if split[2] in MORPHABLE_ROLES:
+                await SEND(ch,MORPHABLE_ROLES[1])
+                await ADD_ROLES(usr,MORPHABLE_ROLES[0])
+                
+        if lmsg.startswith("unmorph from") or lmsg.startswith("demorph from"):
+            split = lmsg.split(" ",2)
+            if split[2] in MORPHABLE_ROLES:
+                await SEND(ch,MORPHABLE_ROLES[2])
+                await REMOVE_ROLES(usr,MORPHABLE_ROLES[0])
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
