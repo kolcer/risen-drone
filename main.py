@@ -39,15 +39,15 @@ SINGLE_WORD_TRIGGERS = {
 #all words nedd to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
-    'best alignment': "Keeper obviously. Stop asking stupid questions.",
-    'bug tutorial': "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...",
-    'stuck stairs': "Haha. You got stuck in stairs!",
-    'fallen drone how': "I fell, okay?",
-    'worst alignment': "Are you expecting me to answer with None?",
-    'when muggle tower': "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.",
-    'good drone': "Thanks.",
-    'bad drone': "Nobody is perfect. Robots included.",
-    'dead chat': "Not on my watch.",
+    "Keeper obviously. Stop asking stupid questions.": ["best", "alignment"], 
+    "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...": ['bug', 'tutorial'], 
+    "Haha. You got stuck in stairs!": ['stuck', 'stairs'],
+    "I fell, okay?": ['fallen', 'drone', 'how'],
+    "Are you expecting me to answer with None?": ['worst', 'alignment'], 
+    "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.": ['when', 'muggle', 'tower'], 
+    "Thanks.": ['good', 'drone'], 
+    "Nobody is perfect. Robots included.": ['bad', 'drone'],
+    "Not on my watch.": ['dead', 'chat'],
 }
 
 ### INITIAL SETUP ###
@@ -155,9 +155,9 @@ async def on_message(message):
                 return
         
         #multiple word trigger
-        for i,v in MULTIPLE_WORD_TRIGGERS.items():
-            if all(word in lmsg for word in i):
-                await SEND(ch,v)
+        for i, v in MULTIPLE_WORD_TRIGGERS.items():
+            if all(word in lmsg for word in v):
+                await SEND(ch,i)
                 return
                 
                
