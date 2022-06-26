@@ -95,7 +95,7 @@ async def on_message(message):
         return
         
     ## tips/tricks admin command
-    if msg.startswith("]"):
+    if msg.startswith("|"):
 
         #check for admin
         if not usr.id in ADMINS:
