@@ -28,10 +28,26 @@ ADMINS = [
 
 #this keywords will trigger the bot with a single occurence
 #key is the trigger, value is the response
-#it does not have to be a single word
+#it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    "gun": "<:cs_Stairbonk:812813052822421555>",
-    "demorph from ultimate chat killer": "There was an attempt.",
+    'gun': "<:cs_Stairbonk:812813052822421555>",
+    'demorph from ultimate chat killer': "There was an attempt.",
+    'morph to ultimate chat killer': "It needs to be earned, sorry.",
+    'csTrollpain': "Tsk." 
+}
+
+#all words nedd to be present for this trigger to occur
+#but the order of the words does not matter
+MULTIPLE_WORD_TRIGGERS = {
+    'best alignment': "Keeper obviously. Stop asking stupid questions.",
+    'bug tutorial': "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...",
+    'stuck stairs': "Haha. You got stuck in stairs!'",
+    'fallen drone how': "I fell, okay?",
+    'worst alignment': "Are you expecting me to answer with None?",
+    'when muggle tower': "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.",
+    'good drone': "Thanks.",
+    'bad drone': "Nobody is perfect. Robots included."
+    'dead chat': "Not on my watch."
 }
 
 ### INITIAL SETUP ###
@@ -118,12 +134,6 @@ async def on_message(message):
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
         
-        #single word trigger
-        for i, v in SINGLE_WORD_TRIGGERS.items():
-            if i in lmsg:
-                await SEND(ch,v)
-                return
-        
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
@@ -137,7 +147,20 @@ async def on_message(message):
                     key = split[0] + "T"
                     await SEND(ch,show_random_tip(key))
                     return
+
+        #single word trigger
+        for i, v in SINGLE_WORD_TRIGGERS.items():
+            if i in lmsg:
+                await SEND(ch,v)
+                return
+        
+        #multiple word trigger
+        for i,v in MULTIPLE_WORD_TRIGGERS.items():
+            if all(word in lmsg for word in i):
+                await SEND(ch,v)
+                return
                 
+               
     ## tips/tricks admin command
     else:
 
