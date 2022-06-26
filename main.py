@@ -102,9 +102,6 @@ async def on_message(message):
             await SEND(channel,"You are not allowed to use this command.")
             return
             
-        #lowercase the message
-        msg = msg.lower()
-        
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         key = split[1]
