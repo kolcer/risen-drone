@@ -41,7 +41,7 @@ SINGLE_WORD_TRIGGERS = {
 MULTIPLE_WORD_TRIGGERS = {
     'best alignment': "Keeper obviously. Stop asking stupid questions.",
     'bug tutorial': "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...",
-    'stuck stairs': "Haha. You got stuck in stairs!'",
+    'stuck stairs': "Haha. You got stuck in stairs!",
     'fallen drone how': "I fell, okay?",
     'worst alignment': "Are you expecting me to answer with None?",
     'when muggle tower': "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.",
