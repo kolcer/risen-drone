@@ -48,7 +48,7 @@ def list_tips(key):
     result = db.lrange(key,0,-1)
     return result
 
-def show_random_tip(key)
+def show_random_tip(key):
     index = random.randint(0,db.llen(key))
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
