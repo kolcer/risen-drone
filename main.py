@@ -19,6 +19,30 @@ ADMINS = [
     786743350950494219, #td
 ] 
 
+#worst guns ever made for the gun role
+WORST_GUNS = [
+    "Cochran Turret Revolver",
+    "Chauchat",
+    "Nambu Type 94 Pistol",
+    "Krummlauf",
+    "2 mm Kolibri",
+    "Glisenti Model 1910",
+    "Davy Crockett",
+    "Northover Projector",
+    "Duck's Foot Pistol",
+    "Puckle Gun",
+    "Nock Volley Gun",
+    "Grossflammenwerfer",
+    "Gyrojet",
+    "FP-45 Liberator"
+    "Ross Rifle",
+    "Arsenal AF2011-A1",
+    "CZ-38",
+    "LeMat Revolver",
+    "Boys Anti-Tank Rifle",
+    "No gun name for you",
+]
+
 #this is for tips and trivia database
 TIPS_KEYS = [
     "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
@@ -204,7 +228,12 @@ async def PRINT_TIPS(channel,key):
             combined_string = new_string
     await SEND(channel,combined_string)
 
-
+#edit nick
+async def EDIT_NICK(usr,new_nick)
+    await usr.edit(new_nick)
+    
+    
+#drone start up, prepare roles here
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -224,6 +253,29 @@ async def on_ready():
     await SEND(channel,'The last edited code is now effective.')
     return
 
+#member update, prevent changing gun nick to anything other than the gun name
+@client.event
+async def on_member_update(before, after):
+    
+    #nick has not changed
+    if before.nick == after.nick:
+        return
+    
+    #is user a gun?
+    is_gun = False
+    for role in before.roles:
+        if role.name == "Guns":
+            is_gun = True
+    #not a gun
+    if not is_gun:
+        return
+    
+    #ignore if user nick after change is a gun name
+    if after.nick in Worst_guns:
+        return
+
+    await EDIT_NICK(usr,nick=random.choice(Worst_guns))
+    return
 
 @client.event
 async def on_message(message):
@@ -251,6 +303,8 @@ async def on_message(message):
             split = lmsg.split(" ",2)
             role = split[2].capitalize()
             if role in MORPHABLE_ROLES:
+                if role == "Guns" then
+                    await EDIT_NICK(usr,nick=random.choice(Worst_guns))
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 
