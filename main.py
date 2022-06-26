@@ -39,17 +39,34 @@ SINGLE_WORD_TRIGGERS = {
 #all words nedd to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
-    "Keeper obviously. Stop asking stupid questions.": ["best", "alignment"], 
-    "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...": ['bug', 'tutorial'], 
-    "Haha. You got stuck in stairs!": ['stuck', 'stairs'],
-    "I fell, okay?": ['fallen', 'drone', 'how'],
-    "Are you expecting me to answer with None?": ['worst', 'alignment', '?'], 
-    "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.": ['when', 'muggle', 'tower', '?'], 
-    "Thanks.": ['good', 'drone'], 
-    "Nobody is perfect. Robots included.": ['bad', 'drone'],
-    "Not on my watch.": ['dead', 'chat'],
+    "Keeper obviously. Stop asking stupid questions.": 
+        ["best", "alignment"], 
+    "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...":
+        ['bug', 'tutorial'], 
+    "Haha. You got stuck in stairs!":
+        ['stuck', 'stairs'],
+    "I fell, okay?":
+        ['fallen', 'drone', 'how'],
+    "Are you expecting me to answer with None?": 
+        ['worst', 'alignment', '?'], 
+    "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
+        ['when', 'muggle', 'tower', '?'], 
+    "Thanks.":
+        ['good', 'drone'], 
+    "Nobody is perfect. Robots included.":
+        ['bad', 'drone'],
+    "Not on my watch.": 
+        ['dead', 'chat'],
 }
 
+#first word is required and any of the pool of rest of the words
+MIXED_WORD_TRIGGERS = {
+    "Hello!":   [
+        'fallen drone', 
+        ["hi", "hello", "howdy", "sup"],
+    ],
+    
+}
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
@@ -159,6 +176,13 @@ async def on_message(message):
             if all(word in lmsg for word in v):
                 await SEND(ch,i)
                 return
+       
+        #mixed word trigger
+        for i, v in MIXED_WORD_TRIGGERS.items()
+            if v[0] in lmsg:
+                if any(word in lmsg for word in v[1]):
+                    await SEND(ch,i)
+                    return
                 
                
     ## tips/tricks admin command
