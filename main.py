@@ -102,14 +102,6 @@ async def on_message(message):
         #lowercase the message
         msg = msg.lower()
         
-        #tip or trick?
-        tip = True
-        if msg.startswith("triv",2):
-            tip = False
-        elif not msg.startswith("tip",2):
-            await SEND(channel,"Invalid command.")
-            return
-        
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         key = split[1]
@@ -118,11 +110,16 @@ async def on_message(message):
             await SEND(channel,"Invalid alignment.")
             return
            
-        
-        #for trivia, key has extra "T" at the end
-        if tip == False:
+        #tip or trick?
+        tot = "tip"
+        if msg.startswith("triv",2):
+            tot = "trivia"
+            #for trivia, key has extra "T" at the end
             key = key + "T"
-                
+        elif not msg.startswith("tip",2):
+            await SEND(channel,"Invalid command.")
+            return
+        
         #add tip   
         if msg.startswith("]n"):
            add_tip(key,split[2])
