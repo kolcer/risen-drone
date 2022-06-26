@@ -111,11 +111,11 @@ async def on_message(message):
         split = lmsg.split(" ", 1)
         if split[1] == "tip" or split[1] == "trick":
             if split[0] in TIPS_KEYS:
-                SEND(ch,show_random_tip(split[0]))
+                await SEND(ch,show_random_tip(split[0]))
         elif split[1] == "trivia":
             if split[0] in TIPS_KEYS:
                 key = split[0] + "T"
-                SEND(ch,show_random_tip(key))
+                await SEND(ch,show_random_tip(key))
                 
     ## tips/tricks admin command
     else:
