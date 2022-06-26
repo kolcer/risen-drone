@@ -9,12 +9,14 @@ from datetime import date
 
 ## CONSTANTS ##
 
+#this is for tips and trivia database
 TIPS_KEYS = [
     "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
     "thief", "hacker", "archon", "drifter", "heretic", "none", "general",
     "possessed", "architect",
 ]
 
+#this is for administrating tips and trivia database
 ADMINS = [
     481893862864846861, #sleazel
     267014823315898368, #rolo
@@ -23,6 +25,14 @@ ADMINS = [
     380938705667620874, #jeff
     786743350950494219, #td
 ] 
+
+#this keywords will trigger the bot with a single occurence
+#key is the trigger, value is the response
+#it does not have to be a single word
+SINGLE_WORD_TRIGGERS = {
+    "gun": "<:cs_Stairbonk:812813052822421555>",
+    "demorph from ultimate chat killer": "There was an attempt.",
+}
 
 ### INITIAL SETUP ###
 
@@ -108,16 +118,25 @@ async def on_message(message):
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
         
+        #single word trigger
+        for i, v in SINGLE_WORD_TRIGGERS.items():
+            if i in lmsg:
+                await SEND(ch,v)
+                return
+        
+        
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
         if len(split) == 2:
             if split[1] == "tip" or split[1] == "trick":
                 if split[0] in TIPS_KEYS:
                     await SEND(ch,show_random_tip(split[0]))
+                    return
             elif split[1] == "trivia":
                 if split[0] in TIPS_KEYS:
                     key = split[0] + "T"
                     await SEND(ch,show_random_tip(key))
+                    return
                 
     ## tips/tricks admin command
     else:
@@ -148,7 +167,7 @@ async def on_message(message):
         #add tip   
         if msg.startswith("n",1):
             add_tip(key,split[2])
-            await SEND(ch,"New " + split[1] + " " + tot + "  added.")
+            await SEND(ch,"New " + split[1] + " " + tot + " added.")
             return
 
         #list tips
