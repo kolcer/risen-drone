@@ -105,17 +105,19 @@ async def on_message(message):
     #normal non-admin usage
     if not msg.startswith("|"):
         
+        ## lowercase the message for some commands to use
         lmsg = msg.lower()
         
         ## tips/tricks trigger
         split = lmsg.split(" ", 1)
-        if split[1] == "tip" or split[1] == "trick":
-            if split[0] in TIPS_KEYS:
-                await SEND(ch,show_random_tip(split[0]))
-        elif split[1] == "trivia":
-            if split[0] in TIPS_KEYS:
-                key = split[0] + "T"
-                await SEND(ch,show_random_tip(key))
+        if len(split) == 2:
+            if split[1] == "tip" or split[1] == "trick":
+                if split[0] in TIPS_KEYS:
+                    await SEND(ch,show_random_tip(split[0]))
+            elif split[1] == "trivia":
+                if split[0] in TIPS_KEYS:
+                    key = split[0] + "T"
+                    await SEND(ch,show_random_tip(key))
                 
     ## tips/tricks admin command
     else:
