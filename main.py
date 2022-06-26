@@ -46,8 +46,8 @@ MULTIPLE_WORD_TRIGGERS = {
     'worst alignment': "Are you expecting me to answer with None?",
     'when muggle tower': "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.",
     'good drone': "Thanks.",
-    'bad drone': "Nobody is perfect. Robots included."
-    'dead chat': "Not on my watch."
+    'bad drone': "Nobody is perfect. Robots included.",
+    'dead chat': "Not on my watch.",
 }
 
 ### INITIAL SETUP ###
