@@ -274,7 +274,7 @@ async def on_member_update(before, after):
     if after.nick in Worst_guns:
         return
 
-    await EDIT_NICK(usr,nick=random.choice(Worst_guns))
+    await EDIT_NICK(usr,nick=random.choice(WORST_GUNS))
     return
 
 @client.event
@@ -302,15 +302,19 @@ async def on_message(message):
         if lmsg.startswith("morph to"):
             split = lmsg.split(" ",2)
             role = split[2].capitalize()
+            if role == "Gun":
+                role = "Guns"
             if role in MORPHABLE_ROLES:
                 if role == "Guns":
-                    await EDIT_NICK(usr,nick=random.choice(Worst_guns))
+                    await EDIT_NICK(usr,nick=random.choice(WORST_GUNS))
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 
         if lmsg.startswith("unmorph from") or lmsg.startswith("demorph from"):
             split = lmsg.split(" ",2)
             role = split[2].capitalize()
+            if role == "Gun":
+                role = "Guns"
             if role in MORPHABLE_ROLES:
                 await SEND(ch,MORPHABLE_ROLES[role][2])
                 await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
