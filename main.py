@@ -212,7 +212,8 @@ async def on_ready():
     await client.change_presence(activity=game)
     
     #prepare roles
-    server_roles = message.guild.roles
+    guild = client.get_guild(624227331720085528)
+    server_roles = guild.roles
     
     #morphable
     for role in server_roles:
