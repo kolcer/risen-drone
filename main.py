@@ -55,7 +55,7 @@ def list_tips(key):
 async def SEND(channel,message):
     if message == None or message == "":
         #cannot send empty message
-        retrun
+        return
     await channel.send(message)
 
 #print tips
