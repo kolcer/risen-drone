@@ -36,7 +36,7 @@ SINGLE_WORD_TRIGGERS = {
     'csTrollpain': "Tsk." 
 }
 
-#all words nedd to be present for this trigger to occur
+#all words need to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
     "Keeper obviously. Stop asking stupid questions.": 
