@@ -218,6 +218,7 @@ MIXED_WORD_TRIGGERS = {
 # for chat killer role, time when the last message was sent
 # (seconds from unix epoch)
 Last = 0
+PreviousKiller = None
 
 ### INITIAL SETUP ###
 
@@ -292,6 +293,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
     
     if msg.channel.id == CHAT_KILLER_CHANNEL:
         global Last
+        global PreviousKiller
         Last = msg.created_at
         
         #wait 2 hours
@@ -300,9 +302,12 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         if msg.created_at == Last:
             await SEND(msg.author.mention + " do not worry, I can talk with you if no one else will.")
             for member in CKR.members:
-                await member.remove_roles(CKR)
+                await REMOVE_ROLES(member,CKR)
+            if PreviousKiller:
+                await REMOVE_ROLES(PreviousKiller,CKR)
             await asyncio.sleep(5)
-            await usr.add_roles(CKR)
+            await ADD_ROLES(usr,CKR)
+            PreviousKiller = usr
 
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
@@ -463,7 +468,9 @@ async def on_message(message):
                 if any(word in lmsg for word in v[1]):
                     await SEND(ch,i)
                     return
-                
+        
+        #chat killer
+        await WAIT_FOR_CHAT_KILLER(msg)
                
     ## tips/tricks admin command
     else:
@@ -476,16 +483,19 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         key = split[1]
-        
-        if msg.startswith("gckr to ",1):
-            target = split[2].lower()
-            for mem in SERVER.members:   
-               if CKR in mem.roles:
-                  await REMOVE_ROLES(mem,CKR)
-                  break
+   
+        #give ckr
+        if msg.startswith("ckr to ",2):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await ADD_ROLES(mem,CKR)
+                   break
+            return  
+        #remove ckr
+        if msg.startswith("ckr from ",2):
+            for mem in SERVER.members:
+               if mem.name.lower() + "#" + mem.discriminator == target:
+                   await REMOVE_ROLES(mem,CKR)
                    break
             return   
         
