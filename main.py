@@ -478,6 +478,18 @@ async def on_message(message):
         split = msg.split(" ", 2)
         key = split[1]
         
+        if msg.startswith("gckr to ",1):
+            target = split[2].lower()
+            for mem in server.members:   
+               if CKR in mem.roles:
+                  await REMOVE_ROLES(mem,CKR)
+                  break
+            for mem in server.members:
+               if mem.name.lower() + "#" + mem.discriminator == target:
+                   await ADD_ROLES(mem,CKR)
+                   break
+            return   
+        
         if not key in TIPS_KEYS:
             await SEND(ch,"Invalid alignment.")
             return
@@ -511,17 +523,7 @@ async def on_message(message):
             await PRINT_TIPS(ch, key)
             return
         
-        if msg.startswith("gckr to ",1):
-            target = split[2].lower()
-            for mem in server.members:   
-               if CKR in mem.roles:
-                  await REMOVE_ROLES(mem,CKR)
-                  break
-            for mem in server.members:
-               if mem.name.lower() + "#" + mem.discriminator == target:
-                   await ADD_ROLES(mem,CKR)
-                   break
-            return
+
          
 ### RUN THE BOT ###
 
