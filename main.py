@@ -480,11 +480,11 @@ async def on_message(message):
         
         if msg.startswith("gckr to ",1):
             target = split[2].lower()
-            for mem in server.members:   
+            for mem in SERVER.members:   
                if CKR in mem.roles:
                   await REMOVE_ROLES(mem,CKR)
                   break
-            for mem in server.members:
+            for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await ADD_ROLES(mem,CKR)
                    break
