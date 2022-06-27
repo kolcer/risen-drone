@@ -9,6 +9,10 @@ from datetime import date
 
 ## CONSTANTS ##
 
+CHAT_KILLER_CHANNEL = 624227331720085536
+TEST_CHANNEL = 813882658156838923
+SERVER = 624227331720085528
+
 #this is for administrating tips and trivia database
 ADMINS = [
     481893862864846861, #sleazel
@@ -121,16 +125,56 @@ MORPHABLE_ROLES = {
      ],
 }
 
+#pingable roles, no custom messages
+#roles will be fetched on bot startup
+PING_ROLES = {
+    "Announcements":
+        None,
+    "Events":
+        None,
+    "Polls":
+        None,
+    "Updates":
+        None,
+}
 
+#chat killer role
+CKR = "Ultimate Chat Killer",
+
+#bot will react to the webhook emoji, if it finds in a webhook message
+#values will be replaced by emoji objects during startup
+EMOJIS_TO_REACT = {
+    "_patron": 758081038697103504,
+    "_joker": 758081245157654599,
+    "_wicked": 792143453035167754,
+    "_keeper": 758081314912993283,
+    "_muggle": 758081353932603414,
+    "_hacker": 758081540063494288,
+    "_thief": 758081386203840644,
+    "_heretic": 786323224115281921,
+    "_archon": 786323402172530688,
+    "_drifter": 786323335880507483,
+    "_spectre": 758083065988776017,
+    "_chameleon": 758083033738903692,
+    "csSleazelApproves": 791393163343560715,
+    "csSecret": 786318938350813215,
+    "csPranked": 786317086066343936,
+    "csSuperSecret": 987709883010916383,
+    "csMegaSecret": 987819430639730699,
+}
 
 #this keywords will trigger the bot with a single occurence
-#key is the trigger, value is the response
+# value is the trigger, key is theresponse!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    'gun': "<:cs_Stairbonk:812813052822421555>",
-    'demorph from ultimate chat killer': "There was an attempt.",
-    'morph to ultimate chat killer': "It needs to be earned, sorry.",
-    'csTrollpain': "Tsk." 
+    "<:cs_Stairbonk:812813052822421555>":
+        'gun',
+     "There was an attempt.": 
+        'demorph from ultimate chat killer',
+    "It needs to be earned, sorry.":
+        'morph to ultimate chat killer',
+     "Tsk.":
+        'cstrollpain',
 }
 
 #all words nedd to be present for this trigger to occur
@@ -169,6 +213,13 @@ MIXED_WORD_TRIGGERS = {
     
     
 }
+
+### GLOBAL VARIABLES ###
+
+# for chat killer role, time when the last message was sent
+# (seconds from unix epoch)
+Last = 0
+
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
@@ -200,7 +251,7 @@ def show_random_tip(key):
     
 ### PRIVATE ASYNC FUNCTIONS ###
 
-#TODO: implement anti rate-limit measures here
+### RATE LIMITED FUNCTIONS ###
 async def SEND(channel,message):
     if message == None or message == "":
         #cannot send empty message
@@ -215,6 +266,15 @@ async def ADD_ROLES(usr,roles):
 async def REMOVE_ROLES(usr,roles):
     await usr.remove_roles(roles)
 
+#edit nick
+async def EDIT_NICK(usr,new_nick):
+    await usr.edit(nick=new_nick)
+### END OF RATE LIMITED FUNCTIONS ###
+
+#below function can also cause rate limts, but
+#they are using only above functions so we do not need 
+#to worry about these ones
+
 #print tips
 async def PRINT_TIPS(channel,key):
     tips = list_tips(key)
@@ -228,30 +288,57 @@ async def PRINT_TIPS(channel,key):
             combined_string = new_string
     await SEND(channel,combined_string)
 
-#edit nick
-async def EDIT_NICK(usr,new_nick):
-    await usr.edit(nick=new_nick)
+#chat killer functions
+async def WAIT_FOR_CHAT_KILLER(msg):
     
+    if msg.channel.id == CHAT_KILLER_CHANNEL:
+        global Last
+        Last = msg.created_at
+        
+        #wait 2 hours
+        await asyncio.sleep(7200)
+        
+        if msg.created_at == Last:
+            await SEND(msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            for member in CKR.members:
+                await member.remove_roles(CKR)
+            await asyncio.sleep(5)
+            await usr.add_roles(CKR)
+
+
+### PUBLIC (ON EVENT) FUNCTIONS ###
     
 #drone start up, prepare roles here
 @client.event
 async def on_ready():
+    
     print('We have logged in as {0.user}'.format(client))
     game = discord.Game("Lucid Ladders")
     await client.change_presence(activity=game)
+
+    #get the guild
+    global SERVER
+    SERVER = client.get_guild(624227331720085528)
     
-    #prepare roles
-    guild = client.get_guild(624227331720085528)
-    server_roles = guild.roles
-    
-    #morphable
-    for role in server_roles:
+    #prepare the roles
+    global CKR
+    for role in SERVER.roles:
+        #morphable
         if role.name in MORPHABLE_ROLES:
             MORPHABLE_ROLES[role.name][0] = role
+        #ping roles
+        if role.name in PING_ROLES:
+            PING_ROLES[role.name] = role
+        if role.name == CKR:
+            CKR = role
+            
+    #prepare emojis reactions
+    for i, v in EMOJIS_TO_REACT.items():
+        EMOJIS_TO_REACT[i] = client.get_emoji(v)
     
-    channel = client.get_channel(813882658156838923)
-    await SEND(channel,'The last edited code is now effective.')
-    return
+    #send ready to the test channel
+    ch = client.get_channel(TEST_CHANNEL)
+    await SEND(ch,'The last edited code is now effective.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
@@ -262,10 +349,9 @@ async def on_member_update(before, after):
         return
     
     #is user a gun?
-    is_gun = False
-    for role in before.roles:
-        if role.name == "Guns":
-            is_gun = True
+    if not MORPHABLE_ROLES["Guns"][0] in before.roles:
+        return
+    
     #not a gun
     if not is_gun:
         return
@@ -277,6 +363,7 @@ async def on_member_update(before, after):
     await EDIT_NICK(usr,random.choice(WORST_GUNS))
     return
 
+#main function on each message being intercepted
 @client.event
 async def on_message(message):
 
@@ -285,7 +372,13 @@ async def on_message(message):
     ch = message.channel
     
     ## user must not be a bot
+    ## but the bot will add reactions to the webhook (if any)
+    ## before returning
     if usr.bot == True:
+        for i, v in EMOJIS_TO_REACT.items():
+            if i in msg:
+                await message.add_reaction(v)
+                return
         return
     
     #this will avoid old activatig with old bot
@@ -297,11 +390,13 @@ async def on_message(message):
         
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
+        ## split the message to 3 strings for some commands to use
+        ## no need to have more than 3 strings
+        lsplit = lmsg.split(" ",2) 
         
         #morph command
         if lmsg.startswith("morph to"):
-            split = lmsg.split(" ",2)
-            role = split[2].capitalize()
+            role = lsplit[2].capitalize()
             if role == "Gun":
                 role = "Guns"
             if role in MORPHABLE_ROLES:
@@ -310,10 +405,10 @@ async def on_message(message):
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
-                
-        if lmsg.startswith("unmorph from") or lmsg.startswith("demorph from"):
-            split = lmsg.split(" ",2)
-            role = split[2].capitalize()
+        
+        #demorph command (accepts demorph, unmorph and any **morph from combination)
+        if lmsg.startswith("morph from",2):
+            role = lsplit[2].capitalize()
             if role == "Gun":
                 role = "Guns"
             if role in MORPHABLE_ROLES:
@@ -321,23 +416,40 @@ async def on_message(message):
                 await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
         
+        #sub command
+        if lmsg.startswith("sub to"):
+            role = lsplit[2].capitalize()
+            if role in PING_ROLES:
+                await SEND(ch,"You have subscribed to " + role + "!")
+                await ADD_ROLES(usr,PING_ROLES[role])
+                return
+
+        #unsub command (aceppts unsub, desub and any **sub from combination)
+        if lmsg.startswith("sub from",2):
+            role = lsplit[2].capitalize()
+            if role in PING_ROLES:
+                await SEND(ch,"You have unsubscribed from " + role + "!")
+                await REMOVE_ROLES(usr,PING_ROLES[role])
+                return
+                
+        
+        
         ## tips/tricks trigger
-        split = lmsg.split(" ", 1)
-        if len(split) == 2:
-            if split[1] == "tip" or split[1] == "trick":
-                if split[0] in TIPS_KEYS:
-                    await SEND(ch,show_random_tip(split[0]))
+        if len(lsplit) == 2:
+            if lsplit[1] == "tip" or lsplit[1] == "trick":
+                if lsplit[0] in TIPS_KEYS:
+                    await SEND(ch,show_random_tip(lsplit[0]))
                     return
-            elif split[1] == "trivia":
-                if split[0] in TIPS_KEYS:
-                    key = split[0] + "T"
+            elif lsplit[1] == "trivia":
+                if lsplit[0] in TIPS_KEYS:
+                    key = lsplit[0] + "T"
                     await SEND(ch,show_random_tip(key))
                     return
 
         #single word trigger
         for i, v in SINGLE_WORD_TRIGGERS.items():
-            if i in lmsg:
-                await SEND(ch,v)
+            if v in lmsg:
+                await SEND(ch,i)
                 return
         
         #multiple word trigger
@@ -371,12 +483,12 @@ async def on_message(message):
             return
            
         #tip or trick?
-        tot = "ti"
-        if msg.startswith("tr",2):
-            tot = "tr"
+        tot = "tip"
+        if msg.startswith("triv",2):
+            tot = "triv"
             #for trivia, key has extra "T" at the end
             key = key + "T"
-        elif not msg.startswith("ti",2):
+        elif not msg.startswith("tip",2):
             await SEND(ch,"Invalid command.")
             return
         
@@ -398,7 +510,19 @@ async def on_message(message):
             await SEND(ch,split[1] + " " + tot + "(s):")
             await PRINT_TIPS(ch, key)
             return
-    
+        
+        if msg.startswith("gckr to ",1):
+            target = split[2].lower()
+            for mem in server.members:   
+               if CKR in mem.roles:
+                  await REMOVE_ROLES(mem,CKR)
+                  break
+            for mem in server.members:
+               if mem.name.lower() + "#" + mem.discriminator == target:
+                   await ADD_ROLES(mem,CKR)
+                   break
+            return
          
-#run the bot 
+### RUN THE BOT ###
+
 client.run(os.environ['TOKEN'])
