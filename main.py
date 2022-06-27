@@ -12,6 +12,7 @@ from datetime import date
 CHAT_KILLER_CHANNEL = 624227331720085536
 TEST_CHANNEL = 813882658156838923
 SERVER = 624227331720085528
+CKR = "Ultimate Chat Killer"
 
 #this is for administrating tips and trivia database
 ADMINS = [
@@ -138,8 +139,6 @@ PING_ROLES = {
         None,
 }
 
-#chat killer role
-CKR = "Ultimate Chat Killer",
 
 #bot will react to the webhook emoji, if it finds in a webhook message
 #values will be replaced by emoji objects during startup
