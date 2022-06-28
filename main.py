@@ -197,7 +197,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
-    "You are a true stair jumper.":
+    "{stairjumper} is a true stair jumper.":
         ["found", "secret", "badge"],
 }
 
@@ -461,6 +461,8 @@ async def on_message(message):
         #multiple word trigger
         for i, v in MULTIPLE_WORD_TRIGGERS.items():
             if all(word in lmsg for word in v):
+                if "{stairjumper}" in i:
+                    i = i.format(mention=usr.mention)
                 await SEND(ch,i)
                 return
        
@@ -468,8 +470,6 @@ async def on_message(message):
         for i, v in MIXED_WORD_TRIGGERS.items():
             if v[0] in lmsg:
                 if any(word in lmsg for word in v[1]):
-                    if "{mention}" in i:
-                        i = i.format(mention=usr.mention)
                     await SEND(ch,i)
                     return
         
