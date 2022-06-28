@@ -485,16 +485,17 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         key = split[1]
+        target = msg.split(" ", 2)[2]
    
         #give ckr
-        if msg.startswith("ckr to ",2):
+        if msg.startswith("ckr to "):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await ADD_ROLES(mem,CKR)
                    break
             return  
         #remove ckr
-        if msg.startswith("ckr from ",2):
+        if msg.startswith("ckr from "):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await REMOVE_ROLES(mem,CKR)
