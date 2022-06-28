@@ -120,7 +120,7 @@ MORPHABLE_ROLES = {
         "The circle has made their decision. You are permanently banned from being a Heretic ever again.",
     ],
      "Guns": [ 
-         None,
+        None,
         "smh, FINE!",
         "Finally you came to your senses.",
      ],
@@ -197,6 +197,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
+    message.author.mention + " is a true stair jumper.":
+        ["found", "secret", "badge"],
 }
 
 #first word is required and any of the pool of rest of the words
