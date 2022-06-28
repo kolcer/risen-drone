@@ -197,7 +197,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
-    message.author.mention + " is a true stair jumper.":
+    "You are a true stair jumper.":
         ["found", "secret", "badge"],
 }
 
