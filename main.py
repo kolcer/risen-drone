@@ -251,9 +251,15 @@ def show_random_tip(key):
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
     
-### PRIVATE ASYNC FUNCTIONS ###
-
 ### RATE LIMITED FUNCTIONS ###
+
+def GET_CHANNEL(id):
+    return client.get_channel(id)
+
+def GET_EMOJI(id):
+    return client.get_emoji(id)
+
+### PRIVATE ASYNC FUNCTIONS ###
 async def SEND(channel,message):
     if message == None or message == "":
         #cannot send empty message
@@ -293,7 +299,7 @@ async def PRINT_TIPS(channel,key):
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
     
-    if msg.channel.id == CHAT_KILLER_CHANNEL:
+    if msg.channel == CHAT_KILLER_CHANNEL:
         global Last
         global PreviousKiller
         Last = msg.created_at
@@ -302,7 +308,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(7200)
         
         if msg.created_at == Last:
-            await SEND(msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            await SEND(CHAT_KILLER_CHANNEL,msg.author.mention + " do not worry, I can talk with you if no one else will.")
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
             if PreviousKiller:
@@ -324,8 +330,15 @@ async def on_ready():
 
     #get the guild
     global SERVER
+    #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(624227331720085528)
     
+    #get channels
+    global TEST_CHANNEL
+    TEST_CHANNEL = GET_CHANNEL(TEST_CHANNEL)
+    global CHAT_KILLER_CHANNEL
+    CHAT_KILLER_CHANNEL = GET_CHANNEL(CHAT_KILLER_CHANNEL)
+
     #prepare the roles
     global CKR
     for role in SERVER.roles:
@@ -340,11 +353,10 @@ async def on_ready():
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
-        EMOJIS_TO_REACT[i] = client.get_emoji(v)
+        EMOJIS_TO_REACT[i] = GET_EMOJI(v)
     
     #send ready to the test channel
-    ch = client.get_channel(TEST_CHANNEL)
-    await SEND(ch,'The last edited code is now effective.')
+    await SEND(TEST_CHANNEL,'The last edited code is now effective.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
@@ -476,7 +488,7 @@ async def on_message(message):
         #chat killer
         await WAIT_FOR_CHAT_KILLER(msg)
                
-    ## tips/tricks admin command
+    ## admin command
     else:
 
         #check for admin
