@@ -462,7 +462,7 @@ async def on_message(message):
         for i, v in MULTIPLE_WORD_TRIGGERS.items():
             if all(word in lmsg for word in v):
                 if "{stairjumper}" in i:
-                    i = i.format(mention=usr.mention)
+                    i = i.format(stairjumper=usr.mention)
                 await SEND(ch,i)
                 return
        
