@@ -468,6 +468,8 @@ async def on_message(message):
         for i, v in MIXED_WORD_TRIGGERS.items():
             if v[0] in lmsg:
                 if any(word in lmsg for word in v[1]):
+                    if "{mention}" in i:
+                        i = i.format(mention=usr.mention)
                     await SEND(ch,i)
                     return
         
@@ -485,17 +487,17 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         key = split[1]
-        target = msg.split(" ", 2)[2]
+        target = split[2]
    
         #give ckr
-        if msg.startswith("ckr to "):
+        if msg.startswith("ckr to ", 1):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await ADD_ROLES(mem,CKR)
                    break
             return  
         #remove ckr
-        if msg.startswith("ckr from "):
+        if msg.startswith("ckr from ", 1):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == target:
                    await REMOVE_ROLES(mem,CKR)
