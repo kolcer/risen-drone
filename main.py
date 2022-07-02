@@ -372,7 +372,7 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(v)
     
     #send ready to the test channel
-    await SEND(CHANNEL["test"],'The last edited code is now effective.')
+    await SEND(CHANNELS["test"],'The last edited code is now effective.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
