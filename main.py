@@ -186,11 +186,11 @@ EMOJIS_TO_REACT = {
 SINGLE_WORD_TRIGGERS = {
     "<:cs_Stairbonk:812813052822421555>":
         'gun',
-     "There was an attempt.": 
+    "There was an attempt.": 
         'demorph from ultimate chat killer',
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
-     "Tsk.":
+    "Tsk.":
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943'
@@ -488,7 +488,7 @@ async def on_message(message):
  
         #fallen drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), FALLEN_DRONE_NICK)
-        if compare.ratio() > 0.8:
+        if compare.ratio() > 0.5:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
