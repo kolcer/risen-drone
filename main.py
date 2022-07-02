@@ -329,7 +329,7 @@ async def EDIT_NICK(usr,new_nick):
     await usr.edit(nick=new_nick)
     
 #add reaction    
-async def ADD_REACTION(msg,reaction)
+async def ADD_REACTION(msg,reaction):
     await msg.add_reaction(reaction)
 
 ### END OF RATE LIMITED FUNCTIONS ###
