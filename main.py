@@ -634,7 +634,7 @@ async def Rig(rigType, ch, usr):
                 
           
             
-    await asyncio.sleep(COOLDOWN_DURAION[rigType])
+    await asyncio.sleep(COOLDOWN_DURATION[rigType])
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
     await SEND(message.channel, rigType.capitalize() + " Rig cooldown is over.")
     
