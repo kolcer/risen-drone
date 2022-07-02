@@ -624,7 +624,7 @@ async def Rig(rigType, ch, usr)
             if rigType == "joker":
                 await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
                 await asyncio.sleep(60)
-            elif rigType == "thief:
+            elif rigType == "thief":
                 await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
                 await asyncio.sleep(600)
             else:
