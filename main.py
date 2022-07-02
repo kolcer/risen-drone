@@ -188,6 +188,8 @@ SINGLE_WORD_TRIGGERS = {
         'morph to ultimate chat killer',
      "Tsk.":
         'cstrollpain',
+    "{mention} <:csRbxangryping:786325219727638535>":
+        '<@!827952429290618943>'
 }
 
 #all words nedd to be present for this trigger to occur
@@ -211,7 +213,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
-    "{stairjumper} is a true stair jumper.":
+    "{mention} is a true stair jumper.":
         ["found", "secret", "badge"],
 }
 
@@ -484,14 +486,16 @@ async def on_message(message):
         #single word trigger
         for i, v in SINGLE_WORD_TRIGGERS.items():
             if v in lmsg:
+                if "{mention}" in i:
+                    i = i.format(mention=usr.mention)
                 await SEND(ch,i)
                 return
         
         #multiple word trigger
         for i, v in MULTIPLE_WORD_TRIGGERS.items():
             if all(word in lmsg for word in v):
-                if "{stairjumper}" in i:
-                    i = i.format(stairjumper=usr.mention)
+                if "{mention}" in i:
+                    i = i.format(mention=usr.mention)
                 await SEND(ch,i)
                 return
        
@@ -515,29 +519,28 @@ async def on_message(message):
             
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
-        key = split[1]
-        target = split[2]
    
         #give ckr
         if msg.startswith("ckr to ", 1):
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == target:
+               if mem.name.lower() + "#" + mem.discriminator == split[2]:
                    await ADD_ROLES(mem,CKR)
                    break
             return  
         #remove ckr
         if msg.startswith("ckr from ", 1):
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == target:
+               if mem.name.lower() + "#" + mem.discriminator == split[2]:
                    await REMOVE_ROLES(mem,CKR)
                    break
             return   
-        
+
+        key = split[1]
         if not key in TIPS_KEYS:
             await SEND(ch,"Invalid alignment.")
             return
            
-        #tip or trick?
+        #tip or trivia?
         tot = "tip"
         if msg.startswith("triv",2):
             tot = "triv"
