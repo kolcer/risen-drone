@@ -450,7 +450,7 @@ async def SEND(channel,message):
     if message == None or message == "":
         #cannot send empty message
         return
-    await channel.send(message)
+    return await channel.send(message)
 
 #add roles
 async def ADD_ROLES(usr,roles):
