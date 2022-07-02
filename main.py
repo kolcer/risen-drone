@@ -583,7 +583,7 @@ async def Rig(rigType, ch, usr):
             await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
             await asyncio.sleep(3)
             secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
-                + message.channel.mention + ". " + message.jump_url)
+                + ch.mention + ". " + message.jump_url)
             await SEND(ch2, "https://media.giphy.com/media/QM1yEJoR1Z7oKAGg4Y/giphy.gif")
             await asyncio.sleep(3)
             await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)           
