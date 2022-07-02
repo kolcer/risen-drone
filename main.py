@@ -866,7 +866,7 @@ async def on_message(message):
                 if cd:
                     cdList = ""
                     for i, v in RIG_COOLDOWNS.items():
-                        cdlist += COOLDOWN_DESCRIPTIONS[i]
+                        cdList += COOLDOWN_DESCRIPTIONS[i]
                         if v:
                             cdList += ":x: \n"
                         else:
