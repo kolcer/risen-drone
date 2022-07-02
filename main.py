@@ -11,7 +11,6 @@ from datetime import date
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
-TEST_CHANNEL = 813882658156838923
 
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
@@ -30,10 +29,11 @@ ADMINS = [
 ] 
 
 #channels where bot is allowed to post
-BOT_CHANNELS = {
+CHANNELS = {
     "general": 624227331720085536,
     "commands": 750060041289072771,
-    "crazy-stairs": 750060054090219760,    
+    "crazy-stairs": 750060054090219760,  
+    "test" = 813882658156838923,
 }
 
 #worst guns ever made for the gun role
@@ -138,8 +138,6 @@ MORPHABLE_ROLES = {
      ],
 }
 
-
-
 #pingable roles, no custom messages
 #roles will be fetched on bot startup
 PING_ROLES = {
@@ -152,7 +150,6 @@ PING_ROLES = {
     "Updates":
         None,
 }
-
 
 #bot will react to the webhook emoji, if it finds in a webhook message
 #values will be replaced by emoji objects during startup
@@ -224,9 +221,7 @@ MIXED_WORD_TRIGGERS = {
     "Wrong.": [
         'drone',
         ["dead", "down", "off", "vacation", "sleep"],
-    ],
-    
-    
+    ],    
 }
 
 ### GLOBAL VARIABLES ###
@@ -313,7 +308,7 @@ async def PRINT_TIPS(channel,key):
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
     
-    if msg.channel == CHAT_KILLER_CHANNEL:
+    if msg.channel == CHANNELS["general"]:
         global Last
         global PreviousKiller
         Last = msg.created_at
@@ -347,12 +342,10 @@ async def on_ready():
     #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(SERVER)
     
-    #get channels
-    global TEST_CHANNEL
-    TEST_CHANNEL = GET_CHANNEL(TEST_CHANNEL)
-    global CHAT_KILLER_CHANNEL
-    CHAT_KILLER_CHANNEL = GET_CHANNEL(CHAT_KILLER_CHANNEL)
-
+    #get the channels
+    for i, v in CHANNELS.items():
+        CHANNELS[i] = GET_CHANNEL(v)
+    
     #prepare the roles
     global CKR
     global POSSESSED
@@ -379,7 +372,7 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(v)
     
     #send ready to the test channel
-    await SEND(TEST_CHANNEL,'The last edited code is now effective.')
+    await SEND(CHANNEL["test"],'The last edited code is now effective.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
