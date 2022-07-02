@@ -171,7 +171,7 @@ SPECIAL_ROLES = {
         None,
         "Please verify to become a climber.",
         "To the tower you go!",
-        "You are no longer a Climber. Goodbye."
+        "You are no longer a Climber. Goodbye.",
         "You are no longer a Climber. Goodbye.",
     ],
     "Possessed": [
@@ -502,10 +502,11 @@ async def on_member_update(before, after):
 #on new member join
 @client.event
 async def on_member_join(member):
-    
     await SEND(CHANNELS["verify"],
-        "Welcome to Crazy Stairs Discord Server!\nUnlike other Jokers around here, I am a real bot.\nPlease read the <#750056989207429143>, to avoid misunderstandings.\nHave fun, and remember: It's okay to be a little crazy.\n"
-    )
+        "Welcome to Crazy Stairs Discord Server!"
+        "\nUnlike other Jokers around here, I am a real bot."
+        "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
+        "\nHave fun, and remember: It's okay to be a little crazy.")
     
 #main function on each message being intercepted
 @client.event
