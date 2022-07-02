@@ -189,7 +189,7 @@ SINGLE_WORD_TRIGGERS = {
      "Tsk.":
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
-        '<@!827952429290618943>'
+        '827952429290618943'
 }
 
 #all words nedd to be present for this trigger to occur
