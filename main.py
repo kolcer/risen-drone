@@ -25,6 +25,7 @@ FALLEN_DRONE_NICK = "FALLEN DRONE"
 CKR = "Ultimate Chat Killer"
 POSSESSED = "Possessed (rig)"
 MURDURATOR = "Murdurators"
+CLIMBER = "Climbers"
 
 #this is for administrating tips and trivia database
 ADMINS = [
@@ -203,6 +204,7 @@ PING_ROLES = {
     "Updates":
         None,
 }
+IMMUNITY_ROLES = ["Admin", "Murdurators"]
 
 #bot will react to the webhook emoji, if it finds in a webhook message
 #values will be replaced by emoji objects during startup
@@ -305,6 +307,19 @@ IMPOSTOR_NICKS = [
     "Name offered by Me. F.D.",
 ]
 
+RIG_LIST = [
+    "thief",
+    "spectre",
+    "joker",
+    "archon",
+    "heretic",
+    "patron",
+    "wicked",
+    "keeper",
+    "hacker",
+    "drifter",
+]
+
 COOLDOWN_SELECT = {
     "thief": "tsj",
     "spectre": "tsj",
@@ -320,7 +335,7 @@ COOLDOWN_SELECT = {
 
 COOLDOWN_DURATION = {
     "thief": 0, #cooldown embeded in rig effect
-    "spectre": False,
+    "spectre": 0, #cooldown embeded in rig effect
     "joker": 0, #cooldown embeded in rig effect
     "archon": 120,
     "heretic": 60,
@@ -333,16 +348,29 @@ COOLDOWN_DURATION = {
 
 LIMITED_USE_RIGS = [
     "joker",   
+    "thief",
+    "spectre",
 ]
+
+COOLDOWN_DESCRIPTIONS = {
+    "general": "General cooldown: ",
+    "tsj": "Thief, Spectre, and Joker cooldown: ",
+    "ha": "Heretic and Archon cooldown: ",
+    "patron": "Patron cooldown: ",
+}
 
 ### GLOBAL VARIABLES ###
 
 # for chat killer role, time when the last message was sent
 # (seconds from unix epoch)
 Last = 0
+rigCaster = None
+ghostMsg = ""
 
 ACTIVE_RIGS = {
     "joker": False,
+    "thief": False,
+    "spectre": False,
 }
 
 RIG_COOLDOWNS = {
@@ -353,7 +381,7 @@ RIG_COOLDOWNS = {
 }
 
 RIG_SPAMMERS = {}
-
+NickDictionary = {}
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
@@ -396,6 +424,14 @@ def getScoldDictionary(victim, author):
     }
     return ScoldDict
 
+def rigImmunity(usr1, usr2):
+    for roles in usr1.roles:
+        if roles.name in IMMUNITY_ROLES:
+            return True
+    if usr1 == usr2:
+        return True
+    return False
+
 ### RATE LIMITED FUNCTIONS ###
 
 def GET_CHANNEL(id):
@@ -435,6 +471,9 @@ async def ADD_REACTION(msg,reaction):
 #edit message
 async def EDIT_MESSAGE(msg, con):
     await msg.edit(content=con)
+    
+async def DELETE(message):
+  await message.delete()
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
@@ -496,6 +535,7 @@ async def Rig(rigType, ch, usr)
             RIG_SPAMMERS[usr] = spamCount
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
+    global rigCaster
     
     match rigType:
         
@@ -530,14 +570,6 @@ async def Rig(rigType, ch, usr)
             await EDIT_NICK(usr, im)
             await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
             
-        case "joker":
-            ACTIVE_RIGS["joker"] = True
-            await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
-            await asyncio.sleep(60)
-            if ACTIVE_RIGS["joker"]:
-                 ACTIVE_RIGS["joker"] = False
-                 await SEND(ch, "Joker Rig cooldown is over, and the current Rig effect has worn off.")
-                
         case "archon":
             if ch not in CHANNELS:
                 await SEND(ch, "Impossible to create a Split here. This channel is restricted.")
@@ -586,16 +618,23 @@ async def Rig(rigType, ch, usr)
             for rig in ACITVE_RIGS.keys():
                 ACITVE_RIGS[rig] = False
                 
-         case "thief":
-            ACTIVE_RIGS["thief"] = True
-            await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
-            await asyncio.sleep(600)
-            if ACTIVE_RIGS["thief"]:
-                 ACTIVE_RIGS["joker"] = False
-                 await SEND(ch, "Joker Rig cooldown is over, and the current Rig effect has worn off.")
-    
-        case "spectre":
-            
+        case ("joker"|"thief"|"spectre"):
+            ACTIVE_RIGS[rigType] = True
+            rigCaster = usr
+            if rigType == "joker":
+                await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
+                await asyncio.sleep(60)
+            elif rigType == "thief:
+                await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
+                await asyncio.sleep(600)
+            else:
+                await SEND(ch, usr.mention + " just cast Spectre Rig! Careful.")
+                await asyncio.sleep(600)
+            if ACTIVE_RIGS[rigType]:
+                 ACTIVE_RIGS[rigType] = False
+                 await SEND(ch, rigType.capitalize() + " Rig cooldown is over, and the current Rig effect has worn off.")
+                
+          
             
     await asyncio.sleep(COOLDOWN_DURAION[rigType])
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
@@ -607,53 +646,6 @@ async def Rig(rigType, ch, usr)
         del RIG_SPAMMERS[usr]
    
 
-
-
-
-################################ Separator
-
-async def spectre(usr, message, server):
-  global tsjCD
-  global spectreRig
-  global rigCaster
-  global tooManyUses
-    
-  ## Cooldown
-  if tsjCD == False:
-      await SEND(message.channel, "Ultimate spells are in cooldown.")
-      return
-
-  if not usr in tooManyUses:
-    tooManyUses[usr] = 1
-  elif tooManyUses[usr] == 3:
-    await SEND(message.channel, "You've been using these commands too often.")
-    await asyncio.sleep(3600)
-    if tooManyUses[usr] == 3:
-      tooManyUses[usr] = 0
-    return
-  else:
-    tooManyUses[usr] += 1
-    
-  rigCaster = usr
-  tsjCD = False
-
-  await SEND(message.channel, usr.mention + " just cast Spectre Rig! Careful.")
-  spectreRig = True
-  await asyncio.sleep(600)
-  tsjCD = True
-
-  if spectreRig:
-      spectreRig = False
-      await SEND(
-          message.channel, 
-          "Spectre Rig cooldown is over, and the current Rig effect has worn off."
-      )
-      return
-  await SEND(
-      message.channel, "Spectre Rig cooldown is over.")
-  return
-
-################################ Separator
 
 async def necromancer(usr, message, server):
   global ghostedMsg
@@ -688,6 +680,7 @@ async def on_ready():
     global CKR
     global POSSESSED
     global MURDURATOR
+    global CLIMBER
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -710,6 +703,10 @@ async def on_ready():
             POSSESSED = role
             SPECIAL_ROLES["Possessed"][0] = role
             continue
+        #climber
+        if role.name == CLIMBER:
+            CLIMBER = role
+            SPECIAL_ROLES["Climber"][0] = role
         #architect
         if role.name == "Architect (Booster)":
             SPECIAL_ROLES["Architect"][0] = role
@@ -796,6 +793,97 @@ async def on_message(message):
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
         
+        ## thief rig acitve
+        if ACTIVE_RIGS["thief"]:
+          
+            if ch.name not in CHANNELS or len(rigCaster.display_name + ", " + usr.display_name) > 32 or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+                return
+                          
+            ACTIVE_RIGS["thief"] = False
+            victim = usr.display_name
+
+            NickDictionary[usr] = "N/A"
+            await EDIT_NICK(usr, "N/A")
+
+            await asyncio.sleep(1)
+          
+            if rigCaster in NickDictionary:
+              NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+              await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
+              await SEND(ch, rigCaster.mention + " has just stolen your name!")
+              return
+              
+            await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
+            await SEND(ch, rigCaster.mention + " has just stolen your name!")
+          
+            await asyncio.sleep(1800)
+            del NickDictionary[usr]
+            return
+
+        ## Spectre Rig Active
+        if ACTIVE_RIGS["spectre"]:
+            
+            if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
+                return
+            global ghostMsg
+            ACTIVE_RIGS["spectre"] = False
+
+            chances = random.randint(0, 1)
+
+            if chances == 1:
+                await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
+                await DELETE(message)
+                return
+
+            await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
+            return
+
+        ## Joker Rig Active
+        if ACTIVE_RIGS["joker"]:
+            
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https"):
+                return
+            ACTIVE_RIGS["joker"] = False
+
+            msgcontent = message.content
+
+            await DELETE(message)
+            await asyncio.sleep(2)
+
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:")
+          
+            return
+
+        ## All Rigs in one
+        if lsplit[0] == "cast" and lsplit[2] == "rig":
+            rigPick = lsplit[1]
+            if rigPick == "chameleon":
+                cd = False
+                for active in RIG_COOLDOWNS.values():
+                    if active:
+                        cd = True
+                        break
+                if cd:
+                    cdList = ""
+                    for i, v in RIG_COOLDOWNS.items():
+                        cdlist += COOLDOWN_DESCRIPTIONS[i]
+                        if v:
+                            cdList += ":x: \n"
+                        else:
+                            cdList += ":white_check_mark: \n"
+                    await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
+                    return
+
+                await SEND(ch, "*drum roll*")
+                await asyncio.sleep(4)
+                await Rig(random.choice(RIG_LIST),ch,usr)
+                return
+            if rigPick not in RIG_LIST:
+                await SEND(ch, rigPick + " is not a valid Rig. Try again.")
+                return
+            await Rig(rigPick,ch,usr)
+            return
+                 
         ## Scold command
         if lmsg.startswith("fallen drone scold "):
             finalmsg = None
