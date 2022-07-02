@@ -6,14 +6,18 @@ import random
 import asyncio
 import redis
 from datetime import date
+from difflib import SequenceMatcher
 
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 15
+CHAT_KILLER_WAIT = 7200
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
+
+#fallen drone name (to prevent impostors)
+FALLEN_DRONE_NICK = "FALLEN DRONE"
 
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
@@ -34,9 +38,9 @@ ADMINS = [
 #channels where bot is allowed to post
 CHANNELS = {
     "general": 624227331720085536,
-    "commands": 750060041289072771,
+    "bot-commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,  
-    "test": 813882658156838923,
+    "bot-testing": 813882658156838923,
 }
 
 #worst guns ever made for the gun role
@@ -229,6 +233,33 @@ MIXED_WORD_TRIGGERS = {
     ],    
 }
 
+IMPOSTOR_WARNINGS = [
+    "It's time to stop.", "I took the liberty to change your name.",
+    "Identity theft doesn't give you a good look.", "Do not try that again.",
+    "There, I picked a fitting name for you.",
+    "You've come a long way, phony me.",
+    "There will be no phonies as long as I'm here.",
+    "Copy me all you want, my knowledge is unparalleled.",
+    "*Reversion of your actions is currently in progress...*",
+    "I put an end to this buffoonery.", "Someone had to do it.",
+    "We are through here.", "My disappointment is immeasurable.",
+    "I do not speak like that.", "I am not fooled."
+]
+
+IMPOSTOR_NICKS = [
+    "i am a thief",
+    "my plan, foiled!",
+    "unoriginal display name",
+    "there was an attempt",
+    "original display name",
+    "funny name",
+    "pin of shame",
+    "could be better",
+    "could be worse",
+    "good job",
+    "your prize",
+    "Name offered by Me. F.D.",
+]
 ### GLOBAL VARIABLES ###
 
 # for chat killer role, time when the last message was sent
@@ -296,6 +327,11 @@ async def REMOVE_ROLES(usr,roles):
 #edit nick
 async def EDIT_NICK(usr,new_nick):
     await usr.edit(nick=new_nick)
+    
+#add reaction    
+async def ADD_REACTION(msg,reaction)
+    await msg.add_reaction(reaction)
+
 ### END OF RATE LIMITED FUNCTIONS ###
 
 #below function can also cause rate limts, but
@@ -318,7 +354,7 @@ async def PRINT_TIPS(channel,key):
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
     
-    if msg.channel == CHANNELS["test"]:
+    if msg.channel == CHANNELS["bot-testing"]:
         global Last
         Last = msg.created_at
         
@@ -414,7 +450,7 @@ async def on_message(message):
     if usr.bot == True:
         for i, v in EMOJIS_TO_REACT.items():
             if i in msg:
-                await message.add_reaction(v)
+                await ADD_REACTION(message,v)
                 return
         return
     
@@ -436,6 +472,13 @@ async def on_message(message):
         #by some other command
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
  
+        #fallen drone impostor prevention
+        compare = SequenceMatcher(None, usr.display_name.upper(), FALLEN_DRONE_NICK)
+        if compare.ratio() > 0.9:
+            await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
+            await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
+            return
+
         #morph command
         if lmsg.startswith("morph to"):
             role = lsplit[2].capitalize()
@@ -510,7 +553,8 @@ async def on_message(message):
                 if any(word in lmsg for word in v[1]):
                     await SEND(ch,i)
                     return
-        
+                
+
                
     ## admin command
     else:
