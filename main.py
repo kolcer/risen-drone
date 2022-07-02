@@ -268,10 +268,10 @@ def GET_CHANNEL(id):
 def GET_EMOJI(id):
     return client.get_emoji(id)
 
-#up to date roles!
-#only used to remove old chat killer (if any)
-def GET_UPDATED_CKR_ROLE():
-    return SERVER.get_role(CKR.id)
+#get up to date ckr members
+def UPDATE_CKR():
+    global CKR
+    CKR = SERVER.get_role(CKR.id)
 
 ### PRIVATE ASYNC FUNCTIONS ###
 async def SEND(channel,message):
@@ -323,12 +323,13 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         
         if msg.created_at == Last:
             await SEND(CHANNELS["test"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
-            for member in GET_UPDATED_CKR_ROLE().members:
+            UPDATE_CKR()
+            for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
             #if PreviousKiller:
                 #await REMOVE_ROLES(PreviousKiller,CKR)
             await asyncio.sleep(5)
-            await ADD_ROLES(usr,CKR)
+            await ADD_ROLES(message.usr,CKR)
             #PreviousKiller = usr
 
 
