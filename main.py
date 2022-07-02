@@ -572,7 +572,7 @@ async def Rig(rigType, ch, usr):
             await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
             
         case "archon":
-            if ch not in CHANNELS:
+            if ch.name not in CHANNELS:
                 await SEND(ch, "Impossible to create a Split here. This channel is restricted.")
                 RIG_COOLDOWNS["ha"] = False
                 return
