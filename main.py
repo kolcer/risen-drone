@@ -462,7 +462,8 @@ async def REMOVE_ROLES(usr,roles):
 
 #edit nick
 async def EDIT_NICK(usr,new_nick):
-    await usr.edit(nick=new_nick)
+    if usr.id ~= 481893862864846861:
+        await usr.edit(nick=new_nick)
     
 #add reaction    
 async def ADD_REACTION(msg,reaction):
