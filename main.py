@@ -362,7 +362,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(CHAT_KILLER_WAIT)
         
         if msg.created_at == Last:
-            await SEND(CHANNELS["test"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            await SEND(CHANNELS["bot-testing"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
@@ -415,7 +415,7 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(v)
     
     #send ready to the test channel
-    await SEND(CHANNELS["test"],'The last edited code is now effective.')
+    await SEND(CHANNELS["bot-testing"],'The last edited code is now effective.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
