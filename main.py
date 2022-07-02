@@ -503,7 +503,7 @@ async def on_message(message):
                     return
         
         #chat killer
-        await WAIT_FOR_CHAT_KILLER(msg)
+        await WAIT_FOR_CHAT_KILLER(message)
                
     ## admin command
     else:
