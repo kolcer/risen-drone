@@ -33,7 +33,7 @@ CHANNELS = {
     "general": 624227331720085536,
     "commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,  
-    "test" = 813882658156838923,
+    "test": 813882658156838923,
 }
 
 #worst guns ever made for the gun role
