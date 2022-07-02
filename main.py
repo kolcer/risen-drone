@@ -24,6 +24,7 @@ FALLEN_DRONE_NICK = "FALLEN DRONE"
 #values replaced by roles on startup
 CKR = "Ultimate Chat Killer"
 POSSESSED = "Possessed (rig)"
+MURDURATOR = "Murdurators"
 
 #this is for administrating tips and trivia database
 ADMINS = [
@@ -304,12 +305,54 @@ IMPOSTOR_NICKS = [
     "Name offered by Me. F.D.",
 ]
 
+COOLDOWN_SELECT = {
+    "thief": "tsj",
+    "spectre": "tsj",
+    "joker": "tsj",
+    "archon": "ha",
+    "heretic": "ha",
+    "patron": "patron",
+    "wicked": "general",
+    "keeper": "general",
+    "hacker": "general",
+    "drifter": "general",
+}
+
+COOLDOWN_DURATION = {
+    "thief": 0, #cooldown embeded in rig effect
+    "spectre": False,
+    "joker": 0, #cooldown embeded in rig effect
+    "archon": 120,
+    "heretic": 60,
+    "patron": 900,
+    "wicked": 60,
+    "keeper": 20,
+    "hacker": 20,
+    "drifter": 20,
+}
+
+LIMITED_USE_RIGS = [
+    "joker",   
+]
+
 ### GLOBAL VARIABLES ###
 
 # for chat killer role, time when the last message was sent
 # (seconds from unix epoch)
 Last = 0
-PreviousKiller = None
+
+ACTIVE_RIGS = {
+    "joker": False,
+}
+
+RIG_COOLDOWNS = {
+    "general": False,
+    "tsj": False,
+    "ha": False,
+    "patron": False,
+}
+
+RIG_SPAMMERS = {}
 
 ### INITIAL SETUP ###
 
@@ -389,6 +432,10 @@ async def EDIT_NICK(usr,new_nick):
 async def ADD_REACTION(msg,reaction):
     await msg.add_reaction(reaction)
 
+#edit message
+async def EDIT_MESSAGE(msg, con):
+    await msg.edit(content=con)
+
 ### END OF RATE LIMITED FUNCTIONS ###
 
 #below function can also cause rate limts, but
@@ -410,8 +457,7 @@ async def PRINT_TIPS(channel,key):
 
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
-    
-    if msg.channel == CHANNELS["bot-testing"]:
+    if msg.channel == CHANNELS["general"]:
         global Last
         Last = msg.created_at
         
@@ -419,13 +465,205 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(CHAT_KILLER_WAIT)
         
         if msg.created_at == Last:
-            await SEND(CHANNELS["bot-testing"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
             await asyncio.sleep(5)
             await ADD_ROLES(msg.author,CKR)
- 
+
+### RIGS ###
+
+async def Rig(rigType, ch, usr)
+   
+    if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
+        await SEND(ch, "Ultimate spells are in cooldown.")
+        return
+        
+    spamCount = 0
+    if usr in RIG_SPAMMERS:
+        spamCount = RIG_SPAMMERS[usr]
+    
+    if LIMITED_USE_RIGS[rigType]:
+        if spamCount == 3:
+            await SEND(message.channel, "You've been using these commands too often.")
+            await asyncio.sleep(3600)
+            if usr in RIG_SPAMMERS:
+                del RIG_SPAMMERS[usr]
+            return
+        else:
+            spamCount += 1
+            RIG_SPAMMERS[usr] = spamCount
+            
+    RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
+    
+    match rigType:
+        
+        case "heretic":
+            if MURDURATOR in usr.roles:
+                await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
+                RIG_COOLDOWNS["ha"] = False
+                return
+            #for member in SERVER.members:
+               # if POSSESSED in member.roles:
+                   # await SEND(ch, "Another ultimate spell is in progress. Please wait.")
+                   # RIG_COOLDOWNS["ha"] = False
+                   # return
+            await ADD_ROLES(usr, POSSESSED)
+            await asyncio.sleep(1)
+            await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
+                       "\nMaybe someone could give you some Mana?")
+            await asyncio.sleep(60)
+            await REMOVE_ROLES(usr, POSSESSED)
+            
+        case "wicked":
+            role_list = []
+            for role in usr.roles:
+                if role.name in MORPHABLE_ROLES or role.name in PING_ROLES:
+                    role_list.append(role)
+            #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
+            await usr.remove_roles(*roleList)       
+            await SEND(ch, "You cast Wicked Rig but forgot to unlock Devil rank first and ended up purging all your roles!")
+         
+        case "drifter":
+            im = usr.display_name[::-1]
+            await EDIT_NICK(usr, im)
+            await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
+            
+        case "joker":
+            ACTIVE_RIGS["joker"] = True
+            await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
+            await asyncio.sleep(60)
+            if ACTIVE_RIGS["joker"]:
+                 ACTIVE_RIGS["joker"] = False
+                 await SEND(ch, "Joker Rig cooldown is over, and the current Rig effect has worn off.")
+                
+        case "archon":
+            if ch not in CHANNELS:
+                await SEND(ch, "Impossible to create a Split here. This channel is restricted.")
+                RIG_COOLDOWNS["ha"] = False
+                return
+            ch2 = ch
+            while ch2 == ch or ch2.name == "bot-testing":
+                ch2 = random.choice(list(chooseChannel.values()))
+            firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
+            await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
+            await asyncio.sleep(3)
+            secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
+                + message.channel.mention + ". " + message.jump_url)
+            await SEND(ch2, "https://media.giphy.com/media/QM1yEJoR1Z7oKAGg4Y/giphy.gif")
+            await asyncio.sleep(3)
+            await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)           
+        
+        case "hacker":
+            im = ""
+            for i in range(8):
+                temp = str(random.randint(0, 1))
+                im += temp
+            await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd############")
+            await asyncio.sleep(3)
+            await EDIT_NICK(usr, im)
+            if usr.display_name == '11111111' or usr.display_name == '00000000':
+                await SEND(message.channel,"That's some luck right there.")
+            
+        case "keeper":
+            im = ''.join(sorted(usr.display_name))
+            await EDIT_NICK(usr, im)
+            await asyncio.sleep(1)
+            await SEND(ch, "You cast Keeper Rig and now your name is alphabetically ordered!")
+        
+        case "patron":
+            rigActive = False
+            for active in ACTIVE_RIGS.values():
+                if active:
+                    rigActive = True
+                    break
+            if not rigActive:
+                await SEND(ch, "It would be useless casting this spell now.")
+                RIG_COOLDOWNS["patron"] = False
+                return
+            await SEND(ch, "You cast Patron Rig and restored the Server!")
+            for rig in ACITVE_RIGS.keys():
+                ACITVE_RIGS[rig] = False
+                
+         case "thief":
+            ACTIVE_RIGS["thief"] = True
+            await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
+            await asyncio.sleep(600)
+            if ACTIVE_RIGS["thief"]:
+                 ACTIVE_RIGS["joker"] = False
+                 await SEND(ch, "Joker Rig cooldown is over, and the current Rig effect has worn off.")
+    
+        case "spectre":
+            
+            
+    await asyncio.sleep(COOLDOWN_DURAION[rigType])
+    RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
+    await SEND(message.channel, rigType.capitalize() + " Rig cooldown is over.")
+    
+    #reset spam count
+    await asyncio.sleep(3600)
+    if usr in RIG_SPAMMERS and spamCount == RIG_SPAMMERS[usr]:
+        del RIG_SPAMMERS[usr]
+   
+
+
+
+
+################################ Separator
+
+async def spectre(usr, message, server):
+  global tsjCD
+  global spectreRig
+  global rigCaster
+  global tooManyUses
+    
+  ## Cooldown
+  if tsjCD == False:
+      await SEND(message.channel, "Ultimate spells are in cooldown.")
+      return
+
+  if not usr in tooManyUses:
+    tooManyUses[usr] = 1
+  elif tooManyUses[usr] == 3:
+    await SEND(message.channel, "You've been using these commands too often.")
+    await asyncio.sleep(3600)
+    if tooManyUses[usr] == 3:
+      tooManyUses[usr] = 0
+    return
+  else:
+    tooManyUses[usr] += 1
+    
+  rigCaster = usr
+  tsjCD = False
+
+  await SEND(message.channel, usr.mention + " just cast Spectre Rig! Careful.")
+  spectreRig = True
+  await asyncio.sleep(600)
+  tsjCD = True
+
+  if spectreRig:
+      spectreRig = False
+      await SEND(
+          message.channel, 
+          "Spectre Rig cooldown is over, and the current Rig effect has worn off."
+      )
+      return
+  await SEND(
+      message.channel, "Spectre Rig cooldown is over.")
+  return
+
+################################ Separator
+
+async def necromancer(usr, message, server):
+  global ghostedMsg
+  
+  if ghostMsg != "":
+    await SEND(message.channel, ghostMsg)
+  else:
+    await SEND(message.channel, "*but nobody came...*")
+
+################################################################### END RIGS
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
@@ -449,6 +687,7 @@ async def on_ready():
     #prepare the roles
     global CKR
     global POSSESSED
+    global MURDURATOR
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -471,6 +710,13 @@ async def on_ready():
             POSSESSED = role
             SPECIAL_ROLES["Possessed"][0] = role
             continue
+        #architect
+        if role.name == "Architect (Booster)":
+            SPECIAL_ROLES["Architect"][0] = role
+            continue
+        #murdurator
+        if role.name == MURDURATOR:
+            MURDURATOR = role
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
