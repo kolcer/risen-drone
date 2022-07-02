@@ -329,7 +329,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             #if PreviousKiller:
                 #await REMOVE_ROLES(PreviousKiller,CKR)
             await asyncio.sleep(5)
-            await ADD_ROLES(msg.usr,CKR)
+            await ADD_ROLES(msg.author,CKR)
             #PreviousKiller = usr
 
 
