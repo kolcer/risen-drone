@@ -9,10 +9,15 @@ from datetime import date
 
 ## CONSTANTS ##
 
-CHAT_KILLER_CHANNEL = 624227331720085536
-TEST_CHANNEL = 813882658156838923
+#ids will be replaced with objects on startup
 SERVER = 624227331720085528
+TEST_CHANNEL = 813882658156838923
+
+#special roles
+#roles that bot can assing to, but not by a regular user commannd
+#values replaced by roles on startup
 CKR = "Ultimate Chat Killer"
+POSSESSED = "Possessed (rig)"
 
 #this is for administrating tips and trivia database
 ADMINS = [
@@ -23,6 +28,13 @@ ADMINS = [
     380938705667620874, #jeff
     786743350950494219, #td
 ] 
+
+#channels where bot is allowed to post
+BOT_CHANNELS = {
+    "general": 624227331720085536,
+    "commands": 750060041289072771,
+    "crazy-stairs": 750060054090219760,    
+}
 
 #worst guns ever made for the gun role
 WORST_GUNS = [
@@ -125,6 +137,8 @@ MORPHABLE_ROLES = {
         "Finally you came to your senses.",
      ],
 }
+
+
 
 #pingable roles, no custom messages
 #roles will be fetched on bot startup
@@ -331,7 +345,7 @@ async def on_ready():
     #get the guild
     global SERVER
     #this is a one-off, so we do not worry about rate limits
-    SERVER = client.get_guild(624227331720085528)
+    SERVER = client.get_guild(SERVER)
     
     #get channels
     global TEST_CHANNEL
@@ -341,15 +355,24 @@ async def on_ready():
 
     #prepare the roles
     global CKR
+    global POSSESSED
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
             MORPHABLE_ROLES[role.name][0] = role
+            continue
         #ping roles
         if role.name in PING_ROLES:
             PING_ROLES[role.name] = role
+            continue
+        #chat killer
         if role.name == CKR:
             CKR = role
+            continue
+        #possessed (for the rig)
+        if role.name == POSSESSED:
+            POSSESSED = role
+            continue
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
@@ -368,10 +391,6 @@ async def on_member_update(before, after):
     
     #is user a gun?
     if not MORPHABLE_ROLES["Guns"][0] in before.roles:
-        return
-    
-    #not a gun
-    if not is_gun:
         return
     
     #ignore if user nick after change is a gun name
@@ -548,9 +567,6 @@ async def on_message(message):
             await SEND(ch,split[1] + " " + tot + "(s):")
             await PRINT_TIPS(ch, key)
             return
-        
-
-         
+               
 ### RUN THE BOT ###
-
 client.run(os.environ['TOKEN'])
