@@ -10,7 +10,7 @@ from datetime import date
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 7200
+CHAT_KILLER_WAIT = 15
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
@@ -435,7 +435,7 @@ async def on_message(message):
         #this should run regardless if the message was intercepted
         #by some other command
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
-        await ckr_task
+        asyncio.run(ckr_task)
  
         #morph command
         if lmsg.startswith("morph to"):
