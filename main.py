@@ -41,6 +41,7 @@ CHANNELS = {
     "bot-commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,  
     "bot-testing": 813882658156838923,
+    "verify": 735406774718562324,
 }
 
 #worst guns ever made for the gun role
@@ -183,7 +184,7 @@ SPECIAL_ROLES = {
     #multiple words (ultimate chat killer) would break the script logic
     "Ultimate": [
         None,
-        "Your message needs to be last for 2 hours in the #general channel.",
+        "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
         "You have already killed the chat.",
         "You were not a chat killer in the first place.",
         "There was an attempt.",
@@ -498,6 +499,14 @@ async def on_member_update(before, after):
     await EDIT_NICK(usr,random.choice(WORST_GUNS))
     return
 
+#on new member join
+@client.event
+async def on_member_join(member):
+    
+    await SEND(CHANNELS["verify"],
+        "Welcome to Crazy Stairs Discord Server!\nUnlike other Jokers around here, I am a real bot.\nPlease read the <#750056989207429143>, to avoid misunderstandings.\nHave fun, and remember: It's okay to be a little crazy.\n"
+    )
+    
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
