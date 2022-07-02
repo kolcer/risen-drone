@@ -323,7 +323,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         
         if msg.created_at == Last:
             await SEND(CHANNELS["test"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
-            for member in GET_UPDATED_CKR_ROLE():
+            for member in GET_UPDATED_CKR_ROLE().members:
                 await REMOVE_ROLES(member,CKR)
             #if PreviousKiller:
                 #await REMOVE_ROLES(PreviousKiller,CKR)
