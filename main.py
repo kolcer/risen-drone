@@ -623,13 +623,11 @@ async def Rig(rigType, ch, usr):
             rigCaster = usr
             if rigType == "joker":
                 await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
-                await asyncio.sleep(60)
             elif rigType == "thief":
                 await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
-                await asyncio.sleep(600)
             else:
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Careful.")
-                await asyncio.sleep(600)
+            await asyncio.sleep(600)
             if ACTIVE_RIGS[rigType]:
                  ACTIVE_RIGS[rigType] = False
                  await SEND(ch, rigType.capitalize() + " Rig cooldown is over, and the current Rig effect has worn off.")
