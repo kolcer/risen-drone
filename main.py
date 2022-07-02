@@ -474,7 +474,7 @@ async def on_message(message):
  
         #fallen drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), FALLEN_DRONE_NICK)
-        if compare.ratio() > 0.9:
+        if compare.ratio() > 0.8:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
