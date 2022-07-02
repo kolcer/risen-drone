@@ -513,7 +513,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
 ### RIGS ###
 
-async def Rig(rigType, ch, usr)
+async def Rig(rigType, ch, usr):
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
