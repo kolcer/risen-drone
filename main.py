@@ -158,28 +158,28 @@ SPECIAL_ROLES = {
         "How funny!",
         "You are no longer an Admin... You never were.",
         "I believe you could just go and do it yourself.",
-    ]
+    ],
     "Architect": [
         None,
         "You should boost the server if you crave for that role.",
         "You are already an Architect, smh.",
         "You are not an Architect...",
         "Just wait for the boost to expire.",
-    ]
+    ],
     "Climber": [
         None,
         "Please verify to become a climber.",
         "To the tower you go!",
         "You are no longer a Climber. Goodbye."
         "You are no longer a Climber. Goodbye.",
-    ]
+    ],
     "Possessed": [
         None,
         "Wait for someone to cast a Heretic Rig",
         "You are already possessed...",
         "You are not possessed...",
         "Ask someone for mana",
-    ]
+    ],
     #multiple words (ultimate chat killer) would break the script logic
     "Ultimate": [
         None,
@@ -187,7 +187,7 @@ SPECIAL_ROLES = {
         "You have already killed the chat.",
         "You were not a chat killer in the first place.",
         "There was an attempt.",
-    ]
+    ],
 }
 
 #pingable roles, no custom messages
