@@ -260,6 +260,7 @@ IMPOSTOR_NICKS = [
     "your prize",
     "Name offered by Me. F.D.",
 ]
+
 ### GLOBAL VARIABLES ###
 
 # for chat killer role, time when the last message was sent
@@ -295,7 +296,20 @@ def show_random_tip(key):
     index = random.randint(0,db.llen(key))
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
-    
+
+def getScoldDictionary(victim, author):
+    ScoldDict = {
+        481893862864846861:
+            "I am thankful to my creator, not disappointed.",
+        827952429290618943:
+            author.mention + " nice try.",
+        828423681914437663:
+            victim.mention + ", I am EXTREMELY disappointed in you. You know why. I do not forget.",
+        author.id:
+            author.mention + " you do not need Me to be disappointed in yourself.",
+    }
+    return ScoldDict
+
 ### RATE LIMITED FUNCTIONS ###
 
 def GET_CHANNEL(id):
@@ -464,8 +478,8 @@ async def on_message(message):
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
         ## split the message to 3 strings for some commands to use
-        ## no need to have more than 3 strings
-        lsplit = lmsg.split(" ",2) 
+        ## no need to have more than 4 strings
+        lsplit = lmsg.split(" ",3) 
         
         #create chat killer task
         #this should run regardless if the message was intercepted
@@ -477,6 +491,27 @@ async def on_message(message):
         if compare.ratio() > 0.8:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
+            return
+        
+        ## Scold command
+        if lmsg.startswith("fallen drone scold "):
+            finalmsg = None
+            for member in SERVER.members:
+                if member.name.lower() + "#" + member.discriminator == lsplit[3]:
+                    ScoldDict = getScoldDictionary(member, usr)
+                    # Scold someone in the Dictionary (User itself included)
+                    if member.id in ScoldDict:
+                        finalmsg = ScoldDict[member.id]
+                    # Scolding a Bot
+                    elif member.bot:
+                        finalmsg = "I love my bot friends."
+                    # Scolding an User that is in the Server
+                    else:
+                        finalmsg = member.display_name + ", I am very disappointed in you."
+                    await SEND(ch,finalmsg)
+                    return
+            # Scolding an User that is NOT in the Server
+            await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
             return
 
         #morph command
