@@ -145,6 +145,51 @@ MORPHABLE_ROLES = {
      ],
 }
 
+#not morphable roles
+# 0 - role itself
+# 1 - doesnt have role, and wants it
+# 2 - has role, and wants it
+# 3 - doesnt have role, and wants to remove it
+# 4 - has role, and wants to remove it
+SPECIAL_ROLES = {
+    "Admin": [
+        None,
+        "You are now an Admin! ...Wait, what?",
+        "How funny!",
+        "You are no longer an Admin... You never were.",
+        "I believe you could just go and do it yourself.",
+    ]
+    "Architect": [
+        None,
+        "You should boost the server if you crave for that role.",
+        "You are already an Architect, smh.",
+        "You are not an Architect...",
+        "Just wait for the boost to expire.",
+    ]
+    "Climber": [
+        None,
+        "Please verify to become a climber.",
+        "To the tower you go!",
+        "You are no longer a Climber. Goodbye."
+        "You are no longer a Climber. Goodbye.",
+    ]
+    "Possessed": [
+        None,
+        "Wait for someone to cast a Heretic Rig",
+        "You are already possessed...",
+        "You are not possessed...",
+        "Ask someone for mana",
+    ]
+    #multiple words (ultimate chat killer) would break the script logic
+    "Ultimate": [
+        None,
+        "Your message needs to be last for 2 hours in the #general channel.",
+        "You have already killed the chat.",
+        "You were not a chat killer in the first place.",
+        "There was an attempt.",
+    ]
+}
+
 #pingable roles, no custom messages
 #roles will be fetched on bot startup
 PING_ROLES = {
@@ -186,8 +231,6 @@ EMOJIS_TO_REACT = {
 SINGLE_WORD_TRIGGERS = {
     "<:cs_Stairbonk:812813052822421555>":
         'gun',
-    "There was an attempt.": 
-        'demorph from ultimate chat killer',
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
     "Tsk.":
@@ -415,13 +458,18 @@ async def on_ready():
         if role.name in PING_ROLES:
             PING_ROLES[role.name] = role
             continue
+        if role.name in SPECIAL_ROLES:
+            SPECIAL_ROLES[role.name][0] = role
+            continue
         #chat killer
         if role.name == CKR:
             CKR = role
+            SPECIAL_ROLES["Ultimate"][0] = role
             continue
         #possessed (for the rig)
         if role.name == POSSESSED:
             POSSESSED = role
+            SPECIAL_ROLES["Possessed"][0] = role
             continue
             
     #prepare emojis reactions
@@ -525,6 +573,12 @@ async def on_message(message):
                 await SEND(ch,MORPHABLE_ROLES[role][1])
                 await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
+            if role in SPECIAL_ROLES:
+                if SPECIAL_ROLES[role][0] in usr.roles:
+                    await SEND(ch,SPECIAL_ROLES[role][2])
+                else:
+                    await SEND(ch,SPECIAL_ROLES[role][1])
+                return
         
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         if lmsg.startswith("morph from",2):
@@ -534,6 +588,12 @@ async def on_message(message):
             if role in MORPHABLE_ROLES:
                 await SEND(ch,MORPHABLE_ROLES[role][2])
                 await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
+                return
+            if role in SPECIAL_ROLES:
+                if SPECIAL_ROLES[role][0] in usr.roles:
+                    await SEND(ch,SPECIAL_ROLES[role][4])
+                else:
+                    await SEND(ch,SPECIAL_ROLES[role][3])
                 return
         
         #sub command
