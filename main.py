@@ -562,7 +562,7 @@ async def Rig(rigType, ch, usr):
                 if role.name in MORPHABLE_ROLES or role.name in PING_ROLES:
                     role_list.append(role)
             #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
-            await usr.remove_roles(*roleList)       
+            await usr.remove_roles(*role_list)       
             await SEND(ch, "You cast Wicked Rig but forgot to unlock Devil rank first and ended up purging all your roles!")
          
         case "drifter":
