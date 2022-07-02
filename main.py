@@ -728,6 +728,11 @@ async def on_member_update(before, after):
     if before.nick == after.nick:
         return
     
+    #for thief rig
+    if before in NickDictionary and after.nick != NickDictionary[before]:
+      await EDIT_NICK(after, NickDictionary[before])
+      return
+ 
     #is user a gun?
     if not MORPHABLE_ROLES["Guns"][0] in before.roles:
         return
