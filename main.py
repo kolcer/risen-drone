@@ -9,6 +9,9 @@ from datetime import date
 
 ## CONSTANTS ##
 
+#chat killer requires 2 hours of inactivity(in seconds)
+CHAT_KILLER_WAIT = 7200
+
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
 
@@ -20,12 +23,12 @@ POSSESSED = "Possessed (rig)"
 
 #this is for administrating tips and trivia database
 ADMINS = [
-    481893862864846861, #sleazel
-    267014823315898368, #rolo
-    745478913999896637, #bluestar
-    487107394774630401, #hmster
-    380938705667620874, #jeff
-    786743350950494219, #td
+    int(os.environ['USER1']),
+    int(os.environ['USER2']),
+    int(os.environ['USER3']),
+    int(os.environ['USER4']),
+    int(os.environ['USER5']),
+    int(os.environ['USER6']),
 ] 
 
 #channels where bot is allowed to post
@@ -315,23 +318,19 @@ async def WAIT_FOR_CHAT_KILLER(msg):
     
     if msg.channel == CHANNELS["test"]:
         global Last
-        #global PreviousKiller
         Last = msg.created_at
         
         #wait 2 hours
-        await asyncio.sleep(5)
+        await asyncio.sleep(CHAT_KILLER_WAIT)
         
         if msg.created_at == Last:
             await SEND(CHANNELS["test"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
-            #if PreviousKiller:
-                #await REMOVE_ROLES(PreviousKiller,CKR)
             await asyncio.sleep(5)
             await ADD_ROLES(msg.author,CKR)
-            #PreviousKiller = usr
-
+ 
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
