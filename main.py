@@ -41,7 +41,6 @@ CHANNELS = {
     "bot-commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,  
     "bot-testing": 813882658156838923,
-    "verify": 735406774718562324,
 }
 
 #worst guns ever made for the gun role
@@ -502,7 +501,7 @@ async def on_member_update(before, after):
 #on new member join
 @client.event
 async def on_member_join(member):
-    await SEND(CHANNELS["verify"],
+    await SEND(CHANNELS["general"],
         "Welcome to Crazy Stairs Discord Server!"
         "\nUnlike other Jokers around here, I am a real bot."
         "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
