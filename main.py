@@ -523,7 +523,7 @@ async def Rig(rigType, ch, usr):
     if usr in RIG_SPAMMERS:
         spamCount = RIG_SPAMMERS[usr]
     
-    if LIMITED_USE_RIGS[rigType]:
+    if rigType in LIMITED_USE_RIGS:
         if spamCount == 3:
             await SEND(message.channel, "You've been using these commands too often.")
             await asyncio.sleep(3600)
