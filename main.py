@@ -754,6 +754,7 @@ async def on_member_join(member):
         "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
         "\nHave fun, and remember: It's okay to be a little crazy.")
 
+#saves last deleted message for necromancer rig to show
 @client.event
 async def on_message_delete(message):
   global ghostMsg
