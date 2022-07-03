@@ -102,7 +102,7 @@ MORPHABLE_ROLES = {
     ],
     "Keeper": [ 
        None,
-       "The staircase is now under your supervision, you successfully became a Keeper."
+       "The staircase is now under your supervision, you successfully became a Keeper.",
        "You failed to take care of the stairs, and so you are no longer a Keeper.",
     ],
     "Muggle": [ 
@@ -112,7 +112,7 @@ MORPHABLE_ROLES = {
     ],
     "Chameleon": [ 
        None,
-       "Do not let them know your next move, you are now a Chameleon!"
+       "Do not let them know your next move, you are now a Chameleon!",
        "You had many options, yet you came back. You do not get to be a Chameleon anymore.",
     ],
     "Hacker": [ 
@@ -137,7 +137,7 @@ MORPHABLE_ROLES = {
      ],
      "Heretic": [ 
         None,
-        "We have banned dark magic, but you do not seem to care. You successfully became a Heretic."
+        "We have banned dark magic, but you do not seem to care. You successfully became a Heretic.",
         "The circle has made their decision. You are permanently banned from being a Heretic ever again.",
     ],
      "Guns": [ 
@@ -239,7 +239,7 @@ SINGLE_WORD_TRIGGERS = {
     "Tsk.":
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
-        '827952429290618943'
+        '827952429290618943',
 }
 
 #all words nedd to be present for this trigger to occur
