@@ -616,8 +616,8 @@ async def Rig(rigType, ch, usr):
                 RIG_COOLDOWNS["patron"] = False
                 return
             await SEND(ch, "You cast Patron Rig and restored the Server!")
-            for rig in ACITVE_RIGS.keys():
-                ACITVE_RIGS[rig] = False
+            for rig in ACTIVE_RIGS.keys():
+                ACTIVE_RIGS[rig] = False
                 
         case ("joker"|"thief"|"spectre"):
             ACTIVE_RIGS[rigType] = True
