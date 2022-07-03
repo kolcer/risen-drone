@@ -739,10 +739,10 @@ async def on_member_update(before, after):
         return
     
     #ignore if user nick after change is a gun name
-    if after.nick in Worst_guns:
+    if after.nick in WORST_GUNS:
         return
 
-    await EDIT_NICK(usr,random.choice(WORST_GUNS))
+    await EDIT_NICK(after, random.choice(WORST_GUNS))
     return
 
 #on new member join
