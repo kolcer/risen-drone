@@ -526,7 +526,7 @@ async def Rig(rigType, ch, usr):
     
     if rigType in LIMITED_USE_RIGS:
         if spamCount == 3:
-            await SEND(message.channel, "You've been using these commands too often.")
+            await SEND(ch, "You've been using these commands too often.")
             await asyncio.sleep(3600)
             if usr in RIG_SPAMMERS:
                 del RIG_SPAMMERS[usr]
@@ -597,7 +597,7 @@ async def Rig(rigType, ch, usr):
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
             if usr.display_name == '11111111' or usr.display_name == '00000000':
-                await SEND(message.channel,"That's some luck right there.")
+                await SEND(ch, "That's some luck right there.")
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))
@@ -637,7 +637,7 @@ async def Rig(rigType, ch, usr):
             
     await asyncio.sleep(COOLDOWN_DURATION[rigType])
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
-    await SEND(message.channel, rigType.capitalize() + " Rig cooldown is over.")
+    await SEND(ch, rigType.capitalize() + " Rig cooldown is over.")
     
     #reset spam count
     await asyncio.sleep(3600)
