@@ -133,7 +133,7 @@ MORPHABLE_ROLES = {
      "Drifter": [ 
         None,
         "You took the elevator and rose to the top. You are now a Drifter.",
-        "I saw you taking the stairs, you are no longer a Drifter",
+        "I saw you taking the stairs, you are no longer a Drifter.",
      ],
      "Heretic": [ 
         None,
