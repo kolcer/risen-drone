@@ -797,6 +797,36 @@ async def on_message(message):
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
         
+        ## All Rigs in one
+        if lsplit[0] == "cast" and lsplit[2] == "rig":
+            rigPick = lsplit[1]
+            if rigPick == "chameleon":
+                cd = False
+                for active in RIG_COOLDOWNS.values():
+                    if active:
+                        cd = True
+                        break
+                if cd:
+                    cdList = ""
+                    for i, v in RIG_COOLDOWNS.items():
+                        cdList += COOLDOWN_DESCRIPTIONS[i]
+                        if v:
+                            cdList += ":x: \n"
+                        else:
+                            cdList += ":white_check_mark: \n"
+                    await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
+                    return
+
+                await SEND(ch, "*drum roll*")
+                await asyncio.sleep(4)
+                await Rig(random.choice(RIG_LIST),ch,usr)
+                return
+            if rigPick not in RIG_LIST:
+                await SEND(ch, rigPick + " is not a valid Rig. Try again.")
+                return
+            await Rig(rigPick,ch,usr)
+            return
+        
         ## thief rig acitve
         if ACTIVE_RIGS["thief"]:
           
@@ -856,36 +886,6 @@ async def on_message(message):
 
             await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:")
           
-            return
-
-        ## All Rigs in one
-        if lsplit[0] == "cast" and lsplit[2] == "rig":
-            rigPick = lsplit[1]
-            if rigPick == "chameleon":
-                cd = False
-                for active in RIG_COOLDOWNS.values():
-                    if active:
-                        cd = True
-                        break
-                if cd:
-                    cdList = ""
-                    for i, v in RIG_COOLDOWNS.items():
-                        cdList += COOLDOWN_DESCRIPTIONS[i]
-                        if v:
-                            cdList += ":x: \n"
-                        else:
-                            cdList += ":white_check_mark: \n"
-                    await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
-                    return
-
-                await SEND(ch, "*drum roll*")
-                await asyncio.sleep(4)
-                await Rig(random.choice(RIG_LIST),ch,usr)
-                return
-            if rigPick not in RIG_LIST:
-                await SEND(ch, rigPick + " is not a valid Rig. Try again.")
-                return
-            await Rig(rigPick,ch,usr)
             return
                  
         ## Scold command
