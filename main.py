@@ -663,7 +663,7 @@ async def necromancer(usr, message, server):
 async def on_ready():
     
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("Lucid Ladders")
+    game = discord.Game("Sleazel's Revenge")
     await client.change_presence(activity=game)
 
     #get the guild
