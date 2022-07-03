@@ -646,13 +646,13 @@ async def Rig(rigType, ch, usr):
    
 
 
-async def necromancer(usr, message, server):
+async def necromancer(message):
   global ghostedMsg
   
   if ghostMsg != "":
-    await SEND(message.channel, ghostMsg)
+    await SEND(message, ghostMsg)
   else:
-    await SEND(message.channel, "*but nobody came...*")
+    await SEND(message, "*but nobody came...*")
 
 ################################################################### END RIGS
 
@@ -753,6 +753,11 @@ async def on_member_join(member):
         "\nUnlike other Jokers around here, I am a real bot."
         "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
         "\nHave fun, and remember: It's okay to be a little crazy.")
+
+@client.event
+async def on_message_delete(message):
+  global ghostMsg
+  ghostMsg = "*" + str(message.author.nick) + " once said: '" + str(message.content) + "'...*"
     
 #main function on each message being intercepted
 @client.event
@@ -821,9 +826,14 @@ async def on_message(message):
                 await asyncio.sleep(4)
                 await Rig(random.choice(RIG_LIST),ch,usr)
                 return
-            if rigPick not in RIG_LIST:
+            if rigPick not in RIG_LIST and rigPick != "necromancer":
                 await SEND(ch, rigPick + " is not a valid Rig. Try again.")
                 return
+
+            if rigPick == "necromancer":
+              await necromancer(ch)
+              return
+
             await Rig(rigPick,ch,usr)
             return
         
