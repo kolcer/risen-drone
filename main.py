@@ -6,12 +6,15 @@ import random
 import asyncio
 import redis
 from datetime import date
+from datetime import time
 from difflib import SequenceMatcher
 
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
 CHAT_KILLER_WAIT = 7200
+#player that reaches this level first will win the mini game
+MINI_GAME_TOP_LEVEL = 21
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
@@ -383,6 +386,15 @@ QUIZZERS = []
 
 RIG_SPAMMERS = {}
 NickDictionary = {}
+
+MG_STATUS = "off"
+MG_CHANNEL = None
+MG_CURRENT_PLR = 0
+MG_TICK = 0
+MG_PLAYERS = {}
+MG_QUEUE = []
+
+
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
@@ -433,6 +445,17 @@ def rigImmunity(usr1, usr2):
         return True
     return False
 
+def resetMG():
+    global MG_STATUS
+    global MG_CHANNEL 
+    global MG_CURRENT_PLR 
+
+    MG_PLAYERS = {}
+    MG_QUEUE = []
+    MG_STATUS = "off"
+    MG_CHANNEL = None
+    MG_CURRENT_PLR = 0
+   
 ### RATE LIMITED FUNCTIONS ###
 
 def GET_CHANNEL(id):
@@ -654,6 +677,120 @@ async def necromancer(message):
   else:
     await SEND(message, "*but nobody came...*")
 
+async def MG_SHOW_STATS():
+    toSend = "Current placements:\n"
+    for plr, place in MG_PLAYERS.items():
+        toSend += plr.display_name + ": " + str(place) + " floor\n"
+    await SEND (MG_CHANNEL, toSend)
+    
+async def MG_ACTION(plr, action):
+    
+    #all players always advance 1 level per round
+    for i in MG_PLAYERS.keys():
+        MG_PLAYERS[i] += 1
+        
+    toSend = plr.display_name + " has played " + action " and "
+    
+    match action:
+        case "none":
+            toSend += "(no effect)"
+            
+        case "muggle":
+            chances = random.randint(0, 2)
+            if chances == 2:
+                MG_PLAYERS[plr] -= 1
+                toSend += " got stuck!"
+            else:
+                MG_PLAYERS[plr] += 1
+                toSend += " due to stairjump trick, has advanced 2 levels instead of 1!"
+                
+        case "patron":
+            ourLevel = MG_PLAYERS[plr]
+            for i, v in MG_PLAYERS.items():
+                if v <= ourLevel:
+                    MG_PLAYERS[i] += 1
+                toSend += " advanced 2 levels with all other players below."
+                
+        case "joker":
+            victim = random.choice(MG_QUEUE)
+            if victim != plr:
+                toSend += " pranked " victim.display_name " - they fell 1 level down!"
+                MG_PLAYERS[victim] -= 2
+            else:
+                toSend += " pranked themselves, and did not advance this turn."
+                MG_PLAYERS[victim] -= 1
+        
+        case "wicked":
+            ourLevel = MG_PLAYERS[plr]
+            for i, v in MG_PLAYERS.items():
+                if v > ourLevel:
+                    MG_PLAYERS[i] -= 1
+                toSend += " purged the stairs and above players got stuck."
+            
+        case "spectre":
+            chances = random.randint(-1, 2)
+            MG_PLAYES[plr] += chances
+            if chances == -1:
+                toSend += " had a teleportation accident!"
+            elif chances == 0:
+                toSend += " did not get any advantage."
+            elif chances == 1:
+                toSend += " teleported one extra level up."
+            elif chances == 2:
+                toSend += " teleported two extra levels up."
+         
+        case "keeper":
+            toSend += " caused bottom player to advance faster and stranded the top player!"
+            top = None
+            bottom = None
+            topl = -99999999
+            bottml = 9999999
+            for i, v in MG_PLAYERS.items()
+               if level < bottoml:
+                    bottom = i
+                    bottoml = v
+               if level > topl:
+                    top = i
+                    topl = v
+            MG_PLAYERS[top] -=1
+            MG_PLAYERS[bottom] += 1
+            
+        case "thief":
+            victim = random.choice(MG_QUEUE)
+        
+            if victim != plr:
+                toSend += " has stolen " + victim.display_name + " place!"
+                cache = MG_PLAYERS[victim]
+                MG_PLAYERS[victim] = MG_PLYERS[plr]
+                MG_PLAYERS[plr] = cache
+            else
+                toSend += " has been caught stealing!"
+                MG_PLAYERS[plr] -= 1
+            
+        case "hacker":
+            chances = random.randint(0, 3)
+            
+            if chances == 0:
+                toSend += " has been kicked from the game for hacking!"
+                del MG_PLAYERS[plr]
+                MG_QUEUE.remove(plr)
+            elif chances == 1:
+                toSend += " has been frozen by a Murdurator!"
+                MG_PLAYERS[plr] -= 1
+            elif chances == 0:
+                toSend += " has had an unsuccessful hack, but was not detected!"
+            else:
+                toSend += " has hacked the game and won!"
+                for i in MG_PLAYERS.keys():
+                    MG_PLAYERS[i] -= 1
+                MG_PLAYERS[plr] = MINI_GAME_TOP_LEVEL 
+                
+            
+
+            
+            
+           
+           
 ################################################################### END RIGS
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
@@ -786,8 +923,33 @@ async def on_message(message):
     if msg.startswith(">"):
         return
     
+    #mini game
+    global MG_STATUS
+    global MG_CHANNEL 
+    global MG_CURRENT_PLR 
+    global MG_GAME_OWNER 
+    global MG_TICK
+    
+    if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
+        
+        lmsg = msg.lower()
+        
+        if MG_STATUS == "gather" and lmsg == "begin" and usr == MG_QUEUE[0]:
+            
+            if len(MG_QUEUE) < 2:
+                await SEND(MG_CHANNEL, "Not enough players for the mini game to begin!")
+                return
+            
+            MG_STATUS = "on"
+            MG_TICK = time.time()
+            
+            return
+            ourTick
+            
+        
+        
     #normal non-admin usage
-    if not msg.startswith("|"):
+    elif not msg.startswith("|"):
         
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
@@ -806,7 +968,41 @@ async def on_message(message):
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
+
+        #start mini game
+        if lmsg = "start mini game":
+            if MG_STATUS != "off":
+                await SEND(ch, "Mini game already in progress. Please wait for it to finish.")
+                return
+            else
+                MG_STATUS = "gather"
+                MG_PLAYERS[usr] = 0
+                MG_QUEUE.append(usr)
+                MG_CURRENT_PLR = 0
+                MG_CHANNEL = ch
+                MG_TICK = time.time()
+                ourTick = MG_TICK
+                await SEND(ch, usr.display_name + " has started a mini game! Type 'join' to join!\n" + usr.display_name + " - type 'begin' to start!")
+                await asyncio.sleep(60)
+                if MG_STATUS == "gather" and ourTick == MG_TICK:
+                    await SEND(ch, "Mini game has been cancelled due to inactivity.")
+                    resetMG()
+                return
         
+        #join mini game
+        if lmsg == "join" and MG_STATUS == "gather" and MG_CHANNEL == ch:
+            if usr in MG_PLAYERS:
+                await SEND(ch, "You have  already joined the mini game!")
+                return
+            else
+                MG_PLAYERS[usr] = 0
+                MG_QUEUE.append(usr)
+                toSend = usr.display_name + " has joined the game!\nCurrent players:\n"
+                for plr in MG_QUEUE:
+                    toSend += plr.display_name + "\n"
+                await SEND(ch, toSend)
+                return
+
         ## All Rigs in one
         if lsplit[0] == "cast" and lsplit[2] == "rig":
             rigPick = lsplit[1]
