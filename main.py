@@ -745,7 +745,7 @@ async def MG_ACTION(plr, action):
             bottom = None
             topl = -99999999
             bottml = 9999999
-            for i, v in MG_PLAYERS.items()
+            for i, v in MG_PLAYERS.items():
                if level < bottoml:
                     bottom = i
                     bottoml = v
