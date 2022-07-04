@@ -327,9 +327,9 @@ COOLDOWN_SELECT = {
 }
 
 COOLDOWN_DURATION = {
-    "thief": 0, #cooldown embeded in rig effect
-    "spectre": 0, #cooldown embeded in rig effect
-    "joker": 0, #cooldown embeded in rig effect
+    "thief": 600,
+    "spectre": 600,
+    "joker": 600,
     "archon": 120,
     "heretic": 60,
     "patron": 900,
@@ -520,9 +520,6 @@ async def Rig(rigType, ch, usr):
     if rigType in LIMITED_USE_RIGS:
         if spamCount == 3:
             await SEND(ch, "You've been using these commands too often.")
-            await asyncio.sleep(3600)
-            if usr in RIG_SPAMMERS:
-                del RIG_SPAMMERS[usr]
             return
         else:
             spamCount += 1
@@ -531,6 +528,7 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
     global rigCaster
     
+    messageAppend = "."
     match rigType:
         
         case "heretic":
@@ -621,16 +619,17 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
             else:
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Careful.")
-            await asyncio.sleep(600)
-            if ACTIVE_RIGS[rigType]:
-                 ACTIVE_RIGS[rigType] = False
-                 await SEND(ch, rigType.capitalize() + " Rig cooldown is over, and the current Rig effect has worn off.")
+            messageAppend = ", and the current Rig effect has worn off."
                 
           
             
     await asyncio.sleep(COOLDOWN_DURATION[rigType])
+
+    if rigType in LIMITED_USE_RIGS:
+        ACTIVE_RIGS[rigType] = False
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
-    await SEND(ch, rigType.capitalize() + " Rig cooldown is over.")
+
+    await SEND(ch, rigType.capitalize() + " Rig cooldown is over" + messageAppend)
     
     #reset spam count
     await asyncio.sleep(3600)
