@@ -689,7 +689,7 @@ async def MG_ACTION(plr, action):
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
         
-    toSend = plr.display_name + " has played " + action " and "
+    toSend = plr.display_name + " has played " + action + " and "
     
     match action:
         case "none":
