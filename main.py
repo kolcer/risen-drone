@@ -1025,6 +1025,7 @@ async def on_message(message):
             return
 
         if lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+            QUIZ["second-player"] = False
             QUIZZERS.append(usr)
             quizzerson = QUIZZERS[0].mention + " and " + QUIZZERS[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
 
