@@ -754,7 +754,7 @@ async def on_member_join(member):
 @client.event
 async def on_message_delete(message):
   global ghostMsg
-  ghostMsg = "*" + str(message.author.nick) + " once said: '" + str(message.content) + "'...*"
+  ghostMsg = "*" + str(message.author.nick) + " last words lie here...*"
     
 #main function on each message being intercepted
 @client.event
@@ -866,7 +866,6 @@ async def on_message(message):
             
             if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
                 return
-            global ghostMsg
             ACTIVE_RIGS["spectre"] = False
 
             chances = random.randint(0, 1)
