@@ -991,7 +991,7 @@ async def on_message(message):
             if usr in MG_PLAYERS:
                 await SEND(ch, "You have  already joined the mini game!")
                 return
-            else
+            else:
                 MG_PLAYERS[usr] = 0
                 MG_QUEUE.append(usr)
                 toSend = usr.display_name + " has joined the game!\nCurrent players:\n"
