@@ -714,7 +714,7 @@ async def MG_ACTION(plr, action):
         case "joker":
             victim = random.choice(MG_QUEUE)
             if victim != plr:
-                toSend += " pranked " victim.display_name " - they fell 1 level down!"
+                toSend += " pranked " + victim.display_name + " - they fell 1 level down!"
                 MG_PLAYERS[victim] -= 2
             else:
                 toSend += " pranked themselves, and did not advance this turn."
