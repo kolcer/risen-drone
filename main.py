@@ -930,6 +930,7 @@ async def on_message(message):
     global MG_GAME_OWNER 
     global MG_TICK
     
+    #mini game in progress
     if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
         
         lmsg = msg.lower()
@@ -942,11 +943,7 @@ async def on_message(message):
             
             MG_STATUS = "on"
             MG_TICK = time.time()
-            
             return
-            ourTick
-            
-        
         
     #normal non-admin usage
     elif not msg.startswith("|"):
@@ -970,11 +967,11 @@ async def on_message(message):
             return
 
         #start mini game
-        if lmsg = "start mini game":
+        if lmsg == "start mini game":
             if MG_STATUS != "off":
                 await SEND(ch, "Mini game already in progress. Please wait for it to finish.")
                 return
-            else
+            else:
                 MG_STATUS = "gather"
                 MG_PLAYERS[usr] = 0
                 MG_QUEUE.append(usr)
