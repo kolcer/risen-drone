@@ -625,7 +625,7 @@ def MG_ACTION(plr, action):
                 cache = MG_PLAYERS[top]
                 MG_PLAYERS[top] = MG_PLAYERS[bottom]
                 MG_PLAYERS[bottom] = cache
-             else:
+            else:
                 toSend += "Failded to perform a dark ritual and got stranded"
                 MG_PLAYERS[plr] -= 1
                 
