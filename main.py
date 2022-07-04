@@ -763,7 +763,7 @@ async def MG_ACTION(plr, action):
                 cache = MG_PLAYERS[victim]
                 MG_PLAYERS[victim] = MG_PLYERS[plr]
                 MG_PLAYERS[plr] = cache
-            else
+            else:
                 toSend += " has been caught stealing!"
                 MG_PLAYERS[plr] -= 1
             
