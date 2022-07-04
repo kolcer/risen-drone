@@ -1028,7 +1028,7 @@ async def on_message(message):
                 toSend = winners[0].display_name
                 
                 if len(winners) > 1:
-                    for i in range(1,len(winners) -1)
+                    for i in range(1,len(winners) -1):
                         toSend += " and " + winners[i].display_name
                         
                 await SEND(MG_CHANNEL, winners[0].display_name + " won the game!")
@@ -1037,12 +1037,9 @@ async def on_message(message):
             return
         
         elif MG_STATUS == "on" and lmsg in MG_SPELLS and MG_QUEUE[MG_CURRENT_PLR] == usr:
-            
-            if :
-                
-                spell = lmsg
-                if lmsg == "chameleon":
-                    spell = random.choice(MG_SPELLS)
+            spell = lmsg
+            if lmsg == "chameleon":
+                spell = random.choice(MG_SPELLS)
                 
             
             
