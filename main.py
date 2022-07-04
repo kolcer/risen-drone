@@ -619,14 +619,14 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
             else:
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Careful.")
-            messageAppend = ", and the current Rig effect has worn off."
                 
           
             
     await asyncio.sleep(COOLDOWN_DURATION[rigType])
 
-    if rigType in LIMITED_USE_RIGS:
+    if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False
+        messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
     await SEND(ch, rigType.capitalize() + " Rig cooldown is over" + messageAppend)
