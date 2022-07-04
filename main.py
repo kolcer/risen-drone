@@ -327,13 +327,13 @@ COOLDOWN_SELECT = {
 }
 
 COOLDOWN_DURATION = {
+    "patron": 900,    
     "thief": 600,
     "spectre": 600,
     "joker": 600,
-    "archon": 120,
+    "archon": 120,    
     "heretic": 60,
-    "patron": 900,
-    "wicked": 60,
+    "wicked": 60,    
     "keeper": 20,
     "hacker": 20,
     "drifter": 20,
