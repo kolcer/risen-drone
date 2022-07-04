@@ -373,6 +373,14 @@ RIG_COOLDOWNS = {
     "patron": False,
 }
 
+QUIZ = {
+    "active" : False,
+    "second-player" : False,
+    "phase1" : False,
+}
+
+QUIZZERS = []
+
 RIG_SPAMMERS = {}
 NickDictionary = {}
 ### INITIAL SETUP ###
@@ -1001,6 +1009,27 @@ async def on_message(message):
                 if any(word in lmsg for word in v[1]):
                     await SEND(ch,i)
                     return
+
+        if lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
+            QUIZZERS.append(usr)
+            QUIZ["active"] = True
+            QUIZ["second-player"] = True
+
+            await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions.")
+            await asyncio.sleep(10)
+            if QUIZ["second-player"] == True:
+                QUIZ["active"] = False
+                QUIZ["second-player"] = False
+                QUIZZERS.remove(usr)
+                await SEND(ch, "Nobody joined in time. Event is concluded.")
+            return
+
+        if lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+            QUIZZERS.append(usr)
+            quizzerson = QUIZZERS[0].mention + " and " + QUIZZERS[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
+
+            await SEND(ch, quizzerson)
+            return
                 
 
                
