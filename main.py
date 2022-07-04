@@ -1009,7 +1009,7 @@ async def on_message(message):
             await SEND(MG_CHANNEL, tosend)
             
             asyncio.sleep(MINI_GAME_MAX_WAIT)
-            while MG_TICK == ourTick and MG_WIN_DETECT < MINI_GAME_MAX_LEVEL
+            while MG_TICK == ourTick and MG_WIN_DETECT < MINI_GAME_MAX_LEVEL:
                 MG_CURRENT_PLR += 1
                 if MG_CURRENT_PLR > len(MG_QUEUE) - 1:
                     MG_CURRENT_PLR = 0
