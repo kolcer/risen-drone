@@ -28,14 +28,7 @@ MURDURATOR = "Murdurators"
 CLIMBER = "Climbers"
 
 #this is for administrating tips and trivia database
-ADMINS = [
-    int(os.environ['USER1']),
-    int(os.environ['USER2']),
-    int(os.environ['USER3']),
-    int(os.environ['USER4']),
-    int(os.environ['USER5']),
-    int(os.environ['USER6']),
-] 
+ADMIN = "Drone Master"
 
 #channels where bot is allowed to post
 CHANNELS = {
@@ -680,6 +673,7 @@ async def on_ready():
     global POSSESSED
     global MURDURATOR
     global CLIMBER
+    global ADMIN
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -713,6 +707,9 @@ async def on_ready():
         #murdurator
         if role.name == MURDURATOR:
             MURDURATOR = role
+        #drone tips/tricks admins
+        if role.name == ADMIN:
+            ADMIN = role
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
@@ -1013,7 +1010,7 @@ async def on_message(message):
     else:
 
         #check for admin
-        if not usr.id in ADMINS:
+        if not ADMIN in usr.roles:
             await SEND(ch,"You are not allowed to use this command.")
             return
             
