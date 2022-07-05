@@ -1234,7 +1234,7 @@ async def on_message(message):
             #go here if there are no more questions
             if QUIZ["turn"] == len(QUESTIONS) + 1:
 
-                highscore = 0
+                highscore = -1
                 for i in QUIZZERS:
                     if QUIZZERS[i] > highscore:
                         winner = i
