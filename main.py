@@ -1151,7 +1151,7 @@ async def on_message(message):
             return
 
         #start the quiz
-        if ch == CHANNELS["bot-testing"] and lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
+        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
             #add user to the quiz users with 0 points.
             QUIZZERS[usr] = 0
 
@@ -1168,7 +1168,7 @@ async def on_message(message):
             return
 
         #join an ongoing quiz
-        if ch == CHANNELS["bot-testing"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+        if ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
             #disables looking for second player
             QUIZ["second-player"] = False
             #adds the new user to the quiz users
@@ -1193,7 +1193,7 @@ async def on_message(message):
                 await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
             return
 
-        if ch == CHANNELS["bot-testing"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
+        if ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
             if usr not in QUIZZERS:
                 await DELETE(message)
                 return
