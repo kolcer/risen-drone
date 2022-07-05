@@ -648,11 +648,11 @@ async def nextQuestion(ch):
 
     QUIZ["rolls"].append(QUIZ["rng"])
     answers = ""
-    await SEND(ch, "❓ " + QUESTIONS[QUIZ["rng"]][0])
+    await SEND(ch, ":question: " + QUESTIONS[QUIZ["rng"]][0])
 
     random.shuffle(QUESTIONS[QUIZ["rng"]][1])   
     for i in QUESTIONS[QUIZ["rng"]][1]:
-        answers += "▶️ " + i + " \n"
+        answers += ":arrow_forward: `" + i + "` \n"
 
     await SEND(ch, answers)
     QUIZ["can-answer"] = True
