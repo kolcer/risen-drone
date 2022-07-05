@@ -15,7 +15,7 @@ from difflib import SequenceMatcher
 CHAT_KILLER_WAIT = 7200
 #player that reaches this level first will win the mini game
 MINI_GAME_TOP_LEVEL = 21
-MINI_GAME_MAX_WAIT = 20
+MINI_GAME_MAX_WAIT = 30
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
