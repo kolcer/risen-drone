@@ -713,7 +713,7 @@ def MG_NEXT_PLAYER():
 def MG_SHOW_WINNERS():
     winners = []
     for i, v in MG_PLAYERS.items():
-        if v >= MINI_GAME_MAX_LEVEL:
+        if v >= MINI_GAME_TOP_LEVEL:
             winners.append(i)
                         
     toSend = winners[0].display_name
@@ -1096,7 +1096,7 @@ async def MG_LOOP(toSend):
     while True:
         
         toSend += MG_SHOW_STATS()
-        if MG_WIN_DETECT >= MINI_GAME_MAX_LEVEL or len(MG_QUEUE) < 2:
+        if MG_WIN_DETECT >= MINI_GAME_TOP_LEVEL or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()
             await SEND(MG_CHANNEL, tosend)
             MG_RESET()
