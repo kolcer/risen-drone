@@ -703,6 +703,26 @@ def MG_SHOW_STATS():
             MG_WIN_DETECT = place
 
     return toSend
+
+def MG_NEXT_PLAYER():
+    MG_CURRENT_PLR += 1
+    if MG_CURRENT_PLR > len(MG_QUEUE) - 1:
+        MG_CURRENT_PLR = 0
+      
+
+def MG_SHOW_WINNERS():
+    winners = []
+    for i, v in MG_PLAYERS.items():
+        if v >= MINI_GAME_MAX_LEVEL:
+            winners.append(i)
+                        
+    toSend = winners[0].display_name
+                
+    if len(winners) > 1:
+        for i in range(1,len(winners) -1):
+            toSend += " and " + winners[i].display_name
+                        
+    retrun toSend + " won the game!"
     
 def MG_ACTION(plr, action):
     
@@ -812,7 +832,7 @@ def MG_ACTION(plr, action):
                 if chances == 0 or i == plr:
                     MG_PLAYERS[i] += 1
                 else:
-                    MG_PLAYERS[i] += 1
+                    MG_PLAYERS[i] -= 1
         
         case "drifter":
             chances = random.randint(0,1)
@@ -1068,6 +1088,33 @@ async def necromancer(message):
 
 
     
+async def MG_LOOP(toSend):
+    
+    MG_TICK = time.time()
+    ourTick = MG_TICK
+    
+    while True:
+        
+        toSend += MG_SHOW_STATS()
+        if MG_WIN_DETECT >= MINI_GAME_MAX_LEVEL or len(MG_QUEUE) < 2:
+            toSend += MG_SHOW_WINNERS()
+            await SEND(MG_CHANNEL, tosend)
+            MG_RESET()
+            return
+        else:
+            toSend += MG_QUEUE[MG_CURRENT_PLR].display_name + " turn! Choose Your alignment!"
+            await SEND(MG_CHANNEL, tosend)
+        
+        asyncio.sleep(MINI_GAME_MAX_WAIT)
+        
+        if MG_TICK != ourTick:
+            return
+        
+        toSend = MG_ACTION(MG_QUEUE[MG_CURRENT_PLR],"none")
+        
+        MG_NEXT_PLAYER()
+         
+    
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
 #drone start up, prepare roles here
@@ -1202,7 +1249,6 @@ async def on_message(message):
     global MG_STATUS
     global MG_CHANNEL 
     global MG_CURRENT_PLR 
-    global MG_GAME_OWNER 
     global MG_TICK
     
     #mini game in progress
@@ -1217,45 +1263,16 @@ async def on_message(message):
                 return
             
             MG_STATUS = "on"
-            MG_TICK = time.time()
-            ourTick = MG_TICK
-            toSend = "Mini game has begun!\n"
-            toSend += MG_SHOW_STATS()
-            toSend += usr.display_name + " turn! Choose Your alignment!"
-            await SEND(MG_CHANNEL, tosend)
+            await MG_LOOP("Mini game has begun!")            
             
-            asyncio.sleep(MINI_GAME_MAX_WAIT)
-            while MG_TICK == ourTick and MG_WIN_DETECT < MINI_GAME_MAX_LEVEL:
-                MG_CURRENT_PLR += 1
-                if MG_CURRENT_PLR > len(MG_QUEUE) - 1:
-                    MG_CURRENT_PLR = 0
-                toSend = MG_ACTION(usr,"none")
-                toSend += MG_SHOW_STATS()
-                toSend += usr.display_name + " turn! Choose Your alignment!"
-                await SEND(MG_CHANNEL, tosend)
-                asyncio.sleep(MINI_GAME_MAX_WAIT)
-            
-            if MG_WIN_DETECT >= MINI_GAME_MAX_LEVEL:
-                winners = []
-                for i, v in MG_PLAYERS.items():
-                    if v >= MINI_GAME_MAX_LEVEL:
-                        winners.append(i)
-                        
-                toSend = winners[0].display_name
-                
-                if len(winners) > 1:
-                    for i in range(1,len(winners) -1):
-                        toSend += " and " + winners[i].display_name
-                        
-                await SEND(MG_CHANNEL, winners[0].display_name + " won the game!")
-                MG_RESET()
-                
             return
         
         elif MG_STATUS == "on" and lmsg in MG_SPELLS and MG_QUEUE[MG_CURRENT_PLR] == usr:
             spell = lmsg
             if lmsg == "chameleon":
                 spell = random.choice(MG_SPELLS)
+            MG_NEXT_PLAYER()
+            await MG_LOOP(MG_ACTION(usr,spell))
        
     #normal non-admin usage
     elif not msg.startswith("|"):
