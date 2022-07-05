@@ -364,6 +364,7 @@ QUIZ = {
     "cturn" : 1,
     "rolls" : [0],
     "rng" : 0,
+    "scores" : "**TOTAL POINTS**\n"
 }
 
 QUIZZERS = {}
@@ -621,6 +622,7 @@ async def CLOSE_EVENT():
     QUIZ["second-player"] = False
     QUIZ["can-answer"] = False
     QUIZ["rolls"].clear()
+    QUIZ["scores"] = "**TOTAL POINTS**\n"
     QUIZZERS.clear()
     LOSERS.clear()
     return True
@@ -636,9 +638,15 @@ def FORCE_CLOSE_EVENT():
   QUIZ["second-player"] = False
   QUIZ["can-answer"] = False
   QUIZ["rolls"].clear()
+  QUIZ["scores"] = "**TOTAL POINTS**\n"
   QUIZZERS.clear()
   LOSERS.clear()
   return
+
+def showScores():
+    for i in QUIZZERS:
+        QUIZ["scores"] += str(i.nick) + "'s points: " + str(QUIZZERS[i]) + "\n"
+    return QUIZ["scores"]
 
 async def nextQuestion(ch):
     usefulkeys = list(QUESTIONS.keys())
@@ -1348,7 +1356,7 @@ async def on_message(message):
             
             #if one of the two wants to stop they can feel free to
             if lmsg == "stop quiz":
-                await SEND(ch, usr.mention + " stopped the Quiz. Event is over.")
+                await SEND(ch, showScores() + usr.mention + " stopped the Quiz. Event is over.")
                 FORCE_CLOSE_EVENT()
                 return
 
@@ -1368,7 +1376,7 @@ async def on_message(message):
                 #no return here. after adding a user, checks if both users are losers
                 #if they are, the event gets forced closed.
                 if len(LOSERS) == 2:
-                    await SEND(ch, "Both players have not answered the question correctly. Event is over.")
+                    await SEND(ch, showScores() + "Both players have not answered the question correctly. Event is over.")
                     FORCE_CLOSE_EVENT()
                     return
 
@@ -1395,20 +1403,18 @@ async def on_message(message):
 
             #go here if there are no more questions
             if QUIZ["turn"] > len(QUESTIONS):
-                scores = "**TOTAL POINTS**\n"
                 highscore = -1
                 for i in QUIZZERS:
-                    scores += str(i.nick) + "'s points: " + str(QUIZZERS[i]) + "\n"
                     if QUIZZERS[i] > highscore:
                         winner = i
                         highscore = QUIZZERS[i]
                     elif QUIZZERS[i] == highscore:
-                        await SEND(ch, "That's a tie. But we do not like ties. Play again.")
+                        await SEND(ch, showScores() + "That's a tie. But we do not like ties. Play again.")
                         FORCE_CLOSE_EVENT()
                         return
 
                 #and the winner is (not you)
-                await SEND(ch, scores + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
+                await SEND(ch, showScores() + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
                 FORCE_CLOSE_EVENT()
                 return
 
