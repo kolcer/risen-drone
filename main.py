@@ -721,8 +721,8 @@ def MG_SHOW_WINNERS():
     if len(winners) > 1:
         for i in range(1,len(winners) -1):
             toSend += " and " + winners[i].display_name
-                        
-    retrun toSend + " won the game!"
+    toSend += " won the game!"                    
+    retrun toSend
     
 def MG_ACTION(plr, action):
     
