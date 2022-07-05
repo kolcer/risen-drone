@@ -509,16 +509,17 @@ def FORCE_CLOSE_EVENT():
   return
 
 async def nextQuestion(ch):
-  answers = ""
-  await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
+    answers = ""
+    await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
 
-  for i in QUESTIONS[QUIZ["turn"]][1]:
-    answers += ":arrow_forward: `" + i + "` \n"
+    randomvalues = random.shuffle(QUESTIONS[QUIZ["turn"]][1])   
+    for i in randomvalues:
+        answers += ":arrow_forward: `" + i + "` \n"
 
-  await SEND(ch, answers)
-  QUIZ["can-answer"] = True
-  
-  return
+    await SEND(ch, answers)
+    QUIZ["can-answer"] = True
+    
+    return
 
 def getScoldDictionary(victim, author):
     ScoldDict = {
