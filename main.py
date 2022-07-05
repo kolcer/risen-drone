@@ -1395,9 +1395,10 @@ async def on_message(message):
 
             #go here if there are no more questions
             if QUIZ["turn"] > len(QUESTIONS):
-
+                scores = "**TOTAL POINTS**\n"
                 highscore = -1
                 for i in QUIZZERS:
+                    scores += str(i.nick) + "'s points: " + str(QUIZZERS[i]) + "\n"
                     if QUIZZERS[i] > highscore:
                         winner = i
                         highscore = QUIZZERS[i]
@@ -1407,7 +1408,7 @@ async def on_message(message):
                         return
 
                 #and the winner is (not you)
-                await SEND(ch, winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
+                await SEND(ch, scores + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
                 FORCE_CLOSE_EVENT()
                 return
 
