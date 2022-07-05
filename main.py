@@ -362,6 +362,7 @@ QUIZ = {
     "can-answer" : False,
     "turn" : 0,
     "cturn" : 1,
+    "rolls" : [0],
 }
 
 QUIZZERS = {}
@@ -509,6 +510,12 @@ def FORCE_CLOSE_EVENT():
   return
 
 async def nextQuestion(ch):
+    randomnumber = 0
+    while randomnumber in QUIZ["rolls"]:
+        randomnumber = random.choice(QUESTIONS.keys())
+
+    QUIZ["rolls"].append(randomnumber)
+    await SEND(ch, ":question: " + QUESTIONS[random.choice(QUESTIONS)][0])
     answers = ""
     await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
 
