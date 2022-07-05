@@ -512,8 +512,8 @@ async def nextQuestion(ch):
     answers = ""
     await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
 
-    randomvalues = random.shuffle(QUESTIONS[QUIZ["turn"]][1])   
-    for i in randomvalues:
+    random.shuffle(QUESTIONS[QUIZ["turn"]][1])   
+    for i in QUESTIONS[QUIZ["turn"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
 
     await SEND(ch, answers)
