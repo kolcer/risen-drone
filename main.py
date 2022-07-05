@@ -727,12 +727,12 @@ def MG_SHOW_WINNERS():
         if v >= MINI_GAME_TOP_LEVEL:
             winners.append(i)
                         
-    toSend = winners[0].display_name
+    toSend = winners[0].mention
     if len(winners) > 1:
         for i in range(1,len(winners) -1):
-            toSend += " and " + winners[i].display_name
+            toSend += " and " + winners[i].mention
     
-    return toSend + " won the game!"                    
+    return toSend + " won LUCID LADDERS!"                    
     
 def MG_ACTION(plr, action):
     
@@ -1272,11 +1272,11 @@ async def on_message(message):
         if MG_STATUS == "gather" and lmsg == "begin" and usr == MG_QUEUE[0]:
             
             if len(MG_QUEUE) < 2:
-                await SEND(MG_CHANNEL, "Not enough players for the mini game to begin!")
+                await SEND(MG_CHANNEL, "Not enough players for the Lucid Ladders to begin!")
                 return
             
             MG_STATUS = "on"
-            await MG_LOOP("Mini game has begun!")            
+            await MG_LOOP("Lucid Ladders have begun!")            
             
             return
         
@@ -1428,9 +1428,9 @@ async def on_message(message):
             return      
 
         #start mini game
-        if lmsg == "start mini game":
+        if lmsg == "play lucid ladders":
             if MG_STATUS != "off":
-                await SEND(ch, "Mini game already in progress. Please wait for it to finish.")
+                await SEND(ch, "A game is already in progress. Please wait for it to finish.")
                 return
             else:
                 MG_STATUS = "gather"
@@ -1440,10 +1440,10 @@ async def on_message(message):
                 MG_CHANNEL = ch
                 MG_TICK = time.time()
                 ourTick = MG_TICK
-                await SEND(ch, usr.display_name + " has started a mini game! Type 'join' to join!\n" + usr.display_name + " - type 'begin' to start!")
+                await SEND(ch, usr.display_name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.display_name + " - type 'begin' to start!")
                 await asyncio.sleep(60)
                 if MG_STATUS == "gather" and ourTick == MG_TICK:
-                    await SEND(ch, "Mini game has been cancelled due to inactivity.")
+                    await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
                     MG_RESET()
                 return
         
@@ -1455,7 +1455,7 @@ async def on_message(message):
             else:
                 MG_PLAYERS[usr] = 0
                 MG_QUEUE.append(usr)
-                toSend = usr.display_name + " has joined the game!\nCurrent players:\n"
+                toSend = usr.display_name + " has joined Lucid Ladders!\nCurrent players:\n"
                 for plr in MG_QUEUE:
                     toSend += plr.display_name + "\n"
                 await SEND(ch, toSend)
