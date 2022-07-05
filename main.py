@@ -1422,7 +1422,7 @@ async def on_message(message):
             #after going to the next round check if the next round lasts more than 30 seconds
             await nextQuestion(ch)
             if await CLOSE_EVENT():
-                await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
+                await SEND(ch, showScores() + "Event is concluded because both parts couldn't answer my very simple question.")
             return      
 
         #start mini game
