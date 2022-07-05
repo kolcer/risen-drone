@@ -719,7 +719,6 @@ def MG_SHOW_WINNERS():
             winners.append(i)
                         
     toSend = winners[0].display_name
-                
     if len(winners) > 1:
         for i in range(1,len(winners) -1):
             toSend += " and " + winners[i].display_name
@@ -788,7 +787,7 @@ def MG_ACTION(plr, action):
             top = None
             bottom = None
             topl = -99999999
-            bottml = 9999999
+            bottoml = 9999999
             for i, v in MG_PLAYERS.items():
                if v < bottoml:
                     bottom = i
@@ -852,7 +851,7 @@ def MG_ACTION(plr, action):
                 top = None
                 bottom = None
                 topl = -99999999
-                bottml = 9999999
+                bottoml = 9999999
                 for i, v in MG_PLAYERS.items():
                     if v < bottoml:
                         bottom = i
