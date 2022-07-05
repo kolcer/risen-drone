@@ -753,7 +753,7 @@ def MG_ACTION(plr, action):
             for i, v in MG_PLAYERS.items():
                 if v <= ourLevel:
                     MG_PLAYERS[i] += 1
-                toSend += "advanced 2 levels with all other players below them."
+            toSend += "advanced 2 levels with all other players below them."
                 
         case "joker":
             victim = random.choice(MG_QUEUE)
@@ -769,11 +769,11 @@ def MG_ACTION(plr, action):
             for i, v in MG_PLAYERS.items():
                 if v > ourLevel:
                     MG_PLAYERS[i] -= 1
-                toSend += "purged the stairs and above players got stuck."
+            toSend += "purged the stairs and above players got stuck."
             
         case "spectre":
             chances = random.randint(-1, 2)
-            MG_PLAYES[plr] += chances
+            MG_PLAYERS[plr] += chances
             if chances == -1:
                 toSend += "had a teleportation accident!"
             elif chances == 0:
@@ -790,10 +790,10 @@ def MG_ACTION(plr, action):
             topl = -99999999
             bottml = 9999999
             for i, v in MG_PLAYERS.items():
-               if level < bottoml:
+               if v < bottoml:
                     bottom = i
                     bottoml = v
-               if level > topl:
+               if v > topl:
                     top = i
                     topl = v
             MG_PLAYERS[top] -=1
@@ -804,7 +804,7 @@ def MG_ACTION(plr, action):
             if victim != plr:
                 toSend += "has stolen " + victim.display_name + " place!"
                 cache = MG_PLAYERS[victim]
-                MG_PLAYERS[victim] = MG_PLYERS[plr]
+                MG_PLAYERS[victim] = MG_PLAYERS[plr]
                 MG_PLAYERS[plr] = cache
             else:
                 toSend += "has been caught stealing!"
@@ -854,10 +854,10 @@ def MG_ACTION(plr, action):
                 topl = -99999999
                 bottml = 9999999
                 for i, v in MG_PLAYERS.items():
-                    if level < bottoml:
+                    if v < bottoml:
                         bottom = i
                         bottoml = v
-                    if level > topl:
+                    if v > topl:
                         top = i
                         topl = v
                 cache = MG_PLAYERS[top]
