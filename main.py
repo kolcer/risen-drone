@@ -641,17 +641,18 @@ def FORCE_CLOSE_EVENT():
   return
 
 async def nextQuestion(ch):
+    usefulkeys = list(QUESTIONS.keys())
+    QUIZ["rng"] = random.choice(usefulkeys)
     while QUIZ["rng"] in QUIZ["rolls"]:
-        usefulkeys = list(QUESTIONS.keys())
         QUIZ["rng"] = random.choice(usefulkeys)
 
     QUIZ["rolls"].append(QUIZ["rng"])
     answers = ""
-    await SEND(ch, ":question: " + QUESTIONS[QUIZ["rng"]][0])
+    await SEND(ch, "❓ " + QUESTIONS[QUIZ["rng"]][0])
 
     random.shuffle(QUESTIONS[QUIZ["rng"]][1])   
     for i in QUESTIONS[QUIZ["rng"]][1]:
-        answers += ":arrow_forward: `" + i + "` \n"
+        answers += "▶️ " + i + " \n"
 
     await SEND(ch, answers)
     QUIZ["can-answer"] = True
@@ -1103,7 +1104,7 @@ async def MG_LOOP(toSend):
             return
         else:
             toSend += MG_QUEUE[MG_CURRENT_PLR].display_name + " turn! Choose Your alignment!"
-            await SEND(MG_CHANNEL, tosend)
+            await SEND(MG_CHANNEL, toSend)
         
         asyncio.sleep(MINI_GAME_MAX_WAIT)
         
