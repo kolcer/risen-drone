@@ -6,7 +6,7 @@ import random
 import asyncio
 import redis
 from datetime import date
-from datetime import time
+import time
 from difflib import SequenceMatcher
 
 ## CONSTANTS ##
