@@ -1128,7 +1128,7 @@ async def on_message(message):
                 spell = random.choice(MG_SPELLS)
        
     #normal non-admin usage
-    elif not msg.startswith("|") and not usr.nick == "rolo":
+    elif not msg.startswith("|") and not usr.nick == "rolo" and not usr.nick == "godofstairs":
         
         ## lowercase the message for some commands to use
         lmsg = msg.lower()
