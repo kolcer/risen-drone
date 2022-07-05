@@ -379,11 +379,11 @@ QUESTIONS = {
   ],
 
   2: [
-    "Is this Quiz cool?",
-    ["YES!", "Not even close", "No", "I hardly disagree"],
-    "yes!",
-    ", you have good taste.",
-    "Of course. Wrong answer.",
+    "What's the maximum amount of Mana one player can reach?",
+    ["22", "Infinite", "20", "10"],
+    "infinite",
+    " guessed it. (or maybe knew it...)",
+    "Wrong answer.",
   ],
 
   3: [
@@ -400,6 +400,134 @@ QUESTIONS = {
     "i fell",
     " knows me all too well.",
     "Wrong.",
+  ],
+
+  5: [
+    "When did I join this Discord Server?",
+    ["04/03/2021", "07/01/2022", "03/04/2021", "9/29/2018"],
+    "04/03/2021",
+    " is correct.",
+    "I forgive you.",
+  ],
+
+  6: [
+    "Originally, how did the Final Orb work?",
+    ["Same as now", "It stood stil in a room at the top floor", "Same as now but it stood still", "It was mmoving in a room at the top floor"],
+    "it stood stil in a room at the top floor",
+    " guessed it. (or maybe knew it...)",
+    "Wrong answer.",
+  ],
+
+  7: [
+    "What is the latest Badge added in Crazy Stairs?",
+    ["Super Secret Badge", "Mega Secret Badge", "Architect's Design", "Possessed Fate"],
+    "mega secret badge",
+    " won this one, on to the next one we go.",
+    "Wrong, you haven't been paying attention.",
+  ],
+
+  8: [
+    "How much Mana do players actually have when Infinite Mana is active?",
+    ["100", "Infinite", "50", "1000"],
+    "100",
+    " is a genius.",
+    "Wrong.",
+  ],
+
+  9: [
+    "Which of these names Sleazel has never used in Discord?",
+    ["Sleazy Guy", "Malcolm", "Sleaz", "Archon"],
+    "sleazy guy",
+    " has been stalking Sleazel.",
+    "Better luck next time.",
+  ],
+
+  10: [
+    "How were the Drones originally referred as?",
+    ["Keepers", "Drones", "Overseers", "Guardians"],
+    "keepers",
+    " was paying attention during class.",
+    "Not correct.",
+  ],
+
+  11: [
+    "How was the first Admin of this Discord Server called?",
+    ["bash1234567888", "wheredidthesungo", "LizzyTheAdventurer", "jeff"],
+    "bash1234567888",
+    " has been here for too long.",
+    "The answer provided doesn't match the correct one.",
+  ],
+
+  12: [
+    "Which one of the following was NOT part of the Original Trinity?",
+    ["Patron", "Joker", "Thief", "Wicked"],
+    "thief",
+    " is indeed correct.",
+    "Better luck next time.",
+  ],
+
+  13: [
+    "How many Drones are there in each Crazy Stairs server?",
+    ["9", "8", "7", "10"],
+    "9",
+    " is not wrong, even though I'm more than a mere Drone.",
+    "You tried, and failed.",
+  ],
+
+  14: [
+    "How many intersecations does each Drone handle?",
+    ["3", "2", "1", "4"],
+    "3",
+    " checked the General Trivia.",
+    "Nope.",
+  ],
+
+  15: [
+    "How much does it cost (Robux) to refill your Mana in Crazy Stairs?",
+    ["10", "15", "No such feature in the game", "20"],
+    "10",
+    " has refilled their Mana once, or tried to.",
+    "Totally wrong.",
+  ],
+
+  16: [
+    "Which Mana orb gives 3 Mana?",
+    ["Yellow", "Blue", "Green", "Red"],
+    "yellow",
+    " somehow knew the answer.",
+    "Have you ever played the game?",
+  ],
+
+  17: [
+    "How many Climbs are required to unlock the last rank of an alignment??",
+    ["50", "25", "60", "30"],
+    "50",
+    " is correct.",
+    "Incorrect.",
+  ],
+
+  18: [
+    "Which one of the following is NOT a way to get unpossessed??",
+    ["Trigger a Chameleon Rig", "Reset", "Get Mana by another Player", "Trigger a Patron Rig"],
+    "yellow",
+    " somehow knew the answer.",
+    "Have you ever played the game?",
+  ],
+
+  19: [
+    "Whose alignment's icon does the lobby's shape resemble?",
+    ["Hacker", "Patron", "Wicked", "Thief"],
+    "hacker",
+    " answered correctly.",
+    "Try zooming out every now and then.",
+  ],
+
+  20: [
+    "Which alignment does NOT get a switch upon ranking up?",
+    ["Wicked", "Archon", "Joker", "Drifter"],
+    "drifter",
+    " guessed the correct answer.",
+    "You gotta rank up your alignments.",
   ],
 }
 
