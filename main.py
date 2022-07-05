@@ -856,7 +856,7 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] += 2
                 
         case "heretic":
-            chances == random.randint(0,1)
+            chances = random.randint(0,1)
             if chances == 0:
                 toSend += "Performed a dark ritual and swapped first and last players!"
                 top = None
