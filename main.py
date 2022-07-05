@@ -706,6 +706,7 @@ def MG_SHOW_STATS():
     return toSend
 
 def MG_NEXT_PLAYER():
+    global MG_CURRENT_PLR
     MG_CURRENT_PLR += 1
     if MG_CURRENT_PLR > len(MG_QUEUE) - 1:
         MG_CURRENT_PLR = 0
