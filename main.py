@@ -21,7 +21,7 @@ MINI_GAME_MAX_WAIT = 20
 SERVER = 624227331720085528
 
 #fallen drone name (to prevent impostors)
-FALLEN_DRONE_NICK = "FALLEN DRONE"
+FALLEN_DRONE_NICK = "FAL LEN DRONE"
 
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
