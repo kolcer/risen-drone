@@ -736,7 +736,8 @@ def MG_SHOW_WINNERS():
     
 def MG_ACTION(plr, action):
     
-    
+    global MG_CURRENT_PLR 
+     
     #all players always advance 1 level per round
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
@@ -824,6 +825,7 @@ def MG_ACTION(plr, action):
                 toSend += "has been kicked from the game for hacking!"
                 del MG_PLAYERS[plr]
                 MG_QUEUE.remove(plr)
+                MG_CURRENT_PLAYER -= 1
             elif chances == 1:
                 toSend += "has been frozen by a Murdurator!"
                 MG_PLAYERS[plr] -= 1
