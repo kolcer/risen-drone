@@ -499,7 +499,7 @@ QUESTIONS = {
   ],
 
   17: [
-    "How many Climbs are required to unlock the last rank of an alignment??",
+    "How many Climbs are required to unlock the last rank of an alignment?",
     ["50", "25", "60", "30"],
     "50",
     " is correct.",
@@ -507,9 +507,9 @@ QUESTIONS = {
   ],
 
   18: [
-    "Which one of the following is NOT a way to get unpossessed??",
-    ["Trigger a Chameleon Rig", "Reset", "Receive Mana by another player", "Trigger a Patron Rig"],
-    "Receive Mana by another player",
+    "Which one of the following is NOT a way to get unpossessed?",
+    ["Trigger a Chameleon Rig", "Reset", "Receive Mana from another player", "Trigger a Patron Rig"],
+    "Receive Mana from another player",
     " somehow knew the answer.",
     "Have you ever played the game?",
   ],
