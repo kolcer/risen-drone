@@ -695,8 +695,8 @@ def MG_RESET():
     global MG_CURRENT_PLR 
     global MG_WIN_DETECT
     
-    MG_PLAYERS = {}
-    MG_QUEUE = []
+    MG_PLAYERS.clear()
+    MG_QUEUE.clear()
     MG_STATUS = "off"
     MG_CHANNEL = None
     MG_CURRENT_PLR = 0
