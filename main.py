@@ -356,6 +356,51 @@ COOLDOWN_DESCRIPTIONS = {
     "patron": "Patron cooldown: ",
 }
 
+QUIZ = {
+    "active" : False,
+    "second-player" : False,
+    "can-answer" : False,
+    "turn" : 0,
+    "cturn" : 1,
+}
+
+QUIZZERS = {}
+LOSERS = []
+
+QUESTIONS = {
+  1: [
+    "Which game am I playing right now?",
+    ["Crazy Stairs", "Lucid Ladders", "Sleazel's Revenge", "Adopt Me!"],
+    "sleazel's revenge",
+    " got it right, but that was pretty easy. Let's move on now.\nBoth Players can now answer the next question.",
+    "There was no way for you to get this wrong yet you surprise me!",
+  ],
+
+  2: [
+    "Is this Quiz cool?",
+    ["YES!", "Not even close", "No", "I hardly disagree"],
+    "yes!",
+    ", you have good taste.\nBoth Players can now answer the next question.",
+    "Of course. Wrong answer.",
+  ],
+
+  3: [
+    "How many Alignments are there in the game?",
+    ["13", "12", "11", "9"],
+    "12",
+    " won this one, on to the next one we go.\nBoth Players can now answer the next question.",
+    "No.",
+  ],
+
+  4: [
+    "How did I become Fallen Drone?",
+    ["I asked Sleazel", "I fell", "Someone pushed me causing my fall", "I aged"],
+    "i fell",
+    " knows me all too well.",
+    "Wrong.",
+  ],
+}
+
 MG_SPELLS = [
     "none",
     "muggle",
@@ -392,14 +437,6 @@ RIG_COOLDOWNS = {
     "ha": False,
     "patron": False,
 }
-
-QUIZ = {
-    "active" : False,
-    "second-player" : False,
-    "phase1" : False,
-}
-
-QUIZZERS = []
 
 RIG_SPAMMERS = {}
 NickDictionary = {}
@@ -442,6 +479,35 @@ def show_random_tip(key):
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
 
+async def CLOSE_EVENT():
+  print("entered")
+  await asyncio.sleep(30)
+  print("30 sec passed")
+  if QUIZ["turn"] == QUIZ["cturn"] and QUIZ["active"]:
+    print("same turns has been going on for 30 seconds")
+    QUIZ["turn"] = 0
+    QUIZ["cturn"] = -5
+    QUIZ["active"] = False
+    QUIZ["second-player"] = False
+    QUIZ["can-answer"] = False
+    QUIZZERS.clear()
+    LOSERS.clear()
+    return True
+
+  print("not the same turn")
+  QUIZ["cturn"] += 1
+  return False
+
+def FORCE_CLOSE_EVENT():
+  QUIZ["turn"] = 0
+  QUIZ["cturn"] = -5
+  QUIZ["active"] = False
+  QUIZ["second-player"] = False
+  QUIZ["can-answer"] = False
+  QUIZZERS.clear()
+  LOSERS.clear()
+  return
+  
 def getScoldDictionary(victim, author):
     ScoldDict = {
         481893862864846861:
@@ -1301,27 +1367,114 @@ async def on_message(message):
                     await SEND(ch,i)
                     return
 
-        # if lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
-        #     QUIZZERS.append(usr)
-        #     QUIZ["active"] = True
-        #     QUIZ["second-player"] = True
+        #start the quiz
+        if lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
+          #add user to the quiz users with 0 points.
+          QUIZZERS[usr] = 0
 
-        #     await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions.")
-        #     await asyncio.sleep(10)
-        #     if QUIZ["second-player"] == True:
-        #         QUIZ["active"] = False
-        #         QUIZ["second-player"] = False
-        #         QUIZZERS.remove(usr)
-        #         await SEND(ch, "Nobody joined in time. Event is concluded.")
-        #     return
+          #activates the quiz, activates looking for second player.
+          QUIZ["active"] = True
+          QUIZ["second-player"] = True
+          await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions.")
 
-        # if lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
-        #     QUIZ["second-player"] = False
-        #     QUIZZERS.append(usr)
-        #     quizzerson = QUIZZERS[0].mention + " and " + QUIZZERS[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
+          #if no one joins within 10 seconds, event is forced closed.
+          await asyncio.sleep(10)
+          if QUIZ["second-player"] == True:
+            await SEND(ch, "Nobody joined in time. Event is concluded.")
+            FORCE_CLOSE_EVENT()
+          return
 
-        #     await SEND(ch, quizzerson)
-        #     return
+        #join an ongoing quiz
+        if lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+          #disables looking for second player
+          QUIZ["second-player"] = False
+          #adds the new user to the quiz users
+          QUIZZERS[usr] = 0
+          #preparation to announce the two players
+          users = list(QUIZZERS.keys())
+          quizzerson = users[0].mention + " and " + users[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
+          await SEND(ch, quizzerson)
+          #turn started from 0, now it begins
+          QUIZ["turn"] += 1
+          QUIZ["cturn"] = 1
+          #prevents other people from talking while there is a quiz. avoids suggestions.
+          #(this command cannot be used outside of bot-commands)
+          await asyncio.sleep(2)
+          await SEND(ch, "Beyond this point, any message sent from non-participating Users will be deleted.")
+          #proceeds with the next(first in this case) question
+          await asyncio.sleep(2)
+          await nextQuestion(ch)
+          #after starting, check if the round has been going on for more than 30 seconds.
+          #if positive, close the event and send the message
+          if await CLOSE_EVENT():
+            await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
+          return
+
+        if ch == CHANNELS["bot-testing"] and QUIZ["active"] and not QUIZ["second-player"] and usr in QUIZZERS.keys() and QUIZ["can-answer"]:
+          #if usr not in QUIZZERS:
+            #await DELETE(message)
+          
+          #each user gets one try at guessing the answer.
+          #if you lost your attempt, wait for the other user to guess (or fail... concluding the event)
+          if usr in LOSERS:
+            await SEND(ch, "You have wasted your chance. Let the other User play now.")
+            return
+
+          #if the answer is not correct enter here
+          if lmsg != QUESTIONS[QUIZ["turn"]][2]:
+            #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
+            #then a loser they become.
+            if usr not in LOSERS:
+              LOSERS.append(usr)
+
+            #no return here. after adding a user, checks if both users are losers
+            #if they are, the event gets forced closed.
+            if len(LOSERS) == 2:
+              await SEND(ch, "Both players have not answered the question correctly. Event is over.")
+              FORCE_CLOSE_EVENT()
+              return
+
+            #if it is the first user to get the answer wrong, then show fallen's disappointment.
+            await SEND(ch, QUESTIONS[QUIZ["turn"]][4])
+            return
+
+          #go here instead if the answer it not incorrect (which means it is correct indeed)
+          #show fallen's approval to the guessing user.
+          QUIZ["can-answer"] = False
+          await SEND(ch, usr.mention + QUESTIONS[QUIZ["turn"]][3])
+          #the user who misguessed the answered gets a second chance (might it be the second or third depending on the round tho-)
+          LOSERS.clear()
+          #guesser gains 1 point
+          QUIZZERS[usr] += 1
+          #to the next turn we go (unless we want the same question to repeat itself)
+          QUIZ["turn"] += 1
+          await asyncio.sleep(5)
+
+          #go here if there are no more questions
+          if QUIZ["turn"] == len(QUESTIONS) + 1:
+
+            highscore = 0
+            for i in QUIZZERS:
+              if QUIZZERS[i] > highscore:
+                winner = i
+                highscore = QUIZZERS[i]
+              elif QUIZZERS[i] == highscore:
+                await SEND(ch, "That's a tie. But we do not like ties. Play again.")
+                FORCE_CLOSE_EVENT()
+                return
+
+            #and the winner is (not you)
+            await SEND(ch, winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
+            FORCE_CLOSE_EVENT()
+            return
+
+          #if there are more questions go here
+          #after going to the next round check if the next round lasts more than 30 seconds
+          await nextQuestion(ch)
+          if await CLOSE_EVENT():
+            await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
+          
+          return      
                 
 
                
