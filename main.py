@@ -363,6 +363,7 @@ QUIZ = {
     "turn" : 0,
     "cturn" : 1,
     "rolls" : [0],
+    "rng" : 0,
 }
 
 QUIZZERS = {}
@@ -373,7 +374,7 @@ QUESTIONS = {
     "Which game am I playing right now?",
     ["Crazy Stairs", "Lucid Ladders", "Sleazel's Revenge", "Adopt Me!"],
     "sleazel's revenge",
-    " got it right, but that was pretty easy. Let's move on now.\nBoth Players can now answer the next question.",
+    " got it right, but that was pretty easy. Let's move on now.",
     "There was no way for you to get this wrong yet you surprise me!",
   ],
 
@@ -381,7 +382,7 @@ QUESTIONS = {
     "Is this Quiz cool?",
     ["YES!", "Not even close", "No", "I hardly disagree"],
     "yes!",
-    ", you have good taste.\nBoth Players can now answer the next question.",
+    ", you have good taste.",
     "Of course. Wrong answer.",
   ],
 
@@ -389,7 +390,7 @@ QUESTIONS = {
     "How many Alignments are there in the game?",
     ["13", "12", "11", "9"],
     "12",
-    " won this one, on to the next one we go.\nBoth Players can now answer the next question.",
+    " won this one, on to the next one we go.",
     "No.",
   ],
 
@@ -491,6 +492,7 @@ async def CLOSE_EVENT():
     QUIZ["active"] = False
     QUIZ["second-player"] = False
     QUIZ["can-answer"] = False
+    QUIZ["rolls"].clear()
     QUIZZERS.clear()
     LOSERS.clear()
     return True
@@ -505,22 +507,22 @@ def FORCE_CLOSE_EVENT():
   QUIZ["active"] = False
   QUIZ["second-player"] = False
   QUIZ["can-answer"] = False
+  QUIZ["rolls"].clear()
   QUIZZERS.clear()
   LOSERS.clear()
   return
 
 async def nextQuestion(ch):
-    randomnumber = 0
-    while randomnumber in QUIZ["rolls"]:
-        randomnumber = random.choice(QUESTIONS.keys())
+    while QUIZ["rng"] in QUIZ["rolls"]:
+        usefulkeys = list(QUESTIONS.keys())
+        QUIZ["rng"] = random.choice(usefulkeys)
 
-    QUIZ["rolls"].append(randomnumber)
-    await SEND(ch, ":question: " + QUESTIONS[randomnumber][0])
+    QUIZ["rolls"].append(QUIZ["rng"])
     answers = ""
-    await SEND(ch, ":question: " + QUESTIONS[randomnumber][0])
+    await SEND(ch, ":question: " + QUESTIONS[QUIZ["rng"]][0])
 
-    random.shuffle(QUESTIONS[randomnumber][1])   
-    for i in QUESTIONS[randomnumber][1]:
+    random.shuffle(QUESTIONS[QUIZ["rng"]][1])   
+    for i in QUESTIONS[QUIZ["rng"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
 
     await SEND(ch, answers)
@@ -1209,7 +1211,7 @@ async def on_message(message):
                 return
 
             #if the answer is not correct enter here
-            if lmsg != QUESTIONS[QUIZ["turn"]][2]:
+            if lmsg != QUESTIONS[QUIZ["rng"]][2]:
                 #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
                 #then a loser they become.
                 if usr not in LOSERS:
@@ -1223,13 +1225,18 @@ async def on_message(message):
                     return
 
                 #if it is the first user to get the answer wrong, then show fallen's disappointment.
-                await SEND(ch, QUESTIONS[QUIZ["turn"]][4])
+                await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
                 return
 
             #go here instead if the answer it not incorrect (which means it is correct indeed)
             #show fallen's approval to the guessing user.
             QUIZ["can-answer"] = False
-            await SEND(ch, usr.mention + QUESTIONS[QUIZ["turn"]][3])
+            finalmsg = ""
+            if QUIZ["turn"] + 1 > len(QUESTIONS):
+              finalmsg = QUESTIONS[QUIZ["rng"]][3]
+            else:
+              finalmsg = QUESTIONS[QUIZ["rng"]][3] + "\nBoth Players can now answer the next question."
+            await SEND(ch, usr.mention + finalmsg)
             #the user who misguessed the answered gets a second chance (might it be the second or third depending on the round tho-)
             LOSERS.clear()
             #guesser gains 1 point
@@ -1239,7 +1246,7 @@ async def on_message(message):
             await asyncio.sleep(5)
 
             #go here if there are no more questions
-            if QUIZ["turn"] == len(QUESTIONS) + 1:
+            if QUIZ["turn"] > len(QUESTIONS):
 
                 highscore = -1
                 for i in QUIZZERS:
