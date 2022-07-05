@@ -1108,7 +1108,7 @@ async def MG_LOOP(toSend):
             toSend += MG_QUEUE[MG_CURRENT_PLR].display_name + " turn! Choose Your alignment!"
             await SEND(MG_CHANNEL, toSend)
         
-        asyncio.sleep(MINI_GAME_MAX_WAIT)
+        await asyncio.sleep(MINI_GAME_MAX_WAIT)
         
         if MG_TICK != ourTick:
             return
