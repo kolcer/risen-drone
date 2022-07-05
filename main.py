@@ -648,7 +648,7 @@ async def nextQuestion(ch):
 
     QUIZ["rolls"].append(QUIZ["rng"])
     answers = ""
-    qnum = "*Question no. " + QUIZ["turn"] + "*\n"
+    qnum = "*Question no. " + str(QUIZ["turn"]) + "*\n"
     await SEND(ch, qnum + ":question: " + QUESTIONS[QUIZ["rng"]][0])
 
     random.shuffle(QUESTIONS[QUIZ["rng"]][1])   
