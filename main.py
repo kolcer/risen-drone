@@ -507,7 +507,19 @@ def FORCE_CLOSE_EVENT():
   QUIZZERS.clear()
   LOSERS.clear()
   return
+
+async def nextQuestion(ch):
+  answers = ""
+  await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
+
+  for i in QUESTIONS[QUIZ["turn"]][1]:
+    answers += ":arrow_forward: `" + i + "` \n"
+
+  await SEND(ch, answers)
+  QUIZ["can-answer"] = True
   
+  return
+
 def getScoldDictionary(victim, author):
     ScoldDict = {
         481893862864846861:
