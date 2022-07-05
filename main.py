@@ -21,7 +21,7 @@ MINI_GAME_MAX_WAIT = 20
 SERVER = 624227331720085528
 
 #fallen drone name (to prevent impostors)
-FALLEN_DRONE_NICK = "FAL LEN DRONE"
+FALLEN_DRONE_NICK = "FALLEN DRONE"
 
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
@@ -697,7 +697,7 @@ def MG_SHOW_STATS():
 
     global MG_WIN_DETECT
     
-    toSend = "Current placements:\n"
+    toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
         toSend += plr.display_name + ": " + str(place) + " floor\n"
         if place > MG_WIN_DETECT:
@@ -1092,6 +1092,7 @@ async def necromancer(message):
     
 async def MG_LOOP(toSend):
     
+    global MG_TICK
     MG_TICK = time.time()
     ourTick = MG_TICK
     
@@ -1100,7 +1101,7 @@ async def MG_LOOP(toSend):
         toSend += MG_SHOW_STATS()
         if MG_WIN_DETECT >= MINI_GAME_TOP_LEVEL or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()
-            await SEND(MG_CHANNEL, tosend)
+            await SEND(MG_CHANNEL, toSend)
             MG_RESET()
             return
         else:
