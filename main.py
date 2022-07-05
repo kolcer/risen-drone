@@ -379,7 +379,7 @@ QUESTIONS = {
   ],
 
   2: [
-    "What's the maximum amount of Mana one player can reach?",
+    "What's the maximum amount of Mana one player can have?",
     ["22", "Infinite", "20", "10"],
     "infinite",
     " guessed it. (or maybe knew it...)",
@@ -412,14 +412,14 @@ QUESTIONS = {
 
   6: [
     "Originally, how did the Final Orb work?",
-    ["Same as now", "It stood stil in a room at the top floor", "Same as now but it stood still", "It was mmoving in a room at the top floor"],
-    "it stood stil in a room at the top floor",
+    ["Same as now", "It stood still in a room at the top floor", "Same as now but it stood still", "It was moving in a room at the top floor"],
+    "it stood still in a room at the top floor",
     " guessed it. (or maybe knew it...)",
     "Wrong answer.",
   ],
 
   7: [
-    "What is the latest Badge added in Crazy Stairs?",
+    "Which was the latest Badge added in Crazy Stairs?",
     ["Super Secret Badge", "Mega Secret Badge", "Architect's Design", "Possessed Fate"],
     "mega secret badge",
     " won this one, on to the next one we go.",
@@ -508,8 +508,8 @@ QUESTIONS = {
 
   18: [
     "Which one of the following is NOT a way to get unpossessed??",
-    ["Trigger a Chameleon Rig", "Reset", "Get Mana by another Player", "Trigger a Patron Rig"],
-    "yellow",
+    ["Trigger a Chameleon Rig", "Reset", "Receive Mana by another player", "Trigger a Patron Rig"],
+    "Receive Mana by another player",
     " somehow knew the answer.",
     "Have you ever played the game?",
   ],
@@ -1358,7 +1358,7 @@ async def on_message(message):
                 return
 
             #if the answer is not correct enter here
-            if lmsg != QUESTIONS[QUIZ["rng"]][2]:
+            if lmsg != QUESTIONS[QUIZ["rng"]][2].lower():
                 #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
                 #then a loser they become.
                 if usr not in LOSERS:
