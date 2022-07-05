@@ -515,12 +515,12 @@ async def nextQuestion(ch):
         randomnumber = random.choice(QUESTIONS.keys())
 
     QUIZ["rolls"].append(randomnumber)
-    await SEND(ch, ":question: " + QUESTIONS[random.choice(QUESTIONS)][0])
+    await SEND(ch, ":question: " + QUESTIONS[randomnumber][0])
     answers = ""
-    await SEND(ch, ":question: " + QUESTIONS[QUIZ["turn"]][0])
+    await SEND(ch, ":question: " + QUESTIONS[randomnumber][0])
 
-    random.shuffle(QUESTIONS[QUIZ["turn"]][1])   
-    for i in QUESTIONS[QUIZ["turn"]][1]:
+    random.shuffle(QUESTIONS[randomnumber][1])   
+    for i in QUESTIONS[randomnumber][1]:
         answers += ":arrow_forward: `" + i + "` \n"
 
     await SEND(ch, answers)
@@ -1149,7 +1149,7 @@ async def on_message(message):
             return
 
         #start the quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
+        if ch == CHANNELS["bot-testing"] and lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
             #add user to the quiz users with 0 points.
             QUIZZERS[usr] = 0
 
@@ -1166,7 +1166,7 @@ async def on_message(message):
             return
 
         #join an ongoing quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+        if ch == CHANNELS["bot-testing"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
             #disables looking for second player
             QUIZ["second-player"] = False
             #adds the new user to the quiz users
@@ -1191,7 +1191,7 @@ async def on_message(message):
                 await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
             return
 
-        if ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
+        if ch == CHANNELS["bot-testing"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
             if usr not in QUIZZERS:
                 await DELETE(message)
                 return
