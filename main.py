@@ -525,8 +525,8 @@ QUESTIONS = {
 
   20: [
     "Which alignment does NOT get a switch upon ranking up?",
-    ["Wicked", "Archon", "Joker", "Drifter"],
-    "drifter",
+    ["Wicked", "Archon", "Joker", "Heretic"],
+    "Heretic",
     " guessed the correct answer.",
     "You gotta rank up your alignments.",
   ],
