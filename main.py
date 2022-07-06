@@ -742,35 +742,35 @@ def MG_ACTION(plr, action):
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
         
-    toSend = plr.display_name + " has played " + action + " and "
+    toSend = "All players advance 1 level.\n" + plr.display_name + " has played " + action + ". They "
     
     match action:
         case "none":
-            toSend += "is chilling this round."
+            toSend += "are chilling this round."
             
         case "muggle":
             chances = random.randint(0, 2)
             if chances == 2:
                 MG_PLAYERS[plr] -= 1
-                toSend += "got stuck!"
+                toSend += "got stuck and had to go down 1 level!"
             else:
                 MG_PLAYERS[plr] += 1
-                toSend += "did a stairjump trick, and advanced 2 levels!"
+                toSend += "did a stairjump trick, and advanced 1 extra level!"
                 
         case "patron":
             ourLevel = MG_PLAYERS[plr]
             for i, v in MG_PLAYERS.items():
                 if v <= ourLevel:
                     MG_PLAYERS[i] += 1
-            toSend += "advanced 2 levels with all other players below them."
+            toSend += "advanced 1 extra level with all other players below them."
                 
         case "joker":
             victim = random.choice(MG_QUEUE)
             if victim != plr:
-                toSend += "pranked " + victim.display_name + " - they fell 1 level down!"
+                toSend += "pranked " + victim.display_name + " - causing them to fell 2 levels down!"
                 MG_PLAYERS[victim] -= 2
             else:
-                toSend += "pranked themselves, and did not advance this turn."
+                toSend += "pranked themselves, and fell 1 level down."
                 MG_PLAYERS[victim] -= 1
         
         case "wicked":
@@ -778,13 +778,13 @@ def MG_ACTION(plr, action):
             for i, v in MG_PLAYERS.items():
                 if v > ourLevel:
                     MG_PLAYERS[i] -= 1
-            toSend += "purged the stairs and above players got stuck."
+            toSend += "purged the stairs and above players fell one level."
             
         case "spectre":
             chances = random.randint(-1, 2)
             MG_PLAYERS[plr] += chances
             if chances == -1:
-                toSend += "had a teleportation accident!"
+                toSend += "had a teleportation accident and lost one level!"
             elif chances == 0:
                 toSend += "did not get any advantage."
             elif chances == 1:
@@ -793,7 +793,7 @@ def MG_ACTION(plr, action):
                 toSend += "teleported two extra levels up."
          
         case "keeper":
-            toSend += "caused bottom player to advance faster and stranded the top player!"
+            toSend += "caused bottom player to advance an extra level and top player to go down!"
             top = None
             bottom = None
             topl = -99999999
@@ -811,34 +811,37 @@ def MG_ACTION(plr, action):
         case "thief":
             victim = random.choice(MG_QUEUE)
             if victim != plr:
-                toSend += "has stolen " + victim.display_name + " place!"
+                toSend += "have stolen " + victim.display_name + " place!"
                 cache = MG_PLAYERS[victim]
                 MG_PLAYERS[victim] = MG_PLAYERS[plr]
                 MG_PLAYERS[plr] = cache
             else:
-                toSend += "has been caught stealing!"
+                toSend += "have been caught stealing, and had to flee one level down!"
                 MG_PLAYERS[plr] -= 1
             
         case "hacker":
             chances = random.randint(0, 3)
             if chances == 0:
-                toSend += "has been kicked from the game for hacking!"
+                toSend += "have been kicked from the game for hacking!"
+                
+                cp = MG_QUEUE[MG_CURRENT_PLR]
                 del MG_PLAYERS[plr]
                 MG_QUEUE.remove(plr)
-                MG_CURRENT_PLR -= 1
+                MG_CURRENT_PLR = MG_QUEUE.index(cp)
+                
             elif chances == 1:
-                toSend += "has been frozen by a Murdurator!"
+                toSend += "have been frozen by a Murdurator and lost one level!"
                 MG_PLAYERS[plr] -= 1
             elif chances == 2:
-                toSend += "has had an unsuccessful hack, but was not detected!"
+                toSend += "have had an unsuccessful hack, but was not detected!"
             else:
-                toSend += "has hacked the game!"
+                toSend += "have hacked the game!"
                 for i in MG_PLAYERS.keys():
                     MG_PLAYERS[i] -= 1
                 MG_PLAYERS[plr] = MINI_GAME_TOP_LEVEL
                 
         case "archon":
-            toSend += "cast Split Event and caused players to be either stranded or move 2 levels up."
+            toSend += "cast Split Event and caused players to either lost or gain a extra level."
             for i in MG_PLAYERS.keys():
                 chances = random.randint(0,1)
                 if chances == 0 or i == plr:
@@ -849,16 +852,16 @@ def MG_ACTION(plr, action):
         case "drifter":
             chances = random.randint(0,1)
             if chances == 0:
-                toSend += "took the elevator, but it was broken."
+                toSend += "took the elevator, but it was broken - a level was lost"
                 MG_PLAYERS[plr] -= 1
             else:
-                toSend += "took the elevator, and advanced 3 levels!"
+                toSend += "took the elevator, and advanced 2 extra levels!"
                 MG_PLAYERS[plr] += 2
                 
         case "heretic":
             chances = random.randint(0,1)
             if chances == 0:
-                toSend += "Performed a dark ritual and swapped first and last players!"
+                toSend += "performed a dark ritual and swapped first and last players!"
                 top = None
                 bottom = None
                 topl = -99999999
@@ -874,7 +877,7 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[top] = MG_PLAYERS[bottom]
                 MG_PLAYERS[bottom] = cache
             else:
-                toSend += "Failded to perform a dark ritual and got stranded"
+                toSend += "failed to perform a dark ritual and got stranded - a level was lost."
                 MG_PLAYERS[plr] -= 1
                 
     return toSend
@@ -1123,9 +1126,10 @@ async def MG_LOOP(toSend):
         if MG_TICK != ourTick:
             return
         
-        toSend = MG_ACTION(MG_QUEUE[MG_CURRENT_PLR],"none")
-        
+        cp = MG_QUEUE[MG_CURRENT_PLR]
         MG_NEXT_PLAYER()
+        toSend = MG_ACTION(cp,"none")
+        
          
     
 ### PUBLIC (ON EVENT) FUNCTIONS ###
