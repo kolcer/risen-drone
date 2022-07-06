@@ -606,7 +606,7 @@ def list_entries(key):
     return result
 
 def show_random_entry(key):
-    index = random.randint(0,db.llen(key))
+    index = random.randint(0,db.llen(key)-1)
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
 
