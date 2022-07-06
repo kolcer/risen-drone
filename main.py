@@ -825,7 +825,7 @@ def MG_ACTION(plr, action):
                 toSend += "has been kicked from the game for hacking!"
                 del MG_PLAYERS[plr]
                 MG_QUEUE.remove(plr)
-                MG_CURRENT_PLAYER -= 1
+                MG_CURRENT_PLR -= 1
             elif chances == 1:
                 toSend += "has been frozen by a Murdurator!"
                 MG_PLAYERS[plr] -= 1
