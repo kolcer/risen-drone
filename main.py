@@ -1721,7 +1721,7 @@ async def on_message(message):
 
             elif split[1] == "print":
                 question = show_specific_entry("quiz",int(split[2]))
-                qSplit = split[2].split("|")
+                qSplit = question.split("|")
                 toSend = "Q:\n" + qSplit[0] + "\nCorrect Answer:\n" + qSplit[1]
                 toSend += "\nA2:\n" + qSplit[2] + "\nA3:\n" + qSplit[3] + "\nA4:\n" + qSplit[4]
                 toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
