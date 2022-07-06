@@ -594,22 +594,29 @@ db = redis.from_url(os.environ.get("REDIS_URL"))
 
 ### PRIVATE SYNC FUNTIONS ###
 
-def add_tip(key, new_tip):
-    db.rpush(key,new_tip)
+def add_entry(key, new_entry):
+    db.rpush(key,new_entry)
 
-def delete_tip(key, index):
+def delete_entry(key, index):
     db.lset(key,index,"_del_")
     db.lrem(key,1,"_del_")
 
-def list_tips(key):
+def list_entries(key):
     result = db.lrange(key,0,-1)
     return result
 
-def show_random_tip(key):
+def show_random_entry(key):
     index = random.randint(0,db.llen(key))
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
 
+def get_amount_of_entries(key):
+    return db.llen(key)
+
+def show_specific_entry(key,index):
+    result = db.lrange(key,index,index)
+    return result[0].decode("utf-8")
+    
 async def CLOSE_EVENT():
   print("entered")
   await asyncio.sleep(30)
@@ -933,14 +940,14 @@ async def DELETE(message):
 #to worry about these ones
 
 #print tips
-async def PRINT_TIPS(channel,key):
-    tips = list_tips(key)
+async def PRINT_ENTRIES(channel,key):
+    entries = list_entries(key)
     combined_string = ""
-    for i in range(len(tips)):
-        new_string = combined_string + str(i) + ") " + tips[i].decode("utf-8") + "\n"
+    for i in range(len(entries)):
+        new_string = combined_string + str(i) + ") " + entries[i].decode("utf-8") + "\n"
         if len(new_string) > 2000:
             await SEND(channel,combined_string)
-            combined_string = str(i) + ") " + tips[i].decode("utf-8") + "\n"
+            combined_string = str(i) + ") " + entries[i].decode("utf-8") + "\n"
         else:
             combined_string = new_string
     await SEND(channel,combined_string)
@@ -1637,12 +1644,12 @@ async def on_message(message):
         if len(lsplit) == 2:
             if lsplit[1] == "tip" or lsplit[1] == "trick":
                 if lsplit[0] in TIPS_KEYS:
-                    await SEND(ch,show_random_tip(lsplit[0]))
+                    await SEND(ch,show_random_entry(lsplit[0]))
                     return
             elif lsplit[1] == "trivia":
                 if lsplit[0] in TIPS_KEYS:
                     key = lsplit[0] + "T"
-                    await SEND(ch,show_random_tip(key))
+                    await SEND(ch,show_random_entry(key))
                     return
 
         #single word trigger
@@ -1677,7 +1684,9 @@ async def on_message(message):
         if not ADMIN in usr.roles:
             await SEND(ch,"You are not allowed to use this command.")
             return
+
             
+
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
    
@@ -1688,6 +1697,7 @@ async def on_message(message):
                    await ADD_ROLES(mem,CKR)
                    break
             return  
+
         #remove ckr
         if msg.startswith("ckr from ", 1):
             for mem in SERVER.members:
@@ -1695,6 +1705,33 @@ async def on_message(message):
                    await REMOVE_ROLES(mem,CKR)
                    break
             return   
+
+        #quiz
+        if msg.startswith("quiz",1):
+            if split[1] == "new":
+                qSplit = split[2].split("|")
+                if len(qSplit) != 7:
+                    await SEND(ch,"Question does not have the required 7 sections.")
+                else:
+                    add_entry("quiz",split[2])
+                    await SEND(ch,"Successfully added new quiz question")
+
+            elif split[1] == "amount":
+                await SEND(ch,"There are " + str(get_amount_of_entries("quiz")) + " questions in the database.")        
+
+            elif split[1] == "print":
+                question = show_specific_entry("quiz",int(split[2]))
+                qSplit = split[2].split("|")
+                toSend = "Q:\n" + qSplit[0] + "\nCorrect Answer:\n" + qSplit[1]
+                toSend += "\nA2:\n" + qSplit[2] + "\nA3:\n" + qSplit[3] + "\nA4:\n" + qSplit[4]
+                toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
+                await SEND(ch,toSend)
+
+            elif split[1] == "delete":
+                delete_entry("quiz",int(split[2]))
+                await SEND(ch,"Question at index " + split[2] + " has been deleted." )
+
+            return
 
         key = split[1]
         if not key in TIPS_KEYS:
@@ -1713,21 +1750,21 @@ async def on_message(message):
         
         #add tip   
         if msg.startswith("n",1):
-            add_tip(key,split[2])
+            add_entry(key,split[2])
             await SEND(ch,"New " + split[1] + " " + tot + " added.")
             return
 
         #list tips
         if msg.startswith("l",1):
             await SEND(ch,split[1] + " " + tot + "(s):")
-            await PRINT_TIPS(ch, key)
+            await PRINT_ENTRIES(ch, key)
             return
             
         #delete tip
         if msg.startswith("d",1):
-            delete_tip(key,int(split[2]))
+            delete_entry(key,int(split[2]))
             await SEND(ch,split[1] + " " + tot + "(s):")
-            await PRINT_TIPS(ch, key)
+            await PRINT_ENTRIES(ch, key)
             return
                
 ### RUN THE BOT ###
