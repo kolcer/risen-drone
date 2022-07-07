@@ -1320,7 +1320,7 @@ async def on_message(message):
             return
 
         #start the quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and QUIZ["active"] == False:
+        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
             #add user to the quiz users with 0 points.
             QUIZZERS[usr] = 0
 
@@ -1566,6 +1566,34 @@ async def on_message(message):
             await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:")
           
             return
+
+        ## Give Mana command
+        if msg.lower().startswith("give mana to "):
+            print("mana")
+
+            role = SPECIAL_ROLES["Possessed"]
+            split_message = msg.split(" ", 3)
+            target = split_message[3].lower()
+            for member in SERVER.members:
+                if member.name.lower() + "#" + member.discriminator == target:
+                    if role in member.roles:
+                        await SEND(message.channel,
+                            member.display_name +
+                            " has received some Mana and is no longer Possessed!"
+                        )
+                        await asyncio.sleep(3)
+                       # await member.remove_roles(role)
+                        await REMOVE_ROLES(member, role)
+                    else:
+                        await SEND(message.channel,
+                            member.display_name +
+                            " received your Mana, but they do not seem to need it."
+                        )
+                    return
+            await SEND(message.channel,
+                "Who are you trying to share your Mana with?")
+            return
+
                  
         ## Scold command
         if lmsg.startswith("fallen drone scold "):
