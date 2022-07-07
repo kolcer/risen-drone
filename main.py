@@ -1569,9 +1569,8 @@ async def on_message(message):
 
         ## Give Mana command
         if msg.lower().startswith("give mana to "):
-            print("mana")
-
-            role = SPECIAL_ROLES["Possessed"]
+            global POSSESSED
+            role = POSSESSED
             split_message = msg.split(" ", 3)
             target = split_message[3].lower()
             for member in SERVER.members:
