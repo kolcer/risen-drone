@@ -1,2 +1,2 @@
-# risen-drone
-New Crazy Stairs Discord bot
+# fallen-drone
+Crazy Stairs Discord bot
