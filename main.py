@@ -1298,7 +1298,7 @@ async def on_message(message):
             MG_NEXT_PLAYER()
             await MG_LOOP(MG_ACTION(usr,spell))
        
-    #normal non-admin usage
+    #normal non-admin usage.
     elif not msg.startswith("|"):
         
         ## lowercase the message for some commands to use
