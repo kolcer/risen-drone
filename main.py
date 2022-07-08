@@ -839,6 +839,8 @@ def MG_ACTION(plr, action):
                 del MG_PLAYERS[plr]
                 MG_QUEUE.remove(plr)
                 MG_CURRENT_PLR = MG_QUEUE.index(cp)
+                if len(MG_QUEUE) == 1:
+                    MG_PLAYERS[cp] = MINI_GAME_TOP_LEVEL
                 
             elif chances == 1:
                 toSend += "have been frozen by a Murdurator and lost one level!"
