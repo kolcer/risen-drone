@@ -1302,6 +1302,12 @@ async def on_message(message):
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
+
+
+        await asyncio.sleep(60)
+        if len(FIX_BOT) != 0:
+            await SEND(ch, "Games have not been resetted due to lack of users asking to.")
+            FIX_BOT.clear()
         return
 
     #mini game in progress
