@@ -30,6 +30,7 @@ CKR = "Ultimate Chat Killer"
 POSSESSED = "Possessed (rig)"
 MURDURATOR = "Murdurators"
 CLIMBER = "Climbers"
+MASTER = "Drone Master"
 
 #this is for administrating tips and trivia database
 ADMIN = "Drone Master"
@@ -187,6 +188,7 @@ SPECIAL_ROLES = {
         "You were not a chat killer in the first place.",
         "There was an attempt.",
     ],
+
 }
 
 #pingable roles, no custom messages
@@ -579,6 +581,8 @@ MG_TICK = 0
 MG_WIN_DETECT = 0
 MG_PLAYERS = {}
 MG_QUEUE = []
+#if game breaks there must be 3 people telling the bot to reset
+FIX_BOT = []
 
 
 ### INITIAL SETUP ###
@@ -1164,6 +1168,7 @@ async def on_ready():
     global MURDURATOR
     global CLIMBER
     global ADMIN
+    global MASTER
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -1180,6 +1185,9 @@ async def on_ready():
         if role.name == CKR:
             CKR = role
             SPECIAL_ROLES["Ultimate"][0] = role
+            continue
+        if role.name == MASTER:
+            MASTER = role
             continue
         #possessed (for the rig)
         if role.name == POSSESSED:
@@ -1274,7 +1282,28 @@ async def on_message(message):
     global MG_CHANNEL 
     global MG_CURRENT_PLR 
     global MG_TICK
+    global FIX_BOT
     
+    if msg.lower() == "reset bot" and usr not in FIX_BOT:
+        if MASTER in usr.roles:
+            await SEND(ch, "All Games have been resetted.")
+            FIX_BOT.clear()
+            FORCE_CLOSE_EVENT()
+            MG_RESET()
+            return
+
+        FIX_BOT.append(usr)
+        if len(FIX_BOT) == 1:
+            await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
+        elif len(FIX_BOT) == 2:
+            await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
+        else:
+            await SEND(ch, "All Games have been resetted.")
+            FIX_BOT.clear()
+            FORCE_CLOSE_EVENT()
+            MG_RESET()
+        return
+
     #mini game in progress
     if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
         
