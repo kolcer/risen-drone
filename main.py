@@ -12,7 +12,7 @@ from difflib import SequenceMatcher
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 5
+CHAT_KILLER_WAIT = 7200
 #player that reaches this level first will win the mini game
 MINI_GAME_TOP_LEVEL = 21
 MINI_GAME_MAX_WAIT = 30
@@ -964,7 +964,7 @@ async def PRINT_ENTRIES(channel,key):
 
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
-    if msg.channel == CHANNELS["bot-testing"]:
+    if msg.channel == CHANNELS["general"]:
         global Last
         global thirdkill
         Last = msg.created_at
@@ -974,7 +974,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         
         if msg.created_at == Last and not CKR in msg.author.roles:
             thirdkill = None
-            await SEND(CHANNELS["bot-testing"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
@@ -989,7 +989,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         elif msg.created_at == Last and CKR in msg.author.roles:
 
             if msg.author == thirdkill:
-                await SEND(CHANNELS["bot-testing"],msg.author.mention + " stop killing the chat...")
+                await SEND(CHANNELS["general"],msg.author.mention + " stop killing the chat...")
                 UPDATE_CKR()
                 for member in CKR.members:
                     await REMOVE_ROLES(member,CKR)
@@ -1003,7 +1003,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
 
             thirdkill = msg.author
-            await SEND(CHANNELS["bot-testing"],msg.author.mention + " what have you done to this chat.")
+            await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
