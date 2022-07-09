@@ -557,6 +557,7 @@ MG_SPELLS = [
 Last = 0
 rigCaster = None
 ghostMsg = ""
+thirdkill = None
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -965,12 +966,14 @@ async def PRINT_ENTRIES(channel,key):
 async def WAIT_FOR_CHAT_KILLER(msg):
     if msg.channel == CHANNELS["bot-testing"]:
         global Last
+        global thirdkill
         Last = msg.created_at
         
         #wait 2 hours
         await asyncio.sleep(CHAT_KILLER_WAIT)
         
         if msg.created_at == Last and not CKR in msg.author.roles:
+            thirdkill = None
             await SEND(CHANNELS["bot-testing"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
@@ -979,10 +982,27 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             await ADD_ROLES(msg.author,CKR)
             await asyncio.sleep(1)
 
-            if CKR.name == "Definitive Ultimate Chat Killer":
+            if CKR.name != "Ultimate Chat Killer":
                 await EDIT_ROLE(CKR, "Ultimate Chat Killer", "New chat killer. They are not Definitive yet.")
+            return
 
         elif msg.created_at == Last and CKR in msg.author.roles:
+
+            if msg.author == thirdkill:
+                await SEND(CHANNELS["bot-testing"],msg.author.mention + " stop killing the chat...")
+                UPDATE_CKR()
+                for member in CKR.members:
+                    await REMOVE_ROLES(member,CKR)
+                await asyncio.sleep(5)
+                await ADD_ROLES(msg.author,CKR)
+                await asyncio.sleep(1)
+
+                if CKR.name != "Professional Chat Murderer":
+                    await EDIT_ROLE(CKR, "Professional Chat Murderer", "This user has killed the chat thrice in a row.")
+                return
+
+
+            thirdkill = msg.author
             await SEND(CHANNELS["bot-testing"],msg.author.mention + " what have you done to this chat.")
             UPDATE_CKR()
             for member in CKR.members:
@@ -991,8 +1011,10 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             await ADD_ROLES(msg.author,CKR)
             await asyncio.sleep(1)
 
-            if CKR.name == "Ultimate Chat Killer":
+            if CKR.name != "Definitive Ultimate Chat Killer":
                 await EDIT_ROLE(CKR, "Definitive Ultimate Chat Killer", "This user has killed the chat twice in a row.")
+            return
+                
 
 
 ### RIGS ###
