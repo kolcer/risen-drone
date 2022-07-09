@@ -12,7 +12,7 @@ from difflib import SequenceMatcher
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 5
+CHAT_KILLER_WAIT = 7200
 #player that reaches this level first will win the mini game
 MINI_GAME_TOP_LEVEL = 21
 MINI_GAME_MAX_WAIT = 30
