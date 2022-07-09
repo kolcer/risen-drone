@@ -12,7 +12,7 @@ from difflib import SequenceMatcher
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 7200
+CHAT_KILLER_WAIT = 5
 #player that reaches this level first will win the mini game
 MINI_GAME_TOP_LEVEL = 21
 MINI_GAME_MAX_WAIT = 30
@@ -26,11 +26,11 @@ FALLEN_DRONE_NICK = "FALLEN DRONE"
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
 #values replaced by roles on startup
-CKR = "Ultimate Chat Killer"
-POSSESSED = "Possessed (rig)"
+CKR = 951424560685805588
+POSSESSED = 988572669521842197
 MURDURATOR = "Murdurators"
 CLIMBER = "Climbers"
-MASTER = "Drone Master"
+MASTER = 993446701090222160
 
 #this is for administrating tips and trivia database
 ADMIN = "Drone Master"
@@ -719,7 +719,7 @@ def MG_SHOW_STATS():
     
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
-        toSend += plr.display_name + ": " + str(place) + " floor\n"
+        toSend += "**" + plr.display_name + "**: " + str(place) + " floor\n"
         if place > MG_WIN_DETECT:
             MG_WIN_DETECT = place
 
@@ -939,6 +939,9 @@ async def EDIT_MESSAGE(msg, con):
 async def DELETE(message):
   await message.delete()
 
+async def EDIT_ROLE(targetrole, newname, motivation):
+  await targetrole.edit(name = newname, reason = motivation)
+
 ### END OF RATE LIMITED FUNCTIONS ###
 
 #below function can also cause rate limts, but
@@ -960,20 +963,37 @@ async def PRINT_ENTRIES(channel,key):
 
 #chat killer functions
 async def WAIT_FOR_CHAT_KILLER(msg):
-    if msg.channel == CHANNELS["general"]:
+    if msg.channel == CHANNELS["bot-testing"]:
         global Last
         Last = msg.created_at
         
         #wait 2 hours
         await asyncio.sleep(CHAT_KILLER_WAIT)
         
-        if msg.created_at == Last:
+        if msg.created_at == Last and not CKR in msg.author.roles:
             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
             await asyncio.sleep(5)
             await ADD_ROLES(msg.author,CKR)
+            await asyncio.sleep(1)
+
+            if CKR.name == "Definitive Ultimate Chat Killer":
+                await EDIT_ROLE(CKR, "Ultimate Chat Killer", "New chat killer. They are not Definitive yet.")
+
+        elif msg.created_at == Last and CKR in msg.author.roles:
+            await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
+            UPDATE_CKR()
+            for member in CKR.members:
+                await REMOVE_ROLES(member,CKR)
+            await asyncio.sleep(5)
+            await ADD_ROLES(msg.author,CKR)
+            await asyncio.sleep(1)
+
+            if CKR.name == "Ultimate Chat Killer":
+                await EDIT_ROLE(CKR, "Definitive Ultimate Chat Killer", "This user has killed the chat twice in a row.")
+
 
 ### RIGS ###
 
@@ -1131,7 +1151,7 @@ async def MG_LOOP(toSend):
             MG_RESET()
             return
         else:
-            toSend += MG_QUEUE[MG_CURRENT_PLR].display_name + " turn! Choose Your alignment!"
+            toSend += "**" + MG_QUEUE[MG_CURRENT_PLR].display_name + "** turn! Choose Your alignment!"
             await SEND(MG_CHANNEL, toSend)
         
         await asyncio.sleep(MINI_GAME_MAX_WAIT)
@@ -1184,15 +1204,16 @@ async def on_ready():
             SPECIAL_ROLES[role.name][0] = role
             continue
         #chat killer
-        if role.name == CKR:
+        if role.id == CKR:
             CKR = role
             SPECIAL_ROLES["Ultimate"][0] = role
             continue
-        if role.name == MASTER:
+        #drone master
+        if role.id == MASTER:
             MASTER = role
             continue
         #possessed (for the rig)
-        if role.name == POSSESSED:
+        if role.id == POSSESSED:
             POSSESSED = role
             SPECIAL_ROLES["Possessed"][0] = role
             continue
