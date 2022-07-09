@@ -990,11 +990,6 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
             if msg.author == thirdkill:
                 await SEND(CHANNELS["general"],msg.author.mention + " stop killing the chat...")
-                UPDATE_CKR()
-                for member in CKR.members:
-                    await REMOVE_ROLES(member,CKR)
-                await asyncio.sleep(5)
-                await ADD_ROLES(msg.author,CKR)
                 await asyncio.sleep(1)
 
                 if CKR.name != "Professional Chat Murderer":
@@ -1004,11 +999,6 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
             thirdkill = msg.author
             await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
-            UPDATE_CKR()
-            for member in CKR.members:
-                await REMOVE_ROLES(member,CKR)
-            await asyncio.sleep(5)
-            await ADD_ROLES(msg.author,CKR)
             await asyncio.sleep(1)
 
             if CKR.name != "Definitive Ultimate Chat Killer":
