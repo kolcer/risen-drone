@@ -12,7 +12,7 @@ from difflib import SequenceMatcher
 ## CONSTANTS ##
 
 #chat killer requires 2 hours of inactivity(in seconds)
-CHAT_KILLER_WAIT = 7200
+CHAT_KILLER_WAIT = 5
 #player that reaches this level first will win the mini game
 MINI_GAME_TOP_LEVEL = 21
 MINI_GAME_MAX_WAIT = 30
@@ -971,7 +971,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(CHAT_KILLER_WAIT)
         
         if msg.created_at == Last and not CKR in msg.author.roles:
-            await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
+            await SEND(CHANNELS["bot-testing"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
@@ -983,7 +983,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
                 await EDIT_ROLE(CKR, "Ultimate Chat Killer", "New chat killer. They are not Definitive yet.")
 
         elif msg.created_at == Last and CKR in msg.author.roles:
-            await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
+            await SEND(CHANNELS["bot-testing"],msg.author.mention + " what have you done to this chat.")
             UPDATE_CKR()
             for member in CKR.members:
                 await REMOVE_ROLES(member,CKR)
