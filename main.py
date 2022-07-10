@@ -723,7 +723,7 @@ def MG_SHOW_STATS():
         toSend += "**" + plr.display_name + "**: " + str(place) + " floor\n"
         if place > MG_WIN_DETECT:
             MG_WIN_DETECT = place
-
+    toSend += "-------------\n"
     return toSend
 
 def MG_NEXT_PLAYER():
