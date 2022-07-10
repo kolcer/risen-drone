@@ -720,7 +720,7 @@ def MG_SHOW_STATS():
     
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
-        toSend += "**" + plr.display_name + "**: " + str(place) + " floor\n"
+        toSend += "**" + plr.name + "**: " + str(place) + " floor\n"
         if place > MG_WIN_DETECT:
             MG_WIN_DETECT = place
     toSend += "-------------\n"
@@ -1163,7 +1163,7 @@ async def MG_LOOP(toSend):
             MG_RESET()
             return
         else:
-            toSend += "**" + MG_QUEUE[MG_CURRENT_PLR].display_name + "** turn! Choose Your alignment!"
+            toSend += "**" + MG_QUEUE[MG_CURRENT_PLR].name + "** turn! Choose Your alignment!"
             await SEND(MG_CHANNEL, toSend)
         
         await asyncio.sleep(MINI_GAME_MAX_WAIT)
