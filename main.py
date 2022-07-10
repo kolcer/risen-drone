@@ -1521,7 +1521,7 @@ async def on_message(message):
                 MG_CHANNEL = ch
                 MG_TICK = time.time()
                 ourTick = MG_TICK
-                await SEND(ch, usr.display_name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.display_name + " - type 'begin' to start!")
+                await SEND(ch, usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
                 await asyncio.sleep(60)
                 if MG_STATUS == "gather" and ourTick == MG_TICK:
                     await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
@@ -1536,9 +1536,9 @@ async def on_message(message):
             else:
                 MG_PLAYERS[usr] = 0
                 MG_QUEUE.append(usr)
-                toSend = usr.display_name + " has joined Lucid Ladders!\nCurrent players:\n"
+                toSend = usr.name + " has joined Lucid Ladders!\nCurrent players:\n"
                 for plr in MG_QUEUE:
-                    toSend += plr.display_name + "\n"
+                    toSend += plr.name + "\n"
                 await SEND(ch, toSend)
                 return
 
