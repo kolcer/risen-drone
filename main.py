@@ -741,7 +741,7 @@ def MG_SHOW_WINNERS():
                         
     toSend = winners[0].mention
     if len(winners) > 1:
-        for i in range(1,len(winners) -1):
+        for i in range(1,len(winners)):
             toSend += " and " + winners[i].mention
     
     return toSend + " won LUCID LADDERS!"                    
