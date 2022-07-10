@@ -1363,7 +1363,7 @@ async def on_message(message):
         
         elif MG_STATUS == "on" and lmsg in MG_SPELLS and MG_QUEUE[MG_CURRENT_PLR] == usr:
             spell = lmsg
-            if lmsg == "chameleon":
+            while spell == "chameleon":
                 spell = random.choice(MG_SPELLS)
             MG_NEXT_PLAYER()
             await MG_LOOP(MG_ACTION(usr,spell))
