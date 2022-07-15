@@ -1783,7 +1783,7 @@ async def on_message(message):
         if msg.startswith("ckr to ", 1):
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "I gave Chat Killer Role to " + split[2])
+                    await SEND(ch, "I gave the Chat Killer Role to " + split[2])
                     await ADD_ROLES(mem,CKR)
                     break
             return  
