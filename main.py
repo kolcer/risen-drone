@@ -30,10 +30,9 @@ CKR = 951424560685805588
 POSSESSED = 988572669521842197
 MURDURATOR = "Murdurators"
 CLIMBER = "Climbers"
-MASTER = 993446701090222160
 
 #this is for administrating tips and trivia database
-ADMIN = "Drone Master"
+ADMIN = 993446701090222160
 
 #channels where bot is allowed to post
 CHANNELS = {
@@ -1202,7 +1201,6 @@ async def on_ready():
     global MURDURATOR
     global CLIMBER
     global ADMIN
-    global MASTER
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -1219,10 +1217,6 @@ async def on_ready():
         if role.id == CKR:
             CKR = role
             SPECIAL_ROLES["Ultimate"][0] = role
-            continue
-        #drone master
-        if role.id == MASTER:
-            MASTER = role
             continue
         #possessed (for the rig)
         if role.id == POSSESSED:
@@ -1241,7 +1235,7 @@ async def on_ready():
         if role.name == MURDURATOR:
             MURDURATOR = role
         #drone tips/tricks admins
-        if role.name == ADMIN:
+        if role.id == ADMIN:
             ADMIN = role
             
     #prepare emojis reactions
