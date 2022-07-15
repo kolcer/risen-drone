@@ -1776,18 +1776,19 @@ async def on_message(message):
             await SEND(ch,"You are not allowed to use this command.")
             return
 
-            
-
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
    
         #give ckr
-        if msg.startswith("ckr to ", 1):
-            for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                   await ADD_ROLES(mem,CKR)
-                   break
-            return  
+        try:
+            if msg.startswith("ckr to ", 1):
+                for mem in SERVER.members:
+                    if mem.name.lower() + "#" + mem.discriminator == split[2]:
+                        await ADD_ROLES(mem,CKR)
+                        break
+                return  
+        except Exception as ex:
+            await SEND(CHANNELS["bot-testing"], ex)
 
         #remove ckr
         if msg.startswith("ckr from ", 1):
