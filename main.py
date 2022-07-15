@@ -1314,7 +1314,7 @@ async def on_message(message):
     global FIX_BOT
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
-        if MASTER in usr.roles:
+        if ADMIN in usr.roles:
             await SEND(ch, "All Games have been resetted.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
