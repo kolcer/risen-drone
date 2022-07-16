@@ -1779,6 +1779,7 @@ async def on_message(message):
         await SEND(ch,"You are an Admin.")
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
+        await SEND(ch,split)
     
         await SEND(ch,"Split message")
         #give ckr
