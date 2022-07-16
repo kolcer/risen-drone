@@ -1776,37 +1776,28 @@ async def on_message(message):
             await SEND(ch,"You are not allowed to use this command.")
             return
 
-        await SEND(ch,"You are an Admin.")
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
-        await SEND(ch,split[2])
     
-        await SEND(ch,"Split message")
         #give ckr
         if msg.startswith("ckr to ", 1):
-            await SEND(ch,"ckr to detected")
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch,"user found")
                     await SEND(ch, "I gave the Chat Killer Role to " + split[2])
+                    await asyncio.sleep(1)
                     await ADD_ROLES(mem,CKR)
                     break
-            await SEND(ch,"members in server loop ended")
             return  
 
         #remove ckr
         if msg.startswith("ckr from ", 1):
-            await SEND(ch,"ckr from detected")
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch,"user found")
                     await SEND(ch, "I took the Chat Killer Role away from " + split[2])
+                    await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,CKR)
                     break
-            await SEND(ch,"members in server loop ended")
             return   
-
-        await SEND(ch,"neither ckr detected")
 
         #quiz
         if msg.startswith("quiz",1):
