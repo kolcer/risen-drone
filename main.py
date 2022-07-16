@@ -1790,16 +1790,22 @@ async def on_message(message):
                     await SEND(ch, "I gave the Chat Killer Role to " + split[2])
                     await ADD_ROLES(mem,CKR)
                     break
+            await SEND(ch,"members in server loop ended")
             return  
 
         #remove ckr
         if msg.startswith("ckr from ", 1):
+            await SEND(ch,"ckr from detected")
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
+                    await SEND(ch,"user found")
                     await SEND(ch, "I took the Chat Killer Role away from " + split[2])
                     await REMOVE_ROLES(mem,CKR)
                     break
+            await SEND(ch,"members in server loop ended")
             return   
+
+        await SEND(ch,"neither ckr detected")
 
         #quiz
         if msg.startswith("quiz",1):
