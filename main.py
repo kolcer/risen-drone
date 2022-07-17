@@ -34,7 +34,7 @@ CLIMBER = "Climbers"
 #this is for administrating tips and trivia database
 ADMIN = 993446701090222160
 
-#channels where bot is allowed to post
+#channels where bot is allowed to post 
 CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
@@ -1853,7 +1853,7 @@ async def on_message(message):
             await PRINT_ENTRIES(ch, key)
             return
             
-        #delete tip
+        #delete tipp
         if msg.startswith("d",1):
             delete_entry(key,int(split[2]))
             await SEND(ch,split[1] + " " + tot + "(s):")
