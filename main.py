@@ -353,9 +353,11 @@ LIMITED_USE_RIGS = [
 REVIVE_CHAT = [
     "How did you find out about Crazy Stairs?",
     "What's your least favorite Alignment, and why is it Muggle?",
-    "How many alignments were there in the game when you found it?",
+    "How many alignments were there in the game when you started playing?",
     "Whose alignment's power would you rather wield in real life?",
-    "Nope. Chat is as dead as my intentions to revive it."
+    "Nope. Chat is as dead as my intentions to revive it.",
+    "Is Sleazel cool?",
+    "What's your favorite feature present in the game?"
 ]
 
 COOLDOWN_DESCRIPTIONS = {
@@ -1694,12 +1696,12 @@ async def on_message(message):
         if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             global revivechat
             #chat has to be dead, duh
-            # if not revivechat:
-            #     await SEND(ch, "This chat is very much alive, I am afraid.")
-            #     return
+            if not revivechat:
+                await SEND(ch, "This chat is very much alive, I am afraid.")
+                return
 
             #only chat killers can use the command
-            if CKR in message.author.roles:
+            if not CKR in message.author.roles:
                 await SEND(ch, "It is not your fault.")
                 return
 
