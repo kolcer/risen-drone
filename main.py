@@ -1695,7 +1695,7 @@ async def on_message(message):
             global revivechat
             #chat has to be dead, duh
             if not revivechat:
-                await SEND(ch, "This chat is very much alive, probably.")
+                await SEND(ch, "This chat is very much alive, I am afraid.")
                 return
 
             #only chat killers can use the command
