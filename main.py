@@ -350,6 +350,14 @@ LIMITED_USE_RIGS = [
     "spectre",
 ]
 
+REVIVE_CHAT = [
+    "How did you find out about Crazy Stairs?",
+    "What's your least favorite Alignment, and why is it Muggle?",
+    "How many alignments were there in the game when you found it?",
+    "Whose alignment's power would you rather wield in real life?",
+    "Nope. Chat is as dead as my intentions to revive it."
+]
+
 COOLDOWN_DESCRIPTIONS = {
     "general": "General cooldown: ",
     "tsj": "Thief, Spectre, and Joker cooldown: ",
@@ -557,6 +565,7 @@ Last = 0
 rigCaster = None
 ghostMsg = ""
 thirdkill = None
+revivechat = False
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -966,6 +975,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
     if msg.channel == CHANNELS["general"]:
         global Last
         global thirdkill
+        global revivechat
         Last = msg.created_at
         
         #wait 2 hours
@@ -973,6 +983,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         
         if msg.created_at == Last and not CKR in msg.author.roles:
             thirdkill = None
+            revivechat = True
             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in CKR.members:
@@ -986,7 +997,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             return
 
         elif msg.created_at == Last and CKR in msg.author.roles:
-
+            revivechat = True
             if msg.author == thirdkill:
                 await SEND(CHANNELS["general"],msg.author.mention + " stop killing the chat...")
                 await asyncio.sleep(1)
@@ -1677,6 +1688,24 @@ async def on_message(message):
                     return
             # Scolding an User that is NOT in the Server
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
+            return
+
+        ## Revive Chat Command
+        if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
+            global revivechat
+            #chat has to be dead, duh
+            if not revivechat:
+                await SEND(ch, "This chat is very much alive, probably.")
+                return
+
+            #only chat killers can use the command
+            if not CKR in message.author.roles:
+                await SEND(ch, "Welp.")
+                return
+
+            await SEND(ch, "Welp. Alright.")
+            await asyncio.sleep(2)
+            await SEND(ch, random.choice(REVIVE_CHAT))
             return
 
         #morph command
