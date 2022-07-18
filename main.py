@@ -1706,6 +1706,7 @@ async def on_message(message):
             await SEND(ch, "Welp. Alright.")
             await asyncio.sleep(2)
             await SEND(ch, random.choice(REVIVE_CHAT))
+            revivechat = False
             return
 
         #morph command
