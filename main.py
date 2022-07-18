@@ -1694,9 +1694,9 @@ async def on_message(message):
         if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             global revivechat
             #chat has to be dead, duh
-            if not revivechat:
-                await SEND(ch, "This chat is very much alive, I am afraid.")
-                return
+            # if not revivechat:
+            #     await SEND(ch, "This chat is very much alive, I am afraid.")
+            #     return
 
             #only chat killers can use the command
             if not CKR in message.author.roles:
