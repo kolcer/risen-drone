@@ -1699,11 +1699,11 @@ async def on_message(message):
             #     return
 
             #only chat killers can use the command
-            if not CKR in message.author.roles:
-                await SEND(ch, "Welp.")
+            if CKR in message.author.roles:
+                await SEND(ch, "It is not your fault.")
                 return
 
-            await SEND(ch, "Welp. Alright.")
+            await SEND(ch, "Reedeming yourself? Alright.")
             await asyncio.sleep(2)
             await SEND(ch, random.choice(REVIVE_CHAT))
             revivechat = False
