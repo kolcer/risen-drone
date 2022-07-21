@@ -1343,11 +1343,11 @@ async def on_message(message):
                     print("saved first role found")
                     rolename = role.name.lower()
 
-                print("checking if they have another role: " + eligible)
+                print("checking if they have another role: " + str(eligible))
                 eligible =+ 1
         
         if eligible == 1:
-            print("user only has one role: " + eligible)
+            print("user only has one role: " + str(eligible))
             await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename])
     
     #this will avoid old activatig with old bot
