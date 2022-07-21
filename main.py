@@ -1335,7 +1335,7 @@ async def on_message(message):
     rolename = ""
 
     print(randomchance)
-    if randomchance == 0:
+    if randomchance > 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 if eligible == 0:
@@ -1344,7 +1344,7 @@ async def on_message(message):
                 eligible =+ 1
         
         if eligible == 1:
-            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename])
+            await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
