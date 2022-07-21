@@ -94,7 +94,7 @@ MORPHABLE_ROLES = {
     ],
     "Spectre": [ 
        None,
-       "Our quote's founder has been identified, you are now a Spectre",
+       "Our quote's founder has been identified, you are now a Spectre.",
        "Once again, Spectre's Founder went MIA.",
     ],
     "Keeper": [ 
@@ -174,10 +174,10 @@ SPECIAL_ROLES = {
     ],
     "Possessed": [
         None,
-        "Wait for someone to cast a Heretic Rig",
+        "Wait for someone to cast a Heretic Rig.",
         "You are already possessed...",
         "You are not possessed...",
-        "Ask someone for mana",
+        "Ask someone for mana.",
     ],
     #multiple words (ultimate chat killer) would break the script logic
     "Ultimate": [
@@ -367,7 +367,7 @@ LIMITED_USE_RIGS = [
 
 REVIVE_CHAT = [
     "How did you find out about Crazy Stairs?",
-    "What's your least favorite Alignment, and why is it Muggle?",
+    "What's your least favorite Alignment?",
     "How many alignments were there in the game when you started playing?",
     "Whose alignment's power would you rather wield in real life?",
     "Nope. Chat is as dead as my intentions to revive it.",
