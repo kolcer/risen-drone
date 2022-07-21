@@ -1338,7 +1338,7 @@ async def on_message(message):
     if randomchance > 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
-                eligible =+ 1                
+                eligible = eligible + 1                
                 print("user has a role")
                 if eligible == 1:
                     print("saved first role found")
