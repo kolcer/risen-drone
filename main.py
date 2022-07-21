@@ -331,6 +331,21 @@ COOLDOWN_SELECT = {
     "drifter": "general",
 }
 
+SANCTUARY = {
+    "muggle": " has found Muggle's Home!",
+    "thief": " has found Thief's Guild!",
+    "spectre": " has found Spectre's Nether!",
+    "joker": " has found Joker's Circus!",
+    "archon": " has found Archon's Study!",
+    "heretic": " has found Heretic's Nexus!",
+    "patron": " has found Patron's Haven!",
+    "wicked": " has found Wicked's Chamber!",
+    "keeper": " has found Muggle's Base!",
+    "hacker": " has found Hacker's Backdoor!",
+    "drifter": " has found Drifter's Shelter!",
+    "chameleon": " has found Chameleon's Oasis!",
+}
+
 COOLDOWN_DURATION = {
     "patron": 900,    
     "thief": 600,
@@ -1314,6 +1329,22 @@ async def on_message(message):
                 await ADD_REACTION(message,v)
                 return
         return
+
+    randomchance = random.randint(0,1000)
+    eligible = 0
+    rolename = ""
+
+    print(randomchance)
+    if randomchance == 0:
+        for role in usr.roles:
+            if role.name.lower() in SANCTUARY:
+                if eligible == 0:
+                    rolename = role.name.lower()
+
+                eligible =+ 1
+        
+        if eligible == 1:
+            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
