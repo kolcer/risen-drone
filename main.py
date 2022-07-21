@@ -1334,22 +1334,16 @@ async def on_message(message):
     eligible = 0
     rolename = ""
 
-    print(randomchance)
-    if randomchance > 0:
+    if randomchance == 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 eligible = eligible + 1                
-                print("user has a role")
                 if eligible == 1:
-                    print("saved first role found")
                     rolename = role.name.lower()
-
-                print("checking if they have another role: " + str(eligible))
 
         
         if eligible == 1:
-            print("user only has one role: " + str(eligible))
-            await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename])
+            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
