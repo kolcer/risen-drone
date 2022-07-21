@@ -1343,7 +1343,7 @@ async def on_message(message):
 
         
         if eligible == 1:
-            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename])
+            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/1000 chance)")
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
