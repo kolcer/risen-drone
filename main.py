@@ -991,7 +991,6 @@ async def PRINT_ENTRIES(channel,key):
 async def WAIT_FOR_CHAT_KILLER(msg):
     if msg.channel == CHANNELS["general"]:
         global Last
-        global thirdkill
         global revivechat
         Last = msg.created_at
         
@@ -1015,7 +1014,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
         elif msg.created_at == Last and CKR in msg.author.roles:
             revivechat = True
-            if msg.author == thirdkill:
+            if CKR.name == "Definitive Ultimate Chat Killer" or CKR.name == "Professional Chat Murderer":
                 await SEND(CHANNELS["general"],msg.author.mention + " stop killing the chat...")
                 await asyncio.sleep(1)
 
@@ -1023,8 +1022,6 @@ async def WAIT_FOR_CHAT_KILLER(msg):
                     await EDIT_ROLE(CKR, "Professional Chat Murderer", "This user has killed the chat thrice in a row.")
                 return
 
-
-            thirdkill = msg.author
             await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
             await asyncio.sleep(1)
 
