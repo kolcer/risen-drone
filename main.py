@@ -348,7 +348,7 @@ SANCTUARY = {
 
 COOLDOWN_DURATION = {
     "patron": 900,    
-    "thief": 3,
+    "thief": 600,
     "spectre": 600,
     "joker": 600,
     "archon": 120,    
@@ -1613,8 +1613,6 @@ async def on_message(message):
         
         ## thief rig active
         if ACTIVE_RIGS["thief"]:
-            if usr.id != 267014823315898368 and usr.id != 828423681914437663:
-                return
           
             if ch.name not in CHANNELS or len(rigCaster.display_name + ", " + usr.display_name) > 32 or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
                 return
@@ -1636,7 +1634,7 @@ async def on_message(message):
             await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
             await SEND(ch, rigCaster.mention + " has just stolen your name!")
           
-            await asyncio.sleep(50)
+            await asyncio.sleep(1800)
             del NickDictionary[usr]
             return
 
