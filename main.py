@@ -1636,7 +1636,7 @@ async def on_message(message):
             await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
             await SEND(ch, rigCaster.mention + " has just stolen your name!")
           
-            await asyncio.sleep(10)
+            await asyncio.sleep(50)
             del NickDictionary[usr]
             return
 
