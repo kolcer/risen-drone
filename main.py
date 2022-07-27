@@ -1837,10 +1837,11 @@ async def on_message(message):
 
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
+        msgback = msg.split(" ", 2)[2]
 
 
         if msg.startswith("makesay", 1):
-            await SEND(CHANNELS[split[1]], split[2])
+            await SEND(CHANNELS[split[1]], msgback)
             return
     
         #give ckr
