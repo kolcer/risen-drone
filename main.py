@@ -779,7 +779,7 @@ def MG_ACTION(plr, action):
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
         
-    toSend = "All players advance 1 level.\n" + plr.display_name + " has played " + action + ". They "
+    toSend = "All players advance 1 level.\n**" + plr.name + "** has played " + action + ". They "
     
     match action:
         case "none":
