@@ -969,7 +969,7 @@ async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
 async def NEW_ROLE(colorpick, rolename):
-  await SERVER.create_role(name = rolename, color = discord.Colour(int("0x" + str(colorpick))))
+  await SERVER.create_role(name = rolename, colour = discord.Colour(int("0x" + colorpick)))
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
