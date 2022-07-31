@@ -1849,6 +1849,10 @@ async def on_message(message):
     ## admin command
     else:
 
+        #check if user is trying to use the spoiler format first
+        if msg.startswith("||"):
+            return
+    
         #check for admin
         if not ADMIN in usr.roles:
             await SEND(ch,"You are not allowed to use this command.")
