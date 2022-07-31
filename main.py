@@ -949,6 +949,10 @@ async def ADD_ROLES(usr,roles):
 async def REMOVE_ROLES(usr,roles):
     await usr.remove_roles(roles)
 
+#purge roles
+async def PURGE_ROLES(role):
+    await role.delete()
+
 #edit nick
 async def EDIT_NICK(usr,new_nick):
     if usr.id != 481893862864846861:
@@ -1850,7 +1854,7 @@ async def on_message(message):
         #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
-                await NEW_ROLE(split[1], split[2])
+                await NEW_ROLE(split[1], msgback)
             except Exception as e:
                 await SEND(ch, e)
                 return
@@ -1877,6 +1881,24 @@ async def on_message(message):
                     await asyncio.sleep(1)
                     await ADD_ROLES(mem,neededrole)
                     break
+            return  
+
+        #remove any role
+        if msg.startswith("unassign", 1):
+            neededrole = discord.utils.get(SERVER.roles, name=split[1].replace("_", " "))
+            for mem in SERVER.members:
+               if mem.name.lower() + "#" + mem.discriminator == split[2]:
+                    await SEND(ch, "I gave the Role to " + split[2])
+                    await asyncio.sleep(1)
+                    await REMOVE_ROLES(mem,neededrole)
+                    break
+            return  
+
+        #purge any role
+        if msg.startswith("purge role", 1):
+            neededrole = discord.utils.get(SERVER.roles, name=msgback)
+            await PURGE_ROLES(neededrole)
+            await SEND(ch, "role purged.")
             return  
 
         #remove ckr
