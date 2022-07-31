@@ -1869,13 +1869,14 @@ async def on_message(message):
 
         #create a new role with name and color
         if msg.startswith("nr", 1):
+            newrole = None
             try:
                 newrole = await NEW_ROLE(split[1], msgback)
             except Exception as e:
                 await SEND(ch, e)
                 return
 
-            await SEND(ch, "The ID is: " + newrole.id)
+            await SEND(ch, "The ID is: " + newrole.Id)
             return
     
         #give ckr
