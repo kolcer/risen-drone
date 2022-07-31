@@ -1347,7 +1347,7 @@ async def on_message(message):
     eligible = 0
     rolename = ""
 
-    if randomchance != 0 and not FUN_ROLES["Sanctuary Discoverer"] in usr.roles and ch == CHANNELS["bot-commands"]:
+    if randomchance != 0 and not FUN_ROLES["Sanctuary Discoverer"] in usr.roles and ch == CHANNELS["bot-testing"]:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 eligible = eligible + 1                
