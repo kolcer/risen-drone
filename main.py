@@ -190,6 +190,10 @@ SPECIAL_ROLES = {
 
 }
 
+FUN_ROLES = {
+    "Sanctuary Discoverer": None,
+}
+
 #pingable roles, no custom messages
 #roles will be fetched on bot startup
 PING_ROLES = {
@@ -1233,6 +1237,7 @@ async def on_ready():
     global MURDURATOR
     global CLIMBER
     global ADMIN
+    global DISCOVERER
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -1269,6 +1274,10 @@ async def on_ready():
         #drone tips/tricks admins
         if role.id == ADMIN:
             ADMIN = role
+        #fun roles
+        if role.name in FUN_ROLES:
+            FUN_ROLES(role.name) = role
+            continue
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
@@ -1338,7 +1347,7 @@ async def on_message(message):
     eligible = 0
     rolename = ""
 
-    if randomchance == 0:
+    if randomchance == 0 and not FUN_ROLES("Sanctuary Discoverer") in usr.roles:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 eligible = eligible + 1                
@@ -1348,6 +1357,8 @@ async def on_message(message):
         
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/1000 chance)")
+            await asyncio.sleep(1)
+            await use.add_roles(FUN_ROLES("Sanctuary Discoverer"))
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
