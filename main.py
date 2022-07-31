@@ -1890,8 +1890,8 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1) and usr.id == 267014823315898368:
-            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
-                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            if split[1] in FUN_ROLES:
+                neededrole = FUN_ROLES[split[1]]
             else:
                 await SEND(ch, "You cannot assign this role through my commands.")
                 return
@@ -1906,8 +1906,8 @@ async def on_message(message):
 
         #remove any role
         if msg.startswith("unassign", 1):
-            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
-                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            if split[1] in FUN_ROLES:
+                neededrole = FUN_ROLES[split[1]]
             else:
                 await SEND(ch, "You cannot unassign this role through my commands.")
                 return
@@ -1922,8 +1922,8 @@ async def on_message(message):
 
         #edit any role
         if msg.startswith("alter", 1):
-            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
-                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            if split[1] in FUN_ROLES:
+                neededrole = FUN_ROLES[split[1]]
             else:
                 await SEND(ch, "You cannot edit this role through my commands.")
                 return
@@ -1935,8 +1935,8 @@ async def on_message(message):
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
-                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            if split[1] in FUN_ROLES:
+                neededrole = FUN_ROLES[split[1]]
             else:
                 await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
