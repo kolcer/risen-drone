@@ -1358,7 +1358,7 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename] + " (1/1000 chance)")
             await asyncio.sleep(1)
-            await use.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+            await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
