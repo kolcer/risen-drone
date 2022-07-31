@@ -1888,7 +1888,7 @@ async def on_message(message):
             neededrole = discord.utils.get(SERVER.roles, name=split[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "I gave the Role to " + split[2])
+                    await SEND(ch, "took the role away from " + split[2])
                     await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,neededrole)
                     break
