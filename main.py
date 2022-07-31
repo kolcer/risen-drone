@@ -977,7 +977,7 @@ async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
 async def NEW_ROLE(colorpick, rolename):
-  return await SERVER.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
+  await SERVER.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
@@ -1848,14 +1848,15 @@ async def on_message(message):
                
     ## admin command
     else:
+
         #check for admin
         if not ADMIN in usr.roles:
+            await SEND(ch,"You are not allowed to use this command.")
             return
 
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
         msgback = msg.split(" ", 2)[2]
-        targetrole = msg.split(" ")[1].replace("_", " ")
 
         #have the bot say whatever you say
         if msg.startswith("makesay", 1):
@@ -1865,13 +1866,12 @@ async def on_message(message):
         #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
-                newrole = await NEW_ROLE(split[1], msgback)
+                await NEW_ROLE(split[1], msgback)
             except Exception as e:
                 await SEND(ch, e)
                 return
 
             await SEND(ch, "Worked.")
-            FUN_ROLES[msgback] = newrole
             return
     
         #give ckr
@@ -1886,12 +1886,7 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot assign this role through my commands.")
-                return
-                
+            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
                     await SEND(ch, "I gave the Role to " + split[2])
@@ -1902,15 +1897,10 @@ async def on_message(message):
 
         #remove any role
         if msg.startswith("unassign", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot unassign this role through my commands.")
-                return
-
+            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "Took the role away from " + split[2])
+                    await SEND(ch, "took the role away from " + split[2])
                     await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,neededrole)
                     break
@@ -1918,29 +1908,15 @@ async def on_message(message):
 
         #edit any role
         if msg.startswith("alter", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot edit this role through my commands.")
-                return
-
+            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             await EDIT_ROLE(neededrole, msgback, "changing name")
-            await asyncio.sleep(1)
-            await SEND(ch, "You changed the name correctly.")
-            FUN_ROLES[msgback] = neededrole
             return  
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if msgback in FUN_ROLES:
-                neededrole = FUN_ROLES[msgback]
-            else:
-                await SEND(ch, "You cannot obliterate this role through my commands.")
-                return
-                
+            neededrole = discord.utils.get(SERVER.roles, name=msgback)
             await PURGE_ROLES(neededrole)
-            await asyncio.sleep(1)
-            await SEND(ch, "The role is gone.")
+            await SEND(ch, "role purged.")
             return  
 
         #remove ckr
