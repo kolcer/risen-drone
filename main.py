@@ -1276,8 +1276,8 @@ async def on_ready():
         if role.id == ADMIN:
             ADMIN = role
         #fun roles
-        if role.id in FUN_ROLES:
-            FUN_ROLES[role.id] = role
+        if role.name in FUN_ROLES:
+            FUN_ROLES[role.name] = role
             continue
             
     #prepare emojis reactions
