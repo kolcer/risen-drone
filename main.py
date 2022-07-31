@@ -1885,7 +1885,7 @@ async def on_message(message):
             return  
 
         #give any role
-        if msg.startswith("assign", 1):
+        if msg.startswith("assign", 1) and usr.id == 267014823315898368:
             neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
@@ -1896,7 +1896,7 @@ async def on_message(message):
             return  
 
         #remove any role
-        if msg.startswith("unassign", 1):
+        if msg.startswith("unassign", 1) and usr.id == 267014823315898368:
             neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
@@ -1907,13 +1907,13 @@ async def on_message(message):
             return  
 
         #edit any role
-        if msg.startswith("alter", 1):
+        if msg.startswith("alter", 1) and usr.id == 267014823315898368:
             neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
             await EDIT_ROLE(neededrole, msgback, "changing name")
             return  
 
         #purge any role
-        if msg.startswith("purge role", 1):
+        if msg.startswith("purge role", 1) and usr.id == 267014823315898368:
             neededrole = discord.utils.get(SERVER.roles, name=msgback)
             await PURGE_ROLES(neededrole)
             await SEND(ch, "role purged.")
