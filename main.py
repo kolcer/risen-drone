@@ -968,8 +968,8 @@ async def DELETE(message):
 async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
-async def NEW_ROLE(color, rolename):
-  await SERVER.create_role(name = rolename, colour = "0x" + color)
+async def NEW_ROLE(colorpick, rolename):
+  await SERVER.create_role(name = rolename, color = "0x" + colorpick)
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
