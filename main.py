@@ -968,6 +968,9 @@ async def DELETE(message):
 async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
+async def NEW_ROLE(color, rolename):
+  await SERVER.create_role(name = rolename, colour = "0x" + color)
+
 ### END OF RATE LIMITED FUNCTIONS ###
 
 #below function can also cause rate limts, but
@@ -1839,9 +1842,20 @@ async def on_message(message):
         split = msg.lower().split(" ", 2)
         msgback = msg.split(" ", 2)[2]
 
-
+        #have the bot say whatever you say
         if msg.startswith("makesay", 1):
             await SEND(CHANNELS[split[1]], msgback)
+            return
+
+        #create a new role
+        if msg.startswith("nr", 1):
+            try:
+                await NEW_ROLE(split[1], split[2])
+            except:
+                await SEND.(ch, "Error.")
+                return
+
+            await SEND(ch, "Worked.")
             return
     
         #give ckr
