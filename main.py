@@ -1892,7 +1892,7 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1) and usr.id == 267014823315898368:
-            if split[1] in FUN_ROLES:
+            if split[1] in FUN_ROLES.keys():
                 neededrole = FUN_ROLES[split[1]]
             else:
                 await SEND(ch, "You cannot assign this role through my commands.")
