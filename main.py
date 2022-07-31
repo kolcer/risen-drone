@@ -1897,7 +1897,7 @@ async def on_message(message):
         #edit any role
         if msg.startswith("alter", 1):
             neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
-            EDIT_ROLE(neededrole, msgback, "changing name")
+            await EDIT_ROLE(neededrole, msgback, "changing name")
             return  
 
         #purge any role
