@@ -1861,7 +1861,7 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
         print(split)
-        print(FUN_ROLES)
+        print(FUN_ROLES.keys())
         msgback = msg.split(" ", 2)[2]
 
         #have the bot say whatever you say
