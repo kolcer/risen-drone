@@ -8,7 +8,6 @@ import redis
 from datetime import date
 import time
 from difflib import SequenceMatcher
-from discord.utils import get
 
 ## CONSTANTS ##
 
