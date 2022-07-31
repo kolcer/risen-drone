@@ -1847,12 +1847,12 @@ async def on_message(message):
             await SEND(CHANNELS[split[1]], msgback)
             return
 
-        #create a new role
+        #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
                 await NEW_ROLE(split[1], split[2])
             except:
-                await SEND.(ch, "Error.")
+                await SEND(ch, "Error.")
                 return
 
             await SEND(ch, "Worked.")
