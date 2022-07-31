@@ -1347,7 +1347,7 @@ async def on_message(message):
     eligible = 0
     rolename = ""
 
-    if randomchance == 0 and not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
+    if randomchance == 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 eligible = eligible + 1                
@@ -1358,7 +1358,8 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
-            await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
+                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
