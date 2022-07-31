@@ -1851,8 +1851,8 @@ async def on_message(message):
         if msg.startswith("nr", 1):
             try:
                 await NEW_ROLE(split[1], split[2])
-            except:
-                await SEND(ch, "Error.")
+            except Exception as e:
+                await SEND(ch, e)
                 return
 
             await SEND(ch, "Worked.")
