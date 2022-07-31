@@ -1860,8 +1860,6 @@ async def on_message(message):
 
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
-        print(split)
-        print(FUN_ROLES.keys())
         msgback = msg.split(" ", 2)[2]
 
         #have the bot say whatever you say
@@ -1892,8 +1890,8 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1) and usr.id == 267014823315898368:
-            if split[1] in FUN_ROLES.keys():
-                neededrole = FUN_ROLES[split[1]]
+            if int(split[1]) in FUN_ROLES.keys():
+                neededrole = FUN_ROLES[int(split[1])]
             else:
                 await SEND(ch, "You cannot assign this role through my commands.")
                 return
@@ -1908,8 +1906,8 @@ async def on_message(message):
 
         #remove any role
         if msg.startswith("unassign", 1):
-            if split[1] in FUN_ROLES:
-                neededrole = FUN_ROLES[split[1]]
+            if int(split[1]) in FUN_ROLES:
+                neededrole = FUN_ROLES[int(split[1])]
             else:
                 await SEND(ch, "You cannot unassign this role through my commands.")
                 return
@@ -1924,8 +1922,8 @@ async def on_message(message):
 
         #edit any role
         if msg.startswith("alter", 1):
-            if split[1] in FUN_ROLES:
-                neededrole = FUN_ROLES[split[1]]
+            if int(split[1]) in FUN_ROLES:
+                neededrole = FUN_ROLES[int(split[1])]
             else:
                 await SEND(ch, "You cannot edit this role through my commands.")
                 return
@@ -1937,8 +1935,8 @@ async def on_message(message):
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if split[1] in FUN_ROLES:
-                neededrole = FUN_ROLES[split[1]]
+            if int(split[1]) in FUN_ROLES:
+                neededrole = FUN_ROLES[int(split[1])]
             else:
                 await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
