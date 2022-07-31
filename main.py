@@ -1276,7 +1276,7 @@ async def on_ready():
             ADMIN = role
         #fun roles
         if role.name in FUN_ROLES:
-            FUN_ROLES(role.name) = role
+            FUN_ROLES[role.name] = role
             continue
             
     #prepare emojis reactions
@@ -1347,7 +1347,7 @@ async def on_message(message):
     eligible = 0
     rolename = ""
 
-    if randomchance == 0 and not FUN_ROLES("Sanctuary Discoverer") in usr.roles:
+    if randomchance == 0 and not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
                 eligible = eligible + 1                
@@ -1358,7 +1358,7 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/1000 chance)")
             await asyncio.sleep(1)
-            await use.add_roles(FUN_ROLES("Sanctuary Discoverer"))
+            await use.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
