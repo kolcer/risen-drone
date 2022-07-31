@@ -1876,7 +1876,7 @@ async def on_message(message):
                 await SEND(ch, e)
                 return
 
-            await SEND(ch, "The ID is: " + newrole.Id)
+            await SEND(ch, "The ID is: " + newrole.id)
             return
     
         #give ckr
