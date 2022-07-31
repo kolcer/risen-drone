@@ -191,7 +191,7 @@ SPECIAL_ROLES = {
 }
 
 FUN_ROLES = {
-    "Sanctuary Discoverer": None,
+    1003308893331533854: None,
 }
 
 #pingable roles, no custom messages
@@ -1275,8 +1275,8 @@ async def on_ready():
         if role.id == ADMIN:
             ADMIN = role
         #fun roles
-        if role.name in FUN_ROLES:
-            FUN_ROLES[role.name] = role
+        if role.id in FUN_ROLES:
+            FUN_ROLES[role.id] = role
             continue
             
     #prepare emojis reactions
@@ -1893,7 +1893,7 @@ async def on_message(message):
             if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
                 neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
             else:
-                SEND(ch, "You cannot assign this role through my commands.")
+                await SEND(ch, "You cannot assign this role through my commands.")
                 return
                 
             for mem in SERVER.members:
@@ -1909,7 +1909,7 @@ async def on_message(message):
             if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
                 neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
             else:
-                SEND(ch, "You cannot unassign this role through my commands.")
+                await SEND(ch, "You cannot unassign this role through my commands.")
                 return
 
             for mem in SERVER.members:
@@ -1925,7 +1925,7 @@ async def on_message(message):
             if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
                 neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
             else:
-                SEND(ch, "You cannot edit this role through my commands.")
+                await SEND(ch, "You cannot edit this role through my commands.")
                 return
 
             await EDIT_ROLE(neededrole, msgback, "changing name")
@@ -1938,7 +1938,7 @@ async def on_message(message):
             if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
                 neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
             else:
-                SEND(ch, "You cannot obliterate this role through my commands.")
+                await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
                 
             await PURGE_ROLES(neededrole)
