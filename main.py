@@ -1860,6 +1860,7 @@ async def on_message(message):
 
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
+        print(split)
         msgback = msg.split(" ", 2)[2]
 
         #have the bot say whatever you say
