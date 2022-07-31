@@ -1890,7 +1890,12 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1) and usr.id == 267014823315898368:
-            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
+            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
+                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            else:
+                SEND(ch, "You cannot assign this role through my commands.")
+                return
+                
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
                     await SEND(ch, "I gave the Role to " + split[2])
@@ -1900,27 +1905,45 @@ async def on_message(message):
             return  
 
         #remove any role
-        if msg.startswith("unassign", 1) and usr.id == 267014823315898368:
-            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
+        if msg.startswith("unassign", 1):
+            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
+                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            else:
+                SEND(ch, "You cannot unassign this role through my commands.")
+                return
+
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "took the role away from " + split[2])
+                    await SEND(ch, "Took the role away from " + split[2])
                     await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,neededrole)
                     break
             return  
 
         #edit any role
-        if msg.startswith("alter", 1) and usr.id == 267014823315898368:
-            neededrole = discord.utils.get(SERVER.roles, name=msg.split(" ")[1].replace("_", " "))
+        if msg.startswith("alter", 1):
+            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
+                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            else:
+                SEND(ch, "You cannot edit this role through my commands.")
+                return
+
             await EDIT_ROLE(neededrole, msgback, "changing name")
+            await asyncio.sleep(1)
+            await SEND(ch, "You changed the name correctly.")
             return  
 
         #purge any role
-        if msg.startswith("purge role", 1) and usr.id == 267014823315898368:
-            neededrole = discord.utils.get(SERVER.roles, name=msgback)
+        if msg.startswith("purge role", 1):
+            if msg.split(" ")[1].replace("_", " ") in FUN_ROLES:
+                neededrole = FUN_ROLES[msg.split(" ")[1].replace("_", " ")]
+            else:
+                SEND(ch, "You cannot obliterate this role through my commands.")
+                return
+                
             await PURGE_ROLES(neededrole)
-            await SEND(ch, "role purged.")
+            await asyncio.sleep(1)
+            await SEND(ch, "The role is gone.")
             return  
 
         #remove ckr
