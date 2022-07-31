@@ -1871,7 +1871,7 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1):
-        neededrole = get(SERVER.roles, name=split[1])
+        neededrole = discord.utils.get(SERVER.roles, name=split[1])
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
                     await SEND(ch, "I gave the Role to " + split[2])
