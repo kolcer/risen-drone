@@ -1939,8 +1939,8 @@ async def on_message(message):
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
+            if msgback in FUN_ROLES:
+                neededrole = FUN_ROLES[msgback]
             else:
                 await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
