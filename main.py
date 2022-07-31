@@ -8,6 +8,7 @@ import redis
 from datetime import date
 import time
 from difflib import SequenceMatcher
+from discord.utils import get
 
 ## CONSTANTS ##
 
@@ -1865,6 +1866,17 @@ async def on_message(message):
                     await SEND(ch, "I gave the Chat Killer Role to " + split[2])
                     await asyncio.sleep(1)
                     await ADD_ROLES(mem,CKR)
+                    break
+            return  
+
+        #give any role
+        if msg.startswith("assign", 1):
+        neededrole = get(SERVER.roles, name=split[1])
+            for mem in SERVER.members:
+               if mem.name.lower() + "#" + mem.discriminator == split[2]:
+                    await SEND(ch, "I gave the Role to " + split[2])
+                    await asyncio.sleep(1)
+                    await ADD_ROLES(mem,neededrole)
                     break
             return  
 
