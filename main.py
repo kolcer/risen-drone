@@ -1343,7 +1343,7 @@ async def on_message(message):
                 return
         return
 
-    randomchance = random.randint(0,1000)
+    randomchance = random.randint(0,5000)
     eligible = 0
     rolename = ""
 
@@ -1356,7 +1356,7 @@ async def on_message(message):
 
         
         if eligible == 1:
-            await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename] + " (1/1000 chance)")
+            await SEND(CHANNELS["bot-testing"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
             await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
