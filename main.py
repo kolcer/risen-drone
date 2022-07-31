@@ -977,7 +977,7 @@ async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
 async def NEW_ROLE(colorpick, rolename):
-  await SERVER.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
+  return await SERVER.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
@@ -1870,12 +1870,12 @@ async def on_message(message):
         #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
-                await NEW_ROLE(split[1], msgback)
+                newrole = await NEW_ROLE(split[1], msgback)
             except Exception as e:
                 await SEND(ch, e)
                 return
 
-            await SEND(ch, "Worked.")
+            await SEND(ch, "The ID is: " + newrole.id)
             return
     
         #give ckr
