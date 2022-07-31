@@ -192,6 +192,7 @@ SPECIAL_ROLES = {
 
 FUN_ROLES = {
     1003308893331533854: None, ##Sanctuary Discoverer
+    1003373469205024929: None,
 }
 
 #pingable roles, no custom messages
