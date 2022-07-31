@@ -191,7 +191,7 @@ SPECIAL_ROLES = {
 }
 
 FUN_ROLES = {
-    1003308893331533854: None,
+    1003308893331533854: None, ##Sanctuary Discoverer
 }
 
 #pingable roles, no custom messages
@@ -1358,8 +1358,8 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
-            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
-                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+            if not FUN_ROLES[1003308893331533854] in usr.roles:
+                await usr.add_roles(FUN_ROLES[1003308893331533854])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
@@ -1861,6 +1861,7 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
         print(split)
+        print(FUN_ROLES)
         msgback = msg.split(" ", 2)[2]
 
         #have the bot say whatever you say
