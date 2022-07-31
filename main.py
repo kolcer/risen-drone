@@ -191,8 +191,7 @@ SPECIAL_ROLES = {
 }
 
 FUN_ROLES = {
-    1003308893331533854: None, ##Sanctuary Discoverer
-    1003373469205024929: None,
+    "Sanctuary Discoverer": None,
 }
 
 #pingable roles, no custom messages
@@ -1359,8 +1358,8 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
-            if not FUN_ROLES[1003308893331533854] in usr.roles:
-                await usr.add_roles(FUN_ROLES[1003308893331533854])
+            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
+                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
@@ -1862,6 +1861,7 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.lower().split(" ", 2)
         msgback = msg.split(" ", 2)[2]
+        targetrole = msg.split(" ")[1].replace("_", " ")
 
         #have the bot say whatever you say
         if msg.startswith("makesay", 1):
@@ -1870,14 +1870,14 @@ async def on_message(message):
 
         #create a new role with name and color
         if msg.startswith("nr", 1):
-            newrole = None
             try:
                 newrole = await NEW_ROLE(split[1], msgback)
             except Exception as e:
                 await SEND(ch, e)
                 return
 
-            await SEND(ch, "The ID is: " + str(newrole.id))
+            await SEND(ch, "Worked.")
+            FUN_ROLES[msgback] = newrole
             return
     
         #give ckr
@@ -1891,9 +1891,9 @@ async def on_message(message):
             return  
 
         #give any role
-        if msg.startswith("assign", 1) and usr.id == 267014823315898368:
-            if int(split[1]) in FUN_ROLES.keys():
-                neededrole = FUN_ROLES[int(split[1])]
+        if msg.startswith("assign", 1):
+            if targetrole in FUN_ROLES:
+                neededrole = FUN_ROLES[targetrole]
             else:
                 await SEND(ch, "You cannot assign this role through my commands.")
                 return
@@ -1908,8 +1908,8 @@ async def on_message(message):
 
         #remove any role
         if msg.startswith("unassign", 1):
-            if int(split[1]) in FUN_ROLES:
-                neededrole = FUN_ROLES[int(split[1])]
+            if targetrole in FUN_ROLES:
+                neededrole = FUN_ROLES[targetrole]
             else:
                 await SEND(ch, "You cannot unassign this role through my commands.")
                 return
@@ -1924,8 +1924,8 @@ async def on_message(message):
 
         #edit any role
         if msg.startswith("alter", 1):
-            if int(split[1]) in FUN_ROLES:
-                neededrole = FUN_ROLES[int(split[1])]
+            if targetrole in FUN_ROLES:
+                neededrole = FUN_ROLES[targetrole]
             else:
                 await SEND(ch, "You cannot edit this role through my commands.")
                 return
@@ -1933,12 +1933,13 @@ async def on_message(message):
             await EDIT_ROLE(neededrole, msgback, "changing name")
             await asyncio.sleep(1)
             await SEND(ch, "You changed the name correctly.")
+            FUN_ROLES[msgback] = neededrole
             return  
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if int(split[1]) in FUN_ROLES:
-                neededrole = FUN_ROLES[int(split[1])]
+            if targetrole in FUN_ROLES:
+                neededrole = FUN_ROLES[targetrole]
             else:
                 await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
