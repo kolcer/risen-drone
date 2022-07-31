@@ -969,7 +969,7 @@ async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
 async def NEW_ROLE(colorpick, rolename):
-  await SERVER.create_role(name = rolename.replace("_", " "), colour = discord.Colour(int(colorpick, 16)))
+  await SERVER.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
 
 ### END OF RATE LIMITED FUNCTIONS ###
 
@@ -1870,7 +1870,7 @@ async def on_message(message):
 
         #give any role
         if msg.startswith("assign", 1):
-            neededrole = discord.utils.get(SERVER.roles, name=split[1].replace("_", " ")
+            neededrole = discord.utils.get(SERVER.roles, name=split[1].replace("_", " "))
             for mem in SERVER.members:
                if mem.name.lower() + "#" + mem.discriminator == split[2]:
                     await SEND(ch, "I gave the Role to " + split[2])
@@ -1943,7 +1943,7 @@ async def on_message(message):
             await PRINT_ENTRIES(ch, key)
             return
             
-        #delete tipp
+        #delete tip
         if msg.startswith("d",1):
             delete_entry(key,int(split[2]))
             await SEND(ch,split[1] + " " + tot + "(s):")
