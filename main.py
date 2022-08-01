@@ -1663,7 +1663,7 @@ async def on_message(message):
 
             if len(rigCaster.display_name + ", " + usr.display_name) > 32:
                 if len(rigCaster.display_name) > len(usr.display_name):
-                    await SEND(CHANNELS["bot-commands"], "Your name is too long, let me clean it. (Previous name: **" + str(rigCaster.display_name) + "**)")
+                    await SEND(CHANNELS["bot-commands"], rigCaster.mention + " your name is too long, let me clean it. (Previous name: **" + str(rigCaster.display_name) + "**)")
                     await asyncio.sleep(1)
                     await EDIT_NICK(rigCaster, victim)
                 else:
