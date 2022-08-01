@@ -1596,7 +1596,7 @@ async def on_message(message):
                 return
 
         ## All Rigs in one
-        if lsplit[0] == "cast" and lsplit[2] == "rig" and usr.id == 267014823315898368 or usr.id == 894573836366934047:
+        if lsplit[0] == "cast" and lsplit[2] == "rig" and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
