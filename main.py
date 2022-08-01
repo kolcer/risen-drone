@@ -1677,7 +1677,7 @@ async def on_message(message):
             del NickDictionary[usr]
             return
 
-        ## Spectre Rig Active
+        ## Spectre Rig Active 
         if ACTIVE_RIGS["spectre"]:
             
             if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
