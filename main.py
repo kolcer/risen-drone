@@ -1656,7 +1656,11 @@ async def on_message(message):
             await asyncio.sleep(1)
           
             if rigCaster in NickDictionary:
-                NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+                if tooLong:
+                    NickDictionary[rigCaster] = victim
+                else:
+                    NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+                    
                 await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
                 await SEND(ch, rigCaster.mention + " has just stolen your name!")
 
