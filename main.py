@@ -1055,7 +1055,7 @@ async def Rig(rigType, ch, usr):
         spamCount = RIG_SPAMMERS[usr]
     
     if rigType in LIMITED_USE_RIGS:
-        if spamCount == 3:
+        if spamCount == 10:
             await SEND(ch, "You've been using these commands too often.")
             return
         else:
