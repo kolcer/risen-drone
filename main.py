@@ -1677,7 +1677,7 @@ async def on_message(message):
         ## Joker Rig Active
         if ACTIVE_RIGS["joker"]:
             
-            if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https"):
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https") or len(msg) > 45:
                 return
             ACTIVE_RIGS["joker"] = False
 
