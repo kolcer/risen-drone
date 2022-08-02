@@ -1686,7 +1686,7 @@ async def on_message(message):
             await DELETE(message)
             await asyncio.sleep(2)
 
-            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown: (" + rigCaster.mention + ")")
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown: (" + usr.mention + ")")
           
             return
 
