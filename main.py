@@ -352,7 +352,7 @@ SANCTUARY = {
 
 COOLDOWN_DURATION = {
     "patron": 900,    
-    "thief": 10,
+    "thief": 600,
     "spectre": 600,
     "joker": 600,
     "archon": 120,    
@@ -1597,7 +1597,7 @@ async def on_message(message):
 
         ## All Rigs in one
 
-        if lsplit[0] == "cast" and lsplit[2] == "rig" and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
+        if lsplit[0] == "cast" and lsplit[2] == "rig": #and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
@@ -1635,7 +1635,7 @@ async def on_message(message):
         if ACTIVE_RIGS["thief"]:
             tooLong = False
           
-            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
                 return
                           
             if len(rigCaster.display_name + ", " + usr.display_name) > 32:
@@ -1660,7 +1660,7 @@ async def on_message(message):
                     NickDictionary[rigCaster] = victim
                 else:
                     NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
-                    
+
                 await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
                 await SEND(ch, rigCaster.mention + " has just stolen your name!")
 
@@ -1678,7 +1678,7 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
           
-            await asyncio.sleep(60) #1800 
+            await asyncio.sleep(1800) #1800 
             del NickDictionary[usr]
             return
 
