@@ -352,7 +352,7 @@ SANCTUARY = {
 
 COOLDOWN_DURATION = {
     "patron": 900,    
-    "thief": 600,
+    "thief": 10,
     "spectre": 600,
     "joker": 600,
     "archon": 120,    
@@ -1596,7 +1596,8 @@ async def on_message(message):
                 return
 
         ## All Rigs in one
-        if lsplit[0] == "cast" and lsplit[2] == "rig":
+
+        if lsplit[0] == "cast" and lsplit[2] == "rig" and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
@@ -1632,10 +1633,20 @@ async def on_message(message):
         
         ## thief rig active
         if ACTIVE_RIGS["thief"]:
+            tooLong = False
           
-            if ch.name not in CHANNELS or len(rigCaster.display_name + ", " + usr.display_name) > 32 or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32
                 return
                           
+            if len(rigCaster.display_name + ", " + usr.display_name) > 32:
+                if len(rigCaster.display_name) > len(usr.display_name):
+                    await SEND(CHANNELS["bot-commands", rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)"])
+                    await asyncio.sleep(1)
+                    await EDIT_NICK(rigCaster, "")
+                    tooLong = True
+                else:
+                    return
+
             ACTIVE_RIGS["thief"] = False
             victim = usr.display_name
 
@@ -1645,15 +1656,25 @@ async def on_message(message):
             await asyncio.sleep(1)
           
             if rigCaster in NickDictionary:
-              NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
-              await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
-              await SEND(ch, rigCaster.mention + " has just stolen your name!")
-              return
+                NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+                await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
+                await SEND(ch, rigCaster.mention + " has just stolen your name!")
+
+                if tooLong == True:
+                    await asyncio.sleep(1)
+                    await EDIT_NICK(rigCaster, rigCaster.display_name.replace(", ","", 1))
+
+                return
               
             await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
             await SEND(ch, rigCaster.mention + " has just stolen your name!")
+
+
+            if tooLong == True:
+                await asyncio.sleep(1)
+                await EDIT_NICK(rigCaster, rigCaster.display_name.replace(", ","", 1))
           
-            await asyncio.sleep(1800)
+            await asyncio.sleep(20) #1800
             del NickDictionary[usr]
             return
 
