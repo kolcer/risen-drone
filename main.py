@@ -741,7 +741,7 @@ async def updateRigTracker(rigType):
         if rigType.upper() in i:
             currentnumber = i.split(" ")[1].replace(",","")
 
-            i.replace(currentnumber, int(currentnumber) + 1)
+            i.replace(currentnumber, str(int(currentnumber) + 1))
             finalmsg += i + ",\n"
         else:
             finalmsg += i + "\n"
