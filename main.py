@@ -352,16 +352,16 @@ SANCTUARY = {
 }
 
 COOLDOWN_DURATION = {
-    "patron": 900,    
-    "thief": 600,
-    "spectre": 600,
-    "joker": 600,
-    "archon": 120,    
-    "heretic": 60,
-    "wicked": 60,    
-    "keeper": 20,
-    "hacker": 20,
-    "drifter": 20,
+    "patron": 5,    
+    "thief": 5,
+    "spectre": 5,
+    "joker": 5,
+    "archon": 5,    
+    "heretic": 5,
+    "wicked": 5,    
+    "keeper": 5,
+    "hacker": 5,
+    "drifter": 5,
 }
 
 LIMITED_USE_RIGS = [
@@ -750,7 +750,7 @@ async def updateRigTracker(rigType):
             #i = i.replace(currentnumber, str(int(currentnumber) + 1))
             db.set(rigType.lower() + "uses", int(currentnumber) + 1)
             newnumber = db.get(rigType.lower() + "uses")
-            i = i.replace(i.split(" ")[1].replace(",",""), newnumber)
+            i = i.replace(i.split(" ")[1].replace(",",""), str(newnumber))
 
             finalmsg += i + ",\n"
         else:
