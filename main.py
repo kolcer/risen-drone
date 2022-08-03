@@ -1258,7 +1258,6 @@ async def on_ready():
         CHANNELS[i] = GET_CHANNEL(v)
     
     RIGTRACKER = await getmsg(RIGTRACKER)
-    await RIGTRACKER.pin()
     #prepare the roles
     global CKR
     global POSSESSED
