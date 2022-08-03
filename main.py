@@ -736,17 +736,23 @@ async def updateRigTracker(rigType):
     blankmsg = initialmsg.split(",")
     currentnumber = None
     finalmsg = ""
+    counter = 0
 
     for i in blankmsg:
+        counter += 1
         if rigType.upper() in i:
             currentnumber = i.split(" ")[1].replace(",","")
 
-            i.replace(currentnumber, str(int(currentnumber) + 1))
+            i = i.replace(currentnumber, str(int(currentnumber) + 1))
+
             finalmsg += i + ",\n"
         else:
-            finalmsg += i + ",\n"
+            if counter == 12:
+                finalmsg += i + "\n"
+            else:
+                finalmsg += i + ",\n"
 
-    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace("\n",""))
+    await EDIT_MESSAGE(RIGTRACKER, finalmsg)
 
 def MG_RESET():
     global MG_STATUS
