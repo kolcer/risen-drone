@@ -1049,6 +1049,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 ### RIGS ###
 
 async def Rig(rigType, ch, usr):
+    global RIGTRACKER
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
@@ -1230,6 +1231,7 @@ async def on_ready():
 
     #get the guild
     global SERVER
+    global RIGTRACKER
     #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(SERVER)
     RIGTRACKER = await getmsg(RIGTRACKER)
