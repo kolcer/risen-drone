@@ -1629,7 +1629,7 @@ async def on_message(message):
 
         ## All Rigs in one
 
-        if lsplit[0] == "cast" and lsplit[2] == "rig": #and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
+        if lsplit[0] == "cast" and lsplit[2] == "rig" and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
@@ -2014,6 +2014,21 @@ async def on_message(message):
         if msg.startswith("reset rig tracker", 1):
             await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
             return
+
+        #edits db rig tracking count for specific alignment
+        if msg.startswith("edit tracker ", 1):
+            db.set("patronuses", 101)
+            db.set("jokeruses", 164)
+            db.set("wickeduses", 102)
+            db.set("jokeruses", 111)
+            db.set("hackeruses", 148)
+            db.set("thiefuses", 460)
+            db.set("drifteruses", 106)
+            db.set("archonuses", 140)
+            db.set("hereticuses", 184)
+            db.set("spectreuses", 124)
+            track = split.upper()
+
 
         #quiz
         if msg.startswith("quiz",1):
