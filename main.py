@@ -744,9 +744,9 @@ async def updateRigTracker(rigType):
             i.replace(currentnumber, str(int(currentnumber) + 1))
             finalmsg += i + ",\n"
         else:
-            finalmsg += i + "\n"
+            finalmsg += i + ",\n"
 
-    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
+    await EDIT_MESSAGE(RIGTRACKER, finalmsg)
 
 def MG_RESET():
     global MG_STATUS
@@ -2008,7 +2008,7 @@ async def on_message(message):
         if msg.startswith("reset rig tracker", 1):
             await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
             return
-            
+
         #quiz
         if msg.startswith("quiz",1):
             if split[1] == "new":
