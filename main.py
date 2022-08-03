@@ -19,6 +19,7 @@ MINI_GAME_MAX_WAIT = 30
 
 #ids will be replaced with objects on startup
 SERVER = 624227331720085528
+RIGTRACKER = 1004326588021743667
 
 #fallen drone name (to prevent impostors)
 FALLEN_DRONE_NICK = "FALLEN DRONE"
@@ -927,6 +928,9 @@ def MG_ACTION(plr, action):
 
 ### RATE LIMITED FUNCTIONS ###
 
+async def getmsg(msgID):
+    return await SERVER.fetch_message(msgID)
+
 def GET_CHANNEL(id):
     return client.get_channel(id)
 
@@ -1073,6 +1077,8 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
                 RIG_COOLDOWNS["ha"] = False
                 return
+
+            await EDIT_MESSAGE(RIGTRACKER, "Test")
             #for member in SERVER.members:
                # if POSSESSED in member.roles:
                    # await SEND(ch, "Another ultimate spell is in progress. Please wait.")
@@ -1226,6 +1232,7 @@ async def on_ready():
     global SERVER
     #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(SERVER)
+    RIGTRACKER = await getmsg(RIGTRACKER)
     
     #get the channels
     for i, v in CHANNELS.items():
