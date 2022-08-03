@@ -731,6 +731,23 @@ def rigImmunity(usr1, usr2):
         return True
     return False
 
+async def updateRigTracker(rigType):
+    initialmsg = RIGTRACKER.content
+    blankmsg = initialmsg.split(",")
+    currentnumber = None
+    finalmsg = "RIGS TRACKER,\n"
+
+    for i in blankmsg:
+        if rigType.upper() in i:
+            currentnumber = i.split(" ")[1].replace(",","")
+
+            i.replace(currentnumber, int(currentnumber) + 1)
+            finalmsg += i + ",\n"
+        else:
+            finalmsg += i + "\n"
+
+    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
+
 def MG_RESET():
     global MG_STATUS
     global MG_CHANNEL 
@@ -1070,6 +1087,7 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
     global rigCaster
     
+    #await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
         
@@ -1079,7 +1097,6 @@ async def Rig(rigType, ch, usr):
                 RIG_COOLDOWNS["ha"] = False
                 return
 
-            await EDIT_MESSAGE(RIGTRACKER, "Test")
             #for member in SERVER.members:
                # if POSSESSED in member.roles:
                    # await SEND(ch, "Another ultimate spell is in progress. Please wait.")
@@ -1241,6 +1258,8 @@ async def on_ready():
         CHANNELS[i] = GET_CHANNEL(v)
     
     RIGTRACKER = await getmsg(RIGTRACKER)
+
+    await EDIT_MESSAGE(RIGTRACKER, "RIGS TRACKER,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
 
     #prepare the roles
     global CKR
