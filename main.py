@@ -748,7 +748,9 @@ async def updateRigTracker(rigType):
             print(db.get(rigType.lower() + "uses"))
 
             #i = i.replace(currentnumber, str(int(currentnumber) + 1))
-            i = i.replace(i.split(" ")[1].replace(",",""), str(int(currentnumber) + 1))
+            db.set(rigType.lower() + "uses", currentnumber + 1)
+            newnumber = db.get(rigType.lower() + "uses")
+            i = i.replace(i.split(" ")[1].replace(",",""), newnumber)
 
             finalmsg += i + ",\n"
         else:
