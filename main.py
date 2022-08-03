@@ -731,22 +731,22 @@ def rigImmunity(usr1, usr2):
         return True
     return False
 
-async def updateRigTracker(rigType):
-    initialmsg = RIGTRACKER.content
-    blankmsg = initialmsg.split(",")
-    currentnumber = None
-    finalmsg = "RIGS TRACKER,\n"
+# async def updateRigTracker(rigType):
+#     initialmsg = RIGTRACKER.content
+#     blankmsg = initialmsg.split(",")
+#     currentnumber = None
+#     finalmsg = ""
 
-    for i in blankmsg:
-        if rigType.upper() in i:
-            currentnumber = i.split(" ")[1].replace(",","")
+#     for i in blankmsg:
+#         if rigType.upper() in i:
+#             currentnumber = i.split(" ")[1].replace(",","")
 
-            i.replace(currentnumber, str(int(currentnumber) + 1))
-            finalmsg += i + ",\n"
-        else:
-            finalmsg += i + "\n"
+#             i.replace(currentnumber, str(int(currentnumber) + 1))
+#             finalmsg += i + ",\n"
+#         else:
+#             finalmsg += i + "\n"
 
-    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
+#     await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
 
 def MG_RESET():
     global MG_STATUS
@@ -1087,7 +1087,7 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
     global rigCaster
     
-    await updateRigTracker(rigType)
+    # await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
         
