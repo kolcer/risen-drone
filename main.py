@@ -741,9 +741,11 @@ async def updateRigTracker(rigType):
     for i in blankmsg:
         counter += 1
         if rigType.upper() in i:
-            currentnumber = i.split(" ")[1].replace(",","")
+            #currentnumber = i.split(" ")[1].replace(",","")
+            currentnumber = db.get(rigType.lower() + "uses")
 
-            i = i.replace(currentnumber, str(int(currentnumber) + 1))
+            #i = i.replace(currentnumber, str(int(currentnumber) + 1))
+            i = i.replace(i.split(" ")[1].replace(",",""), str(int(currentnumber) + 1))
 
             finalmsg += i + ",\n"
         else:
@@ -2017,17 +2019,10 @@ async def on_message(message):
 
         #edits db rig tracking count for specific alignment
         if msg.startswith("edit tracker ", 1):
-            db.set("patronuses", 101)
-            db.set("jokeruses", 164)
-            db.set("wickeduses", 102)
-            db.set("jokeruses", 111)
-            db.set("hackeruses", 148)
-            db.set("thiefuses", 460)
-            db.set("drifteruses", 106)
-            db.set("archonuses", 140)
-            db.set("hereticuses", 184)
-            db.set("spectreuses", 124)
-            track = split.upper()
+            track = msgback
+
+            db.set(track + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2
+            return
 
 
         #quiz
