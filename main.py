@@ -743,6 +743,9 @@ async def updateRigTracker(rigType):
         if rigType.upper() in i:
             #currentnumber = i.split(" ")[1].replace(",","")
             currentnumber = db.get(rigType.lower() + "uses")
+            print(currentnumber)
+            print(db.get("keeperuses"))
+            print(db.get(rigType.lower() + "uses"))
 
             #i = i.replace(currentnumber, str(int(currentnumber) + 1))
             i = i.replace(i.split(" ")[1].replace(",",""), str(int(currentnumber) + 1))
