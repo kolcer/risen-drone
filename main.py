@@ -929,7 +929,7 @@ def MG_ACTION(plr, action):
 ### RATE LIMITED FUNCTIONS ###
 
 async def getmsg(msgID):
-    return await SERVER.fetch_message(msgID)
+    return await CHANNELS["bot-testing"].fetch_message(msgID)
 
 def GET_CHANNEL(id):
     return client.get_channel(id)
@@ -1234,19 +1234,20 @@ async def on_ready():
     global RIGTRACKER
     #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(SERVER)
-    RIGTRACKER = await getmsg(RIGTRACKER)
+    
     
     #get the channels
     for i, v in CHANNELS.items():
         CHANNELS[i] = GET_CHANNEL(v)
     
+    RIGTRACKER = await getmsg(RIGTRACKER)
+
     #prepare the roles
     global CKR
     global POSSESSED
     global MURDURATOR
     global CLIMBER
     global ADMIN
-    global DISCOVERER
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
