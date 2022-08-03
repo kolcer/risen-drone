@@ -731,22 +731,22 @@ def rigImmunity(usr1, usr2):
         return True
     return False
 
-# async def updateRigTracker(rigType):
-#     initialmsg = RIGTRACKER.content
-#     blankmsg = initialmsg.split(",")
-#     currentnumber = None
-#     finalmsg = ""
+async def updateRigTracker(rigType):
+    initialmsg = RIGTRACKER.content
+    blankmsg = initialmsg.split(",")
+    currentnumber = None
+    finalmsg = ""
 
-#     for i in blankmsg:
-#         if rigType.upper() in i:
-#             currentnumber = i.split(" ")[1].replace(",","")
+    for i in blankmsg:
+        if rigType.upper() in i:
+            currentnumber = i.split(" ")[1].replace(",","")
 
-#             i.replace(currentnumber, str(int(currentnumber) + 1))
-#             finalmsg += i + ",\n"
-#         else:
-#             finalmsg += i + "\n"
+            i.replace(currentnumber, str(int(currentnumber) + 1))
+            finalmsg += i + ",\n"
+        else:
+            finalmsg += i + "\n"
 
-#     await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
+    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace(",", "", 1))
 
 def MG_RESET():
     global MG_STATUS
@@ -1087,7 +1087,7 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
     global rigCaster
     
-    # await updateRigTracker(rigType)
+    await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
         
@@ -1258,9 +1258,7 @@ async def on_ready():
         CHANNELS[i] = GET_CHANNEL(v)
     
     RIGTRACKER = await getmsg(RIGTRACKER)
-
-    ##await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
-
+    await RIGTRACKER.pin()
     #prepare the roles
     global CKR
     global POSSESSED
@@ -2006,6 +2004,10 @@ async def on_message(message):
                     await REMOVE_ROLES(mem,CKR)
                     break
             return   
+
+        #resets the rig tracker message
+        if msg == "reset rigtracker":
+            await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
 
         #quiz
         if msg.startswith("quiz",1):
