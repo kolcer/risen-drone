@@ -733,7 +733,7 @@ def rigImmunity(usr1, usr2):
 
 async def updateRigTracker(rigType):
     initialmsg = RIGTRACKER.content
-    blankmsg = initialmsg.split(",")
+    blankmsg = initialmsg.replace("\n","").split(",")
     currentnumber = None
     finalmsg = ""
     counter = 0
