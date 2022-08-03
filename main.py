@@ -1087,7 +1087,7 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
     global rigCaster
     
-    #await updateRigTracker(rigType)
+    await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
         
@@ -1259,7 +1259,7 @@ async def on_ready():
     
     RIGTRACKER = await getmsg(RIGTRACKER)
 
-    await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
+    ##await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
 
     #prepare the roles
     global CKR
