@@ -1263,8 +1263,6 @@ async def on_ready():
     #this is a one-off, so we do not worry about rate limits
     SERVER = client.get_guild(SERVER)
     
-    db.set("jokeruses", 160)
-    db.set("keeperuses", 111)
     #get the channels
     for i, v in CHANNELS.items():
         CHANNELS[i] = GET_CHANNEL(v)
