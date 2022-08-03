@@ -2005,7 +2005,7 @@ async def on_message(message):
             return   
 
         #resets the rig tracker message
-        if msg == "reset rigtracker":
+        if msg == "reset rig tracker":
             await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
 
         #quiz
