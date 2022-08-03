@@ -746,7 +746,7 @@ async def updateRigTracker(rigType):
         else:
             finalmsg += i + ",\n"
 
-    await EDIT_MESSAGE(RIGTRACKER, finalmsg)
+    await EDIT_MESSAGE(RIGTRACKER, finalmsg.replace("\n",""))
 
 def MG_RESET():
     global MG_STATUS
