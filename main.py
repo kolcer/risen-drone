@@ -1005,6 +1005,7 @@ async def EDIT_MESSAGE(msg, con):
     await msg.edit(content=con)
     
 async def DELETE(message):
+  await asyncio.sleep(2)
   await message.delete()
 
 async def EDIT_ROLE(targetrole, newname, motivation):
