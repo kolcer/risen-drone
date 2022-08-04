@@ -35,7 +35,7 @@ CLIMBER = "Climbers"
 #this is for administrating tips and trivia database
 ADMIN = 993446701090222160
 
-#channels where bot is allowed to post 
+#channels where bot is allowed to post  
 CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
