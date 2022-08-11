@@ -1873,7 +1873,7 @@ async def on_message(message):
                 if usr == rigCaster:
                     SEND(ch, "This action is not permitted as of now.")
                     return
-                    
+
                 await SEND(ch,"You are no longer immune.")
                 await REMOVE_ROLES(usr,FUN_ROLES[role])
                 return
