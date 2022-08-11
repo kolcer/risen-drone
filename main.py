@@ -193,7 +193,6 @@ SPECIAL_ROLES = {
 
 FUN_ROLES = {
     "Sanctuary Discoverer": None,
-    "Immune": None,
 }
 
 #pingable roles, no custom messages
@@ -1638,11 +1637,6 @@ async def on_message(message):
         ## All Rigs in one
 
         if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
-
-            if FUN_ROLES["Immune"] in usr.roles:
-                await SEND(ch, "You are not allowed to use this command.")
-                return
-
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
@@ -1849,10 +1843,6 @@ async def on_message(message):
                 else:
                     await SEND(ch,SPECIAL_ROLES[role][1])
                 return
-            if role in FUN_ROLES:
-                await SEND(ch,"You are immune to all rigs now.")
-                await ADD_ROLES(usr,FUN_ROLES[role])
-                return
         
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         if lmsg.startswith("morph from",2):
@@ -1868,14 +1858,6 @@ async def on_message(message):
                     await SEND(ch,SPECIAL_ROLES[role][4])
                 else:
                     await SEND(ch,SPECIAL_ROLES[role][3])
-                return
-            if role in FUN_ROLES:
-                if usr == rigCaster:
-                    SEND(ch, "This action is not permitted as of now.")
-                    return
-
-                await SEND(ch,"You are no longer immune.")
-                await REMOVE_ROLES(usr,FUN_ROLES[role])
                 return
         
         #sub command
