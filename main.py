@@ -1851,7 +1851,7 @@ async def on_message(message):
                 return
             if role in FUN_ROLES:
                 await SEND(ch,"You are immune to all rigs now.")
-                await ADD_ROLES(usr,FUN_ROLES[role][1])
+                await ADD_ROLES(usr,FUN_ROLES[role])
                 return
         
         #demorph command (accepts demorph, unmorph and any **morph from combination)
@@ -1871,7 +1871,7 @@ async def on_message(message):
                 return
             if role in FUN_ROLES:
                 await SEND(ch,"You are no longer immune.")
-                await REMOVE_ROLES(usr,FUN_ROLES[role][1])
+                await REMOVE_ROLES(usr,FUN_ROLES[role])
                 return
         
         #sub command
