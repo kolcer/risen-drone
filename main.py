@@ -1709,7 +1709,7 @@ async def on_message(message):
                         await asyncio.sleep(1)
                         await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
 
-                    await asyncio.sleep(1800) #1800 
+                    await asyncio.sleep(300) #300#1800 
                     del NickDictionary[rigCaster]
 
                     return
@@ -1722,7 +1722,7 @@ async def on_message(message):
                     await asyncio.sleep(1)
                     await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
             
-                await asyncio.sleep(1800) #1800 
+                await asyncio.sleep(300) #300#1800 
                 del NickDictionary[usr]
                 return
 
