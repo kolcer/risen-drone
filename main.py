@@ -1670,94 +1670,92 @@ async def on_message(message):
             await Rig(rigPick,ch,usr)
             return
 
-
-        if FUN_ROLES["Immune"] not in usr.roles:
-            ## thief rig active
-            if ACTIVE_RIGS["thief"]:
-                tooLong = False
+        ## thief rig active
+        if ACTIVE_RIGS["thief"]:
+            tooLong = False
             
-                if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
-                    return
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
+                return
                             
-                if len(rigCaster.display_name + ", " + usr.display_name) > 32:
-                    if len(rigCaster.display_name) > len(usr.display_name):
-                        await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
-                        await asyncio.sleep(1)
-                        await EDIT_NICK(rigCaster, ".")
-                        tooLong = True
-                    else:
-                        return
-
-                ACTIVE_RIGS["thief"] = False
-                victim = usr.display_name
-
-                NickDictionary[usr] = "N/A"
-                await EDIT_NICK(usr, "N/A")
-
-                await asyncio.sleep(1)
-            
-                if rigCaster in NickDictionary:
-                    if tooLong:
-                        NickDictionary[rigCaster] = victim
-                    else:
-                        NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
-
-                    await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
-                    await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
-
-                    if tooLong == True:
-                        await asyncio.sleep(1)
-                        await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
-
-                    await asyncio.sleep(300) #300#1800 
-                    del NickDictionary[rigCaster]
-
+            if len(rigCaster.display_name + ", " + usr.display_name) > 32:
+                if len(rigCaster.display_name) > len(usr.display_name):
+                    await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
+                    await asyncio.sleep(1)
+                    await EDIT_NICK(rigCaster, ".")
+                    tooLong = True
+                else:
                     return
-                
-                await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
-                await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
 
+            ACTIVE_RIGS["thief"] = False
+            victim = usr.display_name
+
+            NickDictionary[usr] = "N/A"
+            await EDIT_NICK(usr, "N/A")
+
+            await asyncio.sleep(1)
+            
+            if rigCaster in NickDictionary:
+                if tooLong:
+                    NickDictionary[rigCaster] = victim
+                else:
+                    NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+
+                await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
+                await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
 
                 if tooLong == True:
                     await asyncio.sleep(1)
                     await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
-            
+
                 await asyncio.sleep(300) #300#1800 
-                del NickDictionary[usr]
+                del NickDictionary[rigCaster]
+
                 return
-
-            ## Spectre Rig Active
-            if ACTIVE_RIGS["spectre"]:
                 
-                if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
-                    return
-                ACTIVE_RIGS["spectre"] = False
+            await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
+            await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
 
-                chances = random.randint(0, 1)
 
-                if chances == 1:
-                    await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
-                    await DELETE(message)
-                    return
-
-                await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
-                return
-
-            ## Joker Rig Active
-            if ACTIVE_RIGS["joker"]:
-                
-                if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https") or len(msg) > 45:
-                    return
-                ACTIVE_RIGS["joker"] = False
-
-                msgcontent = message.content
-
-                await DELETE(message)
-                await asyncio.sleep(2)
-
-                await SEND(ch, str(msgcontent) + " -" + ":nerd::clown: (" + usr.mention + ")")
+            if tooLong == True:
+                await asyncio.sleep(1)
+                await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
             
+            await asyncio.sleep(300) #300#1800 
+            del NickDictionary[usr]
+            return
+
+        ## Spectre Rig Active
+        if ACTIVE_RIGS["spectre"]:
+                
+            if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
                 return
+            ACTIVE_RIGS["spectre"] = False
+
+            chances = random.randint(0, 1)
+
+            if chances == 1:
+                await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
+                await DELETE(message)
+                return
+
+            await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
+            return
+
+        ## Joker Rig Active
+        if ACTIVE_RIGS["joker"]:
+                
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https") or len(msg) > 45:
+                return
+            ACTIVE_RIGS["joker"] = False
+
+            msgcontent = message.content
+
+            await DELETE(message)
+            await asyncio.sleep(2)
+
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown: (" + usr.mention + ")")
+            
+            return
 
         ## Give Mana command
         if msg.lower().startswith("give mana to "):
