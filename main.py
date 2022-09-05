@@ -193,6 +193,7 @@ SPECIAL_ROLES = {
 
 FUN_ROLES = {
     "Sanctuary Discoverer": None,
+    "Splicer": None,
 }
 
 #pingable roles, no custom messages
@@ -588,6 +589,8 @@ rigCaster = None
 ghostMsg = ""
 thirdkill = None
 revivechat = False
+
+SPLICER_FANS = {}
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -1823,6 +1826,17 @@ async def on_message(message):
             await SEND(ch, random.choice(REVIVE_CHAT))
             revivechat = False
             return
+
+        ## Splicer role assignment
+        if "<:_splicer:988948000200069191>" in msg:
+            if usr in SPLICER_FANS:
+                if SPLICER_FANS[usr] == 3:
+                    if not FUN_ROLES["Splicer"] in usr.roles:
+                        usr.add_role(FUN_ROLES["Splicer"])
+                else:
+                    SPLICER_FANS[usr] += 1
+            else:
+                SPLICER_FANS[usr] = 1
 
         #morph command
         if lmsg.startswith("morph to"):
