@@ -1832,9 +1832,9 @@ async def on_message(message):
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
                     if not FUN_ROLES["Splicer"] in usr.roles:
-                        usr.add_role(FUN_ROLES["Splicer"])
+                        ADD_ROLES(usr, FUN_ROLES["Splicer"])
                         await asyncio.sleep(1)
-                        await SEND(ch, "Ok, here you go.")
+                        await SEND(ch, "Ok! Here you go.")
                 else:
                     SPLICER_FANS[usr] += 1
             else:
