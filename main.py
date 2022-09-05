@@ -233,7 +233,7 @@ EMOJIS_TO_REACT = {
 }
 
 #this keywords will trigger the bot with a single occurence
-# value is the trigger, key is theresponse!
+# value is the trigger, key is the response!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
     "<:cs_Stairbonk:812813052822421555>": #MESSAGE SENT
@@ -244,8 +244,6 @@ SINGLE_WORD_TRIGGERS = {
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
-    "Hm":
-        'Hm.',
 }
 
 #all words nedd to be present for this trigger to occur
@@ -271,6 +269,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['dead', 'chat'],
     "{mention} is a true stair jumper.":
         ["found", "secret", "badge"],
+    "Hm.":
+        ["Hm"],
 }
 
 #first word is required and any of the pool of rest of the words
