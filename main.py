@@ -236,27 +236,29 @@ EMOJIS_TO_REACT = {
 # value is the trigger, key is theresponse!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    "<:cs_Stairbonk:812813052822421555>":
-        'gun',
+    "<:cs_Stairbonk:812813052822421555>": #MESSAGE SENT
+        'gun',                            #REPLY
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
     "Tsk.":
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
+    "Hm":
+        'Hm.',
 }
 
 #all words nedd to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
     "Keeper obviously. Stop asking stupid questions.": 
-        ["best", "alignment"], 
+        ["best", "alignment", "?"], 
     "Please stop abusing the tutorial. Poor Sleazel can\'t sleep at night...":
         ['bug', 'tutorial'], 
     "Haha. You got stuck in stairs!":
         ['stuck', 'stairs'],
     "I fell, okay?":
-        ['fallen', 'drone', 'how'],
+        ['fallen', 'drone', 'how', "?"],
     "Are you expecting me to answer with None?": 
         ['worst', 'alignment', '?'], 
     "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
