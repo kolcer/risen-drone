@@ -1938,7 +1938,8 @@ async def on_message(message):
             return
 
         #deterimine the key (this is an alignment name in most cases)
-        split = msg.lower().split(" ", 2)
+        split = msg.split(" ", 2)
+        split2 = msg.lower().split(" ", 2)
         msgback = msg.split(" ", 2)[2]
         targetrole = msg.split(" ")[1].replace("_", " ")
 
@@ -1962,8 +1963,8 @@ async def on_message(message):
         #give ckr
         if msg.startswith("ckr to ", 1):
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "I gave the Chat Killer Role to " + split[2])
+               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
+                    await SEND(ch, "I gave the Chat Killer Role to " + split2[2])
                     await asyncio.sleep(1)
                     await ADD_ROLES(mem,CKR)
                     break
@@ -1978,8 +1979,8 @@ async def on_message(message):
                 return
                 
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "I gave the Role to " + split[2])
+               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
+                    await SEND(ch, "I gave the Role to " + split2[2])
                     await asyncio.sleep(1)
                     await ADD_ROLES(mem,neededrole)
                     break
@@ -1994,8 +1995,8 @@ async def on_message(message):
                 return
 
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "Took the role away from " + split[2])
+               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
+                    await SEND(ch, "Took the role away from " + split2[2])
                     await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,neededrole)
                     break
@@ -2031,8 +2032,8 @@ async def on_message(message):
         #remove ckr
         if msg.startswith("ckr from ", 1):
             for mem in SERVER.members:
-               if mem.name.lower() + "#" + mem.discriminator == split[2]:
-                    await SEND(ch, "I took the Chat Killer Role away from " + split[2])
+               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
+                    await SEND(ch, "I took the Chat Killer Role away from " + split2[2])
                     await asyncio.sleep(1)
                     await REMOVE_ROLES(mem,CKR)
                     break
