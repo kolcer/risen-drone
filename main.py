@@ -194,6 +194,7 @@ SPECIAL_ROLES = {
 FUN_ROLES = {
     "Sanctuary Discoverer": None,
     "Splicer": None,
+    "Helping Hand": None,
 }
 
 #pingable roles, no custom messages
@@ -1951,7 +1952,7 @@ async def on_message(message):
         #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
-                newrole = await NEW_ROLE(split[1], msgback)
+                newrole = await NEW_ROLE(split[1], msgback.replace("_"," "))
             except Exception as e:
                 await SEND(ch, e)
                 return
