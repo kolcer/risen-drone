@@ -1772,13 +1772,13 @@ async def on_message(message):
             for member in SERVER.members:
                 if member.name.lower() + "#" + member.discriminator == target:
                     if role in member.roles:
-                        await SEND(message.channel,
-                            member.display_name +
-                            " has received some Mana and is no longer Possessed!"
-                        )
+                        await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
                         await asyncio.sleep(3)
                        # await member.remove_roles(role)
                         await REMOVE_ROLES(member, role)
+                        await asyncio.sleep(1)
+                        if not FUN_ROLES["Helping Hand"] in usr.roles:
+                            await ADD_ROLES(usr, FUN_ROLES["Helping Hand"])
                     else:
                         await SEND(message.channel,
                             member.display_name +
