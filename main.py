@@ -1957,7 +1957,7 @@ async def on_message(message):
                 return
 
             await SEND(ch, "Worked.")
-            FUN_ROLES[msgback] = newrole
+            FUN_ROLES[msgback.replace("_"," ")] = newrole
             return
     
         #give ckr
