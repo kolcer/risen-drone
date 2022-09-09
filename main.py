@@ -194,7 +194,6 @@ SPECIAL_ROLES = {
 FUN_ROLES = {
     "Sanctuary Discoverer": None,
     "Splicer": None,
-    "Helping Hand": None,
 }
 
 #pingable roles, no custom messages
@@ -1983,7 +1982,7 @@ async def on_message(message):
                if mem.name.lower() + "#" + mem.discriminator == split2[2]:
                     await SEND(ch, "I gave the Role to " + split2[2])
                     await asyncio.sleep(1)
-                    await ADD_ROLES(mem,neededrole)
+                    await ADD_ROLES(mem, neededrole)
                     break
             return  
 
