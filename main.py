@@ -1811,6 +1811,15 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
             return
 
+        ## Show Profile
+        if msg == "fd show profile":
+            profilemsg = str(usr.nick) + "'s roles:\n"
+            for role in FUN_ROLES:
+                if FUN_ROLES[role] in usr.roles:
+                    profilemsg += str(role) + " = Owned.\n"
+                else:
+                    profilemsg += "??? = Not Owned.\n"
+
         ## Revive Chat Command
         if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             global revivechat
