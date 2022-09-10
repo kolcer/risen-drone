@@ -1812,13 +1812,15 @@ async def on_message(message):
             return
 
         ## Show Profile
-        if msg == "fd show profile":
+        if lmsg == "fd show profile":
             profilemsg = str(usr.nick) + "'s roles:\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
                     profilemsg += str(role) + " = Owned.\n"
                 else:
                     profilemsg += "??? = Not Owned.\n"
+            
+            await SEND(ch, profilemsg)
 
         ## Revive Chat Command
         if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
