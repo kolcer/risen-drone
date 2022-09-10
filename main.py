@@ -1813,12 +1813,12 @@ async def on_message(message):
 
         ## Show Profile
         if lmsg == "fd show profile":
-            profilemsg = str(usr.nick) + "'s roles:\n"
+            profilemsg = str(usr.nick) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
-                    profilemsg += str(role) + " = Owned.\n"
+                    profilemsg += "**" + str(role) + "** = Owned.\n"
                 else:
-                    profilemsg += "??? = Not Owned.\n"
+                    profilemsg += "**???** = Not Owned.\n"
             
             await SEND(ch, profilemsg)
 
