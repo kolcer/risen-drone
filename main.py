@@ -1377,14 +1377,14 @@ async def on_message(message):
 
     global MSG_SENT
 
+    msg = message.content
+    usr = message.author
+    ch = message.channel
+
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
     else:
         MSG_SENT[usr] += 1
-
-    msg = message.content
-    usr = message.author
-    ch = message.channel
     
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
