@@ -1834,7 +1834,7 @@ async def on_message(message):
             else:
                 messages = MSG_SENT[usr]
 
-            profilemsg += "**Latest messages sent:** " + messages + "\n"
+            profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
             
             await SEND(ch, profilemsg)
 
