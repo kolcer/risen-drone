@@ -1834,7 +1834,8 @@ async def on_message(message):
             else:
                 messages = MSG_SENT[usr]
 
-            profilemsg += "\n**Latest messages sent:** " + str(messages) + "\n"
+            profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
+            profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
             
             await SEND(ch, profilemsg)
 
