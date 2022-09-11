@@ -594,6 +594,7 @@ thirdkill = None
 revivechat = False
 
 SPLICER_FANS = {}
+MSG_SENT = {}
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -1374,6 +1375,13 @@ async def on_message_delete(message):
 @client.event
 async def on_message(message):
 
+    global MSG_SENT
+
+    if usr not in MSG_SENT:
+        MSG_SENT[usr] = 1
+    else:
+        MSG_SENT[usr] += 1
+
     msg = message.content
     usr = message.author
     ch = message.channel
@@ -1816,9 +1824,11 @@ async def on_message(message):
             profilemsg = str(usr.nick) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
-                    profilemsg += "**" + str(role) + "** = Owned.\n"
+                    profilemsg += "**" + str(role) + "** = Found.\n"
                 else:
-                    profilemsg += "**???** = Not Owned.\n"
+                    profilemsg += "**???**\n"
+
+            profilemsg += "Latest messages sent: " + str(MSG_SENT[usr]) + "\n"
             
             await SEND(ch, profilemsg)
 
