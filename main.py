@@ -2039,10 +2039,10 @@ async def on_message(message):
                 await SEND(ch, "You cannot edit this role through my commands.")
                 return
 
-            await EDIT_ROLE(neededrole, msgback, "changing name")
+            await EDIT_ROLE(neededrole, msgback.replace("_", " "), "changing name")
             await asyncio.sleep(1)
             await SEND(ch, "You changed the name correctly.")
-            FUN_ROLES[msgback] = neededrole
+            FUN_ROLES[msgback.replace("_", " ")] = neededrole
             return  
 
         #purge any role
