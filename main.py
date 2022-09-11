@@ -194,7 +194,7 @@ SPECIAL_ROLES = {
 FUN_ROLES = {
     "Sanctuary Discoverer": None,
     "Splicer": None,
-    "Helping Hand": None,
+    "Heretic Defier": None,
 }
 
 #pingable roles, no custom messages
