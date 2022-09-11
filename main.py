@@ -1821,6 +1821,7 @@ async def on_message(message):
 
         ## Show Profile
         if lmsg == "fd show profile":
+            messages = ""
             profilemsg = str(usr.nick) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
@@ -1828,7 +1829,12 @@ async def on_message(message):
                 else:
                     profilemsg += "**???**\n"
 
-            profilemsg += "Latest messages sent: " + str(MSG_SENT[usr]) + "\n"
+            if usr not in MSG_SENT:
+                messages = "0"
+            else:
+                messages = MSG_SENT[usr]
+
+            profilemsg += "**Latest messages sent:** " + messages + "\n"
             
             await SEND(ch, profilemsg)
 
