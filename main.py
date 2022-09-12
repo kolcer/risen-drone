@@ -1679,7 +1679,7 @@ async def on_message(message):
                 await SEND(ch, "That is not a valid rig. Try again.")
                 return
 
-            LAST_RIG[usr] = str(rigPick)
+            LAST_RIG[usr] = str(rigPick) + " Rig"
 
             if rigPick == "necromancer":
               await necromancer(ch)
@@ -1842,7 +1842,7 @@ async def on_message(message):
 
             profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-            profilemsg += "**Last rig casted:** " + str(lastrig).capitalize() + " Rig\n"
+            profilemsg += "**Last rig casted:** " + str(lastrig).capitalize() + "\n"
             
             await SEND(ch, profilemsg)
 
