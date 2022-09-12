@@ -1822,7 +1822,6 @@ async def on_message(message):
 
         ## Show Profile
         if lmsg == "fd show profile":
-            global LAST_RIG
             messages = ""
             profilemsg = str(usr.nick) + "'s roles:\n\n"
             for role in FUN_ROLES:
