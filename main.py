@@ -1842,7 +1842,7 @@ async def on_message(message):
 
             profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-            profilemsg += "**Last rig casted:** " + str(lastrig).capitalize() + "\n"
+            profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
             
             await SEND(ch, profilemsg)
 
