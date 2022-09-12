@@ -1822,6 +1822,7 @@ async def on_message(message):
 
         ## Show Profile
         if lmsg == "fd show profile":
+            global LAST_RIG
             messages = ""
             profilemsg = str(usr.nick) + "'s roles:\n\n"
             for role in FUN_ROLES:
@@ -1842,7 +1843,7 @@ async def on_message(message):
 
             profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-            profilemsg += "**Last rig casted:** " + str(lastrig) + "\n"
+            profilemsg += "**Last rig casted:** " + str(lastrig).capitalize() + "\n"
             
             await SEND(ch, profilemsg)
 
