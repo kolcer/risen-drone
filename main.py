@@ -595,6 +595,7 @@ revivechat = False
 
 SPLICER_FANS = {}
 MSG_SENT = {}
+LAST_RIG = {}
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -1176,7 +1177,7 @@ async def Rig(rigType, ch, usr):
             im = ''.join(sorted(usr.display_name))
             await EDIT_NICK(usr, im)
             await asyncio.sleep(1)
-            await SEND(ch, "You cast Keeper Rig and now your name is alphabetically ordered!")
+            await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
         
         case "patron":
             rigActive = False
@@ -1369,7 +1370,7 @@ async def on_member_join(member):
 @client.event
 async def on_message_delete(message):
   global ghostMsg
-  ghostMsg = "*" + str(message.author.nick) + " last words lie here...*"
+  ghostMsg = "*" + str(message.author.nick) + "'s last words lie here...*"
     
 #main function on each message being intercepted
 @client.event
@@ -1651,6 +1652,7 @@ async def on_message(message):
         ## All Rigs in one
 
         if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
+            global LAST_RIG
             rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
@@ -1674,8 +1676,10 @@ async def on_message(message):
                 await Rig(random.choice(RIG_LIST),ch,usr)
                 return
             if rigPick not in RIG_LIST and rigPick != "necromancer":
-                await SEND(ch, rigPick + " is not a valid Rig. Try again.")
+                await SEND(ch, "That is not a valid rig. Try again.")
                 return
+
+            LAST_RIG[usr] = str(rigPick)
 
             if rigPick == "necromancer":
               await necromancer(ch)
@@ -1692,13 +1696,10 @@ async def on_message(message):
                 return
                             
             if len(rigCaster.display_name + ", " + usr.display_name) > 32:
-                if len(rigCaster.display_name) > len(usr.display_name):
-                    await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
-                    await asyncio.sleep(1)
-                    await EDIT_NICK(rigCaster, ".")
-                    tooLong = True
-                else:
-                    return
+                await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
+                await asyncio.sleep(1)
+                await EDIT_NICK(rigCaster, ".")
+                tooLong = True
 
             ACTIVE_RIGS["thief"] = False
             victim = usr.display_name
@@ -1834,8 +1835,14 @@ async def on_message(message):
             else:
                 messages = MSG_SENT[usr]
 
+            if usr not in LAST_RIG:
+                lastrig = "None"
+            else:
+                lastrig = LAST_RIG[usr]
+
             profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
+            profilemsg += "**Last rig casted:** " + str(lastrig) + "\n"
             
             await SEND(ch, profilemsg)
 
