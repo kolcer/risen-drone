@@ -1786,8 +1786,8 @@ async def on_message(message):
                        # await member.remove_roles(role)
                         await REMOVE_ROLES(member, role)
                         await asyncio.sleep(1)
-                        if not FUN_ROLES["Helping Hand"] in usr.roles:
-                            await ADD_ROLES(usr, FUN_ROLES["Helping Hand"])
+                        if not FUN_ROLES["Heretic Defier"] in usr.roles:
+                            await ADD_ROLES(usr, FUN_ROLES["Heretic Defier"])
                     else:
                         await SEND(message.channel,
                             member.display_name +
