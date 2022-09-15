@@ -695,7 +695,7 @@ def FORCE_CLOSE_EVENT():
 
 def showScores():
     for i in QUIZZERS:
-        QUIZ["scores"] += str(i.nick) + "'s points: " + str(QUIZZERS[i]) + "\n"
+        QUIZ["scores"] += str(i.display_name) + "'s points: " + str(QUIZZERS[i]) + "\n"
     return QUIZ["scores"]
 
 async def nextQuestion(ch):
@@ -1370,7 +1370,7 @@ async def on_member_join(member):
 @client.event
 async def on_message_delete(message):
   global ghostMsg
-  ghostMsg = "*" + str(message.author.nick) + "'s last words lie here...*"
+  ghostMsg = "*" + str(message.author.display_name) + "'s last words lie here...*"
     
 #main function on each message being intercepted
 @client.event
@@ -1826,7 +1826,7 @@ async def on_message(message):
         ## Show Profile
         if lmsg == "fd show profile":
             messages = ""
-            profilemsg = str(usr.nick) + "'s roles:\n\n"
+            profilemsg = str(usr.display_name) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
                     profilemsg += "**" + str(role) + "**\n"
@@ -1843,7 +1843,7 @@ async def on_message(message):
             else:
                 lastrig = LAST_RIG[usr]
 
-            profilemsg += "\n" + str(usr.nick) + "'s stats:\n\n"
+            profilemsg += "\n" + str(usr.display_name) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
             profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
             
