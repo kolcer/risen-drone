@@ -325,12 +325,14 @@ RIG_LIST = [
     "keeper",
     "hacker",
     "drifter",
+    "splicer",
 ]
 
 COOLDOWN_SELECT = {
     "thief": "tsj",
     "spectre": "tsj",
     "joker": "tsj",
+    "splicer": "tsj",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -360,6 +362,7 @@ COOLDOWN_DURATION = {
     "thief": 600,
     "spectre": 600,
     "joker": 600,
+    "splicer": 600,
     "archon": 120,    
     "heretic": 60,
     "wicked": 60,    
@@ -372,6 +375,7 @@ LIMITED_USE_RIGS = [
     "joker",   
     "thief",
     "spectre",
+    "splicer",
 ]
 
 REVIVE_CHAT = [
@@ -386,7 +390,7 @@ REVIVE_CHAT = [
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "General cooldown: ",
-    "tsj": "Thief, Spectre, and Joker cooldown: ",
+    "tsj": "Trigger Effect rigs cooldown: ",
     "ha": "Heretic and Archon cooldown: ",
     "patron": "Patron cooldown: ",
 }
@@ -601,6 +605,7 @@ ACTIVE_RIGS = {
     "joker": False,
     "thief": False,
     "spectre": False,
+    "splicer": False,
 }
 
 RIG_COOLDOWNS = {
@@ -1193,15 +1198,17 @@ async def Rig(rigType, ch, usr):
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
-        case ("joker"|"thief"|"spectre"):
+        case ("joker"|"thief"|"spectre"|"splicer"):
             ACTIVE_RIGS[rigType] = True
             rigCaster = usr
             if rigType == "joker":
-                await SEND(ch, usr.mention + " just cast Joker Rig. Someone will be in for a treat.")
+                await SEND(ch, usr.mention + " just cast Joker Rig! Someone will be in for a treat.")
             elif rigType == "thief":
-                await SEND(ch, usr.mention + " just cast Thief Rig! Watch out everyone.")
+                await SEND(ch, usr.mention + " just cast Thief Rig! Hold tight your belongings.")
+            elif rigType == "spectre":
+                await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
             else:
-                await SEND(ch, usr.mention + " just cast Spectre Rig! Careful.")
+                await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
                 
           
             
@@ -1762,7 +1769,7 @@ async def on_message(message):
         ## Joker Rig Active
         if ACTIVE_RIGS["joker"]:
                 
-            if ch.name not in CHANNELS or not CLIMBER in usr.roles or msg.startswith("https") or len(msg) > 45:
+            if (ch.name not in CHANNELS) or (not CLIMBER in usr.roles) or ("https" in msg) or (len(msg) > 45):
                 return
             ACTIVE_RIGS["joker"] = False
 
@@ -1771,7 +1778,30 @@ async def on_message(message):
             await DELETE(message)
             await asyncio.sleep(2)
 
-            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown: (" + usr.mention + ")")
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention + ".")
+            
+            return
+
+        ## Splicer Rig Active
+        if ACTIVE_RIGS["splicer"]:
+                
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+                return
+                
+            ACTIVE_RIGS["splicer"] = False
+
+            rcn = rigCaster.nick
+            rcn1 = rcn[:len(rcn)//2]
+            rcn2 = rcn[len(rcn)//2:]
+
+            usrn = rigCaster.nick
+            usrn1 = usrn[:len(usrn)//2]
+            usrn2 = usrn[len(usrn)//2:]
+
+            await EDIT_NICK(usr, usrn1 + rcn2)
+            await asyncio.sleep(1)
+            await EDIT_NICK(rigCaster, rcn1 + usrn2)
+            await SEND(ch, rigCaster.mention + " has just split your name!")
             
             return
 
