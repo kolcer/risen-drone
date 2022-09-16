@@ -1784,17 +1784,17 @@ async def on_message(message):
 
         ## Splicer Rig Active
         if ACTIVE_RIGS["splicer"]:
-                
+
             if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
                 return
                 
             ACTIVE_RIGS["splicer"] = False
 
-            rcn = rigCaster.nick
+            rcn = rigCaster.display_name
             rcn1 = rcn[:len(rcn)//2]
             rcn2 = rcn[len(rcn)//2:]
 
-            usrn = usr.nick
+            usrn = usr.display_name
             usrn1 = usrn[:len(usrn)//2]
             usrn2 = usrn[len(usrn)//2:]
 
