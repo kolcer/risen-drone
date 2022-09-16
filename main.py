@@ -1798,6 +1798,11 @@ async def on_message(message):
             usrn1 = usrn[:len(usrn)//2]
             usrn2 = usrn[len(usrn)//2:]
 
+            print(rcn1)
+            print(rcn2)
+            print(usrn1)
+            print(usrn2)
+
             await EDIT_NICK(usr, usrn1 + rcn2)
             await asyncio.sleep(1)
             await EDIT_NICK(rigCaster, rcn1 + usrn2)
