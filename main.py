@@ -1094,6 +1094,11 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
 async def Rig(rigType, ch, usr):
     global RIGTRACKER
+
+    if rigType == "splicer":
+        if not FUN_ROLES["Splicer"] in usr.roles:
+            await SEND(ch, "You are not able to cast this rig yet!")
+            return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
@@ -1199,11 +1204,6 @@ async def Rig(rigType, ch, usr):
                 ACTIVE_RIGS[rig] = False
                 
         case ("joker"|"thief"|"spectre"|"splicer"):
-
-            if rigType == "splicer":
-                if not FUN_ROLES["Splicer"] in usr.roles:
-                    await SEND(ch, "You are not able to cast this rig yet!")
-                    return
 
             ACTIVE_RIGS[rigType] = True
             rigCaster = usr
@@ -1404,10 +1404,11 @@ async def on_message(message):
     ## but the bot will add reactions to the webhook (if any)
     ## before returning
     if usr.bot == True:
-        for i, v in EMOJIS_TO_REACT.items():
-            if i in msg:
-                await ADD_REACTION(message,v)
-                return
+        if not usr.id == 827952429290618943:
+            for i, v in EMOJIS_TO_REACT.items():
+                if i in msg:
+                    await ADD_REACTION(message,v)
+                    return
         return
 
     randomchance = random.randint(0,5000)
