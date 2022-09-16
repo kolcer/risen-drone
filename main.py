@@ -1095,7 +1095,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 async def Rig(rigType, ch, usr):
     global RIGTRACKER
 
-    if rigType == "splicer":
+    if rigType.lower() == "splicer":
         if not FUN_ROLES["Splicer"] in usr.roles:
             await SEND(ch, "You are not able to cast this rig yet!")
             return
@@ -1109,7 +1109,7 @@ async def Rig(rigType, ch, usr):
         spamCount = RIG_SPAMMERS[usr]
     
     if rigType in LIMITED_USE_RIGS:
-        if spamCount == 10:
+        if spamCount == 2:
             await SEND(ch, "You've been using these commands too often.")
             return
         else:
