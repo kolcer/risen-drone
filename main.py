@@ -1392,6 +1392,7 @@ async def on_message_delete(message):
 async def on_message(message):
 
     global MSG_SENT
+    global ARTISTS
 
     msg = message.content
     usr = message.author
@@ -1413,15 +1414,18 @@ async def on_message(message):
     else:
         MSG_SENT[usr] += 1
 
-    if ch == CHANNELS["bot-testing"]:
-        if not usr in ARTISTS:
+    if ch == CHANNELS["bot-testing"] and message.attachments:
+        if usr not in ARTISTS:
             ARTISTS[usr] = 1
         else:
             ARTISTS[usr] += 1
 
-        if
+        if ARTISTS[usr] == 3:
+            if not FUN_ROLES["Architect Design"] in usr.roles:
+                await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
+                await asyncio.sleep(1)
+                await SEND(ch, "Nice art!")
         
-
     randomchance = random.randint(0,5000)
     eligible = 0
     rolename = ""
