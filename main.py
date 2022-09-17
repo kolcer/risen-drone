@@ -1800,7 +1800,7 @@ async def on_message(message):
             await DELETE(message)
             await asyncio.sleep(2)
 
-            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention + ".")
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
             
             return
 
