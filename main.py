@@ -1400,7 +1400,7 @@ async def on_message(message):
 
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
-    ## before returning
+    ## before returning 
     if usr.bot == True:
         if not usr.id == 827952429290618943:
             for i, v in EMOJIS_TO_REACT.items():
