@@ -195,6 +195,7 @@ FUN_ROLES = {
     "Sanctuary Discoverer": None,
     "Splicer": None,
     "Heretic Defier": None,
+    "Architect Design": None,
 }
 
 #pingable roles, no custom messages
@@ -600,6 +601,7 @@ revivechat = False
 SPLICER_FANS = {}
 MSG_SENT = {}
 LAST_RIG = {}
+ARTISTS = {}
 
 ACTIVE_RIGS = {
     "joker": False,
@@ -1395,11 +1397,6 @@ async def on_message(message):
     usr = message.author
     ch = message.channel
 
-    if usr not in MSG_SENT:
-        MSG_SENT[usr] = 1
-    else:
-        MSG_SENT[usr] += 1
-    
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
     ## before returning
@@ -1410,6 +1407,20 @@ async def on_message(message):
                     await ADD_REACTION(message,v)
                     return
         return
+
+    if usr not in MSG_SENT:
+        MSG_SENT[usr] = 1
+    else:
+        MSG_SENT[usr] += 1
+
+    if ch == CHANNELS["bot-testing"]:
+        if not usr in ARTISTS:
+            ARTISTS[usr] = 1
+        else:
+            ARTISTS[usr] += 1
+
+        if
+        
 
     randomchance = random.randint(0,5000)
     eligible = 0
