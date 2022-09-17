@@ -1415,17 +1415,18 @@ async def on_message(message):
         MSG_SENT[usr] += 1
 
     if ch.id == 845454640103424032 and message.attachments:
-        await ADD_REACTION(message, "❤️")
         if usr not in ARTISTS:
             ARTISTS[usr] = 1
-        else:
+            await ADD_REACTION(message, "🤍")
+        elif ARTISTS[usr] == 1:
             ARTISTS[usr] += 1
-
-        if ARTISTS[usr] == 3:
+            await ADD_REACTION(message, "❤️")
+        else: 
             if not FUN_ROLES["Architect Design"] in usr.roles:
                 await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
                 await asyncio.sleep(1)
-                await SEND(ch, "Nice art!")
+                await SEND(ch, "I like your style.")
+                await ADD_REACTION(message, "❤️‍🔥")
         
     randomchance = random.randint(0,5000)
     eligible = 0
