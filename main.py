@@ -1386,6 +1386,13 @@ async def on_member_join(member):
 async def on_message_delete(message):
   global ghostMsg
   ghostMsg = "*" + str(message.author.display_name) + "'s last words lie here...*"
+
+@client.event
+async def on_reaction_add(reaction, user):
+    if reaction == "🚩":
+        await SEND(reaction.message.channel, "Message was flagged.")
+        await asyncio.sleep(1)
+        await SEND(CHANNELS["bot-testing"], user.mention + " hi.")
     
 #main function on each message being intercepted
 @client.event
