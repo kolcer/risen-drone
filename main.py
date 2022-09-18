@@ -1394,7 +1394,7 @@ async def on_reaction_add(reaction, user):
         msgflag = reaction.message
         chflag  = reaction.message.channel
         
-        if not any(reaction.emoji == emoji for reaction in reaction.message.reactions):
+        if any(reaction.emoji == emoji for reaction in reaction.message.reactions):
             await SEND(chflag, "Message was flagged.")
             await asyncio.sleep(1)
             await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
