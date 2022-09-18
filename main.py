@@ -1390,9 +1390,11 @@ async def on_message_delete(message):
 @client.event
 async def on_reaction_add(reaction, user):
     if reaction.emoji == "🚩":
-        await SEND(reaction.message.channel, "Message was flagged.")
+        msgflag = reaction.message
+        chflag  = reaction.message.channel
+        await SEND(chflag, "Message was flagged.")
         await asyncio.sleep(1)
-        await SEND(CHANNELS["bot-testing"], user.mention + " hi.")
+        await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
     
 #main function on each message being intercepted
 @client.event
