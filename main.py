@@ -1387,22 +1387,22 @@ async def on_message_delete(message):
   global ghostMsg
   ghostMsg = "*" + str(message.author.display_name) + "'s last words lie here...*"
 
-@client.event
-async def on_reaction_add(reaction, user):
-    emoji = "🚩" # some emoji as a string
-    counting = 0
-    if reaction.emoji == emoji:
-        msgflag = reaction.message
-        chflag  = reaction.message.channel
+# @client.event
+# async def on_reaction_add(reaction, user):
+#     emoji = "🚩" # some emoji as a string
+#     counting = 0
+#     if reaction.emoji == emoji:
+#         msgflag = reaction.message
+#         chflag  = reaction.message.channel
 
-        for reaction in reaction.message.reactions:
-            if reaction.emoji == emoji:
-                counting += 1
+#         for reaction in reaction.message.reactions:
+#             if reaction.emoji == emoji:
+#                 counting += 1
         
-        if counting == 1:
-            await SEND(chflag, "Message was flagged.")
-            await asyncio.sleep(1)
-            await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
+#         if counting == 1:
+#             await SEND(chflag, "Message was flagged.")
+#             await asyncio.sleep(1)
+#             await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
 
     
 #main function on each message being intercepted
