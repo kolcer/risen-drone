@@ -1389,7 +1389,7 @@ async def on_message_delete(message):
 
 @client.event
 async def on_reaction_add(reaction, user):
-    if reaction == "🚩":
+    if reaction.emoji == "🚩":
         await SEND(reaction.message.channel, "Message was flagged.")
         await asyncio.sleep(1)
         await SEND(CHANNELS["bot-testing"], user.mention + " hi.")
