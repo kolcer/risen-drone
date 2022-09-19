@@ -1870,7 +1870,7 @@ async def on_message(message):
             
             return
 
-        # Splicer Rig Active 
+        # Splicer Rig Active
         if ACTIVE_RIGS["splicer"]:
             global SPLICER_RIG
 
