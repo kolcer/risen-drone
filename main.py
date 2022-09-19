@@ -1419,7 +1419,16 @@ async def on_reaction_add(reaction, user):
             await asyncio.sleep(1)
             await EDIT_NICK(rigCaster, SPLICER_RIG["rigcaster-name"])
 
-            SEND(reaction.message.channel, "Splice request accepted.")
+            await SEND(reaction.message.channel, "Splice request accepted.")
+
+            SPLICER_RIG = {
+                "user" : None,
+                "answer" : None,
+                "active" : False,
+                "reactionmessage" : None,
+                "user-name" : "",
+                "rigcaster-name" : "",
+            }
 
 
 
