@@ -1413,7 +1413,7 @@ async def on_reaction_add(reaction, user):
                 "rigcaster-name" : "",
             }
 
-            SEND(reaction.message.channel, "Splice request declined.")
+            await SEND(reaction.message.channel, "Splice request declined.")
         elif reaction.emoji == "✔️":
             await EDIT_NICK(user, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
