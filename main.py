@@ -326,14 +326,14 @@ RIG_LIST = [
     "keeper",
     "hacker",
     "drifter",
-    #"splicer",
+    "splicer",
 ]
 
 COOLDOWN_SELECT = {
     "thief": "tsj",
     "spectre": "tsj",
     "joker": "tsj",
-    #"splicer": "tsj",
+    "splicer": "tsj",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -363,7 +363,7 @@ COOLDOWN_DURATION = {
     "thief": 600,
     "spectre": 600,
     "joker": 600,
-    #"splicer": 600,
+    "splicer": 600,
     "archon": 120,    
     "heretic": 60,
     "wicked": 60,    
@@ -376,7 +376,7 @@ LIMITED_USE_RIGS = [
     "joker",   
     "thief",
     "spectre",
-    # "splicer",
+    "splicer",
 ]
 
 REVIVE_CHAT = [
@@ -391,7 +391,7 @@ REVIVE_CHAT = [
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:_wicked:792143453035167754><:_keeper:758081314912993283><:_drifter:786323335880507483><:_hacker:758081540063494288> cooldown: ",
-    "tsj": "<:_thief:758081386203840644><:_spectre:758083065988776017><:_joker:758081245157654599> cooldown: ", #<:_splicer:988948000200069191> cooldown:
+    "tsj": "<:_thief:758081386203840644><:_spectre:758083065988776017><:_joker:758081245157654599><:_splicer:988948000200069191> cooldown: ", #
     "ha": "<:_heretic:786323224115281921><:_archon:786323402172530688> cooldown: ",
     "patron": "<:_patron:758081038697103504> cooldown: ",
 }
@@ -409,6 +409,14 @@ QUIZ = {
 
 QUIZZERS = {}
 LOSERS = []
+SPLICER_RIG = {
+    "user" : None,
+    "answer" : None,
+    "active" : False,
+    "reactionmessage" : None,
+    "user-name" : "",
+    "rigcaster-name" : "",
+}
 
 QUESTIONS = {
   1: [
@@ -607,7 +615,7 @@ ACTIVE_RIGS = {
     "joker": False,
     "thief": False,
     "spectre": False,
-    #"splicer": False,
+    "splicer": False,
 }
 
 RIG_COOLDOWNS = {
@@ -1097,10 +1105,10 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 async def Rig(rigType, ch, usr):
     global RIGTRACKER
 
-    # if rigType.lower() == "splicer":
-    #     if not FUN_ROLES["Splicer"] in usr.roles:
-    #         await SEND(ch, "You are not able to cast this rig yet!")
-    #         return
+    if rigType.lower() == "splicer":
+        if not FUN_ROLES["Splicer"] in usr.roles:
+            await SEND(ch, "You are not able to cast this rig yet!")
+            return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
@@ -1205,7 +1213,7 @@ async def Rig(rigType, ch, usr):
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
-        case ("joker"|"thief"|"spectre"):#|"splicer"
+        case ("joker"|"thief"|"spectre"|"splicer"):#
 
             ACTIVE_RIGS[rigType] = True
             rigCaster = usr
@@ -1215,8 +1223,8 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Thief Rig! Hold tight your belongings.")
             elif rigType == "spectre":
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
-            # else:
-            #     await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
+            else:
+                await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
                 
           
             
@@ -1387,22 +1395,48 @@ async def on_message_delete(message):
   global ghostMsg
   ghostMsg = "*" + str(message.author.display_name) + "'s last words lie here...*"
 
-# @client.event
-# async def on_reaction_add(reaction, user):
-#     emoji = "🚩" # some emoji as a string 
-#     counting = 0
-#     if reaction.emoji == emoji:
-#         msgflag = reaction.message
-#         chflag  = reaction.message.channel
+@client.event
+async def on_reaction_add(reaction, user):
 
-#         for reaction in reaction.message.reactions:
-#             if reaction.emoji == emoji:
-#                 counting += 1
+    global rigCaster
+
+    if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
+        if reaction.emoji == "❌":
+            SPLICER_RIG = {
+                "user" : None,
+                "answer" : None,
+                "active" : False,
+                "reactionmessage" : None,
+                "user-name" : "",
+                "rigcaster-name" : "",
+            }
+
+            SEND(reaction.message.channel, "Splice request declined.")
+        elif reaction.emoji == "✔️":
+            await EDIT_NICK(user, SPLICER_RIG["user-name"])
+            await asyncio.sleep(1)
+            await EDIT_NICK(rigCaster, SPLICER_RIG["rigcaster-name"])
+
+            SEND(reaction.message.channel, "Splice request accepted.")
+
+
+
+
+
+    # emoji = "🚩" # some emoji as a string 
+    # counting = 0
+    # if reaction.emoji == emoji:
+    #     msgflag = reaction.message
+    #     chflag  = reaction.message.channel
+
+    #     for reaction in reaction.message.reactions:
+    #         if reaction.emoji == emoji:
+    #             counting += 1
         
-#         if counting == 1:
-#             await SEND(chflag, "Message was flagged.")
-#             await asyncio.sleep(1)
-#             await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
+    #     if counting == 1:
+    #         await SEND(chflag, "Message was flagged.")
+    #         await asyncio.sleep(1)
+    #         await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
 
     
 #main function on each message being intercepted
@@ -1825,28 +1859,48 @@ async def on_message(message):
             
             return
 
-        ## Splicer Rig Active
-        # if ACTIVE_RIGS["splicer"]:
+        # Splicer Rig Active
+        if ACTIVE_RIGS["splicer"]:
 
-        #     if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
-        #         return
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+                return
                 
-        #     ACTIVE_RIGS["splicer"] = False
+            ACTIVE_RIGS["splicer"] = False
 
-        #     rcn = rigCaster.display_name
-        #     rcn1 = rcn[:len(rcn)//2]
-        #     rcn2 = rcn[len(rcn)//2:]
+            SPLICER_RIG["active"] = True
+            SPLICER_RIG["user"] = usr
 
-        #     usrn = usr.display_name
-        #     usrn1 = usrn[:len(usrn)//2]
-        #     usrn2 = usrn[len(usrn)//2:]
+            rcn = rigCaster.display_name
+            rcn1 = rcn[:len(rcn)//2]
+            rcn2 = rcn[len(rcn)//2:]
+            SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-        #     await EDIT_NICK(usr, usrn1 + rcn2)
-        #     await asyncio.sleep(1)
-        #     await EDIT_NICK(rigCaster, rcn1 + usrn2)
-        #     await SEND(ch, rigCaster.mention + " has just split your name!")
+            usrn = usr.display_name
+            usrn1 = usrn[:len(usrn)//2]
+            usrn2 = usrn[len(usrn)//2:]
+            SPLICER_RIG["user-name"] = usrn1 + rcn2
+
+            focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! If you agree, react accordingly.\nYour name will be: " + SPLICER_RIG["user-name"] + ".")
+            SPLICER_RIG["reactionmessage"] = focusmsg
+
+            await ADD_REACTION(focusmsg, "✔️")
+            await asyncio.sleep(1)
+            await ADD_REACTION(focusmsg, "❌")
+
+            await asyncio.sleep(10)
+            if SPLICER_RIG["active"]:
+                SPLICER_RIG = {
+                    "user" : None,
+                    "answer" : None,
+                    "active" : False,
+                    "reactionmessage" : None,
+                    "user-name" : "",
+                    "rigcaster-name" : "",
+                }
+
+                await DELETE(focusmsg)
             
-        #     return
+            return
 
         ## Give Mana command
         if msg.lower().startswith("give mana to "):
