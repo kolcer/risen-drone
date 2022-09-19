@@ -1389,7 +1389,7 @@ async def on_message_delete(message):
 
 # @client.event
 # async def on_reaction_add(reaction, user):
-#     emoji = "🚩" # some emoji as a string
+#     emoji = "🚩" # some emoji as a string 
 #     counting = 0
 #     if reaction.emoji == emoji:
 #         msgflag = reaction.message
@@ -1481,6 +1481,7 @@ async def on_message(message):
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
+            NickDictionary.clear()
             return
 
         FIX_BOT.append(usr)
