@@ -391,7 +391,7 @@ REVIVE_CHAT = [
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:_wicked:792143453035167754><:_keeper:758081314912993283><:_drifter:786323335880507483><:_hacker:758081540063494288> cooldown: ",
-    "tsj": "<:_thief:758081386203840644><:_spectre:758083065988776017><:_joker:758081245157654599> ", #<:_splicer:988948000200069191> cooldown:
+    "tsj": "<:_thief:758081386203840644><:_spectre:758083065988776017><:_joker:758081245157654599> cooldown: ", #<:_splicer:988948000200069191> cooldown:
     "ha": "<:_heretic:786323224115281921><:_archon:786323402172530688> cooldown: ",
     "patron": "<:_patron:758081038697103504> cooldown: ",
 }
