@@ -409,14 +409,6 @@ QUIZ = {
 
 QUIZZERS = {}
 LOSERS = []
-SPLICER_RIG = {
-    "user" : None,
-    "answer" : None,
-    "active" : False,
-    "reactionmessage" : None,
-    "user-name" : "",
-    "rigcaster-name" : "",
-}
 
 QUESTIONS = {
   1: [
@@ -610,6 +602,15 @@ SPLICER_FANS = {}
 MSG_SENT = {}
 LAST_RIG = {}
 ARTISTS = {}
+
+SPLICER_RIG = {
+    "user" : None,
+    "answer" : None,
+    "active" : False,
+    "reactionmessage" : None,
+    "user-name" : "",
+    "rigcaster-name" : "",
+}
 
 ACTIVE_RIGS = {
     "joker": False,
