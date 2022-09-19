@@ -1400,6 +1400,7 @@ async def on_message_delete(message):
 async def on_reaction_add(reaction, user):
 
     global rigCaster
+    global SPLICER_RIG
 
     if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
         if reaction.emoji == "❌":
@@ -1862,6 +1863,7 @@ async def on_message(message):
 
         # Splicer Rig Active
         if ACTIVE_RIGS["splicer"]:
+            global SPLICER_RIG
 
             if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
                 return
