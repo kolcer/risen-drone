@@ -1876,12 +1876,14 @@ async def on_message(message):
             rcn = rigCaster.display_name
             rcn1 = rcn[:len(rcn)//2]
             rcn2 = rcn[len(rcn)//2:]
-            SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
             usrn = usr.display_name
             usrn1 = usrn[:len(usrn)//2]
             usrn2 = usrn[len(usrn)//2:]
+
+
             SPLICER_RIG["user-name"] = usrn1 + rcn2
+            SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
             focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! If you agree, react accordingly.\nYour name will be: " + SPLICER_RIG["user-name"] + ".")
             SPLICER_RIG["reactionmessage"] = focusmsg
