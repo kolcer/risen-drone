@@ -1414,7 +1414,7 @@ async def on_reaction_add(reaction, user):
             }
 
             await SEND(reaction.message.channel, "Splice request declined.")
-        elif reaction.emoji == "✔️":
+        elif reaction.emoji == "✅":
             await EDIT_NICK(user, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
             await EDIT_NICK(rigCaster, SPLICER_RIG["rigcaster-name"])
@@ -1897,9 +1897,9 @@ async def on_message(message):
             focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! If you agree, react accordingly.\nYour name will be: " + SPLICER_RIG["user-name"] + ".")
             SPLICER_RIG["reactionmessage"] = focusmsg
 
-            await ADD_REACTION(focusmsg, "✔️")
-            await asyncio.sleep(1)
             await ADD_REACTION(focusmsg, "❌")
+            await asyncio.sleep(1)
+            await ADD_REACTION(focusmsg, "✅")
 
             await asyncio.sleep(10)
             if SPLICER_RIG["active"]:
