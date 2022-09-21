@@ -1901,7 +1901,7 @@ async def on_message(message):
             await asyncio.sleep(1)
             await ADD_REACTION(focusmsg, "✅")
 
-            await asyncio.sleep(10)
+            await asyncio.sleep(60)
             if SPLICER_RIG["active"]:
                 SPLICER_RIG = {
                     "user" : None,
