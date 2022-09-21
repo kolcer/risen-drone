@@ -209,6 +209,8 @@ PING_ROLES = {
         None,
     "Updates":
         None,
+    "Minigames":
+        None,
 }
 IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
 
@@ -1599,7 +1601,7 @@ async def on_message(message):
             #activates the quiz, activates looking for second player.
             QUIZ["active"] = True
             QUIZ["second-player"] = True
-            await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
+            await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
             #if no one joins within 10 seconds, event is forced closed.
             await asyncio.sleep(10)
@@ -1723,7 +1725,7 @@ async def on_message(message):
                 MG_CHANNEL = ch
                 MG_TICK = time.time()
                 ourTick = MG_TICK
-                await SEND(ch, usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
+                await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
                 await asyncio.sleep(60)
                 if MG_STATUS == "gather" and ourTick == MG_TICK:
                     await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
