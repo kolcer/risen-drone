@@ -1912,7 +1912,7 @@ async def on_message(message):
                     "rigcaster-name" : "",
                 }
 
-                await DELETE(focusmsg)
+                await ADD_REACTION(focusmsg, "🛑")
             
             return
 
