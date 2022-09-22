@@ -769,9 +769,6 @@ async def updateRigTracker(rigType):
         if rigType.upper() in i:
             #currentnumber = i.split(" ")[1].replace(",","")
             currentnumber = db.get(rigType.lower() + "uses")
-            print(currentnumber)
-            print(db.get("keeperuses"))
-            print(db.get(rigType.lower() + "uses"))
 
             #i = i.replace(currentnumber, str(int(currentnumber) + 1))
             db.set(rigType.lower() + "uses", int(currentnumber) + 1)
@@ -1293,6 +1290,9 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     game = discord.Game("Sleazel's Revenge")
     await client.change_presence(activity=game)
+
+    listse = {}
+    db.set("showcase", listse)
 
     #get the guild
     global SERVER
