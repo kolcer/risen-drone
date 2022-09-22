@@ -1291,9 +1291,6 @@ async def on_ready():
     game = discord.Game("Sleazel's Revenge")
     await client.change_presence(activity=game)
 
-    listse = {}
-    db.set("showcase", listse)
-
     #get the guild
     global SERVER
     global RIGTRACKER
