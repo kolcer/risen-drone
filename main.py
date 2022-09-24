@@ -1893,7 +1893,7 @@ async def on_message(message):
             SPLICER_RIG["user-name"] = usrn1 + rcn2
             SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-            focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! React to proceed.\nYour name will be: " + SPLICER_RIG["user-name"] + ".\nTheir name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
+            focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + rigCaster.name + "#" + rigCaster.discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
             SPLICER_RIG["reactionmessage"] = focusmsg
 
             await ADD_REACTION(focusmsg, "❌")
