@@ -1429,26 +1429,6 @@ async def on_reaction_add(reaction, user):
                 "rigcaster-name" : "",
             }
 
-
-
-
-
-    # emoji = "🚩" # some emoji as a string 
-    # counting = 0
-    # if reaction.emoji == emoji:
-    #     msgflag = reaction.message
-    #     chflag  = reaction.message.channel
-
-    #     for reaction in reaction.message.reactions:
-    #         if reaction.emoji == emoji:
-    #             counting += 1
-        
-    #     if counting == 1:
-    #         await SEND(chflag, "Message was flagged.")
-    #         await asyncio.sleep(1)
-    #         await SEND(CHANNELS["bot-testing"], user.mention + " has reported this message:\n" + msgflag.jump_url)
-
-    
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
@@ -1476,37 +1456,37 @@ async def on_message(message):
     else:
         MSG_SENT[usr] += 1
 
-    if ch.id == 845454640103424032 and message.attachments:
-        if usr not in ARTISTS:
-            ARTISTS[usr] = 1
-            await ADD_REACTION(message, "🤍")
-        elif ARTISTS[usr] == 1:
-            ARTISTS[usr] += 1
-            await ADD_REACTION(message, "❤️")
-        else: 
-            if not FUN_ROLES["Architect Design"] in usr.roles:
-                await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
-                await asyncio.sleep(1)
-                await SEND(ch, "I like your style.")
-                await ADD_REACTION(message, "❤️‍🔥")
+    # if ch.id == 845454640103424032 and message.attachments:
+    #     if usr not in ARTISTS:
+    #         ARTISTS[usr] = 1
+    #         await ADD_REACTION(message, "🤍")
+    #     elif ARTISTS[usr] == 1:
+    #         ARTISTS[usr] += 1
+    #         await ADD_REACTION(message, "❤️")
+    #     else: 
+    #         if not FUN_ROLES["Architect Design"] in usr.roles:
+    #             await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
+    #             await asyncio.sleep(1)
+    #             await SEND(ch, "I like your style.")
+    #             await ADD_REACTION(message, "❤️‍🔥")
         
-    randomchance = random.randint(0,5000)
-    eligible = 0
-    rolename = ""
+    # randomchance = random.randint(0,5000)
+    # eligible = 0
+    # rolename = ""
 
-    if randomchance == 0:
-        for role in usr.roles:
-            if role.name.lower() in SANCTUARY:
-                eligible = eligible + 1                
-                if eligible == 1:
-                    rolename = role.name.lower()
+    # if randomchance == 0:
+    #     for role in usr.roles:
+    #         if role.name.lower() in SANCTUARY:
+    #             eligible = eligible + 1                
+    #             if eligible == 1:
+    #                 rolename = role.name.lower()
 
         
-        if eligible == 1:
-            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
-            await asyncio.sleep(1)
-            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
-                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+    #     if eligible == 1:
+    #         await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
+    #         await asyncio.sleep(1)
+    #         if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
+    #             await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
@@ -1519,32 +1499,32 @@ async def on_message(message):
     global MG_TICK
     global FIX_BOT
     
-    if msg.lower() == "reset bot" and usr not in FIX_BOT:
-        if ADMIN in usr.roles:
-            await SEND(ch, "All Games have been resetted.")
-            FIX_BOT.clear()
-            FORCE_CLOSE_EVENT()
-            MG_RESET()
-            NickDictionary.clear()
-            return
+    # if msg.lower() == "reset bot" and usr not in FIX_BOT:
+    #     if ADMIN in usr.roles:
+    #         await SEND(ch, "All Games have been resetted.")
+    #         FIX_BOT.clear()
+    #         FORCE_CLOSE_EVENT()
+    #         MG_RESET()
+    #         NickDictionary.clear()
+    #         return
 
-        FIX_BOT.append(usr)
-        if len(FIX_BOT) == 1:
-            await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
-        elif len(FIX_BOT) == 2:
-            await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
-        else:
-            await SEND(ch, "All Games have been resetted.")
-            FIX_BOT.clear()
-            FORCE_CLOSE_EVENT()
-            MG_RESET()
+    #     FIX_BOT.append(usr)
+    #     if len(FIX_BOT) == 1:
+    #         await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
+    #     elif len(FIX_BOT) == 2:
+    #         await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
+    #     else:
+    #         await SEND(ch, "All Games have been resetted.")
+    #         FIX_BOT.clear()
+    #         FORCE_CLOSE_EVENT()
+    #         MG_RESET()
 
 
-        await asyncio.sleep(60)
-        if len(FIX_BOT) != 0:
-            await SEND(ch, "Games have not been resetted due to lack of users asking to.")
-            FIX_BOT.clear()
-        return
+    #     await asyncio.sleep(60)
+    #     if len(FIX_BOT) != 0:
+    #         await SEND(ch, "Games have not been resetted due to lack of users asking to.")
+    #         FIX_BOT.clear()
+    #     return
 
     #mini game in progress
     if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
