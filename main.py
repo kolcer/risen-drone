@@ -1456,6 +1456,10 @@ async def on_message(message):
     else:
         MSG_SENT[usr] += 1
 
+
+    if ch.id == 845454640103424032 and not message.attachments:
+        await DELETE(message)
+
     # if ch.id == 845454640103424032 and message.attachments:
     #     if usr not in ARTISTS:
     #         ARTISTS[usr] = 1
