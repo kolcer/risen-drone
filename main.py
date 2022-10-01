@@ -212,7 +212,7 @@ PING_ROLES = {
     "Minigames":
         None,
 }
-IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel", "Wicked"]
+IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
 
 #bot will react to the webhook emoji, if it finds in a webhook message
 #values will be replaced by emoji objects during startup
