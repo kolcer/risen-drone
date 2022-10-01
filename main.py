@@ -1458,7 +1458,10 @@ async def on_message(message):
 
 
     if ch.id == 845454640103424032 and not message.attachments:
-        await DELETE(message)
+        if any(role in usr.roles for role in IMMUNITY_ROLES):
+            return
+        else:
+            await DELETE(message)
 
     # if ch.id == 845454640103424032 and message.attachments:
     #     if usr not in ARTISTS:
