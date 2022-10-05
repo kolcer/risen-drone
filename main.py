@@ -415,8 +415,8 @@ LOSERS = []
 QUESTIONS = {
   1: [
     "Which game am I playing right now?",
-    ["Crazy Stairs", "Lucid Ladders", "Sleazel's Revenge", "Adopt Me!"],
-    "sleazel's revenge",
+    ["Crazy Stairs", "Lucid Ladders", "Fall damage in Crazy Stairs", "Adopt Me!"],
+    "fall damage in crazy stairs",
     " got it right, but that was pretty easy. Let's move on now.",
     "There was no way for you to get this wrong yet you surprise me!",
   ],
@@ -1288,7 +1288,7 @@ async def MG_LOOP(toSend):
 async def on_ready():
     
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("Sleazel's Revenge")
+    game = discord.Game("Fall damage in Crazy Stairs")
     await client.change_presence(activity=game)
 
     #get the guild
