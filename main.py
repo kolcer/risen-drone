@@ -1466,37 +1466,37 @@ async def on_message(message):
 
             
 
-    # if ch.id == 845454640103424032 and message.attachments:
-    #     if usr not in ARTISTS:
-    #         ARTISTS[usr] = 1
-    #         await ADD_REACTION(message, "🤍")
-    #     elif ARTISTS[usr] == 1:
-    #         ARTISTS[usr] += 1
-    #         await ADD_REACTION(message, "❤️")
-    #     else: 
-    #         if not FUN_ROLES["Architect Design"] in usr.roles:
-    #             await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
-    #             await asyncio.sleep(1)
-    #             await SEND(ch, "I like your style.")
-    #             await ADD_REACTION(message, "❤️‍🔥")
+    if ch.id == 845454640103424032 and message.attachments:
+        if usr not in ARTISTS:
+            ARTISTS[usr] = 1
+            await ADD_REACTION(message, "🤍")
+        elif ARTISTS[usr] == 1:
+            ARTISTS[usr] += 1
+            await ADD_REACTION(message, "❤️")
+        else: 
+            if not FUN_ROLES["Architect Design"] in usr.roles:
+                await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
+                await asyncio.sleep(1)
+                await SEND(ch, "I like your style.")
+                await ADD_REACTION(message, "❤️‍🔥")
         
-    # randomchance = random.randint(0,5000)
-    # eligible = 0
-    # rolename = ""
+    randomchance = random.randint(0,5000)
+    eligible = 0
+    rolename = ""
 
-    # if randomchance == 0:
-    #     for role in usr.roles:
-    #         if role.name.lower() in SANCTUARY:
-    #             eligible = eligible + 1                
-    #             if eligible == 1:
-    #                 rolename = role.name.lower()
+    if randomchance == 0:
+        for role in usr.roles:
+            if role.name.lower() in SANCTUARY:
+                eligible = eligible + 1                
+                if eligible == 1:
+                    rolename = role.name.lower()
 
         
-    #     if eligible == 1:
-    #         await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
-    #         await asyncio.sleep(1)
-    #         if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
-    #             await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+        if eligible == 1:
+            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
+            await asyncio.sleep(1)
+            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
+                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
     if msg.startswith(">"):
@@ -1509,32 +1509,32 @@ async def on_message(message):
     global MG_TICK
     global FIX_BOT
     
-    # if msg.lower() == "reset bot" and usr not in FIX_BOT:
-    #     if ADMIN in usr.roles:
-    #         await SEND(ch, "All Games have been resetted.")
-    #         FIX_BOT.clear()
-    #         FORCE_CLOSE_EVENT()
-    #         MG_RESET()
-    #         NickDictionary.clear()
-    #         return
+    if msg.lower() == "reset bot" and usr not in FIX_BOT:
+        if ADMIN in usr.roles:
+            await SEND(ch, "All Games have been resetted.")
+            FIX_BOT.clear()
+            FORCE_CLOSE_EVENT()
+            MG_RESET()
+            NickDictionary.clear()
+            return
 
-    #     FIX_BOT.append(usr)
-    #     if len(FIX_BOT) == 1:
-    #         await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
-    #     elif len(FIX_BOT) == 2:
-    #         await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
-    #     else:
-    #         await SEND(ch, "All Games have been resetted.")
-    #         FIX_BOT.clear()
-    #         FORCE_CLOSE_EVENT()
-    #         MG_RESET()
+        FIX_BOT.append(usr)
+        if len(FIX_BOT) == 1:
+            await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
+        elif len(FIX_BOT) == 2:
+            await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
+        else:
+            await SEND(ch, "All Games have been resetted.")
+            FIX_BOT.clear()
+            FORCE_CLOSE_EVENT()
+            MG_RESET()
 
 
-    #     await asyncio.sleep(60)
-    #     if len(FIX_BOT) != 0:
-    #         await SEND(ch, "Games have not been resetted due to lack of users asking to.")
-    #         FIX_BOT.clear()
-    #     return
+        await asyncio.sleep(60)
+        if len(FIX_BOT) != 0:
+            await SEND(ch, "Games have not been resetted due to lack of users asking to.")
+            FIX_BOT.clear()
+        return
 
     #mini game in progress
     if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
@@ -1580,124 +1580,124 @@ async def on_message(message):
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
 
-        # #start the quiz
-        # if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
-        #     #add user to the quiz users with 0 points.
-        #     QUIZZERS[usr] = 0
+        #start the quiz
+        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
+            #add user to the quiz users with 0 points.
+            QUIZZERS[usr] = 0
 
-        #     #activates the quiz, activates looking for second player.
-        #     QUIZ["active"] = True
-        #     QUIZ["second-player"] = True
-        #     await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
+            #activates the quiz, activates looking for second player.
+            QUIZ["active"] = True
+            QUIZ["second-player"] = True
+            await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
-        #     #if no one joins within 10 seconds, event is forced closed.
-        #     await asyncio.sleep(10)
-        #     if QUIZ["second-player"] == True:
-        #         await SEND(ch, "Nobody joined in time. Event is concluded.")
-        #         FORCE_CLOSE_EVENT()
-        #     return
+            #if no one joins within 10 seconds, event is forced closed.
+            await asyncio.sleep(10)
+            if QUIZ["second-player"] == True:
+                await SEND(ch, "Nobody joined in time. Event is concluded.")
+                FORCE_CLOSE_EVENT()
+            return
 
-        # #join an ongoing quiz
-        # if ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
-        #     #disables looking for second player
-        #     QUIZ["second-player"] = False
-        #     #adds the new user to the quiz users
-        #     QUIZZERS[usr] = 0
-        #     #preparation to announce the two players
-        #     users = list(QUIZZERS.keys())
-        #     quizzerson = users[0].mention + " and " + users[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
-        #     await SEND(ch, quizzerson)
-        #     #turn started from 0, now it begins
-        #     QUIZ["turn"] += 1
-        #     QUIZ["cturn"] = 1
-        #     #prevents other people from talking while there is a quiz. avoids suggestions.
-        #     #(this command cannot be used outside of bot-commands)
-        #     await asyncio.sleep(2)
-        #     await SEND(ch, "Beyond this point, any message sent from non-participating Users will be deleted.")
-        #     #proceeds with the next(first in this case) question
-        #     await asyncio.sleep(2)
-        #     await nextQuestion(ch)
-        #     #after starting, check if the round has been going on for more than 30 seconds.
-        #     #if positive, close the event and send the message
-        #     if await CLOSE_EVENT():
-        #         await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
-        #     return
+        #join an ongoing quiz
+        if ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+            #disables looking for second player
+            QUIZ["second-player"] = False
+            #adds the new user to the quiz users
+            QUIZZERS[usr] = 0
+            #preparation to announce the two players
+            users = list(QUIZZERS.keys())
+            quizzerson = users[0].mention + " and " + users[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
+            await SEND(ch, quizzerson)
+            #turn started from 0, now it begins
+            QUIZ["turn"] += 1
+            QUIZ["cturn"] = 1
+            #prevents other people from talking while there is a quiz. avoids suggestions.
+            #(this command cannot be used outside of bot-commands)
+            await asyncio.sleep(2)
+            await SEND(ch, "Beyond this point, any message sent from non-participating Users will be deleted.")
+            #proceeds with the next(first in this case) question
+            await asyncio.sleep(2)
+            await nextQuestion(ch)
+            #after starting, check if the round has been going on for more than 30 seconds.
+            #if positive, close the event and send the message
+            if await CLOSE_EVENT():
+                await SEND(ch, "Event is concluded because both parts couldn't answer my very simple question.")
+            return
 
-        # if ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
-        #     if usr not in QUIZZERS:
-        #         await DELETE(message)
-        #         return
+        if ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
+            if usr not in QUIZZERS:
+                await DELETE(message)
+                return
             
-        #     #if one of the two wants to stop they can feel free to
-        #     if lmsg == "stop quiz":
-        #         await SEND(ch, showScores() + usr.mention + " stopped the Quiz. Event is over.")
-        #         FORCE_CLOSE_EVENT()
-        #         return
+            #if one of the two wants to stop they can feel free to
+            if lmsg == "stop quiz":
+                await SEND(ch, showScores() + usr.mention + " stopped the Quiz. Event is over.")
+                FORCE_CLOSE_EVENT()
+                return
 
-        #     #each user gets one try at guessing the answer.
-        #     #if you lost your attempt, wait for the other user to guess (or fail... concluding the event)
-        #     if usr in LOSERS:
-        #         await SEND(ch, "You have wasted your chance. Let the other User play now.")
-        #         return
+            #each user gets one try at guessing the answer.
+            #if you lost your attempt, wait for the other user to guess (or fail... concluding the event)
+            if usr in LOSERS:
+                await SEND(ch, "You have wasted your chance. Let the other User play now.")
+                return
 
-        #     #if the answer is not correct enter here
-        #     if lmsg != QUESTIONS[QUIZ["rng"]][2].lower():
-        #         #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
-        #         #then a loser they become.
-        #         if usr not in LOSERS:
-        #             LOSERS.append(usr)
+            #if the answer is not correct enter here
+            if lmsg != QUESTIONS[QUIZ["rng"]][2].lower():
+                #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
+                #then a loser they become.
+                if usr not in LOSERS:
+                    LOSERS.append(usr)
 
-        #         #no return here. after adding a user, checks if both users are losers
-        #         #if they are, the event gets forced closed.
-        #         if len(LOSERS) == 2:
-        #             await SEND(ch, showScores() + "Both players have not answered the question correctly. Event is over.")
-        #             FORCE_CLOSE_EVENT()
-        #             return
+                #no return here. after adding a user, checks if both users are losers
+                #if they are, the event gets forced closed.
+                if len(LOSERS) == 2:
+                    await SEND(ch, showScores() + "Both players have not answered the question correctly. Event is over.")
+                    FORCE_CLOSE_EVENT()
+                    return
 
-        #         #if it is the first user to get the answer wrong, then show fallen's disappointment.
-        #         await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
-        #         return
+                #if it is the first user to get the answer wrong, then show fallen's disappointment.
+                await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
+                return
 
-        #     #go here instead if the answer it not incorrect (which means it is correct indeed)
-        #     #show fallen's approval to the guessing user.
-        #     QUIZ["can-answer"] = False
-        #     finalmsg = ""
-        #     if QUIZ["turn"] + 1 > len(QUESTIONS):
-        #       finalmsg = QUESTIONS[QUIZ["rng"]][3]
-        #     else:
-        #       finalmsg = QUESTIONS[QUIZ["rng"]][3] + "\nBoth Players can now answer the next question."
-        #     await SEND(ch, usr.mention + finalmsg)
-        #     #the user who misguessed the answered gets a second chance (might it be the second or third depending on the round tho-)
-        #     LOSERS.clear()
-        #     #guesser gains 1 point
-        #     QUIZZERS[usr] += 1
-        #     #to the next turn we go (unless we want the same question to repeat itself)
-        #     QUIZ["turn"] += 1
-        #     await asyncio.sleep(5)
+            #go here instead if the answer it not incorrect (which means it is correct indeed)
+            #show fallen's approval to the guessing user.
+            QUIZ["can-answer"] = False
+            finalmsg = ""
+            if QUIZ["turn"] + 1 > len(QUESTIONS):
+              finalmsg = QUESTIONS[QUIZ["rng"]][3]
+            else:
+              finalmsg = QUESTIONS[QUIZ["rng"]][3] + "\nBoth Players can now answer the next question."
+            await SEND(ch, usr.mention + finalmsg)
+            #the user who misguessed the answered gets a second chance (might it be the second or third depending on the round tho-)
+            LOSERS.clear()
+            #guesser gains 1 point
+            QUIZZERS[usr] += 1
+            #to the next turn we go (unless we want the same question to repeat itself)
+            QUIZ["turn"] += 1
+            await asyncio.sleep(5)
 
-        #     #go here if there are no more questions
-        #     if QUIZ["turn"] > len(QUESTIONS):
-        #         highscore = -1
-        #         for i in QUIZZERS:
-        #             if QUIZZERS[i] > highscore:
-        #                 winner = i
-        #                 highscore = QUIZZERS[i]
-        #             elif QUIZZERS[i] == highscore:
-        #                 await SEND(ch, showScores() + "That's a tie. But we do not like ties. Play again.")
-        #                 FORCE_CLOSE_EVENT()
-        #                 return
+            #go here if there are no more questions
+            if QUIZ["turn"] > len(QUESTIONS):
+                highscore = -1
+                for i in QUIZZERS:
+                    if QUIZZERS[i] > highscore:
+                        winner = i
+                        highscore = QUIZZERS[i]
+                    elif QUIZZERS[i] == highscore:
+                        await SEND(ch, showScores() + "That's a tie. But we do not like ties. Play again.")
+                        FORCE_CLOSE_EVENT()
+                        return
 
-        #         #and the winner is (not you)
-        #         await SEND(ch, showScores() + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
-        #         FORCE_CLOSE_EVENT()
-        #         return
+                #and the winner is (not you)
+                await SEND(ch, showScores() + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
+                FORCE_CLOSE_EVENT()
+                return
 
-        #     #if there are more questions go here
-        #     #after going to the next round check if the next round lasts more than 30 seconds
-        #     await nextQuestion(ch)
-        #     if await CLOSE_EVENT():
-        #         await SEND(ch, showScores() + "Event is concluded because both parts couldn't answer my very simple question.")
-        #     return      
+            #if there are more questions go here
+            #after going to the next round check if the next round lasts more than 30 seconds
+            await nextQuestion(ch)
+            if await CLOSE_EVENT():
+                await SEND(ch, showScores() + "Event is concluded because both parts couldn't answer my very simple question.")
+            return      
 
         #start mini game
         if lmsg == "play lucid ladders":
@@ -1735,281 +1735,281 @@ async def on_message(message):
 
         # ## All Rigs in one
 
-        # if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
-        #     global LAST_RIG
-        #     rigPick = lsplit[1]
-        #     if rigPick == "chameleon":
-        #         cd = False
-        #         for active in RIG_COOLDOWNS.values():
-        #             if active:
-        #                 cd = True
-        #                 break
-        #         if cd:
-        #             cdList = ""
-        #             for i, v in RIG_COOLDOWNS.items():
-        #                 cdList += COOLDOWN_DESCRIPTIONS[i]
-        #                 if v:
-        #                     cdList += ":x: \n"
-        #                 else:
-        #                     cdList += ":white_check_mark: \n"
-        #             await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
-        #             return
+        if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
+            global LAST_RIG
+            rigPick = lsplit[1]
+            if rigPick == "chameleon":
+                cd = False
+                for active in RIG_COOLDOWNS.values():
+                    if active:
+                        cd = True
+                        break
+                if cd:
+                    cdList = ""
+                    for i, v in RIG_COOLDOWNS.items():
+                        cdList += COOLDOWN_DESCRIPTIONS[i]
+                        if v:
+                            cdList += ":x: \n"
+                        else:
+                            cdList += ":white_check_mark: \n"
+                    await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
+                    return
 
-        #         await SEND(ch, "*drum roll*")
-        #         await asyncio.sleep(4)
-        #         await Rig(random.choice(RIG_LIST),ch,usr)
-        #         return
-        #     if rigPick not in RIG_LIST and rigPick != "necromancer":
-        #         await SEND(ch, "That is not a valid rig. Try again.")
-        #         return
+                await SEND(ch, "*drum roll*")
+                await asyncio.sleep(4)
+                await Rig(random.choice(RIG_LIST),ch,usr)
+                return
+            if rigPick not in RIG_LIST and rigPick != "necromancer":
+                await SEND(ch, "That is not a valid rig. Try again.")
+                return
 
-        #     LAST_RIG[usr] = str(rigPick) + " Rig"
+            LAST_RIG[usr] = str(rigPick) + " Rig"
 
-        #     if rigPick == "necromancer":
-        #       await necromancer(ch)
-        #       return
+            if rigPick == "necromancer":
+              await necromancer(ch)
+              return
 
-        #     await Rig(rigPick,ch,usr)
-        #     return
+            await Rig(rigPick,ch,usr)
+            return
 
-        # ## thief rig active
-        # if ACTIVE_RIGS["thief"]:
-        #     tooLong = False
+        ## thief rig active
+        if ACTIVE_RIGS["thief"]:
+            tooLong = False
             
-        #     if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
-        #         return
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
+                return
 
                             
-        #     if len(rigCaster.display_name + ", " + usr.display_name) > 32:
-        #         await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
-        #         await asyncio.sleep(1)
-        #         await EDIT_NICK(rigCaster, ".")
-        #         tooLong = True
+            if len(rigCaster.display_name + ", " + usr.display_name) > 32:
+                await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
+                await asyncio.sleep(1)
+                await EDIT_NICK(rigCaster, ".")
+                tooLong = True
 
-        #     ACTIVE_RIGS["thief"] = False
-        #     victim = usr.display_name
+            ACTIVE_RIGS["thief"] = False
+            victim = usr.display_name
 
-        #     NickDictionary[usr] = "N/A"
+            NickDictionary[usr] = "N/A"
 
-        #     if not usr.id == 481893862864846861:
-        #         await EDIT_NICK(usr, "N/A")
+            if not usr.id == 481893862864846861:
+                await EDIT_NICK(usr, "N/A")
 
-        #     await asyncio.sleep(1)
+            await asyncio.sleep(1)
             
-        #     # if rigCaster in NickDictionary:
-        #     #     if tooLong:
-        #     #         NickDictionary[rigCaster] = victim
-        #     #     else:
-        #     #         NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+            # if rigCaster in NickDictionary:
+            #     if tooLong:
+            #         NickDictionary[rigCaster] = victim
+            #     else:
+            #         NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
 
-        #     #     await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
-        #     #     await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
+            #     await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
+            #     await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
 
-        #     #     if tooLong == True:
-        #     #         await asyncio.sleep(1)
-        #     #         await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
+            #     if tooLong == True:
+            #         await asyncio.sleep(1)
+            #         await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
 
-        #     #     await asyncio.sleep(300) #300#1800 
-        #     #     del NickDictionary[rigCaster]
+            #     await asyncio.sleep(300) #300#1800 
+            #     del NickDictionary[rigCaster]
 
-        #     #     return
+            #     return
                 
-        #     await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
-        #     await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
+            await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
+            await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
 
 
-        #     if tooLong == True:
-        #         await asyncio.sleep(1)
-        #         await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
+            if tooLong == True:
+                await asyncio.sleep(1)
+                await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
             
-        #     await asyncio.sleep(300) #300#1800 
-        #     del NickDictionary[usr]
-        #     return
+            await asyncio.sleep(300) #300#1800 
+            del NickDictionary[usr]
+            return
 
-        # ## Spectre Rig Active
-        # if ACTIVE_RIGS["spectre"]:
+        ## Spectre Rig Active
+        if ACTIVE_RIGS["spectre"]:
                 
-        #     if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
-        #         return
-        #     ACTIVE_RIGS["spectre"] = False
+            if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
+                return
+            ACTIVE_RIGS["spectre"] = False
 
-        #     chances = random.randint(0, 1)
+            chances = random.randint(0, 1)
 
-        #     if chances == 1:
-        #         await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
-        #         await DELETE(message)
-        #         return
+            if chances == 1:
+                await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
+                await DELETE(message)
+                return
 
-        #     await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
-        #     return
+            await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
+            return
 
-        # ## Joker Rig Active
-        # if ACTIVE_RIGS["joker"]:
+        ## Joker Rig Active
+        if ACTIVE_RIGS["joker"]:
                 
-        #     if (ch.name not in CHANNELS) or (not CLIMBER in usr.roles) or ("https" in msg) or (len(msg) > 45):
-        #         return
-        #     ACTIVE_RIGS["joker"] = False
+            if (ch.name not in CHANNELS) or (not CLIMBER in usr.roles) or ("https" in msg) or (len(msg) > 45):
+                return
+            ACTIVE_RIGS["joker"] = False
 
-        #     msgcontent = message.content
+            msgcontent = message.content
 
-        #     await DELETE(message)
-        #     await asyncio.sleep(2)
+            await DELETE(message)
+            await asyncio.sleep(2)
 
-        #     await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
+            await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
             
-        #     return
+            return
 
-        # # Splicer Rig Active
-        # if ACTIVE_RIGS["splicer"]:
-        #     global SPLICER_RIG
+        # Splicer Rig Active
+        if ACTIVE_RIGS["splicer"]:
+            global SPLICER_RIG
 
-        #     if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
-        #         return
+            if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+                return
                 
-        #     ACTIVE_RIGS["splicer"] = False
+            ACTIVE_RIGS["splicer"] = False
 
-        #     SPLICER_RIG["active"] = True
-        #     SPLICER_RIG["user"] = usr
+            SPLICER_RIG["active"] = True
+            SPLICER_RIG["user"] = usr
 
-        #     rcn = rigCaster.display_name
-        #     rcn1 = rcn[:len(rcn)//2]
-        #     rcn2 = rcn[len(rcn)//2:]
+            rcn = rigCaster.display_name
+            rcn1 = rcn[:len(rcn)//2]
+            rcn2 = rcn[len(rcn)//2:]
 
-        #     usrn = usr.display_name
-        #     usrn1 = usrn[:len(usrn)//2]
-        #     usrn2 = usrn[len(usrn)//2:]
+            usrn = usr.display_name
+            usrn1 = usrn[:len(usrn)//2]
+            usrn2 = usrn[len(usrn)//2:]
 
 
-        #     SPLICER_RIG["user-name"] = usrn1 + rcn2
-        #     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
+            SPLICER_RIG["user-name"] = usrn1 + rcn2
+            SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-        #     focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + rigCaster.name + "#" + rigCaster.discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
-        #     SPLICER_RIG["reactionmessage"] = focusmsg
+            focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + rigCaster.name + "#" + rigCaster.discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
+            SPLICER_RIG["reactionmessage"] = focusmsg
 
-        #     await ADD_REACTION(focusmsg, "❌")
-        #     await asyncio.sleep(1)
-        #     await ADD_REACTION(focusmsg, "✅")
+            await ADD_REACTION(focusmsg, "❌")
+            await asyncio.sleep(1)
+            await ADD_REACTION(focusmsg, "✅")
 
-        #     await asyncio.sleep(60)
-        #     if SPLICER_RIG["active"]:
-        #         SPLICER_RIG = {
-        #             "user" : None,
-        #             "answer" : None,
-        #             "active" : False,
-        #             "reactionmessage" : None,
-        #             "user-name" : "",
-        #             "rigcaster-name" : "",
-        #         }
+            await asyncio.sleep(60)
+            if SPLICER_RIG["active"]:
+                SPLICER_RIG = {
+                    "user" : None,
+                    "answer" : None,
+                    "active" : False,
+                    "reactionmessage" : None,
+                    "user-name" : "",
+                    "rigcaster-name" : "",
+                }
 
-        #         await ADD_REACTION(focusmsg, "🛑")
+                await ADD_REACTION(focusmsg, "🛑")
             
-        #     return
+            return
 
-        # ## Give Mana command
-        # if msg.lower().startswith("give mana to "):
-        #     global POSSESSED
-        #     role = POSSESSED
-        #     split_message = msg.split(" ", 3)
-        #     target = split_message[3].lower()
-        #     for member in SERVER.members:
-        #         if member.name.lower() + "#" + member.discriminator == target:
-        #             if role in member.roles:
-        #                 await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
-        #                 await asyncio.sleep(3)
-        #                # await member.remove_roles(role)
-        #                 await REMOVE_ROLES(member, role)
-        #                 await asyncio.sleep(1)
-        #                 if not FUN_ROLES["Heretic Defier"] in usr.roles:
-        #                     await ADD_ROLES(usr, FUN_ROLES["Heretic Defier"])
-        #             else:
-        #                 await SEND(message.channel,
-        #                     member.display_name +
-        #                     " received your Mana, but they do not seem to need it."
-        #                 )
-        #             return
-        #     await SEND(message.channel,
-        #         "Who are you trying to share your Mana with?")
-        #     return
+        ## Give Mana command
+        if msg.lower().startswith("give mana to "):
+            global POSSESSED
+            role = POSSESSED
+            split_message = msg.split(" ", 3)
+            target = split_message[3].lower()
+            for member in SERVER.members:
+                if member.name.lower() + "#" + member.discriminator == target:
+                    if role in member.roles:
+                        await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
+                        await asyncio.sleep(3)
+                       # await member.remove_roles(role)
+                        await REMOVE_ROLES(member, role)
+                        await asyncio.sleep(1)
+                        if not FUN_ROLES["Heretic Defier"] in usr.roles:
+                            await ADD_ROLES(usr, FUN_ROLES["Heretic Defier"])
+                    else:
+                        await SEND(message.channel,
+                            member.display_name +
+                            " received your Mana, but they do not seem to need it."
+                        )
+                    return
+            await SEND(message.channel,
+                "Who are you trying to share your Mana with?")
+            return
 
                  
-        # ## Scold command
-        # if lmsg.startswith("fallen drone scold "):
-        #     finalmsg = None
-        #     for member in SERVER.members:
-        #         if member.name.lower() + "#" + member.discriminator == lsplit[3]:
-        #             ScoldDict = getScoldDictionary(member, usr)
-        #             # Scold someone in the Dictionary (User itself included)
-        #             if member.id in ScoldDict:
-        #                 finalmsg = ScoldDict[member.id]
-        #             # Scolding a Bot
-        #             elif member.bot:
-        #                 finalmsg = "I love my bot friends."
-        #             # Scolding an User that is in the Server
-        #             else:
-        #                 finalmsg = member.display_name + ", I am very disappointed in you."
-        #             await SEND(ch,finalmsg)
-        #             return
-        #     # Scolding an User that is NOT in the Server
-        #     await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
-        #     return
+        ## Scold command
+        if lmsg.startswith("fallen drone scold "):
+            finalmsg = None
+            for member in SERVER.members:
+                if member.name.lower() + "#" + member.discriminator == lsplit[3]:
+                    ScoldDict = getScoldDictionary(member, usr)
+                    # Scold someone in the Dictionary (User itself included)
+                    if member.id in ScoldDict:
+                        finalmsg = ScoldDict[member.id]
+                    # Scolding a Bot
+                    elif member.bot:
+                        finalmsg = "I love my bot friends."
+                    # Scolding an User that is in the Server
+                    else:
+                        finalmsg = member.display_name + ", I am very disappointed in you."
+                    await SEND(ch,finalmsg)
+                    return
+            # Scolding an User that is NOT in the Server
+            await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
+            return
 
-        # ## Show Profile
-        # if lmsg == "fd show profile":
-        #     messages = ""
-        #     profilemsg = str(usr.display_name) + "'s roles:\n\n"
-        #     for role in FUN_ROLES:
-        #         if FUN_ROLES[role] in usr.roles:
-        #             profilemsg += "**" + str(role) + "**\n"
-        #         else:
-        #             profilemsg += "**???**\n"
+        ## Show Profile
+        if lmsg == "fd show profile":
+            messages = ""
+            profilemsg = str(usr.display_name) + "'s roles:\n\n"
+            for role in FUN_ROLES:
+                if FUN_ROLES[role] in usr.roles:
+                    profilemsg += "**" + str(role) + "**\n"
+                else:
+                    profilemsg += "**???**\n"
 
-        #     if usr not in MSG_SENT:
-        #         messages = "0"
-        #     else:
-        #         messages = MSG_SENT[usr]
+            if usr not in MSG_SENT:
+                messages = "0"
+            else:
+                messages = MSG_SENT[usr]
 
-        #     if usr not in LAST_RIG:
-        #         lastrig = "None"
-        #     else:
-        #         lastrig = LAST_RIG[usr]
+            if usr not in LAST_RIG:
+                lastrig = "None"
+            else:
+                lastrig = LAST_RIG[usr]
 
-        #     profilemsg += "\n" + str(usr.display_name) + "'s stats:\n\n"
-        #     profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-        #     profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
+            profilemsg += "\n" + str(usr.display_name) + "'s stats:\n\n"
+            profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
+            profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
             
-        #     await SEND(ch, profilemsg)
+            await SEND(ch, profilemsg)
 
-        # ## Revive Chat Command
-        # if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
-        #     global revivechat
-        #     #chat has to be dead, duh
-        #     if not revivechat:
-        #         await SEND(ch, "This chat is very much alive, I am afraid.")
-        #         return
+        ## Revive Chat Command
+        if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
+            global revivechat
+            #chat has to be dead, duh
+            if not revivechat:
+                await SEND(ch, "This chat is very much alive, I am afraid.")
+                return
 
-        #     #only chat killers can use the command
-        #     if not CKR in message.author.roles:
-        #         await SEND(ch, "It is not your fault.")
-        #         return
+            #only chat killers can use the command
+            if not CKR in message.author.roles:
+                await SEND(ch, "It is not your fault.")
+                return
 
-        #     await SEND(ch, "Reedeming yourself? Alright.")
-        #     await asyncio.sleep(2)
-        #     await SEND(ch, random.choice(REVIVE_CHAT))
-        #     revivechat = False
-        #     return
+            await SEND(ch, "Reedeming yourself? Alright.")
+            await asyncio.sleep(2)
+            await SEND(ch, random.choice(REVIVE_CHAT))
+            revivechat = False
+            return
 
-        # ## Splicer role assignment
-        # if "<:_splicer:988948000200069191>" in msg:
-        #     if usr in SPLICER_FANS:
-        #         if SPLICER_FANS[usr] == 3:
-        #             if not FUN_ROLES["Splicer"] in usr.roles:
-        #                 await ADD_ROLES(usr, FUN_ROLES["Splicer"])
-        #                 await asyncio.sleep(1)
-        #                 await SEND(ch, "Ok... there you go.")
-        #         else:
-        #             SPLICER_FANS[usr] += 1
-        #     else:
-        #         SPLICER_FANS[usr] = 1
+        ## Splicer role assignment
+        if "<:_splicer:988948000200069191>" in msg:
+            if usr in SPLICER_FANS:
+                if SPLICER_FANS[usr] == 3:
+                    if not FUN_ROLES["Splicer"] in usr.roles:
+                        await ADD_ROLES(usr, FUN_ROLES["Splicer"])
+                        await asyncio.sleep(1)
+                        await SEND(ch, "Ok... there you go.")
+                else:
+                    SPLICER_FANS[usr] += 1
+            else:
+                SPLICER_FANS[usr] = 1
 
         #morph command
         if lmsg.startswith("morph to"):
