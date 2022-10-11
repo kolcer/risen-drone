@@ -1429,6 +1429,19 @@ async def on_reaction_add(reaction, user):
                 "rigcaster-name" : "",
             }
 
+@client.event
+async def on_message_edit(before, after):
+    msg = after.content
+    usr = after.author
+    ch = after.channel
+
+    if ch.id == 845454640103424032 and (not after.attachments and 'http' not in msg):
+        for role in usr.roles:
+            if role.name in IMMUNITY_ROLES:
+                return
+
+        await DELETE(after)
+
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
