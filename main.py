@@ -1661,7 +1661,7 @@ async def on_message(message):
                     LOSERS.append(usr)
 
                 #no return here. after adding a user, checks if both users are losers
-                #if they are, the event gets forced closed.
+                #if they are, the event continues.
                 if len(LOSERS) == 2:
                     await SEND(ch, showScores() + "Both players have not answered the question correctly...")
                     #go here if there are no more questions
@@ -1684,6 +1684,9 @@ async def on_message(message):
                     #if there are more questions go here
                     #after going to the next round check if the next round lasts more than 30 seconds
                     await nextQuestion(ch)
+                    if await CLOSE_EVENT():
+                        await SEND(ch, showScores() + "Event is concluded because both parts couldn't answer my very simple question.")
+                    return   
 
             #go here instead if the answer it not incorrect (which means it is correct indeed)
             #show fallen's approval to the guessing user.
