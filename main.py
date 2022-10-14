@@ -1663,13 +1663,27 @@ async def on_message(message):
                 #no return here. after adding a user, checks if both users are losers
                 #if they are, the event gets forced closed.
                 if len(LOSERS) == 2:
-                    await SEND(ch, showScores() + "Both players have not answered the question correctly. Event is over.")
-                    FORCE_CLOSE_EVENT()
-                    return
+                    await SEND(ch, showScores() + "Both players have not answered the question correctly...")
+                    #go here if there are no more questions
+                    if QUIZ["turn"] > len(QUESTIONS):
+                        highscore = -1
+                        for i in QUIZZERS:
+                            if QUIZZERS[i] > highscore:
+                                winner = i
+                                highscore = QUIZZERS[i]
+                            elif QUIZZERS[i] == highscore:
+                                await SEND(ch, showScores() + "That's a tie. But we do not like ties. Play again.")
+                                FORCE_CLOSE_EVENT()
+                                return
 
-                #if it is the first user to get the answer wrong, then show fallen's disappointment.
-                await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
-                return
+                        #and the winner is (not you)
+                        await SEND(ch, showScores() + winner.mention + " correctly answered most of the questions and won the Event. Felicitations.")
+                        FORCE_CLOSE_EVENT()
+                        return
+
+                    #if there are more questions go here
+                    #after going to the next round check if the next round lasts more than 30 seconds
+                    await nextQuestion(ch)
 
             #go here instead if the answer it not incorrect (which means it is correct indeed)
             #show fallen's approval to the guessing user.
