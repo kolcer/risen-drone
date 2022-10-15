@@ -1757,7 +1757,7 @@ async def on_message(message):
                 await SEND(ch, "That is not a valid rig. Try again.")
                 return
 
-            if ch != CHANNELS["bot-commands"]:
+            if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"]:
                 await Rig("heretic",ch,usr)
                 return
 
