@@ -1750,6 +1750,9 @@ async def on_message(message):
 
         if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
 
+            global LAST_RIG
+            rigPick = lsplit[1]
+
             if rigPick not in RIG_LIST and rigPick != "necromancer":
                 await SEND(ch, "That is not a valid rig. Try again.")
                 return
@@ -1758,8 +1761,6 @@ async def on_message(message):
                 await Rig("heretic",ch,usr)
                 return
 
-            global LAST_RIG
-            rigPick = lsplit[1]
             if rigPick == "chameleon":
                 cd = False
                 for active in RIG_COOLDOWNS.values():
