@@ -1750,7 +1750,7 @@ async def on_message(message):
 
         if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
 
-            if ch != CHANNELS["bot-testing"] and ch != CHANNELS["bot-commands"]:
+            if ch != CHANNELS["bot-commands"]:
                 await Rig("heretic",ch,usr)
                 return
 
