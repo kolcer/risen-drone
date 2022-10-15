@@ -1750,6 +1750,10 @@ async def on_message(message):
 
         if lsplit[0] == "cast" and lsplit[2] == "rig":# and (usr.id == 267014823315898368 or usr.id == 894573836366934047):
 
+            if rigPick not in RIG_LIST and rigPick != "necromancer":
+                await SEND(ch, "That is not a valid rig. Try again.")
+                return
+
             if ch != CHANNELS["bot-commands"]:
                 await Rig("heretic",ch,usr)
                 return
@@ -1776,9 +1780,6 @@ async def on_message(message):
                 await SEND(ch, "*drum roll*")
                 await asyncio.sleep(4)
                 await Rig(random.choice(RIG_LIST),ch,usr)
-                return
-            if rigPick not in RIG_LIST and rigPick != "necromancer":
-                await SEND(ch, "That is not a valid rig. Try again.")
                 return
 
             LAST_RIG[usr] = str(rigPick) + " Rig"
