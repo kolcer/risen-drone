@@ -1753,7 +1753,7 @@ async def on_message(message):
             global LAST_RIG
             rigPick = lsplit[1]
 
-            if rigPick not in RIG_LIST and rigPick != "necromancer":
+            if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
                 await SEND(ch, "That is not a valid rig. Try again.")
                 return
 
