@@ -1879,6 +1879,7 @@ async def on_message(message):
             await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
 
             if usr.id == "267014823315898368" and FUN_ROLES["Pranked the Creator"] not in rigCaster.roles:
+                print("usr pranked ROlo and doesn't have the role already")
                 await ADD_ROLES(rigCaster, FUN_ROLES["Pranked the Creator"])
             
             return
