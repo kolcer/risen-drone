@@ -196,6 +196,7 @@ FUN_ROLES = {
     "Splicer": None,
     "Heretic Defier": None,
     "Architect Design": None,
+    "Pranked the Creator": None,
 }
 
 #pingable roles, no custom messages
@@ -1876,6 +1877,9 @@ async def on_message(message):
             await asyncio.sleep(2)
 
             await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
+
+            if usr.id == "267014823315898368" and FUN_ROLES["Pranked the Creator"] not in rigCaster.roles:
+                await ADD_ROLES(rigCaster, FUN_ROLES["Pranked the Creator"])
             
             return
 
