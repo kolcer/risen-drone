@@ -82,66 +82,92 @@ MORPHABLE_ROLES = {
         None,
         "Go help those noobs, you are now a Patron!",
         "What about protecting the noobs? Without a Patron around they will be lost.",
+        "You are already assisting the noobs, why would you help them twice?",
+        "Nobody has seen you around lately, what are you doing?",
     ],
     "Joker": [ 
         None,
         "As if there weren't enough clowns here, you are now a Joker!",
         "Did you run out of jokes? The Joker guild will hear about this.",
+        "Nice joke.",
+        "You were not a Joker, but you are a Clown now for sure.",
     ],
     "Wicked": [ 
         None,
         "Unleash all your wickedness, you are now a Wicked!",
         "You destroyed everything and left nothing behind. Thank you for your services, a Wicked is not needed anymore.",
+        "You have been destroying the stairs until now...",
+        "You are not a Wicked...",
     ],
     "Spectre": [ 
-       None,
-       "Our quote's founder has been identified, you are now a Spectre.",
-       "Once again, Spectre's Founder went MIA.",
+        None,
+        "Spectre guild quote's founder has been identified, you are now a Spectre.",
+        "Once again, Spectre's Founder went MIA.",
+        "We have already found you, or are you planning to leave?",
+        "Your soul didn't belong here to begin with.",
     ],
     "Keeper": [ 
-       None,
-       "The staircase is now under your supervision, you successfully became a Keeper.",
-       "You failed to take care of the stairs, and so you are no longer a Keeper.",
+        None,
+        "The staircase is now under your supervision, you successfully became a Keeper.",
+        "You failed to take care of the stairs, and so you are no longer a Keeper.",
+        "Do you need help cleaning the stairs?",
+        "The stairs do not recognise you anyway.",
     ],
     "Muggle": [ 
-       None,
-       "Work smarter, not harder. You are now a Muggle!",
-       "The tower was too overwhelming for a weakling like you. Your Muggle license has been revoked.",
+        None,
+        "Work smarter, not harder. You are now a Muggle!",
+        "The tower was too overwhelming for a weakling like you. Your Muggle license has been revoked.",
+        "Are you having an identity crisis?",
+        "Once a weakling, always a weakling.",
     ],
     "Chameleon": [ 
-       None,
-       "Do not let them know your next move, you are now a Chameleon!",
-       "You had many options, yet you came back. You do not get to be a Chameleon anymore.",
+        None,
+        "Do not let them know your next move, you are now a Chameleon!",
+        "You had many options, yet you came back. You do not get to be a Chameleon anymore.",
+        "You cannot morph to Chameleon via Chameleon, duh.",
+        "I know a Chameleon when I see one, and you aren't one.",
     ],
     "Hacker": [ 
         None,
-       "Welcome to the backdoor, you are now a Hacker!",
-       "You tried to execute some code but as a result you accidentally removed your Hacker permissions.",
+        "Welcome to the backdoor, you are now a Hacker!",
+        "You tried to execute some code but as a result you accidentally removed your Hacker permissions.",
+        "You are already inside...",
+        "You do not seem to be a cheater, no reason to remove your permissions.",
     ],
     "Thief": [ 
         None,
         "Is it really called borrowing? You are now a Thief!",
         "You actually gave me back the role? How generous. But also that doesn't make you a Thief anymore.",
+        "The thief guild has already hired you.",
+        "The thief guild has never seen you before.",
      ],
     "Archon": [ 
         None,
         "Typo fixed, happy? You are now an Archon!",
         "Traveling between portals has been fun, but fun eventually comes to an end. You are no longer an Archon.",
+        "I have already corrected the typo.",
+        "Do you want the fun to end twice?",
      ],
      "Drifter": [ 
         None,
         "You took the elevator and rose to the top. You are now a Drifter.",
         "I saw you taking the stairs, you are no longer a Drifter.",
+        "Isn't that you traveling on the platforms?",
+        "You are still taking the stairs.",
      ],
      "Heretic": [ 
         None,
         "We have banned dark magic, but you do not seem to care. You successfully became a Heretic.",
         "The circle has made their decision. You are permanently banned from being a Heretic ever again.",
+        "You cared enough to join again?",
+        "You are banned from being a Heretic ever again.",
     ],
      "Guns": [ 
         None,
         "smh, FINE!",
         "Finally you came to your senses.",
+        "SMH! FINE!",
+        "You are not a gun.",
      ],
 }
 
@@ -2037,12 +2063,18 @@ async def on_message(message):
             role = lsplit[2].capitalize()
             if role == "Gun":
                 role = "Guns"
+
             if role in MORPHABLE_ROLES:
                 if role == "Guns":
                     await EDIT_NICK(usr,random.choice(WORST_GUNS))
-                await SEND(ch,MORPHABLE_ROLES[role][1])
-                await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
+
+                if MORPHABLE_ROLES[role][0] in usr.roles:
+                    await SEND(ch,MORPHABLE_ROLES[role][3])
+                else:
+                    await SEND(ch,MORPHABLE_ROLES[role][1])
+                    await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
+
             if role in SPECIAL_ROLES:
                 if SPECIAL_ROLES[role][0] in usr.roles:
                     await SEND(ch,SPECIAL_ROLES[role][2])
@@ -2055,10 +2087,20 @@ async def on_message(message):
             role = lsplit[2].capitalize()
             if role == "Gun":
                 role = "Guns"
+                
+            # if role in MORPHABLE_ROLES:
+            #     await SEND(ch,MORPHABLE_ROLES[role][2])
+            #     await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
+            #     return
+
             if role in MORPHABLE_ROLES:
-                await SEND(ch,MORPHABLE_ROLES[role][2])
-                await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
+                if MORPHABLE_ROLES[role][0] not in usr.roles:
+                    await SEND(ch,MORPHABLE_ROLES[role][4])
+                else:
+                    await SEND(ch,MORPHABLE_ROLES[role][2])
+                    await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
+                
             if role in SPECIAL_ROLES:
                 if SPECIAL_ROLES[role][0] in usr.roles:
                     await SEND(ch,SPECIAL_ROLES[role][4])
