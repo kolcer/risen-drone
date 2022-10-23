@@ -2098,7 +2098,7 @@ async def on_message(message):
                     await SEND(ch,MORPHABLE_ROLES[role][4])
                 else:
                     await SEND(ch,MORPHABLE_ROLES[role][2])
-                    await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
+                    await REMOVE_ROLES(usr,MORPHABLE_ROLES[role][0])
                 return
                 
             if role in SPECIAL_ROLES:
