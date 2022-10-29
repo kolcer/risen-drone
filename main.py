@@ -393,7 +393,7 @@ COOLDOWN_DURATION = {
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
-    "archon": 120,    
+    "archon": 240,    
     "heretic": 60,
     "wicked": 60,    
     "keeper": 20,
