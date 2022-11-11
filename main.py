@@ -1428,7 +1428,7 @@ async def on_reaction_add(reaction, user):
     global rigCaster
     global SPLICER_RIG
 
-    if reaction.emoji.name == "csSleazelApproves" and user.id != 481893862864846861:
+    if (reaction.emoji.name == "csSleazelApproves" or reaction.emoji.name == "csSleazelNotApproved") and user.id != 481893862864846861:
         await SEND(reaction.message.channel, "Smh.")
 
 
