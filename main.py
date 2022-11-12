@@ -1502,6 +1502,9 @@ async def on_message(message):
                     return
         return
 
+    if usr.id == 861582242023079987:
+        return
+
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
     else:
