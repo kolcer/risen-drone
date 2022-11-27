@@ -244,6 +244,18 @@ IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
 #bot will react to the webhook emoji, if it finds in a webhook message
 #values will be replaced by emoji objects during startup
 EMOJIS_TO_REACT = {
+    "csPatron": 758081038697103504,
+    "csJoker": 758081245157654599,
+    "csWicked": 792143453035167754,
+    "csSpectre": 1046200431342272512,
+    "csMuggle": 758081353932603414,
+    "csChameleon": 792458534641074197,
+    "csKeeper": 758081314912993283,
+    "csThief": 758081386203840644,
+    "csHacker": 758081540063494288,
+    "csHeretic": 786323224115281921,
+    "csArchon": 786323402172530688,
+    "csDrifter": 786323335880507483,
     "csSaviour": 1046199993188483163,
     "csIt": 1046199856793923635,
     "csAnnihilator": 1046199281633206303,
