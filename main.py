@@ -223,6 +223,7 @@ FUN_ROLES = {
     "Heretic Defier": None,
     "Architect Design": None,
     "Pranked the Creator": None,
+    "I was there": None,
 }
 
 #pingable roles, no custom messages
@@ -1516,6 +1517,10 @@ async def on_message(message):
 
     if usr.id == 861582242023079987:
         return
+
+    if msg.lower() == "fallen drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
+        await SEND(ch, "I will remember your sympathy.")
+        await ADD_ROLES(usr, FUN_ROLES["I was there"])
 
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
