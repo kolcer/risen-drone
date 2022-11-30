@@ -1470,7 +1470,7 @@ async def on_reaction_add(reaction, user):
                 "rigcaster-name" : "",
             }
 
-    if (reaction.emoji.name == "csSleazelApproves" or reaction.emoji.name == "csSleazelNotApproved") and user.id != 481893862864846861:
+    if (reaction.emoji == "csSleazelApproves" or reaction.emoji == "csSleazelNotApproved") and user.id != 481893862864846861:
         await reaction.remove(user)
 
 @client.event
