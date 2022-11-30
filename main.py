@@ -1328,7 +1328,7 @@ async def MG_LOOP(toSend):
 async def on_ready():
     
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("Sleazel's Revenge")
+    game = discord.Game("Bioforge")
     await client.change_presence(activity=game)
 
     #get the guild
@@ -1518,9 +1518,9 @@ async def on_message(message):
     if usr.id == 861582242023079987:
         return
 
-    if msg.lower() == "fallen drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
-        await SEND(ch, "I will remember your sympathy.")
-        await ADD_ROLES(usr, FUN_ROLES["I was there"])
+    #if msg.lower() == "fallen drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
+        #await SEND(ch, "I will remember your sympathy.")
+       # await ADD_ROLES(usr, FUN_ROLES["I was there"])
 
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
