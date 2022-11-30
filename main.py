@@ -9,7 +9,7 @@ from datetime import date
 import time
 from difflib import SequenceMatcher
 
-## CONSTANTS ##
+## CONSTANTS ####
 
 #chatt killer requires 2 hours of inactivity(in seconds)
 CHAT_KILLER_WAIT = 7200
