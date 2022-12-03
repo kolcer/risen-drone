@@ -21,8 +21,8 @@ MINI_GAME_MAX_WAIT = 30
 SERVER = 624227331720085528
 RIGTRACKER = 1004326588021743667
 
-#fallen drone name (to prevent impostors)
-FALLEN_DRONE_NICK = "FALLEN DRONE"
+#broken drone name (to prevent impostors)
+BROKEN_DRONE_NICK = "BROKEN DRONE"
 
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
@@ -299,8 +299,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['bug', 'tutorial'], 
     "Haha. You got stuck in stairs!":
         ['stuck', 'stairs'],
-    "I fell, okay?":
-        ['fallen', 'drone', 'how', "?"],
+    "I fell and broke, okay?":
+        ['broken', 'drone', 'how', "?"],
     "Are you expecting me to answer with None?": 
         ['worst', 'alignment', '?'], 
     "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
@@ -320,7 +320,7 @@ MULTIPLE_WORD_TRIGGERS = {
 #first word is required and any of the pool of rest of the words
 MIXED_WORD_TRIGGERS = {
     "Hello!":   [
-        'fallen drone', 
+        'broken drone', 
         ["hi", "hello", "howdy", "sup"],
     ],
     "Wrong.": [
@@ -455,8 +455,8 @@ LOSERS = []
 QUESTIONS = {
   1: [
     "Which game am I playing right now?",
-    ["Crazy Stairs", "Lucid Ladders", "Sleazel's Revenge", "Adopt Me!"],
-    "sleazel's revenge",
+    ["Crazy Stairs", "Lucid Ladders", "Sleazel's Revenge", "Bioforge"],
+    "bioforge",
     " got it right, but that was pretty easy. Let's move on now.",
     "There was no way for you to get this wrong yet you surprise me!",
   ],
@@ -478,9 +478,9 @@ QUESTIONS = {
   ],
 
   4: [
-    "How did I become Fallen Drone?",
-    ["I asked Sleazel", "I fell", "Someone pushed me causing my fall", "I aged"],
-    "i fell",
+    "How did I become Broken Drone?",
+    ["Sleazel punched me", "I fell and broke", "Someone threw me against a wall", "I aged"],
+    "i fell and broke",
     " knows me all too well.",
     "Wrong.",
   ],
@@ -519,14 +519,14 @@ QUESTIONS = {
 
   9: [
     "Which of these names Sleazel has never used in Discord?",
-    ["Sleazy Guy", "Malcolm", "Sleaz", "Archon"],
-    "sleazy guy",
+    ["Sleazy Guy", "Malcolm", "Keeper", "Archon"],
+    "keeper",
     " has been stalking Sleazel.",
     "Better luck next time.",
   ],
 
   10: [
-    "How were the Drones originally referred as?",
+    "How were the Drones originally referred to as?",
     ["Keepers", "Drones", "Overseers", "Guardians"],
     "keepers",
     " was paying attention during class.",
@@ -1518,7 +1518,7 @@ async def on_message(message):
     if usr.id == 861582242023079987:
         return
 
-    #if msg.lower() == "fallen drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
+    #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
        # await ADD_ROLES(usr, FUN_ROLES["I was there"])
 
@@ -1636,15 +1636,15 @@ async def on_message(message):
         #by some other command
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
  
-        #fallen drone impostor prevention
-        compare = SequenceMatcher(None, usr.display_name.upper(), FALLEN_DRONE_NICK)
+        #broken drone impostor prevention
+        compare = SequenceMatcher(None, usr.display_name.upper(), BROKEN_DRONE_NICK)
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
             return
 
         #start the quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "fallen drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
+        if ch == CHANNELS["bot-commands"] and lmsg == "broken drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
             #add user to the quiz users with 0 points.
             QUIZZERS[usr] = 0
 
@@ -1717,12 +1717,12 @@ async def on_message(message):
                     FORCE_CLOSE_EVENT()
                     return
 
-                #if it is the first user to get the answer wrong, then show fallen's disappointment.
+                #if it is the first user to get the answer wrong, then show broken's disappointment.
                 await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
                 return
 
             #go here instead if the answer it not incorrect (which means it is correct indeed)
-            #show fallen's approval to the guessing user.
+            #show broken's approval to the guessing user.
             QUIZ["can-answer"] = False
             finalmsg = ""
             if QUIZ["turn"] + 1 > len(QUESTIONS):
@@ -2003,7 +2003,7 @@ async def on_message(message):
 
                  
         ## Scold command
-        if lmsg.startswith("fallen drone scold "):
+        if lmsg.startswith("broken drone scold "):
             finalmsg = None
             for member in SERVER.members:
                 if member.name.lower() + "#" + member.discriminator == lsplit[3]:
@@ -2024,7 +2024,7 @@ async def on_message(message):
             return
 
         ## Show Profile
-        if lmsg == "fd show profile":
+        if lmsg == "bd show profile":
             messages = ""
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
             for role in FUN_ROLES:
