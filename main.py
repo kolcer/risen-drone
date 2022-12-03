@@ -27,12 +27,8 @@ BROKEN_DRONE_NICK = "BROKEN DRONE"
 #special roles
 #roles that bot can assing to, but not by a regular user commannd
 #values replaced by roles on startup
-POSSESSED = 988572669521842197
-MURDURATOR = "Murdurators"
-CLIMBER = "Climbers"
 
 #this is for administrating tips and trivia database
-ADMIN = 993446701090222160
 
 #channels where bot is allowed to post  
 CHANNELS = {
@@ -1139,12 +1135,6 @@ async def on_ready():
         CHANNELS[i] = GET_CHANNEL(v)
     
     RIGTRACKER = await getmsg(RIGTRACKER)
-    #prepare the roles
-    global CKR
-    global POSSESSED
-    global MURDURATOR
-    global CLIMBER
-    global ADMIN
 
     PrepareRoles(SERVER.roles)
 
