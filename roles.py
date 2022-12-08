@@ -5,10 +5,6 @@ Last = 0
 #chatt killer requires 2 hours of inactivity(in seconds)
 CHAT_KILLER_WAIT = 7200
 CKR = 951424560685805588
-POSSESSED = 988572669521842197
-MURDURATOR = "Murdurators"
-CLIMBER = "Climbers"
-ADMIN = 993446701090222160
 
 #worst guns ever made for the gun role
 WORST_GUNS = [
@@ -223,13 +219,6 @@ async def EDIT_ROLE(targetrole, newname, motivation):
   await targetrole.edit(name = newname, reason = motivation)
 
 def PrepareRoles(serverRoles):
-    #prepare the roles
-    global CKR
-    global POSSESSED
-    global MURDURATOR
-    global CLIMBER
-    global ADMIN
-
     for role in serverRoles:
         #morphable
         if role.name in MORPHABLE_ROLES:
