@@ -60,11 +60,52 @@ async def on_ready():
     RIGTRACKER = await GET_MSG(CHANNELS["bot-testing"],RIGTRACKER)
 
     #prepare the roles
-    PrepareRoles(SERVER.roles)
-    
-    #fetch questions for the quiz
-    FetchQuestions()
-
+    global CKR
+    global POSSESSED
+    global MURDURATOR
+    global CLIMBER
+    global ADMIN
+    for role in SERVER.roles:
+        #morphable
+        if role.name in MORPHABLE_ROLES:
+            MORPHABLE_ROLES[role.name][0] = role
+            continue
+        #ping roles
+        if role.name in PING_ROLES:
+            PING_ROLES[role.name] = role
+            continue
+        if role.name in SPECIAL_ROLES:
+            SPECIAL_ROLES[role.name][0] = role
+            continue
+        #chat killer
+        if role.id == CKR:
+            CKR = role
+            SPECIAL_ROLES["Ultimate"][0] = role
+            continue
+        #possessed (for the rig)
+        if role.id == POSSESSED:
+            POSSESSED = role
+            SPECIAL_ROLES["Possessed"][0] = role
+            continue
+        #climber
+        if role.name == CLIMBER:
+            CLIMBER = role
+            SPECIAL_ROLES["Climber"][0] = role
+        #architect
+        if role.name == "Architect (Booster)":
+            SPECIAL_ROLES["Architect"][0] = role
+            continue
+        #murdurator
+        if role.name == MURDURATOR:
+            MURDURATOR = role
+        #drone tips/tricks admins
+        if role.id == ADMIN:
+            ADMIN = role
+        #fun roles
+        if role.name in FUN_ROLES:
+            FUN_ROLES[role.name] = role
+            continue
+            
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
@@ -139,6 +180,7 @@ async def on_message(message):
 
     global MSG_SENT
     global ARTISTS
+    global ADMIN
 
     msg = message.content
     usr = message.author
