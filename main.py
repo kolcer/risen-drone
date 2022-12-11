@@ -36,7 +36,20 @@ async def PRINT_ENTRIES(channel,key):
             combined_string = new_string
     await SEND(channel,combined_string)
 
-
+#print questions
+async def PRINT_QUESTIONS(channel):
+    entries = list_entries('quiz')
+    combined_string = ""
+    for i in range(len(entries)):
+        entry = entries[i].decode("utf-8")
+        split = entry.split('|')
+        new_string = combined_string + str(i) + ") " + split[0] + "\n"
+        if len(new_string) > 2000:
+            await SEND(channel,combined_string)
+            combined_string = str(i) + ") " + split[0] + "\n"
+        else:
+            combined_string = new_string
+    await SEND(channel,combined_string)
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
 #drone start up, prepare roles here
@@ -78,6 +91,8 @@ async def on_ready():
         #drone admin
         if role.id == ADMIN:
             ADMIN = role
+            print(role.id)
+            print(role.name)
             continue
         #chat killer
         if role.id == CKR:
@@ -103,15 +118,14 @@ async def on_ready():
         #murdurator
         if role.id == MURDURATOR:
             MURDURATOR = role
-        #drone tips/tricks admins
-        if role.id == ADMIN:
-            ADMIN = role
         #fun roles
         if role.name in FUN_ROLES:
             FUN_ROLES[role.name] = role
-            continue
-
+            continue    
             
+    #fetch questions for the quiz
+    await FetchQuestions()
+
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
@@ -162,7 +176,7 @@ async def on_message_delete(message):
 @client.event
 async def on_reaction_add(reaction, user):
 
-    SplicerRig(reaction,user)
+    await SplicerRig(reaction,user)
 
     if (reaction.emoji == "csSleazelApproves" or reaction.emoji == "csSleazelNotApproved") and user.id != 481893862864846861:
         await reaction.remove(user)
@@ -187,6 +201,7 @@ async def on_message(message):
     global MSG_SENT
     global ARTISTS
     global ADMIN
+    global RIGTRACKER
 
     msg = message.content
     usr = message.author
@@ -263,6 +278,8 @@ async def on_message(message):
     global FIX_BOT
 
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
+        print(ADMIN.name)
+    
         if ADMIN in usr.roles:
             await SEND(ch, "All Games have been resetted.")
             FIX_BOT.clear()
@@ -642,7 +659,8 @@ async def on_message(message):
                 toSend += "\nA2:\n" + qSplit[2] + "\nA3:\n" + qSplit[3] + "\nA4:\n" + qSplit[4]
                 toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
                 await SEND(ch,toSend)
-
+            elif split[1] == 'list':
+                await PRINT_QUESTIONS(ch)
             elif split[1] == "delete":
                 delete_entry("quiz",int(split[2]))
                 await SEND(ch,"Question at index " + split[2] + " has been deleted." )

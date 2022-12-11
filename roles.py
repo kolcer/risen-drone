@@ -3,6 +3,7 @@ import random
 from rated import *
 from globals import *
 
+
 async def MorphTo(usr,role):
     if role == "Gun":
         role = "Guns"
