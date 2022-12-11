@@ -41,12 +41,12 @@ async def PRINT_QUESTIONS(channel):
     entries = list_entries('quiz')
     combined_string = ""
     for i in range(len(entries)):
-        entry = entries[i]
+        entry = entries[i].decode("utf-8")
         split = entry.split('|')
-        new_string = combined_string + str(i) + ") " + split[1].decode("utf-8") + "\n"
+        new_string = combined_string + str(i) + ") " + split[0] + "\n"
         if len(new_string) > 2000:
             await SEND(channel,combined_string)
-            combined_string = str(i) + ") " + split[1].decode("utf-8") + "\n"
+            combined_string = str(i) + ") " + split[0] + "\n"
         else:
             combined_string = new_string
     await SEND(channel,combined_string)
