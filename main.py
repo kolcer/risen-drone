@@ -139,6 +139,7 @@ async def on_message(message):
 
     global MSG_SENT
     global ARTISTS
+    global ADMIN
 
     msg = message.content
     usr = message.author
