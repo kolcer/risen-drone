@@ -3,60 +3,6 @@ import random
 from rated import *
 from globals import *
 
-def PrepareRoles(serverRoles):
-    #prepare the roles
-    global CKR
-    global POSSESSED
-    global MURDURATOR
-    global CLIMBER
-    global ADMIN
-
-    for role in serverRoles:
-        #morphable
-        if role.name in MORPHABLE_ROLES:
-            MORPHABLE_ROLES[role.name][0] = role
-            continue
-        #ping roles
-        if role.name in PING_ROLES:
-            PING_ROLES[role.name] = role
-            continue
-        #drone admin
-        if role.id == ADMIN:
-            ADMIN = role
-            print(role.id)
-            print(role.name)
-            continue
-        #chat killer
-        if role.id == CKR:
-            CKR = role
-            SPECIAL_ROLES["Ultimate"][0] = role
-            continue
-        #possessed (for the rig)
-        if role.id == POSSESSED:
-            POSSESSED = role
-            SPECIAL_ROLES['Possessed'][0] = role
-        #climber
-        if role.id == CLIMBER:
-            CLIMBER = role
-            SPECIAL_ROLES["Climber"][0] = role
-        #architect
-        if role.name == "Architect (Booster)":
-            SPECIAL_ROLES["Architect"][0] = role
-            continue
-        #discord admin
-        if role.name == 'Admin':
-            SPECIAL_ROLES['Admin'][0] = role
-            continue
-        #murdurator
-        if role.id == MURDURATOR:
-            MURDURATOR = role
-        #drone tips/tricks admins
-        #if role.id == ADMIN:
-            #ADMIN = role
-        #fun roles
-        if role.name in FUN_ROLES:
-            FUN_ROLES[role.name] = role
-            continue
 
 async def MorphTo(usr,role):
     if role == "Gun":
