@@ -658,7 +658,7 @@ async def on_message(message):
                 toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
                 await SEND(ch,toSend)
             elif split[1] == 'list':
-                PRINT_QUESTIONS(ch)
+                await PRINT_QUESTIONS(ch)
             elif split[1] == "delete":
                 delete_entry("quiz",int(split[2]))
                 await SEND(ch,"Question at index " + split[2] + " has been deleted." )
