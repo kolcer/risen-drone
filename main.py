@@ -65,6 +65,7 @@ async def on_ready():
     global MURDURATOR
     global CLIMBER
     global ADMIN
+
     for role in SERVER.roles:
         #morphable
         if role.name in MORPHABLE_ROLES:
@@ -74,8 +75,9 @@ async def on_ready():
         if role.name in PING_ROLES:
             PING_ROLES[role.name] = role
             continue
-        if role.name in SPECIAL_ROLES:
-            SPECIAL_ROLES[role.name][0] = role
+        #drone admin
+        if role.id == ADMIN:
+            ADMIN = role
             continue
         #chat killer
         if role.id == CKR:
@@ -85,18 +87,21 @@ async def on_ready():
         #possessed (for the rig)
         if role.id == POSSESSED:
             POSSESSED = role
-            SPECIAL_ROLES["Possessed"][0] = role
-            continue
+            SPECIAL_ROLES['Possessed'][0] = role
         #climber
-        if role.name == CLIMBER:
+        if role.id == CLIMBER:
             CLIMBER = role
             SPECIAL_ROLES["Climber"][0] = role
         #architect
         if role.name == "Architect (Booster)":
             SPECIAL_ROLES["Architect"][0] = role
             continue
+        #discord admin
+        if role.name == 'Admin':
+            SPECIAL_ROLES['Admin'][0] = role
+            continue
         #murdurator
-        if role.name == MURDURATOR:
+        if role.id == MURDURATOR:
             MURDURATOR = role
         #drone tips/tricks admins
         if role.id == ADMIN:
@@ -105,6 +110,7 @@ async def on_ready():
         if role.name in FUN_ROLES:
             FUN_ROLES[role.name] = role
             continue
+
             
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
