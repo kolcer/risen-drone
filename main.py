@@ -63,7 +63,7 @@ async def on_ready():
     PrepareRoles(SERVER.roles)
     
     #fetch questions for the quiz
-    FetchQuestions()
+    await FetchQuestions()
 
     #prepare emojis reactions
     for i, v in EMOJIS_TO_REACT.items():
