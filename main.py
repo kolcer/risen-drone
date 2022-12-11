@@ -36,7 +36,19 @@ async def PRINT_ENTRIES(channel,key):
             combined_string = new_string
     await SEND(channel,combined_string)
 
-
+#print questions
+async def PRINT_QUESTIONS(channel):
+    entries = list_entries('quiz')
+    combined_string = ""
+    for i in range(len(entries)):
+        entry = entries[i].split('|')
+        new_string = combined_string + str(i) + ") " + entry[1].decode("utf-8") + "\n"
+        if len(new_string) > 2000:
+            await SEND(channel,combined_string)
+            combined_string = str(i) + ") " + entry[i].decode("utf-8") + "\n"
+        else:
+            combined_string = new_string
+    await SEND(channel,combined_string)
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
 #drone start up, prepare roles here
@@ -645,7 +657,8 @@ async def on_message(message):
                 toSend += "\nA2:\n" + qSplit[2] + "\nA3:\n" + qSplit[3] + "\nA4:\n" + qSplit[4]
                 toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
                 await SEND(ch,toSend)
-
+            elif split[1] == 'list':
+                PRINT_QUESTIONS(ch)
             elif split[1] == "delete":
                 delete_entry("quiz",int(split[2]))
                 await SEND(ch,"Question at index " + split[2] + " has been deleted." )
