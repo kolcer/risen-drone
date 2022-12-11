@@ -60,6 +60,11 @@ async def on_ready():
     RIGTRACKER = await GET_MSG(CHANNELS["bot-testing"],RIGTRACKER)
 
     #prepare the roles
+    global CKR
+    global POSSESSED
+    global MURDURATOR
+    global CLIMBER
+    global ADMIN
     PrepareRoles(SERVER.roles)
     
     #fetch questions for the quiz
