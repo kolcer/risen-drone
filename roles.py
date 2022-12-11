@@ -23,6 +23,8 @@ def PrepareRoles(serverRoles):
         #drone admin
         if role.id == ADMIN:
             ADMIN = role
+            print(role.id)
+            print(role.name)
             continue
         #chat killer
         if role.id == CKR:
@@ -49,8 +51,8 @@ def PrepareRoles(serverRoles):
         if role.id == MURDURATOR:
             MURDURATOR = role
         #drone tips/tricks admins
-        if role.id == ADMIN:
-            ADMIN = role
+        #if role.id == ADMIN:
+            #ADMIN = role
         #fun roles
         if role.name in FUN_ROLES:
             FUN_ROLES[role.name] = role
