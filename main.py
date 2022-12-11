@@ -45,7 +45,7 @@ async def PRINT_QUESTIONS(channel):
         new_string = combined_string + str(i) + ") " + entry[1].decode("utf-8") + "\n"
         if len(new_string) > 2000:
             await SEND(channel,combined_string)
-            combined_string = str(i) + ") " + entry[i].decode("utf-8") + "\n"
+            combined_string = str(i) + ") " + entry[1].decode("utf-8") + "\n"
         else:
             combined_string = new_string
     await SEND(channel,combined_string)
