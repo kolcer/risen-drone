@@ -193,31 +193,29 @@ async def SplicerRig(reaction,user):
  
     if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
         if reaction.emoji == "❌":
-            SPLICER_RIG = {
-                "user" : None,
-                "answer" : None,
-                "active" : False,
-                "reactionmessage" : None,
-                "user-name" : "",
-                "RIG_DATA['rigCaster']-name" : "",
-            }
-
+            SPLICER_RIG["user"] = None
+            SPLICER_RIG["answer"] = None
+            SPLICER_RIG["active"] = False
+            SPLICER_RIG["reactionmessage"] = None
+            SPLICER_RIG["user-name"] = ""
+            SPLICER_RIG['rigcaster-name'] = ""
+  
             await SEND(reaction.message.channel, "Splice request declined.")
         elif reaction.emoji == "✅":
             await EDIT_NICK(user, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
-            await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG["RIG_DATA['rigCaster']-name"])
+            await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
 
             await SEND(reaction.message.channel, "Splice request accepted.")
 
-            SPLICER_RIG = {
-                "user" : None,
-                "answer" : None,
-                "active" : False,
-                "reactionmessage" : None,
-                "user-name" : "",
-                "RIG_DATA['rigCaster']-name" : "",
-            }
+            
+            SPLICER_RIG["user"] = None
+            SPLICER_RIG["answer"] = None
+            SPLICER_RIG["active"] = False
+            SPLICER_RIG["reactionmessage"] = None
+            SPLICER_RIG["user-name"] = ""
+            SPLICER_RIG['rigcaster-name'] = ""
+            
 
 async def CastRig(rigPick,ch,usr):
 
@@ -378,14 +376,13 @@ async def ExecuteSplicerRig(ch,usr):
 
     await asyncio.sleep(60)
     if SPLICER_RIG["active"]:
-        SPLICER_RIG = {
-            "user" : None,
-            "answer" : None,
-            "active" : False,
-            "reactionmessage" : None,
-            "user-name" : "",
-            "RIG_DATA['rigCaster']-name" : "",
-        }
+        SPLICER_RIG["user"] = None
+        SPLICER_RIG["answer"] = None
+        SPLICER_RIG["active"] = False
+        SPLICER_RIG["reactionmessage"] = None
+        SPLICER_RIG["user-name"] = ""
+        SPLICER_RIG['rigcaster-name'] = ""
+ 
 
         await ADD_REACTION(focusmsg, "🛑")
             
