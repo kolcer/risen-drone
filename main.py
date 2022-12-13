@@ -61,67 +61,18 @@ async def on_ready():
     await client.change_presence(activity=game)
 
     #get the guild
-    global SERVER
-    global RIGTRACKER
     #this is a one-off, so we do not worry about rate limits
-    SERVER = client.get_guild(SERVER)
+    SERVER_DATA['server'] = client.get_guild(SERVER_DATA['server'])
     
     #get the channels
     for i, v in CHANNELS.items():
         CHANNELS[i] = GET_CHANNEL(client,v)
     
-    RIGTRACKER = await GET_MSG(CHANNELS["bot-testing"],RIGTRACKER)
+    RIG_DATA['rigTracker'] = await GET_MSG(CHANNELS["bot-testing"],RIG_DATA['rigTracker'])
 
     #prepare the roles
-    global CKR
-    global POSSESSED
-    global MURDURATOR
-    global CLIMBER
-    global ADMIN
-
-    for role in SERVER.roles:
-        #morphable
-        if role.name in MORPHABLE_ROLES:
-            MORPHABLE_ROLES[role.name][0] = role
-            continue
-        #ping roles
-        if role.name in PING_ROLES:
-            PING_ROLES[role.name] = role
-            continue
-        #drone admin
-        if role.id == ADMIN:
-            ADMIN = role
-            print(role.id)
-            print(role.name)
-            continue
-        #chat killer
-        if role.id == CKR:
-            CKR = role
-            SPECIAL_ROLES["Ultimate"][0] = role
-            continue
-        #possessed (for the rig)
-        if role.id == POSSESSED:
-            POSSESSED = role
-            SPECIAL_ROLES['Possessed'][0] = role
-        #climber
-        if role.id == CLIMBER:
-            CLIMBER = role
-            SPECIAL_ROLES["Climber"][0] = role
-        #architect
-        if role.name == "Architect (Booster)":
-            SPECIAL_ROLES["Architect"][0] = role
-            continue
-        #discord admin
-        if role.name == 'Admin':
-            SPECIAL_ROLES['Admin'][0] = role
-            continue
-        #murdurator
-        if role.id == MURDURATOR:
-            MURDURATOR = role
-        #fun roles
-        if role.name in FUN_ROLES:
-            FUN_ROLES[role.name] = role
-            continue    
+ 
+    PrepareRoles(SERVER_DATA['server'].roles)
             
     #fetch questions for the quiz
     await FetchQuestions()
@@ -169,8 +120,7 @@ async def on_member_join(member):
 #saves last deleted message for necromancer rig to show
 @client.event
 async def on_message_delete(message):
-  global ghostMsg
-  ghostMsg = "*" + str(message.author.display_name) + "'s last words lie here...*"
+  RIG_DATA['ghostMsg'] = "*" + str(message.author.display_name) + "'s last words lie here...*"
 
 
 @client.event
@@ -198,10 +148,6 @@ async def on_message_edit(before, after):
 @client.event
 async def on_message(message):
 
-    global MSG_SENT
-    global ARTISTS
-    global ADMIN
-    global RIGTRACKER
 
     msg = message.content
     usr = message.author
@@ -275,12 +221,10 @@ async def on_message(message):
     if msg.startswith(">"):
         return
     
-    global FIX_BOT
 
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
-        print(ADMIN.name)
     
-        if ADMIN in usr.roles:
+        if EXTRA_ROLES['admin'] in usr.roles:
             await SEND(ch, "All Games have been resetted.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
@@ -307,7 +251,7 @@ async def on_message(message):
         return
 
     #mini game in progress
-    if MG_STATUS != "off" and usr in MG_QUEUE and ch == MG_CHANNEL:
+    if LADDERS['status'] != "off" and usr in MG_QUEUE and ch == LADDERS['channel']:
 
         await LucidLaddersProcessMessage(usr,msg)
        
@@ -326,7 +270,7 @@ async def on_message(message):
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
  
         #broken drone impostor prevention
-        compare = SequenceMatcher(None, usr.display_name.upper(), BROKEN_DRONE_NICK)
+        compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
@@ -352,7 +296,7 @@ async def on_message(message):
             await PlayLucidLadders(usr,ch)
 
         #join mini game
-        if lmsg == "join" and MG_STATUS == "gather" and MG_CHANNEL == ch:
+        if lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
             await JoinLucidLadders(usr)
 
@@ -389,7 +333,7 @@ async def on_message(message):
         ## Scold command
         if lmsg.startswith("broken drone scold "):
             finalmsg = None
-            for member in SERVER.members:
+            for member in SERVER_DATA['server'].members:
                 if member.name.lower() + "#" + member.discriminator == lsplit[3]:
                     ScoldDict = getScoldDictionary(member, usr)
                     # Scold someone in the Dictionary (User itself included)
@@ -435,21 +379,20 @@ async def on_message(message):
 
         ## Revive Chat Command
         if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
-            global revivechat
             #chat has to be dead, duh
-            if not revivechat:
+            if not CHAT_KILLER['reviveChat']:
                 await SEND(ch, "This chat is very much alive, I am afraid.")
                 return
 
             #only chat killers can use the command
-            if not CKR in message.author.roles:
+            if not EXTRA_ROLES['ckr'] in message.author.roles:
                 await SEND(ch, "It is not your fault.")
                 return
 
             await SEND(ch, "Reedeming yourself? Alright.")
             await asyncio.sleep(2)
             await SEND(ch, random.choice(REVIVE_CHAT))
-            revivechat = False
+            CHAT_KILLER['reviveChat'] = False
             return
 
         ## Splicer role assignment
@@ -521,7 +464,7 @@ async def on_message(message):
     ## admin command
     else:
         #check for admin
-        if not ADMIN in usr.roles:
+        if not EXTRA_ROLES['admin'] in usr.roles:
             return
 
         #deterimine the key (this is an alignment name in most cases)
@@ -538,7 +481,7 @@ async def on_message(message):
         #create a new role with name and color
         if msg.startswith("nr", 1):
             try:
-                newrole = await NEW_ROLE(SERVER,split[1], msgback.replace("_"," "))
+                newrole = await NEW_ROLE(SERVER_DATA['server'],split[1], msgback.replace("_"," "))
             except Exception as e:
                 await SEND(ch, e)
                 return
@@ -549,11 +492,11 @@ async def on_message(message):
     
         #give ckr
         if msg.startswith("ckr to ", 1):
-            for mem in SERVER.members:
+            for mem in SERVER_DATA['server'].members:
                if mem.name.lower() + "#" + mem.discriminator == split2[2]:
                     await SEND(ch, "I gave the Chat Killer Role to " + split2[2])
                     await asyncio.sleep(1)
-                    await ADD_ROLES(mem,CKR)
+                    await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
                     break
             return  
 
@@ -565,7 +508,7 @@ async def on_message(message):
                 await SEND(ch, "You cannot assign this role through my commands.")
                 return
                 
-            for mem in SERVER.members:
+            for mem in SERVER_DATA['server'].members:
                if mem.name.lower() + "#" + mem.discriminator == split2[2]:
                     await SEND(ch, "I gave the Role to " + split2[2])
                     await asyncio.sleep(1)
@@ -581,7 +524,7 @@ async def on_message(message):
                 await SEND(ch, "You cannot unassign this role through my commands.")
                 return
 
-            for mem in SERVER.members:
+            for mem in SERVER_DATA['server'].members:
                if mem.name.lower() + "#" + mem.discriminator == split2[2]:
                     await SEND(ch, "Took the role away from " + split2[2])
                     await asyncio.sleep(1)
@@ -618,17 +561,17 @@ async def on_message(message):
 
         #remove ckr
         if msg.startswith("ckr from ", 1):
-            for mem in SERVER.members:
+            for mem in SERVER_DATA['server'].members:
                if mem.name.lower() + "#" + mem.discriminator == split2[2]:
                     await SEND(ch, "I took the Chat Killer Role away from " + split2[2])
                     await asyncio.sleep(1)
-                    await REMOVE_ROLES(mem,CKR)
+                    await REMOVE_ROLES(mem,EXTRA_ROLES['ckr'])
                     break
             return   
 
         #resets the rig tracker message
         if msg.startswith("reset rig tracker", 1):
-            await EDIT_MESSAGE(RIGTRACKER, "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
+            await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
             return
 
         #edits db rig tracking count for specific alignment

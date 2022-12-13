@@ -6,41 +6,35 @@ from globals import *
 from rated import *
 
 def MG_RESET():
-    global MG_STATUS
-    global MG_CHANNEL 
-    global MG_CURRENT_PLR 
-    global MG_WIN_DETECT
-    
+     
     MG_PLAYERS.clear()
     MG_QUEUE.clear()
-    MG_STATUS = "off"
-    MG_CHANNEL = None
-    MG_CURRENT_PLR = 0
-    MG_WIN_DETECT = 0
+    LADDERS['status'] = "off"
+    LADDERS['channel'] = None
+    LADDERS['currentPlayer'] = 0
+    LADDERS['winDetect'] = 0
     
 def MG_SHOW_STATS():
 
-    global MG_WIN_DETECT
     
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
         toSend += "**" + plr.name + "**: " + str(place) + " floor\n"
-        if place > MG_WIN_DETECT:
-            MG_WIN_DETECT = place
+        if place > LADDERS['winDetect']:
+            LADDERS['winDetect'] = place
     toSend += "-------------\n"
     return toSend
 
 def MG_NEXT_PLAYER():
-    global MG_CURRENT_PLR
-    MG_CURRENT_PLR += 1
-    if MG_CURRENT_PLR > len(MG_QUEUE) - 1:
-        MG_CURRENT_PLR = 0
+    LADDERS['currentPlayer'] += 1
+    if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
+        LADDERS['currentPlayer'] = 0
       
 
 def MG_SHOW_WINNERS():
     winners = []
     for i, v in MG_PLAYERS.items():
-        if v >= MINI_GAME_TOP_LEVEL:
+        if v >= LADDERS['topLevel']:
             winners.append(i)
                         
     toSend = winners[0].mention
@@ -52,8 +46,7 @@ def MG_SHOW_WINNERS():
     
 def MG_ACTION(plr, action):
     
-    global MG_CURRENT_PLR 
-     
+      
     #all players always advance 1 level per round
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
@@ -140,12 +133,12 @@ def MG_ACTION(plr, action):
             if chances == 0:
                 toSend += "have been kicked from the game for hacking!"
                 
-                cp = MG_QUEUE[MG_CURRENT_PLR]
+                cp = MG_QUEUE[LADDERS['currentPlayer']]
                 del MG_PLAYERS[plr]
                 MG_QUEUE.remove(plr)
-                MG_CURRENT_PLR = MG_QUEUE.index(cp)
+                LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
                 if len(MG_QUEUE) == 1:
-                    MG_PLAYERS[cp] = MINI_GAME_TOP_LEVEL
+                    MG_PLAYERS[cp] = LADDERS['topLevel']
                 
             elif chances == 1:
                 toSend += "have been frozen by a Murdurator and lost one level!"
@@ -156,7 +149,7 @@ def MG_ACTION(plr, action):
                 toSend += "have hacked the game!"
                 for i in MG_PLAYERS.keys():
                     MG_PLAYERS[i] -= 1
-                MG_PLAYERS[plr] = MINI_GAME_TOP_LEVEL
+                MG_PLAYERS[plr] = LADDERS['topLevel']
                 
         case "archon":
             toSend += "cast Split Event and caused players to either lost or gain a extra level."
@@ -202,50 +195,48 @@ def MG_ACTION(plr, action):
 
 async def MG_LOOP(toSend):
     
-    global MG_TICK
-    MG_TICK = time.time()
-    ourTick = MG_TICK
+    LADDERS['tick'] = time.time()
+    ourTick = LADDERS['tick']
     
     while True:
         
         toSend += MG_SHOW_STATS()
-        if MG_WIN_DETECT >= MINI_GAME_TOP_LEVEL or len(MG_QUEUE) < 2:
+        if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()
-            await SEND(MG_CHANNEL, toSend)
+            await SEND(LADDERS['channel'], toSend)
             MG_RESET()
             return
         else:
-            toSend += "**" + MG_QUEUE[MG_CURRENT_PLR].name + "** turn! Choose Your alignment!"
-            await SEND(MG_CHANNEL, toSend)
+            toSend += "**" + MG_QUEUE[LADDERS['currentPlayer']].name + "** turn! Choose Your alignment!"
+            await SEND(LADDERS['channel'], toSend)
         
-        await asyncio.sleep(MINI_GAME_MAX_WAIT)
+        await asyncio.sleep(LADDERS['maxWait'])
         
-        if MG_TICK != ourTick:
+        if LADDERS['tick'] != ourTick:
             return
         
-        cp = MG_QUEUE[MG_CURRENT_PLR]
+        cp = MG_QUEUE[LADDERS['currentPlayer']]
         MG_NEXT_PLAYER()
         toSend = MG_ACTION(cp,"none")
 
 async def LucidLaddersProcessMessage(usr,msg):
 
        #mini game
-    global MG_STATUS
     lmsg = msg.lower()
         
-    if MG_STATUS == "gather" and lmsg == "begin" and usr == MG_QUEUE[0]:
+    if LADDERS['status'] == "gather" and lmsg == "begin" and usr == MG_QUEUE[0]:
             
         if len(MG_QUEUE) < 2:
-            await SEND(MG_CHANNEL, "Not enough players for the Lucid Ladders to begin!")
+            await SEND(LADDERS['channel'], "Not enough players for the Lucid Ladders to begin!")
             #return "Not enough players for the Lucid Ladders to begin!"
             return
 
-        MG_STATUS = "on"
+        LADDERS['status'] = "on"
         await MG_LOOP("Lucid Ladders have begun!")            
             
         return
         
-    elif MG_STATUS == "on" and lmsg in MG_SPELLS and MG_QUEUE[MG_CURRENT_PLR] == usr:
+    elif LADDERS['status'] == "on" and lmsg in MG_SPELLS and MG_QUEUE[LADDERS['currentPlayer']] == usr:
         spell = lmsg
         while spell == "chameleon":
             spell = random.choice(MG_SPELLS)
@@ -254,25 +245,21 @@ async def LucidLaddersProcessMessage(usr,msg):
 
 async def PlayLucidLadders(usr,ch):
         #mini game
-    global MG_STATUS
-    global MG_CHANNEL 
-    global MG_CURRENT_PLR 
-    global MG_TICK
  
-    if MG_STATUS != "off":
+    if LADDERS['status'] != "off":
         await SEND(ch, "A game is already in progress. Please wait for it to finish.")
         return
     else:
-        MG_STATUS = "gather"
+        LADDERS['status'] = "gather"
         MG_PLAYERS[usr] = 0
         MG_QUEUE.append(usr)
-        MG_CURRENT_PLR = 0
-        MG_CHANNEL = ch
-        MG_TICK = time.time()
-        ourTick = MG_TICK
+        LADDERS['currentPlayer'] = 0
+        LADDERS['channel'] = ch
+        LADDERS['tick'] = time.time()
+        ourTick = LADDERS['tick']
         await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
         await asyncio.sleep(60)
-        if MG_STATUS == "gather" and ourTick == MG_TICK:
+        if LADDERS['status'] == "gather" and ourTick == LADDERS['tick']:
             await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
             MG_RESET()
         return
@@ -280,7 +267,7 @@ async def PlayLucidLadders(usr,ch):
 async def JoinLucidLadders(usr):
   
     if usr in MG_PLAYERS:
-        await SEND(MG_CHANNEL, "You have already joined the mini game!")
+        await SEND(LADDERS['channel'], "You have already joined the mini game!")
         return
     else:
         MG_PLAYERS[usr] = 0
@@ -288,5 +275,5 @@ async def JoinLucidLadders(usr):
         toSend = usr.name + " has joined Lucid Ladders!\nCurrent players:\n"
         for plr in MG_QUEUE:
             toSend += plr.name + "\n"
-        await SEND(MG_CHANNEL, toSend)
+        await SEND(LADDERS['channel'], toSend)
         return

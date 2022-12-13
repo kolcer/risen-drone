@@ -1,38 +1,9 @@
 #DRONE GLOBAL VARIABLES AND CONSTANTS
 
-#CONSTANTS
-#player that reaches this level first will win the mini game
-MINI_GAME_TOP_LEVEL = 21
-MINI_GAME_MAX_WAIT = 30
-BROKEN_DRONE_NICK = "BROKEN DRONE"
-CHAT_KILLER_WAIT = 7200
-
-#ids will be replaced with objects on startup
-#SERVER
-SERVER = 624227331720085528
-
-#RIG TRACKER MESSAGE
-RIGTRACKER = 1004326588021743667
-
-#SPECIAL ROLES
-CKR = 951424560685805588            #chat killer
-POSSESSED = 988572669521842197      #via rig
-ADMIN = 993446701090222160          #aka Drone Master (not a discord admin)
-MURDURATOR = 735225462405464125     #discord server moderator
-CLIMBER = 735410759206568047        #climber (consider adding manually verified)
-
-#VARIABLES
-rigCaster = None
-thirdkill = None
-revivechat = False
-ghostMsg = ""
-#chat killer requires 2 hours of inactivity (in seconds)
-Last = 0
-MG_STATUS = "off"
-MG_CHANNEL = None
-MG_CURRENT_PLR = 0
-MG_TICK = 0
-MG_WIN_DETECT = 0
+SERVER_DATA = {
+    'server': 624227331720085528,
+    'nick': 'BROKEN DRONE',
+}
 
 #VARIABLE ARRAYS
 LOSERS = []
@@ -508,6 +479,66 @@ QUIZ = {
     "scores" : "**TOTAL POINTS**\n"
 }
 
+LADDERS = {
+    'topLevel': 21,
+    'maxWait': 30,
+    'status': 'off',
+    'channel': None,
+    'currentPlayer': 0,
+    'tick': 0,
+    'winDetect': 0,
+}
+
+EXTRA_ROLES = {
+    'ckr': 951424560685805588,            #chat killer
+    'possessed': 988572669521842197,      #via rig
+    'admin': 993446701090222160,          #aka Drone Master (not a discord admin)
+    'murdurator': 735225462405464125,     #discord server moderator
+    'climber': 735410759206568047,        #climber (consider adding manually verified)
+}
+
+CHAT_KILLER = {
+    'wait': 7200,
+    #'thirdKill': None,
+    'last': 0,
+    'reviveChat': False,
+}
+
+RIG_DATA = {
+    'rigTracker': 1004326588021743667,
+    'rigCaster': None,
+    'ghostMsg': "",
+}
+
+
+
+#player that reaches this level first will win the mini game
+#MINI_GAME_TOP_LEVEL = 21
+#MINI_GAME_MAX_WAIT = 30
+#BROKEN_DRONE_NICK = "BROKEN DRONE"
+#CHAT_KILLER_WAIT = 7200
+
+#ids will be replaced with objects on startup
+#SERVER
+#SERVER = 624227331720085528
+
+#RIG TRACKER MESSAGE
+#RIGTRACKER = 1004326588021743667
+
+#SPECIAL ROLES
+
+#VARIABLES
+#rigCaster = None
+#thirdkill = None
+#revivechat = False
+#ghostMsg = ""
+#chat killer requires 2 hours of inactivity (in seconds)
+#Last = 0
+#MG_STATUS = "off"
+#MG_CHANNEL = None
+#MG_CURRENT_PLR = 0
+#MG_TICK = 0
+#MG_WIN_DETECT = 0
 
 #create scold dictionary for the scold command
 def getScoldDictionary(victim, author):

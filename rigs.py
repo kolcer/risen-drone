@@ -15,7 +15,7 @@ def rigImmunity(usr1, usr2):
 
 
 async def updateRigTracker(rigType):
-    initialmsg = RIGTRACKER.content
+    initialmsg = RIG_DATA['rigTracker'].content
     blankmsg = initialmsg.replace("\n","").split(",")
     currentnumber = None
     finalmsg = ""
@@ -39,21 +39,19 @@ async def updateRigTracker(rigType):
             else:
                 finalmsg += i + ",\n"
 
-    await EDIT_MESSAGE(RIGTRACKER, finalmsg)
+    await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
 
 
 async def necromancer(message):
-    global ghostedMsg
-  
-    if ghostMsg != "":
-        await SEND(message, ghostMsg)
+ 
+    if RIG_DATA['ghostMsg'] != "":
+        await SEND(message, RIG_DATA['ghostMsg'])
     else:
         await SEND(message, "*but nobody came...*")
 
 
 async def Rig(rigType, ch, usr):
-    global RIGTRACKER
-
+ 
     if rigType.lower() == "splicer":
         if not FUN_ROLES["Splicer"] in usr.roles:
             await SEND(ch, "You are not able to cast this rig yet!")
@@ -76,29 +74,28 @@ async def Rig(rigType, ch, usr):
             RIG_SPAMMERS[usr] = spamCount
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
-    global rigCaster
     
     await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
         
         case "heretic":
-            if MURDURATOR in usr.roles:
+            if EXTRA_ROLES['murdurator'] in usr.roles:
                 await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
                 RIG_COOLDOWNS["ha"] = False
                 return
 
-            #for member in SERVER.members:
-               # if POSSESSED in member.roles:
+            #for member in SERVER_DATA['server'].members:
+               # if EXTRA_ROLES['possessed'] in member.roles:
                    # await SEND(ch, "Another ultimate spell is in progress. Please wait.")
                    # RIG_COOLDOWNS["ha"] = False
                    # return
-            await ADD_ROLES(usr, POSSESSED)
+            await ADD_ROLES(usr, EXTRA_ROLES['possessed'])
             await asyncio.sleep(1)
             await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
                        "\nMaybe someone could give you some Mana?")
             await asyncio.sleep(60)
-            await REMOVE_ROLES(usr, POSSESSED)
+            await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
             
         case "wicked":
             role_list = []
@@ -165,7 +162,7 @@ async def Rig(rigType, ch, usr):
         case ("joker"|"thief"|"spectre"|"splicer"):#
 
             ACTIVE_RIGS[rigType] = True
-            rigCaster = usr
+            RIG_DATA['rigCaster'] = usr
             if rigType == "joker":
                 await SEND(ch, usr.mention + " just cast Joker Rig! Someone will be in for a treat.")
             elif rigType == "thief":
@@ -193,9 +190,7 @@ async def Rig(rigType, ch, usr):
 
 
 async def SplicerRig(reaction,user):
-    global rigCaster
-    global SPLICER_RIG
-
+ 
     if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
         if reaction.emoji == "❌":
             SPLICER_RIG = {
@@ -204,14 +199,14 @@ async def SplicerRig(reaction,user):
                 "active" : False,
                 "reactionmessage" : None,
                 "user-name" : "",
-                "rigcaster-name" : "",
+                "RIG_DATA['rigCaster']-name" : "",
             }
 
             await SEND(reaction.message.channel, "Splice request declined.")
         elif reaction.emoji == "✅":
             await EDIT_NICK(user, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
-            await EDIT_NICK(rigCaster, SPLICER_RIG["rigcaster-name"])
+            await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG["RIG_DATA['rigCaster']-name"])
 
             await SEND(reaction.message.channel, "Splice request accepted.")
 
@@ -221,11 +216,10 @@ async def SplicerRig(reaction,user):
                 "active" : False,
                 "reactionmessage" : None,
                 "user-name" : "",
-                "rigcaster-name" : "",
+                "RIG_DATA['rigCaster']-name" : "",
             }
 
 async def CastRig(rigPick,ch,usr):
-    global LAST_RIG
 
     if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
         await SEND(ch, "That is not a valid rig. Try again.")
@@ -270,14 +264,14 @@ async def ExecuteThiefRig(ch,usr):
 
     tooLong = False
             
-    if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster): #or len(rigCaster.display_name + ", " + usr.display_name) > 32:
+    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
 
                             
-    if len(rigCaster.display_name + ", " + usr.display_name) > 32:
-        await SEND(CHANNELS["bot-commands"], rigCaster.mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + rigCaster.display_name + "`)")
+    if len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+        await SEND(CHANNELS["bot-commands"], RIG_DATA['rigCaster'].mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + RIG_DATA['rigCaster'].display_name + "`)")
         await asyncio.sleep(1)
-        await EDIT_NICK(rigCaster, ".")
+        await EDIT_NICK(RIG_DATA['rigCaster'], ".")
         tooLong = True
 
     ACTIVE_RIGS["thief"] = False
@@ -290,31 +284,31 @@ async def ExecuteThiefRig(ch,usr):
 
     await asyncio.sleep(1)
             
-    # if rigCaster in NickDictionary:
+    # if RIG_DATA['rigCaster'] in NickDictionary:
     #     if tooLong:
-    #         NickDictionary[rigCaster] = victim
+    #         NickDictionary[RIG_DATA['rigCaster']] = victim
     #     else:
-    #         NickDictionary[rigCaster] = rigCaster.display_name + ", " + victim
+    #         NickDictionary[RIG_DATA['rigCaster']] = RIG_DATA['rigCaster'].display_name + ", " + victim
 
-    #     await EDIT_NICK(rigCaster, NickDictionary[rigCaster])
-    #     await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
+    #     await EDIT_NICK(RIG_DATA['rigCaster'], NickDictionary[RIG_DATA['rigCaster']])
+    #     await SEND(ch, RIG_DATA['rigCaster'].mention + " has just stolen your name for 5 minutes!")
 
     #     if tooLong == True:
     #         await asyncio.sleep(1)
-    #         await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
+    #         await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
 
     #     await asyncio.sleep(300) #300#1800 
-    #     del NickDictionary[rigCaster]
+    #     del NickDictionary[RIG_DATA['rigCaster']]
 
     #     return
                 
-    await EDIT_NICK(rigCaster, rigCaster.display_name + ", " + victim)
-    await SEND(ch, rigCaster.mention + " has just stolen your name for 5 minutes!")
+    await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name + ", " + victim)
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " has just stolen your name for 5 minutes!")
 
 
     if tooLong == True:
         await asyncio.sleep(1)
-        await EDIT_NICK(rigCaster, rigCaster.display_name.replace("., ","", 1))
+        await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
             
     await asyncio.sleep(300) #300#1800 
     del NickDictionary[usr]
@@ -322,24 +316,24 @@ async def ExecuteThiefRig(ch,usr):
 
 
 async def ExecuteSpectreRig(ch,usr,message):
-    if ch.name not in CHANNELS or rigImmunity(usr, rigCaster) or not CLIMBER in usr.roles:
+    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
         return
     ACTIVE_RIGS["spectre"] = False
 
     chances = random.randint(0, 1)
 
     if chances == 1:
-        await SEND(ch, rigCaster.mention + " has made your Message disappear with a 50% chance!")
+        await SEND(ch, RIG_DATA['rigCaster'].mention + " has made your Message disappear with a 50% chance!")
         await DELETE(message)
         return
 
-    await SEND(ch, rigCaster.mention + " has NOT made your Message disappear with a 50% chance.")
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your Message disappear with a 50% chance.")
     return
 
 
 async def ExecuteJokerRig(ch,usr,message):
 
-    if (ch.name not in CHANNELS) or (not CLIMBER in usr.roles) or ("https" in message.content) or (len(message.content) > 45):
+    if (ch.name not in CHANNELS) or (not EXTRA_ROLES['climber'] in usr.roles) or ("https" in message.content) or (len(message.content) > 45):
         return
     ACTIVE_RIGS["joker"] = False
 
@@ -354,9 +348,8 @@ async def ExecuteJokerRig(ch,usr,message):
 
 
 async def ExecuteSplicerRig(ch,usr):
-    global SPLICER_RIG
-
-    if ch.name not in CHANNELS or not CLIMBER in usr.roles or rigImmunity(usr, rigCaster):
+ 
+    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']):
         return
                 
     ACTIVE_RIGS["splicer"] = False
@@ -364,7 +357,7 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["active"] = True
     SPLICER_RIG["user"] = usr
 
-    rcn = rigCaster.display_name
+    rcn = RIG_DATA['rigCaster'].display_name
     rcn1 = rcn[:len(rcn)//2]
     rcn2 = rcn[len(rcn)//2:]
 
@@ -374,9 +367,9 @@ async def ExecuteSplicerRig(ch,usr):
 
 
     SPLICER_RIG["user-name"] = usrn1 + rcn2
-    SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
+    SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2
 
-    focusmsg = await SEND(ch, rigCaster.mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + rigCaster.name + "#" + rigCaster.discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
+    focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["RIG_DATA['rigCaster']-name"] + ".")
     SPLICER_RIG["reactionmessage"] = focusmsg
 
     await ADD_REACTION(focusmsg, "❌")
@@ -391,7 +384,7 @@ async def ExecuteSplicerRig(ch,usr):
             "active" : False,
             "reactionmessage" : None,
             "user-name" : "",
-            "rigcaster-name" : "",
+            "RIG_DATA['rigCaster']-name" : "",
         }
 
         await ADD_REACTION(focusmsg, "🛑")
@@ -400,11 +393,11 @@ async def ExecuteSplicerRig(ch,usr):
 
 
 async def GiveMana(ch,usr,message):
-    global POSSESSED
-    role = POSSESSED
+ 
+    role = EXTRA_ROLES['possessed']
     split_message = message.content.split(" ", 3)
     target = split_message[3].lower()
-    for member in SERVER.members:
+    for member in SERVER_DATA['server'].members:
         if member.name.lower() + "#" + member.discriminator == target:
             if role in member.roles:
                 await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
