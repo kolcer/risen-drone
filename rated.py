@@ -1,6 +1,7 @@
 import asyncio
 import discord
 from globals import EXTRA_ROLES
+from globals import SERVER_DATA
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
@@ -9,8 +10,8 @@ def GET_EMOJI(client,id):
     return client.get_emoji(id)
 
 #get up to date ckr members
-def UPDATE_CKR(server):
-     EXTRA_ROLES['ckr'] = server.get_role(EXTRA_ROLES['ckr'].id)
+def UPDATE_CKR():
+     EXTRA_ROLES['ckr'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['ckr'].id)
 
 # rate limited functions
 
