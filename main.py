@@ -396,7 +396,7 @@ async def on_message(message):
             return
 
         ## Splicer role assignment
-        if "<:_splicer:988948000200069191>" in msg:
+        if "<:csSplicer:988948000200069191>" in msg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
                     if not FUN_ROLES["Splicer"] in usr.roles:
