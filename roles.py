@@ -16,8 +16,6 @@ def PrepareRoles(roles):
         #drone admin
         if role.id == EXTRA_ROLES['admin']:
             EXTRA_ROLES['admin'] = role
-            print(role.id)
-            print(role.name)
             continue
         #chat killer
         if role.id == EXTRA_ROLES['ckr']:

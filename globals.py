@@ -295,10 +295,10 @@ RIG_COOLDOWNS = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "general": "<:_wicked:792143453035167754><:_keeper:758081314912993283><:_drifter:786323335880507483><:_hacker:758081540063494288> cooldown: ",
-    "tsj": "<:_thief:758081386203840644><:_spectre:758083065988776017><:_joker:758081245157654599><:_splicer:988948000200069191> cooldown: ", #
-    "ha": "<:_heretic:786323224115281921><:_archon:786323402172530688> cooldown: ",
-    "patron": "<:_patron:758081038697103504> cooldown: ",
+    "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:758081540063494288> cooldown: ",
+    "tsj": "<:csThief:758081386203840644><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ", #
+    "ha": "<:csHeretic:786323224115281921><:csArchon:786323402172530688> cooldown: ",
+    "patron": "<:csPatron:758081038697103504> cooldown: ",
 }
 
 #this roles can be assigned via a morph to command
@@ -509,36 +509,6 @@ RIG_DATA = {
     'rigCaster': None,
     'ghostMsg': "",
 }
-
-
-
-#player that reaches this level first will win the mini game
-#MINI_GAME_TOP_LEVEL = 21
-#MINI_GAME_MAX_WAIT = 30
-#BROKEN_DRONE_NICK = "BROKEN DRONE"
-#CHAT_KILLER_WAIT = 7200
-
-#ids will be replaced with objects on startup
-#SERVER
-#SERVER = 624227331720085528
-
-#RIG TRACKER MESSAGE
-#RIGTRACKER = 1004326588021743667
-
-#SPECIAL ROLES
-
-#VARIABLES
-#rigCaster = None
-#thirdkill = None
-#revivechat = False
-#ghostMsg = ""
-#chat killer requires 2 hours of inactivity (in seconds)
-#Last = 0
-#MG_STATUS = "off"
-#MG_CHANNEL = None
-#MG_CURRENT_PLR = 0
-#MG_TICK = 0
-#MG_WIN_DETECT = 0
 
 #create scold dictionary for the scold command
 def getScoldDictionary(victim, author):

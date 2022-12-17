@@ -274,64 +274,63 @@ async def on_message(message):
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
-            return
-
+ 
         #start the quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "broken drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
+        elif ch == CHANNELS["bot-commands"] and lmsg == "broken drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
             await StartQuiz(usr,ch)
 
         #join an ongoing quiz
-        if ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+        elif ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
             
             await JoinQuiz(usr,ch)
 
-        if ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
+        elif ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
             
             await ProcessQuizAnswer(usr,ch,message,lmsg)
 
         #start mini game
-        if lmsg == "play lucid ladders":
+        elif lmsg == "play lucid ladders":
 
             await PlayLucidLadders(usr,ch)
 
         #join mini game
-        if lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
+        elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
             await JoinLucidLadders(usr)
 
         # ## All Rigs in one
-        if lsplit[0] == "cast" and lsplit[2] == "rig":
+        elif lsplit[0] == "cast" and lsplit[2] == "rig":
 
             await CastRig(lsplit[1],ch,usr)
 
         ## thief rig active
-        if ACTIVE_RIGS["thief"]:
+        elif ACTIVE_RIGS["thief"]:
 
             await ExecuteThiefRig(ch,usr)
 
         ## Spectre Rig Active
-        if ACTIVE_RIGS["spectre"]:
+        elif ACTIVE_RIGS["spectre"]:
                 
             await ExecuteSpectreRig(ch,usr,message)
 
         ## Joker Rig Active
-        if ACTIVE_RIGS["joker"]:
+        elif ACTIVE_RIGS["joker"]:
                 
             await ExecuteJokerRig(ch,usr,message)
 
         # Splicer Rig Active
-        if ACTIVE_RIGS["splicer"]:
+        elif ACTIVE_RIGS["splicer"]:
 
             await ExecuteSplicerRig(ch,usr)
 
         ## Give Mana command
-        if msg.lower().startswith("give mana to "):
+        elif msg.lower().startswith("give mana to "):
         
             await GiveMana(ch,usr,message)
                  
         ## Scold command
-        if lmsg.startswith("broken drone scold "):
+        elif lmsg.startswith("broken drone scold "):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
                 if member.name.lower() + "#" + member.discriminator == lsplit[3]:
@@ -349,10 +348,9 @@ async def on_message(message):
                     return
             # Scolding an User that is NOT in the Server
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
-            return
 
         ## Show Profile
-        if lmsg == "bd show profile":
+        elif lmsg == "bd show profile":
             messages = ""
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
             for role in FUN_ROLES:
@@ -378,7 +376,7 @@ async def on_message(message):
             await SEND(ch, profilemsg)
 
         ## Revive Chat Command
-        if "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
+        elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             #chat has to be dead, duh
             if not CHAT_KILLER['reviveChat']:
                 await SEND(ch, "This chat is very much alive, I am afraid.")
@@ -393,10 +391,9 @@ async def on_message(message):
             await asyncio.sleep(2)
             await SEND(ch, random.choice(REVIVE_CHAT))
             CHAT_KILLER['reviveChat'] = False
-            return
-
+ 
         ## Splicer role assignment
-        if "<:csSplicer:988948000200069191>" in msg:
+        elif "<:csSplicer:988948000200069191>" in msg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
                     if not FUN_ROLES["Splicer"] in usr.roles:
@@ -409,55 +406,56 @@ async def on_message(message):
                 SPLICER_FANS[usr] = 1
 
         #morph command
-        if lmsg.startswith("morph to"):
+        elif lmsg.startswith("morph to"):
             await SEND(ch,await MorphTo(usr,lsplit[2].capitalize()))
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
-        if lmsg.startswith("morph from",2):
+        elif lmsg.startswith("morph from",2):
             await SEND(ch,await DemorphFrom(usr,lsplit[2].capitalize()))
 
         #sub command       
-        if lmsg.startswith("sub to"):
+        elif lmsg.startswith("sub to"):
             await SEND(ch,await SubTo(usr,lsplit[2].capitalize()))
 
         #unsub command
-        if lmsg.startswith("sub from",2):
+        elif lmsg.startswith("sub from",2):
             await SEND(ch,await UnsubFrom(usr,lsplit[2].capitalize()))
        
-        ## tips/tricks trigger
-        if len(lsplit) == 2:
-            if lsplit[1] == "tip" or lsplit[1] == "trick":
-                if lsplit[0] in TIPS_KEYS:
-                    await SEND(ch,show_random_entry(lsplit[0]))
-                    return
-            elif lsplit[1] == "trivia":
-                if lsplit[0] in TIPS_KEYS:
-                    key = lsplit[0] + "T"
-                    await SEND(ch,show_random_entry(key))
-                    return
+        else:
+            ## tips/tricks trigger
+            if len(lsplit) == 2:
+                if lsplit[1] == "tip" or lsplit[1] == "trick":
+                    if lsplit[0] in TIPS_KEYS:
+                        await SEND(ch,show_random_entry(lsplit[0]))
+                        return
+                elif lsplit[1] == "trivia":
+                    if lsplit[0] in TIPS_KEYS:
+                        key = lsplit[0] + "T"
+                        await SEND(ch,show_random_entry(key))
+                        return
 
-        #single word trigger
-        for i, v in SINGLE_WORD_TRIGGERS.items():
-            if v in lmsg:
-                if "{mention}" in i:
-                    i = i.format(mention=usr.mention)
-                await SEND(ch,i)
-                return
-        
-        #multiple word trigger
-        for i, v in MULTIPLE_WORD_TRIGGERS.items():
-            if all(word in lmsg for word in v):
-                if "{mention}" in i:
-                    i = i.format(mention=usr.mention)
-                await SEND(ch,i)
-                return
-       
-        #mixed word trigger
-        for i, v in MIXED_WORD_TRIGGERS.items():
-            if v[0] in lmsg:
-                if any(word in lmsg for word in v[1]):
+            #single word trigger
+            for i, v in SINGLE_WORD_TRIGGERS.items():
+                if v in lmsg:
+                    if "{mention}" in i:
+                        i = i.format(mention=usr.mention)
                     await SEND(ch,i)
                     return
+        
+            #multiple word trigger
+            for i, v in MULTIPLE_WORD_TRIGGERS.items():
+                if all(word in lmsg for word in v):
+                    if "{mention}" in i:
+                        i = i.format(mention=usr.mention)
+                    await SEND(ch,i)
+                    return
+       
+            #mixed word trigger
+            for i, v in MIXED_WORD_TRIGGERS.items():
+                if v[0] in lmsg:
+                    if any(word in lmsg for word in v[1]):
+                        await SEND(ch,i)
+                        return
       
 
                
