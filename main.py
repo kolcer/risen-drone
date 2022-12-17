@@ -426,7 +426,7 @@ async def on_message(message):
 
             await SEND(ch,''' **Broken Drone commands:**
 
-Please use this commands only in <#750060041289072771>!    
+Please use these commands only in <#750060041289072771>!    
 
 **morph to** _[alignment]_
     -> Get chosen alignment role in this server
