@@ -475,7 +475,7 @@ _[alignment]_ **trivia**
 
 **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
 **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
-**Available ping roles**: Updates, Announcements, Events, Polls, Minigames
+**Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel in game (sub if you want Prank The Creator badge)
 ''')
             
         else:

@@ -466,6 +466,8 @@ PING_ROLES = {
         None,
     "Minigames":
         None,
+    "Sleazel in game":
+        None,
 }
 
 QUIZ = {
