@@ -469,7 +469,7 @@ async def on_message(message):
         split = msg.split(" ", 2)
         split2 = msg.lower().split(" ", 2)
         msgback = ''
-        if msg.split(' ',2)[2]:
+        if len(msg.split(' ',2)) > 2:
             msgback = msg.split(" ", 2)[2]
         targetrole = msg.split(" ")[1].replace("_", " ")
 
