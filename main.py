@@ -468,7 +468,7 @@ async def on_message(message):
         #deterimine the key (this is an alignment name in most cases)
         split = msg.split(" ", 2)
         split2 = msg.lower().split(" ", 2)
-        msgback = msg.split(" ", 2)[2]
+        msgback = msg.split(" ", 2)[2] or ''
         targetrole = msg.split(" ")[1].replace("_", " ")
 
         #have the bot say whatever you say
