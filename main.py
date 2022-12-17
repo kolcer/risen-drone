@@ -57,7 +57,7 @@ async def PRINT_QUESTIONS(channel):
 async def on_ready():
     
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("Bioforge")
+    game = discord.Game("bd help")
     await client.change_presence(activity=game)
 
     #get the guild
@@ -460,7 +460,7 @@ _[alignment]_ **trivia**
     -> Rescues a possessed user
 **reset bot**
     -> Use this command if the bot breaks (3 users required)
-    
+
 **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
 **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
 **Available ping roles**: Updates, Announcements, Events, Polls, Minigames
