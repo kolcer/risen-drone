@@ -171,9 +171,6 @@ async def on_message(message):
                     return
         return
 
-    if usr.id == 861582242023079987:
-        return
-
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
        # await ADD_ROLES(usr, FUN_ROLES["I was there"])
