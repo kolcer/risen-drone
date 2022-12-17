@@ -466,7 +466,7 @@ PING_ROLES = {
         None,
     "Minigames":
         None,
-    "Sleazel in game":
+    "Sleazel-in-game":
         None,
 }
 
