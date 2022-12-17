@@ -426,46 +426,45 @@ async def on_message(message):
 
             await SEND(ch,''' **Broken Drone commands:**
 
-            Please use this commands only in <#750060041289072771>!    
+Please use this commands only in <#750060041289072771>!    
 
-            morph to _[alignment]_
-                -> Adds chosen alignment role in this server
-            demorph from _[alignment]_
-                -> Removes chosen alignment role
-            sub to _[ping role]_
-                -> Subscribe to chosen ping role
-            unsub from _[ping role]_
-                -> Unsubscribe from chosen ping role
-            general tip
-                -> Shows a general tip
-            _[alignment]_ tip
-                -> Shows chosen alignment tip
-            general trivia
-                -> Shows a general trivia
-            _[alignment]_ trivia
-                -> Shows chosen alignment trivia
-            cast _[alignment]_ rig
-                -> A fun command to mess around in the server
-            play lucid ladders
-                -> Starts Lucid Ladders mini game (requires at least 2 playres)
-            broken drone start quiz
-                -> Starts Crazy Stairs knowledge quiz (2 players required)
-            reset bot
-                -> Use this command if the bot breaks (3 users required)
-            broken drone scold _[username#discriminator]_
-                -> Scolds chosen user
-            revive chat
-                -> Revive chat (only for true chat killers)
-            bd show profile
-                -> Shows Your stats and special roles
-            give mana to _[username#discriminator]_
-                -> Rescues a possessed user
-
-            **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper,
-                Hacker, Thief, Archon, Drifter, Heretic.
-            **Extra alignments** (cannot be morph to): Possessed, None, Architect.
-            **Available ping roles**: Updates, Announcements, Events, Polls, Minigames
-                ''')
+**morph to** _[alignment]_
+    -> Get chosen alignment role in this server
+**demorph from** _[alignment]_
+    -> Remove chosen alignment role
+**sub to** _[ping role]_
+    -> Subscribe to chosen ping role
+**unsub from** _[ping role]_
+    -> Unsubscribe from chosen ping role
+**general tip**
+    -> Show a general tip
+_[alignment]_ **tip**
+    -> Show chosen alignment tip
+**general trivia**
+    -> Show a general trivia
+_[alignment]_ **trivia**
+    -> Show chosen alignment trivia
+**cast** _[alignment]_ **rig**
+    -> A fun command to mess around in the server
+**play lucid ladders**
+    -> Start Lucid Ladders mini game (requires at least 2 playres)
+**broken drone start quiz**
+    -> Start Crazy Stairs knowledge quiz (2 players required)
+**broken drone scold** _[username#discriminator]_
+    -> Scolds chosen user
+**revive chat**
+    -> Revive chat (only for true chat killers)
+**bd show profile**
+    -> Shows Your stats and special roles
+**give mana to** _[username#discriminator]_
+    -> Rescues a possessed user
+**reset bot**
+    -> Use this command if the bot breaks (3 users required)
+    
+**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
+**Extra alignments** (cannot be morphed into): Possessed, None, Architect.
+**Available ping roles**: Updates, Announcements, Events, Polls, Minigames
+''')
             
         else:
             ## tips/tricks trigger
