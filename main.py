@@ -420,7 +420,39 @@ async def on_message(message):
         #unsub command
         elif lmsg.startswith("sub from",2):
             await SEND(ch,await UnsubFrom(usr,lsplit[2].capitalize()))
-       
+        
+        #guide
+        elif lmsg == 'bd help':
+
+            await SEND(ch,SERVER_DATA['nick'] + ''' commands:
+
+                Please use this commands only in <#750060041289072771>!    
+
+                morph to [alignment]        -> Adds chosen alignment role in this server
+                demorph from [alignment]    -> Removes chosen alignment role
+                sub to [ping role]          -> Subscribe to chosen ping role
+                unsub from [ping role]      -> Unsubscribe from chosen ping role
+                general tip                 -> Shows a general tip
+                [alignment] tip             -> Shows chosen alignment tip
+                general trivia              -> Shows a general trivia
+                [alignment] trivia          -> Shows chosen alignment trivia
+                cast [alignment] rig        -> A fun command to mess around in the server
+                play lucid ladders          -> Starts Lucid Ladders mini game (requires at least 2 playres)
+                broken drone start quiz     -> Starts Crazy Stairs knowledge quiz (2 players required)
+                reset bot                   -> Use this command if the bot breaks (3 users required)
+                broken drone scold 
+                    [username#discriminator]-> Scolds chosen user
+                revive chat                 -> Revive chat (only for true chat killers)
+                bd show profile             -> Shows Your stats and special roles
+                give mana to
+                    [username#discriminator]-> Rescues a possessed user
+
+                Available aligments: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper,
+                    Hacker, Thief, Archon, Drifter, Heretic.
+                Extra alignments (cannot be morph to): Possessed, None, Architect.
+                Available ping roles: Updates, Announcements, Events, Polls, Minigames
+                ''')
+            
         else:
             ## tips/tricks trigger
             if len(lsplit) == 2:
