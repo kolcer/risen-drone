@@ -257,7 +257,7 @@ async def PlayLucidLadders(usr,ch):
         LADDERS['channel'] = ch
         LADDERS['tick'] = time.time()
         ourTick = LADDERS['tick']
-        await SEND(ch, PING_ROLES["Minigames"].mention + "\n" + usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
+        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
         await asyncio.sleep(60)
         if LADDERS['status'] == "gather" and ourTick == LADDERS['tick']:
             await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
