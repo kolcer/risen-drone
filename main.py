@@ -222,7 +222,7 @@ async def on_message(message):
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
     
         if EXTRA_ROLES['admin'] in usr.roles:
-            await SEND(ch, "All Games have been resetted.")
+            await SEND(ch, "All Games have been reset.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
@@ -235,7 +235,7 @@ async def on_message(message):
         elif len(FIX_BOT) == 2:
             await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
         else:
-            await SEND(ch, "All Games have been resetted.")
+            await SEND(ch, "All Games have been reset.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
@@ -243,7 +243,7 @@ async def on_message(message):
 
         await asyncio.sleep(60)
         if len(FIX_BOT) != 0:
-            await SEND(ch, "Games have not been resetted due to lack of users asking to.")
+            await SEND(ch, "Games have not been reset due to lack of users asking to.")
             FIX_BOT.clear()
         return
 
