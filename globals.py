@@ -491,6 +491,22 @@ LADDERS = {
     'winDetect': 0,
 }
 
+I_SPY = {
+    'maxwait': 60,
+    'status': None,
+    'channel': None,
+    'questions': [ 
+        "I spy with my little eye something beginning with the letter **S**.",
+        "I spy with my little eye something beginning with the letter **M**.",
+        "I spy with my little eye something beginning with the letter **E**.",
+    ],
+    'answers':[
+        "stairs",
+        "more stairs",
+        "even more stairs",
+    ],
+}
+
 EXTRA_ROLES = {
     'ckr': 951424560685805588,            #chat killer
     'possessed': 988572669521842197,      #via rig

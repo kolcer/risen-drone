@@ -477,7 +477,26 @@ _[alignment]_ **trivia**
 **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
 **Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
 ''')
-            
+        elif I_SPY['status'] != None and ch == I_SPY['channel']:
+            if lmsg == I_SPY['answers'][I_SPY['status']]: 
+                next = I_SPY['status'] + 1
+                
+                I_SPY['status'] = None
+                await SEND(ch,'Correct.')
+                await asyncio.sleep(5)
+                if I_SPY['questions'][next] != None:
+                    I_SPY['status'] = next
+                    await SEND(ch,I_SPY['questions'][next])
+                    await asyncio.sleep(I_SPY['maxwait'])
+                    if I_SPY['status'] == next:
+                        I_SPY['status'] = None
+                        await SEND(ch,'Whatever.')
+                else:
+                   await SEND(ch,'I hate my job.')
+            else:
+                I_SPY['status'] = None
+                await SEND(ch,'Wrong. Better luck next time.')
+
         else:
             ## tips/tricks trigger
             if len(lsplit) == 2:
@@ -533,6 +552,18 @@ _[alignment]_ **trivia**
         #have the bot say whatever you say
         if msg.startswith("makesay", 1):
             await SEND(CHANNELS[split[1]], msgback)
+            await DELETE(msg)
+            return
+
+        if msg.startwith("ispy",1):
+            I_SPY['channel'] = CHANNELS[split[1]]
+            I_SPY['status'] = 0
+            await SEND(I_SPY['channel'],I_SPY['questions'][0])
+            await DELETE(msg)
+            await asyncio.sleep(I_SPY['maxwait'])
+            if I_SPY['status'] == 0:
+                I_SPY['status'] = None
+                await SEND(I_SPY['channel'],'Whatever.')
             return
 
         #create a new role with name and color
