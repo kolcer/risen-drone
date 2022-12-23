@@ -552,14 +552,14 @@ _[alignment]_ **trivia**
         #have the bot say whatever you say
         if msg.startswith("makesay", 1):
             await SEND(CHANNELS[split[1]], msgback)
-            await DELETE(msg)
+            await DELETE(message)
             return
 
         if msg.startswith("ispy",1):
             I_SPY['channel'] = CHANNELS[split[1]]
             I_SPY['status'] = 0
             await SEND(I_SPY['channel'],I_SPY['questions'][0])
-            await DELETE(msg)
+            await DELETE(message)
             await asyncio.sleep(I_SPY['maxwait'])
             if I_SPY['status'] == 0:
                 I_SPY['status'] = None
