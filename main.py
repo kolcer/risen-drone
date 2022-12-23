@@ -555,7 +555,7 @@ _[alignment]_ **trivia**
             await DELETE(msg)
             return
 
-        if msg.startwith("ispy",1):
+        if msg.startswith("ispy",1):
             I_SPY['channel'] = CHANNELS[split[1]]
             I_SPY['status'] = 0
             await SEND(I_SPY['channel'],I_SPY['questions'][0])
