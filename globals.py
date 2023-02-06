@@ -215,7 +215,7 @@ MULTIPLE_WORD_TRIGGERS = {
     "Hm.":
         ["Hm"],
     "You can't hate Sleazel! What has he done to you?":
-        ["hate"], ["sleazel"],
+        ['hate'], ['sleazel'],
 }
 
 #first word is required and any of the pool of rest of the words
