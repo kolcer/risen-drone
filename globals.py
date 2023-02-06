@@ -234,7 +234,7 @@ MULTIPLE_WORD_TRIGGERS = {
     "I did actually.":
         ['who', 'asked']
     "Hey! Let's not be disrespectful, or say goodbye to your liver.":
-        ['skill issue', 'L', 'bozo']
+        ['skill issue', 'L', 'bozo'],
 }
 
 #first word is required and any of the pool of rest of the words
