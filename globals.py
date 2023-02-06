@@ -198,8 +198,12 @@ SINGLE_WORD_TRIGGERS = {
         '827952429290618943',
     "You're the one that has no balls.":
         'balls',
-    "Hey! Let's not get disrespectful or I will be very pissed."
-        'skill issue', 'L', 'bozo'
+    "The only skill issue you have is your capability to try to roast someone. Nice try.":
+        'skill issue',
+    "Wow, have you finally learned your ABC's? Shriveled up shrimp.":
+        'L',
+    "Oh I like you admitting to being a clown. Just like a Joker!":
+        'bozo',
 }
 
 #all words nedd to be present for this trigger to occur
