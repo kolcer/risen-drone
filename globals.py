@@ -230,6 +230,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['sucks', 'sleazel'],
     "Let's not suck people, okay?":
         ['you', 'suck'],
+    "I did actually.":
+        ['who', 'asked']
 }
 
 #first word is required and any of the pool of rest of the words
