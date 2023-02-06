@@ -198,6 +198,8 @@ SINGLE_WORD_TRIGGERS = {
         '827952429290618943',
     "You're the one that has no balls.":
         'balls',
+    "Hey! Let's not get disrespectful or I will be very pissed."
+        'skill issue', 'L', 'bozo'
 }
 
 #all words nedd to be present for this trigger to occur
@@ -233,8 +235,6 @@ MULTIPLE_WORD_TRIGGERS = {
         ['you', 'suck'],
     "I did actually.":
         ['who', 'asked'],
-    "Hey! Let's not be disrespectful, or say goodbye to your liver.":
-        ['skill issue', 'L', 'bozo']
 }
 
 #first word is required and any of the pool of rest of the words
