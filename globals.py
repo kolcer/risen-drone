@@ -195,6 +195,8 @@ SINGLE_WORD_TRIGGERS = {
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
+    "You're the one that has no balls."
+        'balls',
 }
 
 #all words nedd to be present for this trigger to occur
