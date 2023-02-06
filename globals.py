@@ -214,6 +214,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "Hm.":
         ["Hm"],
+    "You can't hate Sleazel! What has he done to you?":
+        ["hate"], ["sleazel"]
 }
 
 #first word is required and any of the pool of rest of the words
