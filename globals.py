@@ -69,6 +69,7 @@ REVIVE_CHAT = [
     "Nope. Chat is as dead as my intentions to revive it.",
     "Is Sleazel cool?",
     "What's your favorite feature present in the game?"
+    "What's fun about Crazy Stairs?"
 ]
 
 RIG_LIST = [
@@ -114,6 +115,7 @@ WORST_GUNS = [
     "LeMat Revolver",
     "Boys Anti-Tank Rifle",
     "No gun name for you",
+    "AK-47",
 ]
 
 MG_SPELLS = [
