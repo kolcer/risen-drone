@@ -58,6 +58,7 @@ IMPOSTOR_NICKS = [
     "good job",
     "your prize",
     "Name offered by Me. F.D.",
+    "i laughed at fallen drone's death"
 ]
 
 REVIVE_CHAT = [
