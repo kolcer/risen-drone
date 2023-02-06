@@ -384,7 +384,7 @@ async def on_message(message):
                 await SEND(ch, "It is not your fault.")
                 return
 
-            await SEND(ch, "Reedeming yourself? Alright.")
+            await SEND(ch, "Redeeming yourself? Alright.")
             await asyncio.sleep(2)
             await SEND(ch, random.choice(REVIVE_CHAT))
             CHAT_KILLER['reviveChat'] = False
