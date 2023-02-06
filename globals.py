@@ -216,7 +216,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ["Hm"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
-    "Well, you probably suck too."
+    "Well, you probably suck too.":
         ['sucks', 'sleazel'],
 }
 
