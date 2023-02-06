@@ -43,6 +43,8 @@ IMPOSTOR_WARNINGS = [
     "I put an end to this buffoonery.", "Someone had to do it.",
     "We are through here.", "My disappointment is immeasurable.",
     "I do not speak like that.", "I am not fooled."
+    "You can never copy me, nerd."
+    "Good luck on copying me."
 ]
 
 IMPOSTOR_NICKS = [
@@ -58,7 +60,7 @@ IMPOSTOR_NICKS = [
     "good job",
     "your prize",
     "Name offered by Me. F.D.",
-    "i laughed at fallen drone's death"
+    "this nerd is a copycat lmao"
 ]
 
 REVIVE_CHAT = [
@@ -70,6 +72,7 @@ REVIVE_CHAT = [
     "Is Sleazel cool?",
     "What's your favorite feature present in the game?"
     "What's fun about Crazy Stairs?"
+    "Do you hate Sleazel?"
 ]
 
 RIG_LIST = [
