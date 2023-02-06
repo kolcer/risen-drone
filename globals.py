@@ -61,6 +61,7 @@ IMPOSTOR_NICKS = [
     "your prize",
     "Name offered by Me. F.D.",
     "this nerd is a copycat lmao"
+    "this man tried"
 ]
 
 REVIVE_CHAT = [
@@ -73,6 +74,7 @@ REVIVE_CHAT = [
     "What's your favorite feature present in the game?"
     "What's fun about Crazy Stairs?"
     "Do you hate Sleazel?"
+    "Don't make the chat dead again! I will get very unpleasant."
 ]
 
 RIG_LIST = [
