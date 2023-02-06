@@ -226,6 +226,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['hate', 'sleazel'],
     "Well, you probably suck too.":
         ['sucks', 'sleazel'],
+    "Let's not suck people, okay?":
+        ['you', 'suck'],
 }
 
 #first word is required and any of the pool of rest of the words
