@@ -232,9 +232,9 @@ MULTIPLE_WORD_TRIGGERS = {
     "Let's not suck people, okay?":
         ['you', 'suck'],
     "I did actually.":
-        ['who', 'asked']
+        ['who', 'asked'],
     "Hey! Let's not be disrespectful, or say goodbye to your liver.":
-        ['skill issue', 'L', 'bozo'],
+        ['skill issue', 'L', 'bozo']
 }
 
 #first word is required and any of the pool of rest of the words
