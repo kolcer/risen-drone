@@ -195,7 +195,7 @@ SINGLE_WORD_TRIGGERS = {
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
-    "You're the one that has no balls."
+    "You're the one that has no balls.":
         'balls',
 }
 
