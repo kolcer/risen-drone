@@ -201,7 +201,7 @@ SINGLE_WORD_TRIGGERS = {
     "The only skill issue you have is your capability to try to roast someone. Nice try.":
         'skill issue',
     "Wow, have you finally learned your ABC's? Shriveled up shrimp.":
-        'L',
+        'l',
     "Oh I like you admitting to being a clown. Just like a Joker!":
         'bozo',
 }
