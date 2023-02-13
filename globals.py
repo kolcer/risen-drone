@@ -71,11 +71,11 @@ REVIVE_CHAT = [
     "Whose alignment's power would you rather wield in real life?",
     "Nope. Chat is as dead as my intentions to revive it.",
     "Is Sleazel cool?",
-    "What's your favorite feature present in the game?"
-    "What's fun about Crazy Stairs?"
-    "Do you hate Sleazel?"
-    "Don't make the chat dead again! I will get very unpleasant."
-    "Star Wars reminds me of home. I still want to go back to Death Star one day..."
+    "What's your favorite feature present in the game?",
+    "What's fun about Crazy Stairs?",
+    "Do you hate Sleazel?",
+    "Don't make the chat dead again! I will get very unpleasant.",
+    "Star Wars reminds me of home. I still want to go back to Death Star one day...",
 ]
 
 RIG_LIST = [
