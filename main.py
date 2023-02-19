@@ -153,10 +153,14 @@ async def on_message(message):
     usr = message.author
     ch = message.channel
 
-    if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg) and not usr.id == 827952429290618943:
+
+
+    if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in IMMUNITY_ROLES:
                 return
+        if usr.id == 827952429290618943:
+            return
 
         await DELETE(message)
 
