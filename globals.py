@@ -202,6 +202,8 @@ SINGLE_WORD_TRIGGERS = {
         'skill issue',
     "Oh I like you admitting to being a clown. Just like a Joker!":
         'bozo',
+    "Oh no you don't. I know that you are bypassing, Nexieus.":
+        'fuсk',
 }
 
 #all words nedd to be present for this trigger to occur
