@@ -204,6 +204,8 @@ SINGLE_WORD_TRIGGERS = {
         'bozo',
     "Oh no you don't. I know that you are bypassing, Nexieus.":
         'fuсk',
+    "Cease.":
+        'fu*c*k',
 }
 
 #all words nedd to be present for this trigger to occur
