@@ -206,6 +206,12 @@ SINGLE_WORD_TRIGGERS = {
         'fuсk',
     "Cease.":
         'fu*c*k',
+    "You can't bypass. You are a fool.":
+        'f*u*ck',
+    "No.":
+        '*f*uck',
+    "I am getting very pissed off. Stop.":
+        'fuc*k*',
 }
 
 #all words nedd to be present for this trigger to occur
