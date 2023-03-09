@@ -239,7 +239,7 @@ async def on_message(message):
         elif len(FIX_BOT) == 2:
             await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
         else:
-            await SEND(ch, "All Games and Rigs (and their Cooldowns) have been reset.")
+            await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
