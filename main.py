@@ -244,6 +244,12 @@ async def on_message(message):
             FORCE_CLOSE_EVENT()
             MG_RESET()
 
+            for rig in ACTIVE_RIGS:
+                ACTIVE_RIGS[rig] = False 
+
+            for cooldown in RIG_COOLDOWNS:
+                RIG_COOLDOWNS[cooldown] = False 
+
 
         await asyncio.sleep(60)
         if len(FIX_BOT) != 0:
