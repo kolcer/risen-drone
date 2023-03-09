@@ -248,7 +248,7 @@ async def on_message(message):
                 ACTIVE_RIGS[rig] = False 
 
             for cooldown in RIG_COOLDOWNS:
-                RIG_COOLDOWNS[cooldown] = False 
+                RIG_COOLDOWNS[cooldown] = False
 
 
         await asyncio.sleep(60)
