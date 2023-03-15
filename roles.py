@@ -105,7 +105,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(CHAT_KILLER['wait'])
         
         if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
-            #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel
+            #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo(?)
             CHAT_KILLER['reviveChat'] = True
             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
@@ -116,21 +116,22 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             await asyncio.sleep(1)
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
-                print(EXTRA_ROLES['ckr'].name)
-                await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Definitive yet.")
+                await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Professionals yet.")
             return
 
         elif msg.created_at == CHAT_KILLER['last'] and EXTRA_ROLES['ckr'] in msg.author.roles:
             CHAT_KILLER['reviveChat'] = True
-            if EXTRA_ROLES['ckr'].name == "Definitive Ultimate Chat Killer" or EXTRA_ROLES['ckr'].name == "Professional Chat Murderer":
-                await SEND(CHANNELS["general"],msg.author.mention + " stop killing the chat...")
+
+            if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+                await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
                 await asyncio.sleep(1)
 
-                if EXTRA_ROLES['ckr'].name != "Professional Chat Murderer":
-                    await EDIT_ROLE(EXTRA_ROLES['ckr'], "Professional Chat Murderer", "This user has killed the chat thrice in a row.")
-                return
+                await EDIT_ROLE(EXTRA_ROLES['ckr'], "The Awkward One", "Awkward.")
 
-            await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
-            await asyncio.sleep(1)
+            if EXTRA_ROLES['ckr'].name == "Ultimate Chat Killer":
+                await SEND(CHANNELS["general"],msg.author.mention + " you did it again...")
+                await asyncio.sleep(1)
+
+                await EDIT_ROLE(EXTRA_ROLES['ckr'], "Professional Chat Murderer", "Yikes, they have killed the chat again.")
       
     
