@@ -116,6 +116,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             await asyncio.sleep(1)
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+                print(EXTRA_ROLES['ckr'].name)
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Definitive yet.")
             return
 
