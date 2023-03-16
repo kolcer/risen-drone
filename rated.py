@@ -11,7 +11,7 @@ def GET_EMOJI(client,id):
 
 #get up to date ckr members
 def UPDATE_CKR():
-     EXTRA_ROLES['ckr'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['ckr'].id)
+    EXTRA_ROLES['ckr'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['ckr'].id)
 
 # rate limited functions
 
@@ -34,7 +34,7 @@ async def EDIT_NICK(usr,new_nick):
 
 #edit role
 async def EDIT_ROLE(targetrole, newname, motivation):
-  await targetrole.edit(name = newname, reason = motivation)
+    await targetrole.edit(name = newname, reason = motivation)
 
 #send message
 async def SEND(channel,message):
@@ -56,9 +56,9 @@ async def EDIT_MESSAGE(msg, con):
     await msg.edit(content=con)
     
 async def DELETE(message):
-  await asyncio.sleep(2)
-  await message.delete()
+    await asyncio.sleep(2)
+    await message.delete()
 
 async def NEW_ROLE(server,colorpick, rolename):
-  return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
+    return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
 
