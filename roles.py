@@ -107,6 +107,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
             #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo(?)
             CHAT_KILLER['reviveChat'] = True
+            print("new chat killer")
             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
             for member in EXTRA_ROLES['ckr'].members:
@@ -116,22 +117,30 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             await asyncio.sleep(1)
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+                print("attempt to change the name of the role to: Ultimate Chat Killer")
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Professionals yet.")
+                print(EXTRA_ROLES['ckr'].name)
             return
 
         elif msg.created_at == CHAT_KILLER['last'] and EXTRA_ROLES['ckr'] in msg.author.roles:
             CHAT_KILLER['reviveChat'] = True
+            print("user already has the chat killer role")
+            print(EXTRA_ROLES['ckr'].name)
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+                print("attempt to change the name of the role to: The Awkward One")
                 await SEND(CHANNELS["general"],msg.author.mention + " what have you done to this chat.")
                 await asyncio.sleep(1)
 
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "The Awkward One", "Awkward.")
+                print(EXTRA_ROLES['ckr'].name)
 
             if EXTRA_ROLES['ckr'].name == "Ultimate Chat Killer":
+                print("attempt to change the name of the role to: Professional Chat Murderer")
                 await SEND(CHANNELS["general"],msg.author.mention + " you did it again...")
                 await asyncio.sleep(1)
 
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Professional Chat Murderer", "Yikes, they have killed the chat again.")
+                print(EXTRA_ROLES['ckr'].name)
       
     
