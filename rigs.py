@@ -200,13 +200,13 @@ async def SplicerRig(reaction,user):
             SPLICER_RIG["user-name"] = ""
             SPLICER_RIG['rigcaster-name'] = ""
   
-            await SEND(reaction.message.channel, "Splice request declined.")
+            await SEND(reaction.message.channel, "Splice request declined. That's too bad.")
         elif reaction.emoji == "✅":
             await EDIT_NICK(user, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
             await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
 
-            await SEND(reaction.message.channel, "Splice request accepted.")
+            await SEND(reaction.message.channel, "Splice request accepted. Enjoy your new display names.")
 
             
             SPLICER_RIG["user"] = None
@@ -356,16 +356,23 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["user"] = usr
 
     rcn = RIG_DATA['rigCaster'].display_name
+    print(rcn)
     rcn1 = rcn[:len(rcn)//2]
     rcn2 = rcn[len(rcn)//2:]
+    print(rcn1 + "/" + rcn2)
 
     usrn = usr.display_name
+    print(usr)
     usrn1 = usrn[:len(usrn)//2]
     usrn2 = usrn[len(usrn)//2:]
+    print(usrn1 + "/" + usrn2)
 
 
     SPLICER_RIG["user-name"] = usrn1 + rcn2
-    SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2
+    # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
+    SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
+    print(SPLICER_RIG["user-name"])
+    print(SPLICER_RIG["RIG_DATA['rigCaster']-name"])
 
     focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["RIG_DATA['rigCaster']-name"] + ".")
     SPLICER_RIG["reactionmessage"] = focusmsg
