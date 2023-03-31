@@ -443,6 +443,10 @@ FUN_ROLES = {
     "Zero": None,
 }
 
+LIMITED_ROLES = {
+    "Zero": "November 27 2022 - November 28 2022",
+}
+
 #not morphable roles
 # 0 - role itself
 # 1 - doesnt have role, and wants it
