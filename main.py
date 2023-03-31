@@ -226,7 +226,7 @@ async def on_message(message):
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
     
         if EXTRA_ROLES['admin'] in usr.roles:
-            await SEND(ch, "All Games have been reset.")
+            await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
