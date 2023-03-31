@@ -362,6 +362,7 @@ async def on_message(message):
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
+                    print(LIMITED_ROLES[str(role)])
                     if str(role) in LIMITED_ROLES:
                         profilemsg += "**" + str(role) + "** 🔒 " + LIMITED_ROLES[str(role)] + "\n"
                     else:
