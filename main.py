@@ -362,9 +362,15 @@ async def on_message(message):
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
             for role in FUN_ROLES:
                 if FUN_ROLES[role] in usr.roles:
-                    profilemsg += "**" + str(role) + "**\n"
+                    if str(role) == "I was there":
+                        profilemsg += "**" + str(role) + "** 🔒\n"
+                    else:
+                        profilemsg += "**" + str(role) + "**\n"
                 else:
-                    profilemsg += "**???**\n"
+                    if str(role) == "I was there":
+                        profilemsg += "**???** 🔒\n"
+                    else:
+                        profilemsg += "**???**\n"
 
             if usr not in MSG_SENT:
                 messages = "0"

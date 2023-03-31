@@ -438,6 +438,7 @@ FUN_ROLES = {
     "Architect Design": None,
     "Pranked the Creator": None,
     "I was there": None,
+    "Zero": None,
 }
 
 #not morphable roles
