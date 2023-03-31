@@ -139,8 +139,8 @@ async def Rig(rigType, ch, usr):
             if usr.display_name == '00000000':
                 await SEND(ch, "You truly deserve the Zero rank.")
 
-            if FUN_ROLES["Zero"] not in usr.roles and usr.id == 267014823315898368:
-                await ADD_ROLES(usr, FUN_ROLES["Zero"])
+                if FUN_ROLES["Zero"] not in usr.roles:
+                    await ADD_ROLES(usr, FUN_ROLES["Zero"])
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))
