@@ -684,6 +684,19 @@ _[alignment]_ **trivia**
 
             db.set(track + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
             return
+        
+        #momentarily turns Heretic Rig off before updating the drone, to avoid someone casting it and getting stuck with the role.
+        #also frees any person who is currently possessed
+        if msg.startswith("disable heretic rig", 1):
+            RIG_COOLDOWNS["ha"] = True
+            role = EXTRA_ROLES['possessed']
+
+            for member in SERVER_DATA['server'].members:
+                    if role in member.roles:
+                            await REMOVE_ROLES(member, role)
+
+            await SEND(ch, "Heretic rig has been disabled. If someone was possessed, they no longer are.")
+            return
 
 
         #quiz
