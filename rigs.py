@@ -136,8 +136,8 @@ async def Rig(rigType, ch, usr):
             await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd############")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
-            if usr.display_name == '11111111' or usr.display_name == '00000000':
-                await SEND(ch, "That's some luck right there.")
+            if usr.display_name == '00000000':
+                await SEND(ch, "You truly deserve the Zero rank.")
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))

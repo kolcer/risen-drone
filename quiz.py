@@ -154,7 +154,7 @@ async def ProcessQuizAnswer(usr,ch,message,lmsg):
         await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
         return
 
-    #go here instead if the answer it not incorrect (which means it is correct indeed)
+    #go here instead if the answer is not incorrect (which means it is correct indeed)
     #show broken's approval to the guessing user.
     QUIZ["can-answer"] = False
     finalmsg = ""

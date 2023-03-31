@@ -48,7 +48,7 @@ IMPOSTOR_WARNINGS = [
 ]
 
 IMPOSTOR_NICKS = [
-    "i am a thief",
+    "I am a thief",
     "my plan, foiled!",
     "unoriginal display name",
     "there was an attempt",
@@ -188,8 +188,8 @@ EMOJIS_TO_REACT = {
 # value is the trigger, key is the response!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    "<:cs_Stairbonk:812813052822421555>": #MESSAGE SENT
-        'gun',                            #REPLY
+    "<:cs_Stairbonk:812813052822421555>": #REPLY FROM THE BOT
+        'gun',                            #YOUR MESSAGE
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
     "Tsk.":
@@ -214,7 +214,7 @@ SINGLE_WORD_TRIGGERS = {
         'fuc*k*',
 }
 
-#all words nedd to be present for this trigger to occur
+#all words need to be present for this trigger to occur
 #but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
     "Keeper obviously. Stop asking stupid questions.": 
@@ -340,10 +340,10 @@ COOLDOWN_DESCRIPTIONS = {
 MORPHABLE_ROLES = {
     "Patron": [ 
         None,
-        "Go help those noobs, you are now a Patron!",
-        "What about protecting the noobs? Without a Patron around they will be lost.",
-        "You are already assisting the noobs, why would you help them twice?",
-        "Nobody has seen you around lately, what are you doing?",
+        "Go help those noobs, you are now a Patron!",                                  #MORPH TO - DOESN'T HAVE THE ROLE
+        "What about protecting the noobs? Without a Patron around they will be lost.", #DEMORPH FROM - HAS THE ROLE
+        "You are already assisting the noobs, why would you help them twice?",         #MORPH TO - HAS THE ROLE
+        "Nobody has seen you around lately, what are you doing?",                      #DEMORPH FROM - DOESN'T HAVE THE ROLE
     ],
     "Joker": [ 
         None,
@@ -357,7 +357,7 @@ MORPHABLE_ROLES = {
         "Unleash all your wickedness, you are now a Wicked!",
         "You destroyed everything and left nothing behind. Thank you for your services, a Wicked is not needed anymore.",
         "You have been destroying the stairs until now...",
-        "You are not a Wicked...",
+        "I haven't caught you doing any misdeed yet, are you starting now?",
     ],
     "Spectre": [ 
         None,
@@ -391,7 +391,7 @@ MORPHABLE_ROLES = {
         None,
         "Welcome to the backdoor, you are now a Hacker!",
         "You tried to execute some code but as a result you accidentally removed your Hacker permissions.",
-        "You are already inside...",
+        "You have already snuck inside the source code.",
         "You do not seem to be a cheater, no reason to remove your permissions.",
     ],
     "Thief": [ 
@@ -403,9 +403,9 @@ MORPHABLE_ROLES = {
      ],
     "Archon": [ 
         None,
-        "Typo fixed, happy? You are now an Archon!",
+        "It is finally time to pay a visit to the other dimension. You are now an Archon!",
         "Traveling between portals has been fun, but fun eventually comes to an end. You are no longer an Archon.",
-        "I have already corrected the typo.",
+        "You are already visiting a dimension, it would be very rude to get away without saying goodbye to the locals.",
         "Do you want the fun to end twice?",
      ],
      "Drifter": [ 
@@ -573,6 +573,6 @@ def getScoldDictionary(victim, author):
         886615047407812678:
             victim.mention + ", I am IMMEASURABLY disappointed in you. We all know why. I will never forget that.",
         author.id:
-            author.mention + " you do not need Me to be disappointed in yourself.",
+            author.mention + " you do not need me to be disappointed in yourself.",
     }
     return ScoldDict
