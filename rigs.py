@@ -184,6 +184,9 @@ async def Rig(rigType, ch, usr):
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
+    if not HERETIC_DISABLED[0] and rigType.lower() == "heretic":
+        RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
+
     await SEND(ch, rigType.capitalize() + " Rig cooldown is over" + messageAppend)
     
     #reset spam count

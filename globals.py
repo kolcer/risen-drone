@@ -22,6 +22,8 @@ QUESTIONS = {} #fill this up on startup from database
 NickDictionary = {}
 MG_PLAYERS = {}
 
+HERETIC_DISABLED = [False]
+
 #CONSTANT ARRAYS
 #this is for tips and trivia database
 TIPS_KEYS = [
