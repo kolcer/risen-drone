@@ -408,6 +408,7 @@ async def GiveMana(ch,usr,message):
 
     if role in message.author.roles:
         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
+        return
 
     split_message = message.content.split(" ", 3)
     target = split_message[3].lower()
