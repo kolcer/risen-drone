@@ -51,10 +51,6 @@ async def necromancer(message):
 
 
 async def Rig(rigType, ch, usr):
-
-    if MORPHABLE_ROLES["Guns"][0] in usr.roles:
-        await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
-        return
  
     if rigType.lower() == "splicer":
         if not FUN_ROLES["Splicer"] in usr.roles:
@@ -231,6 +227,10 @@ async def CastRig(rigPick,ch,usr):
 
     if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
         await SEND(ch, "That is not a valid rig. Try again.")
+        return
+    
+    if MORPHABLE_ROLES["Guns"][0] in usr.roles:
+        await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
     if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"]:
