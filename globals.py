@@ -232,7 +232,7 @@ MULTIPLE_WORD_TRIGGERS = {
     "Haha. You got stuck in stairs!":
         ['stuck', 'stairs'],
     "I fell and broke, okay?":
-        ['broken', 'drone', 'how', "?"],
+        ['break', 'drone', 'how', "?"],
     "Are you expecting me to answer with None?": 
         ['worst', 'alignment', '?'], 
     "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
@@ -245,8 +245,6 @@ MULTIPLE_WORD_TRIGGERS = {
         ['dead', 'chat'],
     "{mention} is a true stair jumper.":
         ["found", "secret", "badge"],
-    "Hm.":
-        ["Hm"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
     "Well, you probably suck too.":
