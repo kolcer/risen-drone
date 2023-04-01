@@ -191,8 +191,10 @@ EMOJIS_TO_REACT = {
 # value is the trigger, key is the response!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    "<:cs_Stairbonk:812813052822421555>": #REPLY FROM THE BOT
-        'gun',                            #YOUR MESSAGE
+    # "<:cs_Stairbonk:812813052822421555>": #REPLY FROM THE BOT
+    #     'gun',                            #YOUR MESSAGE
+    "I love guns. 🥰":
+        'gun',    
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
     "Tsk.":
