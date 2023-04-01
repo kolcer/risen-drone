@@ -125,6 +125,7 @@ WORST_GUNS = [
     "Boys Anti-Tank Rifle",
     "No gun name for you",
     "AK-47",
+    "DSR 50",
 ]
 
 MG_SPELLS = [
