@@ -196,7 +196,7 @@ SINGLE_WORD_TRIGGERS = {
     #     'gun',                            #YOUR MESSAGE
     "<:cs_Stairbonk:812813052822421555>":
         'peace',                         
-    "I love guns. 🥰":
+    "I lo- ...Huh? <:cs_Stairbonk:812813052822421555>":
         'gun',    
     "It needs to be earned, sorry.":
         'morph to ultimate chat killer',
