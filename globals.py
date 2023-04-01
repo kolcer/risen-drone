@@ -444,7 +444,7 @@ FUN_ROLES = {
 }
 
 LIMITED_ROLES = {
-    "I was there": "*(November 27th 2022 / November 28th 2022)*",
+    "I was there": "*(11/27/2022 - 11/28/2022)*",
 }
 
 #not morphable roles

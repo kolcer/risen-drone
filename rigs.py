@@ -51,6 +51,10 @@ async def necromancer(message):
 
 
 async def Rig(rigType, ch, usr):
+
+    if MORPHABLE_ROLES["Guns"][0] in usr.roles:
+        await SEND(ch, "Guns do not get to use cool magical powers.")
+        return
  
     if rigType.lower() == "splicer":
         if not FUN_ROLES["Splicer"] in usr.roles:
