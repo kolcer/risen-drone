@@ -687,7 +687,7 @@ _[alignment]_ **trivia**
         
         #momentarily turns Heretic Rig off before updating the drone, to avoid someone casting it and getting stuck with the role.
         #also frees any person who is currently possessed
-        if msg.startswith("disable heretic rig", 1):
+        if msg.startswith("dhr", 1) or msg.startswith("disable heretic rig", 1):
             HERETIC_DISABLED[0] = True
             RIG_COOLDOWNS["ha"] = True
             role = EXTRA_ROLES['possessed']
