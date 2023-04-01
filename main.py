@@ -431,10 +431,10 @@ async def on_message(message):
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles and not HERETIC_DISABLED[0]:
                 DEMORPH_CLIMBER.append(usr)
                 await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
-                await asyncio.wait(10)
+                await asyncio.sleep(10)
                 await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
                 DEMORPH_CLIMBER.remove(usr)
-                await asyncio.wait(1)
+                await asyncio.sleep(1)
                 await SEND(ch, "Just kidding.")
 
         #sub command       
