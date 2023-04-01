@@ -137,7 +137,7 @@ async def Rig(rigType, ch, usr):
             for i in range(8):
                 temp = str(random.randint(0, 1))
                 im += temp
-            await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd############")
+            await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd#############")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
             if usr.display_name == '00000000':
