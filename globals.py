@@ -220,6 +220,10 @@ SINGLE_WORD_TRIGGERS = {
         '*f*uck',
     "I am getting very pissed off. Stop.":
         'fuc*k*',
+    "It's spelt Thief.":
+        "theif",
+    "🏌️":
+        "hm",
 }
 
 #all words need to be present for this trigger to occur
