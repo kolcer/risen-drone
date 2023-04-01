@@ -222,7 +222,7 @@ SINGLE_WORD_TRIGGERS = {
         'fuc*k*',
     "It's spelt Thief.":
         "theif",
-    "🏌️":
+    "🏌️‍♂️":
         "hm",
 }
 
