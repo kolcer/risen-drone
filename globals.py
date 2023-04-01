@@ -193,6 +193,8 @@ EMOJIS_TO_REACT = {
 SINGLE_WORD_TRIGGERS = {
     # "<:cs_Stairbonk:812813052822421555>": #REPLY FROM THE BOT
     #     'gun',                            #YOUR MESSAGE
+    "<:cs_Stairbonk:812813052822421555>":
+        'peace',                         
     "I love guns. 🥰":
         'gun',    
     "It needs to be earned, sorry.":
