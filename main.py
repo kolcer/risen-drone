@@ -420,11 +420,22 @@ async def on_message(message):
 
         #morph command
         elif lmsg.startswith("morph to"):
-            await SEND(ch,await MorphTo(usr,lsplit[2].capitalize()))
+            morphToTarget = lsplit[2].capitalize()
+            await SEND(ch, await MorphTo(usr,morphToTarget))
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
-            await SEND(ch,await DemorphFrom(usr,lsplit[2].capitalize()))
+            demorphFromTarget = lsplit[2].capitalize()
+            await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
+
+            if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles and not HERETIC_DISABLED[0]:
+                DEMORPH_CLIMBER.append(usr)
+                await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
+                await asyncio.wait(10)
+                await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
+                DEMORPH_CLIMBER.remove(usr)
+                await asyncio.wait(1)
+                await SEND(ch, "Just kidding.")
 
         #sub command       
         elif lmsg.startswith("sub to"):
@@ -696,7 +707,10 @@ _[alignment]_ **trivia**
                     if role in member.roles:
                             await REMOVE_ROLES(member, role)
 
-            await SEND(ch, "Heretic rig has been disabled. If someone was possessed, they no longer are.")
+            for user in DEMORPH_CLIMBER:
+                await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
+
+            await SEND(ch, "Heretic Rig has been disabled. If someone was possessed, they no longer are.")
             return
 
 

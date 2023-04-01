@@ -234,7 +234,10 @@ async def CastRig(rigPick,ch,usr):
         return
 
     if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"]:
-        await Rig("heretic",ch,usr)
+        rigPick = "heretic"
+    
+    if rigPick == "heretic" and HERETIC_DISABLED[0]:
+        await SEND(ch, "Heretic Rig is currently disabled. The bot is restarting soon and I wouldn't want you to be stuck with the Possessed role.")
         return
 
     if rigPick == "chameleon":

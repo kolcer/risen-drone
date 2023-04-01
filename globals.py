@@ -22,7 +22,8 @@ QUESTIONS = {} #fill this up on startup from database
 NickDictionary = {}
 MG_PLAYERS = {}
 
-HERETIC_DISABLED = [False]
+HERETIC_DISABLED = [False] #used to prevent deletion of important roles before bot is manually restarted (type |disable heretic rig)
+DEMORPH_CLIMBER = [] #saves people who demorphed from climber and gives the role back instantly when disabling heretic rig
 
 #CONSTANT ARRAYS
 #this is for tips and trivia database
