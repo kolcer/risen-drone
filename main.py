@@ -224,19 +224,11 @@ async def on_message(message):
     
 
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
-    
-        if EXTRA_ROLES['admin'] in usr.roles:
-            await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
-            FIX_BOT.clear()
-            FORCE_CLOSE_EVENT()
-            MG_RESET()
-            NickDictionary.clear()
-            return
 
         FIX_BOT.append(usr)
-        if len(FIX_BOT) == 1:
+        if len(FIX_BOT) == 1 and not EXTRA_ROLES['admin'] in usr.roles:
             await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
-        elif len(FIX_BOT) == 2:
+        elif len(FIX_BOT) == 2 and not EXTRA_ROLES['admin'] in usr.roles:
             await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
         else:
             await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
