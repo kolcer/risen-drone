@@ -570,7 +570,7 @@ async def on_message(message):
         if len(msginputs) == 1:
             #full admin commands list
             if lmsg.startswith("cmdlist", 1):
-                if ch.Id != 813882658156838923:
+                if ch.id != 813882658156838923:
                     SEND(ch, "Try to be more discreet, they do not need to know.")
                     return
 
@@ -723,7 +723,7 @@ async def on_message(message):
                     return
                     
                 for mem in SERVER_DATA['server'].members:
-                    if mem.Id == msgsplit[1]:
+                    if mem.id == msgsplit[1]:
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
                             await ADD_ROLES(mem, neededrole)
@@ -739,7 +739,7 @@ async def on_message(message):
                     return
 
                 for mem in SERVER_DATA['server'].members:
-                    if mem.Id == msgsplit[1]:
+                    if mem.id == msgsplit[1]:
                             await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
                             await REMOVE_ROLES(mem, neededrole)
