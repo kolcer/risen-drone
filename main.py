@@ -562,7 +562,7 @@ async def on_message(message):
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         #deterimine the key (this is an alignment name in most cases)
-        msginputs = len(msg.split(" "))
+        msginputs = msg.split(" ")
         msgsplit = msg.split(" ", 2) #creates a list from the input received. "Hello world say HI!" becomes LIST["Hello", "world", "say HI!"]
         lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
 
