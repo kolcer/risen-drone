@@ -672,6 +672,7 @@ Delete: Deletes the specified quiz question by index.
     
             #give ckr
             if lmsg.startswith("ckr to", 1):
+                print(lthird)
                 for mem in SERVER_DATA['server'].members:
                     if mem.name.lower() + "#" + mem.discriminator == lthird:
                         await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
