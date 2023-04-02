@@ -73,9 +73,6 @@ async def DemorphFrom(usr,role):
                 
     if role in MORPHABLE_ROLES:
 
-        if role == "Guns":
-            return "Not today matey."
-
         if MORPHABLE_ROLES[role][0] not in usr.roles:
             return MORPHABLE_ROLES[role][4]
         else:
