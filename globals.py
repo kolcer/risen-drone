@@ -432,9 +432,9 @@ MORPHABLE_ROLES = {
     ],
      "Guns": [ 
         None,
-        "Welcome to the cult!",
+        "I really hate guns, but if you insist.",
         "Finally you came to your senses.",
-        "Have another cool gun name.",
+        "How about this gun?",
         "You are not a gun.",
      ],
 }
