@@ -654,7 +654,7 @@ _[alignment]_ **trivia**
             return  
 
         #purge any role
-        if msg.startswith("purge role", 1):
+        if msg.startswith("purgerole", 1):
             if targetrole in FUN_ROLES:
                 neededrole = FUN_ROLES[targetrole]
             else:
