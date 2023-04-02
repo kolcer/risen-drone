@@ -577,12 +577,6 @@ async def on_message(message):
                 await SEND(ch,''' **ADMIN COMMANDS:**  
 
                     **1 INPUT COMMANDS**
-                    |cmdlist
-                    ➡️ Get this prompt
-
-                    !resetcounter
-                    ➡️ Resets the rig tracker counter.
-
                     !dhr
                     ➡️ Stands for Disable Heretic Rig.
                         Disables Heretic Rig and prevents any current heretic rig
@@ -607,21 +601,14 @@ async def on_message(message):
                     |makesay [channel-name] [message]
                     ➡️ Forces the bot to type the decided message in the indicated channel.
 
-                    |ckr to [user#discriminator]
-                    ➡️ Bestows the Chat Killer role to the specified user.
-
-                    |ckr from [user#discriminator]
-                    ➡️ Takes back the Chat Killer role from the specified user.
+                    |ckr to/from [user#discriminator]
+                    ➡️ Gives/removes the Chat Killer role to/from the specified user.
 
                     |nr [hexadecimal-color] [name]
                     ➡️ Creates a new role with the specificed color and indicated name.
 
-                    |assign [user#discriminator] [role-name]
-                    ➡️ Gives the specified role to the indicated user.
-                        Role has to be in the FUN_ROLES list.
-
-                    |unassign [user#discriminator] [role-name]
-                    ➡️ Removes the specified role from the indicated user. 
+                    |un/assign [user#discriminator] [role-name]
+                    ➡️ Removes/gives the specified role from/to the indicated user.
                         Role has to be in the FUN_ROLES list.
 
                     |alter [old-name] [new-name]
