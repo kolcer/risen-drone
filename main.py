@@ -576,53 +576,31 @@ async def on_message(message):
 
                 await SEND(ch,''' **ADMIN COMMANDS:**  
 
-                    **1 INPUT COMMANDS**
-                    !dhr
-                    ➡️ Stands for Disable Heretic Rig.
-                        Disables Heretic Rig and prevents any current heretic rig
-                        under cooldown to leave the cooldown status until next bot reset.
-                        Any user that is Possessed will be rid of the role.
+                        |dhr: Disables Heretic Rig and removes the Possessed role from any user currently under its effect. Heretic Rigs under cooldown will remain so until the next bot reset.
 
-                    **2 INPUTS COMMANDS**
-                    !ispy [channel-name]
-                    ➡️ Initiates ispy minigame on the specified channel.
+                        |ispy [channel-name]: Starts an "ispy" mini-game in the specified channel.
 
-                    **3 INPUTS COMMANDS**
-                    |quiz [action] [?]
-                    ➡️ Action can be:
-                        New: Creates a new question for the quiz. Answer, options and responses must be specified in [?] section separated by "|".
-                        Count: Indicates how many questions there are currently. [?] section not required.
-                        Print: Prints a specified question along to its correct answer, options and responses. Specify question index in [?] section.
-                        List: Lists all the current existing questions. [?] section not required.
-                        Delete: Deletes specified question by index. Specify question index in [?] section.
+                        |quiz [action] [?]:
 
-                        New question should be in this order: Question|Correct answer|Answer|Answer|Answer|[Automatic user mention +] Good response|Bad response
+                        New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
+                        Count: Displays the number of currently existing quiz questions.
+                        Print: Prints a specified quiz question with its answer, options, and responses. Specify the question index in the [?] section.
+                        List: Lists all current quiz questions.
+                        Delete: Deletes the specified quiz question by index.
+                        |makesay [channel-name] [message]: Forces the bot to type the specified message in the indicated channel.
 
-                    |makesay [channel-name] [message]
-                    ➡️ Forces the bot to type the decided message in the indicated channel.
+                        |ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
 
-                    |ckr to/from [user#discriminator]
-                    ➡️ Gives/removes the Chat Killer role to/from the specified user.
+                        |nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
 
-                    |nr [hexadecimal-color] [name]
-                    ➡️ Creates a new role with the specificed color and indicated name.
+                        |un/assign [user#discriminator] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
 
-                    |un/assign [user#discriminator] [role-name]
-                    ➡️ Removes/gives the specified role from/to the indicated user.
-                        Role has to be in the FUN_ROLES list.
+                        |alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
 
-                    |alter [old-name] [new-name]
-                    ➡️ Changes the old role name to the new one. Old name has to contain underscores instead of spaces.
-                        Role has to be in the FUN_ROLES list.
+                        |purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
 
-                    |purge role [role-name]
-                    ➡️ Deletes the specified role.
-                        Role has to be in the FUN_ROLES list.
-
-                    **4 INPUTS COMMANDS**
-                    |edit tracker [alignment] [new-count]
-                    ➡️ Changes the tracker count for the selected Alignment to the specified number.
-                    ''')
+                        |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
+                ''')
                 return
             
             #resets the rig tracker message  ---why would you do this? ç__ç
@@ -636,6 +614,7 @@ async def on_message(message):
 
                 if HERETIC_DISABLED[0]:
                     await SEND(ch, "Already done.")
+                    return
 
                 HERETIC_DISABLED[0] = True
                 RIG_COOLDOWNS["ha"] = True
