@@ -50,6 +50,12 @@ async def PRINT_QUESTIONS(channel):
         else:
             combined_string = new_string
     await SEND(channel,combined_string)
+
+#simpler admin check
+async def ADMIN_CHECK(usr, ch):
+    if not EXTRA_ROLES['admin'] in usr.roles:
+        return await SEND(ch, "You are not allowed to use this command.")
+
 ### PUBLIC (ON EVENT) FUNCTIONS ###
     
 #drone start up, prepare roles here
@@ -150,6 +156,8 @@ async def on_message(message):
 
 
     msg = message.content
+    ## lowercase the message for some commands to use
+    lmsg = msg.lower()
     usr = message.author
     ch = message.channel
 
@@ -255,10 +263,9 @@ async def on_message(message):
         await LucidLaddersProcessMessage(usr,msg)
        
     #normal non-admin usage.
-    elif not msg.startswith("|"):
+    else:
         
-        ## lowercase the message for some commands to use
-        lmsg = msg.lower()
+
         ## split the message to 3 strings for some commands to use
         ## no need to have more than 4 strings
         lsplit = lmsg.split(" ",3) 
@@ -442,60 +449,60 @@ async def on_message(message):
 
             await SEND(ch,''' **Broken Drone commands:**
 
-Please use these commands only in <#750060041289072771>!    
+            Please use these commands only in <#750060041289072771>!    
 
-**morph to** _[alignment]_
-➡️ Get chosen alignment role in this server
+            **morph to** _[alignment]_
+            ➡️ Get chosen alignment role in this server
 
-**demorph from** _[alignment]_
-➡️ Remove chosen alignment role
+            **demorph from** _[alignment]_
+            ➡️ Remove chosen alignment role
 
-**sub to** _[ping role]_
-➡️ Subscribe to chosen ping role
+            **sub to** _[ping role]_
+            ➡️ Subscribe to chosen ping role
 
-**unsub from** _[ping role]_
-➡️ Unsubscribe from chosen ping role
+            **unsub from** _[ping role]_
+            ➡️ Unsubscribe from chosen ping role
 
-**general tip**
-➡️ Show a general tip
+            **general tip**
+            ➡️ Show a general tip
 
-_[alignment]_ **tip**
-➡️ Show chosen alignment tip
+            _[alignment]_ **tip**
+            ➡️ Show chosen alignment tip
 
-**general trivia**
-➡️ Show a general trivia
+            **general trivia**
+            ➡️ Show a general trivia
 
-_[alignment]_ **trivia**
-➡️ Show chosen alignment trivia
+            _[alignment]_ **trivia**
+            ➡️ Show chosen alignment trivia
 
-**cast** _[alignment]_ **rig**
-➡️ A fun command to mess around in the server
+            **cast** _[alignment]_ **rig**
+            ➡️ A fun command to mess around in the server
 
-**play lucid ladders**
-➡️ Start Lucid Ladders mini game (requires at least 2 playres)
+            **play lucid ladders**
+            ➡️ Start Lucid Ladders mini game (requires at least 2 playres)
 
-**broken drone start quiz**
-➡️ Start Crazy Stairs knowledge quiz (2 players required)
+            **broken drone start quiz**
+            ➡️ Start Crazy Stairs knowledge quiz (2 players required)
 
-**broken drone scold** _[username#discriminator]_
-➡️ Scolds chosen user
+            **broken drone scold** _[username#discriminator]_
+            ➡️ Scolds chosen user
 
-**revive chat**
-➡️ Revive chat (only for true chat killers)
+            **revive chat**
+            ➡️ Revive chat (only for true chat killers)
 
-**bd show profile**
-➡️ Shows Your stats and special roles
+            **bd show profile**
+            ➡️ Shows Your stats and special roles
 
-**give mana to** _[username#discriminator]_
-➡️ Rescues a possessed user
+            **give mana to** _[username#discriminator]_
+            ➡️ Rescues a possessed user
 
-**reset bot**
-➡️ Use this command if the bot breaks (3 users required)
+            **reset bot**
+            ➡️ Use this command if the bot breaks (3 users required)
 
-**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
-**Extra alignments** (cannot be morphed into): Possessed, None, Architect.
-**Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
-''')
+            **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
+            **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
+            **Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
+            ''')
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
             if lmsg == I_SPY['answers'][I_SPY['status']]: 
                 next = I_SPY['status'] + 1
@@ -552,193 +559,271 @@ _[alignment]_ **trivia**
                         await SEND(ch,i)
                         return
       
-
-               
-    ## admin command
-    else:
-        #check for admin
-        if not EXTRA_ROLES['admin'] in usr.roles:
-            return
-
+    ## admin commands
+    if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         #deterimine the key (this is an alignment name in most cases)
-        split = msg.split(" ", 2)
-        split2 = msg.lower().split(" ", 2)
-        msgback = ''
-        if len(msg.split(' ',2)) > 2:
-            msgback = msg.split(" ", 2)[2]
-        targetrole = msg.split(" ")[1].replace("_", " ")
+        msginputs = len(msg.split(" "))
+        msgsplit = msg.split(" ", 2) #creates a list from the input received. "Hello world say HI!" becomes LIST["Hello", "world", "say HI!"]
+        lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
 
-        #have the bot say whatever you say
-        if msg.startswith("makesay", 1):
-            await SEND(CHANNELS[split[1]], msgback)
-            await DELETE(message)
-            return
+        #-----admin commands that require ONE input-----
+        if len(msginputs) == 1:
+            #full admin commands list
+            if lmsg.startswith("cmdlist", 1):
+                if ch.Id != 813882658156838923:
+                    SEND(ch, "Try to be more discreet, they do not need to know.")
+                    return
 
-        if msg.startswith("ispy",1):
-            I_SPY['channel'] = CHANNELS[split[1]]
-            I_SPY['status'] = 0
-            await SEND(I_SPY['channel'],I_SPY['questions'][0])
-            await DELETE(message)
-            await asyncio.sleep(I_SPY['maxwait'])
-            if I_SPY['status'] == 0:
-                I_SPY['status'] = None
-                await SEND(I_SPY['channel'],'Whatever.')
-            return
+                await SEND(ch,''' **ADMIN COMMANDS:**  
 
-        #create a new role with name and color
-        if msg.startswith("nr", 1):
-            try:
-                newrole = await NEW_ROLE(SERVER_DATA['server'],split[1], msgback.replace("_"," "))
-            except Exception as e:
-                await SEND(ch, e)
+                    **1 INPUT COMMANDS**
+                    |cmdlist
+                    ➡️ Get this prompt
+
+                    !resetcounter
+                    ➡️ Resets the rig tracker counter.
+
+                    !dhr
+                    ➡️ Stands for Disable Heretic Rig.
+                        Disables Heretic Rig and prevents any current heretic rig
+                        under cooldown to leave the cooldown status until next bot reset.
+                        Any user that is Possessed will be rid of the role.
+
+                    **2 INPUTS COMMANDS**
+                    !ispy [channel-name]
+                    ➡️ Initiates ispy minigame on the specified channel.
+
+                    **3 INPUTS COMMANDS**
+                    |quiz [action] [?]
+                    ➡️ Action can be:
+                        New: Creates a new question for the quiz. Answer, options and responses must be specified in [?] section separated by "|".
+                        Count: Indicates how many questions there are currently. [?] section not required.
+                        Print: Prints a specified question along to its correct answer, options and responses. Specify question index in [?] section.
+                        List: Lists all the current existing questions. [?] section not required.
+                        Delete: Deletes specified question by index. Specify question index in [?] section.
+
+                        New question should be in this order: Question|Correct answer|Answer|Answer|Answer|[Automatic user mention +] Good response|Bad response
+
+                    |makesay [channel-name] [message]
+                    ➡️ Forces the bot to type the decided message in the indicated channel.
+
+                    |ckr to [user#discriminator]
+                    ➡️ Bestows the Chat Killer role to the specified user.
+
+                    |ckr from [user#discriminator]
+                    ➡️ Takes back the Chat Killer role from the specified user.
+
+                    |nr [hexadecimal-color] [name]
+                    ➡️ Creates a new role with the specificed color and indicated name.
+
+                    |assign [user#discriminator] [role-name]
+                    ➡️ Gives the specified role to the indicated user.
+                        Role has to be in the FUN_ROLES list.
+
+                    |unassign [user#discriminator] [role-name]
+                    ➡️ Removes the specified role from the indicated user. 
+                        Role has to be in the FUN_ROLES list.
+
+                    |alter [old-name] [new-name]
+                    ➡️ Changes the old role name to the new one. Old name has to contain underscores instead of spaces.
+                        Role has to be in the FUN_ROLES list.
+
+                    |purge role [role-name]
+                    ➡️ Deletes the specified role.
+                        Role has to be in the FUN_ROLES list.
+
+                    **4 INPUTS COMMANDS**
+                    |edit tracker [alignment] [new-count]
+                    ➡️ Changes the tracker count for the selected Alignment to the specified number.
+                    ''')
+                return
+            
+            #resets the rig tracker message  ---why would you do this? ç__ç
+            if lmsg.startswith("resetcounter", 1):
+                await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
+                return
+            
+            #momentarily turns Heretic Rig off before updating the drone, to avoid someone casting it and getting stuck with the role.
+            #also frees any person who is currently possessed
+            if msg.startswith("dhr", 1):
+
+                if HERETIC_DISABLED[0]:
+                    await SEND(ch, "Already done.")
+
+                HERETIC_DISABLED[0] = True
+                RIG_COOLDOWNS["ha"] = True
+                role = EXTRA_ROLES['possessed']
+
+                for member in SERVER_DATA['server'].members:
+                        if role in member.roles:
+                                await REMOVE_ROLES(member, role)
+
+                for user in DEMORPH_CLIMBER:
+                    await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
+
+                await SEND(ch, "Heretic Rig has been disabled. If someone was possessed, they no longer are.")
                 return
 
-            await SEND(ch, "Worked.")
-            FUN_ROLES[msgback.replace("_"," ")] = newrole
-            return
-    
-        #give ckr
-        if msg.startswith("ckr to ", 1):
-            for mem in SERVER_DATA['server'].members:
-               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
-                    await SEND(ch, "I gave the Chat Killer Role to " + split2[2])
-                    await asyncio.sleep(1)
-                    await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
-                    break
-            return  
-
-        #give any role
-        if msg.startswith("assign", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot assign this role through my commands.")
+        #-----admin commands that require TWO inputs-----
+        elif len(msginputs) == 2:
+            #ispy command
+            if lmsg.startswith("ispy",1):
+                I_SPY['channel'] = CHANNELS[lmsgsplit[1]]
+                I_SPY['status'] = 0
+                await SEND(I_SPY['channel'], I_SPY['questions'][0])
+                await DELETE(message)
+                await asyncio.sleep(I_SPY['maxwait'])
+                if I_SPY['status'] == 0:
+                    I_SPY['status'] = None
+                    await SEND(I_SPY['channel'],'Whatever.')
                 return
-                
-            for mem in SERVER_DATA['server'].members:
-               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
-                    await SEND(ch, "I gave the Role to " + split2[2])
-                    await asyncio.sleep(1)
-                    await ADD_ROLES(mem, neededrole)
-                    break
-            return  
-
-        #remove any role
-        if msg.startswith("unassign", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot unassign this role through my commands.")
-                return
-
-            for mem in SERVER_DATA['server'].members:
-               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
-                    await SEND(ch, "Took the role away from " + split2[2])
-                    await asyncio.sleep(1)
-                    await REMOVE_ROLES(mem,neededrole)
-                    break
-            return  
-
-        #edit any role
-        if msg.startswith("alter", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot edit this role through my commands.")
-                return
-
-            await EDIT_ROLE(neededrole, msgback.replace("_", " "), "changing name")
-            await asyncio.sleep(1)
-            await SEND(ch, "You changed the name correctly.")
-            FUN_ROLES[msgback.replace("_", " ")] = neededrole
-            return  
-
-        #purge any role
-        if msg.startswith("purgerole", 1):
-            if targetrole in FUN_ROLES:
-                neededrole = FUN_ROLES[targetrole]
-            else:
-                await SEND(ch, "You cannot obliterate this role through my commands.")
-                return
-                
-            await PURGE_ROLES(neededrole)
-            await asyncio.sleep(1)
-            await SEND(ch, "The role is gone.")
-            return  
-
-        #remove ckr
-        if msg.startswith("ckr from ", 1):
-            for mem in SERVER_DATA['server'].members:
-               if mem.name.lower() + "#" + mem.discriminator == split2[2]:
-                    await SEND(ch, "I took the Chat Killer Role away from " + split2[2])
-                    await asyncio.sleep(1)
-                    await REMOVE_ROLES(mem,EXTRA_ROLES['ckr'])
-                    break
-            return   
-
-        #resets the rig tracker message
-        if msg.startswith("reset rig tracker", 1):
-            await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
-            return
-
-        #edits db rig tracking count for specific alignment
-        if msg.startswith("edit tracker ", 1):
-            track = msgback
-
-            db.set(track + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
-            return
         
-        #momentarily turns Heretic Rig off before updating the drone, to avoid someone casting it and getting stuck with the role.
-        #also frees any person who is currently possessed
-        if msg.startswith("dhr", 1) or msg.startswith("disable heretic rig", 1):
+        #-----admin commands that require THREE or MORE inputs-----
+        elif len(msginputs) >= 3:
+            third = msg.split(" ", 2)[2]          #NOT lowecase
+            lthird = msg.split(" ", 2)[2].lower() #YES lowecase
+            neededrole = None
 
-            if HERETIC_DISABLED[0]:
-                await SEND(ch, "Already done.")
+            ##-----COMMANDS THAT ONLY USE 3 INPUTS-----
+            #have the bot say whatever you say
+            if lmsg.startswith("makesay", 1):
+                await SEND(CHANNELS[lmsgsplit[1]], third)
+                await DELETE(message)
+                return
 
-            HERETIC_DISABLED[0] = True
-            RIG_COOLDOWNS["ha"] = True
-            role = EXTRA_ROLES['possessed']
+            #create a new role with name and color
+            if lmsg.startswith("nr", 1):
+                try:
+                    newrole = await NEW_ROLE(SERVER_DATA['server'], lmsgsplit[1], third)
+                except Exception as e:
+                    await SEND(ch, e)
+                    return
 
-            for member in SERVER_DATA['server'].members:
-                    if role in member.roles:
-                            await REMOVE_ROLES(member, role)
+                await SEND(ch, "Role created successfully.")
 
-            for user in DEMORPH_CLIMBER:
-                await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
+                FUN_ROLES[third] = newrole
+                return
+    
+            #give ckr
+            if lmsg.startswith("ckr to", 1):
+                for mem in SERVER_DATA['server'].members:
+                    if mem.name.lower() + "#" + mem.discriminator == lthird:
+                            await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
+                            break
+                    return  
 
-            await SEND(ch, "Heretic Rig has been disabled. If someone was possessed, they no longer are.")
-            return
+            #give any role
+            if lmsg.startswith("assign", 1):
+                if third in FUN_ROLES:
+                    neededrole = FUN_ROLES[third]
+                else:
+                    await SEND(ch, "You cannot assign this role through my commands.")
+                    return
+                    
+                for mem in SERVER_DATA['server'].members:
+                    if mem.Id == msgsplit[1]:
+                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await ADD_ROLES(mem, neededrole)
+                            break
+                return  
 
+            #remove any role
+            if lmsg.startswith("unassign", 1):
+                if third in FUN_ROLES:
+                    neededrole = FUN_ROLES[third]
+                else:
+                    await SEND(ch, "You cannot unassign this role through my commands.")
+                    return
 
+                for mem in SERVER_DATA['server'].members:
+                    if mem.Id == msgsplit[1]:
+                            await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await REMOVE_ROLES(mem, neededrole)
+                            break
+                return  
+
+            #edit any role ---deleting and adding the role again is recommended
+            if lmsg.startswith("alter", 1):
+                if msgsplit[1].replace("_", " ") in FUN_ROLES:
+                    neededrole = FUN_ROLES[msgsplit[1].replace("_", " ")]
+                else:
+                    await SEND(ch, "You cannot edit this role through my commands.")
+                    return
+
+                await EDIT_ROLE(neededrole, third, "changing name")
+                await asyncio.sleep(1)
+                await SEND(ch, "You changed the name correctly.")
+                FUN_ROLES[msgsplit[1].replace("_", " ")] = neededrole
+                return  
+
+            #purge any role
+            if lmsg.startswith("purge role", 1):
+                if third in FUN_ROLES:
+                    neededrole = FUN_ROLES[third]
+                else:
+                    await SEND(ch, "You cannot obliterate this role through my commands.")
+                    return
+                    
+                await PURGE_ROLES(neededrole)
+                await asyncio.sleep(1)
+                await SEND(ch, "The role is gone.")
+                return  
+
+            #remove ckr
+            if lmsg.startswith("ckr from", 1):
+                for mem in SERVER_DATA['server'].members:
+                    if mem.name.lower() + "#" + mem.discriminator == lthird:
+                            await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
+                            break
+                return   
+
+            ##-----COMMANDS THAT ONLY USE 4 INPUTS-----
+            #edits db rig tracking count for specific alignment
+            if lmsg.startswith("edit tracker", 1):
+                db.set(lthird + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
+                return
+            
+            ##-----COMMANDS THAT ONLY USE EVEN MORE INPUTS!!!!!!-----
+            #empty so far-
+
+        ##length may vary... for this one
         #quiz
-        if msg.startswith("quiz",1):
-            if split[1] == "new":
-                qSplit = split[2].split("|")
+        if lmsg.startswith("quiz", 1):
+            if lmsgsplit[1] == "new":
+                qSplit = msgsplit[2].split("|")
                 if len(qSplit) != 7:
                     await SEND(ch,"Question does not have the required 7 sections.")
                 else:
-                    add_entry("quiz",split[2])
-                    await SEND(ch,"Successfully added new quiz question")
+                    add_entry("quiz", msgsplit[2])
+                    await SEND(ch, "Successfully added new quiz question")
 
-            elif split[1] == "amount":
+            elif lmsgsplit[1] == "amount":
                 await SEND(ch,"There are " + str(get_amount_of_entries("quiz")) + " questions in the database.")        
 
-            elif split[1] == "print":
-                question = show_specific_entry("quiz",int(split[2]))
+            elif lmsgsplit[1] == "print":
+                question = show_specific_entry("quiz",int(msgsplit[2]))
                 qSplit = question.split("|")
                 toSend = "Q:\n" + qSplit[0] + "\nCorrect Answer:\n" + qSplit[1]
                 toSend += "\nA2:\n" + qSplit[2] + "\nA3:\n" + qSplit[3] + "\nA4:\n" + qSplit[4]
                 toSend += "\nGood response:\n" + qSplit[5] + "\nBad response:\n" + qSplit[6]
                 await SEND(ch,toSend)
-            elif split[1] == 'list':
+            elif lmsgsplit[1] == 'list':
                 await PRINT_QUESTIONS(ch)
-            elif split[1] == "delete":
-                delete_entry("quiz",int(split[2]))
-                await SEND(ch,"Question at index " + split[2] + " has been deleted." )
+            elif lmsgsplit[1] == "delete":
+                delete_entry("quiz", int(msgsplit[2]))
+                await SEND(ch,"Question at index " + msgsplit[2] + " has been deleted." )
 
             return
 
-        key = split[1]
+
+        #and if none of the others match go here...
+        key = msgsplit[1]
         if not key in TIPS_KEYS:
             await SEND(ch,"Invalid alignment.")
             return
@@ -755,20 +840,20 @@ _[alignment]_ **trivia**
         
         #add tip   
         if msg.startswith("n",1):
-            add_entry(key,split[2])
-            await SEND(ch,"New " + split[1] + " " + tot + " added.")
+            add_entry(key,msgsplit[2])
+            await SEND(ch,"New " + msgsplit[1] + " " + tot + " added.")
             return
 
         #list tips
         if msg.startswith("l",1):
-            await SEND(ch,split[1] + " " + tot + "(s):")
+            await SEND(ch,msgsplit[1] + " " + tot + "(s):")
             await PRINT_ENTRIES(ch, key)
             return
             
         #delete tip
         if msg.startswith("d",1):
-            delete_entry(key,int(split[2]))
-            await SEND(ch,split[1] + " " + tot + "(s):")
+            delete_entry(key,int(msgsplit[2]))
+            await SEND(ch,msgsplit[1] + " " + tot + "(s):")
             await PRINT_ENTRIES(ch, key)
             return
                
