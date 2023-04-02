@@ -655,8 +655,8 @@ _[alignment]_ **trivia**
 
         #purge any role
         if msg.startswith("purge role", 1):
-            if msgback.replace("_"," ") in FUN_ROLES:
-                neededrole = FUN_ROLES[msgback]
+            if targetrole in FUN_ROLES:
+                neededrole = FUN_ROLES[targetrole]
             else:
                 await SEND(ch, "You cannot obliterate this role through my commands.")
                 return
