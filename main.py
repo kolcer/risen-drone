@@ -449,60 +449,60 @@ async def on_message(message):
 
             await SEND(ch,''' **Broken Drone commands:**
 
-            Please use these commands only in <#750060041289072771>!    
+Please use these commands only in <#750060041289072771>!    
 
-            **morph to** _[alignment]_
-            ➡️ Get chosen alignment role in this server
+**morph to** _[alignment]_
+➡️ Get chosen alignment role in this server
 
-            **demorph from** _[alignment]_
-            ➡️ Remove chosen alignment role
+**demorph from** _[alignment]_
+➡️ Remove chosen alignment role
 
-            **sub to** _[ping role]_
-            ➡️ Subscribe to chosen ping role
+**sub to** _[ping role]_
+➡️ Subscribe to chosen ping role
 
-            **unsub from** _[ping role]_
-            ➡️ Unsubscribe from chosen ping role
+**unsub from** _[ping role]_
+➡️ Unsubscribe from chosen ping role
 
-            **general tip**
-            ➡️ Show a general tip
+**general tip**
+➡️ Show a general tip
 
-            _[alignment]_ **tip**
-            ➡️ Show chosen alignment tip
+_[alignment]_ **tip**
+➡️ Show chosen alignment tip
 
-            **general trivia**
-            ➡️ Show a general trivia
+**general trivia**
+➡️ Show a general trivia
 
-            _[alignment]_ **trivia**
-            ➡️ Show chosen alignment trivia
+_[alignment]_ **trivia**
+➡️ Show chosen alignment trivia
 
-            **cast** _[alignment]_ **rig**
-            ➡️ A fun command to mess around in the server
+**cast** _[alignment]_ **rig**
+➡️ A fun command to mess around in the server
 
-            **play lucid ladders**
-            ➡️ Start Lucid Ladders mini game (requires at least 2 playres)
+**play lucid ladders**
+➡️ Start Lucid Ladders mini game (requires at least 2 playres)
 
-            **broken drone start quiz**
-            ➡️ Start Crazy Stairs knowledge quiz (2 players required)
+**broken drone start quiz**
+➡️ Start Crazy Stairs knowledge quiz (2 players required)
 
-            **broken drone scold** _[username#discriminator]_
-            ➡️ Scolds chosen user
+**broken drone scold** _[username#discriminator]_
+➡️ Scolds chosen user
 
-            **revive chat**
-            ➡️ Revive chat (only for true chat killers)
+**revive chat**
+➡️ Revive chat (only for true chat killers)
 
-            **bd show profile**
-            ➡️ Shows Your stats and special roles
+**bd show profile**
+➡️ Shows Your stats and special roles
 
-            **give mana to** _[username#discriminator]_
-            ➡️ Rescues a possessed user
+**give mana to** _[username#discriminator]_
+➡️ Rescues a possessed user
 
-            **reset bot**
-            ➡️ Use this command if the bot breaks (3 users required)
+**reset bot**
+➡️ Use this command if the bot breaks (3 users required)
 
-            **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
-            **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
-            **Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
-            ''')
+**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
+**Extra alignments** (cannot be morphed into): Possessed, None, Architect.
+**Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
+''')
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
             if lmsg == I_SPY['answers'][I_SPY['status']]: 
                 next = I_SPY['status'] + 1
@@ -575,32 +575,32 @@ async def on_message(message):
                     return
 
                 await SEND(ch,''' **ADMIN COMMANDS:**  
+|dhr: Disables Heretic Rig and removes the Possessed role from any user currently under its effect. Heretic Rigs under cooldown will remain so until the next bot reset.
 
-                        |dhr: Disables Heretic Rig and removes the Possessed role from any user currently under its effect. Heretic Rigs under cooldown will remain so until the next bot reset.
+|ispy [channel-name]: Starts an "ispy" mini-game in the specified channel.
 
-                        |ispy [channel-name]: Starts an "ispy" mini-game in the specified channel.
+|quiz [action] [?]:
 
-                        |quiz [action] [?]:
+New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
+Count: Displays the number of currently existing quiz questions.
+Print: Prints a specified quiz question with its answer, options, and responses. Specify the question index in the [?] section.
+List: Lists all current quiz questions.
+Delete: Deletes the specified quiz question by index.
 
-                        New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
-                        Count: Displays the number of currently existing quiz questions.
-                        Print: Prints a specified quiz question with its answer, options, and responses. Specify the question index in the [?] section.
-                        List: Lists all current quiz questions.
-                        Delete: Deletes the specified quiz question by index.
-                        |makesay [channel-name] [message]: Forces the bot to type the specified message in the indicated channel.
+|makesay [channel-name] [message]: Forces the bot to type the specified message in the indicated channel.
 
-                        |ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
+|ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
 
-                        |nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
+|nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
 
-                        |un/assign [user#discriminator] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
+|un/assign [user#discriminator] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
 
-                        |alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
+|alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
 
-                        |purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
+|purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
 
-                        |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
-                ''')
+|edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
+''')
                 return
             
             #resets the rig tracker message  ---why would you do this? ç__ç
