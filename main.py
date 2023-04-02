@@ -695,10 +695,10 @@ async def on_message(message):
             if lmsg.startswith("ckr to", 1):
                 for mem in SERVER_DATA['server'].members:
                     if mem.name.lower() + "#" + mem.discriminator == lthird:
-                            await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
-                            await asyncio.sleep(1)
-                            await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
-                            break
+                        await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
+                        break
                     return  
 
             #give any role
@@ -711,10 +711,10 @@ async def on_message(message):
                     
                 for mem in SERVER_DATA['server'].members:
                     if mem.id == msgsplit[1]:
-                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
-                            await asyncio.sleep(1)
-                            await ADD_ROLES(mem, neededrole)
-                            break
+                        await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await ADD_ROLES(mem, neededrole)
+                        break
                 return  
 
             #remove any role
@@ -727,10 +727,10 @@ async def on_message(message):
 
                 for mem in SERVER_DATA['server'].members:
                     if mem.id == msgsplit[1]:
-                            await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
-                            await asyncio.sleep(1)
-                            await REMOVE_ROLES(mem, neededrole)
-                            break
+                        await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await REMOVE_ROLES(mem, neededrole)
+                        break
                 return  
 
             #edit any role ---deleting and adding the role again is recommended
@@ -764,10 +764,10 @@ async def on_message(message):
             if lmsg.startswith("ckr from", 1):
                 for mem in SERVER_DATA['server'].members:
                     if mem.name.lower() + "#" + mem.discriminator == lthird:
-                            await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
-                            await asyncio.sleep(1)
-                            await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
-                            break
+                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
+                        break
                 return   
 
             ##-----COMMANDS THAT ONLY USE 4 INPUTS-----
