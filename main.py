@@ -787,41 +787,41 @@ Delete: Deletes the specified quiz question by index.
 
             return
 
-
         #and if none of the others match go here...
-        key = msgsplit[1]
-        if not key in TIPS_KEYS:
-            await SEND(ch,"Invalid alignment.")
-            return
-           
-        #tip or trivia?
-        tot = "tip"
-        if msg.startswith("triv",2):
-            tot = "triv"
-            #for trivia, key has extra "T" at the end
-            key = key + "T"
-        elif not msg.startswith("tip",2):
-            await SEND(ch,"Invalid command.")
-            return
-        
-        #add tip   
-        if msg.startswith("n",1):
-            add_entry(key,msgsplit[2])
-            await SEND(ch,"New " + msgsplit[1] + " " + tot + " added.")
-            return
-
-        #list tips
-        if msg.startswith("l",1):
-            await SEND(ch,msgsplit[1] + " " + tot + "(s):")
-            await PRINT_ENTRIES(ch, key)
-            return
+        if lmsg.startswith("triv", 2) or lmsg.startswith("tip", 2):
+            key = msgsplit[1]
+            if not key in TIPS_KEYS:
+                await SEND(ch,"Invalid alignment.")
+                return
             
-        #delete tip
-        if msg.startswith("d",1):
-            delete_entry(key,int(msgsplit[2]))
-            await SEND(ch,msgsplit[1] + " " + tot + "(s):")
-            await PRINT_ENTRIES(ch, key)
-            return
+            #tip or trivia?
+            tot = "tip"
+            if msg.startswith("triv",2):
+                tot = "triv"
+                #for trivia, key has extra "T" at the end
+                key = key + "T"
+            elif not msg.startswith("tip",2):
+                await SEND(ch,"Invalid command.")
+                return
+            
+            #add tip   
+            if msg.startswith("n",1):
+                add_entry(key,msgsplit[2])
+                await SEND(ch,"New " + msgsplit[1] + " " + tot + " added.")
+                return
+
+            #list tips
+            if msg.startswith("l",1):
+                await SEND(ch,msgsplit[1] + " " + tot + "(s):")
+                await PRINT_ENTRIES(ch, key)
+                return
+                
+            #delete tip
+            if msg.startswith("d",1):
+                delete_entry(key,int(msgsplit[2]))
+                await SEND(ch,msgsplit[1] + " " + tot + "(s):")
+                await PRINT_ENTRIES(ch, key)
+                return
                
 ### RUN THE BOT ###
 client.run(os.environ['TOKEN'])
