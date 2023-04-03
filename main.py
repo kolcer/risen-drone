@@ -92,18 +92,6 @@ async def on_ready():
 
 @client.event
 async def on_disconnect():
-    #disables heretic rig but automated. thanks to GPT for the info and to sleazel for ignoring my message c:
-    HERETIC_DISABLED[0] = True
-    RIG_COOLDOWNS["ha"] = True
-    role = EXTRA_ROLES['possessed']
-
-    for member in SERVER_DATA['server'].members:
-        if role in member.roles:
-                await REMOVE_ROLES(member, role)
-
-    for user in DEMORPH_CLIMBER:
-        await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
-
     #send ready to the test channel
     await SEND(CHANNELS["bot-testing"], 'This is the end of a journey.')
 
