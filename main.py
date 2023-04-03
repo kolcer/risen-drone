@@ -92,7 +92,7 @@ async def on_ready():
 
 @client.event
 async def on_disconnect():
-    #disables heretic rig but automated. thanks to GPT for the info and to sleazel for ignoring my message :c
+    #disables heretic rig but automated. thanks to GPT for the info and to sleazel for ignoring my message c:
     HERETIC_DISABLED[0] = True
     RIG_COOLDOWNS["ha"] = True
     role = EXTRA_ROLES['possessed']
