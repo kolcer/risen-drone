@@ -593,7 +593,7 @@ Delete: Deletes the specified quiz question by index.
 
 |nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
 
-|un/assign [user#discriminator] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
+|un/assign [!!USER ID!!] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
 
 |alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
 
@@ -648,7 +648,6 @@ Delete: Deletes the specified quiz question by index.
         elif len(msginputs) >= 3:
             third = msg.split(" ", 2)[2]          #NOT lowecase
             lthird = msg.split(" ", 2)[2].lower() #YES lowecase
-            neededrole = None
 
             ##-----COMMANDS THAT ONLY USE 3 INPUTS-----
             #have the bot say whatever you say
@@ -677,7 +676,7 @@ Delete: Deletes the specified quiz question by index.
                     if mem.name.lower() + "#" + mem.discriminator == lthird:
                         await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
                         await asyncio.sleep(1)
-                        await ADD_ROLES(mem,EXTRA_ROLES['ckr'])
+                        await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
                         break
                     return  
 
