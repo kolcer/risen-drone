@@ -289,7 +289,7 @@ async def on_message(message):
         
         #create chat killer task
         #this should run regardless if the message was intercepted
-        #by some other command
+        #by some other command 
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
  
         #broken drone impostor prevention
