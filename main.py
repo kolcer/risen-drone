@@ -99,7 +99,7 @@ async def on_disconnect():
 @client.event
 async def on_member_update(before, after):
     
-    #nick has not changed
+    #nick has not changed 
     if before.nick == after.nick:
         return
     
