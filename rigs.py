@@ -413,7 +413,7 @@ async def GiveMana(ch,usr,message):
  
     role = EXTRA_ROLES['possessed']
 
-    if role in message.author.roles:
+    if role in message.author.roles and ch.id != 813882658156838923:
         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
         return
 
