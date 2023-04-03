@@ -88,7 +88,24 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
     
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"],'The last edited code is now effective.')
+    await SEND(CHANNELS["bot-testing"], 'The last edited code is now effective.')
+
+@client.event
+async def on_disconnect():
+    #disables heretic rig but automated. thanks to GPT for the info and to sleazel for ignoring my message :c
+    HERETIC_DISABLED[0] = True
+    RIG_COOLDOWNS["ha"] = True
+    role = EXTRA_ROLES['possessed']
+
+    for member in SERVER_DATA['server'].members:
+        if role in member.roles:
+                await REMOVE_ROLES(member, role)
+
+    for user in DEMORPH_CLIMBER:
+        await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
+
+    #send ready to the test channel
+    await SEND(CHANNELS["bot-testing"], 'This is the end of a journey.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
@@ -574,8 +591,6 @@ _[alignment]_ **trivia**
                     return
 
                 await SEND(ch,''' **ADMIN COMMANDS:**  
-|dhr: Disables Heretic Rig and removes the Possessed role from any user currently under its effect. Heretic Rigs under cooldown will remain so until the next bot reset.
-
 |ispy [channel-name]: Starts an "ispy" mini-game in the specified channel.
 
 |quiz [action] [?]:
@@ -605,28 +620,6 @@ Delete: Deletes the specified quiz question by index.
             #resets the rig tracker message  ---why would you do this? ç__ç
             if lmsg.startswith("resetcounter", 1):
                 await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
-                return
-            
-            #momentarily turns Heretic Rig off before updating the drone, to avoid someone casting it and getting stuck with the role.
-            #also frees any person who is currently possessed
-            if msg.startswith("dhr", 1):
-
-                if HERETIC_DISABLED[0]:
-                    await SEND(ch, "Already done.")
-                    return
-
-                HERETIC_DISABLED[0] = True
-                RIG_COOLDOWNS["ha"] = True
-                role = EXTRA_ROLES['possessed']
-
-                for member in SERVER_DATA['server'].members:
-                        if role in member.roles:
-                                await REMOVE_ROLES(member, role)
-
-                for user in DEMORPH_CLIMBER:
-                    await ADD_ROLES(user, SPECIAL_ROLES["Climber"][0])
-
-                await SEND(ch, "Heretic Rig has been disabled. If someone was possessed, they no longer are.")
                 return
 
         #-----admin commands that require TWO inputs-----
