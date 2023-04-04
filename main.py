@@ -211,7 +211,7 @@ async def on_message(message):
     if randomchance == 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
-                eligible = eligible + 1                
+                eligible += 1 #are you happy? >:      
                 if eligible == 1:
                     rolename = role.name.lower()
 
@@ -222,7 +222,6 @@ async def on_message(message):
             if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
                 await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
-
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
         FIX_BOT.append(usr)

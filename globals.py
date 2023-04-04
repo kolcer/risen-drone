@@ -141,27 +141,27 @@ WORST_GUNS = [
     "No gun name for you",
     "AK-47",
     "DSR 50",
-    "AMT Automag II",
-    "Welrod Pistol",
-    "De Lisle carbine",
-    "Nambu Type 94 Tank Machine Gun",
-    "M1941 Johnson Machine Gun",
-    "M3 submachine gun",
-    "MAS-38",
-    "Lahti-Saloranta M/26",
-    "Owen submachine gun",
-    "Thompson M1921 submachine gun",
-    "Chauchat-Ribeyrolle",
-    "FG 42",
-    "CETME Model L",
-    "AA-12 shotgun",
-    "H&K G11",
-    "M60 machine gun",
-    "FAMAS",
-    "KSG shotgun",
-    "AMR-2 sniper rifle",
+    "Sword Gun",
+    "Longer Sword Gun",
+    "Long Bow",
+    "Pew Pew",
+    "Sten gun MK II",
+    "Apache pistol",
+    "Axe Pistol",
+    "Mini Death Star",
+    "Gun :]",
+    "Graphite Rifle",
+    "Rubber Band Pistol",
+    "Barret Anti Materiel Rifle",
+    "Suitcase gun",
+    "Stair gun",
+    "Magpul FMG9",
+    "G.R.A.D. .22 RS Knife gun",
+    "Gucci Glock",
+    "Colt Python",
+    "Remington EtronX Rifle",
+    "Winchester Model 59", # gun list officially doubled -ok
 ]
-
 
 MG_SPELLS = [
     "none",
@@ -280,7 +280,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
-    "Well, you probably suck too.":
+    "Sleazel is great!":
         ['sucks', 'sleazel'],
     "Let's not suck people, okay?":
         ['you', 'suck'],
@@ -594,7 +594,6 @@ EXTRA_ROLES = {
 
 CHAT_KILLER = {
     'wait': 7200,
-    #'thirdKill': None,
     'last': 0,
     'reviveChat': False,
 }
@@ -602,7 +601,7 @@ CHAT_KILLER = {
 RIG_DATA = {
     'rigTracker': 1004326588021743667,
     'rigCaster': None,
-    'ghostMsg': "",
+    'ghostMsg': "hehehehaw",
 }
 
 #create scold dictionary for the scold command
@@ -617,6 +616,6 @@ def getScoldDictionary(victim, author):
         886615047407812678:
             victim.mention + ", I am IMMEASURABLY disappointed in you. We all know why. I will never forget that.",
         author.id:
-            author.mention + " you do not need me to be disappointed in yourself.",
+            author.mention + " are you sad?",
     }
     return ScoldDict
