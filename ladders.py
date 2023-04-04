@@ -55,7 +55,7 @@ def MG_ACTION(plr, action):
     
     match action:
         case "none":
-            toSend += "are chilling this round."
+            toSend += "is chilling this round."
             
         case "muggle":
             chances = random.randint(0, 2)
@@ -155,10 +155,14 @@ def MG_ACTION(plr, action):
                     toSend += victim.mention + " has been kicked from the game for hacking!"
                     
                     cp = MG_QUEUE[LADDERS['currentPlayer']]
-                    del MG_PLAYERS[victim]
+                    print(cp)
+                    del MG_PLAYERS[victim] #
                     MG_QUEUE.remove(victim)
+                    print(MG_QUEUE.index(cp))
+                    print(LADDERS['currentPlayer'])
                     LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
                     if len(MG_QUEUE) == 1:
+                        print(MG_PLAYERS[cp])
                         MG_PLAYERS[cp] = LADDERS['topLevel']
 
             elif chances == 7:
