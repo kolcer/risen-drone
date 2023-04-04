@@ -64,39 +64,22 @@ IMPOSTOR_NICKS = [
     "your prize",
     "Name offered by Me. F.D.",
     "this nerd is a copycat lmao",
-    "this nerd tried",
-    "Not the real BD, sorry",
-    "Fake Drone, move along",
-    "Impostor detected",
-    "This isn't the real Drone",
-    "Fake Drone, don't be fooled",
-    "Drone imposter alert!",
+    "this man tried",
+    "just morph to gun bro"
 ]
 
 REVIVE_CHAT = [
     "How did you find out about Crazy Stairs?",
     "What's your least favorite Alignment?",
-    "How many Alignments were there in the game when you started playing?",
-    "Whose Alignment's power would you rather wield in real life?",
+    "How many alignments were there in the game when you started playing?",
+    "Whose alignment's power would you rather wield in real life?",
     "Nope. Chat is as dead as my intentions to revive it.",
     "Is Sleazel cool?",
     "What's your favorite feature present in the game?",
     "What's fun about Crazy Stairs?",
     "Do you hate Sleazel?",
-    "Don't let the chat become dead again, or I'll become quite unhappy.",
+    "Don't make the chat dead again! I will get very unpleasant.",
     "Star Wars reminds me of home. I still want to go back to Death Star one day...",
-    "What's the craziest strategy you've seen someone use in Crazy Stairs?",
-    "If you could add one new feature to Crazy Stairs, what would it be?",
-    "Which alignment do you think is the most overpowered?",
-    "Have you ever played Crazy Stairs with a group of friends? How did it go?",
-    "What's the longest game of Crazy Stairs you've ever played?"
-    "If you could change one thing about the rules of Crazy Stairs, what would it be?",
-    "Have you ever won a game of Crazy Stairs by a lucky coincidence?",
-    "Do you think Crazy Stairs is more luck-based or skill-based? And why?",
-    "What advice would you give to someone who's never played Crazy Stairs before?",
-    "Have you ever introduced someone to Crazy Stairs who ended up liking it? Or the other way around?",
-    "What do you think is the biggest mistake people make when playing Crazy Stairs?",
-    "What's the funniest moment you've had while playing Crazy Stairs?",
 ]
 
 RIG_LIST = [
@@ -120,7 +103,7 @@ LIMITED_USE_RIGS = [
     "splicer",
 ]
 
-#worst guns ever made for the gun role
+#worst guns ever made for the gun role + some extras (was looking for bad guns and came across this exact list)
 WORST_GUNS = [
     "Cochran Turret Revolver",
     "Chauchat",
@@ -135,16 +118,37 @@ WORST_GUNS = [
     "Nock Volley Gun",
     "Grossflammenwerfer",
     "Gyrojet",
-    "FP-45 Liberator",
+    "FP-45 Liberator"
     "Ross Rifle",
     "Arsenal AF2011-A1",
     "CZ-38",
     "LeMat Revolver",
     "Boys Anti-Tank Rifle",
-    "No gun name for you",
+    "No gun name for you", # this is not a gun so some of mine aren't guns >:)
     "AK-47",
     "DSR 50",
-    "AMT Automag II",
+    "Sword Gun",
+    "Longer Sword Gun",
+    "Long Bow",
+    "Gun!",
+    "Sten gun MK II",
+    "Apache pistol",
+    "Axe Pistol", # officially out of ideas here
+    "Mini Death Star",
+    "Gun :]",
+    "Graphite Rifle",
+    "Rubber Band Pistol",
+    "Barret Anti Materiel Rifle", # intentional spelling of "Materiel"
+    "Suitcase gun",
+    "Stair gun",
+    "Magpul FMG9",
+    "G.R.A.D. .22 RS Knife gun",
+    "Gucci Glock",
+    "Colt Python",
+    "ICMB but a gun",
+    "Remington EtronX Rifle",
+    "Winchester Model 59", # gun list officially doubled
+    "AMT Automag II", # adding rolo's guns
     "Welrod Pistol",
     "De Lisle carbine",
     "Nambu Type 94 Tank Machine Gun",
@@ -163,8 +167,8 @@ WORST_GUNS = [
     "FAMAS",
     "KSG shotgun",
     "AMR-2 sniper rifle",
+    "GUN GUN GUN GUN GUN",
 ]
-
 
 MG_SPELLS = [
     "none",
@@ -235,8 +239,8 @@ SINGLE_WORD_TRIGGERS = {
     "Tsk.":
         'cstrollpain',
     "{mention} <:csRbxangryping:786325219727638535>":
-        '827952429290618943',
-    "You're the one that has no balls.":
+        '<@827952429290618943>',
+    "No balls.": # thanks amadan
         'balls',
     "The only skill issue you have is your capability to try to roast someone. Nice try.":
         'skill issue',
@@ -244,18 +248,22 @@ SINGLE_WORD_TRIGGERS = {
         'bozo',
     "Oh no you don't. I know that you are bypassing, Nexieus.":
         'fuсk',
-    "Cease.":
+    "stop - i am legitimately getting angry":
         'fu*c*k',
-    "You can't bypass. You are a fool.":
+    "Don't make me call big bro GPT over":
         'f*u*ck',
-    "No.":
+    "I see how it is":
         '*f*uck',
-    "I am getting very pissed off. Stop.":
+    "I'm telling sleazel!":
         'fuc*k*',
     "It's spelt Thief.":
         "theif",
     "🏌️‍♂️":
         "hm",
+    "balls":
+        "ligma",
+    "That's my line!":
+        "you're the one that has no balls."
 }
 
 #all words need to be present for this trigger to occur
@@ -275,7 +283,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ['when', 'muggle', 'tower', '?'], 
     "Thanks.":
         ['good', 'drone'], 
-    "Nobody is perfect. Robots included.":
+    "Bro have you looked in a mirror? 💀":
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
@@ -283,11 +291,11 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
-    "Well, you probably suck too.":
+    "Sleazel is great!":
         ['sucks', 'sleazel'],
     "Let's not suck people, okay?":
         ['you', 'suck'],
-    "I did actually.":
+    "🤓":
         ['who', 'asked'],
 }
 
@@ -295,11 +303,11 @@ MULTIPLE_WORD_TRIGGERS = {
 MIXED_WORD_TRIGGERS = {
     "Hello!":   [
         'broken drone', 
-        ["hi", "hello", "howdy", "sup"],
+        ["hi", "hello", "howdy", "sup", "broken drone bouta say hello!"],
     ],
     "Wrong.": [
         'drone',
-        ["dead", "down", "off", "vacation", "sleep"],
+        ["dead", "down", "off", "vacation", "sleep", "unalive", "committed die"],
     ],    
 }
 
@@ -376,16 +384,22 @@ COOLDOWN_DESCRIPTIONS = {
     "patron": "<:csPatron:758081038697103504> cooldown: ",
 }
 
-#this roles can be assigned via a morph to command
-#at 0 index we will put a role object during the login proccess.
-#make sure indexes match role name in the server!
+# this roles can be assigned via a morph to command
+# at 0 index we will put a role object during the login proccess.
+# make sure indexes match role name in the server!
+#----- key/legend ------
+# IGNORE THE 'NONE' IT'S THE ROLE ITSELF FUNKY CODING STUFF NOT IMPORTANT
+# morph to - doesn't have role
+# demorph from - has the role
+# morph to - has the role
+# demorph from - doesn't have role
 MORPHABLE_ROLES = {
     "Patron": [ 
         None,
-        "Go help those noobs, you are now a Patron!",                                  #MORPH TO - DOESN'T HAVE THE ROLE
-        "What about protecting the noobs? Without a Patron around they will be lost.", #DEMORPH FROM - HAS THE ROLE
-        "You are already assisting the noobs, why would you help them twice?",         #MORPH TO - HAS THE ROLE
-        "Nobody has seen you around lately, what are you doing?",                      #DEMORPH FROM - DOESN'T HAVE THE ROLE
+        "Go help those noobs, you are now a Patron!",
+        "What about protecting the noobs? Without a Patron around they will be lost.",
+        "You are already assisting the noobs, why would you help them twice?",
+        "Nobody has seen you around lately, what are you doing?",
     ],
     "Joker": [ 
         None,
@@ -487,8 +501,8 @@ LIMITED_ROLES = {
     "I was there": "*(11/27/2022 - 11/28/2022)*",
 }
 
-#not morphable roles
-# 0 - role itself
+# key/legend for not morphable roles that people can morph to
+# 0 - role itself; ignore because funky code stuff
 # 1 - doesnt have role, and wants it
 # 2 - has role, and wants it
 # 3 - doesnt have role, and wants to remove it
@@ -522,19 +536,19 @@ SPECIAL_ROLES = {
         "You are not possessed...",
         "Ask someone for mana.",
     ],
-    #multiple words (ultimate chat killer) would break the script logic
+    # multiple words (ultimate chat killer) would break the script logic
     "Ultimate": [
         None,
         "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
         "You have already killed the chat.",
         "You were not a chat killer in the first place.",
-        "There was an attempt.",
+        "Bro stuck in last year 💀",
     ],
 
 }
 
-#pingable roles, no custom messages
-#roles will be fetched on bot startup
+# pingable roles, no custom messages
+# roles will be fetched on bot startup
 PING_ROLES = {
     "Announcements":
         None,
@@ -588,16 +602,16 @@ I_SPY = {
 }
 
 EXTRA_ROLES = {
-    'ckr': 951424560685805588,            #chat killer
-    'possessed': 988572669521842197,      #via rig
-    'admin': 993446701090222160,          #aka Drone Master (not a discord admin)
-    'murdurator': 735225462405464125,     #discord server moderator
-    'climber': 735410759206568047,        #climber (consider adding manually verified)
+    'ckr': 951424560685805588,            # chat killer
+    'possessed': 988572669521842197,      # haha lmao imagine getting possessed (they cast heretic rig)
+    'admin': 993446701090222160,          # aka Drone Master (not a discord admin)
+    'murdurator': 735225462405464125,     # discord server moderator
+    'climber': 735410759206568047,        # climber (consider adding manually verified)
 }
 
 CHAT_KILLER = {
     'wait': 7200,
-    #'thirdKill': None,
+#   'thirdKill': None,
     'last': 0,
     'reviveChat': False,
 }
@@ -605,21 +619,23 @@ CHAT_KILLER = {
 RIG_DATA = {
     'rigTracker': 1004326588021743667,
     'rigCaster': None,
-    'ghostMsg': "",
+    'ghostMsg': "hehe",
 }
 
-#create scold dictionary for the scold command
+# create scold dictionary for the scold command
 def getScoldDictionary(victim, author):
     ScoldDict = {
         481893862864846861:
             "I am thankful to my creator, not disappointed.",
         827952429290618943:
             author.mention + " nice try.",
+        267014823315898368:
+            victim.mention + ", You are a great person! thanks for aliving me!",
         828423681914437663:
             victim.mention + ", I am EXTREMELY disappointed in you. You know why. I do not forget.",
         886615047407812678:
             victim.mention + ", I am IMMEASURABLY disappointed in you. We all know why. I will never forget that.",
         author.id:
-            author.mention + " you do not need me to be disappointed in yourself.",
+            author.mention + " are you sad? here's some funny cat gifs I found!\nhttps://images-ext-2.discordapp.net/external/HvlaKafHRnlE4NFKWMWvPHAABIUZP4Dwi-Ngd1dLBBY/https/media.tenor.com/vZ3KwdqFkxEAAAPo/jinx-the-cat-jinx.mp4\nhttps://tenor.com/view/kitty-cat-sandwich-cats-sandwich-gif-26112528",
     }
     return ScoldDict

@@ -13,8 +13,7 @@ def GET_EMOJI(client,id):
 def UPDATE_CKR():
     EXTRA_ROLES['ckr'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['ckr'].id)
 
-# rate limited functions
-
+#region rate limited functions
 #get message
 async def GET_MSG(ch,msgID):
     return await ch.fetch_message(msgID)
@@ -61,4 +60,4 @@ async def DELETE(message):
 
 async def NEW_ROLE(server,colorpick, rolename):
     return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
-
+#endregion

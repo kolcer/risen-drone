@@ -45,6 +45,7 @@ def PrepareRoles(roles):
         if role.name in FUN_ROLES:
             FUN_ROLES[role.name] = role
             continue    
+
 async def MorphTo(usr,role):
     if role == "Gun":
         role = "Guns"

@@ -1,3 +1,5 @@
+# bro who is putting these double #?? wtf bro nobody does that
+
 ### IMPORTS ###
 
 import discord
@@ -126,12 +128,13 @@ async def on_member_join(member):
         "Welcome to Crazy Stairs Discord Server!"
         "\nUnlike other Jokers around here, I am a real bot."
         "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
-        "\nHave fun, and remember: It's okay to be a little crazy.")
+        "\nHave fun, and remember: it's ok to be a little crazy!") # i added the pun back, still hate it
 
-#saves last deleted message for necromancer rig to show
+# saves last deleted message for necromancer rig to show
+# removed "ligma" because its 'bad' and 'inappropriate'
 @client.event
 async def on_message_delete(message):
-  RIG_DATA['ghostMsg'] = "*" + str(message.author.display_name) + "'s last words lie here...*"
+  RIG_DATA['ghostMsg'] = "*" + str(message.author.display_name) + "'s last words lie here...* \"😴 💀\" lol"
 
 
 @client.event
@@ -142,6 +145,8 @@ async def on_reaction_add(reaction, user):
     if (reaction.emoji == "csSleazelApproves" or reaction.emoji == "csSleazelNotApproved") and user.id != 481893862864846861:
         await reaction.remove(user)
 
+# i'm not going to delete this
+# but personally i think this is unnecessary because of the same in on_message() + nobody disrespects the rules anyway
 @client.event
 async def on_message_edit(before, after):
     msg = after.content
@@ -155,14 +160,19 @@ async def on_message_edit(before, after):
 
         await DELETE(after)
 
-#main function on each message being intercepted
+# main function on each message being intercepted
 @client.event
 async def on_message(message):
+
+#region vars and misc
     msg = message.content
-    ## lowercase the message for some commands to use
+    # lowercase the message for some commands to use
     lmsg = msg.lower()
     usr = message.author
     ch = message.channel
+
+    if usr.id == 898870303680241674: # if frfr, ignore (please include this rolo i beg you)
+        return
 
     if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
@@ -173,9 +183,8 @@ async def on_message(message):
 
         await DELETE(message)
 
-    ## user must not be a bot
-    ## but the bot will add reactions to the webhook (if any)
-    ## before returning 
+    # user must not be a bot
+    # but the bot will add reactions to the webhook (if any)
     if usr.bot == True:
         if not usr.id == 827952429290618943:
             for i, v in EMOJIS_TO_REACT.items():
@@ -184,16 +193,11 @@ async def on_message(message):
                     return
         return
 
-    #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
-        #await SEND(ch, "I will remember your sympathy.")
-       # await ADD_ROLES(usr, FUN_ROLES["I was there"])
-
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
     else:
         MSG_SENT[usr] += 1
-
-            
+    
 
     if ch.id == 845454640103424032 and message.attachments:
         if usr not in ARTISTS:
@@ -208,26 +212,27 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await SEND(ch, "I like your style.")
                 await ADD_REACTION(message, "❤️‍🔥")
-        
+    
+    # sanctuary variables
     randomchance = random.randint(0,5000)
     eligible = 0
     rolename = ""
+#endregion
 
+    # sanctuary
     if randomchance == 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
-                eligible = eligible + 1                
+                eligible += 1                
                 if eligible == 1:
                     rolename = role.name.lower()
 
-        
         if eligible == 1:
-            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
+            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)") # btw why are we ignoring this
             await asyncio.sleep(1)
             if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
                 await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
-
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
         FIX_BOT.append(usr)
@@ -254,36 +259,37 @@ async def on_message(message):
             FIX_BOT.clear()
         return
 
-    #mini game in progress
+    # minigame in progress
     if LADDERS['status'] != "off" and usr in MG_QUEUE and ch == LADDERS['channel']:
 
         await LucidLaddersProcessMessage(usr,msg)
-       
-    #normal non-admin usage.
+
+#region normal non-admin commands haha you normies
     else:
         
-
-        ## split the message to 3 strings for some commands to use
-        ## no need to have more than 4 strings
-        lsplit = lmsg.split(" ",3) 
+        # split the message to 3 strings for some commands to use
+        # no need to have more than 4 strings
+        lsplit = lmsg.split(" ", 3) 
         
-        #create chat killer task
-        #this should run regardless if the message was intercepted
-        #by some other command 
+        # create chat killer task
+        # this should run regardless if the message was intercepted
+        # by some other command
+        # I'm not going to change this but wondering why it's a variable and not just being called
+        # ckr_task is never mentioned after this.
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
  
-        #broken drone impostor prevention
+        # broken drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
  
-        #start the quiz
+        # start the quiz
         elif ch == CHANNELS["bot-commands"] and lmsg == "broken drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
             await StartQuiz(usr,ch)
 
-        #join an ongoing quiz
+        # join an ongoing quiz
         elif ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
             
             await JoinQuiz(usr,ch)
@@ -292,47 +298,52 @@ async def on_message(message):
             
             await ProcessQuizAnswer(usr,ch,message,lmsg)
 
-        #start mini game
+        # start mini game
         elif lmsg == "play lucid ladders":
 
             await PlayLucidLadders(usr,ch)
 
-        #join mini game
+        # join mini game
         elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
             await JoinLucidLadders(usr)
+        
+        # leave mini game
+        elif lmsg == "leave" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
-        # ## All Rigs in one
+            await LeaveLucidLadders(usr)
+
+        # All Rigs in one
         elif lsplit[0] == "cast" and lsplit[2] == "rig":
 
             await CastRig(lsplit[1],ch,usr)
 
-        ## thief rig active
+        # thief rig active
         elif ACTIVE_RIGS["thief"]:
 
             await ExecuteThiefRig(ch,usr)
 
-        ## Spectre Rig Active
+        # Spectre Rig Active
         elif ACTIVE_RIGS["spectre"]:
                 
             await ExecuteSpectreRig(ch,usr,message)
 
-        ## Joker Rig Active
+        # Joker Rig Active
         elif ACTIVE_RIGS["joker"]:
                 
             await ExecuteJokerRig(ch,usr,message)
 
-        # Splicer Rig Active
+        # Best (Splicer) Rig Active
         elif ACTIVE_RIGS["splicer"]:
 
             await ExecuteSplicerRig(ch,usr)
 
-        ## Give Mana command
+        # Give Mana command
         elif msg.lower().startswith("give mana to "):
         
             await GiveMana(ch,usr,message)
                  
-        ## Scold command
+        # Scold command
         elif lmsg.startswith("broken drone scold "):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
@@ -352,7 +363,7 @@ async def on_message(message):
             # Scolding an User that is NOT in the Server
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
-        ## Show Profile
+        # Show Profile
         elif lmsg == "bd show profile":
             messages = ""
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
@@ -384,11 +395,11 @@ async def on_message(message):
             
             await SEND(ch, profilemsg)
 
-        ## Revive Chat Command
+        # Revive Chat Command
         elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             #chat has to be dead, duh
             if not CHAT_KILLER['reviveChat']:
-                await SEND(ch, "This chat is very much alive, I am afraid.")
+                await SEND(ch, "umm... akchually this chat *is* alive you just haven\'t noticed") # not sure if you actually have to escape ' but ill do it anyway
                 return
 
             #only chat killers can use the command
@@ -401,7 +412,7 @@ async def on_message(message):
             await SEND(ch, random.choice(REVIVE_CHAT))
             CHAT_KILLER['reviveChat'] = False
  
-        ## Splicer role assignment
+        # Splicer role assignment
         elif "<:csSplicer:988948000200069191>" in msg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
@@ -414,12 +425,12 @@ async def on_message(message):
             else:
                 SPLICER_FANS[usr] = 1
 
-        #morph command
+        # morph command
         elif lmsg.startswith("morph to"):
             morphToTarget = lsplit[2].capitalize()
             await SEND(ch, await MorphTo(usr,morphToTarget))
 
-        #demorph command (accepts demorph, unmorph and any **morph from combination)
+        # demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
             demorphFromTarget = lsplit[2].capitalize()
             await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
@@ -433,15 +444,15 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await SEND(ch, "Just kidding.")
 
-        #sub command       
+        # sub command       
         elif lmsg.startswith("sub to"):
             await SEND(ch,await SubTo(usr,lsplit[2].capitalize()))
 
-        #unsub command
+        # unsub command
         elif lmsg.startswith("sub from",2):
             await SEND(ch,await UnsubFrom(usr,lsplit[2].capitalize()))
         
-        #guide
+        # guide
         elif lmsg == 'bd help':
 
             await SEND(ch,''' **Broken Drone commands:**
@@ -532,7 +543,10 @@ _[alignment]_ **trivia**
                         key = lsplit[0] + "T"
                         await SEND(ch,show_random_entry(key))
                         return
-
+            
+            # gifs dont trigger responses
+            if message.attachments and 'http' not in msg:
+                return
             #single word trigger
             for i, v in SINGLE_WORD_TRIGGERS.items():
                 if v in lmsg:
@@ -555,14 +569,15 @@ _[alignment]_ **trivia**
                     if any(word in lmsg for word in v[1]):
                         await SEND(ch,i)
                         return
-      
-    ## admin commands
+#endregion
+
+#region admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         msginputs = msg.split(" ")
-        msgsplit = msg.split(" ", 2) #creates a list from the input received. "Hello world say HI!" becomes LIST["Hello", "world", "say HI!"]
-        lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
+        msgsplit = msg.split(" ", 2) # creates a list from the input received. "Hello world say HI!" becomes LIST["Hello", "world", "say HI!"]
+        lmsgsplit = lmsg.split(" ", 2) # creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
 
-        #-----admin commands that require ONE input-----
+        #----- admin commands that require ONE input -----
         if len(msginputs) == 1:
             #full admin commands list
             if lmsg.startswith("cmdlist", 1):
@@ -587,7 +602,7 @@ Delete: Deletes the specified quiz question by index.
 
 |nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
 
-|un/assign [!!USER ID!!] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
+|un/assign [!!USER ID!!] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES or MORPHABLE_ROLES list.
 
 |alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
 
@@ -602,7 +617,7 @@ Delete: Deletes the specified quiz question by index.
                 await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
                 return
 
-        #-----admin commands that require TWO inputs-----
+        #----- admin commands that require TWO inputs -----
         elif len(msginputs) == 2:
             #ispy command
             if lmsg.startswith("ispy",1):
@@ -616,7 +631,7 @@ Delete: Deletes the specified quiz question by index.
                     await SEND(I_SPY['channel'],'Whatever.')
                 return
         
-        #-----admin commands that require THREE or MORE inputs-----
+        #----- admin commands that require THREE or MORE inputs -----
         elif len(msginputs) >= 3:
             third = msg.split(" ", 2)[2]          #NOT lowecase
             lthird = msg.split(" ", 2)[2].lower() #YES lowecase
@@ -652,12 +667,15 @@ Delete: Deletes the specified quiz question by index.
                         break
                     return  
 
-            #give any role
+            #give any fun or morphable role
             if lmsg.startswith("assign", 1):
-                if third in FUN_ROLES:
-                    neededrole = FUN_ROLES[third]
+                if third in FUN_ROLES or third in MORPHABLE_ROLES:
+                    if third in FUN_ROLES:
+                        neededrole = FUN_ROLES[third]
+                    elif third in MORPHABLE_ROLES:
+                        neededrole = MORPHABLE_ROLES[third]
                 else:
-                    await SEND(ch, "You cannot assign this role through my commands.")
+                    await SEND(ch, "You cannot assign this role through my commands. (it's not in fun or morphable roles)")
                     return
                     
                 for mem in SERVER_DATA['server'].members:
@@ -668,7 +686,7 @@ Delete: Deletes the specified quiz question by index.
                         break
                 return  
 
-            #remove any role
+            #remove any fun role
             if lmsg.startswith("unassign", 1):
                 if third in FUN_ROLES:
                     neededrole = FUN_ROLES[third]
@@ -730,8 +748,8 @@ Delete: Deletes the specified quiz question by index.
             ##-----COMMANDS THAT ONLY USE EVEN MORE INPUTS!!!!!!-----
             #empty so far-
 
-        ##length may vary... for this one
-        #quiz
+        # length may vary... for this one
+        # quiz
         if lmsg.startswith("quiz", 1):
             if lmsgsplit[1] == "new":
                 qSplit = msgsplit[2].split("|")
@@ -759,7 +777,7 @@ Delete: Deletes the specified quiz question by index.
 
             return
 
-        #and if none of the others match go here...
+        # and if none of the others match go here...
         if lmsg.startswith("triv", 2) or lmsg.startswith("tip", 2):
             key = msgsplit[1]
             if not key in TIPS_KEYS:
@@ -794,6 +812,7 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
                 await PRINT_ENTRIES(ch, key)
                 return
-               
-### RUN THE BOT ###
+#endregion
+
+#----- RUN THE BOT -----
 client.run(os.environ['TOKEN'])
