@@ -327,7 +327,7 @@ async def on_message(message):
             await GiveMana(ch,usr,message)
                  
         ## Scold command
-        elif lmsg.startswith("broken drone scold "):
+        elif lmsg.startswith("bd scold "):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
                 if member.name.lower() + "#" + member.discriminator == lsplit[3]:
@@ -473,7 +473,7 @@ _[alignment]_ **trivia**
 **start quiz**
 ➡️ Start Crazy Stairs knowledge quiz (2 players required)
 
-**broken drone scold** _[username#discriminator]_
+**bd scold** _[username#discriminator]_
 ➡️ Scolds chosen user
 
 **revive chat**
