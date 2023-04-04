@@ -90,11 +90,6 @@ async def on_ready():
     #send ready to the test channel
     await SEND(CHANNELS["bot-testing"], 'The last edited code is now effective.')
 
-@client.event
-async def on_disconnect():
-    #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], 'This is the end of a journey.')
-
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
 async def on_member_update(before, after):
@@ -279,7 +274,7 @@ async def on_message(message):
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
  
         #start the quiz
-        elif ch == CHANNELS["bot-commands"] and lmsg == "broken drone start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
+        elif ch == CHANNELS["bot-commands"] and lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
             await StartQuiz(usr,ch)
 
