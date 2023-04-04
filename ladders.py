@@ -152,7 +152,7 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] = LADDERS['topLevel']
                 
         case "archon":
-            toSend += "cast Split Event and caused players to either lost or gain a extra level."
+            toSend += "cast Split Event and caused players to either lost or gain an extra level."
             for i in MG_PLAYERS.keys():
                 chances = random.randint(0,1)
                 if chances == 0 or i == plr:
@@ -163,7 +163,7 @@ def MG_ACTION(plr, action):
         case "drifter":
             chances = random.randint(0,1)
             if chances == 0:
-                toSend += "took the elevator, but it was broken - a level was lost"
+                toSend += "took the elevator, but it was broken. A level was lost!"
                 MG_PLAYERS[plr] -= 1
             else:
                 toSend += "took the elevator, and advanced 2 extra levels!"

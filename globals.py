@@ -63,22 +63,40 @@ IMPOSTOR_NICKS = [
     "good job",
     "your prize",
     "Name offered by Me. F.D.",
-    "this nerd is a copycat lmao"
-    "this man tried"
+    "this nerd is a copycat lmao",
+    "this nerd tried",
+    "Not the real BD, sorry",
+    "Fake Drone, move along",
+    "Impostor detected",
+    "This isn't the real Drone",
+    "Fake Drone, don't be fooled",
+    "Drone imposter alert!",
 ]
 
 REVIVE_CHAT = [
     "How did you find out about Crazy Stairs?",
     "What's your least favorite Alignment?",
-    "How many alignments were there in the game when you started playing?",
-    "Whose alignment's power would you rather wield in real life?",
+    "How many Alignments were there in the game when you started playing?",
+    "Whose Alignment's power would you rather wield in real life?",
     "Nope. Chat is as dead as my intentions to revive it.",
     "Is Sleazel cool?",
     "What's your favorite feature present in the game?",
     "What's fun about Crazy Stairs?",
     "Do you hate Sleazel?",
-    "Don't make the chat dead again! I will get very unpleasant.",
+    "Don't let the chat become dead again, or I'll become quite unhappy.",
     "Star Wars reminds me of home. I still want to go back to Death Star one day...",
+    "What's the craziest strategy you've seen someone use in Crazy Stairs?",
+    "If you could add one new feature to Crazy Stairs, what would it be?",
+    "Which alignment do you think is the most overpowered?",
+    "Have you ever played Crazy Stairs with a group of friends? How did it go?",
+    "What's the longest game of Crazy Stairs you've ever played?"
+    "If you could change one thing about the rules of Crazy Stairs, what would it be?",
+    "Have you ever won a game of Crazy Stairs by a lucky coincidence?",
+    "Do you think Crazy Stairs is more luck-based or skill-based? And why?",
+    "What advice would you give to someone who's never played Crazy Stairs before?",
+    "Have you ever introduced someone to Crazy Stairs who ended up liking it? Or the other way around?",
+    "What do you think is the biggest mistake people make when playing Crazy Stairs?",
+    "What's the funniest moment you've had while playing Crazy Stairs?",
 ]
 
 RIG_LIST = [
@@ -117,7 +135,7 @@ WORST_GUNS = [
     "Nock Volley Gun",
     "Grossflammenwerfer",
     "Gyrojet",
-    "FP-45 Liberator"
+    "FP-45 Liberator",
     "Ross Rifle",
     "Arsenal AF2011-A1",
     "CZ-38",
@@ -126,7 +144,27 @@ WORST_GUNS = [
     "No gun name for you",
     "AK-47",
     "DSR 50",
+    "AMT Automag II",
+    "Welrod Pistol",
+    "De Lisle carbine",
+    "Nambu Type 94 Tank Machine Gun",
+    "M1941 Johnson Machine Gun",
+    "M3 submachine gun",
+    "MAS-38",
+    "Lahti-Saloranta M/26",
+    "Owen submachine gun",
+    "Thompson M1921 submachine gun",
+    "Chauchat-Ribeyrolle",
+    "FG 42",
+    "CETME Model L",
+    "AA-12 shotgun",
+    "H&K G11",
+    "M60 machine gun",
+    "FAMAS",
+    "KSG shotgun",
+    "AMR-2 sniper rifle",
 ]
+
 
 MG_SPELLS = [
     "none",
