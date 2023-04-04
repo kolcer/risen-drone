@@ -147,18 +147,19 @@ def MG_ACTION(plr, action):
                 toSend += "have had an unsuccessful hack, but was not detected!"
             elif chances == 6:
                 victim = random.choice(MG_QUEUE)
-                toSend += "have hacked the game, but wants to pin it on someone else!\n"
+                toSend += "have hacked the game, but want to pin it on someone else!\n"
 
                 if victim.name == plr.name:
                     toSend += "On second thought. Better play it safe."
                 else:
-                    toSend += victim.mention + " have been kicked from the game for hacking!"
+                    toSend += victim.mention + " has been kicked from the game for hacking!"
                     
                     cp = MG_QUEUE[LADDERS['currentPlayer']]
                     print(cp)
+                    print(victim)
                     del MG_PLAYERS[victim] #
                     MG_QUEUE.remove(victim)
-                    print(MG_QUEUE.index(cp))
+                    print(MG_QUEUE)
                     print(LADDERS['currentPlayer'])
                     LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
                     if len(MG_QUEUE) == 1:
