@@ -145,8 +145,8 @@ WORST_GUNS = [
     "Longer Sword Gun",
     "Long Bow",
     "Pew Pew",
-    "Sten gun MK II",
-    "Apache pistol",
+    "Sten Gun MK II",
+    "Apache Pistol",
     "Axe Pistol",
     "Mini Death Star",
     "Gun :]",
@@ -160,7 +160,7 @@ WORST_GUNS = [
     "Gucci Glock",
     "Colt Python",
     "Remington EtronX Rifle",
-    "Winchester Model 59", # gun list officially doubled -ok
+    "Winchester Model 59",
 ]
 
 MG_SPELLS = [
