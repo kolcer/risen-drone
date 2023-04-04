@@ -473,7 +473,7 @@ _[alignment]_ **trivia**
 **play lucid ladders**
 ➡️ Start Lucid Ladders mini game (requires at least 2 playres)
 
-**broken drone start quiz**
+**start quiz**
 ➡️ Start Crazy Stairs knowledge quiz (2 players required)
 
 **broken drone scold** _[username#discriminator]_

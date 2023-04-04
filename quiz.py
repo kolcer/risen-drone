@@ -88,7 +88,7 @@ async def StartQuiz(usr,ch):
     await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
     #if no one joins within 10 seconds, event is forced closed.
-    await asyncio.sleep(10)
+    await asyncio.sleep(30)
     if QUIZ["second-player"] == True:
         await SEND(ch, "Nobody joined in time. Event is concluded.")
         FORCE_CLOSE_EVENT()
