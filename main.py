@@ -93,7 +93,7 @@ async def on_ready():
 @client.event
 async def on_disconnect():
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], 'This is the end of a journey.')
+    await SEND(CHANNELS["bot-testing"], 'This is the end of a journey. Also add <@898870303680241674> to this channel pls.')
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
@@ -124,14 +124,15 @@ async def on_member_update(before, after):
 async def on_member_join(member):
     await SEND(CHANNELS["general"],
         "Welcome to Crazy Stairs Discord Server!"
-        "\nUnlike other Jokers around here, I am a real bot."
+        "\nUnlike other Jokers around here, I am a real bot." # haha get the pun????   D:<
         "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
-        "\nHave fun, and remember: It's okay to be a little crazy.")
+        "\nHave fun, and remember: do not say \"gun\" to me") # removed pun because pun bad
 
-#saves last deleted message for necromancer rig to show
+# saves last deleted message for necromancer rig to show
+# and ligma
 @client.event
 async def on_message_delete(message):
-  RIG_DATA['ghostMsg'] = "*" + str(message.author.display_name) + "'s last words lie here...*"
+  RIG_DATA['ghostMsg'] = "*" + str(message.author.display_name) + "'s last words lie here...* \"ligm- 😴 💀\""
 
 
 @client.event
@@ -155,10 +156,10 @@ async def on_message_edit(before, after):
 
         await DELETE(after)
 
-#main function on each message being intercepted
+# main function on each message being intercepted
 @client.event
 async def on_message(message):
-    ##Just kidding there's nothing on line 156.
+    # haha its line 170 now
 
     msg = message.content
     ## lowercase the message for some commands to use
@@ -166,7 +167,8 @@ async def on_message(message):
     usr = message.author
     ch = message.channel
 
-
+    if usr.id == 898870303680241674: # if rolo II (among us pfp guy), ignore him
+        return
 
     if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
@@ -232,6 +234,7 @@ async def on_message(message):
                 await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
     
     #this will avoid old activatig with old bot
+    # why is this here ????????????????????????
     if msg.startswith(">"):
         return
     
@@ -267,7 +270,7 @@ async def on_message(message):
 
         await LucidLaddersProcessMessage(usr,msg)
        
-    #normal non-admin usage.
+    #normal non-admin usage. :c
     else:
         
 
@@ -309,6 +312,11 @@ async def on_message(message):
         elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
             await JoinLucidLadders(usr)
+        
+        #leave mini game
+        elif lmsg == "leave" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
+
+            await LeaveLucidLadders(usr)
 
         # ## All Rigs in one
         elif lsplit[0] == "cast" and lsplit[2] == "rig":
@@ -330,7 +338,7 @@ async def on_message(message):
                 
             await ExecuteJokerRig(ch,usr,message)
 
-        # Splicer Rig Active
+        # Best (Splicer) Rig Active
         elif ACTIVE_RIGS["splicer"]:
 
             await ExecuteSplicerRig(ch,usr)
@@ -396,7 +404,7 @@ async def on_message(message):
         elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             #chat has to be dead, duh
             if not CHAT_KILLER['reviveChat']:
-                await SEND(ch, "This chat is very much alive, I am afraid.")
+                await SEND(ch, "umm... akchually this chat *is* alive you just haven\'t noticed") # not sure if you actually have to escape ' but ill do it anyway
                 return
 
             #only chat killers can use the command
@@ -540,7 +548,10 @@ _[alignment]_ **trivia**
                         key = lsplit[0] + "T"
                         await SEND(ch,show_random_entry(key))
                         return
-
+            
+            # gifs dont trigger responses
+            if message.attachments and 'http' not in msg:
+                return
             #single word trigger
             for i, v in SINGLE_WORD_TRIGGERS.items():
                 if v in lmsg:
@@ -802,6 +813,6 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
                 await PRINT_ENTRIES(ch, key)
                 return
-               
-### RUN THE BOT ###
+            
+#----- RUN THE BOT -----
 client.run(os.environ['TOKEN'])

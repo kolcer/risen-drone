@@ -63,8 +63,9 @@ IMPOSTOR_NICKS = [
     "good job",
     "your prize",
     "Name offered by Me. F.D.",
-    "this nerd is a copycat lmao"
-    "this man tried"
+    "this nerd is a copycat lmao",
+    "this man tried",
+    "just morph to gun bro"
 ]
 
 REVIVE_CHAT = [
@@ -102,7 +103,7 @@ LIMITED_USE_RIGS = [
     "splicer",
 ]
 
-#worst guns ever made for the gun role
+#worst guns ever made for the gun role + some extras (was looking for bad guns and came across this exact list)
 WORST_GUNS = [
     "Cochran Turret Revolver",
     "Chauchat",
@@ -126,6 +127,27 @@ WORST_GUNS = [
     "No gun name for you",
     "AK-47",
     "DSR 50",
+    "Sword Gun",
+    "Longer Sword Gun",
+    "Long Bow",
+    "Gun!",
+    "Sten gun MK II",
+    "Apache pistol",
+    "Axe Pistol", # officially out of ideas here
+    "Mini Death Star",
+    "Gun :]",
+    "Graphite Rifle",
+    "Rubber Band Pistol",
+    "Barret Anti Materiel Rifle", # intentional spelling of "Materiel"
+    "Suitcase gun",
+    "Stair gun",
+    "Magpul FMG9",
+    "G.R.A.D. .22 RS Knife gun",
+    "Gucci Glock",
+    "Colt Python",
+    "ICMB but a gun",
+    "Remington EtronX Rifle",
+    "Winchester Model 59", # gun list officially doubled
 ]
 
 MG_SPELLS = [
@@ -490,7 +512,7 @@ SPECIAL_ROLES = {
         "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
         "You have already killed the chat.",
         "You were not a chat killer in the first place.",
-        "There was an attempt.",
+        "Bro stuck in last year 💀",
     ],
 
 }

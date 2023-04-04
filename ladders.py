@@ -100,7 +100,7 @@ def MG_ACTION(plr, action):
                 toSend += "teleported one extra level up."
             elif chances == 2:
                 toSend += "teleported two extra levels up."
-         
+        
         case "keeper":
             toSend += "caused bottom player to advance an extra level and top player to go down!"
             top = None
@@ -127,10 +127,11 @@ def MG_ACTION(plr, action):
             else:
                 toSend += "have been caught stealing, and had to flee one level down!"
                 MG_PLAYERS[plr] -= 1
-            
+
+        # balanced hacker - still gambling just more rigged ;)
         case "hacker":
             chances = random.randint(0, 3)
-            if chances == 0:
+            if chances == 0 or chances == 1:
                 toSend += "have been kicked from the game for hacking!"
                 
                 cp = MG_QUEUE[LADDERS['currentPlayer']]
@@ -140,11 +141,9 @@ def MG_ACTION(plr, action):
                 if len(MG_QUEUE) == 1:
                     MG_PLAYERS[cp] = LADDERS['topLevel']
                 
-            elif chances == 1:
+            elif chances == 2:
                 toSend += "have been frozen by a Murdurator and lost one level!"
                 MG_PLAYERS[plr] -= 1
-            elif chances == 2:
-                toSend += "have had an unsuccessful hack, but was not detected!"
             else:
                 toSend += "have hacked the game!"
                 for i in MG_PLAYERS.keys():
@@ -152,18 +151,18 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] = LADDERS['topLevel']
                 
         case "archon":
-            toSend += "cast Split Event and caused players to either lost or gain a extra level."
+            toSend += "cast Split Event and caused players to either lose or gain an extra level or two."
             for i in MG_PLAYERS.keys():
                 chances = random.randint(0,1)
                 if chances == 0 or i == plr:
-                    MG_PLAYERS[i] += 1
+                    MG_PLAYERS[i] += random.randint(1,2)
                 else:
-                    MG_PLAYERS[i] -= 1
+                    MG_PLAYERS[i] -= random.randint(1, 2)
         
         case "drifter":
             chances = random.randint(0,1)
             if chances == 0:
-                toSend += "took the elevator, but it was broken - a level was lost"
+                toSend += "took the elevator, but it was broken and a level was lost"
                 MG_PLAYERS[plr] -= 1
             else:
                 toSend += "took the elevator, and advanced 2 extra levels!"
@@ -265,15 +264,27 @@ async def PlayLucidLadders(usr,ch):
         return
 
 async def JoinLucidLadders(usr):
-  
     if usr in MG_PLAYERS:
         await SEND(LADDERS['channel'], "You have already joined the mini game!")
         return
     else:
         MG_PLAYERS[usr] = 0
         MG_QUEUE.append(usr)
-        toSend = usr.name + " has joined Lucid Ladders!\nCurrent players:\n"
+        toSend = usr.name + " has joined Lucid Ladders! (You may leave by typing \'leave\')\nCurrent players:\n"
         for plr in MG_QUEUE:
             toSend += plr.name + "\n"
         await SEND(LADDERS['channel'], toSend)
+        return
+
+async def LeaveLucidLadders(usr):
+    if usr in MG_PLAYERS:
+        toSend = usr.name + " has left Lucid Ladders! :(\nCurrent players:\n"
+        MG_PLAYERS.pop(MG_PLAYERS[usr])
+        MG_QUEUE.pop(usr)
+        for plr in MG_QUEUE:
+            toSend += plr.name + "\n"
+        await SEND(LADDERS['channel'], toSend)
+        return
+    else:
+        await SEND(LADDERS['channel'], "You aren't in the game! Join by typing \'join\'! :D")
         return
