@@ -129,60 +129,59 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] -= 1
             
         case "hacker":
-            chances = random.randint(0, 8)
-            if chances >= 89 and chances <= -12:
-                toSend += "have been kicked from the game for hacking!"
-                
-                cp = MG_QUEUE[LADDERS['currentPlayer']]
-                del MG_PLAYERS[plr]
-                MG_QUEUE.remove(plr)
-                LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
-                if len(MG_QUEUE) == 1:
-                    MG_PLAYERS[cp] = LADDERS['topLevel']
-                
-            elif chances == 0:
-                toSend += "have been frozen by a Murdurator and lost one level!"
-                MG_PLAYERS[plr] -= 1
-            elif chances == 0:
-                toSend += "have had an unsuccessful hack, but was not detected!"
-            elif chances <= 4:
-                victim = random.choice(MG_PLAYERS)
-                toSend += "have hacked the game, but want to pin it on someone else!\n"
-
-                if victim.name == plr.name:
-                    toSend += "On second thought. Better play it safe."
-                else:
-                    toSend += victim.mention + " has been kicked from the game for hacking!"
+            try:
+                chances = random.randint(0, 8)
+                if chances >= 89 and chances <= -12:
+                    toSend += "have been kicked from the game for hacking!"
                     
                     cp = MG_QUEUE[LADDERS['currentPlayer']]
-                    print(cp)
-                    print(victim)
-                    del MG_PLAYERS[victim] #
-                    MG_QUEUE.remove(victim)
-                    print(MG_QUEUE)
-                    print(LADDERS['currentPlayer'])
+                    del MG_PLAYERS[plr]
+                    MG_QUEUE.remove(plr)
                     LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
                     if len(MG_QUEUE) == 1:
-                        print(MG_PLAYERS[cp])
                         MG_PLAYERS[cp] = LADDERS['topLevel']
+                    
+                elif chances == 0:
+                    toSend += "have been frozen by a Murdurator and lost one level!"
+                    MG_PLAYERS[plr] -= 1
+                elif chances == 0:
+                    toSend += "have had an unsuccessful hack, but was not detected!"
+                elif chances <= 4:
+                    victim = random.choice(MG_PLAYERS)
+                    toSend += "have hacked the game, but want to pin it on someone else!\n"
 
-            elif chances <= 6:
-                victim = random.choice(MG_PLAYERS)
-                toSend += "have just encountered an error message and someone is going to glitch to the top floor!\n"
+                    if victim.name == plr.name:
+                        toSend += "On second thought. Better play it safe."
+                    else:
+                        toSend += victim.mention + " has been kicked from the game for hacking!"
+                        
+                        del MG_PLAYERS[victim] #
+                        MG_QUEUE.remove(victim)
+                        if len(MG_QUEUE) == 1:
+                            print(MG_PLAYERS[cp])
+                            MG_PLAYERS[cp] = LADDERS['topLevel']
 
-                MG_PLAYERS[victim] == 19
+                elif chances <= 6:
+                    victim = random.choice(MG_PLAYERS)
+                    toSend += "have just encountered an error message and someone is going to glitch to the top floor!\n"
 
-            elif chances <= 8:
-                toSend += "have just encountered an error message and everyone is going to glitch to the base floor!\n"
+                    MG_PLAYERS[victim] == 19
 
-                for player in MG_PLAYERS:
-                    MG_PLAYERS[player] = 0
+                elif chances <= 8:
+                    toSend += "have just encountered an error message and everyone is going to glitch to the base floor!\n"
 
-            else:
-                toSend += "has hacked the game with no issues."
-                for i in MG_PLAYERS.keys():
-                    MG_PLAYERS[i] -= 1
-                MG_PLAYERS[plr] = LADDERS['topLevel']
+                    for player in MG_PLAYERS:
+                        MG_PLAYERS[player] = 0
+
+                else:
+                    toSend += "has hacked the game with no issues."
+                    for i in MG_PLAYERS.keys():
+                        MG_PLAYERS[i] -= 1
+                    MG_PLAYERS[plr] = LADDERS['topLevel']
+            except Exception as e:
+                print(e)
+
+
                 
         case "archon":
             toSend += "cast Split Event and caused players to either lost or gain an extra level."
