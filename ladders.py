@@ -55,7 +55,7 @@ def MG_ACTION(plr, action):
     
     match action:
         case "none":
-            toSend += "is chilling this round."
+            toSend += "are chilling this round."
             
         case "muggle":
             chances = random.randint(0, 2)
@@ -125,13 +125,13 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[victim] = MG_PLAYERS[plr]
                 MG_PLAYERS[plr] = cache
             else:
-                toSend += "has been caught stealing, and had to flee one level down!"
+                toSend += "have been caught stealing, and had to flee one level down!"
                 MG_PLAYERS[plr] -= 1
             
         case "hacker":
             chances = random.randint(0, 8)
             if chances >= 0 and chances <= 3:
-                toSend += "has been kicked from the game for hacking!"
+                toSend += "have been kicked from the game for hacking!"
                 
                 cp = MG_QUEUE[LADDERS['currentPlayer']]
                 del MG_PLAYERS[plr]
@@ -141,18 +141,18 @@ def MG_ACTION(plr, action):
                     MG_PLAYERS[cp] = LADDERS['topLevel']
                 
             elif chances == 4:
-                toSend += "has been frozen by a Murdurator and lost one level!"
+                toSend += "have been frozen by a Murdurator and lost one level!"
                 MG_PLAYERS[plr] -= 1
             elif chances == 5:
-                toSend += "has had an unsuccessful hack, but was not detected!"
+                toSend += "have had an unsuccessful hack, but was not detected!"
             elif chances == 6:
                 victim = random.choice(MG_QUEUE)
-                toSend += "has hacked the game, but wants to pin it on someone else!\n"
+                toSend += "have hacked the game, but wants to pin it on someone else!\n"
 
                 if victim.name == plr.name:
                     toSend += "On second thought. Better play it safe."
                 else:
-                    toSend += victim.mention + " has been kicked from the game for hacking!"
+                    toSend += victim.mention + " have been kicked from the game for hacking!"
                     
                     cp = MG_QUEUE[LADDERS['currentPlayer']]
                     print(cp)
@@ -167,13 +167,13 @@ def MG_ACTION(plr, action):
 
             elif chances == 7:
                 victim = random.choice(MG_QUEUE)
-                toSend += "has just encountered an error message and someone is going to glitch to the top floor!\n"
+                toSend += "have just encountered an error message and someone is going to glitch to the top floor!\n"
 
-                MG_PLAYERS[plr] == 19
+                MG_PLAYERS[victim] == 19
 
             elif chances == 8:
                 victim = random.choice(MG_QUEUE)
-                toSend += "has just encountered an error message and everyone is going to glitch to the base floor!\n"
+                toSend += "have just encountered an error message and everyone is going to glitch to the base floor!\n"
 
                 for player in MG_PLAYERS:
                     MG_PLAYERS[player] = 0
