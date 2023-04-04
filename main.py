@@ -158,8 +158,6 @@ async def on_message_edit(before, after):
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
-    ##Just kidding there's nothing on line 156.
-
     msg = message.content
     ## lowercase the message for some commands to use
     lmsg = msg.lower()
@@ -230,10 +228,6 @@ async def on_message(message):
             await asyncio.sleep(1)
             if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
                 await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
-    
-    #this will avoid old activatig with old bot
-    if msg.startswith(">"):
-        return
     
 
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
