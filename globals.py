@@ -255,7 +255,7 @@ SINGLE_WORD_TRIGGERS = {
 
 # ^ that but its reactions instead of responses
 REACT_TRIGGERS = {
-    "<:csStairbonk:812813052822421555>": #REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
+    "<:csStairbonk:812813052822421555>":  #REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
         'gun',                            #YOUR MESSAGE
     "📮":
         "among",
