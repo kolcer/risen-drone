@@ -567,7 +567,7 @@ _[alignment]_ **trivia**
             #full admin commands list
             if lmsg.startswith("cmdlist", 1):
                 if ch.id != 813882658156838923:
-                    SEND(ch, "Try to be more discreet, they do not need to know.")
+                    await SEND(ch, "Try to be more discreet, they do not need to know.")
                     return
 
                 await SEND(ch,''' **ADMIN COMMANDS:**  
@@ -628,7 +628,7 @@ Delete: Deletes the specified quiz question by index.
                 await DELETE(message)
                 return
 
-            #create a new role with name and color
+            #create a new role with name and color 
             if lmsg.startswith("nr", 1):
                 try:
                     newrole = await NEW_ROLE(SERVER_DATA['server'], lmsgsplit[1], third)
@@ -799,11 +799,11 @@ Delete: Deletes the specified quiz question by index.
             #copy tip to thread
             if msg.startswith("c",1):
                 #print(msgsplit[2])
-                #newSplit = msg.split(' ',3)
-                channel = client.get_channel(int(msgsplit[2]))
-                #thread = channel.get_thread(int(newSplit[3]))
+                newSplit = msg.split(' ',3)
+                channel = client.get_channel(int(newSplit[2]))
+                thread = channel.get_thread(int(newSplit[3]))
                 await SEND(ch,'copying...')
-                await POST_TIPS(channel,key)
+                await POST_TIPS(thread,key)
                 return
 
 ### RUN THE BOT ###
