@@ -793,6 +793,7 @@ Delete: Deletes the specified quiz question by index.
                 delete_entry(key,int(msgsplit[2]))
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
                 await PRINT_ENTRIES(ch, key)
+                #hmmmm
                 return
             
             #copy tip to thread
