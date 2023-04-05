@@ -661,21 +661,25 @@ Delete: Deletes the specified quiz question by index.
 
             #give any role
             if lmsg.startswith("assign", 1):
-                print(third)
-                if third in FUN_ROLES:
-                    neededrole = FUN_ROLES[third]
-                    print(neededrole)
-                    print(FUN_ROLES[third])
-                else:
-                    await SEND(ch, "You cannot assign this role through my commands.")
-                    return
-                    
-                for mem in SERVER_DATA['server'].members:
-                    if mem.id == msgsplit[1]:
-                        await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
-                        await asyncio.sleep(1)
-                        await ADD_ROLES(mem, neededrole)
-                        break
+                try:
+                    print(third)
+                    if third in FUN_ROLES:
+                        neededrole = FUN_ROLES[third]
+                        print(neededrole)
+                        print(FUN_ROLES[third])
+                    else:
+                        await SEND(ch, "You cannot assign this role through my commands.")
+                        return
+                        
+                    for mem in SERVER_DATA['server'].members:
+                        if mem.id == msgsplit[1]:
+                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await ADD_ROLES(mem, neededrole)
+                            break
+                except Exception as e:
+                    await SEND(ch, e)
+
                 return  
 
             #remove any role
