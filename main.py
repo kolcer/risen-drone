@@ -800,8 +800,9 @@ Delete: Deletes the specified quiz question by index.
             if msg.startswith("c",1):
                 print(msgsplit[2])
                 channel = client.get_channel(int(msgsplit[2]))
+                thread = channel.get_thread(int(msgsplit[3]))
                 await SEND(ch,'copying...')
-                await POST_TIPS(channel,key)
+                await POST_TIPS(thread,key)
                 return
 
 ### RUN THE BOT ###
