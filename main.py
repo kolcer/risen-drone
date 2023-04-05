@@ -671,6 +671,7 @@ Delete: Deletes the specified quiz question by index.
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
+                    print("ABOUT TO LOOP")
                     for mem in SERVER_DATA['server'].members:
                         if mem.id == msgsplit[1]:
                             print("I AM HEREEEE")
