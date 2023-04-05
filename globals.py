@@ -227,10 +227,8 @@ EMOJIS_TO_REACT = {
 # value is the trigger, key is the response!
 #it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
-    "<:cs_Stairbonk:812813052822421555>": #REPLY FROM THE BOT
-        'gun',                            #YOUR MESSAGE
-    "Tsk.":
-        'cstrollpain',
+    "Tsk.":                             # REPLY FROM BOT
+        'cstrollpain',                  # YOUR MESSAGE
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
     "You're the one that has no balls.":
@@ -253,6 +251,18 @@ SINGLE_WORD_TRIGGERS = {
         "theif",
     "🏌️‍♂️":
         "hm",
+}
+
+# ^ that but its reactions instead of responses
+REACT_TRIGGERS = {
+    "812813052822421555": #REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
+        'gun',                            #YOUR MESSAGE
+    "📮":
+        "among",
+    "🧢":
+        "best",
+    "👁":
+        "drone"
 }
 
 #all words need to be present for this trigger to occur

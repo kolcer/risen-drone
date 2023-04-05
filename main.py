@@ -533,6 +533,12 @@ _[alignment]_ **trivia**
                         await SEND(ch,show_random_entry(key))
                         return
 
+            #reactions trigger
+            for i, v in REACT_TRIGGERS.items():
+                if v in lmsg:
+                    await ADD_REACTION(message,i)
+                    return
+
             #single word trigger
             for i, v in SINGLE_WORD_TRIGGERS.items():
                 if v in lmsg:
