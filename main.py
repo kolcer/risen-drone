@@ -664,6 +664,7 @@ Delete: Deletes the specified quiz question by index.
                 if third in FUN_ROLES:
                     neededrole = FUN_ROLES[third]
                     print(neededrole)
+                    print(FUN_ROLES[third])
                 else:
                     await SEND(ch, "You cannot assign this role through my commands.")
                     return
