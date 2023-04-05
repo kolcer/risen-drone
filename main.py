@@ -798,7 +798,8 @@ Delete: Deletes the specified quiz question by index.
             #copy tip to thread
             if msg.startswith("c",1):
                 channel = client.get_channel(int(msgsplit[2]))
-                POST_TIPS(channel,key)
+                await POST_TIPS(channel,key)
+                return
 
 ### RUN THE BOT ###
 client.run(os.environ['TOKEN'])
