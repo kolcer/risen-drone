@@ -675,7 +675,9 @@ Delete: Deletes the specified quiz question by index.
                     print(msgsplit[1])
                     print(usr.id)
                     print("i swear if the previous 2 numbers dont match...")
+                    print("welp here we go")
                     for mem in SERVER_DATA['server'].members:
+                        print(mem.name)
                         if mem.id == msgsplit[1]:
                             print("I AM HEREEEE")
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
