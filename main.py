@@ -567,7 +567,7 @@ _[alignment]_ **trivia**
             #full admin commands list
             if lmsg.startswith("cmdlist", 1):
                 if ch.id != 813882658156838923:
-                    SEND(ch, "Try to be more discreet, they do not need to know.")
+                    await SEND(ch, "Try to be more discreet, they do not need to know.")
                     return
 
                 await SEND(ch,''' **ADMIN COMMANDS:**  
