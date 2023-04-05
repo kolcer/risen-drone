@@ -733,16 +733,16 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch, "The role is gone.")
                 return  
 
-            ##-----COMMANDS THAT ONLY USE 4 INPUTS-----
+            #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
             if lmsg.startswith("edit tracker", 1):
                 db.set(lthird + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
                 return
             
-            ##-----COMMANDS THAT ONLY USE EVEN MORE INPUTS!!!!!!-----
+            #-----COMMANDS THAT ONLY USE EVEN MORE INPUTS-----
             #empty so far-
 
-        ##length may vary... for this one
+        #length may vary... for this one
         #quiz
         if lmsg.startswith("quiz", 1):
             if lmsgsplit[1] == "new":
