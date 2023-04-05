@@ -36,6 +36,14 @@ async def PRINT_ENTRIES(channel,key):
             combined_string = new_string
     await SEND(channel,combined_string)
 
+#post tips
+async def POST_TIPS(channel,key):
+    entries = list_entries(key)
+    combined_string = ""
+    for i in range(len(entries)):
+        await SEND(channel, "-----\n" + entries[i].decode("utf-8") + "\n------")
+        await asyncio.sleep(3)
+ 
 #print questions
 async def PRINT_QUESTIONS(channel):
     entries = list_entries('quiz')
@@ -786,6 +794,11 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
                 await PRINT_ENTRIES(ch, key)
                 return
-               
+            
+            #copy tip to thread
+            if msg.startswith("c",1):
+                channel = client.get_channel(int(msgsplit[2]))
+                POST_TIPS(channel,key)
+
 ### RUN THE BOT ###
 client.run(os.environ['TOKEN'])
