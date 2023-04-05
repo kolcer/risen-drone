@@ -673,11 +673,13 @@ Delete: Deletes the specified quiz question by index.
                         
                     for mem in SERVER_DATA['server'].members:
                         if mem.id == msgsplit[1]:
+                            print("I AM HEREEEE")
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
                             await ADD_ROLES(mem, neededrole)
                             break
                 except Exception as e:
+                    print(e)
                     await SEND(ch, e)
 
                 return  
