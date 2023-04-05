@@ -651,12 +651,22 @@ Delete: Deletes the specified quiz question by index.
             #give ckr
             if lmsg.startswith("ckr to", 1):
                 for mem in SERVER_DATA['server'].members:
-                    if str(mem.name.lower()) + "#" + str(mem.discriminator) == str(lthird):
+                    if str(mem.name.lower() + "#" + mem.discriminator) == str(lthird):
                         await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
                         await asyncio.sleep(1)
                         await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
                         break
-                    return  
+                return  
+                
+            #remove ckr
+            if lmsg.startswith("ckr from", 1):
+                for mem in SERVER_DATA['server'].members:
+                    if str(mem.name.lower()) + "#" + str(mem.discriminator) == str(lthird):
+                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
+                        break
+                return   
 
             #give any role
             if lmsg.startswith("assign", 1):
@@ -722,16 +732,6 @@ Delete: Deletes the specified quiz question by index.
                 await asyncio.sleep(1)
                 await SEND(ch, "The role is gone.")
                 return  
-
-            #remove ckr
-            if lmsg.startswith("ckr from", 1):
-                for mem in SERVER_DATA['server'].members:
-                    if str(mem.name.lower()) + "#" + str(mem.discriminator) == str(lthird):
-                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
-                        await asyncio.sleep(1)
-                        await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
-                        break
-                return   
 
             ##-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
