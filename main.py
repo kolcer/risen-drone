@@ -532,7 +532,13 @@ _[alignment]_ **trivia**
                         i = i.format(mention=usr.mention)
                     await SEND(ch,i)
                     return
-        
+
+            #reactions trigger
+            for i, v in REACT_TRIGGERS.items():
+                if v in lmsg:
+                    await ADD_REACTION(message,i)
+                    return
+
             #multiple word trigger
             for i, v in MULTIPLE_WORD_TRIGGERS.items():
                 if all(word in lmsg for word in v):
