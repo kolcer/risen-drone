@@ -671,7 +671,7 @@ Delete: Deletes the specified quiz question by index.
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
-                    print("ABOUT TO LOOP")
+                    print("ABOUT TO LOOP") 
                     print(msgsplit[1])
                     print(usr.id)
                     print("i swear if the previous 2 numbers dont match...")
