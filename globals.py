@@ -251,6 +251,8 @@ SINGLE_WORD_TRIGGERS = {
         "theif",
     "🏌️‍♂️":
         "hm",
+    "https://cdn.discordapp.com/emojis/734784926561337497.webp?size=48&name=CH_PepeScared&quality=lossless":
+        "kill",
 }
 
 # ^ that but its reactions instead of responses
@@ -261,8 +263,6 @@ REACT_TRIGGERS = {
         "among",
     "🧢":
         "best",
-    "👁":
-        "drone"
 }
 
 #all words need to be present for this trigger to occur
