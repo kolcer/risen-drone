@@ -672,6 +672,7 @@ Delete: Deletes the specified quiz question by index.
                         return
                         
                     print("ABOUT TO LOOP")
+                    print(msgsplit[1])
                     for mem in SERVER_DATA['server'].members:
                         if mem.id == msgsplit[1]:
                             print("I AM HEREEEE")
