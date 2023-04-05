@@ -628,7 +628,7 @@ Delete: Deletes the specified quiz question by index.
                 await DELETE(message)
                 return
 
-            #create a new role with name and color
+            #create a new role with name and color 
             if lmsg.startswith("nr", 1):
                 try:
                     newrole = await NEW_ROLE(SERVER_DATA['server'], lmsgsplit[1], third)
