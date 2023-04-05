@@ -301,7 +301,7 @@ MULTIPLE_WORD_TRIGGERS = {
 #first word is required and any of the pool of rest of the words
 MIXED_WORD_TRIGGERS = {
     "Hello!":   [
-        'broken drone', 
+        'drone', 
         ["hi", "hello", "howdy", "sup"],
     ],
     "Wrong.": [
