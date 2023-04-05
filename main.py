@@ -661,8 +661,10 @@ Delete: Deletes the specified quiz question by index.
 
             #give any role
             if lmsg.startswith("assign", 1):
+                print(third)
                 if third in FUN_ROLES:
                     neededrole = FUN_ROLES[third]
+                    print(neededrole)
                 else:
                     await SEND(ch, "You cannot assign this role through my commands.")
                     return
