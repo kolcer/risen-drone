@@ -673,6 +673,8 @@ Delete: Deletes the specified quiz question by index.
                         
                     print("ABOUT TO LOOP")
                     print(msgsplit[1])
+                    print(usr.id)
+                    print("i swear if the previous 2 numbers dont match...")
                     for mem in SERVER_DATA['server'].members:
                         if mem.id == msgsplit[1]:
                             print("I AM HEREEEE")
