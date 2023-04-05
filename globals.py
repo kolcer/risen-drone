@@ -253,8 +253,6 @@ SINGLE_WORD_TRIGGERS = {
         "hm",
     "https://cdn.discordapp.com/emojis/734784926561337497.webp?size=48&name=CH_PepeScared&quality=lossless":
         "kill",
-    'https://cdn.discordapp.com/emojis/1040899228882436106.webp?size=48&name=ok%7E3&quality=lossless':
-        "fun"
 }
 
 # ^ that but its reactions instead of responses
