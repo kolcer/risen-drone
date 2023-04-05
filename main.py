@@ -533,12 +533,6 @@ _[alignment]_ **trivia**
                         await SEND(ch,show_random_entry(key))
                         return
 
-            #reactions trigger
-            for i, v in REACT_TRIGGERS.items():
-                if v in lmsg:
-                    await ADD_REACTION(message,i)
-                    return
-
             #single word trigger
             for i, v in SINGLE_WORD_TRIGGERS.items():
                 if v in lmsg:
@@ -561,6 +555,13 @@ _[alignment]_ **trivia**
                     if any(word in lmsg for word in v[1]):
                         await SEND(ch,i)
                         return
+
+            #reactions trigger
+            for i, v in REACT_TRIGGERS.items():
+                if v in lmsg:
+                    await ADD_REACTION(message,i)
+                    return
+
       
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):

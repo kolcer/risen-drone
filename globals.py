@@ -261,8 +261,6 @@ REACT_TRIGGERS = {
         "among",
     "🧢":
         "best",
-    "👁":
-        "drone"
 }
 
 #all words need to be present for this trigger to occur
