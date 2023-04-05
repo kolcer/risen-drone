@@ -650,9 +650,8 @@ Delete: Deletes the specified quiz question by index.
     
             #give ckr
             if lmsg.startswith("ckr to", 1):
-                print(lthird)
                 for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() + "#" + mem.discriminator == lthird:
+                    if str(mem.name.lower()) + "#" + str(mem.discriminator) == str(lthird):
                         await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
                         await asyncio.sleep(1)
                         await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
@@ -662,20 +661,12 @@ Delete: Deletes the specified quiz question by index.
             #give any role
             if lmsg.startswith("assign", 1):
                 try:
-                    print(third)
                     if third in FUN_ROLES:
                         neededrole = FUN_ROLES[third]
-                        print(neededrole)
-                        print(FUN_ROLES[third])
                     else:
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
-                    print("ABOUT TO LOOP") 
-                    print(msgsplit[1])
-                    print(usr.id)
-                    print("i swear if the previous 2 numbers dont match...")
-                    print("welp here we go")
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
                             print("I AM HEREEEE")
@@ -698,7 +689,7 @@ Delete: Deletes the specified quiz question by index.
                     return
 
                 for mem in SERVER_DATA['server'].members:
-                    if mem.id == msgsplit[1]:
+                    if int(mem.id) == int(msgsplit[1]):
                         await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
                         await asyncio.sleep(1)
                         await REMOVE_ROLES(mem, neededrole)
@@ -735,7 +726,7 @@ Delete: Deletes the specified quiz question by index.
             #remove ckr
             if lmsg.startswith("ckr from", 1):
                 for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() + "#" + mem.discriminator == lthird:
+                    if str(mem.name.lower()) + "#" + str(mem.discriminator) == str(lthird):
                         await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
                         await asyncio.sleep(1)
                         await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
