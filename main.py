@@ -798,9 +798,10 @@ Delete: Deletes the specified quiz question by index.
             
             #copy tip to thread
             if msg.startswith("c",1):
-                print(msgsplit[2])
-                channel = client.get_channel(int(msgsplit[2]))
-                thread = channel.get_thread(int(msgsplit[3]))
+                #print(msgsplit[2])
+                newSplit = msg.split(' ',3)
+                channel = client.get_channel(int(newSplit[2]))
+                thread = channel.get_thread(int(newSplit[3]))
                 await SEND(ch,'copying...')
                 await POST_TIPS(thread,key)
                 return
