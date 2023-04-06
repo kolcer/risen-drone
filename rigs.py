@@ -346,7 +346,7 @@ async def ExecuteGunRig(ch,usr):
     ACTIVE_RIGS["gun"] = False
 
     await MorphTo(usr, "Gun")
-    await SEND(ch, "{usr.mention} has fallen for " + RIG_DATA['rigCaster'].mention + "'s trap! They are now a gun!")
+    await SEND(ch, f"{usr.mention} has fallen for {RIG_DATA['rigCaster'].mention}'s trap! They are now a gun!")
     return
 
 async def ExecuteJokerRig(ch,usr,message):
