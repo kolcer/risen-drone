@@ -86,7 +86,7 @@ async def JoinFightingGame(usr):
         return
 
 
-async def ClassShowcase():
+def ClassShowcase():
     toSend = "You may now pick your Alignment. Select between:\n\n"
 
     for alignment in FG_CLASSES.keys():
