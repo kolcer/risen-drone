@@ -321,7 +321,7 @@ async def on_message(message):
         #join mini game
         elif lmsg == "join fight" and FG['status'] == "second-player" and (EXTRA_ROLES["admin"] in usr.roles or usr.id == 894573836366934047):
 
-            await JoinFightingGame(usr, ch)
+            await JoinFightingGame(usr)
 
         # ## All Rigs in one
         elif lsplit[0] == "cast" and lsplit[2] == "rig":
