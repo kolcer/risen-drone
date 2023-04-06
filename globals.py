@@ -330,6 +330,7 @@ COOLDOWN_SELECT = {
     "spectre": "tsj",
     "joker": "tsj",
     "splicer": "tsj",
+    "gun": "tsj",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
