@@ -29,9 +29,11 @@ async def FightingProcessClass(usr, msg):
         print("here")
         if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys():
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
+            return
 
         if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys():
             await SEND(FG["channel"], "I gave you a list. Read it and answer accordingly!") 
+            return
 
         FG_PLAYERS[usr] = [lmsg, None, 70]
         await SEND(FG["channel"], f"{usr.mention} is playing as {lmsg.capitalize()}.")
