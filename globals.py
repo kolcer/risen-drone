@@ -330,7 +330,7 @@ COOLDOWN_SELECT = {
     "spectre": "tsj",
     "joker": "tsj",
     "splicer": "tsj",
-    "gun": "gun",
+    "gun": "tsj",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -377,7 +377,6 @@ RIG_COOLDOWNS = {
     "tsj": False,
     "ha": False,
     "patron": False,
-    "gun": False,
 }
 
 COOLDOWN_DESCRIPTIONS = {
