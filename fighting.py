@@ -43,7 +43,7 @@ async def FightingProcessClass(usr, msg):
             toSend = "Everyone is now ready. Here are your picks:\n\n"
 
             for user in FG_PLAYERS:
-                toSend += f"{usr.name} will be playing as {FG_PLAYERS[user][0]}.\n"
+                toSend += f"{user.name} will be playing as {str(FG_PLAYERS[user][0]).capitalize}.\n"
             
             toSend += "We will now begin."
 
