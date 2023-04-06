@@ -259,7 +259,7 @@ async def PlayLucidLadders(usr,ch):
 
 async def JoinLucidLadders(usr):
   
-    if usr in MG_PLAYERS:
+    if usr in MG_PLAYERS and not EXTRA_ROLES['admin'] in usr.roles:
         await SEND(LADDERS['channel'], "You have already joined the mini game!")
         return
     else:
