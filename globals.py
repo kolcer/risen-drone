@@ -345,6 +345,7 @@ COOLDOWN_DURATION = {
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
+    "gun": 600,
     "archon": 240,    
     "heretic": 60,
     "wicked": 60,    
@@ -367,6 +368,7 @@ ACTIVE_RIGS = {
     "thief": False,
     "spectre": False,
     "splicer": False,
+    "gun": False,
 }
 
 RIG_COOLDOWNS = {
@@ -378,7 +380,7 @@ RIG_COOLDOWNS = {
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:758081540063494288> cooldown: ",
-    "tsj": "<:csThief:758081386203840644><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ", #
+    "tsj": "<:csThief:758081386203840644><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csThegun:1093477773647028305> cooldown: ", #
     "ha": "<:csHeretic:786323224115281921><:csArchon:786323402172530688> cooldown: ",
     "patron": "<:csPatron:758081038697103504> cooldown: ",
 }

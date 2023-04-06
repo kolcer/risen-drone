@@ -329,6 +329,11 @@ async def on_message(message):
 
             await ExecuteSplicerRig(ch,usr)
 
+        # Gun Rig Active
+        elif ACTIVE_RIGS["gun"]:
+
+            await ExecuteGunRig(ch,usr)
+
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
         

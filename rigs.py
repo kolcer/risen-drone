@@ -162,7 +162,7 @@ async def Rig(rigType, ch, usr):
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
-        case ("joker"|"thief"|"spectre"|"splicer"):#
+        case ("joker"|"thief"|"spectre"|"splicer"|"gun"):#
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -172,8 +172,10 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Thief Rig! Hold tight your belongings.")
             elif rigType == "spectre":
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
-            else:
+            elif rigType == "splicer":
                 await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
+            elif rigType == "gun":
+                await SEND(ch, usr.mention + " just cast Gun Rig! Watch out.")
                 
           
             
@@ -222,11 +224,11 @@ async def SplicerRig(reaction,user):
 
 async def CastRig(rigPick,ch,usr):
 
-    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
+    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "gun":
         await SEND(ch, "That is not a valid rig. Try again.")
         return
     
-    if MORPHABLE_ROLES["Guns"][0] in usr.roles:
+    if MORPHABLE_ROLES["Guns"][0] in usr.roles and rigPick != "gun":
         await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
@@ -338,6 +340,18 @@ async def ExecuteSpectreRig(ch,usr,message):
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your Message disappear with a 50% chance.")
     return
 
+async def ExecuteGunRig(ch,usr,message):
+    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles or MORPHABLE_ROLES['Guns'] in usr.roles:
+        return
+    ACTIVE_RIGS["gun"] = False
+
+    await DELETE(message)
+    asyncio.sleep(1)
+
+    await ADD_ROLES(usr, MORPHABLE_ROLES['Guns'])
+    await EDIT_NICK(usr, random.choice(WORST_GUNS))
+    await SEND(ch, "{usr.mention} has fallen for " + RIG_DATA['rigCaster'].mention + "'s trap! They are now a gun!")
+    return
 
 async def ExecuteJokerRig(ch,usr,message):
 
@@ -350,7 +364,7 @@ async def ExecuteJokerRig(ch,usr,message):
     await DELETE(message)
     await asyncio.sleep(2)
 
-    await SEND(ch, str(msgcontent) + " -" + ":nerd::clown:\nFrom: " + usr.mention)
+    await SEND(ch, str(msgcontent) + " - " + ":nerd: :clown:\nFrom: " + usr.mention)
             
     return
 
