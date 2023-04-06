@@ -277,7 +277,7 @@ async def on_message(message):
         #this should run regardless if the message was intercepted
         #by some other command 
         ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
- 
+
         #broken drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
         if compare.ratio() > 0.7:
@@ -307,6 +307,16 @@ async def on_message(message):
         elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
             await JoinLucidLadders(usr)
+
+        #start mini game
+        elif lmsg == "start fight" and EXTRA_ROLES["admin"] in usr.roles:
+
+            await PlayFightingGame(usr,ch)
+
+        #join mini game
+        elif lmsg == "join fight" and FG['status'] == "second-player" and EXTRA_ROLES["admin"] in usr.roles:
+
+            await JoinFightingGame(usr)
 
         # ## All Rigs in one
         elif lsplit[0] == "cast" and lsplit[2] == "rig":
