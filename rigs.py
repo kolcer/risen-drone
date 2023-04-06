@@ -162,7 +162,7 @@ async def Rig(rigType, ch, usr):
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
-        case ("joker"|"thief"|"spectre"|"splicer"|"gun"):#
+        case ("joker"|"thief"|"spectre"|"splicer"):
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -174,7 +174,14 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
             elif rigType == "splicer":
                 await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
-            elif rigType == "gun":
+        
+        case "gun":
+            if not MORPHABLE_ROLES["Guns"] in usr.roles:
+                await SEND(ch, "no gun imagine lmao")
+                return
+            ACTIVE_RIGS['gun'] = True
+            RIG_DATA['rigCaster'] = usr
+            if rigType == "gun":
                 await SEND(ch, usr.mention + " just cast Gun Rig! Watch out.")
                 
           
