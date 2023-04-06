@@ -228,7 +228,7 @@ async def on_message(message):
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
             if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
-                await usr.add_roles(FUN_ROLES["Sanctuary Discoverer"])
+                await ADD_ROLES(usr, FUN_ROLES["Sanctuary Discoverer"])
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
