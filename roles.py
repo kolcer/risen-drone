@@ -54,12 +54,18 @@ async def MorphTo(usr,role):
             await EDIT_NICK(usr,random.choice(WORST_GUNS))
 
         if MORPHABLE_ROLES[role][0] in usr.roles:
+            if random.randint(1,4096) == 1:
+                await ADD_ROLES(usr, FUN_ROLES['Dreepy'])
+                await asyncio.sleep(1)
+                await SEND(f"{usr.mention} found a shiny role! They receive the 'Dreepy' role (1/4096)!")
+                return
             return MORPHABLE_ROLES[role][3]
         else:
             if random.randint(1,4096) == 1:
                 await ADD_ROLES(usr, FUN_ROLES['Dreepy'])
                 await asyncio.sleep(1)
-                return SEND(f"{usr.mention} found a shiny role! They receive the 'Dreepy' role (1/4096)!")
+                await SEND(f"{usr.mention} found a shiny role! They receive the 'Dreepy' role (1/4096)!")
+                return
             await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
             return MORPHABLE_ROLES[role][1]
                
