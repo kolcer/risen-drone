@@ -1,29 +1,29 @@
-#DRONE GLOBAL VARIABLES AND CONSTANTS
+# DRONE GLOBAL VARIABLES AND CONSTANTS
 
 SERVER_DATA = {
     'server': 624227331720085528,
     'nick': 'BROKEN DRONE',
 }
 
-#VARIABLE ARRAYS
+# VARIABLE ARRAYS
 LOSERS = []
 MG_QUEUE = []
-#if game breaks there must be 3 people telling the bot to reset
+# if game breaks there must be 3 people telling the bot to reset
 FIX_BOT = []
 
-#VARIABLE DICTIONARIES
+# VARIABLE DICTIONARIES
 LAST_RIG = {}
 RIG_SPAMMERS = {}
 SPLICER_FANS = {}
 MSG_SENT = {}
 ARTISTS = {}
 QUIZZERS = {}
-QUESTIONS = {} #fill this up on startup from database
+QUESTIONS = {} # fill this up on startup from database
 NickDictionary = {}
 MG_PLAYERS = {}
 
-#CONSTANT ARRAYS
-#this is for tips and trivia database
+# CONSTANT ARRAYS
+# this is for tips and trivia database
 TIPS_KEYS = [
     "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
     "thief", "hacker", "archon", "drifter", "heretic", "none", "general",
@@ -117,7 +117,7 @@ LIMITED_USE_RIGS = [
     "splicer",
 ]
 
-#worst guns ever made for the gun role
+# worst guns ever made for the gun role
 WORST_GUNS = [
     "Cochran Turret Revolver",
     "Chauchat",
@@ -179,9 +179,9 @@ MG_SPELLS = [
     "chameleon",
 ]
 
-#CONSTANT DICTIONARIES
+# CONSTANT DICTIONARIES
 
-#channels where bot is allowed to post  
+# channels where bot is allowed to post  
 CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
@@ -189,8 +189,8 @@ CHANNELS = {
     "bot-testing": 813882658156838923,
 }
 
-#bot will react to the webhook emoji, if it finds in a webhook message
-#values will be replaced by emoji objects during startup
+# bot will react to the webhook emoji, if it finds in a webhook message
+# values will be replaced by emoji objects during startup
 EMOJIS_TO_REACT = {
     "csPatron": 758081038697103504,
     "csJoker": 758081245157654599,
@@ -223,9 +223,9 @@ EMOJIS_TO_REACT = {
     "csMegaSecret": 987819430639730699,
 }
 
-#this keywords will trigger the bot with a single occurence
+# this keywords will trigger the bot with a single occurence
 # value is the trigger, key is the response!
-#it DOES NOT have to be a single word
+# it DOES NOT have to be a single word
 SINGLE_WORD_TRIGGERS = {
     "Tsk.":                             # REPLY FROM BOT
         'cstrollpain',                  # YOUR MESSAGE
@@ -257,16 +257,16 @@ SINGLE_WORD_TRIGGERS = {
 
 # ^ that but its reactions instead of responses
 REACT_TRIGGERS = {
-    "<:csStairbonk:812813052822421555>":  #REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
-        'gun',                            #YOUR MESSAGE
+    "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
+        'gun',                            # YOUR MESSAGE
     "📮":
         "among",
     "🧢":
         "best",
 }
 
-#all words need to be present for this trigger to occur
-#but the order of the words does not matter
+# all words need to be present for this trigger to occur
+# but the order of the words does not matter
 MULTIPLE_WORD_TRIGGERS = {
     "Keeper obviously. Stop asking stupid questions.": 
         ["best", "alignment", "?"], 
@@ -298,7 +298,7 @@ MULTIPLE_WORD_TRIGGERS = {
         ['who', 'asked'],
 }
 
-#first word is required and any of the pool of rest of the words
+# first word is required and any of the pool of rest of the words
 MIXED_WORD_TRIGGERS = {
     "Hello!":   [
         'drone', 
@@ -383,16 +383,16 @@ COOLDOWN_DESCRIPTIONS = {
     "patron": "<:csPatron:758081038697103504> cooldown: ",
 }
 
-#this roles can be assigned via a morph to command
-#at 0 index we will put a role object during the login proccess.
-#make sure indexes match role name in the server!
+# this roles can be assigned via a morph to command
+# at 0 index we will put a role object during the login proccess.
+# make sure indexes match role name in the server!
 MORPHABLE_ROLES = {
-    "Patron": [ 
+    "Patron": [
         None,
-        "Go help those noobs, you are now a Patron!",                                  #MORPH TO - DOESN'T HAVE THE ROLE
-        "What about protecting the noobs? Without a Patron around they will be lost.", #DEMORPH FROM - HAS THE ROLE
-        "You are already assisting the noobs, why would you help them twice?",         #MORPH TO - HAS THE ROLE
-        "Nobody has seen you around lately, what are you doing?",                      #DEMORPH FROM - DOESN'T HAVE THE ROLE
+        "Go help those noobs, you are now a Patron!",                                  # MORPH TO - DOESN'T HAVE THE ROLE
+        "What about protecting the noobs? Without a Patron around they will be lost.", # DEMORPH FROM - HAS THE ROLE
+        "You are already assisting the noobs, why would you help them twice?",         # MORPH TO - HAS THE ROLE
+        "Nobody has seen you around lately, what are you doing?",                      # DEMORPH FROM - DOESN'T HAVE THE ROLE
     ],
     "Joker": [ 
         None,
@@ -494,7 +494,7 @@ LIMITED_ROLES = {
     "I was there": "*(11/27/2022 - 11/28/2022)*",
 }
 
-#not morphable roles
+# not morphable roles
 # 0 - role itself
 # 1 - doesnt have role, and wants it
 # 2 - has role, and wants it
@@ -529,7 +529,7 @@ SPECIAL_ROLES = {
         "You are not possessed...",
         "Ask someone for mana.",
     ],
-    #multiple words (ultimate chat killer) would break the script logic
+    # multiple words (ultimate chat killer) would break the script logic
     "Ultimate": [
         None,
         "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
@@ -540,8 +540,8 @@ SPECIAL_ROLES = {
 
 }
 
-#pingable roles, no custom messages
-#roles will be fetched on bot startup
+# pingable roles, no custom messages
+# roles will be fetched on bot startup
 PING_ROLES = {
     "Announcements":
         None,
@@ -595,11 +595,11 @@ I_SPY = {
 }
 
 EXTRA_ROLES = {
-    'ckr': 951424560685805588,            #chat killer
-    'possessed': 988572669521842197,      #via rig
-    'admin': 993446701090222160,          #aka Drone Master (not a discord admin)
-    'murdurator': 735225462405464125,     #discord server moderator
-    'climber': 735410759206568047,        #climber (consider adding manually verified)
+    'ckr': 951424560685805588,            # chat killer
+    'possessed': 988572669521842197,      # via rig
+    'admin': 993446701090222160,          # aka Drone Master (not a discord admin)
+    'murdurator': 735225462405464125,     # discord server moderator
+    'climber': 735410759206568047,        # climber (consider adding manually verified)
 }
 
 CHAT_KILLER = {
@@ -614,7 +614,7 @@ RIG_DATA = {
     'ghostMsg': "hehehehaw",
 }
 
-#create scold dictionary for the scold command
+# create scold dictionary for the scold command
 def getScoldDictionary(victim, author):
     ScoldDict = {
         481893862864846861:
