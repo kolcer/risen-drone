@@ -428,7 +428,7 @@ async def on_message(message):
         # yo but what if i did that but cooler
         elif "becometh the drip" in lmsg:
             if usr in THE_DRIP:
-                if THE_DRIP[usr] == 3:
+                if THE_DRIP[usr] == 2:
                     if not FUN_ROLES["Dreepy"] in usr.roles:
                         await ADD_ROLES(usr, FUN_ROLES["Dreepy"])
                         await asyncio.sleep(1)
