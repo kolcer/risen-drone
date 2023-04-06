@@ -338,8 +338,7 @@ async def on_message(message):
         elif lmsg.startswith("bd scold "):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
-                if member.name.lower() + "#" + member.discriminator == lmsg.split(" ")[3]:
-                    print("matched name")
+                if member.name.lower() + "#" + member.discriminator == lsplit[2]:
                     ScoldDict = getScoldDictionary(member, usr)
                     # Scold someone in the Dictionary (User itself included)
                     if member.id in ScoldDict:
