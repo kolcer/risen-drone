@@ -49,7 +49,7 @@ async def MorphTo(usr,role):
     if role == "Gun":
         role = "Guns"
 
-    randomChance = random.randint(0,8192) # chance to get a shiny
+    randomChance = random.randint(0,2047) # chance to get a shiny: 1/2048
 
     if role in MORPHABLE_ROLES:
         if role == "Guns":
