@@ -552,7 +552,7 @@ SPECIAL_ROLES = {
         None,
         "You can't just morph to shiny! It's rare for a reason!",
         "You are already pretty sparkly, no need to add more shine to the mix!",
-        "????????",
+        "What. you don't have the role... why are you trying to lose it???",
         "Alright, your loss! ||just kidding||",
     ],
 
