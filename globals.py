@@ -460,21 +460,21 @@ MORPHABLE_ROLES = {
         "You are already visiting a dimension, it would be very rude to get away without saying goodbye to the locals.",
         "Do you want the fun to end twice?",
      ],
-     "Drifter": [ 
+    "Drifter": [ 
         None,
         "You took the elevator and rose to the top. You are now a Drifter.",
         "I saw you taking the stairs, you are no longer a Drifter.",
         "Isn't that you traveling on the platforms?",
         "You are still taking the stairs.",
      ],
-     "Heretic": [ 
+    "Heretic": [ 
         None,
         "We have banned dark magic, but you do not seem to care. You successfully became a Heretic.",
         "The circle has made their decision. You are permanently banned from being a Heretic ever again.",
         "You cared enough to join again?",
         "You are banned from being a Heretic ever again.",
     ],
-     "Guns": [ 
+    "Guns": [ 
         None,
         "I really hate guns, but if you insist.",
         "Finally you came to your senses.",
