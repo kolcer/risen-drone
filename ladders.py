@@ -141,7 +141,7 @@ def MG_ACTION(plr, action):
                 toSend += "have taken an upwards escalator and risen one level!"
                 MG_PLAYERS[plr] += 1
             else:
-                toSend += "have hacked the game and all the thieves and heretics turn to look at them!"
+                toSend += "have hacked the game. All the thieves and heretics turn to look at them!"
                 MG_PLAYERS[plr] += 10
                 
         case "archon":
