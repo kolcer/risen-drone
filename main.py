@@ -10,6 +10,7 @@ from difflib import SequenceMatcher
 from globals import *
 from roles import *
 from ladders import *
+from fighting import *
 from rated import *
 from rigs import *
 from database import *
@@ -263,7 +264,11 @@ async def on_message(message):
     #mini game in progress
     if LADDERS['status'] != "off" and usr in MG_QUEUE and ch == LADDERS['channel']:
 
-        await LucidLaddersProcessMessage(usr,msg)
+        await LucidLaddersProcessMessage(usr, msg)
+
+    elif FG['status'] != "class-picking" and usr in FG_QUEUE:
+
+        await FightingProcessClass(usr, msg)
        
     #normal non-admin usage.
     else:
@@ -311,12 +316,12 @@ async def on_message(message):
         #start mini game
         elif lmsg == "start fight" and EXTRA_ROLES["admin"] in usr.roles:
 
-            await PlayFightingGame(usr,ch)
+            await PlayFightingGame(usr, ch)
 
         #join mini game
         elif lmsg == "join fight" and FG['status'] == "second-player" and EXTRA_ROLES["admin"] in usr.roles:
 
-            await JoinFightingGame(usr)
+            await JoinFightingGame(usr, ch)
 
         # ## All Rigs in one
         elif lsplit[0] == "cast" and lsplit[2] == "rig":

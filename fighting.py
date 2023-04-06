@@ -12,13 +12,50 @@ def FG_RESET():
     FG['currentPlayer'] = 0
     FG['tick'] = 0
 
+def FG_NEXT_PLAYER():
+    FG['currentPlayer'] += 1
+    if FG['currentPlayer'] > len(FG_QUEUE) - 1:
+        FG['currentPlayer'] = 0
+
+
+async def FightingProcessClass(usr, msg):
+    lmsg = msg.lower()
+        
+    if FG['status'] == "class-picking" and usr == MG_QUEUE[0]:
+            
+        if lmsg in SANCTUARY and lmsg not in FG_CLASSES:
+            await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
+
+        if lmsg not in SANCTUARY and lmsg not in FG_CLASSES:
+            await SEND(FG["channel"], "I gave you a list. Read it and answer accordingly!") 
+
+        FG_PLAYERS[usr] = [lmsg, None, 70]
+        await SEND(FG["channel"], f"{usr.mention} is playing as {lmsg.capitalize()}.")
+        FG["class-picked"] += 1
+
+        if FG["class-picked"] == 2:
+            toSend = "Everyone is now ready. Here are your picks:\n\n"
+
+            for user in FG_PLAYERS:
+                toSend += f"{usr.name} will be playing as {FG_PLAYERS[user][0]}.\n"
+
+            SEND(FG["channel"], toSend)
+        return
+        
+    # elif FG['status'] == "on" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:
+    #     spell = lmsg
+    #     while spell == "chameleon":
+    #         spell = random.choice(MG_SPELLS)
+    #     MG_NEXT_PLAYER()
+    #     await MG_LOOP(MG_ACTION(usr,spell))
+
+
 async def PlayFightingGame(usr, ch):
-        #mini game
- 
     if FG['status'] != "off":
         await SEND(ch, "A match is already in progress.")
         return
     else:
+        FG['channel'] = ch
         FG['status'] = "second-player"
         FG_PLAYERS[usr] = [None, None, 70] #class, status, accuracy
         FG_QUEUE.append(usr)
@@ -32,13 +69,25 @@ async def PlayFightingGame(usr, ch):
             FG_RESET()
         return
 
-async def JoinFightingGame(usr, ch):
 
+async def JoinFightingGame(usr):
     if usr in FG_PLAYERS:
         await SEND(FG['channel'], "Wait for someone else.")
         return
     else:
+        FG['status'] = "class-picking"
         FG_PLAYERS[usr] = [None, None, 70] #class, status, accuracy
         FG_QUEUE.append(usr)
-        await SEND(ch, usr.name + " is eager to battle too.")
-        return
+        await SEND(FG["channel"], usr.name + " is eager to fight too.\n")
+        await asyncio.sleep(2)
+        await SEND(FG["channel"], ClassShowcase())
+
+
+async def ClassShowcase():
+    toSend = "You may now pick your Alignment. Select between:\n\n"
+
+    for alignment in FG_CLASSES.keys():
+        toSend += "`" + str(FG_CLASSES[alignment]) + "`\n"
+        
+    return toSend
+
