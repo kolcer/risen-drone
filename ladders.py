@@ -141,10 +141,8 @@ def MG_ACTION(plr, action):
                 toSend += "have taken an upwards escalator and risen one level!"
                 MG_PLAYERS[plr] += 1
             else:
-                toSend += "have hacked the game!"
-                for i in MG_PLAYERS.keys():
-                    MG_PLAYERS[i] -= 1
-                MG_PLAYERS[plr] = LADDERS['topLevel']
+                toSend += "have hacked the game and all the thieves and heretics turn to look at them!"
+                MG_PLAYERS[plr] += 10
                 
         case "archon":
             toSend += "cast Split Event and caused players to either lost or gain an extra level."
