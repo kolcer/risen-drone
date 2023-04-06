@@ -64,7 +64,7 @@ async def PlayFightingGame(usr, ch):
         FG['currentPlayer'] = 0
         FG['tick'] = time.time()
         ourTick = FG['tick']
-        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.mention + " has decided they do not like guns anymore and wants to fight! Type 'join fight' to battle!")
+        await SEND(ch, usr.mention + " has decided they do not like guns anymore and wants to fight! Type 'join fight' to battle!")
         await asyncio.sleep(60)
         if FG['status'] == "second-player" and ourTick == FG['tick']:
             await SEND(ch, "Nobody will fight for now.")
