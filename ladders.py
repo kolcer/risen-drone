@@ -120,7 +120,7 @@ def MG_ACTION(plr, action):
         case "thief":
             victim = random.choice(MG_QUEUE)
             if victim != plr:
-                toSend += "has stolen " + victim.display_name + " place!"
+                toSend += "has stolen " + victim.display_name + "'s place!"
                 cache = MG_PLAYERS[victim]
                 MG_PLAYERS[victim] = MG_PLAYERS[plr]
                 MG_PLAYERS[plr] = cache
@@ -131,20 +131,15 @@ def MG_ACTION(plr, action):
         case "hacker":
             chances = random.randint(0, 5)
             if chances >= 0 and chances <= 2:
-                toSend += "have been kicked from the game for hacking!"
-                
-                cp = MG_QUEUE[LADDERS['currentPlayer']]
-                del MG_PLAYERS[plr]
-                MG_QUEUE.remove(plr)
-                LADDERS['currentPlayer'] = MG_QUEUE.index(cp)
-                if len(MG_QUEUE) == 1:
-                    MG_PLAYERS[cp] = LADDERS['topLevel']
+                toSend += "have teleported next to the orb instead of inside it and fell to the bottom floor!"
+                MG_PLAYERS[plr] = 0
                 
             elif chances == 3:
                 toSend += "have been frozen by a Murdurator and lost one level!"
                 MG_PLAYERS[plr] -= 1
             elif chances == 4:
-                toSend += "have had an unsuccessful hack, but was not detected!"
+                toSend += "have taken an upwards escalator and risen one level!"
+                MG_PLAYERS[plr] += 1
             else:
                 toSend += "have hacked the game!"
                 for i in MG_PLAYERS.keys():
