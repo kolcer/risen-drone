@@ -44,7 +44,7 @@ async def updateRigTracker(rigType):
 
 async def necromancer(message):
  
-    if RIG_DATA['ghostMsg'] != "":
+    if RIG_DATA['ghostMsg'] != "hehehehaw":
         await SEND(message, RIG_DATA['ghostMsg'])
     else:
         await SEND(message, "*but nobody came...*")
@@ -176,13 +176,12 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
         
         case "gun":
-            if not MORPHABLE_ROLES["Guns"] in usr.roles:
+            if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
                 await SEND(ch, "no gun imagine lmao")
                 return
             ACTIVE_RIGS['gun'] = True
             RIG_DATA['rigCaster'] = usr
-            if rigType == "gun":
-                await SEND(ch, usr.mention + " just cast Gun Rig! Watch out.")
+            await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
                 
           
             
@@ -241,10 +240,6 @@ async def CastRig(rigPick,ch,usr):
 
     if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"]:
         rigPick = "heretic"
-    
-    if rigPick == "heretic":
-        await SEND(ch, "Heretic Rig is currently disabled. The bot is restarting soon and I wouldn't want you to be stuck with the Possessed role.")
-        return
 
     if rigPick == "chameleon":
         cd = False

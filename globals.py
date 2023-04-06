@@ -115,6 +115,7 @@ LIMITED_USE_RIGS = [
     "thief",
     "spectre",
     "splicer",
+    "gun",
 ]
 
 # worst guns ever made for the gun role
@@ -377,6 +378,7 @@ RIG_COOLDOWNS = {
     "tsj": False,
     "ha": False,
     "patron": False,
+    "gun": False,
 }
 
 COOLDOWN_DESCRIPTIONS = {
