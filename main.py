@@ -223,7 +223,7 @@ async def on_message(message):
     if randomchance == 0:
         for role in usr.roles:
             if role.name.lower() in SANCTUARY:
-                eligible += 1 #are you happy? >:      
+                eligible += 1 #are you happy? >: -- yes i am
                 if eligible == 1:
                     rolename = role.name.lower()
 
