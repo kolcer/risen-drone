@@ -495,6 +495,7 @@ FUN_ROLES = {
     "Pranked the Creator": None,
     "I was there": None,
     "Zero": None,
+    "Dreepy": None,
 }
 
 LIMITED_ROLES = {
