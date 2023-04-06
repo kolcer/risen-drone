@@ -345,11 +345,7 @@ async def ExecuteGunRig(ch,usr,message):
         return
     ACTIVE_RIGS["gun"] = False
 
-    await DELETE(message)
-    asyncio.sleep(1)
-
     await ADD_ROLES(usr, MORPHABLE_ROLES['Guns'])
-    await EDIT_NICK(usr, random.choice(WORST_GUNS))
     await SEND(ch, "{usr.mention} has fallen for " + RIG_DATA['rigCaster'].mention + "'s trap! They are now a gun!")
     return
 
