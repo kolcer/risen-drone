@@ -11,6 +11,8 @@ def FG_RESET():
     FG['status'] = "off"
     FG['currentPlayer'] = 0
     FG['tick'] = 0
+    FG["class-picked"] = 0
+    FG["channel"] = None
 
 def FG_NEXT_PLAYER():
     FG['currentPlayer'] += 1
@@ -62,10 +64,10 @@ async def PlayFightingGame(usr, ch):
         FG['currentPlayer'] = 0
         FG['tick'] = time.time()
         ourTick = FG['tick']
-        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.name + " has started a fight! Type 'join fight' to battle!")
+        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.mention + " has decided they do not like guns anymore and wants to fight! Type 'join fight' to battle!")
         await asyncio.sleep(60)
         if FG['status'] == "second-player" and ourTick == FG['tick']:
-            await SEND(ch, "Nobody joined in time.")
+            await SEND(ch, "Nobody will fight for now.")
             FG_RESET()
         return
 
@@ -78,9 +80,10 @@ async def JoinFightingGame(usr):
         FG['status'] = "class-picking"
         FG_PLAYERS[usr] = [None, None, 70] #class, status, accuracy
         FG_QUEUE.append(usr)
-        await SEND(FG["channel"], usr.name + " is eager to fight too.\n")
+        await SEND(FG["channel"], usr.mention + " is eager to fight too.\n")
         await asyncio.sleep(2)
         await SEND(FG["channel"], ClassShowcase())
+        return
 
 
 async def ClassShowcase():
