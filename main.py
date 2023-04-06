@@ -314,12 +314,12 @@ async def on_message(message):
             await JoinLucidLadders(usr)
 
         #start mini game
-        elif lmsg == "start fight" and EXTRA_ROLES["admin"] in usr.roles:
+        elif lmsg == "start fight" and (EXTRA_ROLES["admin"] in usr.roles or usr.id == 894573836366934047):
 
             await PlayFightingGame(usr, ch)
 
         #join mini game
-        elif lmsg == "join fight" and FG['status'] == "second-player" and EXTRA_ROLES["admin"] in usr.roles:
+        elif lmsg == "join fight" and FG['status'] == "second-player" and (EXTRA_ROLES["admin"] in usr.roles or usr.id == 894573836366934047):
 
             await JoinFightingGame(usr, ch)
 
