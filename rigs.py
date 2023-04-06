@@ -340,12 +340,12 @@ async def ExecuteSpectreRig(ch,usr,message):
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your Message disappear with a 50% chance.")
     return
 
-async def ExecuteGunRig(ch,usr,message):
+async def ExecuteGunRig(ch,usr):
     if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles or MORPHABLE_ROLES['Guns'] in usr.roles:
         return
     ACTIVE_RIGS["gun"] = False
 
-    await ADD_ROLES(usr, MORPHABLE_ROLES['Guns'])
+    await MorphTo(usr, "Gun")
     await SEND(ch, "{usr.mention} has fallen for " + RIG_DATA['rigCaster'].mention + "'s trap! They are now a gun!")
     return
 

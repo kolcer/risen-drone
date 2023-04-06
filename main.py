@@ -332,7 +332,7 @@ async def on_message(message):
         # Gun Rig Active
         elif ACTIVE_RIGS["gun"]:
 
-            await ExecuteGunRig(ch,usr,message)
+            await ExecuteGunRig(ch,usr)
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
