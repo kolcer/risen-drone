@@ -6,6 +6,7 @@ SERVER_DATA = {
 }
 
 # VARIABLE ARRAYS
+EX_CLIMBERS = []
 LOSERS = []
 MG_QUEUE = []
 # if game breaks there must be 3 people telling the bot to reset
