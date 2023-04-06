@@ -22,13 +22,14 @@ def FG_NEXT_PLAYER():
 
 async def FightingProcessClass(usr, msg):
     lmsg = msg.lower()
+    print("here")
         
     if FG['status'] == "class-picking" and usr == MG_QUEUE[0]:
-            
-        if lmsg in SANCTUARY and lmsg not in FG_CLASSES:
+        print("here")
+        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys():
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
 
-        if lmsg not in SANCTUARY and lmsg not in FG_CLASSES:
+        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys():
             await SEND(FG["channel"], "I gave you a list. Read it and answer accordingly!") 
 
         FG_PLAYERS[usr] = [lmsg, None, 70]
