@@ -90,7 +90,7 @@ def ClassShowcase():
     toSend = "You may now pick your Alignment. Select between:\n\n"
 
     for alignment in FG_CLASSES.keys():
-        toSend += "`" + str(FG_CLASSES[alignment]) + "`\n"
+        toSend += "`" + str(alignment.capitalize()) + "`\n"
         
     return toSend
 
