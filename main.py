@@ -266,7 +266,7 @@ async def on_message(message):
 
         await LucidLaddersProcessMessage(usr, msg)
 
-    elif FG['status'] != "off" and FG['status'] != "second-player" and usr in FG_QUEUE:
+    elif FG['status'] != "off" and FG['status'] != "second-player" and usr in FG_QUEUE and ch == FG["channel"]:
 
         await FightingProcessClass(usr, msg)
        
