@@ -16,6 +16,7 @@ FIX_BOT = []
 LAST_RIG = {}
 RIG_SPAMMERS = {}
 SPLICER_FANS = {}
+THE_DRIP = {}
 MSG_SENT = {}
 ARTISTS = {}
 QUIZZERS = {}
