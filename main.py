@@ -21,6 +21,7 @@ from quiz import *
 # Mosty for the gun role nick change prevention
 intents = discord.Intents.default()
 intents.members = True
+intents.message_content = True
 client = discord.Client(intents=intents)
 
 #print tips
