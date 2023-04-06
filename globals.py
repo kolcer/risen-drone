@@ -656,7 +656,9 @@ def getScoldDictionary(victim, author):
 
 #Fighting Game global variables
 FG = {
-    'status': 'off',
+    "status": "off",
+    "currentPlayer": 0,
+    "tick": 0,
 }
 
 FG_QUEUE = []
@@ -713,4 +715,4 @@ FG_CLASSES = {
                ["special", 10, 15, ["attack", "accuracy"], 30, 5, 2]
                },
 }
-FG_CURRENT = FG_CLASSES
+CURRENT_CLASSES = FG_CLASSES
