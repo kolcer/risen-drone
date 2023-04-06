@@ -44,8 +44,10 @@ async def FightingProcessClass(usr, msg):
 
             for user in FG_PLAYERS:
                 toSend += f"{usr.name} will be playing as {FG_PLAYERS[user][0]}.\n"
+            
+            toSend += "We will now begin."
 
-            SEND(FG["channel"], toSend)
+            await SEND(FG["channel"], toSend)
         return
         
     # elif FG['status'] == "on" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:
