@@ -629,6 +629,8 @@ def getScoldDictionary(victim, author):
             victim.mention + ", I am EXTREMELY disappointed in you. You know why. I do not forget.",
         886615047407812678:
             victim.mention + ", I am IMMEASURABLY disappointed in you. We all know why. I will never forget that.",
+        805356486960087050:
+            victim.mention + ", I am so disappointed in you... why did you try bypassing? We all knew it wasn't going to work.",
         author.id:
             author.mention + " are you sad?",
     }
