@@ -586,11 +586,15 @@ I_SPY = {
         "I spy with my little eye something beginning with the letter **S**.",
         "I spy with my little eye something beginning with the letter **M**.",
         "I spy with my little eye something beginning with the letter **E**.",
+        "I spy with my little eye something beginning with the letter **H**.",
+        "I spy with my little eye something beginning with the letter **A**.",
     ],
     'answers':[
         "stairs",
         "more stairs",
         "even more stairs",
+        "how many stairs",
+        "all the stairs",
     ],
 }
 
