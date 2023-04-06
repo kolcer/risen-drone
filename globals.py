@@ -297,6 +297,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ['you', 'suck'],
     "I did actually.":
         ['who', 'asked'],
+    "No lmao":
+        ['give', 'drone', 'master']
 }
 
 # first word is required and any of the pool of rest of the words
@@ -347,7 +349,7 @@ COOLDOWN_DURATION = {
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
-    "gun": 600,
+    "gun": 300,
     "archon": 240,    
     "heretic": 60,
     "wicked": 60,    
