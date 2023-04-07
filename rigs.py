@@ -191,7 +191,7 @@ async def Rig(rigType, ch, usr):
     while theCooldown > 0:
         await asyncio.sleep(2)
         theCooldown -= 2
-        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Command is on cooldown for* `{theCooldown}` *seconds.*")
+        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown for* `{theCooldown}` *seconds.*")
     
     # for i in range(COOLDOWN_DURATION[rigType], 0, -1):
     #     await asyncio.sleep(2)
