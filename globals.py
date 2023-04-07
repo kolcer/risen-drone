@@ -516,6 +516,7 @@ FUN_ROLES = {
     "I was there": None,
     "Zero": None,
     "Dreepy": None,
+    "Wise": None,
 }
 
 LIMITED_ROLES = {

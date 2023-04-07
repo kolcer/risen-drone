@@ -546,7 +546,14 @@ _[alignment]_ **trivia**
         
         # Get the drone's wisdom
         elif lmsg == "drone of wisdom":
-            await SEND(ch, f"||{random.choice(WISDOM)}||")
+            if random.randint(1, 100) > 1:
+                await SEND(ch, f"||{random.choice(WISDOM)}||")
+                return
+            else:
+                await SEND(ch, f"||Congratulations! You have found the secret wisdom of the drone, earning you the “Wise” role.||")
+                await asyncio.sleep(2)
+                await ADD_ROLES(usr, FUN_ROLES['Wise'])
+                return
 
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
             if lmsg == I_SPY['answers'][I_SPY['status']]: 
