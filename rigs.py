@@ -51,6 +51,7 @@ async def necromancer(message):
 
 
 async def Rig(rigType, ch, usr):
+    msgCounting = None
  
     if rigType.lower() == "splicer":
         if not FUN_ROLES["Splicer"] in usr.roles:
@@ -92,7 +93,7 @@ async def Rig(rigType, ch, usr):
                    # return
             await ADD_ROLES(usr, EXTRA_ROLES['possessed'])
             await asyncio.sleep(1)
-            await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
+            msgCounting = await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
                        "\nMaybe someone could give you some Mana?")
             await asyncio.sleep(60)
             await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
@@ -104,12 +105,12 @@ async def Rig(rigType, ch, usr):
                     role_list.append(role)
             #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
             await usr.remove_roles(*role_list)       
-            await SEND(ch, "You cast Wicked Rig but forgot to unlock Devil rank first and ended up purging all your roles!")
+            msgCounting = await SEND(ch, "You cast Wicked Rig but forgot to unlock Devil rank first and ended up purging all your roles!")
          
         case "drifter":
             im = usr.display_name[::-1]
             await EDIT_NICK(usr, im)
-            await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
+            msgCounting = await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
             
         case "archon":
             if ch.name not in CHANNELS:
@@ -120,6 +121,7 @@ async def Rig(rigType, ch, usr):
             while ch2 == ch or ch2.name == "bot-testing":
                 ch2 = random.choice(list(CHANNELS.values()))
             firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
+            msgCounting = firstmsg
             await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
             await asyncio.sleep(3)
             secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
@@ -133,7 +135,7 @@ async def Rig(rigType, ch, usr):
             for i in range(8):
                 temp = str(random.randint(0, 1))
                 im += temp
-            await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd#############")
+            msgCounting = await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd#############")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
             if usr.display_name == '00000000':
@@ -146,7 +148,7 @@ async def Rig(rigType, ch, usr):
             im = ''.join(sorted(usr.display_name))
             await EDIT_NICK(usr, im)
             await asyncio.sleep(1)
-            await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
+            msgCounting = await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
         
         case "patron":
             rigActive = False
@@ -158,7 +160,7 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, "It would be useless casting this spell now.")
                 RIG_COOLDOWNS["patron"] = False
                 return
-            await SEND(ch, "You cast Patron Rig and restored the Server!")
+            msgCounting = await SEND(ch, "You cast Patron Rig and restored the Server!")
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
@@ -167,13 +169,13 @@ async def Rig(rigType, ch, usr):
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
             if rigType == "joker":
-                await SEND(ch, usr.mention + " just cast Joker Rig! Someone will be in for a treat.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Joker Rig! Someone will be in for a treat.")
             elif rigType == "thief":
-                await SEND(ch, usr.mention + " just cast Thief Rig! Hold tight your belongings.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Thief Rig! Hold tight your belongings.")
             elif rigType == "spectre":
-                await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
             elif rigType == "splicer":
-                await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
         
         case "gun":
             if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
@@ -181,11 +183,15 @@ async def Rig(rigType, ch, usr):
                 return
             ACTIVE_RIGS['gun'] = True
             RIG_DATA['rigCaster'] = usr
-            await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
+            msgCounting = await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
                 
-          
+    msgCountingContent = msgCounting.content
+    
+    for i in range(COOLDOWN_DURATION[rigType], 0, -1):
+        await asyncio.sleep(1)
+        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\nCommand is on cooldown for {i} seconds.")
             
-    await asyncio.sleep(COOLDOWN_DURATION[rigType])
+    # await asyncio.sleep(COOLDOWN_DURATION[rigType])
 
     if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False

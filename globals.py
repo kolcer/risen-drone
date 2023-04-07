@@ -222,7 +222,7 @@ WISDOM = [
     "If you're feeling lost and unsure about life, just remember that you're not alone. Most of us have no idea what we're doing either.",
     "Remember, the key to success is to always have a backup plan. And a backup plan for your backup plan. And a backup plan for that backup plan, just in case.",
     "If you're feeling stressed out and overwhelmed, just remember that the universe is under no obligation to make sense to you.",
-    "Not having a good day? Just remember that tomorrow is a new day. But it's probably going to be disappointing just as much as it did today.",
+    "Not having a good day? Just remember that tomorrow is a new day. But it's probably going to be disappointing just as much as it was today.",
     # Self Ironic Responses
     "The only thing I'm really wise about is pretending to be wise. It's a gift, really.",
     "I may be a drone of wisdom, but let's be real: I'm just a robot spitting out random phrases. Don't take me too seriously.",
