@@ -22,8 +22,7 @@
 #    ▒▒████                    ████                    ████      
 #    ████▒▒                  ████████                  ██████    
 #  ██████                      ▒▒▒▒                      ████░░  
-#  ████ don't bother adding spaces after a # on this one  ████░░
-#▒▒████ :troll:      also work in progress                 ████░░
+#  ████          work in progress                          ████░░
 #██████  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ░░░░░░░░░░░░░░░░▒▒██████
 #████████████████████████████████████████████████████████████████
 #▓▓████████████████████████████████████████████████████████████▓▓
@@ -36,18 +35,19 @@ from globals import *
 from rated import *
 
 #default stats
-NEW_PLAYER = [None, 200, 100, None, 0] #[0]class, [1]health, [2]attack, [3]turns, [4]charges
+NEW_PLAYER = [None, 200, 100, 0] #[0]class, [1]health, [2]attack, [3]charges
 
 #pre-attack checks
 TICK = ["poison", "h. poison"]
 AVOID = ["dodge"]
 
 #players with modified stats
-GOOD_STATUSES = {} #usr: [0]status, [1]stat, [2]buff/debuff, [3]damage/amount, [4]turns
-BAD_STATUSES = {}  #usr: [0]status, [1]stat, [2]buff/debuff, [3]damage/amount, [4]turns
-STATUSES_EXAMPLES = {"roibrari#2287": ["poison", None, None, 15, 2],
-                    "sleazel#0820": ["h. poison", "accuracy", "debuff", 15, 2],
-                    "frfr#0431": ["shield", None, None, 50, 3],
+GOOD_STATUSES = {}   #usr:             [0]status,    [1]stat,     [2]buff/debuff,  [3]damage/amount,  [4]turns
+BAD_STATUSES = {}    #usr:             [0]status,    [1]stat,     [2]buff/debuff,  [3]damage/amount,  [4]turns
+STATUSES_EXAMPLES = {"roibrari#2287": ["poison",     None,        None,            15,                2],
+                    "sleazel#0820":   ["h. poison",  "accuracy",  "debuff",        15,                2],
+                    "frfr#0431":      ["shield",     None,        None,            50,                3],
+                    "cashier#6099":   [None,         "damage",    "buff",          30,                2],
                     }
 
 def FG_RESET():
