@@ -186,10 +186,16 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
                 
     msgCountingContent = msgCounting.content
-    
-    for i in range(COOLDOWN_DURATION[rigType], 0, -1):
+    theCooldown = COOLDOWN_DURATION[rigType]
+
+    while theCooldown > 0:
         await asyncio.sleep(2)
-        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\nCommand is on cooldown for {i} seconds.")
+        theCooldown -= 2
+        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Command is on cooldown for* `{theCooldown}` *seconds.*")
+    
+    # for i in range(COOLDOWN_DURATION[rigType], 0, -1):
+    #     await asyncio.sleep(2)
+    #     await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\nCommand is on cooldown for `{i}` seconds.")
             
     # await asyncio.sleep(COOLDOWN_DURATION[rigType])
 
