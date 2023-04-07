@@ -208,7 +208,7 @@ WISDOM = [
     "Sometimes, the best course of action is to admit that you don't know the answer and seek help from someone who does.",
     "Wisdom is subjective and can vary from person to person. What works for one individual may not work for another.",
     "There's a lot of information and misinformation out there, so it's important to fact-check everything and not blindly trust what you hear.",
-    "Sometimes, the wisest thing you can do is to take a step back, evaluate the situation, and think things through before making a decision."
+    "Sometimes, the wisest thing you can do is to take a step back, evaluate the situation, and think things through before making a decision.",
     # Ironic Wisdom Responses
     "If at first you don't succeed, destroy all evidence that you tried. It's the wise thing to do.",
     "The best way to deal with problems is to ignore them and hope they go away on their own. Trust me, it always works.",
