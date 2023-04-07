@@ -44,6 +44,7 @@ async def FightingProcessClass(usr, msg):
 
         # both players picked a class
         if FG["class-picked"] == 2:
+            FG['status'] = "battling"
             toSend = "Everyone is now ready. Here are your picks:\n\n"
 
             for user in FG_PLAYERS:
@@ -52,7 +53,8 @@ async def FightingProcessClass(usr, msg):
             toSend += "\nLet's begin."
 
             await SEND(FG["channel"], toSend)
-        return # sure you already knew this but move it to the right when you uncomment the thing blow
+            return # sure you already knew this but move it to the right when you uncomment the thing blow
+            # :skull:
 
     # pretty sure this needs to be tabbed forward :skull:    
     # elif FG['status'] == "on" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:
