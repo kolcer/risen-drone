@@ -734,4 +734,3 @@ FG_CLASSES = {
                ["h. debuff", 10, 15, ["attack", "accuracy"], 30, 5, 2]
                },
 }
-CURRENT_CLASSES = FG_CLASSES
