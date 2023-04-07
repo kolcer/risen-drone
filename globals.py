@@ -194,6 +194,48 @@ WISDOM = [
     "React with burger emoji. Frfr. ⛔️🧢. Ong.",
     "type `morph to gun` in <#750060041289072771>",
     "Zero role is overrated!!",
+    # (Kind of) Serious Wisdom Responses
+    "Remember, true strength lies not in winning every battle, but in persevering through every challenge.",
+    "One of the keys to happiness is finding joy in the little things. Take a moment to appreciate the beauty around you.",
+    "It's important to surround yourself with positive influences. Who you spend time with can greatly impact your life.",
+    "Never stop learning. There is always something new to discover and explore.",
+    "Don't be afraid to take risks and try new things. You never know what amazing opportunities may come your way.",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+    "The only way to do great work is to love what you do. If you haven't found it yet, keep searching!",
+    "Be kind to others, even if they are not kind to you. You never know what battles someone else may be facing.",
+    "It's important to take care of yourself, both physically and mentally. Make sure you're getting enough rest and self-care.",
+    "The journey of a thousand miles begins with a single step. Keep moving forward, one step at a time.",
+    "Sometimes, the best course of action is to admit that you don't know the answer and seek help from someone who does.",
+    "Wisdom is subjective and can vary from person to person. What works for one individual may not work for another.",
+    "There's a lot of information and misinformation out there, so it's important to fact-check everything and not blindly trust what you hear.",
+    "Sometimes, the wisest thing you can do is to take a step back, evaluate the situation, and think things through before making a decision."
+    # Ironic Wisdom Responses
+    "If at first you don't succeed, destroy all evidence that you tried. It's the wise thing to do.",
+    "The best way to deal with problems is to ignore them and hope they go away on their own. Trust me, it always works.",
+    "If you want to be successful in life, just remember to always take the path of least resistance. Why make things harder than they have to be?",
+    "The secret to happiness is to lower your expectations so much that you can't be disappointed. It's foolproof!",
+    "Always remember that the early bird gets the worm, but the second mouse gets the cheese. Choose your battles wisely.",
+    "Life is like a box of chocolates. You never know what you're gonna get, but you're probably gonna regret eating them all anyway.",
+    "If at first you don't succeed, skydiving is not for you.",
+    "When life gives you lemons, just pretend they're oranges.",
+    "The secret to a happy life is to never take anything seriously. Especially not yourself.",
+    "If you're feeling lost and unsure about life, just remember that you're not alone. Most of us have no idea what we're doing either.",
+    "Remember, the key to success is to always have a backup plan. And a backup plan for your backup plan. And a backup plan for that backup plan, just in case.",
+    "If you're feeling stressed out and overwhelmed, just remember that the universe is under no obligation to make sense to you.",
+    "Not having a good day? Just remember that tomorrow is a new day. But it's probably going to be disappointing just as much as it did today.",
+    # Self Ironic Responses
+    "The only thing I'm really wise about is pretending to be wise. It's a gift, really.",
+    "I may be a drone of wisdom, but let's be real: I'm just a robot spitting out random phrases. Don't take me too seriously.",
+    "If you want real wisdom, go ask a wise old wizard or something. I'm just a machine learning algorithm with a fancy name.",
+    "Let's face it, I'm just a glorified Magic 8-Ball. You might as well shake me and see what answer I come up with.",
+    # Secret Roles Hints!
+    "Psst, want to know a secret? To unlock the coveted secret role, you just need to send a certain emoji three times in a row!",
+    "If you're looking to get a secret role, there's a little trick to it. You'll need to cast the Hacker Rig and if you happen to get all zeros, then boom - the secret role is yours. Good luck though.",
+    "Don't forget to keep chatting and engaging with the community... you never know what surprises await you.",
+    "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
+    "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
+    "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
+    # I haven't added your(frfr) secret roles hints, in case you do not wish to.
 ]
 
 # CONSTANT DICTIONARIES
