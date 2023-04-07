@@ -7,7 +7,7 @@ from database import *
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
-        if roles.name in IMMUNITY_ROLES or roles.name == "Guns":
+        if roles.name in IMMUNITY_ROLES:
             return True
     if usr1 == usr2:
         return True
