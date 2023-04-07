@@ -1,3 +1,5 @@
+### rolo you forgot to make reset bot reset minigames ###
+
 import random
 import time
 import asyncio
