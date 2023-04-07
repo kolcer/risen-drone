@@ -44,9 +44,9 @@ IMPOSTOR_WARNINGS = [
     "*Reversion of your actions is currently in progress...*",
     "I put an end to this buffoonery.", "Someone had to do it.",
     "We are through here.", "My disappointment is immeasurable.",
-    "I do not speak like that.", "I am not fooled."
-    "You can never copy me, nerd."
-    "Good luck on copying me."
+    "I do not speak like that.", "I am not fooled.",
+    "You can never copy me, nerd.",
+    "Good luck on copying me.",
 ]
 
 IMPOSTOR_NICKS = [
@@ -88,7 +88,7 @@ REVIVE_CHAT = [
     "If you could add one new feature to Crazy Stairs, what would it be?",
     "Which alignment do you think is the most overpowered?",
     "Have you ever played Crazy Stairs with a group of friends? How did it go?",
-    "What's the longest game of Crazy Stairs you've ever played?"
+    "What's the longest game of Crazy Stairs you've ever played?",
     "If you could change one thing about the rules of Crazy Stairs, what would it be?",
     "Have you ever won a game of Crazy Stairs by a lucky coincidence?",
     "Do you think Crazy Stairs is more luck-based or skill-based? And why?",
@@ -266,6 +266,10 @@ REACT_TRIGGERS = {
         "among",
     "🧢":
         "best",
+    "👁":
+        "food",
+    "🍔":
+        "eye",
 }
 
 # all words need to be present for this trigger to occur
@@ -300,7 +304,7 @@ MULTIPLE_WORD_TRIGGERS = {
     "I did actually.":
         ['who', 'asked'],
     "No lmao":
-        ['give', 'drone', 'master']
+        ['give', 'drone', 'master'],
 }
 
 # first word is required and any of the pool of rest of the words
@@ -335,7 +339,7 @@ COOLDOWN_SELECT = {
     "spectre": "tsj",
     "joker": "tsj",
     "splicer": "tsj",
-    "gun": "tsj",
+    "gun": "gun",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -583,7 +587,7 @@ QUIZ = {
     "cturn" : 1,
     "rolls" : [0],
     "rng" : 0,
-    "scores" : "**TOTAL POINTS**\n"
+    "scores" : "**TOTAL POINTS**\n",
 }
 
 LADDERS = {
@@ -652,7 +656,7 @@ def getScoldDictionary(victim, author):
     }
     return ScoldDict
 
-#Fighting Game global variables
+# Fighting Game global variables
 FG = {
     "status": "off",
     'channel': None,
