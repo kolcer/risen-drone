@@ -190,11 +190,11 @@ async def Rig(rigType, ch, usr):
     msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown and can be cast again* `<t:{time.time() + theCooldown}:R>`")
+    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown and can be cast again* `<t:{round(time.time() + theCooldown)}:R>`")
 
     await asyncio.sleep(theCooldown)
 
-    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig cooldown is over.*")
+    await EDIT_MESSAGE(msgCounting, msgCountingContent)
 
     if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False
