@@ -666,7 +666,7 @@ FG = {
 }
 
 FG_QUEUE = []
-FG_PLAYERS = {} #user:class,status,accuracy
+FG_PLAYERS = {} #user:class,status,accuracy,charge
 
 # [0]attack    -> [1]min damage,            [2]max damage
 # [0]shield    -> [1]percentage protection, [2]number of turns
@@ -703,7 +703,7 @@ FG_CLASSES = {
                ["h. poison", 10, 20, 10, 2, "precision", 40, 2],
 
                "death coil": 
-               ["special", 20, 30, 10, 15]
+               ["danger", 20, 30, 10, 15]
                },
 
     "joker": {"prankster's glee": 
@@ -716,7 +716,7 @@ FG_CLASSES = {
                ["debuff", "accuracy", 30],
 
                "jester's gambit": 
-               ["special", 10, 15, ["attack", "accuracy"], 30, 5, 2]
+               ["h. debuff", 10, 15, ["attack", "accuracy"], 30, 5, 2]
                },
 }
 CURRENT_CLASSES = FG_CLASSES
