@@ -192,7 +192,7 @@ WISDOM = [
     "I was going to say something... but someone already said it. Now figure out who, what, and when they said it!",
     "Wisdom found by playing this --> https://www.roblox.com/games/2418401851/Crazy-Stairs-VR",
     "React with burger emoji. Frfr. ⛔️🧢. Ong.",
-    "type `morph to gun` in <#750060041289072771>",
+    "Type `morph to gun` in <#750060041289072771>",
     "Zero role is overrated!!",
     # (Kind of) Serious Wisdom Responses
     "Remember, true strength lies not in winning every battle, but in persevering through every challenge.",
@@ -238,7 +238,7 @@ WISDOM = [
     "Cheating is not necessarily bad...",
     "You know, drone masters can give the secret roles by typing |assign...",
     "Cheating is based.",
-    "if you go to this message, you can achieve a pretty drip result by following the instructions...\nhttps://discord.com/channels/624227331720085528/750060041289072771/1093589933333164162",
+    "If you go to this message, you can achieve a pretty drip result by following the instructions...\nhttps://discord.com/channels/624227331720085528/750060041289072771/1093589933333164162",
     "Wisdom can grant roles.",
     # Suggestions from community
     "y - RealBlanket#7739"
