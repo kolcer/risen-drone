@@ -188,7 +188,7 @@ async def Rig(rigType, ch, usr):
     msgCountingContent = msgCounting.content
     
     for i in range(COOLDOWN_DURATION[rigType], 0, -1):
-        await asyncio.sleep(1)
+        await asyncio.sleep(2)
         await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\nCommand is on cooldown for {i} seconds.")
             
     # await asyncio.sleep(COOLDOWN_DURATION[rigType])
