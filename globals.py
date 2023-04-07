@@ -193,6 +193,7 @@ WISDOM = [
     "Wisdom found by playing this --> https://www.roblox.com/games/2418401851/Crazy-Stairs-VR",
     "React with burger emoji. Frfr. ⛔️🧢. Ong.",
     "type `morph to gun` in <#750060041289072771>",
+    "Zero role is overrated!!",
 ]
 
 # CONSTANT DICTIONARIES
