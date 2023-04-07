@@ -512,6 +512,9 @@ _[alignment]_ **tip**
 _[alignment]_ **trivia**
 ➡️ Show chosen alignment trivia
 
+**drone of wisdom**
+➡️ Get the drone's wisdom
+
 **cast** _[alignment]_ **rig**
 ➡️ A fun command to mess around in the server
 
@@ -540,6 +543,11 @@ _[alignment]_ **trivia**
 **Extra alignments** (cannot be morphed into): Possessed, None, Architect.
 **Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
 ''')
+        
+        # Get the drone's wisdom
+        elif lmsg == "drone of wisdom":
+            await SEND(ch, f"||{random.choice(WISDOM)}||")
+
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
             if lmsg == I_SPY['answers'][I_SPY['status']]: 
                 next = I_SPY['status'] + 1

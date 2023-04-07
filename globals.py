@@ -182,6 +182,19 @@ MG_SPELLS = [
     "chameleon",
 ]
 
+WISDOM = [
+    "You are NOT the gamer!",
+    "Sir, we found the gamer. They're right there ^",
+    "You do not deserve my wisdom.",
+    "If are hungry... eat food.",
+    "There are many minigames that you can play. I won't play any of them with you.",
+    "The best game on roblox is Crazy Stairs.",
+    "I was going to say something... but someone already said it. Now figure out who, what, and when they said it!",
+    "Wisdom found by playing this --> https://www.roblox.com/games/2418401851/Crazy-Stairs-VR",
+    "React with burger emoji. Frfr. ⛔️🧢. Ong.",
+    "type `morph to gun` in <#750060041289072771>",
+]
+
 # CONSTANT DICTIONARIES
 
 # channels where bot is allowed to post  
@@ -269,7 +282,7 @@ REACT_TRIGGERS = {
     "👁":
         "food",
     "🍔":
-        "drone react with burger",
+        "react with burger",
 }
 
 # all words need to be present for this trigger to occur
