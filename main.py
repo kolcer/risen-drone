@@ -247,6 +247,7 @@ async def on_message(message):
             FIX_BOT.clear()
             FORCE_CLOSE_EVENT()
             MG_RESET()
+            FG_RESET()
 
             for rig in ACTIVE_RIGS:
                 ACTIVE_RIGS[rig] = False 
