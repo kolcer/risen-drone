@@ -1,3 +1,5 @@
+import time
+
 from globals import *
 from rated import *
 from roles import *
@@ -188,16 +190,11 @@ async def Rig(rigType, ch, usr):
     msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    while theCooldown > 0:
-        await asyncio.sleep(2)
-        theCooldown -= 2
-        await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown for* `{theCooldown}` *seconds.*")
-    
-    # for i in range(COOLDOWN_DURATION[rigType], 0, -1):
-    #     await asyncio.sleep(2)
-    #     await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\nCommand is on cooldown for `{i}` seconds.")
-            
-    # await asyncio.sleep(COOLDOWN_DURATION[rigType])
+    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown for* `<t:{time.time() + theCooldown}:F>` *seconds.*")
+
+    await asyncio.sleep(theCooldown)
+
+    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig can now be cast again.*")
 
     if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False
