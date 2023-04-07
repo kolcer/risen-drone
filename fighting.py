@@ -43,11 +43,11 @@ TICK = ["poison", "h. poison"]
 AVOID = ["dodge"]
 
 #players with modified stats
-GOOD_STATUSES = {} #usr: [1]status, [2]stat, [3]buff/debuff, [4]damage, [5]turns
-BAD_STATUSES = {}  #usr: [1]status, [2]stat, [3]buff/debuff, [4]damage, [5]turns
+GOOD_STATUSES = {} #usr: [0]status, [1]stat, [2]buff/debuff, [3]damage/amount, [4]turns
+BAD_STATUSES = {}  #usr: [0]status, [1]stat, [2]buff/debuff, [3]damage/amount, [4]turns
 STATUSES_EXAMPLES = {"roibrari#2287": ["poison", None, None, 15, 2],
-                    "sleazel#0820": ["buff", "accuracy", "buff", None, 1],
-                    "frfr#0431": ["shield", "accuracy", "buff", None, 1],
+                    "sleazel#0820": ["h. poison", "accuracy", "debuff", 15, 2],
+                    "frfr#0431": ["shield", None, None, 50, 3],
                     }
 
 def FG_RESET():
