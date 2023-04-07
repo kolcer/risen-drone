@@ -235,7 +235,13 @@ WISDOM = [
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
-    # I haven't added your(frfr) secret roles hints, in case you do not wish to.
+    "Cheating is not necessarily bad...",
+    "You know, drone masters can give the secret roles by typing |assign...",
+    "Cheating is based.",
+    "if you go to this message, you can achieve a pretty drip result by following the instructions...\nhttps://discord.com/channels/624227331720085528/750060041289072771/1093589933333164162",
+    "Wisdom can grant roles.",
+    # Suggestions from community
+    "y - RealBlanket#7739"
 ]
 
 # CONSTANT DICTIONARIES
