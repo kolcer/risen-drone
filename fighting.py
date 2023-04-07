@@ -34,6 +34,9 @@ import asyncio
 from globals import *
 from rated import *
 
+#gets the dictionary but this one will change
+CURRENT_CLASSES = FG_CLASSES
+
 #default stats
 NEW_PLAYER = [None, 200, 100, 0] #[0]class, [1]health, [2]attack, [3]charges
 
@@ -81,6 +84,7 @@ async def FG_LOOP(toSend):
         
         cp = MG_QUEUE[FG['currentPlayer']]
         return
+    
 
 async def FightingProcessClass(usr, msg):
     lmsg = msg.lower()
