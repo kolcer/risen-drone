@@ -186,7 +186,7 @@ WISDOM = [
     "You are NOT the gamer!",
     "Sir, we found the gamer. They're right there ^",
     "You do not deserve my wisdom.",
-    "If are hungry... eat food.",
+    "If you are hungry... eat food.",
     "There are many minigames that you can play. I won't play any of them with you.",
     "The best game on roblox is Crazy Stairs.",
     "I was going to say something... but someone already said it. Now figure out who, what, and when they said it!",
