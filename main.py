@@ -382,7 +382,7 @@ async def on_message(message):
         elif lmsg.startswith("bd show"):
             target = None
             if lmsg == "bd show profile":
-                targetName = f"{usr.name}#{usr.discriminator}"
+                targetName = f"{usr.name}#{usr.discriminator}".lower()
             elif lmsg.endswith("profile"):
                 cleanMsg = lmsg.replace(" profile", "")
                 targetName = cleanMsg.split(" ", 2)[2]
