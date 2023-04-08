@@ -191,9 +191,6 @@ async def on_message(message):
                     await ADD_REACTION(message,v)
                     return
         return
-    
-    if not EXTRA_ROLES['admin'] in usr.roles:
-        return
 
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
