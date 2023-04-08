@@ -143,6 +143,7 @@ async def on_message_delete(message):
 async def on_reaction_add(reaction, user):
 
     await SplicerRig(reaction,user)
+    print(reaction.emoji)
 
     if (reaction.emoji == "<:csSleazelApproves:791393163343560715>" or reaction.emoji == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861:
         await reaction.remove(user)
