@@ -392,6 +392,10 @@ async def on_message(message):
                     target = mem
                     break
 
+            if target == None:
+                await SEND(ch, "I didn't find anyone. Sorry.")
+                return
+
             messages = ""
             profilemsg = str(target.display_name) + "'s roles:\n\n"
 
