@@ -669,7 +669,7 @@ Delete: Deletes the specified quiz question by index.
             # how many wisdoms are there
             if lmsg.startswith("wisdoms"):
                 print("showing wisdoms?")
-                await SEND(f"I have {len(WISDOM)} wisdoms.")
+                await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
                 return
 
         #-----admin commands that require TWO inputs-----
