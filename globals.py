@@ -226,7 +226,7 @@ WISDOM = [
     "The only thing I'm really wise about is pretending to be wise. It's a gift, really. And actually being wise, of course.",
     "I may be a drone of wisdom, but let's be real: among us lol funny crewmate impostor dudes. React to this message with a burrito.",
     "If you want my wisdom, you must eat 42 double creme oreos. Then ask me for my wisdom.",
-    "Let's face it, I'm just a glorified Magic 64-Ball. Step on me uwu *giggles and wags tail*. In game. Don't even try.",
+    "Let's face it, I'm just a glorified Magic 64-Ball. uwu. Giggles and wags tail. In game. Don't even try.",
     # Secret Role Hints!
     "Psst, want to know a secret? To unlock one of the coveted secret roles, you just need to send a certain emoji four times in a row!",
     "If you're looking to get a secret role, there's a little trick to it. You'll need to cast the Hacker Rig and if you happen to get all zeros, then boom - the secret role is yours. Good luck though. 1/256",
