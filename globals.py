@@ -242,6 +242,9 @@ WISDOM = [
     # Suggestions from community
     "y - RealBlanket#7739",
     "nah - Amadán#9008",
+    "Balls - Chugnus Amognus",
+    "I am unoriginal and cannot come up with a good quote - Xeron#7149",
+    "Zero role does not exist - frfr#0431",
 ]
 
 # CONSTANT DICTIONARIES
