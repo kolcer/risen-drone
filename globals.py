@@ -574,6 +574,7 @@ FUN_ROLES = [
 
 APPROVED_ROLES = {
     "Splicer": None,
+    "Role Hunter": None,
 }
 
 FUN_LISTS = {

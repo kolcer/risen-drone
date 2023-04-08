@@ -846,7 +846,33 @@ Delete: Deletes the specified quiz question by index.
                     await SEND(ch, "The role is gone.")
                 except Exception as e:
                     await SEND(ch, e)
+                return 
+            
+            #purge any role
+            if lmsg.startswith("purge drole", 1):
+                if third in APPROVED_ROLES:
+                    neededrole = APPROVED_ROLES[third]
+                else:
+                    await SEND(ch, "You cannot obliterate this role through my commands.")
+                    return
+                    
+                await PURGE_ROLES(neededrole)
+                await asyncio.sleep(1)
+                await SEND(ch, "The Discord role is gone.")
                 return  
+            
+            #create a new role with name and color 
+            if lmsg.startswith("ndr", 1):
+                try:
+                    newrole = await NEW_ROLE(SERVER_DATA['server'], lmsgsplit[1], third)
+                except Exception as e:
+                    await SEND(ch, e)
+                    return
+
+                await SEND(ch, "Discord role created successfully.")
+
+                APPROVED_ROLES[third] = newrole
+                return
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
