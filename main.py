@@ -169,7 +169,6 @@ async def on_message(message):
     usr = message.author
     ch = message.channel 
     
-    return
     if usr in EX_CLIMBERS:
         await DELETE(message)
 
@@ -192,6 +191,8 @@ async def on_message(message):
                     await ADD_REACTION(message,v)
                     return
         return
+    
+    return
 
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
