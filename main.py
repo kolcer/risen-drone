@@ -448,6 +448,9 @@ async def on_message(message):
         
         # yo but what if i did that but cooler
         elif "becometh the drip" in lmsg:
+            if FUN_ROLES['Dreepy'] in usr.roles:
+                await SEND(ch, "lol no, you already have the drip.")
+                return
             if usr in THE_DRIP:
                 if THE_DRIP[usr] == 2:
                     if not str(usr.id) in list_decoded_entries("Dreepy"):
