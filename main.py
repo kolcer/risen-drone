@@ -774,7 +774,7 @@ Delete: Deletes the specified quiz question by index.
                         
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            if msgsplit[1] in list_entries(third):
+                            if msgsplit[1] in list_decoded_entries(third):
                                 await asyncio.sleep(1)
                                 await SEND(ch, "They already own this role, duh.")
                                 return
@@ -798,7 +798,7 @@ Delete: Deletes the specified quiz question by index.
 
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            entries = list_entries(third)
+                            entries = list_decoded_entries(third)
 
                             if not msgsplit[1] in entries:
                                 await asyncio.sleep(1)
