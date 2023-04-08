@@ -723,7 +723,7 @@ Delete: Deletes the specified quiz question by index.
             #create a new role with name and color 
             if lmsg.startswith("nr", 1):
                 try:
-                    add_entry(msgsplit[1])
+                    add_entry(msgsplit[1], usr.id)
                 except Exception as e:
                     await SEND(ch, e)
                     return
