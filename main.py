@@ -445,7 +445,7 @@ async def on_message(message):
             CHAT_KILLER['reviveChat'] = False
  
         ## Splicer role assignment
-        elif "<:cssplicer:988948000200069191>" in msg:
+        elif "<:cssplicer:988948000200069191>" in lmsg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
                     if not str(usr.id) in list_decoded_entries("Splicer"):
