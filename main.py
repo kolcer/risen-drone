@@ -683,16 +683,12 @@ Delete: Deletes the specified quiz question by index.
                                 FUN_LISTS[role.name].append(mem.id)
 
                     for funrole in FUN_LISTS.keys():
-                        if len(toSend) > 2000:
-                            await SEND(ch, toSend)
-                            toSend = ""
-
                         toSend += f"**{funrole}** role owners:\n\n"
                         for id in FUN_LISTS[funrole]:
                             toSend += f"{id}\n"
-                        toSend += "\n"
-
-                    await SEND(ch, toSend)
+                        await SEND(ch, toSend)
+                        await asyncio.sleep(2)
+                        toSend = ""
 
                 except Exception as e:
                     await SEND(ch, e)
