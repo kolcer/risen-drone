@@ -222,7 +222,7 @@ WISDOM = [
     "When life gives you lemons, just pretend they're orange-flavored oreos.",
     "If life keeps giving you lemons, just make some lemonade. And if life gives you a blender, make a margarita. Just don't mix them up.",
     "The secret to a happy life is to never take anything seriously. Especially not yourself. Only my wisdom.",
-    "If you're feeling lost and unsure about life, just remember that you're not alone. Most of us have no idea what we're doing either. Take this interaction for istance.",
+    "If you're feeling lost and unsure about life, just remember that you're not alone. Most of us have no idea what we're doing either. Take this interaction for instance.",
     "Remember, the key to success is to always have a backup plan. And a backup plan for your backup plan. And a backup plan for that backup plan, just in case. And then throw them all away, and waste away eating oreos for the rest of your life.",
     "If you're feeling stressed out and overwhelmed, just remember that the universe is under no obligation to make sense to you. And neither do I.",
     "Not having a good day? Just remember that tomorrow is a new day. But it's probably going to be disappointing just as much as it was today.",
