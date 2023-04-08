@@ -675,23 +675,27 @@ Delete: Deletes the specified quiz question by index.
             
             #prints ids of all users who have the roles
             if lmsg.startswith("showroles", 1):
-                toSend = ""
-                for mem in SERVER_DATA['server'].members:
-                    for role in mem.roles:
-                        if role.name in FUN_LISTS.keys():
-                            FUN_LISTS[role.name].append(mem.id)
+                try:
+                    toSend = ""
+                    for mem in SERVER_DATA['server'].members:
+                        for role in mem.roles:
+                            if role.name in FUN_LISTS.keys():
+                                FUN_LISTS[role.name].append(mem.id)
 
-                for funrole in FUN_LISTS.keys():
-                    if len(toSend) > 2000:
-                        await SEND(ch, toSend)
-                        toSend = ""
-                        
-                    toSend += f"**{funrole}** role owners:\n\n"
-                    for id in FUN_LISTS[funrole]:
-                        toSend += f"{id}\n"
-                    toSend += "\n"
+                    for funrole in FUN_LISTS.keys():
+                        if len(toSend) > 2000:
+                            await SEND(ch, toSend)
+                            toSend = ""
 
-                await SEND(ch, toSend)
+                        toSend += f"**{funrole}** role owners:\n\n"
+                        for id in FUN_LISTS[funrole]:
+                            toSend += f"{id}\n"
+                        toSend += "\n"
+
+                    await SEND(ch, toSend)
+
+                except Exception as e:
+                    await SEND(ch, e)
 
                 return
 
