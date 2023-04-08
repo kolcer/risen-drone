@@ -666,9 +666,8 @@ Delete: Deletes the specified quiz question by index.
                 await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
                 return
             
-            # how many wisdoms are there
-            if lmsg.startswith("wisdoms"):
-                print("showing wisdoms?")
+            # how many wisdoms are there - i swear to god bro why is this not working
+            if lmsg.startswith("wisdoms", 1):
                 await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
                 return
 
