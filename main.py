@@ -873,6 +873,44 @@ Delete: Deletes the specified quiz question by index.
 
                 APPROVED_ROLES[third] = newrole
                 return
+            
+            #give any role
+            if lmsg.startswith("assign", 1):
+                try:
+                    if third in APPROVED_ROLES:
+                        neededrole = APPROVED_ROLES[third]
+                    else:
+                        await SEND(ch, "You cannot assign this role through my commands.")
+                        return
+                        
+                    for mem in SERVER_DATA['server'].members:
+                        if int(mem.id) == int(msgsplit[1]):
+                            print("I AM HEREEEE")
+                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+                            await ADD_ROLES(mem, neededrole)
+                            break
+                except Exception as e:
+                    print(e)
+                    await SEND(ch, e)
+
+                return  
+
+            #remove any role
+            if lmsg.startswith("unassign", 1):
+                if third in APPROVED_ROLES:
+                    neededrole = APPROVED_ROLES[third]
+                else:
+                    await SEND(ch, "You cannot unassign this role through my commands.")
+                    return
+
+                for mem in SERVER_DATA['server'].members:
+                    if int(mem.id) == int(msgsplit[1]):
+                        await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                        await asyncio.sleep(1)
+                        await REMOVE_ROLES(mem, neededrole)
+                        break
+                return  
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
