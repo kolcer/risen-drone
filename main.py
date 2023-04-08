@@ -720,9 +720,9 @@ Delete: Deletes the specified quiz question by index.
             #     return
 
         #-----admin commands that require TWO inputs-----
-        elif len(msginputs) == 2:
-            second = msg.split(" ", 1)[1]          #NOT lowecase
-            lsecond = msg.split(" ", 1)[1].lower() #YES lowecase
+        elif len(msginputs) == 2 or lmsg.startswith("nr", 1):
+            second = msg.split(" ", 1)[1].replace("_", " ")          #NOT lowecase
+            lsecond = msg.split(" ", 1)[1].lower().replace("_", " ") #YES lowecase
             #ispy command
             if lmsg.startswith("ispy",1):
                 I_SPY['channel'] = CHANNELS[lsecond]
