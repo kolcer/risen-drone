@@ -5,6 +5,7 @@ from rated import *
 from roles import *
 from globals import *
 from database import *
+from redis import *
 
 
 def rigImmunity(usr1, usr2):
@@ -56,7 +57,7 @@ async def Rig(rigType, ch, usr):
     msgCounting = None
  
     if rigType.lower() == "splicer":
-        if not FUN_ROLES["Splicer"] in usr.roles:
+        if str(usr.id) not in retrieve_coded_entries("Splicer"):
             await SEND(ch, "You are not able to cast this rig yet!")
             return
    
