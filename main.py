@@ -650,7 +650,7 @@ Print: Prints a specified quiz question with its answer, options, and responses.
 List: Lists all current quiz questions.
 Delete: Deletes the specified quiz question by index.
 
-|makesay [channel id] [message]: Forces the bot to type the specified message in the indicated channel.
+|makesay [channel-name] [message]: Forces the bot to type the specified message in the indicated channel.
 
 |ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
 
@@ -741,11 +741,11 @@ Delete: Deletes the specified quiz question by index.
             #have the bot say whatever you say
             if lmsg.startswith("makesay", 1):
                 try:
-                    await SEND(lmsgsplit[1], third)
+                    await SEND(CHANNELS[lmsgsplit[1]], third)
                     await DELETE(message)
                     return
                 except:
-                    await SEND(ch, "lol no give me an actual channel id or message")
+                    await SEND("no.")
                     return
     
             #give ckr
