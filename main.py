@@ -167,8 +167,9 @@ async def on_message(message):
     ## lowercase the message for some commands to use
     lmsg = msg.lower()
     usr = message.author
-    ch = message.channel
+    ch = message.channel 
 
+    return
     if usr in EX_CLIMBERS:
         await DELETE(message)
 
