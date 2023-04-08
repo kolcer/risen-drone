@@ -236,7 +236,7 @@ WISDOM = [
     "When faced with a difficult decision, weigh the pros and cons carefully. And if that doesn't help, flip a coin. If you are unhappy with the result, you know what to do. Go order some oreos.",
     "The secret to happiness is to focus on the things that really matter in life. Like family, friends, and a full box of oreos.",
     "Remember, Rome wasn't built in a day, but if you pour a lot of passion into what you do, Rome still won't be built in one day.",
-    "The road to success is paved with hard work and determination. And if that doesn't work, try bribing someone with oreos.",
+    "The road to success is paved with hard work and determination. If you fail, try bribing someone with oreos.",
     "Do not give up after the first attempt, try, try again. Otherwise, try pretending that you never tried in the first place. It's a great way to save face.",
     # Secret Role Hints!
     "Psst, want to know a secret? To unlock one of the coveted secret roles, you just need to send a certain emoji four times in a row!",
