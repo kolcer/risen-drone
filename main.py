@@ -383,7 +383,7 @@ async def on_message(message):
             target = None
             if lmsg == "bd show profile":
                 targetName = f"{usr.name}#{usr.discriminator}".lower()
-            elif lmsg.endswith("profile"):
+            elif lmsg.startswith("bd show ") and lmsg.endswith(" profile"):
                 cleanMsg = lmsg.replace(" profile", "")
                 targetName = cleanMsg.split(" ", 2)[2]
 
@@ -721,9 +721,11 @@ Delete: Deletes the specified quiz question by index.
 
         #-----admin commands that require TWO inputs-----
         elif len(msginputs) == 2:
+            second = msg.split(" ", 1)[1]          #NOT lowecase
+            lsecond = msg.split(" ", 1)[1].lower() #YES lowecase
             #ispy command
             if lmsg.startswith("ispy",1):
-                I_SPY['channel'] = CHANNELS[lmsgsplit[1]]
+                I_SPY['channel'] = CHANNELS[lsecond]
                 I_SPY['status'] = 0
                 await SEND(I_SPY['channel'], I_SPY['questions'][0])
                 await DELETE(message)
@@ -733,17 +735,17 @@ Delete: Deletes the specified quiz question by index.
                     await SEND(I_SPY['channel'],'Whatever.')
                 return
             
-            #create a new role with name and color 
+            #create a new role with name
             if lmsg.startswith("nr", 1):
                 try:
-                    add_entry(msgsplit[1], usr.id)
+                    add_entry(second, usr.id)
                 except Exception as e:
                     await SEND(ch, e)
                     return
 
                 await SEND(ch, "Role created successfully.")
 
-                FUN_ROLES.append(msgsplit[1])
+                FUN_ROLES.append(second)
                 return
         
         #-----admin commands that require THREE or MORE inputs-----
