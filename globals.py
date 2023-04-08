@@ -572,6 +572,18 @@ FUN_ROLES = {
     "Wise": None,
 }
 
+FUN_LISTS = {
+    "Sanctuary Discoverer": [],
+    "Splicer": [],
+    "Heretic Defier": [],
+    "Architect Design": [],
+    "Pranked the Creator": [],
+    "I was there": [],
+    "Zero": [],
+    "Dreepy": [],
+    "Wise": [],
+}
+
 LIMITED_ROLES = {
     "I was there": "*(11/27/2022 - 11/28/2022)*",
 }

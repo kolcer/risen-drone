@@ -205,7 +205,6 @@ async def on_message(message):
         MSG_SENT[usr] += 1
 
             
-
     if ch.id == 845454640103424032 and message.attachments:
         if usr not in ARTISTS:
             ARTISTS[usr] = 1
@@ -660,7 +659,7 @@ Delete: Deletes the specified quiz question by index.
 
 |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
 
-|wisdoms: shows how many wisdom quotes the bot has.
+|wisdoms: Shows how many wisdom quotes the bot has.
 ''')
                 return
             
@@ -672,6 +671,24 @@ Delete: Deletes the specified quiz question by index.
             # how many wisdoms are there - i swear to god bro why is this not working
             if lmsg.startswith("wisdoms", 1):
                 await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
+                return
+            
+            #prints ids of all users who have the roles
+            if lmsg.startswith("who has the roles?", 1):
+                toSend = ""
+                for mem in SERVER_DATA['server'].members:
+                    for role in mem.roles:
+                        if role.name in FUN_LISTS.keys():
+                            FUN_LISTS[role.name].append(mem.id)
+
+                for funrole in FUN_LISTS.keys():
+                    toSend += f"**{funrole}** role owners:\n\n"
+                    for id in FUN_LISTS[funrole]:
+                        toSend += f"{id}\n"
+                    toSend += "\n"
+
+                await SEND(ch, toSend)
+
                 return
 
         #-----admin commands that require TWO inputs-----
