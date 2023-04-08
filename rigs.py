@@ -57,7 +57,7 @@ async def Rig(rigType, ch, usr):
     msgCounting = None
  
     if rigType.lower() == "splicer":
-        if str(usr.id) not in retrieve_coded_entries("Splicer"):
+        if str(usr.id) not in list_decoded_entries("Splicer"):
             await SEND(ch, "You are not able to cast this rig yet!")
             return
    
