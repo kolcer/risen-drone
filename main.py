@@ -675,14 +675,26 @@ Delete: Deletes the specified quiz question by index.
             
             if lmsg.startswith("adduserids", 1):
                 try:
+                    await SEND(ch, "Adding each id in its role list...")
                     for mem in SERVER_DATA['server'].members:
                         for role in mem.roles:
                             if role.name in FUN_LISTS.keys():
                                 FUN_LISTS[role.name].append(mem.id)
 
+                    await asyncio.sleep(2)
+                    await SEND(ch, "Starting to add each user id in the db...")
+                    await asyncio.sleep(2)
+
                     for funrole in FUN_LISTS.keys():
-                        add_entry(funrole, FUN_LISTS[funrole])
-                        await asyncio.sleep(5)
+                        for id in FUN_LISTS[funrole]:
+                            add_entry(funrole, id)
+                            await asyncio.sleep(3)
+
+                        await SEND(ch, f"Owners of {funrole} have been added...")
+                        await asyncio.sleep(2)
+
+                    await SEND(ch, "I'm done here.")
+                        
                 except Exception as e:
                     await SEND(ch, e)
 
