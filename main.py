@@ -656,6 +656,8 @@ Delete: Deletes the specified quiz question by index.
 |purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
 
 |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
+
+|wisdoms: shows how many wisdom quotes the bot has.
 ''')
                 return
             
@@ -666,6 +668,7 @@ Delete: Deletes the specified quiz question by index.
             
             # how many wisdoms are there
             if lmsg.startswith("wisdoms"):
+                print("showing wisdoms?")
                 await SEND(f"I have {len(WISDOM)} wisdoms.")
                 return
 
