@@ -444,13 +444,15 @@ async def on_message(message):
                 SPLICER_FANS[usr] = 1
         
         # yo but what if i did that but cooler; OPTIMUS TIMEEEE
-        elif "<:csOptimus:1046224869945266226>" in lmsg:
+        elif "<:csoptimus:1046224869945266226>" in lmsg:
             if usr in THE_DRIP: # ok imagine THE_DRIP is THE_OPTIMUS
                 if THE_DRIP[usr] == 9:
                     if not str(usr.id) in list_decoded_entries("Optimus"):
                         add_entry("Optimus", usr.id)
                         await asyncio.sleep(1)
                         await SEND(ch, f"You will never know where you will end up in a twisted situation. **{usr.name}** has become an Optimus. Optimus emoji.")
+                    else:
+                        await SEND(ch, "You are already an optimus.")
                 else:
                     THE_DRIP[usr] += 1
             else:
