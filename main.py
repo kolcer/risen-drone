@@ -673,23 +673,16 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
                 return
             
-            #prints ids of all users who have the roles
-            if lmsg.startswith("showroles", 1):
+            if lmsg.startswith("adduserids", 1):
                 try:
-                    toSend = ""
                     for mem in SERVER_DATA['server'].members:
                         for role in mem.roles:
                             if role.name in FUN_LISTS.keys():
                                 FUN_LISTS[role.name].append(mem.id)
 
                     for funrole in FUN_LISTS.keys():
-                        toSend += f"**{funrole}** role owners:\n\n"
-                        for id in FUN_LISTS[funrole]:
-                            toSend += f"{id}\n"
-                        await SEND(ch, toSend)
-                        await asyncio.sleep(2)
-                        toSend = ""
-
+                        add_entry(funrole, FUN_LISTS[funrole])
+                        await asyncio.sleep(5)
                 except Exception as e:
                     await SEND(ch, e)
 
