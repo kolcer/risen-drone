@@ -546,7 +546,7 @@ _[alignment]_ **trivia**
         
         # Get the drone's wisdom
         elif lmsg == "drone of wisdom":
-            if random.randint(1, 100) > 1:
+            if random.randint(1, 150) > 1:
                 await SEND(ch, f"||*{random.choice(WISDOM)}*||")
                 return
             else:
@@ -662,6 +662,11 @@ Delete: Deletes the specified quiz question by index.
             #resets the rig tracker message  ---why would you do this? ç__ç
             if lmsg.startswith("resetcounter", 1):
                 await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
+                return
+            
+            # how many wisdoms are there
+            if lmsg.startswith("wisdoms"):
+                await SEND(f"I have {len(WISDOM)} wisdoms.")
                 return
 
         #-----admin commands that require TWO inputs-----
