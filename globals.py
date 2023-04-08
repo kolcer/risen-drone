@@ -239,6 +239,7 @@ WISDOM = [
     "Cheating is based.",
     "If you go to this message, you can achieve a pretty drip result by following the instructions... -> https://discord.com/channels/624227331720085528/750060041289072771/1093589933333164162",
     "Wisdom can grant roles.",
+    "Some rig casters are simply one step ahead.",
     # Suggestions from community
     "y - RealBlanket#7739",
     "nah - Amadán#9008",
@@ -570,6 +571,7 @@ FUN_ROLES = [
     "Zero",
     "Optimus",
     "Wise",
+    "One step ahead"
 ]
 
 APPROVED_ROLES = {

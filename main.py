@@ -331,7 +331,7 @@ async def on_message(message):
         ## thief rig active
         elif ACTIVE_RIGS["thief"]:
 
-            await ExecuteThiefRig(ch,usr)
+            await ExecuteThiefRig(ch,usr,message)
 
         ## Spectre Rig Active
         elif ACTIVE_RIGS["spectre"]:
@@ -346,12 +346,12 @@ async def on_message(message):
         # Splicer Rig Active
         elif ACTIVE_RIGS["splicer"]:
 
-            await ExecuteSplicerRig(ch,usr)
+            await ExecuteSplicerRig(ch,usr,message)
 
         # Gun Rig Active
         elif ACTIVE_RIGS["gun"]:
 
-            await ExecuteGunRig(ch,usr)
+            await ExecuteGunRig(ch,usr,message)
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
