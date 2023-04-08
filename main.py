@@ -213,8 +213,8 @@ async def on_message(message):
             ARTISTS[usr] += 1
             await ADD_REACTION(message, "❤️")
         else: 
-            if not FUN_ROLES["Architect Design"] in usr.roles:
-                await ADD_ROLES(usr, FUN_ROLES["Architect Design"])
+            if not usr.id in list_entries("Architect Design"):
+                add_entry("Architect Design", usr.id)
                 await asyncio.sleep(1)
                 await SEND(ch, "I like your style.")
                 await ADD_REACTION(message, "❤️‍🔥")
@@ -234,8 +234,8 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
-            if not FUN_ROLES["Sanctuary Discoverer"] in usr.roles:
-                await ADD_ROLES(usr, FUN_ROLES["Sanctuary Discoverer"])
+            if not usr.id in list_entries("Sanctuary Discoverer"):
+                add_entry("Sanctuary Discoverer", usr.id)
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
@@ -385,15 +385,16 @@ async def on_message(message):
         elif lmsg == "bd show profile":
             messages = ""
             profilemsg = str(usr.display_name) + "'s roles:\n\n"
+
             for role in FUN_ROLES:
-                if FUN_ROLES[role] in usr.roles:
-                    if str(role) in LIMITED_ROLES:
-                        profilemsg += "**" + str(role) + "** 🔒 " + LIMITED_ROLES[str(role)] + "\n"
+                if usr.id in list_entries(role):
+                    if role in LIMITED_ROLES:
+                        profilemsg += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                     else:
                         profilemsg += "**" + str(role) + "**\n"
                 else:
-                    if str(role) in LIMITED_ROLES:
-                        profilemsg += "**???** 🔒 " + LIMITED_ROLES[str(role)] + "\n"
+                    if role in LIMITED_ROLES:
+                        profilemsg += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
                     else:
                         profilemsg += "**???**\n"
 
@@ -434,8 +435,10 @@ async def on_message(message):
         elif "<:csSplicer:988948000200069191>" in msg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
-                    if not FUN_ROLES["Splicer"] in usr.roles:
-                        await ADD_ROLES(usr, FUN_ROLES["Splicer"])
+                    if not usr.id in list_entries("Splicer"):
+                        add_entry("Splicer", usr.id)
+                        await asyncio.sleep(1)
+                        await ADD_ROLES(usr, APPROVED_ROLES["Splicer"])
                         await asyncio.sleep(1)
                         await SEND(ch, "Ok... there you go.")
                 else:
@@ -447,10 +450,10 @@ async def on_message(message):
         elif "becometh the drip" in lmsg:
             if usr in THE_DRIP:
                 if THE_DRIP[usr] == 2:
-                    if not FUN_ROLES["Dreepy"] in usr.roles:
-                        await ADD_ROLES(usr, FUN_ROLES["Dreepy"])
+                    if not usr.id in list_entries("Dreepy"):
+                        add_entry("Dreepy", usr.id)
                         await asyncio.sleep(1)
-                        await SEND(ch, f"{usr.mention} has acquired the drip")
+                        await SEND(ch, f"{usr.mention} has acquired the drip.")
                 else:
                     THE_DRIP[usr] += 1
             else:
@@ -552,9 +555,12 @@ _[alignment]_ **trivia**
                 await SEND(ch, f"||*{random.choice(WISDOM)}*||")
                 return
             else:
-                await SEND(ch, f"||***Congratulations! You have found the secret wisdom of the drone, earning you the “Wise” role.***||")
-                await asyncio.sleep(2)
-                await ADD_ROLES(usr, FUN_ROLES['Wise'])
+                if not usr.id in list_entries("Wise"):
+                    add_entry("Wise", usr.id)
+                    await SEND(ch, f"||***Congratulations! You have found the secret wisdom of the drone, earning you the “Wise” role.***||")
+                    await asyncio.sleep(2)
+                else:
+                    await SEND(ch, f"||***Congratulations! You found NOTHING.***||")
                 return
 
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
@@ -673,32 +679,32 @@ Delete: Deletes the specified quiz question by index.
                 await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
                 return
             
-            if lmsg.startswith("adduserids", 1):
-                try:
-                    await SEND(ch, "Adding each id in its role list...")
-                    for mem in SERVER_DATA['server'].members:
-                        for role in mem.roles:
-                            if role.name in FUN_LISTS.keys():
-                                FUN_LISTS[role.name].append(mem.id)
+            # if lmsg.startswith("adduserids", 1):
+            #     try:
+            #         await SEND(ch, "Adding each id in its role list...")
+            #         for mem in SERVER_DATA['server'].members:
+            #             for role in mem.roles:
+            #                 if role.name in FUN_LISTS.keys():
+            #                     FUN_LISTS[role.name].append(mem.id)
 
-                    await asyncio.sleep(2)
-                    await SEND(ch, "Starting to add each user id in the db...")
-                    await asyncio.sleep(2)
+            #         await asyncio.sleep(2)
+            #         await SEND(ch, "Starting to add each user id in the db...")
+            #         await asyncio.sleep(2)
 
-                    for funrole in FUN_LISTS.keys():
-                        for id in FUN_LISTS[funrole]:
-                            add_entry(funrole, id)
-                            await asyncio.sleep(3)
+            #         for funrole in FUN_LISTS.keys():
+            #             for id in FUN_LISTS[funrole]:
+            #                 add_entry(funrole, id)
+            #                 await asyncio.sleep(3)
 
-                        await SEND(ch, f"Owners of {funrole} have been added...")
-                        await asyncio.sleep(2)
+            #             await SEND(ch, f"Owners of {funrole} have been added...")
+            #             await asyncio.sleep(2)
 
-                    await SEND(ch, "I'm done here.")
+            #         await SEND(ch, "I'm done here.")
                         
-                except Exception as e:
-                    await SEND(ch, e)
+            #     except Exception as e:
+            #         await SEND(ch, e)
 
-                return
+            #     return
 
         #-----admin commands that require TWO inputs-----
         elif len(msginputs) == 2:
@@ -713,6 +719,19 @@ Delete: Deletes the specified quiz question by index.
                     I_SPY['status'] = None
                     await SEND(I_SPY['channel'],'Whatever.')
                 return
+            
+            #create a new role with name and color 
+            if lmsg.startswith("nr", 1):
+                try:
+                    add_entry(msgsplit[1])
+                except Exception as e:
+                    await SEND(ch, e)
+                    return
+
+                await SEND(ch, "Role created successfully.")
+
+                FUN_ROLES.append(msgsplit[1])
+                return
         
         #-----admin commands that require THREE or MORE inputs-----
         elif len(msginputs) >= 3:
@@ -724,19 +743,6 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("makesay", 1):
                 await SEND(CHANNELS[lmsgsplit[1]], third)
                 await DELETE(message)
-                return
-
-            #create a new role with name and color 
-            if lmsg.startswith("nr", 1):
-                try:
-                    newrole = await NEW_ROLE(SERVER_DATA['server'], lmsgsplit[1], third)
-                except Exception as e:
-                    await SEND(ch, e)
-                    return
-
-                await SEND(ch, "Role created successfully.")
-
-                FUN_ROLES[third] = newrole
                 return
     
             #give ckr
@@ -762,66 +768,80 @@ Delete: Deletes the specified quiz question by index.
             #give any role
             if lmsg.startswith("assign", 1):
                 try:
-                    if third in FUN_ROLES:
-                        neededrole = FUN_ROLES[third]
-                    else:
+                    if not third in FUN_ROLES:
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            print("I AM HEREEEE")
+                            if msgsplit[1] in list_entries(third):
+                                await asyncio.sleep(1)
+                                await SEND(ch, "They already own this role, duh.")
+                                return
+
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
-                            await ADD_ROLES(mem, neededrole)
+                            add_entry(third, msgsplit[1])
+                                
                             break
                 except Exception as e:
-                    print(e)
                     await SEND(ch, e)
 
                 return  
 
             #remove any role
             if lmsg.startswith("unassign", 1):
-                if third in FUN_ROLES:
-                    neededrole = FUN_ROLES[third]
-                else:
-                    await SEND(ch, "You cannot unassign this role through my commands.")
-                    return
+                try:
+                    if not third in FUN_ROLES:
+                        await SEND(ch, "You cannot unassign this role through my commands.")
+                        return
 
-                for mem in SERVER_DATA['server'].members:
-                    if int(mem.id) == int(msgsplit[1]):
-                        await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
-                        await asyncio.sleep(1)
-                        await REMOVE_ROLES(mem, neededrole)
-                        break
+                    for mem in SERVER_DATA['server'].members:
+                        if int(mem.id) == int(msgsplit[1]):
+                            entries = list_entries(third)
+
+                            if not msgsplit[1] in entries:
+                                await asyncio.sleep(1)
+                                await SEND(ch, "They do not own the role. Are you ok?")
+                                return
+
+                            index = entries.index(msgsplit[1])
+                            delete_entry(third, index)
+
+                            await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                            await asyncio.sleep(1)
+
+                            break
+                except Exception as e:
+                    await SEND(ch, e)
                 return  
 
-            #edit any role ---deleting and adding the role again is recommended
-            if lmsg.startswith("alter", 1):
-                if msgsplit[1].replace("_", " ") in FUN_ROLES:
-                    neededrole = FUN_ROLES[msgsplit[1].replace("_", " ")]
-                else:
-                    await SEND(ch, "You cannot edit this role through my commands.")
-                    return
+            #edit any role ---IMPORTANT! keys in redis can't be edited. this command is removed.
+            # if lmsg.startswith("alter", 1):
+            #     if msgsplit[1].replace("_", " ") in FUN_ROLES:
+            #         neededrole = FUN_ROLES[msgsplit[1].replace("_", " ")]
+            #     else:
+            #         await SEND(ch, "You cannot edit this role through my commands.")
+            #         return
 
-                await EDIT_ROLE(neededrole, third, "changing name")
-                await asyncio.sleep(1)
-                await SEND(ch, "You changed the name correctly.")
-                FUN_ROLES[msgsplit[1].replace("_", " ")] = neededrole
-                return  
+            #     await EDIT_ROLE(neededrole, third, "changing name")
+            #     await asyncio.sleep(1)
+            #     await SEND(ch, "You changed the name correctly.")
+            #     FUN_ROLES[msgsplit[1].replace("_", " ")] = neededrole
+            #     return  
 
             #purge any role
             if lmsg.startswith("purge role", 1):
-                if third in FUN_ROLES:
-                    neededrole = FUN_ROLES[third]
-                else:
-                    await SEND(ch, "You cannot obliterate this role through my commands.")
-                    return
-                    
-                await PURGE_ROLES(neededrole)
-                await asyncio.sleep(1)
-                await SEND(ch, "The role is gone.")
+                try:
+                    if not third in FUN_ROLES:
+                        await SEND(ch, "You cannot obliterate this role through my commands.")
+                        return
+                        
+                    delete_key(third)
+                    await asyncio.sleep(1)
+                    await SEND(ch, "The role is gone.")
+                except Exception as e:
+                    await SEND(ch, e)
                 return  
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----

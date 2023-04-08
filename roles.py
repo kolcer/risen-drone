@@ -41,10 +41,10 @@ def PrepareRoles(roles):
         #murdurator
         if role.id == EXTRA_ROLES['murdurator']:
             EXTRA_ROLES['murdurator'] = role
-        #fun roles
-        if role.name in FUN_ROLES:
-            FUN_ROLES[role.name] = role
-            continue    
+        #basically Splicer, roles with color and icons
+        if role.name in APPROVED_ROLES:
+            APPROVED_ROLES[role.name] = role
+ 
 async def MorphTo(usr,role):
     if role == "Gun":
         role = "Guns"

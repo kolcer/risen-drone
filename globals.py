@@ -560,16 +560,20 @@ MORPHABLE_ROLES = {
      ],
 }
 
-FUN_ROLES = {
-    "Sanctuary Discoverer": None,
+FUN_ROLES = [
+    "Sanctuary Discoverer",
+    "Splicer",
+    "Heretic Defier",
+    "Architect Design",
+    "Pranked the Creator",
+    "I was there",
+    "Zero",
+    "Dreepy",
+    "Wise",
+]
+
+APPROVED_ROLES = {
     "Splicer": None,
-    "Heretic Defier": None,
-    "Architect Design": None,
-    "Pranked the Creator": None,
-    "I was there": None,
-    "Zero": None,
-    "Dreepy": None,
-    "Wise": None,
 }
 
 FUN_LISTS = {
