@@ -244,7 +244,8 @@ WISDOM = [
     "nah - Amadán#9008",
     "Balls - Chugnus Amognus",
     "I am unoriginal and cannot come up with a good quote - Xeron#7149",
-    "Zero role does not exist - frfr#0431",
+    "https://cdn.discordapp.com/attachments/750060041289072771/1094195127909634168/Screen_Shot_2023-04-08_at_11.40.40.png",
+    "|assign 898870303680241674 I was there - frfr#0431"
 ]
 
 # CONSTANT DICTIONARIES
