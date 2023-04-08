@@ -568,7 +568,7 @@ FUN_ROLES = [
     "Pranked the Creator",
     "I was there",
     "Zero",
-    "Dreepy",
+    "Optimus",
     "Wise",
 ]
 
