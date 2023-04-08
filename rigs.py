@@ -398,10 +398,12 @@ async def ExecuteJokerRig(ch,usr,message):
 
 
 async def ExecuteSplicerRig(ch,usr,message):
+    print("here")
  
     if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']):
         return
                 
+    print("here")
     ACTIVE_RIGS["splicer"] = False
 
     if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in message.content and "rig" in message.content):
@@ -410,6 +412,7 @@ async def ExecuteSplicerRig(ch,usr,message):
         add_entry("One step ahead", usr.id)
         return
 
+    print("here")
     SPLICER_RIG["active"] = True
     SPLICER_RIG["user"] = usr
 
