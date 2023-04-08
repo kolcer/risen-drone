@@ -432,8 +432,6 @@ async def ExecuteSplicerRig(ch,usr,message):
     SPLICER_RIG["user-name"] = usrn1 + rcn2
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
-    print(SPLICER_RIG["user-name"])
-    print(SPLICER_RIG["RIG_DATA['rigCaster']-name"])
 
     focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["RIG_DATA['rigCaster']-name"] + ".")
     SPLICER_RIG["reactionmessage"] = focusmsg
