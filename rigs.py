@@ -398,12 +398,10 @@ async def ExecuteJokerRig(ch,usr,message):
 
 
 async def ExecuteSplicerRig(ch,usr,message):
-    print("here")
  
     if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']):
         return
                 
-    print("here")
     ACTIVE_RIGS["splicer"] = False
 
     if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in message.content and "rig" in message.content):
@@ -412,7 +410,6 @@ async def ExecuteSplicerRig(ch,usr,message):
         add_entry("One step ahead", usr.id)
         return
 
-    print("here")
     SPLICER_RIG["active"] = True
     SPLICER_RIG["user"] = usr
 
@@ -433,7 +430,7 @@ async def ExecuteSplicerRig(ch,usr,message):
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-    focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["RIG_DATA['rigCaster']-name"] + ".")
+    focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
     SPLICER_RIG["reactionmessage"] = focusmsg
 
     await ADD_REACTION(focusmsg, "❌")
