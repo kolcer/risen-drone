@@ -147,7 +147,11 @@ async def on_reaction_add(reaction, user):
 
     if (str(reaction.emoji) == "<:csSleazelApproves:791393163343560715>" or str(reaction.emoji) == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861:
         await reaction.remove(user)
-        await SEND(reaction.message.channel, "You are not Sleazel. Drop the act.")
+        if NOT_SLEAZEL[0] == False:
+            NOT_SLEAZEL[0] = True
+            await SEND(reaction.message.channel, "You are not Sleazel. Drop the act.")
+            await asyncio.sleep(200)
+            NOT_SLEAZEL[0] = False
         return
 
 @client.event
