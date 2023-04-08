@@ -20,6 +20,10 @@ def list_entries(key):
     result = db.lrange(key,0,-1)
     return result
 
+def list_decoded_entries(key):
+    result = db.lrange(key,0,-1)
+    return [item.decode() for item in result]
+
 def show_random_entry(key):
     index = random.randint(0,db.llen(key)-1)
     result = db.lrange(key,index,index)
