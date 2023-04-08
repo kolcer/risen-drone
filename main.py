@@ -168,7 +168,8 @@ async def on_message(message):
     lmsg = msg.lower()
     usr = message.author
     ch = message.channel 
-
+    
+    await SEND(ch, "I am currently under maintenance.")
     return
     if usr in EX_CLIMBERS:
         await DELETE(message)
