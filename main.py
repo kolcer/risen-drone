@@ -379,12 +379,24 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Show Profile
-        elif lmsg == "bd show profile":
+        elif lmsg.startswith("bd show"):
+            target = None
+            if lmsg == "bd show profile":
+                targetName = f"{usr.name}#{usr.discriminator}"
+            elif lmsg.endswith("profile"):
+                cleanMsg = lmsg.replace(" profile", "")
+                targetName = cleanMsg.split(" ", 2)[2]
+
+            for mem in SERVER_DATA['server'].members:
+                if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
+                    target = mem
+                    break
+
             messages = ""
-            profilemsg = str(usr.display_name) + "'s roles:\n\n"
+            profilemsg = str(target.display_name) + "'s roles:\n\n"
 
             for role in FUN_ROLES:
-                if str(usr.id) in list_decoded_entries(role):
+                if str(target.id) in list_decoded_entries(role):
                     if role in LIMITED_ROLES:
                         profilemsg += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                     else:
@@ -395,17 +407,17 @@ async def on_message(message):
                     else:
                         profilemsg += "**???**\n"
 
-            if usr not in MSG_SENT:
+            if target not in MSG_SENT:
                 messages = "0"
             else:
                 messages = MSG_SENT[usr]
 
-            if usr not in LAST_RIG:
+            if target not in LAST_RIG:
                 lastrig = "None"
             else:
                 lastrig = LAST_RIG[usr]
 
-            profilemsg += "\n" + str(usr.display_name) + "'s stats:\n\n"
+            profilemsg += "\n" + str(target.display_name) + "'s stats:\n\n"
             profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
             profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
             
@@ -450,9 +462,7 @@ async def on_message(message):
                     if not str(usr.id) in list_decoded_entries("Optimus"):
                         add_entry("Optimus", usr.id)
                         await asyncio.sleep(1)
-                        await SEND(ch, f"You will never know where you will end up in a twisted situation. **{usr.name}** has become an Optimus. Optimus emoji.")
-                    else:
-                        await SEND(ch, "You are already an optimus.")
+                        await SEND(ch, f"You will never know where you will end up in a twisted situation. **{usr.name}** has become an Optimus.")
                 else:
                     THE_DRIP[usr] += 1
             else:
