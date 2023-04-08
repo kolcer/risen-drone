@@ -342,7 +342,7 @@ async def ExecuteSpectreRig(ch,usr,message):
         return
     ACTIVE_RIGS["spectre"] = False
 
-    if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in msg.content and "rig" in msg.content):
+    if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in message.content and "rig" in message.content):
         await SEND(f"{usr.mention} is one step ahead of {RIG_DATA['rigCaster'].name}! They earn the \"One step ahead\" role!")
         await asyncio.sleep(1)
         add_entry("One step ahead", str(usr.id))
@@ -375,13 +375,13 @@ async def ExecuteGunRig(ch,usr,msg):
     await DemorphFrom(usr, "Gun")
     return
 
-async def ExecuteJokerRig(ch,usr,msg):
+async def ExecuteJokerRig(ch,usr,message):
 
     if (ch.name not in CHANNELS) or (not EXTRA_ROLES['climber'] in usr.roles) or ("https" in message.content) or (len(message.content) > 45):
         return
     ACTIVE_RIGS["joker"] = False
 
-    if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in msg.content and "rig" in msg.content):
+    if (str(usr.id) not in list_decoded_entries("One step ahead")) and ("cast" in message.content and "rig" in message.content):
         await SEND(f"{usr.mention} is one step ahead of {RIG_DATA['rigCaster'].name}! They earn the \"One step ahead\" role!")
         await asyncio.sleep(1)
         add_entry("One step ahead", str(usr.id))
