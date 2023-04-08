@@ -875,7 +875,7 @@ Delete: Deletes the specified quiz question by index.
                 return
             
             #give any role
-            if lmsg.startswith("assign", 1):
+            if lmsg.startswith("dassign", 1):
                 try:
                     if third in APPROVED_ROLES:
                         neededrole = APPROVED_ROLES[third]
@@ -897,7 +897,7 @@ Delete: Deletes the specified quiz question by index.
                 return  
 
             #remove any role
-            if lmsg.startswith("unassign", 1):
+            if lmsg.startswith("dunassign", 1):
                 if third in APPROVED_ROLES:
                     neededrole = APPROVED_ROLES[third]
                 else:
