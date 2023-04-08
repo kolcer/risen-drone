@@ -124,14 +124,14 @@ async def Rig(rigType, ch, usr):
             while ch2 == ch or ch2.name == "bot-testing":
                 ch2 = random.choice(list(CHANNELS.values()))
             firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
-            msgCounting = firstmsg
             await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
             await asyncio.sleep(3)
             secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
                 + ch.mention + ". " + firstmsg.jump_url)
             await SEND(ch2, "https://media.giphy.com/media/QM1yEJoR1Z7oKAGg4Y/giphy.gif")
             await asyncio.sleep(3)
-            await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)           
+            await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)    
+            msgCounting = firstmsg       
         
         case "hacker":
             im = ""
@@ -191,11 +191,11 @@ async def Rig(rigType, ch, usr):
     msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*{rigType.capitalize()} Rig is on cooldown and can be cast again* <t:{round(time.time() + theCooldown)}:R>")
+    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
 
     await asyncio.sleep(theCooldown)
 
-    await EDIT_MESSAGE(msgCounting, f"{rigType.capitalize()} Rig cooldown is over.")
+    await EDIT_MESSAGE(msgCounting, msgCountingContent)
 
     if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False
