@@ -674,7 +674,7 @@ Delete: Deletes the specified quiz question by index.
                 return
             
             #prints ids of all users who have the roles
-            if lmsg.startswith("who has the roles?", 1):
+            if lmsg.startswith("showroles", 1):
                 toSend = ""
                 for mem in SERVER_DATA['server'].members:
                     for role in mem.roles:
