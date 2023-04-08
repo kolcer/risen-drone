@@ -213,7 +213,7 @@ async def on_message(message):
             ARTISTS[usr] += 1
             await ADD_REACTION(message, "❤️")
         else: 
-            if not usr.id in list_decoded_entries("Architect Design"):
+            if not str(usr.id) in list_decoded_entries("Architect Design"):
                 add_entry("Architect Design", usr.id)
                 await asyncio.sleep(1)
                 await SEND(ch, "I like your style.")
@@ -234,7 +234,7 @@ async def on_message(message):
         if eligible == 1:
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
-            if not usr.id in list_decoded_entries("Sanctuary Discoverer"):
+            if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
                 add_entry("Sanctuary Discoverer", usr.id)
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
@@ -435,7 +435,7 @@ async def on_message(message):
         elif "<:csSplicer:988948000200069191>" in msg:
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
-                    if not usr.id in list_decoded_entries("Splicer"):
+                    if not str(usr.id) in list_decoded_entries("Splicer"):
                         add_entry("Splicer", usr.id)
                         await asyncio.sleep(1)
                         await ADD_ROLES(usr, APPROVED_ROLES["Splicer"])
@@ -450,7 +450,7 @@ async def on_message(message):
         elif "becometh the drip" in lmsg:
             if usr in THE_DRIP:
                 if THE_DRIP[usr] == 2:
-                    if not usr.id in list_decoded_entries("Dreepy"):
+                    if not str(usr.id) in list_decoded_entries("Dreepy"):
                         add_entry("Dreepy", usr.id)
                         await asyncio.sleep(1)
                         await SEND(ch, f"{usr.mention} has acquired the drip.")
@@ -555,7 +555,7 @@ _[alignment]_ **trivia**
                 await SEND(ch, f"||*{random.choice(WISDOM)}*||")
                 return
             else:
-                if not usr.id in list_decoded_entries("Wise"):
+                if not str(usr.id) in list_decoded_entries("Wise"):
                     add_entry("Wise", usr.id)
                     await SEND(ch, f"||***Congratulations! You have found the secret wisdom of the drone, earning you the “Wise” role.***||")
                     await asyncio.sleep(2)
