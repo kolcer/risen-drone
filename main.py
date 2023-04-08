@@ -169,7 +169,7 @@ async def on_message(message):
     usr = message.author
     ch = message.channel 
     
-    if usr in EX_CLIMBERS and not (EXTRA_ROLES['admin'] in usr.roles):
+    if usr in EX_CLIMBERS:
         await DELETE(message)
 
     if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
