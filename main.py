@@ -144,7 +144,7 @@ async def on_reaction_add(reaction, user):
 
     await SplicerRig(reaction,user)
 
-    if (reaction.emoji == "csSleazelApproves" or reaction.emoji == "csSleazelNotApproved") and user.id != 481893862864846861:
+    if (reaction.emoji == "<:csSleazelApproves:791393163343560715>" or reaction.emoji == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861:
         await reaction.remove(user)
 
 @client.event
