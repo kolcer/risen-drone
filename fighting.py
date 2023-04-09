@@ -110,7 +110,7 @@ async def FightingProcessClass(usr, msg):
             return
         
         await print(FG_PLAYERS)
-        FG_PLAYERS[usr]["class"] = lmsg
+        FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] = lmsg
         await print(FG_PLAYERS)
         await print(FG_PLAYERS[usr]["class"])
         await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
