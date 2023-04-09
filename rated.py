@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import time
 from globals import EXTRA_ROLES
 from globals import SERVER_DATA
 from globals import CHANNELS
@@ -61,6 +62,7 @@ async def DELETE(message):
     await message.delete()
 
 async def print(message):
+    time.sleep(2)
     await SEND(CHANNELS["DEBUGS"], message)
 
 async def NEW_ROLE(server,colorpick, rolename):
