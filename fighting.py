@@ -39,10 +39,10 @@ CURRENT_CLASSES = FG_CLASSES
 
 #default stats
 NEW_PLAYER = {
-    "class": None,
+    "class": "none",
     "hp": 200,
     "dmg": 100,
-    "charges": None
+    "charges": 0,
 }
 
 #pre-attack checks
@@ -97,21 +97,21 @@ async def FightingProcessClass(usr, msg):
 
         await print(FG_PLAYERS)
 
-        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == None:
+        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
             return
 
-        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == None:
+        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
             await SEND(FG["channel"], "The options are shown in the list. No more, no less.") 
             return
 
-        if FG_PLAYERS[usr]["class"] != None:
+        if FG_PLAYERS[usr]["class"] != "none":
             await SEND(FG["channel"], "Shush now. Wait for your opponent to pick an Alignment.") 
             return
 
         FG_PLAYERS[usr]["class"] = lmsg
         await print(FG_PLAYERS[usr]["class"])
-        await SEND(FG["channel"], f"{usr.mention} is playing as {lmsg.capitalize()}.")
+        await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
 
         FG["class-picked"] += 1
 
@@ -175,7 +175,7 @@ async def JoinFightingGame(usr):
         await asyncio.sleep(30)
 
         for user in FG_PLAYERS:
-            if FG_PLAYERS[user]["class"] == None:
+            if FG_PLAYERS[user]["class"] == "none":
                 await SEND(FG["channel"], "One or more users have not selected an Alignment in the given time. Fight is cancelled.")
                 FG_RESET()
                 break
