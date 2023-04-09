@@ -95,24 +95,24 @@ async def FightingProcessClass(usr, msg):
         
     if FG['status'] == "class-picking":
 
-        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr.id]["class"] == "none":
+        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
             return
 
-        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr.id]["class"] == "none":
+        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
             await SEND(FG["channel"], "The options are shown in the list. No more, no less.") 
             return
 
-        if FG_PLAYERS[usr.id]["class"] != "none":
+        if FG_PLAYERS[usr]["class"] != "none":
             await SEND(FG["channel"], "Shush now. Wait for your opponent to pick an Alignment.") 
             return
         
         await print(FG_PLAYERS)
-        await print(usr.name)
-        FG_PLAYERS[usr.id]["class"] = lmsg
+        await print(usr)
+        FG_PLAYERS[usr]["class"] = lmsg
         await print(FG_PLAYERS)
         await print(FG_PLAYERS[usr]["class"])
-        await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr.id]['class'].capitalize()}.")
+        await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
 
         FG["class-picked"] += 1
 
@@ -145,7 +145,7 @@ async def PlayFightingGame(usr, ch):
     else:
         FG['channel'] = ch
         FG['status'] = "second-player"
-        FG_PLAYERS[usr.id] = NEW_PLAYER
+        FG_PLAYERS[usr] = NEW_PLAYER
         FG_QUEUE.append(usr)
         FG['currentPlayer'] = 0
         FG['tick'] = time.time()
@@ -165,7 +165,7 @@ async def JoinFightingGame(usr):
         await SEND(FG['channel'], "Wait for someone else.")
         return
     else:
-        FG_PLAYERS[usr.id] = NEW_PLAYER
+        FG_PLAYERS[usr] = NEW_PLAYER
         FG_QUEUE.append(usr)
         await SEND(FG["channel"], f"{usr.mention} is eager to fight too.\n")
 

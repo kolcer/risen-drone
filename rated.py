@@ -62,8 +62,8 @@ async def DELETE(message):
     await message.delete()
 
 async def print(message):
-    time.sleep(2)
     await SEND(CHANNELS["DEBUGS"], message)
+    await asyncio.sleep(2)
 
 async def NEW_ROLE(server,colorpick, rolename):
     return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
