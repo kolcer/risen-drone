@@ -583,7 +583,7 @@ FUN_ROLES = [
     "Zero",
     "Optimus",
     "Wise",
-    "One step ahead"
+    "Weezer",
 ]
 
 APPROVED_ROLES = {
