@@ -103,7 +103,7 @@ async def FightingProcessClass(usr, msg):
             await SEND(FG["channel"], "I gave you a list. Read it and answer accordingly!") 
             return
 
-        if FG_PLAYERS[usr][0] != None:
+        if FG_PLAYERS[usr]["class"] != None:
             await SEND(FG["channel"], "No takes-back.") 
             return
 
