@@ -767,7 +767,15 @@ FG = {
 }
 
 FG_QUEUE = []
-FG_PLAYERS = {} #user:class,status,accuracy,charge
+FG_PLAYERS = {}
+# FG_PLAYERS = {
+#     "usr": {
+#         "class": None,
+#         "hp": 200,
+#         "dmg": 100,
+#         "charges": None
+#     }
+# }
 
 # [0]attack    -> [1]min damage,            [2]max damage
 # [0]shield    -> [1]percentage protection, [2]number of turns
