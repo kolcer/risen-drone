@@ -35,3 +35,6 @@ def get_amount_of_entries(key):
 def show_specific_entry(key,index):
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
+
+def set_entry(key, value):
+    db.set(key, value)
