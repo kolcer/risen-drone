@@ -73,20 +73,25 @@ def FG_NEXT_PLAYER():
         FG['currentPlayer'] = 0
         
 
-async def FG_LOOP(toSend):
+async def FG_LOOP():
     FG['tick'] = time.time()
     ourTick = FG['tick']
+    user = FG_QUEUE[FG['currentPlayer']]
+    userClass = FG_PLAYERS[user]["class"]
     
     while True:   
-        toSend = "It's **" + FG_QUEUE[FG['currentPlayer']].name + "**'s time to shine! Select a skill to use against your opponent."
+        toSend = "It's **" + FG_QUEUE[FG['currentPlayer']].name + "**'s time to shine! Select a skill to use against your opponent.\n\n"
+
+        for skill in FG_CLASSES[userClass].keys():
+            match FG_CLASSES[userClass][skill][0]:
+                case "attack":
+                    toSend += f"[🟢][🗡️]{skill} - DMG {FG_CLASSES[userClass][skill][1]} - {FG_CLASSES[userClass][skill][2]}\n"
+                case "shield":
+                    toSend += f"[🟢][🛡️]{skill} - DFS {FG_CLASSES[userClass][skill][1]}% - TURNS {FG_CLASSES[userClass][skill][2]})\n"
+                case _:
+                    toSend += "hi\n"            
+
         await SEND(FG['channel'], toSend)
-        
-        await asyncio.sleep(60)
-        
-        if FG['tick'] != ourTick:
-            return
-        
-        cp = MG_QUEUE[FG['currentPlayer']]
         return
     
 
@@ -124,6 +129,7 @@ async def FightingProcessClass(usr, msg):
 
             await SEND(FG["channel"], toSend)
 
+            await FG_LOOP()
         return
     
     # elif LADDERS['status'] == "battling" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:

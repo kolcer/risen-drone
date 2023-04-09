@@ -118,6 +118,7 @@ RIG_LIST = [
     "hacker",
     "drifter",
     "splicer",
+    "gun",
 ]
 
 LIMITED_USE_RIGS = [
@@ -808,7 +809,7 @@ FG_CLASSES = {
                "heavenly strike": 
                ["heavy", 30, 40, 1],
 
-               "divine intervention": 
+               "divine intervention":
                ["special", 50, 10, 5]
                },
 
