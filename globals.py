@@ -62,7 +62,7 @@ IMPOSTOR_NICKS = [
     "could be worse",
     "good job",
     "your prize",
-    "Name offered by Me. F.D.",
+    "Name offered by Me. B.D.",
     "this nerd is a copycat lmao",
     "this nerd tried",
     "Not the real BD, sorry",
