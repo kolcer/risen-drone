@@ -98,8 +98,15 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
     
     restarts = int(get_value("restarts")) + 1
+    ping = ""
+
+    if str(os.environ['RAILWAY_GIT_AUTHOR']) in GIT_COMMITTERS.keys():
+        ping = f"<@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}"
+    else:
+        ping = str(os.environ['RAILWAY_GIT_AUTHOR'])
+
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the {restarts}th time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: <@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}>")
+    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the {restarts}th time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
 
     set_entry("restarts", str(restarts))
 
