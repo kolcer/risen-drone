@@ -144,8 +144,8 @@ async def Rig(rigType, ch, usr):
             if usr.display_name == '00000000':
                 await SEND(ch, "You truly deserve the Zero rank.")
 
-                if FUN_ROLES["Zero"] not in usr.roles:
-                    await ADD_ROLES(usr, FUN_ROLES["Zero"])
+                if str(usr.id) not in list_decoded_entries("Zero"):
+                    add_entry("Zero", usr.id)
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))
@@ -467,8 +467,8 @@ async def GiveMana(ch,usr,message):
                 # await member.remove_roles(role)
                 await REMOVE_ROLES(member, role)
                 await asyncio.sleep(1)
-                if not FUN_ROLES["Heretic Defier"] in usr.roles:
-                    await ADD_ROLES(usr, FUN_ROLES["Heretic Defier"])
+                if not str(usr.id) in list_decoded_entries("Heretic Defier"):
+                    add_entry("Heretic Defier", usr.id)
             else:
                 await SEND(message.channel,
                     member.display_name +
