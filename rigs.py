@@ -379,7 +379,6 @@ async def ExecuteJokerRig(ch,usr,message):
 
     if (ch.name not in CHANNELS) or (not EXTRA_ROLES['climber'] in usr.roles) or ("https" in message.content) or (len(message.content) > 45):
         return
-    ACTIVE_RIGS["joker"] = False
 
     if ("cast" in message.content and "rig" in message.content):
         await SEND(f"{usr.mention} is one step ahead of {RIG_DATA['rigCaster'].name}! They earn the \"One step ahead\" role!")
@@ -387,6 +386,8 @@ async def ExecuteJokerRig(ch,usr,message):
         add_entry("One step ahead", usr.id)
         return
 
+    ACTIVE_RIGS["joker"] = False
+    
     msgcontent = message.content
 
     await DELETE(message)
