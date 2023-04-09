@@ -99,6 +99,7 @@ async def FightingProcessClass(usr, msg):
 
         if FG_QUEUE[FG["class-picked"]] != usr:
             await SEND(FG["channel"], "Who had the idea of this encounter gets to choose pick.") 
+            return
 
         if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] == "none":
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
