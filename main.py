@@ -97,7 +97,7 @@ async def on_ready():
     for i, v in EMOJIS_TO_REACT.items():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
     
-    restarts = int(get_value("restarts"))
+    restarts = int(get_value("restarts")) 
     #send ready to the test channel
     await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the {restarts}th time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: `{os.environ['RAILWAY_GIT_AUTHOR']}`")
 
