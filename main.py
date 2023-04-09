@@ -331,7 +331,7 @@ async def on_message(message):
             await JoinFightingGame(usr)
 
         # ## All Rigs in one
-        elif lsplit[0] == "cast" and lsplit[2] == "rig":
+        elif lsplit[0] == "cast" and lsplit[1] == "rig":
 
             await CastRig(lsplit[1],ch,usr)
 
