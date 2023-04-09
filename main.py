@@ -363,7 +363,7 @@ async def on_message(message):
         # Weezer Rig Active
         elif ACTIVE_RIGS['weezer']:
 
-            await ExecuteWeezerRig(ch, usr)
+            await ExecuteWeezerRig(ch, usr, message)
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
