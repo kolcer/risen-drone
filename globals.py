@@ -458,6 +458,7 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gun": False,
+    "weezer": False,
 }
 
 RIG_COOLDOWNS = {

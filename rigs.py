@@ -187,6 +187,11 @@ async def Rig(rigType, ch, usr):
             ACTIVE_RIGS['gun'] = True
             RIG_DATA['rigCaster'] = usr
             msgCounting = await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
+        
+        case "weezer":
+            ACTIVE_RIGS['weezer'] = True
+            RIG_DATA['rigCaster'] = usr
+            msgCounting = await SEND(ch, f"{usr.mention} just cast Weezer rig, I guess... ?")
                 
     msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
@@ -240,7 +245,7 @@ async def SplicerRig(reaction,user):
 
 async def CastRig(rigPick,ch,usr):
 
-    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "gun":
+    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "gun" and rigPick != "weezer":
         await SEND(ch, "That is not a valid rig. Try again.")
         return
     
@@ -380,6 +385,20 @@ async def ExecuteJokerRig(ch,usr, message):
             
     return
 
+async def ExecuteWeezerRig(ch, usr, message):
+    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
+        return
+    ACTIVE_RIGS['weezer'] = False
+
+    if str(usr.id) in list_decoded_entries("Weezer"):
+        await SEND(ch, "You are already a weezer! Weezer gang forever!")
+        return
+    else:
+        await EDIT_NICK(usr, "Lil Weezer")
+        await SEND(ch, f"{usr.mention} has been Weezer'd! Welcome to weezer gang.")
+        await asyncio.sleep(1)
+        add_entry("Weezer", usr.id)
+        return
 
 async def ExecuteSplicerRig(ch,usr):
  
