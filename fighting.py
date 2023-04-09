@@ -109,6 +109,7 @@ async def FightingProcessClass(usr, msg):
             await SEND(FG["channel"], "Shush now. Wait for your opponent to pick an Alignment.") 
             return
 
+        await print(usr.name)
         FG_PLAYERS[usr]["class"] = lmsg
         await print(FG_PLAYERS[usr]["class"])
         await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
