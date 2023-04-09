@@ -341,7 +341,7 @@ SINGLE_WORD_TRIGGERS = {
 # ^ that but its reactions instead of responses - does not have to be a single word, just a single string
 REACT_TRIGGERS = {
     "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
-        'gun',                            # YOUR MESSAGE
+        'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
     "📮":
         "among",
     "🧢":
@@ -350,6 +350,8 @@ REACT_TRIGGERS = {
         "food",
     "🍔":
         "react with burger",
+    "💵":
+        "give money",
 }
 
 # all words need to be present for this trigger to occur
