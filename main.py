@@ -98,7 +98,7 @@ async def on_ready():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
     
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: `{os.environ['RAILWAY_GET_AUTHOR']}`")
+    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: `{os.environ['RAILWAY_GIT_AUTHOR']}`")
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
