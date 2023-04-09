@@ -101,7 +101,7 @@ async def on_ready():
     ping = ""
 
     if str(os.environ['RAILWAY_GIT_AUTHOR']) in GIT_COMMITTERS.keys():
-        ping = f"<@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}"
+        ping = f"<@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}>"
     else:
         ping = str(os.environ['RAILWAY_GIT_AUTHOR'])
 
