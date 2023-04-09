@@ -102,11 +102,11 @@ async def FightingProcessClass(usr, msg):
             return
 
         if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == None:
-            await SEND(FG["channel"], "I gave you a list. Read it and answer accordingly!") 
+            await SEND(FG["channel"], "The options are shown in the list. No more, no less.") 
             return
 
         if FG_PLAYERS[usr]["class"] != None:
-            await SEND(FG["channel"], "No takes-back.") 
+            await SEND(FG["channel"], "Shush now. Wait for your opponent to pick an Alignment.") 
             return
 
         FG_PLAYERS[usr]["class"] = lmsg
@@ -121,13 +121,11 @@ async def FightingProcessClass(usr, msg):
             toSend = "Everyone is now ready. Here are your picks:\n\n"
 
             for user in FG_PLAYERS:
-                toSend += f"{user.name} will be playing as {str(FG_PLAYERS[user][0]).capitalize()}.\n"
+                toSend += f"{user.name} will be playing as {str(FG_PLAYERS[user]['class']).capitalize()}.\n"
             
             toSend += "\nLet's begin."
 
             await SEND(FG["channel"], toSend)
-
-            ShowSkills()
 
         return
     
