@@ -25,6 +25,13 @@ QUESTIONS = {} # fill this up on startup from database
 NickDictionary = {}
 MG_PLAYERS = {}
 
+GIT_COMMITTERS = {
+    "Nicksmth": 267014823315898368,
+    "kolcer": 481893862864846861,
+    "random-deve": 898870303680241674,
+    "EclipseCashier": 695526697059090483,
+}
+
 # CONSTANT ARRAYS
 # this is for tips and trivia database
 TIPS_KEYS = [
