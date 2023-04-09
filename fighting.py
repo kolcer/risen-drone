@@ -175,11 +175,12 @@ async def JoinFightingGame(usr):
 
         await asyncio.sleep(30)
 
-        for user in FG_PLAYERS:
-            if FG_PLAYERS[user]["class"] == "none":
-                await SEND(FG["channel"], "One or more users have not selected an Alignment in the given time. Fight is cancelled.")
-                FG_RESET()
-                break
+        if FG["status"] != "off": 
+            for user in FG_PLAYERS:
+                if FG_PLAYERS[user]["class"] == "none":
+                    await SEND(FG["channel"], "One or more users have not selected an Alignment in the given time. Fight is cancelled.")
+                    FG_RESET()
+                    break
         return
 
 
