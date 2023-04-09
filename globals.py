@@ -269,6 +269,7 @@ CHANNELS = {
     "bot-commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,  
     "bot-testing": 813882658156838923,
+    "DEBUGS": 1094687051724627998,
 }
 
 # bot will react to the webhook emoji, if it finds in a webhook message

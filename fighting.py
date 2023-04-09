@@ -95,7 +95,7 @@ async def FightingProcessClass(usr, msg):
         
     if FG['status'] == "class-picking":
 
-        print(FG_PLAYERS)
+        await print(FG_PLAYERS)
 
         if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == None:
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
@@ -110,7 +110,7 @@ async def FightingProcessClass(usr, msg):
             return
 
         FG_PLAYERS[usr]["class"] = lmsg
-        print(FG_PLAYERS[usr]["class"])
+        await print(FG_PLAYERS[usr]["class"])
         await SEND(FG["channel"], f"{usr.mention} is playing as {lmsg.capitalize()}.")
 
         FG["class-picked"] += 1
@@ -131,12 +131,12 @@ async def FightingProcessClass(usr, msg):
 
         return
     
-    elif LADDERS['status'] == "battling" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:
-        spell = lmsg
-        while spell == "chameleon":
-            spell = random.choice(MG_SPELLS)
-        FG_NEXT_PLAYER()
-        await FG_LOOP(FG_ACTION(usr,spell))
+    # elif LADDERS['status'] == "battling" and lmsg in MG_SPELLS and MG_QUEUE[FG['currentPlayer']] == usr:
+    #     spell = lmsg
+    #     while spell == "chameleon":
+    #         spell = random.choice(MG_SPELLS)
+    #     FG_NEXT_PLAYER()
+    #     await FG_LOOP(FG_ACTION(usr,spell))
 
 
 async def PlayFightingGame(usr, ch):

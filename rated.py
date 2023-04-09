@@ -2,6 +2,7 @@ import asyncio
 import discord
 from globals import EXTRA_ROLES
 from globals import SERVER_DATA
+from globals import CHANNELS
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
@@ -58,6 +59,9 @@ async def EDIT_MESSAGE(msg, con):
 async def DELETE(message):
     await asyncio.sleep(2)
     await message.delete()
+
+async def print(message):
+    await SEND(CHANNELS["DEBUGS"], message)
 
 async def NEW_ROLE(server,colorpick, rolename):
     return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
