@@ -109,7 +109,7 @@ async def FightingProcessClass(usr, msg):
         
         await print(FG_PLAYERS)
         await print(usr.name)
-        FG_PLAYERS[usr]["class"] = lmsg
+        FG_PLAYERS[usr.name]["class"] = lmsg
         await print(FG_PLAYERS)
         await print(FG_PLAYERS[usr]["class"])
         await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
@@ -145,7 +145,7 @@ async def PlayFightingGame(usr, ch):
     else:
         FG['channel'] = ch
         FG['status'] = "second-player"
-        FG_PLAYERS[usr] = NEW_PLAYER
+        FG_PLAYERS[usr.name] = NEW_PLAYER
         FG_QUEUE.append(usr)
         FG['currentPlayer'] = 0
         FG['tick'] = time.time()
@@ -165,7 +165,7 @@ async def JoinFightingGame(usr):
         await SEND(FG['channel'], "Wait for someone else.")
         return
     else:
-        FG_PLAYERS[usr] = NEW_PLAYER
+        FG_PLAYERS[usr.name] = NEW_PLAYER
         FG_QUEUE.append(usr)
         await SEND(FG["channel"], f"{usr.mention} is eager to fight too.\n")
 

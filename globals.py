@@ -772,7 +772,7 @@ FG = {
 FG_QUEUE = []
 FG_PLAYERS = {}
 # FG_PLAYERS = {
-#     "usr": {
+#     "usr.name": {
 #         "class": None,
 #         "hp": 200,
 #         "dmg": 100,
