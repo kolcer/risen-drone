@@ -38,3 +38,10 @@ def show_specific_entry(key,index):
 
 def set_entry(key, value):
     db.set(key, value)
+
+def get_value(key):
+    value = db.get(key)
+    if value is not None:
+        return value.decode("utf-8")
+    else:
+        return None
