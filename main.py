@@ -331,9 +331,9 @@ async def on_message(message):
             await JoinFightingGame(usr)
 
         # ## All Rigs in one
-        elif lsplit[0] == "cast" and lsplit[2] == "rig":
-
-            await CastRig(lsplit[1],ch,usr)
+        elif "cast" in lmsg and "rig" in lmsg:
+            if lsplit[0] == "cast" and lsplit[2] == "rig":
+                await CastRig(lsplit[1],ch,usr)
 
         ## thief rig active
         elif ACTIVE_RIGS["thief"]:
@@ -846,20 +846,6 @@ Delete: Deletes the specified quiz question by index.
                 except Exception as e:
                     await SEND(ch, e)
                 return  
-
-            #edit any role ---IMPORTANT! keys in redis can't be edited. this command is removed.
-            # if lmsg.startswith("alter", 1):
-            #     if msgsplit[1].replace("_", " ") in FUN_ROLES:
-            #         neededrole = FUN_ROLES[msgsplit[1].replace("_", " ")]
-            #     else:
-            #         await SEND(ch, "You cannot edit this role through my commands.")
-            #         return
-
-            #     await EDIT_ROLE(neededrole, third, "changing name")
-            #     await asyncio.sleep(1)
-            #     await SEND(ch, "You changed the name correctly.")
-            #     FUN_ROLES[msgsplit[1].replace("_", " ")] = neededrole
-            #     return  
 
             #purge any role
             if lmsg.startswith("purge role", 1):
