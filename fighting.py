@@ -92,7 +92,7 @@ async def FG_LOOP(toSend):
 
 async def FightingProcessClass(usr, msg):
     lmsg = msg.lower()
-    FG_PLAYERS[usr]
+    await print(FG_PLAYERS[usr])
         
     if FG['status'] == "class-picking":
 
