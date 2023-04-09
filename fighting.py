@@ -97,23 +97,26 @@ async def FightingProcessClass(usr, msg):
         
     if FG['status'] == "class-picking":
 
-        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
+        if FG_QUEUE[FG["class-picked"]] != usr:
+            await SEND(FG["channel"], "Who had the idea of this encounter gets to choose pick.") 
+
+        if lmsg in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] == "none":
             await SEND(FG["channel"], "The selected Alignment has not made it into the fighting scene yet, sadly.") 
             return
 
-        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[usr]["class"] == "none":
+        if lmsg not in SANCTUARY.keys() and lmsg not in FG_CLASSES.keys() and FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] == "none":
             await SEND(FG["channel"], "The options are shown in the list. No more, no less.") 
             return
 
-        if FG_PLAYERS[usr]["class"] != "none":
+        if FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] != "none":
             await SEND(FG["channel"], "Shush now. Wait for your opponent to pick an Alignment.") 
             return
         
         await print(FG_PLAYERS)
         FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"] = lmsg
         await print(FG_PLAYERS)
-        await print(FG_PLAYERS[usr]["class"])
-        await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[usr]['class'].capitalize()}.")
+        await print(FG_PLAYERS[FG_QUEUE[FG["class-picked"]]]["class"])
+        await SEND(FG["channel"], f"{usr.mention} is playing as {FG_PLAYERS[FG_QUEUE[FG['class-picked']]]['class'].capitalize()}.")
 
         FG["class-picked"] += 1
 
