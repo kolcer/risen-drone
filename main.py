@@ -99,7 +99,7 @@ async def on_ready():
     
     restarts = int(get_value("restarts")) + 1
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the {restarts}th time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: <@{GIT_COMMITTERS(str(os.environ['RAILWAY_GIT_AUTHOR']))}>")
+    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the {restarts}th time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: <@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}>")
 
     set_entry("restarts", str(restarts))
 
