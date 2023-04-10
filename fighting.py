@@ -83,13 +83,16 @@ async def FG_LOOP():
         toSend = "It's **" + FG_QUEUE[FG['currentPlayer']].name + "**'s time to shine! Select a skill to use against your opponent.\n\n"
 
         for skill in FG_CLASSES[userClass].keys():
+            userSkill = FG_CLASSES[userClass][skill]
             match FG_CLASSES[userClass][skill][0]:
                 case "attack":
-                    toSend += f"[🟢][🗡️]{skill} - DMG {FG_CLASSES[userClass][skill][1]} - {FG_CLASSES[userClass][skill][2]}\n"
+                    toSend += f"[🟢]{''.join(word.capitalize() for word in skill.split())} - [🗡️]{userSkill[1]}\n"
+                case "random":
+                    toSend += f"[🟢]{''.join(word.capitalize() for word in skill.split())} - [🎲]{userSkill[1]}/{userSkill[2]})\n"
                 case "shield":
-                    toSend += f"[🟢][🛡️]{skill} - DFS {FG_CLASSES[userClass][skill][1]}% - TURNS {FG_CLASSES[userClass][skill][2]})\n"
+                    toSend += f"[🟢]{''.join(word.capitalize() for word in skill.split())} - [🛡️]{userSkill[1]}% - [⌚]{userSkill[2]})\n"
                 case _:
-                    toSend += "hi\n"            
+                    toSend += "wip\n"            
 
         await SEND(FG['channel'], toSend)
         return

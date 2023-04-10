@@ -788,26 +788,27 @@ FG_PLAYERS = {}
 #     }
 # }
 
-# [0]attack    -> [1]min damage,            [2]max damage
+# [0]attack    -> [1]damage
+# [0]random    -> [1]min damage             [2]max damage
 # [0]shield    -> [1]percentage protection, [2]number of turns
-# [0]heavy     -> [1]min damage,            [2]max damage,          [3]cooldown
-# [0]special   -> [1]heal,                  [2]damage,              [3]charge hits
-# [0]poison    -> [1]tick damage,           [2]turns,               [3]stat debuff,            [4]percentage debuff    [5]cooldown
-# [0]h. poison -> [1]min damage,            [2]max damage,          [3]tick damage,            [4]turns,               [5]stat debuff,   [6]percentage debuff  [7]cooldown
-# [0]dodge     -> [1]chance                 [2]damage if successful
-# [0]danger    -> [1]min damage             [2]max damage           [3]s. min damage           [4]s. max damage
-# [0]buff      -> [1]stat buff              [2]percentage buff      [3]turns
-# [0]debuff    -> [1]stat debuff            [2]percentage debuff    [3]turns
-# [0]h. debuff -> [1]min damage,            [2]max damage,          [3]stat debuff,            [4]percentage debuff,   [5]turns,         [6]cooldown
+# [0]heavy     -> [1]damage,                [2]cooldown
+# [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
+# [0]poison    -> [1]tick damage,           [2]turns,                 [3]stat debuff,         [4]percentage debuff 
+# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]stat debuff,        [5]percentage debuff,  [6]cooldown
+# [0]dodge     -> [1]chance                 [2]damage if successful,
+# [0]danger    -> [1]damage                 [2]self damage,
+# [0]buff      -> [1]stat buff              [2]percentage buff,       [3]turns
+# [0]debuff    -> [1]stat debuff            [2]percentage debuff,     [3]turns
+# [0]h. debuff -> [1]damage,                [2]stat debuff,           [3]percentage debuff,   [4]turns,              [5]cooldown
 FG_CLASSES = {
     "patron": {"holy blast": 
-               ["attack", 10, 20],
+               ["attack", 20],
 
                "divine shield": 
                ["shield", 30, 1], 
 
                "heavenly strike": 
-               ["heavy", 30, 40, 1],
+               ["heavy", 40, 1],
 
                "divine intervention":
                ["special", 50, 10, 5]
@@ -820,22 +821,22 @@ FG_CLASSES = {
                ["dodge", 60, 30], 
 
                "nightmare fuel": 
-               ["h. poison", 10, 20, 10, 2, "precision", 40, 2],
+               ["h. poison", 20, 10, 3, "accuracy", 40, 2],
 
                "death coil": 
-               ["danger", 20, 30, 10, 15]
+               ["danger", 30, 15]
                },
 
     "joker": {"prankster's glee": 
                ["buff", ["attack", "accuracy"], 70, 1],
 
                "wild card": 
-               ["attack", 5, 20], 
+               ["random", 5, 30], 
 
                "fool's errand": 
-               ["debuff", "accuracy", 30],
+               ["debuff", "accuracy", 30, 2],
 
                "jester's gambit": 
-               ["h. debuff", 10, 15, ["attack", "accuracy"], 30, 5, 2]
+               ["h. debuff", 15, ["attack", "accuracy"], 30, 5, 6]
                },
 }
