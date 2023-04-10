@@ -828,16 +828,16 @@ FG_CLASSES = {
                ["danger", 30, 15]
                },
 
-    "joker": {"prankster's glee": 
+    "joker": {"prankster glee": 
                ["buff", ["attack", "accuracy"], 70, 1],
 
                "wild card": 
                ["random", 5, 30], 
 
-               "fool's errand": 
+               "fool errand": 
                ["debuff", ["accuracy"], 30, 2],
 
-               "jester's gambit": 
+               "jester gambit": 
                ["heavy", 100, 10]
                },
 }
