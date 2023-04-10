@@ -39,7 +39,7 @@ NEW_PLAYER = {
     "class": None,
     "hp": 200,
     "dmg": 100,
-    "cd": {},
+    "cd": {"heavenly strike": [5]},
     "charges": 0,
 }
 #{"heavenly strike": [False, 0]}
@@ -93,7 +93,7 @@ async def FG_LOOP():
                         toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
                     case "heavy":
                         if skill in FG_PLAYERS[user]['cd'].keys():
-                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][1]}`\n"
+                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][]}`\n"
                         else:
                             toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
                     case _:
