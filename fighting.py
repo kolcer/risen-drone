@@ -101,6 +101,13 @@ async def FG_LOOP():
                             toSend += f"||[🔴]**{skill.title()}**  -  [❤️‍🩹]`{userSkill[1]}` - [💥]`{userSkill[2]}` - [🎯]`{userSkill[3]}`||\n"
                         else:
                             toSend += f"[🟢]**{skill.title()}**  -  [❤️‍🩹]`{userSkill[1]}` - [💥]`{userSkill[2]}` - [🎯]`{userSkill[3]}`\n"
+                    case "poison":
+                        toSend += f"[🟢]**{skill.title()}**  -  [🧪]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
+                    case "h. poison":
+                        if skill in FG_PLAYERS[user]['cd'].keys():
+                            toSend += f"||[🔴]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [🧪]`{userSkill[2]}` - [⌚]`{userSkill[3]}` - [⏳...]`{FG_PLAYERS[user]['cd'][skill][0]}`||\n"
+                        else:
+                            toSend += f"[🟢]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [🧪]`{userSkill[2]}` - [⌚]`{userSkill[3]}` - [⏳]`{userSkill[4]}`\n"
                     case _:
                         toSend += "wip\n"            
 

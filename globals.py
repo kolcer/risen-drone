@@ -792,9 +792,9 @@ FG_PLAYERS = {}
 # [0]random    -> [1]min damage             [2]max damage
 # [0]shield    -> [1]percentage protection, [2]number of turns
 # [0]heavy     -> [1]damage,                [2]cooldown
-#> [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
-# [0]poison    -> [1]tick damage,           [2]turns,                 [3]stat debuff,         [4]percentage debuff 
-# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]stat debuff,        [5]percentage debuff,  [6]cooldown
+# [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
+# [0]poison    -> [1]tick damage,           [2]turns,
+# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]cooldown
 # [0]dodge     -> [1]chance                 [2]damage if successful,
 # [0]danger    -> [1]damage                 [2]self damage,
 # [0]buff      -> [1]stat buff              [2]percentage buff,       [3]turns
@@ -804,14 +804,14 @@ FG_CLASSES = {
     "patron": {"holy blast": 
                ["attack", 20],
 
-               "divine shield": 
+               "sacred guard": 
                ["shield", 30, 1], 
 
                "heavenly strike": 
                ["heavy", 40, 1],
 
                "divine intervention":
-               ["special", 50, 10, 0]
+               ["special", 50, 25, 3]
                },
 
     "wicked": {"poison strike": 
