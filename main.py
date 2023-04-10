@@ -106,7 +106,7 @@ async def on_ready():
         ping = str(os.environ['RAILWAY_GIT_AUTHOR'])
 
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the **{restarts}th** time.\nI am named: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
+    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the **{restarts}th** time.\nSummary: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
 
     set_entry("restarts", str(restarts))
 
