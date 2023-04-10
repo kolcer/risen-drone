@@ -73,33 +73,37 @@ def FG_NEXT_PLAYER():
         
 
 async def FG_LOOP():
-    FG['tick'] = time.time()
-    ourTick = FG['tick']
-    user = FG_QUEUE[FG['currentPlayer']]
-    userClass = FG_PLAYERS[user]["class"]
+    try:
+        FG['tick'] = time.time()
+        ourTick = FG['tick']
+        user = FG_QUEUE[FG['currentPlayer']]
+        userClass = FG_PLAYERS[user]["class"]
+
+        while True:   
+            toSend = "It's **" + FG_QUEUE[FG['currentPlayer']].name + "**'s time to shine! Select a skill to use against your opponent.\n\n"
+
+            for skill in FG_CLASSES[userClass].keys():
+                userSkill = FG_CLASSES[userClass][skill]
+                match FG_CLASSES[userClass][skill][0]:
+                    case "attack":
+                        toSend += f"[🟢]**{skill.title()}**  -  [🗡️]`{userSkill[1]}`\n"
+                    case "random":
+                        toSend += f"[🟢]**{skill.title()}**  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
+                    case "shield":
+                        toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
+                    case "heavy":
+                        if skill in FG_PLAYERS[user]['cd'].keys():
+                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][1]}`\n"
+                        else:
+                            toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
+                    case _:
+                        toSend += "wip\n"            
+
+            await SEND(FG['channel'], toSend)
+    except Exception as e:
+        await SEND(FG["channel"], e)
     
-    while True:   
-        toSend = "It's **" + FG_QUEUE[FG['currentPlayer']].name + "**'s time to shine! Select a skill to use against your opponent.\n\n"
-
-        for skill in FG_CLASSES[userClass].keys():
-            userSkill = FG_CLASSES[userClass][skill]
-            match FG_CLASSES[userClass][skill][0]:
-                case "attack":
-                    toSend += f"[🟢]**{skill.title()}**  -  [🗡️]`{userSkill[1]}`\n"
-                case "random":
-                    toSend += f"[🟢]**{skill.title()}**  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
-                case "shield":
-                    toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
-                case "heavy":
-                    if FG_PLAYERS[user]['cd'][skill][0]:
-                        toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][1]}`\n"
-                    else:
-                        toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
-                case _:
-                    toSend += "wip\n"            
-
-        await SEND(FG['channel'], toSend)
-        return
+    return
     
 
 async def FightingProcessClass(usr, msg):
