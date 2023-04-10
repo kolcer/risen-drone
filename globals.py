@@ -811,7 +811,7 @@ FG_CLASSES = {
                ["heavy", 40, 1],
 
                "divine intervention":
-               ["special", 50, 10, 5]
+               ["special", 50, 10, 0]
                },
 
     "wicked": {"poison strike": 
