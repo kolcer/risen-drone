@@ -100,10 +100,10 @@ async def FG_LOOP():
                         toSend += "wip\n"            
 
             await SEND(FG['channel'], toSend)
+            return
     except Exception as e:
         await SEND(FG["channel"], e)
-    
-    return
+        return
     
 
 async def FightingProcessClass(usr, msg):
