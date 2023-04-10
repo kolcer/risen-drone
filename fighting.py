@@ -34,16 +34,15 @@ import asyncio
 from globals import *
 from rated import *
 
-#gets the dictionary but this one will change
-CURRENT_CLASSES = FG_CLASSES
-
 #default stats
 NEW_PLAYER = {
     "class": None,
     "hp": 200,
     "dmg": 100,
+    "cd": {},
     "charges": 0,
 }
+#{"heavenly strike": [False, 0]}
 
 #pre-attack checks
 TICK = ["poison", "h. poison"]
@@ -88,9 +87,14 @@ async def FG_LOOP():
                 case "attack":
                     toSend += f"[🟢]**{skill.title()}**  -  [🗡️]`{userSkill[1]}`\n"
                 case "random":
-                    toSend += f"[🟢]{skill.title()}  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
+                    toSend += f"[🟢]**{skill.title()}**  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
                 case "shield":
-                    toSend += f"[🟢]{skill.title()}  -  [🛡️]`{userSkill[1]}%` - [⌚]`{userSkill[2]}`\n"
+                    toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
+                case "heavy":
+                    if FG_PLAYERS[user]['cd'][skill][0]:
+                        toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][1]}`\n"
+                    else:
+                        toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
                 case _:
                     toSend += "wip\n"            
 
