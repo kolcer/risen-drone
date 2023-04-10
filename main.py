@@ -97,8 +97,13 @@ async def on_ready():
     for i, v in EMOJIS_TO_REACT.items():
         EMOJIS_TO_REACT[i] = GET_EMOJI(client,v)
     
-    restarts = int(get_value("restarts")) + 1
+    restarts = 0
     ping = ""
+
+    if os.environ['RAILWAY_GIT_COMMIT_MESSAGE'].startswith("Merge branch"):
+        restarts = int(get_value("restarts")) + 2
+    else:
+        restarts = int(get_value("restarts")) + 1
 
     if str(os.environ['RAILWAY_GIT_AUTHOR']) in GIT_COMMITTERS.keys():
         ping = f"<@{GIT_COMMITTERS[str(os.environ['RAILWAY_GIT_AUTHOR'])]}>"
