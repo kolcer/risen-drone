@@ -792,7 +792,7 @@ FG_PLAYERS = {}
 # [0]random    -> [1]min damage             [2]max damage
 # [0]shield    -> [1]percentage protection, [2]number of turns
 # [0]heavy     -> [1]damage,                [2]cooldown
-# [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
+#> [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
 # [0]poison    -> [1]tick damage,           [2]turns,                 [3]stat debuff,         [4]percentage debuff 
 # [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]stat debuff,        [5]percentage debuff,  [6]cooldown
 # [0]dodge     -> [1]chance                 [2]damage if successful,

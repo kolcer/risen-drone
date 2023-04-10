@@ -39,8 +39,8 @@ NEW_PLAYER = {
     "class": None,
     "hp": 200,
     "dmg": 100,
-    "cd": {"heavenly strike": [5]},
-    "charges": 0,
+    "cd": {},
+    "charge": 0,
 }
 #{"heavenly strike": [False, 0]}
 
@@ -86,16 +86,21 @@ async def FG_LOOP():
                 userSkill = FG_CLASSES[userClass][skill]
                 match FG_CLASSES[userClass][skill][0]:
                     case "attack":
-                        toSend += f"[🟢]**{skill.title()}**  -  [🗡️]`{userSkill[1]}`\n"
+                        toSend += f"[🟢]**{skill.title()}**  -  [💥]`{userSkill[1]}`\n"
                     case "random":
                         toSend += f"[🟢]**{skill.title()}**  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
                     case "shield":
-                        toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
+                        toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⌚]`{userSkill[2]}`\n"
                     case "heavy":
                         if skill in FG_PLAYERS[user]['cd'].keys():
-                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][0]}`\n"
+                            toSend += f"||[🔴]**{skill.title()}**  -  [🪓]`{userSkill[1]}` - [⏳...]`{FG_PLAYERS[user]['cd'][skill][0]}`||\n"
                         else:
-                            toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
+                            toSend += f"[🟢]**{skill.title()}**  -  [🪓]`{userSkill[1]}` - [⏳]`{userSkill[2]}`\n"
+                    case "special":
+                        if FG_PLAYERS[user]['charge'] != userSkill[3]:
+                            toSend += f"||[🔴]**{skill.title()}**  -  [❤️‍🩹]`{userSkill[1]}` - [💥]`{userSkill[2]}` - [🎯]`{userSkill[3]}`||\n"
+                        else:
+                            toSend += f"[🟢]**{skill.title()}**  -  [❤️‍🩹]`{userSkill[1]}` - [💥]`{userSkill[2]}` - [🎯]`{userSkill[3]}`\n"
                     case _:
                         toSend += "wip\n"            
 
