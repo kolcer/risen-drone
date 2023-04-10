@@ -86,11 +86,11 @@ async def FG_LOOP():
             userSkill = FG_CLASSES[userClass][skill]
             match FG_CLASSES[userClass][skill][0]:
                 case "attack":
-                    toSend += f"[🟢]{skill.title()}  -  [🗡️]{userSkill[1]}\n"
+                    toSend += f"[🟢]**{skill.title()}**  -  [🗡️]`{userSkill[1]}`\n"
                 case "random":
-                    toSend += f"[🟢]{skill.title()}  -  [🎲]{userSkill[1]}/{userSkill[2]})\n"
+                    toSend += f"[🟢]{skill.title()}  -  [🎲]`{userSkill[1]}/{userSkill[2]}`\n"
                 case "shield":
-                    toSend += f"[🟢]{skill.title()}  -  [🛡️]{userSkill[1]}% - [⌚]{userSkill[2]}\n"
+                    toSend += f"[🟢]{skill.title()}  -  [🛡️]`{userSkill[1]}%` - [⌚]`{userSkill[2]}`\n"
                 case _:
                     toSend += "wip\n"            
 
