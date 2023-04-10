@@ -113,9 +113,9 @@ async def FG_LOOP():
                     case "danger":
                         toSend += f"[🟢]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [⚠️]`{userSkill[2]}`\n"
                     case "buff":
-                        toSend += f"[🟢]**{skill.title()}**  -  [⬆️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]}` - [🔢]`{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
+                        toSend += f"[🟢]**{skill.title()}**  -  [⬆️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]} +{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
                     case "debuff":
-                        toSend += f"[🟢]**{skill.title()}**  -  [⬇️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]}` - [🔢]`{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
+                        toSend += f"[🟢]**{skill.title()}**  -  [⬇️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]} -{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
                     case _:
                         toSend += "error\n"            
 
