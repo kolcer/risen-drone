@@ -93,7 +93,7 @@ async def FG_LOOP():
                         toSend += f"[🟢]**{skill.title()}**  -  [🛡️]`{userSkill[1]}%` - [⏳]`{userSkill[2]}`\n"
                     case "heavy":
                         if skill in FG_PLAYERS[user]['cd'].keys():
-                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][]}`\n"
+                            toSend += f"[🔴]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚...]`{FG_PLAYERS[user]['cd'][skill][0]}`\n"
                         else:
                             toSend += f"[🟢]**{skill.title()}**  -  [🔨]`{userSkill[1]}` - [⌚]`{userSkill[2]}`\n"
                     case _:
