@@ -100,7 +100,7 @@ async def on_ready():
     restarts = 0
     ping = ""
 
-    if os.environ['RAILWAY_GIT_COMMIT_MESSAGE'].startswith("Merge branch"):
+    if str(os.environ['RAILWAY_GIT_COMMIT_MESSAGE']).startswith("Merge branch"):
         restarts = int(get_value("restarts")) + 2
     else:
         restarts = int(get_value("restarts")) + 1
