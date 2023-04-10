@@ -108,8 +108,16 @@ async def FG_LOOP():
                             toSend += f"||[🔴]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [🧪]`{userSkill[2]}` - [⌚]`{userSkill[3]}` - [⏳...]`{FG_PLAYERS[user]['cd'][skill][0]}`||\n"
                         else:
                             toSend += f"[🟢]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [🧪]`{userSkill[2]}` - [⌚]`{userSkill[3]}` - [⏳]`{userSkill[4]}`\n"
+                    case "dodge":
+                        toSend += f"[🟢]**{skill.title()}**  -  [💨]`{userSkill[1]}%` - [💥]`{userSkill[2]}`\n"
+                    case "danger":
+                        toSend += f"[🟢]**{skill.title()}**  -  [💥]`{userSkill[1]}` - [⚠️]`{userSkill[2]}`\n"
+                    case "buff":
+                        toSend += f"[🟢]**{skill.title()}**  -  [⬆️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]}` - [🔢]`{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
+                    case "debuff":
+                        toSend += f"[🟢]**{skill.title()}**  -  [⬇️]`{'random' if len(userSkill[1]) != 1 else userSkill[1][0]}` - [🔢]`{userSkill[2]}%` - [⌚]`{userSkill[3]}`\n"
                     case _:
-                        toSend += "wip\n"            
+                        toSend += "error\n"            
 
             await SEND(FG['channel'], toSend)
             return

@@ -795,11 +795,10 @@ FG_PLAYERS = {}
 # [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
 # [0]poison    -> [1]tick damage,           [2]turns,
 # [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]cooldown
-# [0]dodge     -> [1]chance                 [2]damage if successful,
+# [0]dodge     -> [1]chance                 [2]damage if successful
 # [0]danger    -> [1]damage                 [2]self damage,
 # [0]buff      -> [1]stat buff              [2]percentage buff,       [3]turns
 # [0]debuff    -> [1]stat debuff            [2]percentage debuff,     [3]turns
-# [0]h. debuff -> [1]damage,                [2]stat debuff,           [3]percentage debuff,   [4]turns,              [5]cooldown
 FG_CLASSES = {
     "patron": {"holy blast": 
                ["attack", 20],
@@ -815,13 +814,13 @@ FG_CLASSES = {
                },
 
     "wicked": {"poison strike": 
-               ["poison", 10, 3, 'healing', 50],
+               ["poison", 10, 3],
 
                "shadow step": 
                ["dodge", 60, 30], 
 
                "nightmare fuel": 
-               ["h. poison", 20, 10, 3, "accuracy", 40, 2],
+               ["h. poison", 20, 10, 3, 2],
 
                "death coil": 
                ["danger", 30, 15]
@@ -834,9 +833,9 @@ FG_CLASSES = {
                ["random", 5, 30], 
 
                "fool's errand": 
-               ["debuff", "accuracy", 30, 2],
+               ["debuff", ["accuracy"], 30, 2],
 
                "jester's gambit": 
-               ["h. debuff", 15, ["attack", "accuracy"], 30, 5, 6]
+               ["heavy", 100, 10]
                },
 }
