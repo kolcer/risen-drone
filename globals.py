@@ -344,6 +344,8 @@ SINGLE_WORD_TRIGGERS = {
         "hm",
     "https://cdn.discordapp.com/emojis/734784926561337497.webp?size=48&name=CH_PepeScared&quality=lossless":
         "kill",
+    "{mention} we need to cook":
+        "waltuh",
 }
 
 # ^ that but its reactions instead of responses - does not have to be a single word, just a single string
