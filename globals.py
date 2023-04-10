@@ -323,7 +323,7 @@ SINGLE_WORD_TRIGGERS = {
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
     "You're the one that has no balls.":
-        'balls',
+        'no balls',
     "The only skill issue you have is your capability to try to roast someone. Nice try.":
         'skill issue',
     "Oh I like you admitting to being a clown. Just like a Joker!":
