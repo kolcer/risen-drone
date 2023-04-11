@@ -259,7 +259,7 @@ WISDOM = [
     "Cheating is based.",
     "If you go to this message, you can achieve a pretty drip result by following the instructions... -> https://discord.com/channels/624227331720085528/750060041289072771/1093589933333164162",
     "Wisdom can grant roles.",
-    "Weezer 4 evah.",
+    "Impostor among us sus new alignment??.",
     # Suggestions from community
     "y - RealBlanket#7739",
     "nah - Amadán#9008",
@@ -435,7 +435,7 @@ COOLDOWN_SELECT = {
     "joker": "tsj",
     "splicer": "tsj",
     "gun": "gun",
-    "weezer": "gun",
+    "impostor": "gun",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -452,7 +452,7 @@ COOLDOWN_DURATION = {
     "joker": 600,
     "splicer": 600,
     "gun": 600,
-    "weezer": 300,
+    "impostor": 300,
     "archon": 240,    
     "heretic": 60,
     "wicked": 60,    
@@ -476,7 +476,7 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gun": False,
-    "weezer": False,
+    "impostor": False,
 }
 
 RIG_COOLDOWNS = {
@@ -602,7 +602,7 @@ FUN_ROLES = [
     "Zero",
     "Optimus",
     "Wise",
-    "Weezer",
+    "Impostor",
 ]
 
 APPROVED_ROLES = {

@@ -376,10 +376,10 @@ async def on_message(message):
 
             await ExecuteGunRig(ch,usr,message)
 
-        # Weezer Rig Active
-        elif ACTIVE_RIGS['weezer']:
+        # Impostor Rig Active
+        elif ACTIVE_RIGS['impostor']:
 
-            await ExecuteWeezerRig(ch, usr, message)
+            await ExecuteImpostorRig(ch, usr, message)
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
