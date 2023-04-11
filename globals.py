@@ -269,6 +269,7 @@ WISDOM = [
     "|assign 898870303680241674 I was there - frfr#0431",
     " ||https://cdn.discordapp.com/attachments/750060041289072771/1095276098935324692/Screen_Shot_2023-04-11_at_11.15.57.png|| ",
     "That is terrible advice, who writes this stuff? - sleazel#0820",
+    "one more commitment and its 1.1k commitments - cashier#6099",
 ]
 
 # CONSTANT DICTIONARIES
