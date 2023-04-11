@@ -89,6 +89,7 @@ async def on_ready():
     #prepare the roles
  
     PrepareRoles(SERVER_DATA['server'].roles)
+    # PrepareSecretRoles(FUN_ROLES.keys()) #Keeping this ready.
             
     #fetch questions for the quiz
     await FetchQuestions()
@@ -235,6 +236,14 @@ async def on_message(message):
             await ADD_REACTION(message, "❤️")
         else: 
             if not str(usr.id) in list_decoded_entries("Architect Design"):
+                # firstRole = add_entry_with_check("Architect Design", usr.id) #finishing tomorrow
+                # await asyncio.sleep(1)
+                # await SEND(ch, f"I like your style.")
+                # await asyncio.sleep(1)
+                # if firstRole != "": 
+                #     await SEND(CHANNELS["bot-commands"], f"{usr.name}{firstRole}")
+                # await ADD_REACTION(message, "❤️‍🔥")
+
                 add_entry("Architect Design", usr.id)
                 await asyncio.sleep(1)
                 await SEND(ch, "I like your style.")

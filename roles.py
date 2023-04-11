@@ -2,6 +2,7 @@ import random
 
 from rated import *
 from globals import *
+from database import list_decoded_entries
 
 def PrepareRoles(roles):
     for role in roles:
@@ -44,6 +45,13 @@ def PrepareRoles(roles):
         #basically Splicer, roles with color and icons
         if role.name in APPROVED_ROLES:
             APPROVED_ROLES[role.name] = role
+
+# def PrepareSecretRoles(roles):  # Keeping this ready.
+#     for role in roles:
+#         #secret roles
+#         if role in roles:
+#             FUN_ROLES[role] = list_decoded_entries(role)
+#             continue
  
 async def MorphTo(usr,role):
     if role == "Gun":

@@ -1,6 +1,7 @@
 import redis
 import os
 import random
+from globals import FUN_ROLES
 # Set up the data base
 db = redis.from_url(os.environ.get("REDIS_URL"))
 
@@ -8,6 +9,18 @@ db = redis.from_url(os.environ.get("REDIS_URL"))
 
 def add_entry(key, new_entry):
     db.rpush(key,new_entry)
+
+# def add_entry_with_check(key, new_entry):   # finishing tomorrow
+#     hadAtLeastOneRole = ""
+
+#     for role in FUN_ROLES:
+#         if new_entry in list_decoded_entries(role):
+#             hadAtLeastOneRole = ", you just found your first secret role. Type `bd show profile` to view it."
+#             break
+
+#     db.rpush(key,new_entry)
+
+#     return hadAtLeastOneRole
 
 def delete_key(key):
     db.delete(key)
