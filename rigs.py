@@ -388,7 +388,7 @@ async def ExecuteJokerRig(ch,usr, message):
 async def ExecuteImpostorRig(ch, usr, message):
     if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
         return
-    ACTIVE_RIGS['Impostor'] = False
+    ACTIVE_RIGS['impostor'] = False
 
     if str(usr.id) in list_decoded_entries("Impostor"):
         await SEND(ch, "You are already ejected! Stubid idiot")
