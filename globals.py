@@ -799,7 +799,7 @@ FG_PLAYERS = {}
 # [0]heavy     -> [1]damage,                [2]cooldown
 # [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
 # [0]poison    -> [1]tick damage,           [2]turns,
-# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]cooldown
+# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,        [4]cooldown
 # [0]dodge     -> [1]chance                 [2]damage if successful
 # [0]danger    -> [1]damage                 [2]self damage,
 # [0]buff      -> [1]stat buff              [2]percentage buff,       [3]turns
