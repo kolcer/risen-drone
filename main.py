@@ -236,7 +236,7 @@ async def on_message(message):
             await ADD_REACTION(message, "❤️")
         else: 
             if not str(usr.id) in list_decoded_entries("Architect Design"):
-                add_entry_with_check("Architect Design", usr)
+                await add_entry_with_check("Architect Design", usr)
                 await asyncio.sleep(1)
                 await SEND(ch, f"I like your style.")
                 await asyncio.sleep(1)
@@ -258,7 +258,7 @@ async def on_message(message):
             await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
             await asyncio.sleep(1)
             if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
-                add_entry_with_check("Sanctuary Discoverer", usr)
+                await add_entry_with_check("Sanctuary Discoverer", usr)
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
@@ -480,7 +480,7 @@ async def on_message(message):
             if usr in SPLICER_FANS:
                 if SPLICER_FANS[usr] == 3:
                     if not str(usr.id) in list_decoded_entries("Splicer"):
-                        add_entry_with_check("Splicer", usr)
+                        await add_entry_with_check("Splicer", usr)
                         await asyncio.sleep(1)
                         await ADD_ROLES(usr, APPROVED_ROLES["Splicer"])
                         await asyncio.sleep(1)
@@ -495,7 +495,7 @@ async def on_message(message):
             if usr in THE_DRIP: # ok imagine THE_DRIP is THE_OPTIMUS
                 if THE_DRIP[usr] == 9:
                     if not str(usr.id) in list_decoded_entries("Optimus"):
-                        add_entry_with_check("Optimus", usr)
+                        await add_entry_with_check("Optimus", usr)
                         await asyncio.sleep(1)
                         await SEND(ch, f"You will never know where you will end up in a twisted situation. **{usr.name}** has become an Optimus.")
                 else:
@@ -600,7 +600,7 @@ _[alignment]_ **trivia**
                 return
             else:
                 if not str(usr.id) in list_decoded_entries("Wise"):
-                    add_entry_with_check("Wise", usr)
+                    await add_entry_with_check("Wise", usr)
                     await SEND(ch, f"||***Congratulations! You have found the secret wisdom of the drone, earning you the “Wise” role.***||")
                     await asyncio.sleep(2)
                 else:
