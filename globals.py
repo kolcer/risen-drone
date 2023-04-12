@@ -244,7 +244,7 @@ WISDOM = [
     "In trying times, taking a deep breath and counting to ten could help alleviate the stress. And if that doesn't work, try taking a deep breath and counting to twenty. And if that still doesn't work, maybe it's time for a trip to the forest without any reception or signs.",
     "When faced with a difficult decision, weigh the pros and cons carefully. And if that doesn't help, flip a coin. If you are unhappy with the result, you know what to do. Go buy some oreos. And some more. Another box, why not. Double creme. Mega creme. Crunchies. Ew, golden ones, but why not. MOAR!!",
     "The secret to happiness is to focus on the things that really matter in life. Like family, friends, and a full box of oreos.",
-    "Remember, Rome wasn't built in a day, but if you pour a lot of passion into what you do, Rome still won't be built in one day. Or 2. Maybe get enough people to build rome, and you can do it. But why are you building rome? just build a mansion if you have enough money and people to build rome lol.",
+    "Remember, Rome wasn't built in a day, but if you pour a lot of passion into what you do, Rome still won't be built in one day. Or 2. Maybe get enough people to build Rome, and you can do it. But why are you building rome? Just build a mansion if you have enough money and people to build rome lol.",
     "The road to success is paved with hard work and determination. If you fail, try bribing someone with oreos. I would accept your bribe if i could.",
     "Do not give up after the first attempt, try again. Otherwise, try pretending that you never tried in the first place. It's a great way to save face.",
     # Secret Role Hints!
