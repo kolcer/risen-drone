@@ -16,12 +16,14 @@ async def add_entry_with_check(key, new_entry):
     roleCounter = 0
 
     for role in FUN_ROLES:
-        if new_entry.id in list_decoded_entries(role):
+        if str(new_entry.id) in list_decoded_entries(role):
             roleCounter += 1 
             break
 
     if roleCounter == 0:
-        await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
+        await SEND(CHANNELS["bot-testing"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
+
+    roleCounter = 0
 
     db.rpush(key,new_entry.id)
 
