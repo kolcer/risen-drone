@@ -145,7 +145,7 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, "You truly deserve the Zero rank.")
 
                 if str(usr.id) not in list_decoded_entries("Zero"):
-                    add_entry("Zero", usr.id)
+                    add_entry_with_check("Zero", usr)
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))
@@ -397,7 +397,7 @@ async def ExecuteImpostorRig(ch, usr, message):
         await EDIT_NICK(usr, "The Sus")
         await SEND(ch, f"{usr.mention} has been ejected! L + skill issue + lmao + bad + ratio.")
         await asyncio.sleep(1)
-        add_entry("Impostor", usr.id)
+        add_entry_with_check("Impostor", usr)
         return
 
 async def ExecuteSplicerRig(ch,usr):
@@ -468,7 +468,7 @@ async def GiveMana(ch,usr,message):
                 await REMOVE_ROLES(member, role)
                 await asyncio.sleep(1)
                 if not str(usr.id) in list_decoded_entries("Heretic Defier"):
-                    add_entry("Heretic Defier", usr.id)
+                    add_entry_with_check("Heretic Defier", usr)
             else:
                 await SEND(message.channel,
                     member.display_name +
