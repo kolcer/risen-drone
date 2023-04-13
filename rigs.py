@@ -7,6 +7,8 @@ from globals import *
 from database import *
 from redis import *
 
+#--test
+from discord.ext import commands
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
@@ -426,6 +428,16 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["user-name"] = usrn1 + rcn2
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
+
+    try:
+        view = discord.ui.View()
+        button = discord.ui.Button(label = "Click me!!!")
+        view.addItem(button)
+        await ch.send(view=view)
+    except Exception as e:
+        await SEND(ch, "Lol you failed miserably, try again.")
+        await asyncio.sleep(1)
+        await SEND(ch, e)
 
     focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
     SPLICER_RIG["reactionmessage"] = focusmsg
