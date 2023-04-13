@@ -45,6 +45,7 @@ async def SEND(channel,message):
         return
     return await channel.send(message)
 
+#sends a view with a message
 async def SEND_VIEW(channel, message, view):
     return await channel.send(message, view = view)
 
@@ -58,7 +59,11 @@ async def ADD_REACTION(msg,reaction):
 
 #edit message
 async def EDIT_MESSAGE(msg, con):
-    await msg.edit(content=con)
+    await msg.edit(content = con)
+
+#edit views and/or its message
+async def EDIT_MESSAGE(msg, con, view):
+    await msg.edit(content = con, view = view)
     
 async def DELETE(message):
     await asyncio.sleep(2)
