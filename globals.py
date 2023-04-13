@@ -357,14 +357,14 @@ REACT_TRIGGERS = {
         'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
     "📮":
         "among",
-    "🧢":
-        "best",
     "👁":
         "food",
     "🍔":
         "react with burger",
-    "💵":
-        "give money",
+    "🧢":
+        "best",
+    "🥰":
+        "oreo",
 }
 
 # all words need to be present for this trigger to occur
