@@ -63,7 +63,7 @@ async def EDIT_MESSAGE(msg, con):
 
 #edit views and/or its message
 async def EDIT_VIEW_MESSAGE(msg, con, view):
-    await msg.edit(content = con, view = view)
+    await msg.edit(content = con, view = view) 
     
 async def DELETE(message):
     await asyncio.sleep(2)
