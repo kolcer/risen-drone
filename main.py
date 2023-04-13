@@ -201,7 +201,7 @@ async def on_message(message):
         for role in usr.roles:
             if role.name in IMMUNITY_ROLES:
                 return
-        if usr.id == 827952429290618943:
+        if usr.id == 827952429290618943 and msg == "I like your style.":
             return
 
         await DELETE(message)
