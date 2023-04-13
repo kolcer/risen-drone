@@ -255,7 +255,7 @@ async def CastRig(rigPick,ch,usr):
         await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
-    if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"]:
+    if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"] and ch.id != 1093647594288316458:
         rigPick = "heretic"
 
     if rigPick == "chameleon":
@@ -431,8 +431,8 @@ async def ExecuteSplicerRig(ch,usr):
 
     try:
         view = discord.ui.View()
-        button = discord.ui.Button(label = "Click me!!!")
-        view.addItem(button)
+        button = discord.ui.Button(label="click here")
+        view.add_item(button)
         await ch.send(view=view)
     except Exception as e:
         await SEND(ch, "Lol you failed miserably, try again.")
