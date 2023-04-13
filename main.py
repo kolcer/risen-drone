@@ -799,7 +799,8 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("taketh away ", 1):
                 try:
                     lim = int(third)
-                    await message.channel.purge(limit=lim)
+                    lim += 1 # because the sent message is a message
+                    await PURGE(ch, lim)
                     return
                 except:
                     await SEND(ch, "no lol")
