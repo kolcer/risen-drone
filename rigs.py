@@ -10,6 +10,10 @@ from redis import *
 #--test
 from discord.ext import commands
 
+# class SimpleView(discord.ui.View):
+#     async def hello(self, interaction: discord.Interaction, button: discord.ui.Button):
+#         await interaction.response.send_message("test")
+
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
         if roles.name in IMMUNITY_ROLES:
@@ -431,7 +435,8 @@ async def ExecuteSplicerRig(ch,usr):
 
     try:
         view = discord.ui.View()
-        button = discord.ui.Button(label="click here")
+        button = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
+        button = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
         view.add_item(button)
         await ch.send(view=view)
     except Exception as e:
