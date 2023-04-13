@@ -804,7 +804,7 @@ Delete: Deletes the specified quiz question by index.
                     lim += 1 # because the sent message is a message
                     await PURGE(ch, lim)
                     await asyncio.sleep(1)
-                    await SEND(CHANNELS['bot-testing'], f"{usr.mention} has purged {lim-1} messages in <#{ch}>")
+                    await SEND(CHANNELS['bot-testing'], f"{usr.mention} has purged {lim-1} messages in <#{ch.id}>")
                     return
                 except:
                     await SEND(ch, "no lol")
