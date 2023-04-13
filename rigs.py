@@ -10,9 +10,10 @@ from redis import *
 #--test
 from discord.ext import commands
 
-# class SimpleView(discord.ui.View):
-#     async def hello(self, interaction: discord.Interaction, button: discord.ui.Button):
-#         await interaction.response.send_message("test")
+class SimpleView(discord.ui.View):
+    @discord.ui.button(lavel="hi", style = discord.ButtonStyle.success)
+    async def hello(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message("Imagine if this works, though.")
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
@@ -434,11 +435,11 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
     try:
-        view = discord.ui.View()
-        button1 = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
-        button2 = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
-        view.add_item(button1)
-        view.add_item(button2)
+        view = SimpleView()
+        declineSplice = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
+        acceptSplice = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
+        view.add_item(declineSplice)
+        view.add_item(acceptSplice)
         await ch.send(view=view)
     except Exception as e:
         await SEND(ch, "Lol you failed miserably, try again.")
