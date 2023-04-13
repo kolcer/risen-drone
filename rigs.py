@@ -484,8 +484,7 @@ async def ExecuteSplicerRig(ch,usr):
         await SEND(ch, e)
 
     await view.wait()
-
-    view.too_late()
+    await view.too_late()
 
     # await ADD_REACTION(focusmsg, "❌")
     # await asyncio.sleep(1)
