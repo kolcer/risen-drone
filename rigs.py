@@ -10,10 +10,46 @@ from redis import *
 #--test
 from discord.ext import commands
 
-class SimpleView(discord.ui.View):
-    @discord.ui.button(label="hi", style = discord.ButtonStyle.success)
-    async def hello(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("Imagine if this works, though.")
+def disable_splicer():
+    SPLICER_RIG["user"] = None
+    SPLICER_RIG["answer"] = None
+    SPLICER_RIG["active"] = False
+    SPLICER_RIG["reactionmessage"] = None
+    SPLICER_RIG["user-name"] = ""
+    SPLICER_RIG['rigcaster-name'] = ""
+
+class SplicerView(discord.ui.View):
+    async def too_late(self):
+        for item in self.children:
+            item.disabled = True
+
+        disable_splicer()
+
+        await EDIT_MESSAGE(self.message, view = self)
+
+    async def on_timeout(self) -> None:
+        await self.too_late(self)
+        await SEND(self.message.channel, "Too little, too late.")
+
+    @discord.ui.button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
+    async def declined(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"] and self.message == SPLICER_RIG["reactionmessage"]:
+            disable_splicer()
+            await interaction.response.send_message("Splice request declined. That's too bad.")
+
+    @discord.ui.button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
+    async def accepted(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"] and self.message == SPLICER_RIG["reactionmessage"]:
+            await EDIT_NICK(usr, SPLICER_RIG["user-name"])
+            await asyncio.sleep(1)
+            await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
+            
+            disable_splicer()
+
+            await interaction.response.send_message("Splice request accepted. Enjoy your new display names.")
+
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
@@ -434,36 +470,35 @@ async def ExecuteSplicerRig(ch,usr):
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
+    # focusmsg = 
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
+    # SPLICER_RIG["reactionmessage"] = focusmsg
+
     try:
-        view = SimpleView()
-        declineSplice = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
-        acceptSplice = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
-        view.add_item(declineSplice)
-        view.add_item(acceptSplice)
-        await ch.send(view=view)
+        view = SplicerView(timeout = 5)
+        # await ch.send(view=view)
+        message = await SEND(ch, view=view)
+        view.message = message
+        SPLICER_RIG["reactionmessage"] = message
     except Exception as e:
         await SEND(ch, "Lol you failed miserably, try again.")
         await asyncio.sleep(1)
         await SEND(ch, e)
 
-    focusmsg = await SEND(ch, RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + ".")
-    SPLICER_RIG["reactionmessage"] = focusmsg
+    await view.wait()
 
-    await ADD_REACTION(focusmsg, "❌")
-    await asyncio.sleep(1)
-    await ADD_REACTION(focusmsg, "✅")
+    # await ADD_REACTION(focusmsg, "❌")
+    # await asyncio.sleep(1)
+    # await ADD_REACTION(focusmsg, "✅")
 
-    await asyncio.sleep(60)
-    if SPLICER_RIG["active"]:
-        SPLICER_RIG["user"] = None
-        SPLICER_RIG["answer"] = None
-        SPLICER_RIG["active"] = False
-        SPLICER_RIG["reactionmessage"] = None
-        SPLICER_RIG["user-name"] = ""
-        SPLICER_RIG['rigcaster-name'] = ""
- 
-
-        await ADD_REACTION(focusmsg, "🛑")
+    # await asyncio.sleep(60)
+    # if SPLICER_RIG["active"]:
+    #     SPLICER_RIG["user"] = None
+    #     SPLICER_RIG["answer"] = None
+    #     SPLICER_RIG["active"] = False
+    #     SPLICER_RIG["reactionmessage"] = None
+    #     SPLICER_RIG["user-name"] = ""
+    #     SPLICER_RIG['rigcaster-name'] = ""
             
     return
 
