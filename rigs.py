@@ -473,7 +473,7 @@ async def ExecuteSplicerRig(ch,usr):
     toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
 
     try:
-        view = SplicerView(timeout = 5)
+        view = SplicerView(timeout = 60)
         # await ch.send(view=view)
         message = await SEND_VIEW(ch, toSend, view)
         view.message = message
