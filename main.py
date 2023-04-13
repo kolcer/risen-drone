@@ -792,21 +792,8 @@ Delete: Deletes the specified quiz question by index.
                     await DELETE(message)
                     return
                 except:
-                    await SEND("no.")
+                    await SEND("No.")
                     return
-            
-            # purge command - added for art channel being flooded with golfer emoji
-            # if lmsg.startswith("taketh away ", 1):
-            #     try:
-            #         lim = int(third)
-            #         lim += 1 # because the sent message is a message
-            #         await PURGE(ch, lim)
-            #         await asyncio.sleep(1)
-            #         await SEND(CHANNELS['bot-testing'], f"{usr.mention} has purged {lim-1} messages in <#{ch.id}>")
-            #         return
-            #     except:
-            #         await SEND(ch, "no lol")
-            #         return
     
             #give ckr
             if lmsg.startswith("ckr to", 1):

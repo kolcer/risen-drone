@@ -21,10 +21,6 @@ def UPDATE_CKR():
 async def GET_MSG(ch,msgID):
     return await ch.fetch_message(msgID)
 
-# purge
-# async def PURGE(ch, lim):
-#     await ch.purge(limit=lim)
-
 #add roles
 async def ADD_ROLES(usr,roles):
     await usr.add_roles(roles)
