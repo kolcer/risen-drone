@@ -11,7 +11,7 @@ from redis import *
 from discord.ext import commands
 
 class SimpleView(discord.ui.View):
-    @discord.ui.button(lavel="hi", style = discord.ButtonStyle.success)
+    @discord.ui.button(label="hi", style = discord.ButtonStyle.success)
     async def hello(interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message("Imagine if this works, though.")
 
