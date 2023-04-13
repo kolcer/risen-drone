@@ -28,7 +28,7 @@ class SplicerView(discord.ui.View):
         await EDIT_MESSAGE(self.message, view = self)
 
     async def on_timeout(self) -> None:
-        await self.too_late(self)
+        await self.too_late()
         await SEND(self.message.channel, "Too little, too late.")
 
     @discord.ui.button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)

@@ -64,7 +64,7 @@ async def DELETE(message):
     await asyncio.sleep(2)
     await message.delete()
 
-async def print(message):
+async def DRONEPRINT(message):
     await SEND(CHANNELS["DEBUGS"], message)
     await asyncio.sleep(2)
 
