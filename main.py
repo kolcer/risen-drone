@@ -710,6 +710,8 @@ Delete: Deletes the specified quiz question by index.
 |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
 
 |wisdoms: Shows how many wisdom quotes the bot has.
+
+|taketh away [messages]: purges messages (does not include your message)
 ''')
                 return
             
@@ -801,6 +803,8 @@ Delete: Deletes the specified quiz question by index.
                     lim = int(third)
                     lim += 1 # because the sent message is a message
                     await PURGE(ch, lim)
+                    await asyncio.sleep(1)
+                    await SEND(CHANNELS['bot-testing'], f"{usr.mention} has purged {lim-1} messages in <#{ch}>")
                     return
                 except:
                     await SEND(ch, "no lol")
