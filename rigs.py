@@ -477,7 +477,7 @@ async def ExecuteSplicerRig(ch,usr):
     try:
         view = SplicerView(timeout = 5)
         # await ch.send(view=view)
-        message = await SEND(ch, view=view)
+        message = await SEND_VIEW(ch, view)
         view.message = message
         SPLICER_RIG["reactionmessage"] = message
     except Exception as e:

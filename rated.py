@@ -45,6 +45,9 @@ async def SEND(channel,message):
         return
     return await channel.send(message)
 
+async def SEND_VIEW(channel, view):
+    return await channel.send("message", view = view)
+
 #purge roles
 async def PURGE_ROLES(role):
     await role.delete()
