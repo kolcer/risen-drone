@@ -435,9 +435,10 @@ async def ExecuteSplicerRig(ch,usr):
 
     try:
         view = discord.ui.View()
-        button = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
-        button = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
-        view.add_item(button)
+        button1 = discord.ui.Button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
+        button2 = discord.ui.Button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
+        view.add_item(button1)
+        view.add_item(button2)
         await ch.send(view=view)
     except Exception as e:
         await SEND(ch, "Lol you failed miserably, try again.")
