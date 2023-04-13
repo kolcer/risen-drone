@@ -258,32 +258,32 @@ async def Rig(rigType, ch, usr):
         del RIG_SPAMMERS[usr]
 
 
-async def SplicerRig(reaction,user):
+# async def SplicerRig(reaction,user):
  
-    if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
-        if reaction.emoji == "❌":
-            SPLICER_RIG["user"] = None
-            SPLICER_RIG["answer"] = None
-            SPLICER_RIG["active"] = False
-            SPLICER_RIG["reactionmessage"] = None
-            SPLICER_RIG["user-name"] = ""
-            SPLICER_RIG['rigcaster-name'] = ""
+#     if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
+#         if reaction.emoji == "❌":
+#             SPLICER_RIG["user"] = None
+#             SPLICER_RIG["answer"] = None
+#             SPLICER_RIG["active"] = False
+#             SPLICER_RIG["reactionmessage"] = None
+#             SPLICER_RIG["user-name"] = ""
+#             SPLICER_RIG['rigcaster-name'] = ""
   
-            await SEND(reaction.message.channel, "Splice request declined. That's too bad.")
-        elif reaction.emoji == "✅":
-            await EDIT_NICK(user, SPLICER_RIG["user-name"])
-            await asyncio.sleep(1)
-            await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
+#             await SEND(reaction.message.channel, "Splice request declined. That's too bad.")
+#         elif reaction.emoji == "✅":
+#             await EDIT_NICK(user, SPLICER_RIG["user-name"])
+#             await asyncio.sleep(1)
+#             await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
 
-            await SEND(reaction.message.channel, "Splice request accepted. Enjoy your new display names.")
+#             await SEND(reaction.message.channel, "Splice request accepted. Enjoy your new display names.")
 
             
-            SPLICER_RIG["user"] = None
-            SPLICER_RIG["answer"] = None
-            SPLICER_RIG["active"] = False
-            SPLICER_RIG["reactionmessage"] = None
-            SPLICER_RIG["user-name"] = ""
-            SPLICER_RIG['rigcaster-name'] = ""
+#             SPLICER_RIG["user"] = None
+#             SPLICER_RIG["answer"] = None
+#             SPLICER_RIG["active"] = False
+#             SPLICER_RIG["reactionmessage"] = None
+#             SPLICER_RIG["user-name"] = ""
+#             SPLICER_RIG['rigcaster-name'] = ""
             
 
 async def CastRig(rigPick,ch,usr):
