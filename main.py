@@ -710,8 +710,6 @@ Delete: Deletes the specified quiz question by index.
 |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
 
 |wisdoms: Shows how many wisdom quotes the bot has.
-
-|taketh away [messages]: purges messages (does not include your message)
 ''')
                 return
             
