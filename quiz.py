@@ -5,6 +5,33 @@ from globals import *
 from rated import *
 from database import *
 
+class QuestionView(discord.ui.View):
+    answer1 = None 
+    answer2 = None 
+    
+    @discord.ui.select(
+        placeholder="What is your age?",
+        options=[
+            discord.SelectOption(label="16 - 17", value="16"),
+            discord.SelectOption(label="18 - 23", value="18"),
+            discord.SelectOption(label="24 - 30", value="24")
+        ]        
+    )
+    async def select_age(self, interaction:discord.Interaction, select_item : discord.ui.Select):
+        self.answer1 = select_item.values
+        self.children[0].disabled= True
+        game_select = FavouriteGameSelect()
+        self.add_item(game_select)
+        await interaction.message.edit(view=self)
+        await interaction.response.defer()
+
+    async def respond_to_answer2(self, interaction : discord.Interaction, choices):
+        self.answer2 = choices 
+        self.children[1].disabled= True
+        await interaction.message.edit(view=self)
+        await interaction.response.defer()
+        self.stop()
+
 async def CLOSE_EVENT():
     print("entered")
     await asyncio.sleep(30)

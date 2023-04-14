@@ -23,7 +23,6 @@ from quiz import *
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-bot = discord.Bot()
 client = discord.Client(intents=intents)
 
 #print tips
@@ -68,11 +67,6 @@ async def ADMIN_CHECK(usr, ch):
         return await SEND(ch, "You are not allowed to use this command.")
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
-
-## testing slash command
-@bot.command(description="Test.") # this decorator makes a slash command
-async def ping(ctx): # a slash command will be created with the name "ping"
-    await ctx.respond(f"Pong! Latency is {bot.latency}")
     
 #drone start up, prepare roles here
 @client.event
