@@ -29,9 +29,9 @@ class CastAgain(discord.ui.View):
             usr = interaction.user
             if usr == self.caster:
                 await INTERACTION(interaction.response, "Casting again...", True)
+                self.stop()
                 await asyncio.sleep(2)
                 await Rig(self.type, self.channel, self.caster)
-                self.stop()
             elif usr != self.caster:
                 await INTERACTION(interaction.response, "You did not cast this rig.", True)
             else:
