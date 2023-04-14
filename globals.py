@@ -266,7 +266,7 @@ WISDOM = [
     "I am unoriginal and cannot come up with a good quote - Xeron#7149",
     "https://cdn.discordapp.com/attachments/750060041289072771/1094195127909634168/Screen_Shot_2023-04-08_at_11.40.40.png",
     "|assign 898870303680241674 I was there - frfr#0431",
-    " *||https://cdn.discordapp.com/attachments/750060041289072771/1095276098935324692/Screen_Shot_2023-04-11_at_11.15.57.png||* ",
+    " *|| https://cdn.discordapp.com/attachments/750060041289072771/1095276098935324692/Screen_Shot_2023-04-11_at_11.15.57.png ||* ",
     "That is terrible advice, who writes this stuff? - sleazel#0820",
     "me - roibrari#2287",
     "one more commitment and its 1.1k commitments - cashier#6099",

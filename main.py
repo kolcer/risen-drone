@@ -593,7 +593,7 @@ _[alignment]_ **trivia**
         
         # Get the drone's wisdom
         elif lmsg.startswith("drone of wisdom"):
-            if random.randint(1, 150) > 1:
+            if random.randint(1, 100) > 1:
                 await SEND(ch, f"||*{random.choice(WISDOM)}*||")
                 return
             else:
