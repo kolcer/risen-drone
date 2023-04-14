@@ -19,7 +19,6 @@ from quiz import *
 
 # This allows us to know if user has updated their presence
 # Mosty for the gun role nick change prevention
-bot = discord.Bot()
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
@@ -69,9 +68,9 @@ async def ADMIN_CHECK(usr, ch):
 ### PUBLIC (ON EVENT) FUNCTIONS ###
 
 ### testing slash command
-@bot.command(description="Test.") # this decorator makes a slash command
-async def ping(ctx): # a slash command will be created with the name "ping"
-    await ctx.respond(f"Pong! Latency is {bot.latency}")
+# @bot.command(description="Test.") # this decorator makes a slash command
+# async def ping(ctx): # a slash command will be created with the name "ping"
+#     await ctx.respond(f"Pong! Latency is {bot.latency}")
     
 #drone start up, prepare roles here
 @client.event
