@@ -5,32 +5,22 @@ from globals import *
 from rated import *
 from database import *
 
-# class QuestionView(discord.ui.View):
-#     answer1 = None 
-#     answer2 = None 
+class QuestionView(discord.ui.View):
     
-#     @discord.ui.select(
-#         placeholder="What is your age?",
-#         options=[
-#             discord.SelectOption(label="16 - 17", value="16"),
-#             discord.SelectOption(label="18 - 23", value="18"),
-#             discord.SelectOption(label="24 - 30", value="24")
-#         ]        
-#     )
-#     async def select_age(self, interaction:discord.Interaction, select_item : discord.ui.Select):
-#         self.answer1 = select_item.values
-#         self.children[0].disabled= True
-#         game_select = FavouriteGameSelect()
-#         self.add_item(game_select)
-#         await interaction.message.edit(view=self)
-#         await interaction.response.defer()
-
-#     async def respond_to_answer2(self, interaction : discord.Interaction, choices):
-#         self.answer2 = choices 
-#         self.children[1].disabled= True
-#         await interaction.message.edit(view=self)
-#         await interaction.response.defer()
-#         self.stop()
+    @discord.ui.select(
+        placeholder="What is your age?",
+        options=[
+            discord.SelectOption(label=QUIZ["answers"][0], value="1"),
+            discord.SelectOption(label=QUIZ["answers"][1], value="2"),
+            discord.SelectOption(label=QUIZ["answers"][2], value="3"),
+            discord.SelectOption(label=QUIZ["answers"][3], value="4")
+        ]        
+    )
+    async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
+        self.answer1 = select_item.values
+        self.children[0].disabled= True
+        await EDIT_VIEW_MESSAGE(interaction.message, self)
+        await interaction.response.defer()
 
 async def CLOSE_EVENT():
     print("entered")
@@ -43,7 +33,10 @@ async def CLOSE_EVENT():
         QUIZ["active"] = False
         QUIZ["second-player"] = False
         QUIZ["can-answer"] = False
-        QUIZ["rolls"].clear()
+        QUIZ["saveQuestion"] = None
+        QUIZ["correctAnswer"] = None
+        QUIZ["answers"] = None
+        QUIZ["oldQuestions"].clear()
         QUIZ["scores"] = "**TOTAL POINTS**\n"
         QUIZZERS.clear()
         LOSERS.clear()
@@ -59,7 +52,10 @@ def FORCE_CLOSE_EVENT():
     QUIZ["active"] = False
     QUIZ["second-player"] = False
     QUIZ["can-answer"] = False
-    QUIZ["rolls"].clear()
+    QUIZ["saveQuestion"] = None
+    QUIZ["correctAnswer"] = None
+    QUIZ["answers"] = None
+    QUIZ["oldQuestions"].clear()
     QUIZ["scores"] = "**TOTAL POINTS**\n"
     QUIZZERS.clear()
     LOSERS.clear()
@@ -86,21 +82,32 @@ async def FetchQuestions():
         ]
 
 async def nextQuestion(ch):
-    usefulkeys = list(QUESTIONS.keys())
-    QUIZ["rng"] = random.choice(usefulkeys)
-    while QUIZ["rng"] in QUIZ["rolls"]:
-        QUIZ["rng"] = random.choice(usefulkeys)
+    view = QuestionView()
+    QUIZ["saveQuestion"] = None
+    QUIZ["correctAnswer"] = None
+    QUIZ["answers"] = None
 
-    QUIZ["rolls"].append(QUIZ["rng"])
+    usefulkeys = list(QUESTIONS.keys())
+    QUIZ["currentQuestion"] = random.choice(usefulkeys)
+    while QUIZ["currentQuestion"] in QUIZ["oldQuestions"]:
+        QUIZ["currentQuestion"] = random.choice(usefulkeys)
+
+    QUIZ["oldQuestions"].append(QUIZ["currentQuestion"])
+
     answers = ""
     qnum = "*Question no. " + str(QUIZ["turn"]) + "*\n"
-    await SEND(ch, qnum + ":question: " + QUESTIONS[QUIZ["rng"]][0])
+    await SEND(ch, qnum + ":question: " + QUESTIONS[QUIZ["currentQuestion"]][0])
 
-    random.shuffle(QUESTIONS[QUIZ["rng"]][1])   
-    for i in QUESTIONS[QUIZ["rng"]][1]:
+    QUIZ["correctAnswer"] = QUESTIONS[QUIZ["currentQuestion"]][1][0]
+
+    random.shuffle(QUESTIONS[QUIZ["currentQuestion"]][1])
+
+    QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
+
+    for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
 
-    await SEND(ch, answers)
+    await SEND_VIEW(ch, "Pick the correct answer.", view)
     QUIZ["can-answer"] = True
     
     return
@@ -164,7 +171,7 @@ async def ProcessQuizAnswer(usr,ch,message,lmsg):
         return
 
     #if the answer is not correct enter here
-    if lmsg != QUESTIONS[QUIZ["rng"]][2].lower():
+    if lmsg != QUESTIONS[QUIZ["currentQuestion"]][2].lower():
         #message is not correct but user is not in the LOSERS yet (otherwise code would have stopped before)
         #then a loser they become.
         if usr not in LOSERS:
@@ -178,7 +185,7 @@ async def ProcessQuizAnswer(usr,ch,message,lmsg):
             return
 
         #if it is the first user to get the answer wrong, then show broken's disappointment.
-        await SEND(ch, QUESTIONS[QUIZ["rng"]][4])
+        await SEND(ch, QUESTIONS[QUIZ["currentQuestion"]][4])
         return
 
     #go here instead if the answer is not incorrect (which means it is correct indeed)
@@ -186,9 +193,9 @@ async def ProcessQuizAnswer(usr,ch,message,lmsg):
     QUIZ["can-answer"] = False
     finalmsg = ""
     if QUIZ["turn"] + 1 > len(QUESTIONS):
-        finalmsg = QUESTIONS[QUIZ["rng"]][3]
+        finalmsg = QUESTIONS[QUIZ["currentQuestion"]][3]
     else:
-        finalmsg = QUESTIONS[QUIZ["rng"]][3] + "\nBoth Players can now answer the next question."
+        finalmsg = QUESTIONS[QUIZ["currentQuestion"]][3] + "\nBoth Players can now answer the next question."
     await SEND(ch, usr.mention + finalmsg)
     #the user who misguessed the answered gets a second chance (might it be the second or third depending on the round tho-)
     LOSERS.clear()

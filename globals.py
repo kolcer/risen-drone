@@ -22,6 +22,9 @@ MSG_SENT = {}
 ARTISTS = {}
 QUIZZERS = {}
 QUESTIONS = {} # fill this up on startup from database
+QUIZ = {
+
+}
 NickDictionary = {}
 MG_PLAYERS = {}
 
@@ -710,9 +713,12 @@ QUIZ = {
     "can-answer" : False,
     "turn" : 0,
     "cturn" : 1,
-    "rolls" : [0],
-    "rng" : 0,
+    "oldQuestions" : [0],
+    "currentQuestion" : 0,
     "scores" : "**TOTAL POINTS**\n",
+    "saveQuestion": None,
+    "correctAnswer": None,
+    "answers": None,
 }
 
 LADDERS = {

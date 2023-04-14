@@ -53,8 +53,8 @@ async def INTERACTION(message, content, secret):
     return await message.send_message(content, ephemeral = secret)
 
 #sends a view with a message
-async def SEND_VIEW(channel, message, view):
-    return await channel.send(message, view = view)
+async def SEND_VIEW(channel, content, view):
+    return await channel.send(content, view = view)
 
 #send a reply! ephemeral option included
 async def REPLY(message, content):
