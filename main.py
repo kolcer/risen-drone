@@ -6,6 +6,7 @@ import random
 import asyncio
 #from datetime import date
 from difflib import SequenceMatcher
+from discord.ext import commands
 
 from globals import *
 from roles import *
@@ -15,7 +16,6 @@ from rated import *
 from rigs import *
 from database import *
 from quiz import *
-bot = commands.Bot(command_prefix="!")
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
@@ -69,8 +69,8 @@ async def ADMIN_CHECK(usr, ch):
 ### PUBLIC (ON EVENT) FUNCTIONS ###
 
 ### slash commands???? nooooooooooooooo who did this??
-@bot.slash_command(name="Account Creation Date")  # create a user command for the supplied guilds
-async def account_creation_date(msg, member: discord.Member):  # user commands return the member
+@discord.slash_command(name="Account Creation Date")  # create a user command for the supplied guilds
+async def account_creation_date(msg, interaction, member: discord.Member):  # user commands return the member
     await msg.respond(f"{member.name}'s account was created on {member.created_at}")
     
 #drone start up, prepare roles here
