@@ -56,6 +56,13 @@ async def INTERACTION(message, content, secret):
 async def SEND_VIEW(channel, message, view):
     return await channel.send(message, view = view)
 
+#send a reply! ephemeral option included
+async def REPLY(message, content, secret):
+    if content == None or content == "":
+        #cannot reply with empty message
+        return
+    return await message.reply(content = content, ephemeral = secret)
+
 #purge roles
 async def PURGE_ROLES(role):
     await role.delete()

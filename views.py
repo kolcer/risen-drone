@@ -26,6 +26,7 @@ class SplicerView(discord.ui.View):
             disableSplicer()
             
             await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
+            await REPLY(self.message, "Good choice.", True)
             self.stop()
         else:
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
