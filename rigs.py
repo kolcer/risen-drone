@@ -216,7 +216,7 @@ async def Rig(rigType, ch, usr):
     RIG_DATA["rigType"] = rigType
 
     await view.wait()
-    await view.tooLate()
+    await view.tooLate() 
     
     #reset spam count
     await asyncio.sleep(3600)
