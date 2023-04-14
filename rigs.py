@@ -237,7 +237,7 @@ async def Rig(rigType, ch, usr):
     viewmsg = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
     view.caster = usr
     view.message = viewmsg
-    view.type = COOLDOWN_SELECT[rigType]
+    view.type = rigType
     view.channel = ch
 
     await view.wait()
