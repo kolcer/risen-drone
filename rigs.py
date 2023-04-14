@@ -6,9 +6,34 @@ from rated import *
 from roles import *
 from database import *
 from redis import *
-
-#--test
 from discord.ext import commands
+
+# ---VIEWS---
+class CastAgain(discord.ui.View):
+    async def tooLate(self):
+        for item in self.children:
+            item.disabled = True
+
+        RIG_DATA["rigType"] = None
+        RIG_DATA["rigChannel"] = None
+        RIG_DATA["message"] = None
+
+        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
+    async def on_timeout(self) -> None:
+        await self.tooLate()
+
+    @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
+    async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
+            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
+            self.stop()
+        elif usr != RIG_DATA["rigCaster"]:
+            await INTERACTION(interaction.response, "You did not cast this rig.", True)
+        else:
+            await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
+# ---END VIEWS---
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
@@ -463,37 +488,3 @@ async def GiveMana(ch,usr,message):
     await SEND(message.channel,
         "Who are you trying to share your Mana with?")
     return
-
-
-
-
-
-
-
-# ---VIEWS---
-
-class CastAgain(discord.ui.View):
-    async def tooLate(self):
-        for item in self.children:
-            item.disabled = True
-
-        RIG_DATA["rigType"] = None
-        RIG_DATA["rigChannel"] = None
-        RIG_DATA["message"] = None
-
-        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-
-    async def on_timeout(self) -> None:
-        await self.tooLate()
-
-    @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
-    async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
-            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
-            self.stop()
-        elif usr != RIG_DATA["rigCaster"]:
-            await INTERACTION(interaction.response, "You did not cast this rig.", True)
-        else:
-            await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
-
