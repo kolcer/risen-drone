@@ -45,26 +45,26 @@ class SplicerView(discord.ui.View):
         else:
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
 
-class CastAgain(discord.ui.View):
-    async def tooLate(self):
-        for item in self.children:
-            item.disabled = True
+# class CastAgain(discord.ui.View):
+#     async def tooLate(self):
+#         for item in self.children:
+#             item.disabled = True
 
-        RIG_DATA["rigType"] = None
-        RIG_DATA["rigChannel"] = None
-        RIG_DATA["message"] = None
+#         RIG_DATA["rigType"] = None
+#         RIG_DATA["rigChannel"] = None
+#         RIG_DATA["message"] = None
 
-        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+#         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def on_timeout(self) -> None:
-        await self.tooLate()
+#     async def on_timeout(self) -> None:
+#         await self.tooLate()
 
-    @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
-    async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
+#     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
+#     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
+#         usr = interaction.user
+#         if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
             
-            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
-            self.stop()
-        else:
-            await INTERACTION(interaction.response, "You did not cast this rig.", True)
+#             await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
+#             self.stop()
+#         else:
+#             await INTERACTION(interaction.response, "You did not cast this rig.", True)

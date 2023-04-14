@@ -754,6 +754,7 @@ CHAT_KILLER = {
 RIG_DATA = {
     'rigTracker': 1004326588021743667,
     'rigCaster': None,
+    'againCaster': None,
     'message': None,
     'rigType': None,
     'rigChannel': None,

@@ -17,6 +17,7 @@ class CastAgain(discord.ui.View):
         RIG_DATA["rigType"] = None
         RIG_DATA["rigChannel"] = None
         RIG_DATA["message"] = None
+        RIG_DATA["againCaster"] = None
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -26,10 +27,10 @@ class CastAgain(discord.ui.View):
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
-            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
+        if usr == RIG_DATA["againCaster"] and self.message == RIG_DATA["message"]:
+            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["againCaster"])
             self.stop()
-        elif usr != RIG_DATA["rigCaster"]:
+        elif usr != RIG_DATA["againCaster"]:
             await INTERACTION(interaction.response, "You did not cast this rig.", True)
         else:
             await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
@@ -104,7 +105,7 @@ async def Rig(rigType, ch, usr):
             RIG_SPAMMERS[usr] = spamCount
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
-    
+    RIG_DATA["againCaster"] = usr
     await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
