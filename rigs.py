@@ -9,8 +9,9 @@ from redis import *
 from discord.ext import commands
 
 # ---VIEWS---
+
 class CastAgain(discord.ui.View):
-    async def tooLate(self):
+    async def on_timeout(self):
         for item in self.children:
             item.disabled = True
 
@@ -21,7 +22,7 @@ class CastAgain(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
     async def on_timeout(self) -> None:
-        await self.tooLate()
+        await self.on_timeout()
 
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -240,7 +241,7 @@ async def Rig(rigType, ch, usr):
     view.channel = ch
 
     await view.wait()
-    await view.tooLate() 
+    await view.on_timeout() 
     
     #reset spam count
     await asyncio.sleep(3600)
@@ -440,7 +441,7 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["reactionmessage"] = message
 
     await view.wait()
-    await view.tooLate()
+    await view.on_timeout()
 
     # await ADD_REACTION(focusmsg, "❌")
     # await asyncio.sleep(1)
