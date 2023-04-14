@@ -11,7 +11,7 @@ class QuestionView(discord.ui.View):
         self.question = question
     
     @discord.ui.select(
-        label="Pick the correct answer.",
+        placeholder="Pick the correct answer.",
         options=[]
     )
     
