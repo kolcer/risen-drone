@@ -8,7 +8,7 @@ from database import *
 class QuestionView(discord.ui.View):
     
     @discord.ui.select(
-        placeholder="What is your age?",
+        placeholder=QUIZ["currentQuestion"],
         options=[
             discord.SelectOption(label=QUIZ["answers"][0], value="1"),
             discord.SelectOption(label=QUIZ["answers"][1], value="2"),

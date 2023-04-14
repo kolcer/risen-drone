@@ -22,9 +22,6 @@ MSG_SENT = {}
 ARTISTS = {}
 QUIZZERS = {}
 QUESTIONS = {} # fill this up on startup from database
-QUIZ = {
-
-}
 NickDictionary = {}
 MG_PLAYERS = {}
 
