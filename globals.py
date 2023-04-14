@@ -715,7 +715,7 @@ QUIZ = {
     "scores" : "**TOTAL POINTS**\n",
     "saveQuestion": None,
     "correctAnswer": None,
-    "answers": [],
+    "answers": ["this", "will", "change", "later"],
 }
 
 LADDERS = {

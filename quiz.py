@@ -35,7 +35,7 @@ async def CLOSE_EVENT():
         QUIZ["can-answer"] = False
         QUIZ["saveQuestion"] = None
         QUIZ["correctAnswer"] = None
-        QUIZ["answers"].clear()
+        QUIZ["answers"] = ["this", "will", "change", "later"]
         QUIZ["oldQuestions"].clear()
         QUIZ["scores"] = "**TOTAL POINTS**\n"
         QUIZZERS.clear()
@@ -54,7 +54,7 @@ def FORCE_CLOSE_EVENT():
     QUIZ["can-answer"] = False
     QUIZ["saveQuestion"] = None
     QUIZ["correctAnswer"] = None
-    QUIZ["answers"].clear()
+    QUIZ["answers"] = ["this", "will", "change", "later"]
     QUIZ["oldQuestions"].clear()
     QUIZ["scores"] = "**TOTAL POINTS**\n"
     QUIZZERS.clear()
