@@ -208,41 +208,20 @@ async def Rig(rigType, ch, usr):
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
-    await REPLY(msgCounting, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
+    view = CastAgain(timeout = 5)
+    message = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
+    view.message = message
+    RIG_DATA["message"] = message
+    RIG_DATA["rigChannel"] = ch
+    RIG_DATA["rigType"] = rigType
+
+    await view.wait()
+    await view.tooLate()
     
     #reset spam count
     await asyncio.sleep(3600)
     if usr in RIG_SPAMMERS and spamCount == RIG_SPAMMERS[usr]:
-        del RIG_SPAMMERS[usr]
-
-
-# async def SplicerRig(reaction,user):
- 
-#     if user == SPLICER_RIG["user"] and SPLICER_RIG["active"] == True and reaction.message == SPLICER_RIG["reactionmessage"]:
-#         if reaction.emoji == "❌":
-#             SPLICER_RIG["user"] = None
-#             SPLICER_RIG["answer"] = None
-#             SPLICER_RIG["active"] = False
-#             SPLICER_RIG["reactionmessage"] = None
-#             SPLICER_RIG["user-name"] = ""
-#             SPLICER_RIG['rigcaster-name'] = ""
-  
-#             await SEND(reaction.message.channel, "Splice request declined. That's too bad.")
-#         elif reaction.emoji == "✅":
-#             await EDIT_NICK(user, SPLICER_RIG["user-name"])
-#             await asyncio.sleep(1)
-#             await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
-
-#             await SEND(reaction.message.channel, "Splice request accepted. Enjoy your new display names.")
-
-            
-#             SPLICER_RIG["user"] = None
-#             SPLICER_RIG["answer"] = None
-#             SPLICER_RIG["active"] = False
-#             SPLICER_RIG["reactionmessage"] = None
-#             SPLICER_RIG["user-name"] = ""
-#             SPLICER_RIG['rigcaster-name'] = ""
-            
+        del RIG_SPAMMERS[usr]      
 
 async def CastRig(rigPick,ch,usr):
 
@@ -484,4 +463,37 @@ async def GiveMana(ch,usr,message):
     await SEND(message.channel,
         "Who are you trying to share your Mana with?")
     return
+
+
+
+
+
+
+
+# ---VIEWS---
+
+class CastAgain(discord.ui.View):
+    async def tooLate(self):
+        for item in self.children:
+            item.disabled = True
+
+        RIG_DATA["rigType"] = None
+        RIG_DATA["rigChannel"] = None
+        RIG_DATA["message"] = None
+
+        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
+    async def on_timeout(self) -> None:
+        await self.tooLate()
+
+    @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
+    async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        if usr == RIG_DATA["rigCaster"] and self.message == RIG_DATA["message"]:
+            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
+            self.stop()
+        elif usr != RIG_DATA["rigCaster"]:
+            await INTERACTION(interaction.response, "You did not cast this rig.", True)
+        else:
+            await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
 
