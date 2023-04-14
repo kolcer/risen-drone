@@ -23,7 +23,7 @@ from quiz import *
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-bot = commands.Bot(command_prefix="!", intents = intents)
+bot = discord.Bot()
 client = discord.Client(intents=intents)
 
 #print tips
