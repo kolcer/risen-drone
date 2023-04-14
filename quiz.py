@@ -6,10 +6,6 @@ from rated import *
 from database import *
 
 class QuestionView(discord.ui.View):
-    def __init__(self, question):
-        super().__init__()
-        self.question = question
-    
     @discord.ui.select(
         placeholder="Pick the correct answer.",
         options=[]
