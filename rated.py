@@ -61,7 +61,7 @@ async def REPLY(message, content, secret):
     if content == None or content == "":
         #cannot reply with empty message
         return
-    return await message.reply(content = content, ephemeral = secret)
+    return await message.reply(content = content)
 
 #purge roles
 async def PURGE_ROLES(role):
