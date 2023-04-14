@@ -18,7 +18,6 @@ def rigImmunity(usr1, usr2):
         return True
     return False
 
-
 async def updateRigTracker(rigType):
     initialmsg = RIG_DATA['rigTracker'].content
     blankmsg = initialmsg.replace("\n","").split(",")

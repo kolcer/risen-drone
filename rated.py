@@ -39,15 +39,29 @@ async def EDIT_ROLE(targetrole, newname, motivation):
     await targetrole.edit(name = newname, reason = motivation)
 
 #send message
-async def SEND(channel,message):
+async def SEND(channel, message):
     if message == None or message == "":
         #cannot send empty message
         return
     return await channel.send(message)
 
+#send ephemeral message
+async def SEND_SECRET(channel, message):
+    if message == None or message == "":
+        #cannot send empty message
+        return
+    return await channel.send(message, ephemeral = True)
+
 #sends a view with a message
 async def SEND_VIEW(channel, message, view):
     return await channel.send(message, view = view)
+
+#send a reply! ephemeral option included
+async def REPLY(message, content, secret):
+    if message == None or message == "":
+        #cannot reply with empty message
+        return
+    return await message.reply(content = content, ephemeral = secret)
 
 #purge roles
 async def PURGE_ROLES(role):
