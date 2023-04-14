@@ -30,11 +30,8 @@ class CastAgain(discord.ui.View):
             if usr == self.caster:
                 await Rig(self.type, self.channel, self.caster)
 
-                #this is not optimal but otherwise it will give an error as this button doesn't give a response. this is an empty response.
-                try:
-                    interaction.respond()
-                except:
-                    pass
+                #this is not optimal but otherwise it will give an error as this button doesn't give a response. defer.
+                await interaction.response.defer()
                 self.stop()
             elif usr != self.caster:
                 await INTERACTION(interaction.response, "You did not cast this rig.", True)
