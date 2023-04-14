@@ -18,7 +18,7 @@ class QuestionView(discord.ui.View):
         await interaction.response.defer()
 
     def update_options(self, options):
-            self.add_item(discord.ui.Select(label = options, options = options))
+            self.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = options))
 
 async def CLOSE_EVENT():
     print("entered")
@@ -102,8 +102,8 @@ async def nextQuestion(ch):
 
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
 
-    options = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
-    view.update_options(options)
+    # options = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
+    view.update_options(QUIZ["answers"])
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
