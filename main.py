@@ -15,7 +15,7 @@ from rated import *
 from rigs import *
 from database import *
 from quiz import *
-bot = commands.Bot()
+bot = commands.Bot(command_prefix="!")
 ### INITIAL SETUP ###
 
 # This allows us to know if user has updated their presence
