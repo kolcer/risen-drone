@@ -57,7 +57,7 @@ async def SEND_VIEW(channel, message, view):
     return await channel.send(message, view = view)
 
 #send a reply! ephemeral option included
-async def REPLY(message, content, secret):
+async def REPLY(message, content):
     if content == None or content == "":
         #cannot reply with empty message
         return
