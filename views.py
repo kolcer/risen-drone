@@ -14,7 +14,7 @@ class SplicerView(discord.ui.View):
 
         disableSplicer()
 
-        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self) 
 
     async def on_timeout(self) -> None:
         await self.tooLate()
