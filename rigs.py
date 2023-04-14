@@ -4,21 +4,11 @@ from views import *
 from globals import *
 from rated import *
 from roles import *
-from globals import *
 from database import *
 from redis import *
 
 #--test
 from discord.ext import commands
-
-def disableSplicer():
-    SPLICER_RIG["user"] = None
-    SPLICER_RIG["answer"] = None
-    SPLICER_RIG["active"] = False
-    SPLICER_RIG["reactionmessage"] = None
-    SPLICER_RIG["user-name"] = ""
-    SPLICER_RIG['rigcaster-name'] = ""
-
 
 def rigImmunity(usr1, usr2):
     for roles in usr1.roles:
