@@ -5,12 +5,7 @@ from globals import *
 from rated import *
 from database import *
 
-class QuestionView(discord.ui.View):    
-    @discord.ui.select(
-        placeholder="Pick the correct answer.",
-        options=[]
-    )
-    
+class QuestionView(discord.ui.View):  
     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
         self.answer1 = select_item.values
         self.children[0].disabled= True
@@ -103,7 +98,7 @@ async def nextQuestion(ch):
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
 
     # options = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
-    view.update_options(QUIZ["answers"])
+    view.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = QUIZ["answers"]))
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
