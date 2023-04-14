@@ -25,14 +25,18 @@ class CastAgain(discord.ui.View):
 
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        if usr == self.caster:
-            self.stop()
-            await Rig(self.type, self.channel, self.caster)
-        elif usr != self.caster:
-            await INTERACTION(interaction.response, "Someone else casted this rig manually, or you weren't the one that casted it in the first place.", True)
-        else:
-            await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
+        try:
+            usr = interaction.user
+            if usr == self.caster:
+                await Rig(self.type, self.channel, self.caster)
+                self.stop()
+            elif usr != self.caster:
+                await INTERACTION(interaction.response, "You did not cast this rig.", True)
+            else:
+                await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
+        except Exception as e:
+            await SEND(self.channel, e)
+
 # ---END VIEWS---
 
 def rigImmunity(usr1, usr2):
