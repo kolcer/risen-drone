@@ -6,16 +6,15 @@ from rated import *
 from database import *
 
 class QuestionView(discord.ui.View):
+    def __init__(self, question):
+        super().__init__()
+        self.question = question
     
     @discord.ui.select(
-        placeholder=QUIZ["currentQuestion"],
-        options=[
-            discord.SelectOption(label=QUIZ["answers"][0], value="1"),
-            discord.SelectOption(label=QUIZ["answers"][1], value="2"),
-            discord.SelectOption(label=QUIZ["answers"][2], value="3"),
-            discord.SelectOption(label=QUIZ["answers"][3], value="4")
-        ]        
+        label="Pick the correct answer.",
+        options=[]
     )
+    
     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
         self.answer1 = select_item.values
         self.children[0].disabled= True
@@ -103,6 +102,9 @@ async def nextQuestion(ch):
     random.shuffle(QUESTIONS[QUIZ["currentQuestion"]][1])
 
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
+
+    options = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
+    view.update_options(options)
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
