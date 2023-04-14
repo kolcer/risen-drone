@@ -5,7 +5,7 @@ from globals import *
 from rated import *
 from database import *
 
-class QuestionView(discord.ui.View):
+class QuestionView(discord.ui.View):    
     @discord.ui.select(
         placeholder="Pick the correct answer.",
         options=[]
@@ -16,6 +16,9 @@ class QuestionView(discord.ui.View):
         self.children[0].disabled= True
         await EDIT_VIEW_MESSAGE(interaction.message, self)
         await interaction.response.defer()
+
+    def update_options(self, options):
+            self.add_item(discord.ui.Select(label = options, options = options))
 
 async def CLOSE_EVENT():
     print("entered")
