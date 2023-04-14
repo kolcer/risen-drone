@@ -314,16 +314,16 @@ async def on_message(message):
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
  
         #start the quiz
-        elif ch == CHANNELS["bot-commands"] and lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
+        elif lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
             await StartQuiz(usr,ch)
 
         #join an ongoing quiz
-        elif ch == CHANNELS["bot-commands"] and lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
+        elif lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
             
             await JoinQuiz(usr,ch)
 
-        elif ch == CHANNELS["bot-commands"] and QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
+        elif QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
             
             await ProcessQuizAnswer(usr,ch,message,lmsg)
 
