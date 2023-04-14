@@ -194,21 +194,17 @@ async def Rig(rigType, ch, usr):
             RIG_DATA['rigCaster'] = usr
             msgCounting = await SEND(ch, f"{usr.mention} just cast Impostor rig, I guess... ?")
                 
-    msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
+    theReply = await REPLY(msgCounting, f"*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
 
     await asyncio.sleep(theCooldown)
-
-    await EDIT_MESSAGE(msgCounting, msgCountingContent)
-
     if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
         ACTIVE_RIGS[rigType] = False
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
-    await SEND(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
+    await REPLY(theReply, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
     
     #reset spam count
     await asyncio.sleep(3600)
