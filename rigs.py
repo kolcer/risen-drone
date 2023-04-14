@@ -10,7 +10,7 @@ from redis import *
 #--test
 from discord.ext import commands
 
-def disable_splicer():
+def disableSplicer():
     SPLICER_RIG["user"] = None
     SPLICER_RIG["answer"] = None
     SPLICER_RIG["active"] = False
@@ -19,23 +19,23 @@ def disable_splicer():
     SPLICER_RIG['rigcaster-name'] = ""
 
 class SplicerView(discord.ui.View):
-    async def too_late(self):
+    async def tooLate(self):
         for item in self.children:
             item.disabled = True
 
-        disable_splicer()
+        disableSplicer()
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
     async def on_timeout(self) -> None:
-        await self.too_late()
+        await self.tooLate()
         await SEND(self.message.channel, "Too little, too late.")
 
     @discord.ui.button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
     async def declined(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"] and self.message == SPLICER_RIG["reactionmessage"]:
-            disable_splicer()
+            disableSplicer()
             
             await interaction.response.send_message("Splice request declined. That's too bad.")
             self.stop()
@@ -48,7 +48,7 @@ class SplicerView(discord.ui.View):
             await asyncio.sleep(1)
             await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
 
-            disable_splicer()
+            disableSplicer()
 
             await interaction.response.send_message("Splice request accepted. Enjoy your new display names.")
             self.stop()
@@ -483,7 +483,7 @@ async def ExecuteSplicerRig(ch,usr):
     SPLICER_RIG["reactionmessage"] = message
 
     await view.wait()
-    await view.too_late()
+    await view.tooLate()
 
     # await ADD_REACTION(focusmsg, "❌")
     # await asyncio.sleep(1)
