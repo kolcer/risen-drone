@@ -120,7 +120,7 @@ async def StartQuiz(usr,ch):
     #activates the quiz, activates looking for second player.
     QUIZ["active"] = True
     QUIZ["second-player"] = True
-    await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
+    await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
     #if no one joins within 10 seconds, event is forced closed.
     await asyncio.sleep(30)
