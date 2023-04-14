@@ -15,7 +15,6 @@ from rated import *
 from rigs import *
 from database import *
 from quiz import *
-bot = discord.Bot()
 ### INITIAL SETUP ### 
 
 # This allows us to know if user has updated their presence
@@ -69,7 +68,7 @@ async def ADMIN_CHECK(usr, ch):
 ### PUBLIC (ON EVENT) FUNCTIONS ###
 
 ### testing slash command
-@bot.command(description="I wonder")
+@client.command(description="I wonder")
 async def tryme(interaction: discord.Interaction):
     await INTERACTION(interaction.response, "Shh!", True)
     
