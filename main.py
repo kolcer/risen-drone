@@ -16,7 +16,7 @@ from rigs import *
 from database import *
 from quiz import *
 bot = discord.Bot()
-### INITIAL SETUP ###
+### INITIAL SETUP ### 
 
 # This allows us to know if user has updated their presence
 # Mosty for the gun role nick change prevention
@@ -68,10 +68,10 @@ async def ADMIN_CHECK(usr, ch):
 
 ### PUBLIC (ON EVENT) FUNCTIONS ###
 
-### slash commands???? nooooooooooooooo who did this??
-@bot.command(description="I wonder???")
+### testing slash command
+@bot.command(description="I wonder")
 async def tryme(interaction: discord.Interaction):
-    await INTERACTION(interaction.response, "Shhhh!!!", True)
+    await INTERACTION(interaction.response, "Shh!", True)
     
 #drone start up, prepare roles here
 @client.event
