@@ -36,6 +36,7 @@ class SplicerView(discord.ui.View):
         usr = interaction.user
         if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"] and self.message == SPLICER_RIG["reactionmessage"]:
             disable_splicer()
+            await self.too_late()
             await interaction.response.send_message("Splice request declined. That's too bad.")
 
     @discord.ui.button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
@@ -45,7 +46,8 @@ class SplicerView(discord.ui.View):
             await EDIT_NICK(usr, SPLICER_RIG["user-name"])
             await asyncio.sleep(1)
             await EDIT_NICK(RIG_DATA['rigCaster'], SPLICER_RIG['rigcaster-name'])
-            
+
+            await self.too_late()
             disable_splicer()
 
             await interaction.response.send_message("Splice request accepted. Enjoy your new display names.")
