@@ -25,11 +25,10 @@ class SplicerView(discord.ui.View):
         if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"] and self.message == SPLICER_RIG["reactionmessage"]:
             disableSplicer()
             
-            # await interaction.response.send_message("Splice request declined. That's too bad.")
-            await REPLY(self.message, "Splice request declined. That's too bad.", False)
+            await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
             self.stop()
         else:
-            await REPLY(self.message, "Do not force your opinion on others.", True)
+            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
 
     @discord.ui.button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
     async def accepted(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -41,8 +40,7 @@ class SplicerView(discord.ui.View):
 
             disableSplicer()
 
-            # await interaction.response.send_message("Splice request accepted. Enjoy your new display names.")
-            await REPLY(self.message, "Splice request accepted. Enjoy your new display names.", False)
+            await INTERACTION(interaction.response, "Splice request accepted. Enjoy your new display names.", False)
             self.stop()
         else:
-            await REPLY(self.message, "Do not force your opinion on others.", True)
+            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
