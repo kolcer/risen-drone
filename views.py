@@ -1,10 +1,10 @@
 import time
 
+from rigs import disableSplicer
 from globals import *
 from rated import *
 from roles import *
 from globals import *
-from rigs import disableSplicer
 from discord.ext import commands
 
 class SplicerView(discord.ui.View):
