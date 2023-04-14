@@ -14,10 +14,9 @@ class CastAgain(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        RIG_DATA["rigType"] = None
-        RIG_DATA["rigChannel"] = None
-        RIG_DATA["message"] = None
-        RIG_DATA["againCaster"] = None
+        self.caster = None
+        self.channel = None
+        self.type = None
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -27,11 +26,11 @@ class CastAgain(discord.ui.View):
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        if usr == RIG_DATA["againCaster"] and self.message == RIG_DATA["message"]:
-            await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["againCaster"])
+        if usr == self.caster:
+            await Rig(self.type, self.channel, self.caster)
             self.stop()
-        elif usr != RIG_DATA["againCaster"]:
-            await INTERACTION(interaction.response, "You did not cast this rig.", True)
+        elif usr != self.caster:
+            await INTERACTION(interaction.response, "Someone else casted this rig manually, or you weren't the one that casted it in the first place.", True)
         else:
             await INTERACTION(interaction.response, "Something did not go according to my plans...", True)
 # ---END VIEWS---
@@ -105,7 +104,7 @@ async def Rig(rigType, ch, usr):
             RIG_SPAMMERS[usr] = spamCount
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
-    RIG_DATA["againCaster"] = usr
+
     await updateRigTracker(rigType)
     messageAppend = "."
     match rigType:
@@ -235,11 +234,11 @@ async def Rig(rigType, ch, usr):
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
     view = CastAgain(timeout = 5)
-    message = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
-    view.message = message
-    RIG_DATA["message"] = message
-    RIG_DATA["rigChannel"] = ch
-    RIG_DATA["rigType"] = rigType
+    viewmsg = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
+    view.caster = usr
+    view.message = viewmsg
+    view.type = COOLDOWN_SELECT[rigType]
+    view.channel = ch
 
     await view.wait()
     await view.tooLate() 

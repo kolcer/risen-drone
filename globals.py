@@ -487,6 +487,14 @@ RIG_COOLDOWNS = {
     "gun": False,
 }
 
+# RIG_INSTANCES = {
+#     "general": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
+#     "tsj": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
+#     "ha": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
+#     "patron": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
+#     "gun": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
+# }
+
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:758081540063494288> cooldown: ",
     "tsj": "<:csThief:758081386203840644><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ", #
@@ -754,10 +762,7 @@ CHAT_KILLER = {
 RIG_DATA = {
     'rigTracker': 1004326588021743667,
     'rigCaster': None,
-    'againCaster': None,
-    'message': None,
     'rigType': None,
-    'rigChannel': None,
     'ghostMsg': "hehehehaw",
 }
 
