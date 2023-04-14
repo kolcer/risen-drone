@@ -1,8 +1,8 @@
 import time
 
+from views import *
 from globals import *
 from rated import *
-from views import SplicerView
 from roles import *
 from globals import *
 from database import *
