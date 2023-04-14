@@ -1,7 +1,6 @@
 import time
 
 from globals import *
-from views import *
 from rated import *
 from roles import *
 from globals import *
