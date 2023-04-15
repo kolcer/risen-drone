@@ -16,13 +16,8 @@ from database import *
 #             self.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = options))
 
 class QuestionView(discord.ui.View):  
-    def __init__(self, options, **kwargs):
-        super().__init__(**kwargs)
-        self.select = discord.ui.Select(placeholder="Select the correct answer.", options=options)
-        self.add_item(self.select)
-
-    @discord.ui.select(placeholder="Select the correct answer.", options=[])
-    async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
+    @discord.ui.select(placeholder="Select the correct answer.", options=QUIZ["answers"])
+    async def select_answer(self, interaction: discord.Interaction, select_item: discord.ui.Select):
         self.answer1 = select_item.values
         self.children[0].disabled= True
         await EDIT_VIEW_MESSAGE(interaction.message, self)
@@ -111,8 +106,8 @@ async def nextQuestion(ch):
 
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
 
-    optionList = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
-    view = QuestionView(options = optionList)
+    QUIZ["answers"] = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
+    view = QuestionView()
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
