@@ -5,15 +5,29 @@ from globals import *
 from rated import *
 from database import *
 
+# class QuestionView(discord.ui.View):  
+#     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
+#         self.answer1 = select_item.values
+#         self.children[0].disabled= True
+#         await EDIT_VIEW_MESSAGE(interaction.message, self)
+#         await interaction.response.defer()
+
+#     def update_options(self, options):
+#             self.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = options))
+
 class QuestionView(discord.ui.View):  
+    def __init__(self, options, **kwargs):
+        super().__init__(**kwargs)
+        self.select = discord.ui.Select(placeholder="Select the correct answer.", options=options)
+        self.add_item(self.select)
+
+    @discord.ui.select(placeholder="Select the correct answer.", options=[])
     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
         self.answer1 = select_item.values
         self.children[0].disabled= True
         await EDIT_VIEW_MESSAGE(interaction.message, self)
         await interaction.response.defer()
 
-    def update_options(self, options):
-            self.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = options))
 
 async def CLOSE_EVENT():
     print("entered")
@@ -75,7 +89,7 @@ async def FetchQuestions():
         ]
 
 async def nextQuestion(ch):
-    view = QuestionView()
+    
     QUIZ["saveQuestion"] = None
     QUIZ["correctAnswer"] = None
     QUIZ["answers"] = None
@@ -97,8 +111,7 @@ async def nextQuestion(ch):
 
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
 
-    # options = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
-    view.add_item(discord.ui.Select(placeholder = "Pick the correct answer", options = QUIZ["answers"]))
+    view = QuestionView(options = QUIZ["answers"])
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
