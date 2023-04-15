@@ -15,7 +15,7 @@ class SplicerView(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def on_timeout(self) -> None:
+    async def too_late(self) -> None:
         await self.on_timeout()
         await SEND(self.message.channel, "Too little, too late.")
 
@@ -56,7 +56,7 @@ class SplicerView(discord.ui.View):
 
 #         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-#     async def on_timeout(self) -> None:
+#     async def too_late(self) -> None:
 #         await self.on_timeout()
 
 #     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)

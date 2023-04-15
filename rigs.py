@@ -21,7 +21,7 @@ class CastAgain(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def on_timeout(self) -> None:
+    async def too_late(self) -> None:
         await self.on_timeout()
 
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
@@ -241,7 +241,7 @@ async def Rig(rigType, ch, usr):
     view.channel = ch
 
     await view.wait()
-    await view.on_timeout() 
+    await view.too_late() 
     
     #reset spam count
     await asyncio.sleep(3600)
