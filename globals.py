@@ -713,9 +713,6 @@ QUIZ = {
     "oldQuestions" : [0],
     "currentQuestion" : 0,
     "scores" : "**TOTAL POINTS**\n",
-    "saveQuestion": None,
-    "correctAnswer": None,
-    "answers": ["this", "will", "change", "later"],
 }
 
 LADDERS = {
