@@ -111,7 +111,8 @@ async def nextQuestion(ch):
 
     QUIZ["answers"] = QUESTIONS[QUIZ["currentQuestion"]][1]
 
-    view = QuestionView(options = QUIZ["answers"])
+    optionList = [discord.SelectOption(label=answer, value=answer) for answer in QUIZ["answers"]]
+    view = QuestionView(options = optionList)
 
     for i in QUESTIONS[QUIZ["currentQuestion"]][1]:
         answers += ":arrow_forward: `" + i + "` \n"
