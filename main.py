@@ -948,7 +948,7 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("ne", 1):
                 try:
                     url = msgsplit[1]
-                    name = msgsplit[third]
+                    name = third
                     
                     # Download the image data
                     response = requests.get(url)
