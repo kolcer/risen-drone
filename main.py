@@ -947,7 +947,7 @@ Delete: Deletes the specified quiz question by index.
             #creates new emoji
             if lmsg.startswith("ne", 1):
                 try:
-                    url = msgsplit[msgsplit[1]]
+                    url = msgsplit[1]
                     name = msgsplit[third]
                     
                     # Download the image data
