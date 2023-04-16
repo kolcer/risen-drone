@@ -942,6 +942,18 @@ Delete: Deletes the specified quiz question by index.
                         await REMOVE_ROLES(mem, neededrole)
                         break
                 return  
+            
+            #creates new emoji
+            if lmsg.startswith("ne", 1):
+                # Download the image data
+                async with message.channel.typing():
+                    async with client.session.get(msgsplit[1]) as response:
+                        if response.status == 200:
+                            image_data = await response.read()
+                            emoji = await message.guild.create_custom_emoji(name=third, image=image_data)
+                            await message.channel.send(f"Emoji {emoji.name} has been added!")
+                        else:
+                            await message.channel.send("Could not download image.")
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
