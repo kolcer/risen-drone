@@ -4,6 +4,7 @@ import discord
 import os
 import random
 import asyncio
+import requests
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -945,15 +946,21 @@ Delete: Deletes the specified quiz question by index.
             
             #creates new emoji
             if lmsg.startswith("ne", 1):
-                # Download the image data
-                async with message.channel.typing():
-                    async with client.session.get(msgsplit[1]) as response:
-                        if response.status == 200:
-                            image_data = await response.read()
-                            emoji = await message.guild.create_custom_emoji(name=third, image=image_data)
-                            await message.channel.send(f"Emoji {emoji.name} has been added!")
-                        else:
-                            await message.channel.send("Could not download image.")
+                try:
+                    url = msgsplit[msgsplit[1]]
+                    name = msgsplit[third]
+                    
+                    # Download the image data
+                    response = requests.get(url)
+                    if response.status_code == 200:
+                        image_data = response.content
+                        emoji = await message.guild.create_custom_emoji(name=name, image=image_data)
+                        await message.channel.send(f"Emoji {emoji.name} has been added!")
+                    else:
+                        await message.channel.send("Could not download image.")
+                        
+                except Exception as e:
+                    await message.channel.send(f"Error creating emoji: {str(e)}")
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
