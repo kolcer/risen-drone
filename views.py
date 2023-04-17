@@ -15,11 +15,9 @@ class SplicerView(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-        if self.toolate:
-            await self.too_late()
-
     async def too_late(self):
-        await SEND(self.message.channel, "Too little, too late.")
+        if self.toolate:
+            await SEND(self.message.channel, "Too little, too late.")
 
     @discord.ui.button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
     async def declined(self, interaction: discord.Interaction, button: discord.ui.Button):
