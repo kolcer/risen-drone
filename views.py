@@ -89,16 +89,6 @@ class FirstButton(discord.ui.View):
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
 
-
-
-        if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"]:
-            disableSplicer()
-            
-            await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
-            self.stop()
-        else:
-            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
-
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:
