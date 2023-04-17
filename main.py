@@ -768,11 +768,11 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("buttons", 1):
                 BUTTONS["channel"] = CHANNELS[lsecond]
 
-                if BUTTONS["phase"] == 1:
+                if BUTTONS["phase"] != 0:
                     view = FirstButton(timeout=100)
                     view.users = {}
                     view.toolate = True
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "A button!", view)
+                    view.message = await SEND_VIEW(BUTTONS["channel"], "A button.", view)
 
                     await view.wait()
                     await view.too_late()

@@ -52,9 +52,10 @@ class SplicerView(discord.ui.View):
 class FirstButton(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:
+            item.label = "It's just a button."
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await EDIT_VIEW_MESSAGE(self.message, "I was right.", self)
 
     async def too_late(self):
         if self.toolate:
