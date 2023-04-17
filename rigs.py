@@ -29,8 +29,8 @@ class CastAgain(discord.ui.View):
         usr = interaction.user
         if usr == self.caster:
             await Rig(self.type, self.channel, self.caster)
-            await self.interaction_check(interaction)
             self.stop()
+            await self.interaction_check(interaction)
         else:
             await INTERACTION(interaction.response, "You did not cast this rig.", True)
 
