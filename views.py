@@ -45,6 +45,60 @@ class SplicerView(discord.ui.View):
         else:
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
 
+class FirstButton(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
+    async def too_late(self) -> None:
+        await self.on_timeout()
+        await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
+
+    @discord.ui.button(label="A button", style = discord.ButtonStyle.primary)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if usr not in self.users.keys():
+            self.users[usr] = 0
+        else:
+            self.users[usr] += 1
+
+        if self.users[usr] == 0:
+            self.users[usr] = self.users[usr]
+
+        elif self.users[usr] == 1:
+            self.users[usr] = self.users[usr]
+
+        elif self.users[usr] == 2:
+            await INTERACTION(interaction.response, "Do not let the errors fool you.", True)
+
+        elif self.users[usr] == 3:
+            self.users[usr] = self.users[usr]
+
+        elif self.users[usr] == 4:
+            self.users[usr] = self.users[usr]
+
+        elif self.users[usr] == 5:
+            await INTERACTION(interaction.response, "Alright. That's enough pressing.", True)
+
+        elif self.users[usr] == 6:
+            await INTERACTION(interaction.response, "I am being serious. If you keep going I'll get rate limited.", True)
+
+        elif self.users[usr] == 7:
+            await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
+
+
+
+        if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"]:
+            disableSplicer()
+            
+            await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
+            self.stop()
+        else:
+            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
+
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:

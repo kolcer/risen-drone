@@ -765,6 +765,19 @@ Delete: Deletes the specified quiz question by index.
                     await SEND(I_SPY['channel'],'Whatever.')
                 return
             
+            if lmsg.startswith("buttons",1):
+                BUTTONS["channel"] = CHANNELS[lsecond]
+
+                if BUTTONS["phase"] == 0:
+                    view = FirstButton(timeout=100)
+                    view.users = {}
+                    
+                    await SEND_VIEW(BUTTONS["channel"], "A button!", view)
+
+                    await view.wait()
+                    await view.too_late()
+                return
+
             #create a new role with name
             if lmsg.startswith("nr", 1):
                 try:
