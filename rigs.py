@@ -441,7 +441,6 @@ async def ExecuteSplicerRig(ch,usr):
     view.toolate = True
 
     await view.wait()
-    await view.on_timeout()
 
     # await ADD_REACTION(focusmsg, "❌")
     # await asyncio.sleep(1)
