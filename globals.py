@@ -575,7 +575,7 @@ MORPHABLE_ROLES = {
         None,
         "It is finally time to pay a visit to the other dimension. You are now an Archon!",
         "Traveling between portals has been fun, but fun eventually comes to an end. You are no longer an Archon.",
-        "You are already visiting a dimension, it would be very rude to get away without saying goodbye to the locals.",
+        "You are already visiting a dimension; it would be very rude to get away without saying goodbye to the locals.",
         "Do you want the fun to end twice?",
      ],
     "Drifter": [ 
