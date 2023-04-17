@@ -771,11 +771,12 @@ Delete: Deletes the specified quiz question by index.
                 if BUTTONS["phase"] == 0:
                     view = FirstButton(timeout=100)
                     view.users = {}
+                    view.toolate = True
 
                     await SEND_VIEW(BUTTONS["channel"], "A button!", view)
 
                     await view.wait()
-                    await view.on_timeout()
+                    await view.too_late()
                 return
 
             #create a new role with name

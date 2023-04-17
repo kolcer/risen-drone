@@ -21,9 +21,6 @@ class CastAgain(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def too_late(self) -> None:
-        await self.on_timeout()
-
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
@@ -233,7 +230,7 @@ async def Rig(rigType, ch, usr):
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
-    view = CastAgain(timeout = 100)
+    view = CastAgain(timeout = 5)
     viewmsg = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
     view.caster = usr
     view.message = viewmsg
@@ -241,7 +238,7 @@ async def Rig(rigType, ch, usr):
     view.channel = ch
 
     await view.wait()
-    await view.too_late() 
+    await view.on_timeout() 
     
     #reset spam count
     await asyncio.sleep(3600)
@@ -435,7 +432,7 @@ async def ExecuteSplicerRig(ch,usr):
     toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! Press a button to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
 
 
-    view = SplicerView(timeout = 5)
+    view = SplicerView(timeout = 100)
     message = await SEND_VIEW(ch, toSend, view)
     view.message = message
     view.toolate = True

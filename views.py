@@ -56,9 +56,11 @@ class FirstButton(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def too_late(self) -> None:
+    async def too_late(self):
+        if self.toolate:
+            await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
+
         await self.on_timeout()
-        await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
 
     @discord.ui.button(label="What's this?", style = discord.ButtonStyle.secondary)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -92,6 +94,7 @@ class FirstButton(discord.ui.View):
 
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
+            self.toolate = False
             self.stop()
 
 # class CastAgain(discord.ui.View):
