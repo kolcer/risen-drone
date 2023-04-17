@@ -15,8 +15,10 @@ class SplicerView(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    async def too_late(self) -> None:
-        await self.on_timeout()
+        if self.toolate:
+            await self.too_late()
+
+    async def too_late(self):
         await SEND(self.message.channel, "Too little, too late.")
 
     @discord.ui.button(label="Refuse", custom_id = "SpliceNameNo", style = discord.ButtonStyle.red)
@@ -26,6 +28,7 @@ class SplicerView(discord.ui.View):
             disableSplicer()
             
             await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
+            self.toolate = False
             self.stop()
         else:
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
@@ -41,6 +44,7 @@ class SplicerView(discord.ui.View):
             disableSplicer()
 
             await INTERACTION(interaction.response, "Splice request accepted. Enjoy your new display names.", False)
+            self.toolate = False
             self.stop()
         else:
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)

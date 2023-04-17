@@ -438,6 +438,7 @@ async def ExecuteSplicerRig(ch,usr):
     view = SplicerView(timeout = 5)
     message = await SEND_VIEW(ch, toSend, view)
     view.message = message
+    view.toolate = True
 
     await view.wait()
     await view.on_timeout()
