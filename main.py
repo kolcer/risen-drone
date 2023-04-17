@@ -4,6 +4,7 @@ import discord
 import os
 import random
 import asyncio
+import requests
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -942,6 +943,24 @@ Delete: Deletes the specified quiz question by index.
                         await REMOVE_ROLES(mem, neededrole)
                         break
                 return  
+            
+            #creates new emoji
+            if lmsg.startswith("ne", 1):
+                try:
+                    url = msgsplit[1]
+                    name = third
+                    
+                    # Download the image data
+                    response = requests.get(url)
+                    if response.status_code == 200:
+                        image_data = response.content
+                        emoji = await message.guild.create_custom_emoji(name=name, image=image_data)
+                        await message.channel.send(f"Emoji {emoji.name} has been added!")
+                    else:
+                        await message.channel.send("Could not download image.")
+                        
+                except Exception as e:
+                    await message.channel.send(f"Error creating emoji: {str(e)}")
 
             #-----COMMANDS THAT ONLY USE 4 INPUTS-----
             #edits db rig tracking count for specific alignment
