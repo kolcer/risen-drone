@@ -781,7 +781,6 @@ Delete: Deletes the specified quiz question by index.
                     view = SecondButton(timeout=50)
                     view.pressed = 0
                     view.toolate = True
-                    view.chances = 25
                     view.correct_button = str(random.randint(1, 25))
                     view.message = await SEND_VIEW(BUTTONS["channel"], "So many buttons... which one to press?", view)
 

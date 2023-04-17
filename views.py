@@ -133,7 +133,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -155,7 +155,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -177,7 +177,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -199,7 +199,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -221,7 +221,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -243,7 +243,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -265,7 +265,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -287,7 +287,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -309,7 +309,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -331,7 +331,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -353,7 +353,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -375,7 +375,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -397,7 +397,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -419,7 +419,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -441,7 +441,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -463,7 +463,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -485,7 +485,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -507,7 +507,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -529,7 +529,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -551,7 +551,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -573,7 +573,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -595,7 +595,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -617,7 +617,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -639,7 +639,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
@@ -661,7 +661,7 @@ class SecondButton(discord.ui.View):
             button.style = discord.ButtonStyle.red
             button.disabled = True
 
-            self.chances -= 1
+
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
             

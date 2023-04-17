@@ -753,17 +753,17 @@ BUTTONS = {
     "channel": None,
     "phase": 1,
     "phase2labels": [
-        "Not this one.",
+        "Not this one",
         "Nope",
-        "Wrong again.",
-        "Maybe the next one.",
-        "Sorry.",
-        "What an unlucky day.",
-        "Better luck next time.",
+        "Wrong again",
+        "Maybe the next one",
+        "Sorry",
+        "What an unlucky day",
+        "Better luck next time",
         "No...",
-        "Don't fail me again.",
+        "Don't fail me again",
         "Try again",
-        "Loser."
+        "Loser",
     ]
 }
 
