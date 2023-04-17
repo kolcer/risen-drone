@@ -56,7 +56,7 @@ class FirstButton(discord.ui.View):
         await self.on_timeout()
         await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
 
-    @discord.ui.button(label="What's this?", style = discord.ButtonStyle.primary)
+    @discord.ui.button(label="What's this?", style = discord.ButtonStyle.secondary)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 

@@ -775,7 +775,7 @@ Delete: Deletes the specified quiz question by index.
                     await SEND_VIEW(BUTTONS["channel"], "A button!", view)
 
                     await view.wait()
-                    await view.too_late()
+                    await view.on_timeout()
                 return
 
             #create a new role with name
