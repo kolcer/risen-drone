@@ -432,16 +432,15 @@ async def ExecuteSplicerRig(ch,usr):
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-    toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! React to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
+    toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! Press a button to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
 
 
-    view = SplicerView(timeout = 60)
+    view = SplicerView(timeout = 5)
     message = await SEND_VIEW(ch, toSend, view)
     view.message = message
-    SPLICER_RIG["reactionmessage"] = message
 
     await view.wait()
-    await view.on_timeout()
+    await view.too_late()
 
     # await ADD_REACTION(focusmsg, "❌")
     # await asyncio.sleep(1)
