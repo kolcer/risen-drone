@@ -120,7 +120,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -142,7 +142,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -164,7 +164,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -186,7 +186,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -208,7 +208,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -230,7 +230,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -252,7 +252,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -274,7 +274,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -296,7 +296,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -318,7 +318,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -340,7 +340,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -362,7 +362,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -384,7 +384,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -406,7 +406,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -428,7 +428,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -450,7 +450,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -472,7 +472,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -494,7 +494,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -516,7 +516,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -538,7 +538,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -560,7 +560,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -582,7 +582,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -604,7 +604,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -626,7 +626,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
@@ -648,7 +648,7 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if random.randint(1, self.chances) == 1:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             self.stop()
