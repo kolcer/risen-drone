@@ -1,4 +1,5 @@
 import time
+import random
 
 from globals import *
 from rated import *
@@ -98,6 +99,472 @@ class FirstButton(discord.ui.View):
             self.toolate = False
             BUTTONS["phase"] = 2
             self.stop()
+
+class SecondButton(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.label = "..."
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, "That wraps this up.", self)
+
+    async def too_late(self):
+        if self.toolate:
+            await SEND(BUTTONS["channel"], "So many buttons to press, I was torn as well.")
+
+        await self.on_timeout()
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B10(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B11(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B12(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B13(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B14(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B15(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B16(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B18(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B19(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B20(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B21(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B22(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B23(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B24(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+
+    @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
+    async def B25(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if random.randint(1, self.chance) == 1:
+            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.")
+            self.toolate = False
+            self.stop()
+        else:
+            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
+                button.label = BUTTONS["phase2labels"][10]
+            else:
+                button.label = BUTTONS["phase2labels"][self.pressed]
+                button.style = discord.ButtonStyle.red
+                button.disabled = True
+
+                self.chance -= 1
+            
+
 
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):
