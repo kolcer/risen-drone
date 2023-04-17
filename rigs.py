@@ -258,7 +258,7 @@ async def CastRig(rigPick,ch,usr):
         await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
-    if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"] and ch.id != 1093647594288316458:
+    if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"] and ch.id != 1096887479031836793:
         rigPick = "heretic"
 
     if rigPick == "chameleon":
