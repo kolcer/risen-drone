@@ -21,6 +21,9 @@ class CastAgain(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
+    async def on_error(self):
+        await self.on_timeout()
+
     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
