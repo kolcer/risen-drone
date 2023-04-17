@@ -62,7 +62,7 @@ class FirstButton(discord.ui.View):
 
         await self.on_timeout()
 
-    @discord.ui.button(label="What's this?", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="What's this?", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
@@ -95,6 +95,7 @@ class FirstButton(discord.ui.View):
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
             self.toolate = False
+            BUTTONS["phase"] = 2
             self.stop()
 
 # class CastAgain(discord.ui.View):

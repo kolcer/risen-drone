@@ -751,8 +751,7 @@ BUTTONS = {
     "maxwait": 60,
     "status": None,
     "channel": None,
-    "phase": 0,
-    "phase1": {},
+    "phase": 1,
 }
 
 EXTRA_ROLES = {
