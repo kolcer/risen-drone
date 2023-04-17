@@ -56,7 +56,7 @@ class FirstButton(discord.ui.View):
         await self.on_timeout()
         await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
 
-    @discord.ui.button(label="A button", style = discord.ButtonStyle.primary)
+    @discord.ui.button(label="What's this?", style = discord.ButtonStyle.primary)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
@@ -72,7 +72,7 @@ class FirstButton(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 2:
-            await INTERACTION(interaction.response, "Do not let the errors fool you.", True)
+            await INTERACTION(interaction.response, "This interaction will not fail on my watch.", True)
 
         elif self.users[usr] == 3:
             self.users[usr] = self.users[usr]
@@ -88,6 +88,7 @@ class FirstButton(discord.ui.View):
 
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
+            self.stop()
 
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):
