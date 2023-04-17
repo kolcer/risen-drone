@@ -131,6 +131,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -149,6 +150,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -167,6 +169,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -185,6 +188,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -203,6 +207,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -221,6 +226,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -239,6 +245,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -257,6 +264,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -275,6 +283,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B10(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -293,6 +302,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B11(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -311,6 +321,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B12(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -329,6 +340,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B13(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -347,6 +359,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B14(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -365,6 +378,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B15(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -383,6 +397,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B16(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -401,6 +416,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -419,6 +435,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B18(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -437,6 +454,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B19(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -455,6 +473,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B20(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -473,6 +492,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B21(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -491,6 +511,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B22(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -509,6 +530,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B23(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -527,6 +549,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B24(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -545,6 +568,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
 
     @discord.ui.button(label="Button", style = discord.ButtonStyle.green)
     async def B25(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -563,6 +587,7 @@ class SecondButton(discord.ui.View):
                 button.disabled = True
 
                 self.chance -= 1
+                self.pressed += 1
             
 
 
