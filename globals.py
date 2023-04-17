@@ -127,6 +127,7 @@ LIMITED_USE_RIGS = [
     "spectre",
     "splicer",
     "gun",
+    "impostor",
 ]
 
 # worst guns ever made for the gun role
