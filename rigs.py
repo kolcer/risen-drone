@@ -29,6 +29,7 @@ class CastAgain(discord.ui.View):
         usr = interaction.user
         if usr == self.caster:
             await Rig(self.type, self.channel, self.caster)
+            await self.interaction_check(interaction)
             self.stop()
         else:
             await INTERACTION(interaction.response, "You did not cast this rig.", True)
@@ -233,7 +234,7 @@ async def Rig(rigType, ch, usr):
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
-    view = CastAgain(timeout = 5)
+    view = CastAgain(timeout = 100)
     viewmsg = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
     view.caster = usr
     view.message = viewmsg
