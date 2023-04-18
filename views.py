@@ -61,7 +61,7 @@ class FirstButton(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], "I usually click a button when I see one.")
+            await SEND(BUTTONS["channel"], "Sleazel would have clicked it.")
 
         await self.on_timeout()
 

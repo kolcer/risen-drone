@@ -769,6 +769,7 @@ Delete: Deletes the specified quiz question by index.
                 BUTTONS["channel"] = CHANNELS[lsecond]
                 if BUTTONS["status"] == True:
                     await SEND(ch, "Not so fast.")
+                    return
 
                 await DELETE(message)
                 BUTTONS["status"] = True
