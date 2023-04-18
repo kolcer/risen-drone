@@ -766,6 +766,12 @@ Delete: Deletes the specified quiz question by index.
                 return
             
             if lmsg.startswith("buttons", 1):
+                if "bot-testing" in lmsg:
+                    BUTTONS["channel"] = CHANNELS["bot-testing"]
+                    BUTTONS["phase"] = int(lmsg.replace("|buttons bot-testing", ""))
+                else:
+                    BUTTONS["channel"] = CHANNELS[second]
+
                 BUTTONS["channel"] = CHANNELS[lsecond]
                 if BUTTONS["status"] == True:
                     await SEND(ch, "Not so fast.")
@@ -773,9 +779,6 @@ Delete: Deletes the specified quiz question by index.
 
                 await DELETE(message)
                 BUTTONS["status"] = True
-
-                if "bot-testing" in lmsg:
-                    BUTTONS["phase"] = int(lmsg.replace("|buttons bot-testing", ""))
 
                 if BUTTONS["phase"] == 1:
                     view = FirstButton(timeout=100)
