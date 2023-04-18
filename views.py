@@ -787,7 +787,7 @@ class ThirdButton(discord.ui.View):
                 self.clicks += 1
                 await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{round(time.time() + self.tm)}:R>.", self)
         else:
-            self.tm = 14
+            self.tm = 15
             self.timeout = 15
             if usr == self.winning:
                 await INTERACTION(interaction.response, "Haha, suffer.", True)
