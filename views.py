@@ -670,10 +670,10 @@ class ThirdButton(discord.ui.View):
         for item in self.children:
             item.disabled = True
             if not len(self.users) <= 1:
-                item.label = f"{self.winning.name} was here."
+                item.label = f"{self.winning.name} was here"
                 await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
             else:
-                item.label = "Still my button."
+                item.label = "Still my button"
                 await EDIT_VIEW_MESSAGE(self.message, "I get to keep my button.", self)
 
     async def too_late(self):
