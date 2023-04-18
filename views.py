@@ -773,7 +773,6 @@ class ThirdButton(discord.ui.View):
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-
         if usr not in self.users:
             self.users.append(usr)
 
@@ -789,6 +788,7 @@ class ThirdButton(discord.ui.View):
                 await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{round(time.time() + self.tm)}:R>.", self)
         else:
             self.tm = 14
+            self.timeout = 15
             if usr == self.winning:
                 await INTERACTION(interaction.response, "Haha, suffer.", True)
                 await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` has not learned.\nI said you'll receive it in <t:{round(time.time() + self.tm)}:R>.", self)
@@ -797,7 +797,7 @@ class ThirdButton(discord.ui.View):
                 button.style = discord.ButtonStyle.green
                 self.winning = usr
                 self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up soon.\nIn <t:{round(time.time() + self.tm)}:R> I'll give it to you.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up soon.\nI'll give it to you in <t:{round(time.time() + self.tm)}:R>.", self)
 
             
 
