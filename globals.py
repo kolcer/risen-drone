@@ -613,6 +613,9 @@ FUN_ROLES = [
     "Optimus",
     "Wise",
     "Impostor",
+    "Persistent Clicker",
+    "Lucky Button",
+    "Last One",
 ]
 
 APPROVED_ROLES = {
