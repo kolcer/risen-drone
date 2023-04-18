@@ -780,24 +780,24 @@ class ThirdButton(discord.ui.View):
         if self.clicks < 100:
             if usr == self.winning:
                 await INTERACTION(interaction.response, "The button is yours.", True)
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is being too hasty.\nDon't worry, it'll be yours <t:{self.tm}:R>.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + self.tm)}:R>.", self)
             else:
                 button.label = f"{usr.name} button"
                 button.style = discord.ButtonStyle.green
                 self.winning = usr
                 self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{self.tm}:R>.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{round(time.time() + self.tm)}:R>.", self)
         else:
-            self.tm = round({time.time() + 13})
+            self.tm = 13
             if usr == self.winning:
                 await INTERACTION(interaction.response, "Haha, suffer.", True)
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` has not learned.\nI said you'll receive it in <t:{self.tm}:R>.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` has not learned.\nI said you'll receive it in <t:{round(time.time() + self.tm)}:R>.", self)
             else:
                 button.label = f"{usr.name} button"
                 button.style = discord.ButtonStyle.green
                 self.winning = usr
                 self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up soon.\nIn <t:{self.tm}:R> I'll give it to you.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up soon.\nIn <t:{round(time.time() + self.tm)}:R> I'll give it to you.", self)
 
             
 
