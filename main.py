@@ -773,6 +773,10 @@ Delete: Deletes the specified quiz question by index.
 
                 await DELETE(message)
                 BUTTONS["status"] = True
+
+                if "bot-testing" in lmsg:
+                    BUTTONS["phase"] = int(lmsg.replace("|buttons bot-testing", ""))
+
                 if BUTTONS["phase"] == 1:
                     view = FirstButton(timeout=100)
                     view.users = {}
@@ -797,7 +801,7 @@ Delete: Deletes the specified quiz question by index.
                 elif BUTTONS["phase"] == 3:
                     view = ThirdButton(timeout=30)
                     view.tm = 30
-                    view.clicks = 0
+                    view.clicks = 90
                     view.winning = None
                     view.users = []
                     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
