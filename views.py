@@ -694,6 +694,7 @@ class ThirdButton(discord.ui.View):
 
         if usr == self.winning:
             await INTERACTION(interaction.response, "The button is yours.", True)
+            await EDIT_VIEW_MESSAGE(self.message, f"{usr.name} is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + 30)}:R>.", self)
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
