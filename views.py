@@ -693,13 +693,13 @@ class ThirdButton(discord.ui.View):
             self.users.append(usr)
 
         if usr == self.winning:
-            await INTERACTION(interaction.response, "The button is yours.", True)
-            await EDIT_VIEW_MESSAGE(self.message, f"{usr.name} is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + 30)}:R>.", self)
+            await INTERACTION(interaction.response, "Haha, suffer.", True)
+            await EDIT_VIEW_MESSAGE(self.message, f"{usr.name} is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + 26)}:R>.", self)
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
-            await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is {usr.name}'s button now.\nI'll let you have it <t:{round(time.time() + 30)}:R>.", self)
+            await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is {usr.name}'s button now.\nI'll let you have it <t:{round(time.time() + 26)}:R>.", self)
 
             
 
