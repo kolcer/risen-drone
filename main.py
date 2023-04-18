@@ -788,7 +788,7 @@ Delete: Deletes the specified quiz question by index.
                     await view.too_late()
 
                 elif BUTTONS["phase"] == 1:
-                    view = SecondButton(timeout=15)
+                    view = ThirdButton(timeout=15)
                     view.winning = None
                     view.users = []
                     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
