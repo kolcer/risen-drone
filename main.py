@@ -802,7 +802,7 @@ Delete: Deletes the specified quiz question by index.
 
                 elif BUTTONS["phase"] == 3:
                     view = ThirdButton(timeout=30)
-                    view.tm = 28
+                    view.tm = 29
                     view.clicks = 90
                     view.winning = None
                     view.users = []
