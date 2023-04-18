@@ -767,7 +767,15 @@ BUTTONS = {
         "Don't fail me again",
         "Try again",
         "Loser",
-    ]
+    ],
+    "phase3again": [
+        "`{mention}` is being too hasty.\nDon't worry, it'll be yours <t:{time}:R>.",
+        "`{mention}` has not learned.\nI said you'll receive it in <t:{time}:R>.",
+    ],
+    "phase3new": [
+        "I suppose this is `{mention}`'s button now.\nI'll let you have it <t:{time}:R>.",
+        "`{mention}` is not planning to give up anytime soon.\nI'll give it to you <t:{time}:R>."
+    ],
 }
 
 EXTRA_ROLES = {

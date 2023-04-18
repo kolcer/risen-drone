@@ -806,6 +806,7 @@ Delete: Deletes the specified quiz question by index.
                     view.clicks = 0
                     view.winning = None
                     view.users = []
+                    view.step = 0
                     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
 
                     await view.wait()

@@ -776,28 +776,20 @@ class ThirdButton(discord.ui.View):
         if usr not in self.users:
             self.users.append(usr)
 
-        if self.clicks < 100:
-            if usr == self.winning:
-                await INTERACTION(interaction.response, "The button is yours.", True)
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + self.tm)}:R>.", self)
-            else:
-                button.label = f"{usr.name} button"
-                button.style = discord.ButtonStyle.green
-                self.winning = usr
-                self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{round(time.time() + self.tm)}:R>.", self)
-        else:
-            self.tm = 15
+        if self.clicks >= 100:
+            self.step = 1
             self.timeout = 15
-            if usr == self.winning:
-                await INTERACTION(interaction.response, "Haha, suffer.", True)
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` has not learned.\nI said you'll receive it in <t:{round(time.time() + self.tm)}:R>.", self)
-            else:
-                button.label = f"{usr.name} button"
-                button.style = discord.ButtonStyle.green
-                self.winning = usr
-                self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up anytime soon.\nI'll give it to you in <t:{round(time.time() + self.tm)}:R>.", self)
+            self.tm = 15
+
+        if usr == self.winning:
+            await INTERACTION(interaction.response, "The button is yours.", True)
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase2again"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
+        else:
+            button.label = f"{usr.name} button"
+            button.style = discord.ButtonStyle.green
+            self.winning = usr
+            self.clicks += 1
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase2new"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
 
             
 
