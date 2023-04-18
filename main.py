@@ -777,12 +777,21 @@ Delete: Deletes the specified quiz question by index.
                     await view.wait()
                     await view.too_late()
 
-                elif BUTTONS["phase"] != 0:
+                elif BUTTONS["phase"] == -11:
                     view = SecondButton(timeout=50)
                     view.pressed = 0
                     view.toolate = True
                     view.correct_button = str(random.randint(1, 25))
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "So many buttons... which one to press?", view)
+                    view.message = await SEND_VIEW(BUTTONS["channel"], "So many buttons... which one to click?", view)
+
+                    await view.wait()
+                    await view.too_late()
+
+                elif BUTTONS["phase"] == 1:
+                    view = SecondButton(timeout=15)
+                    view.winning = None
+                    view.users = []
+                    view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
 
                     await view.wait()
                     await view.too_late()

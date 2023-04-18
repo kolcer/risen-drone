@@ -664,6 +664,41 @@ class SecondButton(discord.ui.View):
 
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
+class ThirdButton(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+            if not len(self.users) <= 1:
+                item.label = f"{self.winning.name} was here."
+                await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
+            else:
+                item.label = "Still my button."
+                await EDIT_VIEW_MESSAGE(self.message, "I get to keep my button.", self)
+
+    async def too_late(self):
+        if len(self.users) <= 1:
+            await SEND(BUTTONS["channel"], "Thank you very much.")
+        else:
+            await SEND(BUTTONS["channel"], f"{self.winning.mention} now owns my former button.")
+
+        await self.on_timeout()
+
+    @discord.ui.button(label="Broken Drone button", style = discord.ButtonStyle.secondary)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if usr not in self.users:
+            self.users.append(usr)
+
+        if usr == self.winning:
+            await INTERACTION(interaction.response, "The button is yours.", True)
+        else:
+            button.label = f"{usr.name} button"
+            button.style = discord.ButtonStyle.green
+            self.winning = usr
+            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
             
 
 
