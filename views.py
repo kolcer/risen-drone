@@ -783,13 +783,13 @@ class ThirdButton(discord.ui.View):
 
         if usr == self.winning:
             await INTERACTION(interaction.response, "The button is yours.", True)
-            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase2again"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
             self.clicks += 1
-            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase2new"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.mention, time = round(time.time() + self.tm)), self)
 
             
 
