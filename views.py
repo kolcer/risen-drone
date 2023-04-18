@@ -2,6 +2,7 @@ import time
 import random
 
 from globals import *
+from database import *
 from rated import *
 from roles import *
 from globals import *
@@ -60,7 +61,7 @@ class FirstButton(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], "I usually press a button when I see one.")
+            await SEND(BUTTONS["channel"], "I usually click a button when I see one.")
 
         await self.on_timeout()
 
@@ -89,15 +90,19 @@ class FirstButton(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 5:
-            await INTERACTION(interaction.response, "Alright. That's enough pressing.", True)
+            await INTERACTION(interaction.response, "Alright. That's enough clicking.", True)
 
         elif self.users[usr] == 6:
             await INTERACTION(interaction.response, "I am being serious. If you keep going I'll get rate limited.", True)
 
         elif self.users[usr] == 7:
-            await INTERACTION(interaction.response, f"{usr.mention} has successfully pressed this button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} has successfully clicked this button.", False)
             self.toolate = False
             BUTTONS["phase"] = 2
+
+            if not str(usr.id) in list_decoded_entries("Persistent Clicker"):
+                await add_entry_with_check("Persistent Clicker", usr)
+            
             self.stop()
 
 
@@ -120,9 +125,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -142,9 +150,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -164,9 +175,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -186,9 +200,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -208,9 +225,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -230,9 +250,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -252,9 +275,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -274,9 +300,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -296,9 +325,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -318,9 +350,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -340,9 +375,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -362,9 +400,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -384,9 +425,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -406,9 +450,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -428,9 +475,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -450,9 +500,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -472,9 +525,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -494,9 +550,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -516,9 +575,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -538,9 +600,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -560,9 +625,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -582,9 +650,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -604,9 +675,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -626,9 +700,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -648,9 +725,12 @@ class SecondButton(discord.ui.View):
         usr = interaction.user
 
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} pressed the correct button.", False)
+            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
+            if not str(usr.id) in list_decoded_entries("Lucky Button"):
+                await add_entry_with_check("Lucky Button", usr)
+            BUTTONS["phase"] = 3
             self.stop()
         else:
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
@@ -681,7 +761,11 @@ class ThirdButton(discord.ui.View):
         if len(self.users) <= 1:
             await SEND(BUTTONS["channel"], "Thank you very much.")
         else:
-            await SEND(BUTTONS["channel"], f"{self.winning.mention} now owns my former button.")
+            await SEND(BUTTONS["channel"], f"{self.winning.mention} stole my button.")
+
+            if not str(self.winning.id) in list_decoded_entries("Last One"):
+                await add_entry_with_check("Last One", self.winning)
+            BUTTONS["phase"] = 1
 
         await self.on_timeout()
 
@@ -694,12 +778,12 @@ class ThirdButton(discord.ui.View):
 
         if usr == self.winning:
             await INTERACTION(interaction.response, "Haha, suffer.", True)
-            await EDIT_VIEW_MESSAGE(self.message, f"{usr.name} is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + 26)}:R>.", self)
+            await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is being too hasty.\nDon't worry, it'll be yours <t:{round(time.time() + 26)}:R>.", self)
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
-            await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is {usr.name}'s button now.\nI'll let you have it <t:{round(time.time() + 26)}:R>.", self)
+            await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is `{usr.name}`'s button now.\nI'll let you have it <t:{round(time.time() + 26)}:R>.", self)
 
             
 

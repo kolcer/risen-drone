@@ -768,7 +768,7 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("buttons", 1):
                 BUTTONS["channel"] = CHANNELS[lsecond]
 
-                if BUTTONS["phase"] == 99:
+                if BUTTONS["phase"] == 1:
                     view = FirstButton(timeout=100)
                     view.users = {}
                     view.toolate = True
@@ -777,7 +777,7 @@ Delete: Deletes the specified quiz question by index.
                     await view.wait()
                     await view.too_late()
 
-                elif BUTTONS["phase"] == -11:
+                elif BUTTONS["phase"] == 2:
                     view = SecondButton(timeout=50)
                     view.pressed = 0
                     view.toolate = True
@@ -787,7 +787,7 @@ Delete: Deletes the specified quiz question by index.
                     await view.wait()
                     await view.too_late()
 
-                elif BUTTONS["phase"] == 1:
+                elif BUTTONS["phase"] == 3:
                     view = ThirdButton(timeout=30)
                     view.winning = None
                     view.users = []
