@@ -752,7 +752,7 @@ I_SPY = {
 
 BUTTONS = {
     "maxwait": 60,
-    "status": None,
+    "status": False,
     "channel": None,
     "phase": 1,
     "phase2labels": [

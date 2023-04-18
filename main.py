@@ -768,6 +768,10 @@ Delete: Deletes the specified quiz question by index.
             if lmsg.startswith("buttons", 1):
                 BUTTONS["channel"] = CHANNELS[lsecond]
 
+                if BUTTONS["status"] == True:
+                    await SEND(ch, "Not so fast.")
+
+                BUTTONS["status"] = True
                 if BUTTONS["phase"] == 1:
                     view = FirstButton(timeout=100)
                     view.users = {}
@@ -776,6 +780,7 @@ Delete: Deletes the specified quiz question by index.
 
                     await view.wait()
                     await view.too_late()
+                    BUTTONS["status"] = False
 
                 elif BUTTONS["phase"] == 2:
                     view = SecondButton(timeout=50)
@@ -786,6 +791,7 @@ Delete: Deletes the specified quiz question by index.
 
                     await view.wait()
                     await view.too_late()
+                    BUTTONS["status"] = False
 
                 elif BUTTONS["phase"] == 3:
                     view = ThirdButton(timeout=30)
@@ -795,6 +801,7 @@ Delete: Deletes the specified quiz question by index.
 
                     await view.wait()
                     await view.too_late()
+                    BUTTONS["status"] = False
                 return
 
             #create a new role with name
