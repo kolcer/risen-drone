@@ -674,6 +674,7 @@ class ThirdButton(discord.ui.View):
                 await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
             else:
                 item.label = "Still my button"
+                item.style = discord.ButtonStyle.red
                 await EDIT_VIEW_MESSAGE(self.message, "I get to keep my button.", self)
 
     async def too_late(self):
@@ -697,7 +698,7 @@ class ThirdButton(discord.ui.View):
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+            await EDIT_VIEW_MESSAGE(self.message, f"I suppose this is {usr.name}'s button now.\nI'll let you have it <t:{round(time.time() + 30)}:R>.", self)
 
             
 
