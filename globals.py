@@ -769,11 +769,13 @@ BUTTONS = {
     ],
     "phase3again": [
         "`{mention}` is being too hasty.\nDon't worry, it'll be yours <t:{time}:R>.",
-        "`{mention}` has not learned.\nI said you'll receive it in <t:{time}:R>.",
+        "`{mention}` has not learned.\nI said you'll receive it <t:{time}:R>.",
+        "`{mention}` must be very impatient.\nI hate repeating myself, I'll give it to you <t:{time}:R>.",
     ],
     "phase3new": [
         "I suppose this is `{mention}`'s button now.\nI'll let you have it <t:{time}:R>.",
-        "`{mention}` is not planning to give up anytime soon.\nI'll give it to you <t:{time}:R>."
+        "`{mention}` is not planning to give up anytime soon.\nI'll give it to you <t:{time}:R>.",
+        "I sense a strong desire from `{mention}` to keep this button.\nNevertheless, I will relinquish it to you <t:{time}:R>."
     ],
 }
 
