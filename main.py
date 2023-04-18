@@ -803,7 +803,7 @@ Delete: Deletes the specified quiz question by index.
                 elif BUTTONS["phase"] == 3:
                     view = ThirdButton(timeout=30)
                     view.tm = 30
-                    view.clicks = 97
+                    view.clicks = 0
                     view.winning = None
                     view.users = []
                     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)

@@ -797,7 +797,7 @@ class ThirdButton(discord.ui.View):
                 button.style = discord.ButtonStyle.green
                 self.winning = usr
                 self.clicks += 1
-                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up soon.\nI'll give it to you in <t:{round(time.time() + self.tm)}:R>.", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"`{usr.name}` is not planning to give up anytime soon.\nI'll give it to you in <t:{round(time.time() + self.tm)}:R>.", self)
 
             
 
