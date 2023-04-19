@@ -619,6 +619,12 @@ FUN_ROLES = [
     "Broken Drone Helper",
 ]
 
+LIMITED_ROLES = {
+    "I was there": "*(11/27/2022 - 11/28/2022)*",
+    "Zero": "*(03/31/2022 - 04/19/2022)*",
+    "Persisent Clicker": "*(04/18/2023 - 04/19/2023)*",
+}
+
 APPROVED_ROLES = {
     "Splicer": None,
     "Role Hunter": None,
@@ -634,10 +640,6 @@ FUN_LISTS = {
     "Zero": [],
     "Dreepy": [],
     "Wise": [],
-}
-
-LIMITED_ROLES = {
-    "I was there": "*(11/27/2022 - 11/28/2022)*",
 }
 
 # not morphable roles

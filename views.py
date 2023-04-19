@@ -14,11 +14,17 @@ class ShowProfile(discord.ui.View):
     titles = ["{user}'s secret roles",
               "{user}'s locked roles",
               "{user}'s stats"]
-    
     sidecolor = ["FFA500",
                  "FF0000",
-                 "FFC0CB"]
+                 "FFC0CB"]  
+    embed = None
     
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await self.message.edit(embed=self.embed, view=self)
+
     async def send(self, ch):
         self.message = await ch.send(view=self)
         await self.update_message()
@@ -29,6 +35,7 @@ class ShowProfile(discord.ui.View):
         embed.description = self.data[self.cp]
         embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
 
+        self.embed = embed
         return embed
 
     async def update_message(self):
@@ -184,8 +191,8 @@ class FirstButton(discord.ui.View):
             self.toolate = False
             BUTTONS["phase"] = 2
 
-            if not str(usr.id) in list_decoded_entries("Persistent Clicker"):
-                await add_entry_with_check("Persistent Clicker", usr)
+            # if not str(usr.id) in list_decoded_entries("Persistent Clicker"): 3 roles for 3 games are enough. next ones will not grant roles either.
+            #     await add_entry_with_check("Persistent Clicker", usr)
             
             self.stop()
 

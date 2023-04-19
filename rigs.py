@@ -167,8 +167,8 @@ async def Rig(rigType, ch, usr):
             if usr.display_name == '00000000':
                 await SEND(ch, "You truly deserve the Zero rank.")
 
-                if str(usr.id) not in list_decoded_entries("Zero"):
-                    await add_entry_with_check("Zero", usr)
+                # if str(usr.id) not in list_decoded_entries("Zero"):  Removing gambling. When I made this role it wasn't meant to be grinded for.
+                #     await add_entry_with_check("Zero", usr)
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))

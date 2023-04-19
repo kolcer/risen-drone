@@ -478,6 +478,7 @@ async def on_message(message):
             
             # Send view... hopefully
             await view.send(ch)
+            await view.wait()
 
         ## Revive Chat Command
         elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
