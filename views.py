@@ -221,6 +221,7 @@ class SecondButton(discord.ui.View):
             BUTTONS["phase"] = 3
             self.stop()
         else:
+            await interaction.response.defer()
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
                 button.label = BUTTONS["phase2labels"][10]
                 await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
@@ -427,6 +428,7 @@ class ThirdButton(discord.ui.View):
             await INTERACTION(interaction.response, "The button is yours.", True)
             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
         else:
+            await interaction.response.defer()
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
@@ -459,6 +461,7 @@ class FourthButton(discord.ui.View):
         self.users.append(usr)
         self.step += 1
         if self.step < 4:
+            await interaction.response.defer()
             button.label = f"{usr.name}"
             button.style = discord.ButtonStyle.green
             button.disabled = True
