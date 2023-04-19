@@ -368,7 +368,7 @@ class FourthButton(discord.ui.View):
         self.users.append(usr)
         self.step += 1
         if self.step < 4:
-            button.label = f"{usr.name}'s help"
+            button.label = f"{usr.name}"
             button.style = discord.ButtonStyle.green
             button.disabled = True
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
@@ -390,7 +390,7 @@ class FourthButton(discord.ui.View):
             await newview.too_late()
             self.stop()
 
-    @discord.ui.button(label="Broken Drone's help", custom_id = "1", style = discord.ButtonStyle.green, disabled = True)
+    @discord.ui.button(label="Broken Drone", custom_id = "1", style = discord.ButtonStyle.green, disabled = True)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)

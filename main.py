@@ -783,7 +783,7 @@ Delete: Deletes the specified quiz question by index.
                 BUTTONS["status"] = True
 
                 if BUTTONS["phase"] == 1:
-                    view = FirstButton(timeout=100)
+                    view = FirstButton(timeout=50)
                     view.users = {}
                     view.toolate = True
                     view.message = await SEND_VIEW(BUTTONS["channel"], "A button.", view)
