@@ -11,13 +11,13 @@ from discord.ext import commands
 class ShowProfile(discord.ui.View):
     cp  = 0
     sep = 2
-    titles = ["{user}'s roles",
-              "{user}'s secret roles",
+    titles = ["{user}'s secret roles",
+              "{user}'s locked roles",
               "{user}'s stats"]
     
     async def send(self, ch):
         self.message = await ch.send(view=self)
-        await self.update_message(self.data[self.cp])
+        await self.update_message()
 
     def create_embed(self):
         embed = discord.Embed()
