@@ -389,27 +389,27 @@ class FourthButton(discord.ui.View):
             await newview.too_late()
             newview.stop()
 
-    @discord.ui.button(label="1", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="1", custom_id = "1", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label="2", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="2", custom_id = "2", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label="3", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="3", custom_id = "3", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label="4", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="4", custom_id = "4", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label="5", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="5", custom_id = "5", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
