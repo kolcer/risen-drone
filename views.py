@@ -27,7 +27,7 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
-        embed.color = discord.Colour("#FF0000") 
+        embed.color = discord.Colour(int("FF0000", 16)) 
 
         return embed
 
