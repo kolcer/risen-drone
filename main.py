@@ -815,7 +815,7 @@ Delete: Deletes the specified quiz question by index.
                     BUTTONS["status"] = False
 
                 elif BUTTONS["phase"] == 4:
-                    view = ThirdButton(timeout=60)
+                    view = FourthButton(timeout=60)
                     view.toolate = True
                     view.users = []
                     view.helpers = []

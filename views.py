@@ -312,7 +312,7 @@ class ThirdButton(discord.ui.View):
 
             if not str(self.winning.id) in list_decoded_entries("Last One"):
                 await add_entry_with_check("Last One", self.winning)
-            BUTTONS["phase"] = 1
+            BUTTONS["phase"] = 4
 
         await self.on_timeout()
 
@@ -374,6 +374,7 @@ class FourthButton(discord.ui.View):
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
         elif self.step == 2:
             self.toolate = False
+            BUTTONS["phase"] = 1
             button.label = f"{usr.name}'s help"
             button.style = discord.ButtonStyle.green
             button.disabled = True
