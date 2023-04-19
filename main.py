@@ -27,7 +27,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix="|", intents=intents)
 
-@bot.tree.command(description="Shows your profile", name="Show Profile")
+@bot.tree.command(description="Shows your profile", name="show_profile")
 async def show_profile(interaction: discord.Interaction):
     target = None
     usr = interaction.user
