@@ -442,8 +442,8 @@ class FourthButtonFinal(discord.ui.View):
         await INTERACTION(interaction.response, "Here, take this button.", True)
         await add_entry_with_check("Broken Drone Helper", usr)
 
-        if len(self.clicked) != len(self.users):
-            await self.on_closed()
+        if len(self.clicked) == len(self.users):
+            await self.on_closed() 
             self.stop()
 
 
