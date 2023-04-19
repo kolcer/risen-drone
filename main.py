@@ -430,7 +430,7 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowProfile()
-            view.data = []
+            view.data = ["", "", ""]
             view.target = target
 
             # Prepare list to show in PAGE 1 (secret roles)
