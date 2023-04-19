@@ -51,7 +51,7 @@ class ShowProfile(discord.ui.View):
             self.next_button.disabled = False
             self.last_page_button.disabled = False
             self.last_page_button.style = discord.ButtonStyle.green
-            self.next_button.style = discord.ButtonStyle.
+            self.next_button.style = discord.ButtonStyle.primary
 
     @discord.ui.button(label="|<",
                        style=discord.ButtonStyle.green)
