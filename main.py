@@ -163,7 +163,7 @@ async def on_ready():
     set_entry("restarts", str(restarts))
 
     bot.tree.copy_global_to(guild=SERVER_DATA["server"].id)
-    await bot.tree.sycn(guild=SERVER_DATA["server"].id)
+    await bot.tree.sync(guild=SERVER_DATA["server"].id)
 
 
 #member update, prevent changing gun nick to anything other than the gun name
