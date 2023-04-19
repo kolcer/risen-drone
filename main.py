@@ -719,17 +719,13 @@ Delete: Deletes the specified quiz question by index.
 
 |ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
 
-|nr [hexadecimal-color] [name]: Creates a new role with the specified color and name.
+|nr [name]: Creates a new entry in retis with the specified name (add it to FUN_ROLES in globals.py).
 
 |un/assign [!!USER ID!!] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
-
-|alter [old-name] [new-name]: Changes the old role name to the new one. The old name should contain underscores instead of spaces, and the role must be in the FUN_ROLES list.
 
 |purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
 
 |edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
-
-|wisdoms: Shows how many wisdom quotes the bot has.
 ''')
                 return
             
