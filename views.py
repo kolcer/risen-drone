@@ -8,6 +8,80 @@ from roles import *
 from globals import *
 from discord.ext import commands
 
+class ShowProfile(discord.ui.View):
+    cp  = 0
+    sep = 2
+    titles = ["{user}'s roles",
+              "{user}'s stats",
+              "{user}'s secret roles"]
+    
+    async def send(self, ch):
+        self.message = await ch.send(view=self)
+        await self.update_message(self.data[:self.sep])
+
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = self.titles[self.cp].format(user=self.target.display_name)
+        embed.description = self.data[self.cp]
+
+        return embed
+
+    async def update_message(self):
+        self.update_buttons()
+        await self.message.edit(embed=self.create_embed(), view=self)
+
+    def update_buttons(self):
+        if self.cp == 0:
+            self.first_page_button.disabled = True
+            self.prev_button.disabled = True
+            self.first_page_button.style = discord.ButtonStyle.gray
+            self.prev_button.style = discord.ButtonStyle.gray
+        else:
+            self.first_page_button.disabled = False
+            self.prev_button.disabled = False
+            self.first_page_button.style = discord.ButtonStyle.green
+            self.prev_button.style = discord.ButtonStyle.primary
+
+        if self.cp == 2:
+            self.next_button.disabled = True
+            self.last_page_button.disabled = True
+            self.last_page_button.style = discord.ButtonStyle.gray
+            self.next_button.style = discord.ButtonStyle.gray
+        else:
+            self.next_button.disabled = False
+            self.last_page_button.disabled = False
+            self.last_page_button.style = discord.ButtonStyle.green
+            self.next_button.style = discord.ButtonStyle.
+
+    @discord.ui.button(label="|<",
+                       style=discord.ButtonStyle.green)
+    async def first_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer()
+        self.cp = 0
+
+        await self.update_message()
+
+    @discord.ui.button(label="<",
+                       style=discord.ButtonStyle.primary)
+    async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer()
+        self.cp -= 1
+        await self.update_message()
+
+    @discord.ui.button(label=">",
+                       style=discord.ButtonStyle.primary)
+    async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer()
+        self.cp += 1
+        await self.update_message()
+
+    @discord.ui.button(label=">|",
+                       style=discord.ButtonStyle.green)
+    async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer()
+        self.cp = 2
+        await self.update_message()
+
 class SplicerView(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:

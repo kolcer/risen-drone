@@ -25,51 +25,6 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
-bot = commands.Bot(command_prefix="|", intents=intents)
-
-@bot.tree.command(description="Shows your profile", name="show_profile")
-async def show_profile(interaction: discord.Interaction):
-    target = None
-    usr = interaction.user
-    ch = interaction.channel
-
-    targetName = f"{usr.name}#{usr.discriminator}".lower()
-
-    for mem in SERVER_DATA['server'].members:
-        if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
-            target = mem
-            break
-
-    messages = ""
-    profilemsg = str(target.display_name) + "'s roles:\n\n"
-
-    for role in FUN_ROLES:
-        if str(target.id) in list_decoded_entries(role):
-            if role in LIMITED_ROLES:
-                profilemsg += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
-            else:
-                profilemsg += "**" + str(role) + "**\n"
-        else:
-            if role in LIMITED_ROLES:
-                profilemsg += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
-            else:
-                profilemsg += "**???**\n"
-
-    if target not in MSG_SENT:
-        messages = "0"
-    else:
-        messages = MSG_SENT[usr]
-
-    if target not in LAST_RIG:
-        lastrig = "None"
-    else:
-        lastrig = LAST_RIG[usr]
-
-    profilemsg += "\n" + str(target.display_name) + "'s stats:\n\n"
-    profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-    profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
-    
-    await SEND(ch, profilemsg)
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -161,10 +116,6 @@ async def on_ready():
     await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the **{restarts}th** time.\nSummary: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
 
     set_entry("restarts", str(restarts))
-
-    bot.tree.copy_global_to(guild=SERVER_DATA["server"].id)
-    await bot.tree.sync(guild=SERVER_DATA["server"].id)
-
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
@@ -458,6 +409,8 @@ async def on_message(message):
 
         ## Show Profile
         elif lmsg.startswith("bd show"):
+
+            # Getting the Target
             target = None
             if lmsg == "bd show profile":
                 targetName = f"{usr.name}#{usr.discriminator}".lower()
@@ -469,26 +422,43 @@ async def on_message(message):
                 if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
                     target = mem
                     break
-
+            
+            # No Target?
             if target == None:
                 await SEND(ch, "I didn't find anyone. Sorry.")
                 return
+            
+            # Command will go through. Prepare the View.
+            view = ShowProfile()
+            view.data = []
+            view.target = target
 
-            messages = ""
-            profilemsg = str(target.display_name) + "'s roles:\n\n"
-
+            # Prepare list to show in PAGE 1 (secret roles)
+            secret_roles = ""
             for role in FUN_ROLES:
-                if str(target.id) in list_decoded_entries(role):
-                    if role in LIMITED_ROLES:
-                        profilemsg += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
-                    else:
-                        profilemsg += "**" + str(role) + "**\n"
-                else:
-                    if role in LIMITED_ROLES:
-                        profilemsg += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
-                    else:
-                        profilemsg += "**???**\n"
+                if role in LIMITED_ROLES:
+                    continue
 
+                if str(target.id) in list_decoded_entries(role):
+                    secret_roles += "**" + str(role) + "**\n"
+                else:
+                    secret_roles += "**???**\n"
+            view.data[0] = secret_roles
+
+            # Prepare list to show in PAGE 2 (locked roles)
+            locked_roles = ""
+            for role in FUN_ROLES:
+                if role not in LIMITED_ROLES:
+                    continue
+
+                if str(target.id) in list_decoded_entries(role):
+                    locked_roles += "**" + str(role) + "**\n"
+                else:
+                    locked_roles += "**???**\n"
+            view.data[1] = locked_roles
+
+            # Preparing stuff to handle stats
+            messages = ""
             if target not in MSG_SENT:
                 messages = "0"
             else:
@@ -499,11 +469,14 @@ async def on_message(message):
             else:
                 lastrig = LAST_RIG[usr]
 
-            profilemsg += "\n" + str(target.display_name) + "'s stats:\n\n"
-            profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
-            profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
+            # Prepare list to show in PAGE 3 (user stats)
+            user_stats = ""
+            user_stats += "**Latest messages sent:** " + str(messages) + "\n\n"
+            user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
+            view.data[2] = user_stats
             
-            await SEND(ch, profilemsg)
+            # Send view... hopefully
+            await view.send(ch)
 
         ## Revive Chat Command
         elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
