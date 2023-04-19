@@ -362,24 +362,24 @@ class FourthButton(discord.ui.View):
             await INTERACTION(interaction.response, "I need someone else now.", True)
             return
         elif str(usr.id) in self.roleowners:
-            await INTERACTION(interaction.response, "You did help me in the past, there's no need now.", True)
+            await INTERACTION(interaction.response, "You have been helpful to me in the past, but I don't require your assistance at the moment.", True)
             return
 
         self.users.append(usr)
         self.step += 1
-        if self.step < 2:
+        if self.step < 4:
             button.label = f"{usr.name}'s help"
             button.style = discord.ButtonStyle.green
             button.disabled = True
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-        elif self.step == 2:
+        elif self.step == 4:
             self.toolate = False
             BUTTONS["phase"] = 1
             button.label = f"{usr.name}'s help"
             button.style = discord.ButtonStyle.green
             button.disabled = True
             await self.on_timeout()
-            await asyncio.sleep(6)
+            await asyncio.sleep(10)
             newview = FourthButtonFinal(timeout = 60)
             newview.users = self.users
             newview.clicked = []
@@ -388,7 +388,7 @@ class FourthButton(discord.ui.View):
 
             await newview.wait()
             await newview.too_late()
-            newview.stop()
+            self.stop()
 
     @discord.ui.button(label="Broken Drone's help", custom_id = "1", style = discord.ButtonStyle.green, disabled = True)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
