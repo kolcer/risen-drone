@@ -375,12 +375,12 @@ class FourthButton(discord.ui.View):
         elif self.step == 4:
             self.toolate = False
             BUTTONS["phase"] = 1
-            button.label = f"{usr.name}'s help"
+            button.label = f"{usr.name}"
             button.style = discord.ButtonStyle.green
             button.disabled = True
             await self.on_timeout()
             await asyncio.sleep(10)
-            newview = FourthButtonFinal(timeout = 50)
+            newview = FourthButtonFinal(timeout = 60)
             newview.users = self.users
             newview.clicked = []
             newview.message = self.message
