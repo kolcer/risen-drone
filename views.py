@@ -196,7 +196,6 @@ class FirstButton(discord.ui.View):
             
             self.stop()
 
-
 class SecondButton(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:

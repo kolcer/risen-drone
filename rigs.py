@@ -10,25 +10,25 @@ from discord.ext import commands
 
 # ---VIEWS---
 
-class CastAgain(discord.ui.View):
-    async def on_timeout(self):
-        for item in self.children:
-            item.disabled = True
+# class CastAgain(discord.ui.View):  was added mostly for Zero. But I locked the role. Also it was my first experiment with buttons.
+#     async def on_timeout(self):
+#         for item in self.children:
+#             item.disabled = True
 
-        self.caster = None
-        self.channel = None
-        self.type = None
+#         self.caster = None
+#         self.channel = None
+#         self.type = None
 
-        await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+#         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
-    @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
-    async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        if usr == self.caster:
-            await Rig(self.type, self.channel, self.caster)
-            self.stop()
-        else:
-            await INTERACTION(interaction.response, "You did not cast this rig.", True)
+#     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
+#     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
+#         usr = interaction.user
+#         if usr == self.caster:
+#             await Rig(self.type, self.channel, self.caster)
+#             self.stop()
+#         else:
+#             await INTERACTION(interaction.response, "You did not cast this rig.", True)
 
 # ---END VIEWS---
 
@@ -119,7 +119,7 @@ async def Rig(rigType, ch, usr):
                    # return
             await ADD_ROLES(usr, EXTRA_ROLES['possessed'])
             await asyncio.sleep(1)
-            msgCounting = await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
+            await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
                        "\nMaybe someone could give you some Mana?")
             await asyncio.sleep(60)
             await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
@@ -153,8 +153,7 @@ async def Rig(rigType, ch, usr):
                 + ch.mention + ". " + firstmsg.jump_url)
             await SEND(ch2, "https://media.giphy.com/media/QM1yEJoR1Z7oKAGg4Y/giphy.gif")
             await asyncio.sleep(3)
-            await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)    
-            msgCounting = firstmsg       
+            await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)     
         
         case "hacker":
             im = ""
@@ -230,15 +229,7 @@ async def Rig(rigType, ch, usr):
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
-    view = CastAgain(timeout = 100)
-    viewmsg = await SEND_VIEW(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}", view)
-    view.caster = usr
-    view.message = viewmsg
-    view.type = rigType
-    view.channel = ch
-
-    await view.wait()
-    await view.on_timeout() 
+    await SEND(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
     
     #reset spam count
     await asyncio.sleep(3600)
