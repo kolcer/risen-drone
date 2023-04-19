@@ -15,9 +15,9 @@ class ShowProfile(discord.ui.View):
               "{user}'s locked roles",
               "{user}'s stats"]
     
-    sidecolor = ["orange",
-                 "red",
-                 "pink"]
+    sidecolor = ["FFA500",
+                 "FF0000",
+                 "FFC0CB"]
     
     async def send(self, ch):
         self.message = await ch.send(view=self)
@@ -27,7 +27,7 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
-        embed.color = discord.Colour(int("FF0000", 16)) 
+        embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
 
         return embed
 

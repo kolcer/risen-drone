@@ -453,9 +453,9 @@ async def on_message(message):
                     continue
 
                 if str(target.id) in list_decoded_entries(role):
-                    locked_roles += "**" + str(role) + "**\n"
+                    locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                 else:
-                    locked_roles += "**???**\n"
+                    locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
             view.data[1] = locked_roles
 
             # Preparing stuff to handle stats
