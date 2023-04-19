@@ -367,12 +367,12 @@ class FourthButton(discord.ui.View):
 
         self.users.append(usr)
         self.step += 1
-        if self.step < 5:
+        if self.step < 2:
             button.label = f"{usr.name}'s help"
             button.style = discord.ButtonStyle.green
             button.disabled = True
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-        elif self.step == 5:
+        elif self.step == 2:
             self.toolate = False
             button.label = f"{usr.name}'s help"
             button.style = discord.ButtonStyle.green
