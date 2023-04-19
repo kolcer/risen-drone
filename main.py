@@ -769,8 +769,9 @@ Delete: Deletes the specified quiz question by index.
                 if "bot-testing" in lmsg:
                     BUTTONS["channel"] = CHANNELS["bot-testing"]
                     BUTTONS["phase"] = int(lmsg.replace("|buttons bot-testing", ""))
-                else:
-                    BUTTONS["channel"] = CHANNELS[lsecond]
+                elif "testing" in lmsg:
+                    BUTTONS["channel"] = CHANNELS["testing"]
+                    BUTTONS["phase"] = int(lmsg.replace("|buttons testing", ""))
 
                 if BUTTONS["status"] == True:
                     await SEND(ch, "Not so fast.")
