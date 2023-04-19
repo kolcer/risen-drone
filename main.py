@@ -25,6 +25,51 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="|", intents=intents)
+
+@bot.tree.command(description="Shows your profile", name="Show Profile")
+async def show_profile(interaction: discord.Interaction):
+    target = None
+    usr = interaction.user
+    ch = interaction.channel
+
+    targetName = f"{usr.name}#{usr.discriminator}".lower()
+
+    for mem in SERVER_DATA['server'].members:
+        if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
+            target = mem
+            break
+
+    messages = ""
+    profilemsg = str(target.display_name) + "'s roles:\n\n"
+
+    for role in FUN_ROLES:
+        if str(target.id) in list_decoded_entries(role):
+            if role in LIMITED_ROLES:
+                profilemsg += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
+            else:
+                profilemsg += "**" + str(role) + "**\n"
+        else:
+            if role in LIMITED_ROLES:
+                profilemsg += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
+            else:
+                profilemsg += "**???**\n"
+
+    if target not in MSG_SENT:
+        messages = "0"
+    else:
+        messages = MSG_SENT[usr]
+
+    if target not in LAST_RIG:
+        lastrig = "None"
+    else:
+        lastrig = LAST_RIG[usr]
+
+    profilemsg += "\n" + str(target.display_name) + "'s stats:\n\n"
+    profilemsg += "**Latest messages sent:** " + str(messages) + "\n"
+    profilemsg += "**Last rig cast:** " + str(lastrig).capitalize() + "\n"
+    
+    await SEND(ch, profilemsg)
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
