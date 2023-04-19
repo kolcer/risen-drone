@@ -15,6 +15,10 @@ class ShowProfile(discord.ui.View):
               "{user}'s locked roles",
               "{user}'s stats"]
     
+    sidecolor = ["orange",
+                 "red",
+                 "pink"]
+    
     async def send(self, ch):
         self.message = await ch.send(view=self)
         await self.update_message()
@@ -23,6 +27,7 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
+        embed.color = self.sidecolor[self.cp]
 
         return embed
 
@@ -55,7 +60,7 @@ class ShowProfile(discord.ui.View):
 
     async def check_requester(self, interaction):
             if interaction.user != self.requester:
-                await INTERACTION(interaction.response, "Keep your hands to yourself.")
+                await INTERACTION(interaction.response, "Keep your hands to yourself.", True)
                 return
 
     @discord.ui.button(label="|<", style=discord.ButtonStyle.green)
