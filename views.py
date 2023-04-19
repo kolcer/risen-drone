@@ -380,16 +380,17 @@ class FourthButton(discord.ui.View):
             button.disabled = True
             await self.on_timeout()
             await asyncio.sleep(3)
-            newview = FourthButtonFinal(timeout = 20)
+            newview = FourthButtonFinal(timeout = 60)
             newview.users = self.users
             newview.clicked = []
-            newview.message = await EDIT_VIEW_MESSAGE(self.message, "Thank you, take this button for your efforts.", newview)
+            newview.message = self.message
+            await EDIT_VIEW_MESSAGE(self.message, "Thank you, take this button for your efforts.", newview)
 
             await newview.wait()
             await newview.too_late()
             newview.stop()
 
-    @discord.ui.button(label="1", custom_id = "1", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Broken Drone's help", custom_id = "1", style = discord.ButtonStyle.green, disabled = True)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
@@ -415,18 +416,9 @@ class FourthButton(discord.ui.View):
         await self.process_click(interaction, button, usr)
 
 class FourthButtonFinal(discord.ui.View):
-    async def on_timeout(self):
-        for item in self.children:
-            item.label = "Exhausted"
-            item.disabled = True
-
-        await EDIT_VIEW_MESSAGE(self.message, "Well done.", self)
-
     async def too_late(self):
         if len(self.clicked) != len(self.users):
             await SEND(BUTTONS["channel"], "Someone didn't click it, but who cares.")
-
-        await self.on_timeout()
 
     @discord.ui.button(label="Take", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
