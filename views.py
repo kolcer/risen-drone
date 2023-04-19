@@ -380,7 +380,7 @@ class FourthButton(discord.ui.View):
             button.disabled = True
             await self.on_timeout()
             await asyncio.sleep(10)
-            newview = FourthButtonFinal(timeout = 60)
+            newview = FourthButtonFinal(timeout = 50)
             newview.users = self.users
             newview.clicked = []
             newview.message = self.message
