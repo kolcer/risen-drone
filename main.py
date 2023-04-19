@@ -812,12 +812,25 @@ Delete: Deletes the specified quiz question by index.
                     await view.wait()
                     await view.too_late()
                     BUTTONS["status"] = False
+
+                elif BUTTONS["phase"] == 4:
+                    view = ThirdButton(timeout=60)
+                    view.toolate = True
+                    view.users = []
+                    view.helpers = []
+                    view.step = 0
+                    view.roleowners = list_decoded_entries("Broken Drone Helper")
+                    view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
+
+                    await view.wait()
+                    await view.too_late()
+                    BUTTONS["status"] = False
                 return
 
             #create a new role with name
             if lmsg.startswith("nr", 1):
                 try:
-                    add_entry(second, usr.id)
+                    add_entry(second, "dummy")
                 except Exception as e:
                     await SEND(ch, e)
                     return

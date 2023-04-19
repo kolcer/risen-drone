@@ -145,7 +145,7 @@ class SecondButton(discord.ui.View):
     @discord.ui.button(label="Button", custom_id = "1",  style = discord.ButtonStyle.blurple)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        
+
         await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "2",  style = discord.ButtonStyle.blurple)
@@ -342,7 +342,110 @@ class ThirdButton(discord.ui.View):
             self.clicks += 1
             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
 
-            
+class FourthButton(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+            if item.style != discord.ButtonStyle.green:
+                item.style = discord.ButtonStyle.red
+                item.label = "Empty"
+
+        await EDIT_VIEW_MESSAGE(self.message, "Help is not needed anymore.", self)
+
+    async def too_late(self):
+        if self.toolate:
+            await SEND(BUTTONS["channel"], "Where are the people when you need them?")
+            await self.on_timeout()
+
+    async def process_click(self, interaction, button, usr):
+        if usr in self.users:
+            await INTERACTION(interaction.response, "I need someone else now.", True)
+            return
+        elif str(usr.id) in self.roleowners:
+            await INTERACTION(interaction.response, "You did help me in the past, there's no need now.", True)
+            return
+
+        self.users.append(usr)
+        self.step += 1
+        if self.step < 5:
+            button.label = f"{usr.name}'s help"
+            button.style = discord.ButtonStyle.green
+            button.disabled = True
+            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        elif self.step == 5:
+            self.toolate = False
+            button.label = f"{usr.name}'s help"
+            button.style = discord.ButtonStyle.green
+            button.disabled = True
+            await self.on_timeout()
+            await asyncio.sleep(3)
+            newview = FourthButtonFinal(timeout = 20)
+            newview.users = self.users
+            newview.clicked = []
+            newview.message = await EDIT_VIEW_MESSAGE(self.message, "Thank you, take this button for your efforts.", newview)
+
+            await newview.wait()
+            await newview.too_late()
+            newview.stop()
+
+    @discord.ui.button(label="1", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="2", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="3", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="4", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="5", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+class FourthButtonFinal(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.label = "Exhausted"
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, "Well done.", self)
+
+    async def too_late(self):
+        if len(self.clicked) != len(self.users):
+            await SEND(BUTTONS["channel"], "Someone didn't click it, but who cares.")
+
+        await self.on_timeout()
+
+    @discord.ui.button(label="Take", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if usr not in self.users:
+            await INTERACTION(interaction.response, "You did not help.", True)
+            return
+        elif usr in self.clicked:
+            await INTERACTION(interaction.response, "I do not have any more buttons for you.", True)
+            return
+        
+        self.clicked.append(usr)
+        await INTERACTION(interaction.response, "Here, take this button.", True)
+        await add_entry_with_check("Broken Drone Helper", usr.id)
+
+        if len(self.clicked) != len(self.users):
+            self.stop()
+
+
 
 
 # class CastAgain(discord.ui.View):
