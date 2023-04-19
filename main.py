@@ -429,9 +429,10 @@ async def on_message(message):
                 return
             
             # Command will go through. Prepare the View.
-            view = ShowProfile()
+            view = ShowProfile(timeout=20)
             view.data = ["", "", ""]
             view.target = target
+            view.requester = usr
 
             # Prepare list to show in PAGE 1 (secret roles)
             secret_roles = ""
@@ -471,7 +472,7 @@ async def on_message(message):
 
             # Prepare list to show in PAGE 3 (user stats)
             user_stats = ""
-            user_stats += "**Latest messages sent:** " + str(messages) + "\n\n"
+            user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
             view.data[2] = user_stats
             

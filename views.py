@@ -12,12 +12,12 @@ class ShowProfile(discord.ui.View):
     cp  = 0
     sep = 2
     titles = ["{user}'s roles",
-              "{user}'s stats",
-              "{user}'s secret roles"]
+              "{user}'s secret roles",
+              "{user}'s stats"]
     
     async def send(self, ch):
         self.message = await ch.send(view=self)
-        await self.update_message(self.data[:self.sep])
+        await self.update_message(self.data[self.cp])
 
     def create_embed(self):
         embed = discord.Embed()
@@ -53,31 +53,36 @@ class ShowProfile(discord.ui.View):
             self.last_page_button.style = discord.ButtonStyle.green
             self.next_button.style = discord.ButtonStyle.primary
 
-    @discord.ui.button(label="|<",
-                       style=discord.ButtonStyle.green)
+    async def check_requester(self, interaction):
+            if interaction.user != self.requester:
+                await INTERACTION(interaction.response, "Keep your hands to yourself.")
+                return
+
+    @discord.ui.button(label="|<", style=discord.ButtonStyle.green)
     async def first_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
         await interaction.response.defer()
         self.cp = 0
 
         await self.update_message()
 
-    @discord.ui.button(label="<",
-                       style=discord.ButtonStyle.primary)
+    @discord.ui.button(label="<", style=discord.ButtonStyle.primary)
     async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
         await interaction.response.defer()
         self.cp -= 1
         await self.update_message()
 
-    @discord.ui.button(label=">",
-                       style=discord.ButtonStyle.primary)
+    @discord.ui.button(label=">", style=discord.ButtonStyle.primary)
     async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
         await interaction.response.defer()
         self.cp += 1
         await self.update_message()
 
-    @discord.ui.button(label=">|",
-                       style=discord.ButtonStyle.green)
+    @discord.ui.button(label=">|", style=discord.ButtonStyle.green)
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
         await interaction.response.defer()
         self.cp = 2
         await self.update_message()
