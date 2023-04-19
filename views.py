@@ -120,10 +120,7 @@ class SecondButton(discord.ui.View):
 
         await self.on_timeout()
 
-    @discord.ui.button(label="Button", custom_id = "1",  style = discord.ButtonStyle.blurple)
-    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-
+    async def process_click(self, interaction, button, usr):
         if button.custom_id == self.correct_button:
             await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
@@ -144,606 +141,156 @@ class SecondButton(discord.ui.View):
 
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+
+    @discord.ui.button(label="Button", custom_id = "1",  style = discord.ButtonStyle.blurple)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "2",  style = discord.ButtonStyle.blurple)
     async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "3",  style = discord.ButtonStyle.blurple)
     async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "4",  style = discord.ButtonStyle.blurple)
     async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "5",  style = discord.ButtonStyle.blurple)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "6",  style = discord.ButtonStyle.blurple)
     async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "7",  style = discord.ButtonStyle.blurple)
     async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "8",  style = discord.ButtonStyle.blurple)
     async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "9",  style = discord.ButtonStyle.blurple)
     async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "10",  style = discord.ButtonStyle.blurple)
     async def B10(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "11",  style = discord.ButtonStyle.blurple)
     async def B11(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "12",  style = discord.ButtonStyle.blurple)
     async def B12(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "13",  style = discord.ButtonStyle.blurple)
     async def B13(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "14",  style = discord.ButtonStyle.blurple)
     async def B14(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "15",  style = discord.ButtonStyle.blurple)
     async def B15(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "16",  style = discord.ButtonStyle.blurple)
     async def B16(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "17",  style = discord.ButtonStyle.blurple)
     async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "18",  style = discord.ButtonStyle.blurple)
     async def B18(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "19",  style = discord.ButtonStyle.blurple)
     async def B19(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "20",  style = discord.ButtonStyle.blurple)
     async def B20(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "21",  style = discord.ButtonStyle.blurple)
     async def B21(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "22",  style = discord.ButtonStyle.blurple)
     async def B22(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "23",  style = discord.ButtonStyle.blurple)
     async def B23(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "24",  style = discord.ButtonStyle.blurple)
     async def B24(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
     @discord.ui.button(label="Button", custom_id = "25",  style = discord.ButtonStyle.blurple)
     async def B25(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
-            button.style = discord.ButtonStyle.green
-            self.toolate = False
-            if not str(usr.id) in list_decoded_entries("Lucky Button"):
-                await add_entry_with_check("Lucky Button", usr)
-            BUTTONS["phase"] = 3
-            self.stop()
-        else:
-            if self.pressed > len(BUTTONS["phase2labels"]) - 1:
-                button.label = BUTTONS["phase2labels"][10]
-                await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            else:
-                button.label = BUTTONS["phase2labels"][self.pressed]
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
-
-
-            self.pressed += 1
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+        await self.process_click(interaction, button, usr)
 
 class ThirdButton(discord.ui.View):
     async def on_timeout(self):
