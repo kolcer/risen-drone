@@ -354,7 +354,7 @@ class FourthButton(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], "Where are the people when you need them?")
+            await SEND(BUTTONS["channel"], "Where is the support when you need it?")
             await self.on_timeout()
 
     async def process_click(self, interaction, button, usr):
