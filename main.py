@@ -429,7 +429,7 @@ async def on_message(message):
                 return
             
             # Command will go through. Prepare the View.
-            view = ShowProfile(timeout=20)
+            view = ShowProfile(timeout=500)
             view.data = ["", "", ""]
             view.target = target
             view.requester = usr
