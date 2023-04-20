@@ -692,10 +692,10 @@ _[alignment]_ **trivia**
                     return
                 
 
-        if ch.id == 813882658156838923 and random.randint(1, 5) == 1:
+        if ch.id == 624227331720085536 and random.randint(1, 200) == 1 and not BUTTONS["status"]:
             BUTTONS["channel"] = ch
             BUTTONS["phase"] = random.randint(1, 4)
-            
+
             if BUTTONS["phase"] == 1:
                 BUTTONS["status"] = True
                 view = FirstButton(timeout=50)
