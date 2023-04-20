@@ -690,8 +690,63 @@ _[alignment]_ **trivia**
                 if v in lmsg:
                     await ADD_REACTION(message,i)
                     return
+                
 
-      
+        if ch.id == 813882658156838923 and random.randint(1, 5) == 1:
+            BUTTONS["channel"] = ch
+            BUTTONS["phase"] = random.randint(1, 4)
+            
+            if BUTTONS["phase"] == 1:
+                BUTTONS["status"] = True
+                view = FirstButton(timeout=50)
+                view.users = {}
+                view.toolate = True
+                view.message = await SEND_VIEW(BUTTONS["channel"], "A button.", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 2:
+                BUTTONS["status"] = True
+                view = SecondButton(timeout=50)
+                view.pressed = 0
+                view.toolate = True
+                view.correct_button = str(random.randint(1, 25))
+                view.message = await SEND_VIEW(BUTTONS["channel"], "So many buttons... which one to click?", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 3:
+                BUTTONS["status"] = True
+                view = ThirdButton(timeout=30)
+                view.tm = 30
+                view.clicks = 0
+                view.winning = None
+                view.users = []
+                view.step = 0
+                view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 4:
+                BUTTONS["status"] = True
+                view = FourthButton(timeout=60)
+                view.toolate = True
+                view.users = []
+                view.helpers = []
+                view.step = 0
+                view.roleowners = list_decoded_entries("Broken Drone Helper")
+                view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         msginputs = msg.split(" ")
@@ -782,71 +837,6 @@ Delete: Deletes the specified quiz question by index.
                 if I_SPY['status'] == 0:
                     I_SPY['status'] = None
                     await SEND(I_SPY['channel'],'Whatever.')
-                return
-            
-            if lmsg.startswith("buttons", 1):
-                if "bot-testing" in lmsg:
-                    BUTTONS["channel"] = CHANNELS["bot-testing"]
-                    BUTTONS["phase"] = int(lmsg.replace("|buttons bot-testing", ""))
-                elif "testing" in lmsg:
-                    BUTTONS["channel"] = CHANNELS["testing"]
-                    BUTTONS["phase"] = int(lmsg.replace("|buttons testing", ""))
-                else:
-                    BUTTONS["channel"] = CHANNELS[lsecond]
-
-                if BUTTONS["status"] == True:
-                    await SEND(ch, "Not so fast.")
-                    return
-
-                await DELETE(message)
-                BUTTONS["status"] = True
-
-                if BUTTONS["phase"] == 1:
-                    view = FirstButton(timeout=50)
-                    view.users = {}
-                    view.toolate = True
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "A button.", view)
-
-                    await view.wait()
-                    await view.too_late()
-                    BUTTONS["status"] = False
-
-                elif BUTTONS["phase"] == 2:
-                    view = SecondButton(timeout=50)
-                    view.pressed = 0
-                    view.toolate = True
-                    view.correct_button = str(random.randint(1, 25))
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "So many buttons... which one to click?", view)
-
-                    await view.wait()
-                    await view.too_late()
-                    BUTTONS["status"] = False
-
-                elif BUTTONS["phase"] == 3:
-                    view = ThirdButton(timeout=30)
-                    view.tm = 30
-                    view.clicks = 0
-                    view.winning = None
-                    view.users = []
-                    view.step = 0
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
-
-                    await view.wait()
-                    await view.too_late()
-                    BUTTONS["status"] = False
-
-                elif BUTTONS["phase"] == 4:
-                    view = FourthButton(timeout=60)
-                    view.toolate = True
-                    view.users = []
-                    view.helpers = []
-                    view.step = 0
-                    view.roleowners = list_decoded_entries("Broken Drone Helper")
-                    view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
-
-                    await view.wait()
-                    await view.too_late()
-                    BUTTONS["status"] = False
                 return
 
             #create a new role with name
