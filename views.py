@@ -427,12 +427,12 @@ class ThirdButton(discord.ui.View):
             await INTERACTION(interaction.response, "The button is yours.", True)
             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
         else:
-            await interaction.response.defer()
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
             self.clicks += 1
             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+            await interaction.response.defer()
 
 class FourthButton(discord.ui.View):
     async def on_timeout(self):
