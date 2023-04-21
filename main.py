@@ -431,32 +431,41 @@ async def on_message(message):
             # Command will go through. Prepare the View.
             view = ShowProfile(timeout=500)
             view.data = ["", "", ""]
+            view.footers = ["", ""]
             view.target = target
             view.requester = usr
+            view.sroles = 0
+            view.lroles = 0
+            view.totsroles = 0
+            view.totlroles = 0
 
             # Prepare list to show in PAGE 1 (secret roles)
             secret_roles = ""
             for role in FUN_ROLES:
                 if role in LIMITED_ROLES:
                     continue
-
+                view.totsroles += 1
                 if str(target.id) in list_decoded_entries(role):
+                    view.sroles += 1
                     secret_roles += "**" + str(role) + "**\n"
                 else:
                     secret_roles += "**???**\n"
             view.data[0] = secret_roles
+            view.footers[0] = "**{usr}** collected all **{total}** secret roles, congrats!" if view.sroles == view.totsroles else "**{usr}** has found **{current}** out of **{total}** secret roles."
 
             # Prepare list to show in PAGE 2 (locked roles)
             locked_roles = ""
             for role in FUN_ROLES:
                 if role not in LIMITED_ROLES:
                     continue
-
+                view.totlroles += 1
                 if str(target.id) in list_decoded_entries(role):
+                    view.lroles += 1
                     locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                 else:
                     locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
             view.data[1] = locked_roles
+            view.footers[1] = "Let's see how long this will last." if view.lroles == view.totlroles else "**{current}** out of **{total}** locked roles."
 
             # Preparing stuff to handle stats
             messages = ""

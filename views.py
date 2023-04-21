@@ -33,8 +33,13 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
-        embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
-        embed.set_footer(text=f"{self.requester.display_name} asks, I deliver.")
+        embed.set_footer(text=self.footers[self.cp])
+
+        if self.lroles != self.totlroles:
+            embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
+        else:
+            embed.color = discord.Colour(int("FFD700", 16)) 
+
 
         self.embed = embed
         return embed
