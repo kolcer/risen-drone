@@ -34,6 +34,7 @@ class ShowProfile(discord.ui.View):
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
         embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
+        embed.set_footer(text=f"{self.requester.display_name} asks, I deliver.")
 
         self.embed = embed
         return embed
