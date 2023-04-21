@@ -449,7 +449,7 @@ COOLDOWN_SELECT = {
 
 RIGS_DESCRIPTION = {
     "thief": "How long is your stack of stolen names? Actually, don't tell me.",
-    "spectre": "There's a small chance this message will be empty.",
+    "spectre": "There's a 50% chance this message will be empty." if random.randint(1,2) == 1 else "",
     "joker": "Imagine falling for your own prank.",
     "splicer": "How does it feel to cast an exclusive Rig?",
     "gun": "Peace is the only way.",
