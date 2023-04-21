@@ -484,7 +484,11 @@ async def on_message(message):
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
             view.data[2] = user_stats
+
             view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
+
+            if lastrig.lower().replace(" rig", "") == "spectre":
+                view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
             # Send view... hopefully
             await view.send(ch)
