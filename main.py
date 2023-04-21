@@ -484,7 +484,7 @@ async def on_message(message):
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
             view.data[2] = user_stats
-            view.footers[2] = RIGS_DESCRIPTION[lastrig.lower()]
+            view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
             # Send view... hopefully
             await view.send(ch)

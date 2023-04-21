@@ -454,6 +454,7 @@ RIGS_DESCRIPTION = {
     "splicer": "How does it feel to cast an exclusive Rig?",
     "gun": "Peace is the only way.",
     "impostor": "Amogus amogus amogus amogus",
+    "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
     "archon": "I challenge you to find a typo in this fine sentence.",
     "heretic": "Fell for the oldest trick in the book.",
     "patron": "Let's keep this server clean, together.",
