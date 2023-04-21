@@ -1,5 +1,5 @@
 # DRONE GLOBAL VARIABLES AND CONSTANTS
-
+import random
 SERVER_DATA = {
     'server': 624227331720085528,
     'nick': 'BROKEN DRONE',
@@ -447,6 +447,23 @@ COOLDOWN_SELECT = {
     "drifter": "general",
 }
 
+RIGS_DESCRIPTION = {
+    "thief": "How long is your stack of stolen names? Actually, don't tell me.",
+    "spectre": "There's a 50% chance this message will be empty." if random.randint(1,2) == 1 else "",
+    "joker": "Imagine falling for your own prank.",
+    "splicer": "How does it feel to cast an exclusive Rig?",
+    "gun": "Peace is the only way.",
+    "impostor": "Amogus amogus amogus amogus",
+    "archon": "I challenge you to find a typo in this fine sentence.",
+    "heretic": "Fell for the oldest trick in the book.",
+    "patron": "Let's keep this server clean, together.",
+    "wicked": "No Roles?",
+    "keeper": "Abcdefghijklmnpoqrstuvwxyz.",
+    "hacker": "You truly deserve the Zero rank.",
+    "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
+    "none": "Some cool stats, sadly nobody cares about these.",
+}
+
 COOLDOWN_DURATION = {
     "patron": 900,    
     "thief": 600,
@@ -489,13 +506,6 @@ RIG_COOLDOWNS = {
     "gun": False,
 }
 
-# RIG_INSTANCES = {
-#     "general": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
-#     "tsj": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
-#     "ha": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
-#     "patron": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
-#     "gun": {'rigCaster': None, 'message': None, 'rigType': None, 'rigChannel': None},
-# }
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:758081540063494288> cooldown: ",
@@ -781,6 +791,8 @@ BUTTONS = {
         "I sense a strong desire from `{mention}` to keep this button.\nNevertheless, I will relinquish it to you <t:{time}:R>."
     ],
 }
+
+
 
 EXTRA_ROLES = {
     'ckr': 951424560685805588,            # chat killer
