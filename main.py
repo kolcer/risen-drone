@@ -451,7 +451,7 @@ async def on_message(message):
                 else:
                     secret_roles += "**???**\n"
             view.data[0] = secret_roles
-            view.footers[0] = "**{usr}** collected all **{stotal}** secret roles, congrats!" if view.sroles == view.totsroles else "**{usr}** has found **{scurrent}** out of **{stotal}** secret roles."
+            view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.sroles == view.totsroles else "{scurrent} out of {stotal} secret roles."
 
             # Prepare list to show in PAGE 2 (locked roles)
             locked_roles = ""
@@ -465,7 +465,7 @@ async def on_message(message):
                 else:
                     locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
             view.data[1] = locked_roles
-            view.footers[1] = "Let's see how long this will last." if view.lroles == view.totlroles else "**{lcurrent}** out of **{ltotal}** locked roles."
+            view.footers[1] = "Let's see how long this will last." if view.lroles == view.totlroles else "{lcurrent} out of {ltotal} locked roles."
 
             # Preparing stuff to handle stats
             messages = ""
