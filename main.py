@@ -707,8 +707,10 @@ _[alignment]_ **trivia**
                     await ADD_REACTION(message,i)
                     return
                 
-        print(buttons_chance)
-        if (buttons_chance <= 10 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
+        if (ch.id != 1001034407966150746):
+             print(buttons_chance)
+
+        if (ch.id != 1001034407966150746 and buttons_chance <= 10 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS["bot-testing"]
