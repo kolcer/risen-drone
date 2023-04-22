@@ -706,7 +706,7 @@ _[alignment]_ **trivia**
                     return
                 
 
-        if (ch.id == 624227331720085536 and random.randint(1, 200) == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
+        if (ch.id == 624227331720085536 and random.randint(1, 200) == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")) or (ch.id == 1096887479031836793 and random.randint(1, 5) == 1 and not BUTTONS["status"]):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS["bot-testing"]
