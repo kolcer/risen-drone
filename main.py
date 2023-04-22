@@ -708,14 +708,13 @@ _[alignment]_ **trivia**
                     return
                 
         print(buttons_chance)
-        print(test_chance)
-        if (buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")) or (ch.id == 1096887479031836793 and test_chance == 1 and not BUTTONS["status"]):
+        if (buttons_chance <= 10 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS["bot-testing"]
             else:
                 BUTTONS["phase"] = random.randint(1, 4)
-                BUTTONS["channel"] = ch
+                BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
                 BUTTONS["status"] = True
