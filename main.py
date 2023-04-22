@@ -191,6 +191,8 @@ async def on_message(message):
     lmsg = msg.lower()
     usr = message.author
     ch = message.channel 
+    buttons_chance = random.randint(1, 200)
+    test_chance = random.randint(1, 5)
     
     if usr in EX_CLIMBERS:
         await DELETE(message)
@@ -705,8 +707,9 @@ _[alignment]_ **trivia**
                     await ADD_REACTION(message,i)
                     return
                 
-
-        if (ch.id == 624227331720085536 and random.randint(1, 200) == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")) or (ch.id == 1096887479031836793 and random.randint(1, 5) == 1 and not BUTTONS["status"]):
+        print(buttons_chance)
+        print(test_chance)
+        if (buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")) or (ch.id == 1096887479031836793 and test_chance == 1 and not BUTTONS["status"]):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS["bot-testing"]
