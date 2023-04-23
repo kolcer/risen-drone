@@ -46,7 +46,7 @@ async def SEND(channel, message):
     return await channel.send(message)
 
 #send to interactiom, optional ephemeral 
-async def INTERACTION(message, content, secret):
+async def INTERACTION(message, content: str, secret: bool):
     if content == None or content == "":
         #cannot send empty message
         return
@@ -57,6 +57,7 @@ async def SEND_VIEW(channel, content, view):
     return await channel.send(content, view = view)
 
 #send a reply! ephemeral option included
+# included where???
 async def REPLY(message, content):
     if content == None or content == "":
         #cannot reply with empty message

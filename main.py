@@ -192,7 +192,7 @@ async def on_message(message):
     usr = message.author
     ch = message.channel 
     buttons_chance = random.randint(1, 200)
-    test_chance = random.randint(1, 5)
+    # test_chance = random.randint(1, 5) –––> remove if you are done with this
     
     if usr in EX_CLIMBERS:
         await DELETE(message)
@@ -706,7 +706,24 @@ _[alignment]_ **trivia**
                 if v in lmsg:
                     await ADD_REACTION(message,i)
                     return
-                
+            
+            # burger trigger
+            if lmsg == '🍔':
+                if BURGERING:
+                    await SEND(ch, "I'm full therefore I cannot accept your offering.")
+                    return
+
+                BURGERING = True
+                BUTTONS['status'] = True
+                view = BurgerButton(timeout=50)
+                view.toolate = True
+                view.message = await SEND_VIEW(ch, 'burger moment', view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS['status'] = False
+            
+
         if (ch.id != 1001034407966150746):
              print(buttons_chance)
 

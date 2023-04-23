@@ -32,6 +32,9 @@ GIT_COMMITTERS = {
     "EclipseCashier": 695526697059090483,
 }
 
+# LITERALLY JUST A VARIABLE BUT GLOBAL
+BURGERING = False
+
 # CONSTANT ARRAYS
 # this is for tips and trivia database
 TIPS_KEYS = [
@@ -361,8 +364,6 @@ REACT_TRIGGERS = {
         "among",
     "👁":
         "food",
-    "🍔":
-        "react with burger",
     "🧢":
         "best",
     "🥰":

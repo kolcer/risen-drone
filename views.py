@@ -544,6 +544,35 @@ class FourthButtonFinal(discord.ui.View):
         if len(self.clicked) == len(self.users):
             await self.on_closed()
 
+class BurgerButton(discord.ui.View):
+    async def on_closed(self):
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:')
+
+    async def too_late():
+        await SEND(BUTTONS['channel'], 'burger over')
+
+    @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if usr not in self.users.keys():
+            self.users[usr] = 0
+        else:
+            self.users[usr] += 1
+
+        if self.users[usr] == 3:
+            await INTERACTION(interaction.response, "You have burger'd your last burger.", True)
+            self.toolate = False
+            
+            BURGERING = False
+            self.stop()
+        
+        else:
+            await INTERACTION(interaction.response, "Burger")
+
 
 
 
