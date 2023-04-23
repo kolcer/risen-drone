@@ -708,7 +708,7 @@ _[alignment]_ **trivia**
                     return
             
             # burger trigger
-            if lmsg == '🍔':
+            if lmsg == '🍔' and not BUTTONS['status']:
                 BUTTONS['status'] = True
                 view = BurgerButton(timeout=50)
                 view.toolate = True

@@ -551,7 +551,7 @@ class BurgerButton(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:')
 
-    async def too_late():
+    async def too_late(self):
         await SEND(BUTTONS['channel'], 'burger over')
 
     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
