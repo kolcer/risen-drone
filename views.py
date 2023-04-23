@@ -554,6 +554,8 @@ class BurgerButton(discord.ui.View):
     async def too_late(self):
         await SEND(BUTTONS['channel'], 'burger over')
 
+    self.users = {}
+
     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
