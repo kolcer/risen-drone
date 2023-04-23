@@ -545,8 +545,7 @@ class FourthButtonFinal(discord.ui.View):
             await self.on_closed()
 
 class BurgerButton(discord.ui.View):
-    def __init__(self):
-        self.users = {}
+    users = {}
         
     async def on_closed(self):
         for item in self.children:
