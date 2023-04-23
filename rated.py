@@ -4,7 +4,6 @@ import time
 from globals import EXTRA_ROLES
 from globals import SERVER_DATA
 from globals import CHANNELS
-from globals import BUTTONS
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
