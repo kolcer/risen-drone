@@ -709,11 +709,6 @@ _[alignment]_ **trivia**
             
             # burger trigger
             if lmsg == '🍔':
-                if BURGERING:
-                    await SEND(ch, "I'm full therefore I cannot accept your offering.")
-                    return
-
-                BURGERING = True
                 BUTTONS['status'] = True
                 view = BurgerButton(timeout=50)
                 view.toolate = True

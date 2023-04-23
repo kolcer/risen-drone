@@ -567,7 +567,6 @@ class BurgerButton(discord.ui.View):
             await INTERACTION(interaction.response, "You have burger'd your last burger.", True)
             self.toolate = False
             
-            BURGERING = False
             self.stop()
         
         else:
