@@ -554,8 +554,8 @@ class BurgerButton(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:', self)
 
     async def too_late(self):
-        await SEND(BUTTONS['channel'], 'burger over')
-        await self.on_timeout()
+        if self.toolate:
+            await SEND(BUTTONS['channel'], 'burger over')
 
     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -570,7 +570,6 @@ class BurgerButton(discord.ui.View):
             await INTERACTION(interaction.response, "You have burger'd your last burger.", True)
             self.toolate = False
             
-            self.on_timeout()
             self.stop()
         
         else:
