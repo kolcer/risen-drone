@@ -551,7 +551,7 @@ class BurgerButton(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:')
+        await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:', self)
 
     async def too_late(self):
         await SEND(BUTTONS['channel'], 'burger over')
