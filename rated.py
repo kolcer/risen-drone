@@ -4,6 +4,7 @@ import time
 from globals import EXTRA_ROLES
 from globals import SERVER_DATA
 from globals import CHANNELS
+from globals import BUTTONS
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
@@ -50,6 +51,7 @@ async def INTERACTION(message, content: str, secret: bool):
     if content == None or content == "":
         #cannot send empty message
         return
+    BUTTONS['channel'] = message.channel
     return await message.send_message(content, ephemeral = secret)
 
 #sends a view with a message
