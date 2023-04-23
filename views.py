@@ -572,7 +572,7 @@ class BurgerButton(discord.ui.View):
             self.stop()
         
         else:
-            await INTERACTION(interaction.response, "Burger")
+            await INTERACTION(interaction.response, "Burger emoji", True)
 
 
 
