@@ -561,7 +561,7 @@ class BurgerButton(discord.ui.View):
         usr = interaction.user
 
         if usr not in self.users.keys():
-            self.users[usr] = 0
+            self.users[usr] = 1 # doing this so the checks are more readable (so 3 is actually 3 and not 4)
         else:
             self.users[usr] += 1
 
@@ -569,6 +569,7 @@ class BurgerButton(discord.ui.View):
             await INTERACTION(interaction.response, "You have burger'd your last burger.", True)
             self.toolate = False
             
+            self.on_closed()
             self.stop()
         
         else:
