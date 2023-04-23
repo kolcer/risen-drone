@@ -51,7 +51,6 @@ async def INTERACTION(message, content: str, secret: bool):
     if content == None or content == "":
         #cannot send empty message
         return
-    BUTTONS['channel'] = message.channel
     return await message.send_message(content, ephemeral = secret)
 
 #sends a view with a message

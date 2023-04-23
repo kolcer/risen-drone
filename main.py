@@ -710,6 +710,7 @@ _[alignment]_ **trivia**
             # burger trigger
             if lmsg == '🍔' and not BUTTONS['status']:
                 BUTTONS['status'] = True
+                BUTTONS['channel'] = CHANNELS[ch.name]
                 view = BurgerButton(timeout=50)
                 view.toolate = True
                 view.message = await SEND_VIEW(ch, 'burger moment', view)
