@@ -712,7 +712,7 @@ _[alignment]_ **trivia**
                 BUTTONS['channel'] = CHANNELS[ch.name]
                 view = BurgerButton(timeout=50)
                 view.toolate = True
-                view.message = await SEND_VIEW(ch, 'burger moment', view)
+                view.message = await SEND_VIEW(ch, 'BEHOLD, THE INFINIBURGER!', view)
 
                 await view.wait()
                 await view.too_late()

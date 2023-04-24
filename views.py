@@ -545,8 +545,6 @@ class FourthButtonFinal(discord.ui.View):
             await self.on_closed()
 
 class BurgerButton(discord.ui.View):
-    users = {}
-        
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
@@ -561,21 +559,7 @@ class BurgerButton(discord.ui.View):
 
     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-
-        if usr not in self.users.keys():
-            self.users[usr] = 1 # doing this so the checks are more readable (so 3 is actually 3 and not 4)
-        else:
-            self.users[usr] += 1
-
-        if self.users[usr] == 3:
-            await INTERACTION(interaction.response, "You have burger'd your last burger.", True)
-            self.toolate = False
-            
-            self.stop()
-        
-        else:
-            await INTERACTION(interaction.response, "Burger emoji", True)
+        await INTERACTION(interaction.response, "🍔", True)
 
 
 
