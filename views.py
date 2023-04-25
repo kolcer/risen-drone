@@ -549,7 +549,7 @@ class FifthButton(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n{self.message.content}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n{self.current}\n\n{self.status}", self)
 
     async def too_late(self):
         if self.toolate:
@@ -573,6 +573,7 @@ class FifthButton(discord.ui.View):
             self.stop()
 
     async def update_mistake(self, interaction, button):
+        await interaction.response.defer()
         self.status = "<:csSleazel:786328102392954921>"
 
         for i in range(self.lifes):
@@ -591,6 +592,7 @@ class FifthButton(discord.ui.View):
             self.stop()
 
     async def process_click(self, interaction, button, usr):
+        await interaction.response.defer()
         if str(button.custom_id).lower() in self.myword:
             button.style = discord.ButtonStyle.green
             button.disabled = True
