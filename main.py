@@ -730,7 +730,7 @@ _[alignment]_ **trivia**
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS["bot-testing"]
             else:
-                BUTTONS["phase"] = random.randint(1, 4)
+                BUTTONS["phase"] = random.randint(1, 5)
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:

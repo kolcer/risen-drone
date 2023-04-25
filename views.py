@@ -549,7 +549,7 @@ class FifthButton(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, "The hangman's fate is sealed.", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n{self.message.content}", self)
 
     async def too_late(self):
         if self.toolate:
@@ -583,7 +583,7 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n{self.current}\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n{self.current}\n\n{self.status}", self)
 
         if self.lifes == 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves.", False)
