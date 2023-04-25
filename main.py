@@ -7,6 +7,7 @@ import asyncio
 import requests
 #from datetime import date
 from difflib import SequenceMatcher
+from nltk.corpus import words
 
 from globals import *
 from roles import *
@@ -25,6 +26,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
+word_list = words.words()
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -776,6 +778,29 @@ _[alignment]_ **trivia**
                 view.step = 0
                 view.roleowners = list_decoded_entries("Broken Drone Helper")
                 view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 5:
+                BUTTONS["status"] = True
+                view = FifthButton(timeout=60)
+                view.current = ""
+                view.revealed = []
+                view.toolate = True
+                view.lifes = 5
+                view.status = "<:csSleazel:786328102392954921>"
+                view.myword = random.choice(word_list).lower()
+
+                for i in view.myword:
+                    view.current += "_"
+
+                for i in range(view.lifes):
+                    view.status += "🟩"
+
+                view.status += "<:csStairbonk:812813052822421555>"
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n{view.current}\n{view.status}", view)
 
                 await view.wait()
                 await view.too_late()
