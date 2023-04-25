@@ -571,6 +571,8 @@ class FifthButton(discord.ui.View):
             await INTERACTION(interaction.response, f"{interaction.user.mention} saved the hangman first!", False)
             self.toolate = False
             self.stop()
+        else:
+            await interaction.response.defer()
 
     async def update_mistake(self, interaction, button):
         self.status = "<:csSleazel:786328102392954921>"
@@ -589,9 +591,10 @@ class FifthButton(discord.ui.View):
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves.", False)
             self.toolate = False
             self.stop()
+        else:
+            await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
-        await interaction.response.defer()
         if str(button.custom_id).lower() in self.myword:
             button.style = discord.ButtonStyle.green
             button.disabled = True
