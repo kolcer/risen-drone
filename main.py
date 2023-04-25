@@ -7,7 +7,7 @@ import asyncio
 import requests
 #from datetime import date
 from difflib import SequenceMatcher
-from nltk.corpus import words
+# from nltk.corpus import words
 
 from globals import *
 from roles import *
@@ -16,7 +16,7 @@ from fighting import *
 from rated import *
 from rigs import *
 from database import *
-from quiz import * 
+from quiz import *
 ### INITIAL SETUP ### 
 
 # This allows us to know if user has updated their presence
@@ -26,7 +26,8 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
-word_list = words.words()
+# word_list = words.words()
+word_list = ["cat", "dog", "mouse"]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
