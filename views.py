@@ -573,7 +573,6 @@ class FifthButton(discord.ui.View):
             self.stop()
 
     async def update_mistake(self, interaction, button):
-        await interaction.response.defer()
         self.status = "<:csSleazel:786328102392954921>"
 
         for i in range(self.lifes):
