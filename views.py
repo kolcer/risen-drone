@@ -595,7 +595,7 @@ class FifthButton(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}", self) 
 
-        if self.lifes == 0:
+        if self.lifes <= 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
             self.toolate = False
             self.stop()
