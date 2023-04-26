@@ -588,7 +588,7 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n{self.current}\n\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n{self.current}\n\n{self.status}", self) 
 
         if self.lifes == 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves.", False)
