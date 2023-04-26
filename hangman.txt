@@ -1766,11 +1766,9 @@ anagram
 anagrammatic
 anagrammatically
 anagrams
-anal
 analgesia
 analgesic
 analgesics
-anally
 analogical
 analogies
 analogise
@@ -4893,11 +4891,6 @@ bissau
 bistable
 bistro
 bit
-bitch
-bitches
-bitchiness
-bitching
-bitchy
 bite
 biter
 biters
@@ -5493,12 +5486,6 @@ bonus
 bonuses
 bony
 boo
-boobies
-booboo
-booby
-boobytrap
-boobytrapped
-boobytraps
 booed
 boohoo
 booing
@@ -5939,15 +5926,6 @@ breakups
 breakwater
 breakwaters
 bream
-breast
-breastbone
-breasted
-breastfeed
-breastfeeding
-breasting
-breastplate
-breasts
-breaststroke
 breath
 breathable
 breathalysed
@@ -9009,7 +8987,6 @@ cocain
 cocaine
 cochlea
 cochlear
-cock
 cockatoo
 cockatoos
 cockatrice
@@ -11644,7 +11621,7 @@ crores
 crosier
 crosiers
 cross
-cross-bun
+cross bun
 crossbar
 crossbars
 crossbones
@@ -13927,7 +13904,6 @@ dichotomous
 dichotomy
 diciest
 dicing
-dickens
 dictate
 dictated
 dictates
@@ -18627,9 +18603,6 @@ fading
 fads
 faecal
 faeces
-fag
-faggot
-faggots
 fagot
 fags
 fail
@@ -27055,7 +27028,6 @@ interocular
 interoperability
 interoperable
 interpellation
-interpenetration
 interpersonal
 interplanetary
 interplay
@@ -32118,7 +32090,6 @@ mishear
 misheard
 mishearing
 mishears
-mishitting
 misidentification
 misinform
 misinformation
@@ -36541,15 +36512,6 @@ pending
 pendulous
 pendulum
 pendulums
-penetrable
-penetrate
-penetrated
-penetrates
-penetrating
-penetratingly
-penetration
-penetrations
-penetrative
 penguin
 penguins
 penicillin
@@ -38214,13 +38176,6 @@ pork
 porkchop
 porker
 porky
-porn
-porno
-pornographer
-pornographers
-pornographic
-pornography
-porns
 porosity
 porous
 porphyritic
@@ -40050,10 +40005,6 @@ pushing
 pushovers
 pushups
 pushy
-puss
-pussy
-pussycat
-pussyfooting
 pustular
 pustule
 pustules
@@ -47242,10 +47193,6 @@ sniffling
 sniffly
 sniffs
 snifter
-snigger
-sniggered
-sniggering
-sniggers
 snip
 snipe
 sniper
@@ -57205,10 +57152,6 @@ whooping
 whoops
 whoosh
 whop
-whore
-whorehouse
-whores
-whoring
 whorled
 whorls
 whose
