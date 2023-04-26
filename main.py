@@ -791,7 +791,7 @@ _[alignment]_ **trivia**
                 view.revealed = []
                 view.toolate = True
                 view.lifes = 5
-                view.status = "`<:csSleazel:786328102392954921>"
+                view.status = "<:csSleazel:786328102392954921>"
                 view.myword = random.choice(word_list).lower()
 
                 for i in view.myword:
@@ -803,7 +803,7 @@ _[alignment]_ **trivia**
                 for i in range(view.lifes):
                     view.status += "🟩"
 
-                view.status += "<:csStairbonk:812813052822421555>`"
+                view.status += "<:csStairbonk:812813052822421555>"
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
 
                 await view.wait()
