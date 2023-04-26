@@ -4,7 +4,7 @@ import discord
 import os
 import random
 import asyncio
-import requests
+import requests 
 import nltk
 #from datetime import date
 from difflib import SequenceMatcher
