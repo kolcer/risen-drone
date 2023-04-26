@@ -568,7 +568,7 @@ class FifthButton(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n{self.current}\n\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}", self)
 
         if "_" not in self.current:
             await INTERACTION(interaction.response, f"{interaction.user.mention} saved the hangman first!", False)
@@ -605,8 +605,6 @@ class FifthButton(discord.ui.View):
 
             await self.update_revealed(interaction, button)
         else:
-            button.style = discord.ButtonStyle.red
-            button.disabled = True
             self.lifes -= 1
 
             await self.update_mistake(interaction, button)
