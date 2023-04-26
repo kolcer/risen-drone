@@ -27,7 +27,7 @@ intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
 # word_list = words.words()
-word_list = ["cat", "dog", "mouse"]
+word_list = ["when the stairs are crazy", "sailor moon", "annihilator"]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
