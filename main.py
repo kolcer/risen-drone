@@ -795,8 +795,11 @@ _[alignment]_ **trivia**
                 view.toolate = True
                 view.lifes = 5
                 view.status = "<:csSleazel:786328102392954921>"
-                view.myword = random.choice(word_list).lower()
+                view.myword = "q"
 
+                while "q" in view.myword:
+                    view.myword = random.choice(word_list).lower()
+            
                 for i in view.myword:
                     if str(i) != " ":
                         view.current += "_"
