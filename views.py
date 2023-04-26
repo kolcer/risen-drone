@@ -621,7 +621,7 @@ class FifthButton(discord.ui.View):
         else:
             self.lifes -= 1
 
-            if str(button.custom_id) not in self.wrong:
+            if str(button.custom_id).upper() not in self.wrong:
                 self.wrong += str(button.custom_id).upper() + " "
 
             await self.update_mistake(interaction, button)
