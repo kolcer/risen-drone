@@ -553,7 +553,7 @@ class FifthButton(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], f"It was not *that* hard, I was thinking about: {str(self.myword)}.")
+            await SEND(BUTTONS["channel"], f"How sad. I was thinking about: {str(self.myword)}.")
 
         await self.on_timeout()
 
@@ -596,7 +596,7 @@ class FifthButton(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}", self) 
 
         if self.lifes == 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves.", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
             self.toolate = False
             self.stop()
         else:
