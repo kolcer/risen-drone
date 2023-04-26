@@ -605,6 +605,7 @@ class FifthButton(discord.ui.View):
     async def process_click(self, interaction, button, usr):
         if usr == self.cp:
             await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+            return
         else:
             self.cp = usr
 
