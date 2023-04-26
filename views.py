@@ -549,7 +549,7 @@ class FifthButton(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n{self.current}\n\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}", self)
 
     async def too_late(self):
         if self.toolate:
