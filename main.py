@@ -356,6 +356,7 @@ async def on_message(message):
 
         elif lmsg == "play hangman":
             BUTTONS["status"] = True
+            BUTTONS["channel"] = ch
             view = FifthButton(timeout=60)
             view.current = ""
             view.revealed = []
