@@ -5,6 +5,7 @@ import os
 import random
 import asyncio
 import requests 
+import nltk
 from nltk.corpus import words
 #from datetime import date
 from difflib import SequenceMatcher
@@ -28,6 +29,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 # prepare to get a list of words for the hangman game
+nltk.download('words')
 word_list = words.words()
 
 #print tips
