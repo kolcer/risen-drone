@@ -581,14 +581,19 @@ class FifthButton(discord.ui.View):
         self.status = "<:csSleazel:786328102392954921>"
 
         for i in range(self.lifes):
-            self.status += "🟩"
+            if self.lifes == 1:
+                self.status += "🟥"
+            elif 2 <= self.lifes <= 3:
+                self.status += "🟧"
+            else:
+                self.status += "🟩"
 
         if self.lifes > 0:
             self.status += "<:csStairbonk:812813052822421555>" 
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n{self.current}\n\n{self.status}", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}", self) 
 
         if self.lifes == 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves.", False)
