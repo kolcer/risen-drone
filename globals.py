@@ -273,13 +273,13 @@ WISDOM = [
     "one more commitment and its 1.1k commitments - cashier#6099",
 ]
 
-# WORD_LIST = [
-#     "when the stairs are crazy",
-#     "sleazel",
-#     "annihilator",
-#     "broken drone",
-#     "hangman",
-# ]
+WORD_LIST = [
+    "when the stairs are crazy",
+    "sleazel",
+    "annihilator",
+    "broken drone",
+    "hangman",
+]
 
 # CONSTANT DICTIONARIES
 
