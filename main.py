@@ -731,7 +731,7 @@ _[alignment]_ **trivia**
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
-                BUTTONS["channel"] = CHANNELS["bot-testing"]
+                BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
                 BUTTONS["phase"] = random.randint(1, 5)
                 BUTTONS["channel"] = CHANNELS["general"]
