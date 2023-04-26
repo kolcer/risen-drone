@@ -5,7 +5,7 @@ import os
 import random
 import asyncio
 import requests 
-import nltk
+from nltk.corpus import words
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -28,8 +28,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 # prepare to get a list of words for the hangman game
-nltk.download("words")
-word_list = nltk.corpus.words("en")
+word_list = words.words()
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -794,7 +793,7 @@ _[alignment]_ **trivia**
                 view.toolate = True
                 view.lifes = 5
                 view.status = "<:csSleazel:786328102392954921>"
-                view.myword = random.choice(WORD_LIST).lower()
+                view.myword = random.choice(word_list).lower()
 
                 for i in view.myword:
                     if str(i) != " ":
@@ -1056,7 +1055,6 @@ Delete: Deletes the specified quiz question by index.
                         
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            print("I AM HEREEEE")
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
                             await ADD_ROLES(mem, neededrole)
