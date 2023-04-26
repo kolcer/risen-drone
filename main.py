@@ -16,7 +16,7 @@ from fighting import *
 from rated import *
 from rigs import *
 from database import *
-from quiz import *
+from quiz import * 
 ### INITIAL SETUP ### 
 
 # This allows us to know if user has updated their presence
