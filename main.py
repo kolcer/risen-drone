@@ -5,9 +5,9 @@ import os
 import random
 import asyncio
 import requests
+import nltk
 #from datetime import date
 from difflib import SequenceMatcher
-# from nltk.corpus import words
 
 from globals import *
 from roles import *
@@ -26,7 +26,10 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
-# word_list = words.words()
+
+# prepare to get a list of words for the hangman game
+nltk.download("words")
+word_list = nltk.corpus.words("en")
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -791,7 +794,7 @@ _[alignment]_ **trivia**
                 view.toolate = True
                 view.lifes = 5
                 view.status = "<:csSleazel:786328102392954921>"
-                view.myword = random.choice(WORD_LIST).lower()
+                view.myword = random.choice(word_list).lower()
 
                 for i in view.myword:
                     if str(i) != " ":
