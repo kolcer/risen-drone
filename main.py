@@ -29,8 +29,11 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 # prepare to get a list of words for the hangman game
-nltk.download('words')
-word_list = words.words()
+# nltk.download('words')
+# word_list = words.words()
+
+with open('hangman.txt') as input_file:
+    word_list = [line.strip() for line in input_file]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
