@@ -563,7 +563,7 @@ class FifthButton(discord.ui.View):
             if str(i).lower() in self.revealed:
                 self.current += str(i).upper()
             else:
-                self.current += "_"
+                self.current == self.current + "_" if str(i) != " " else self.current == self.current + " " # += doesnt work here :P 
 
         await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n{self.current}\n\n{self.status}", self)
 
@@ -705,12 +705,6 @@ class FifthButton(discord.ui.View):
 
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label="Q", custom_id = "q",  style = discord.ButtonStyle.blurple)
-    async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-
-        await self.process_click(interaction, button, usr)
-
     @discord.ui.button(label="R", custom_id = "r",  style = discord.ButtonStyle.blurple)
     async def B18(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
@@ -755,6 +749,12 @@ class FifthButton(discord.ui.View):
 
     @discord.ui.button(label="Y", custom_id = "y",  style = discord.ButtonStyle.blurple)
     async def B25(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="Z", custom_id = "z",  style = discord.ButtonStyle.blurple)
+    async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
         await self.process_click(interaction, button, usr)
