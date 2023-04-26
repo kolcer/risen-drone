@@ -593,7 +593,7 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}", self) 
 
         if self.lifes <= 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
@@ -603,6 +603,14 @@ class FifthButton(discord.ui.View):
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
+        if usr == self.cp:
+            await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+        else:
+            self.cp = usr
+
+        if self.wrong == "":
+            self.wrong == "None"
+
         if str(button.custom_id).lower() in self.myword:
             button.style = discord.ButtonStyle.green
             button.disabled = True
@@ -611,6 +619,9 @@ class FifthButton(discord.ui.View):
             await self.update_revealed(interaction, button)
         else:
             self.lifes -= 1
+
+            if str(button.custom_id) not in self.wrong:
+                self.wrong += str(button.custom_id).upper() + " "
 
             await self.update_mistake(interaction, button)
 

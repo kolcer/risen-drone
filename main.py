@@ -360,10 +360,12 @@ async def on_message(message):
             view = FifthButton(timeout=60)
             view.current = ""
             view.revealed = []
+            view.wrong = ""
             view.toolate = True
             view.lifes = 5
             view.status = "<:csSleazel:786328102392954921>"
             view.myword = "q"
+            view.cp = None
 
             while "q" in view.myword:
                 view.myword = random.choice(word_list).lower()
