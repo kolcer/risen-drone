@@ -568,7 +568,7 @@ class FifthButton(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}", self)
 
         if "_" not in self.current:
             await INTERACTION(interaction.response, f"{interaction.user.mention} saved the hangman first!", False)
