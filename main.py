@@ -354,6 +354,35 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
+        elif lmsg == "play hangman":
+            BUTTONS["status"] = True
+            view = FifthButton(timeout=60)
+            view.current = ""
+            view.revealed = []
+            view.toolate = True
+            view.lifes = 5
+            view.status = "<:csSleazel:786328102392954921>"
+            view.myword = "q"
+
+            while "q" in view.myword:
+                view.myword = random.choice(word_list).lower()
+        
+            for i in view.myword:
+                if str(i) != " ":
+                    view.current += "_"
+                else:
+                    view.current += " "
+
+            for i in range(view.lifes):
+                view.status += "🟩"
+
+            view.status += "<:csStairbonk:812813052822421555>"
+            view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
+
+            await view.wait()
+            await view.too_late()
+            BUTTONS["status"] = False
+
         # ## All Rigs in one
         elif "cast" in lmsg and "rig" in lmsg:
             if lsplit[0] == "cast" and lsplit[2] == "rig":
@@ -782,35 +811,6 @@ _[alignment]_ **trivia**
                 view.step = 0
                 view.roleowners = list_decoded_entries("Broken Drone Helper")
                 view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
-
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
-
-            elif BUTTONS["phase"] == 5:
-                BUTTONS["status"] = True
-                view = FifthButton(timeout=60)
-                view.current = ""
-                view.revealed = []
-                view.toolate = True
-                view.lifes = 5
-                view.status = "<:csSleazel:786328102392954921>"
-                view.myword = "q"
-
-                while "q" in view.myword:
-                    view.myword = random.choice(word_list).lower()
-            
-                for i in view.myword:
-                    if str(i) != " ":
-                        view.current += "_"
-                    else:
-                        view.current += " "
-
-                for i in range(view.lifes):
-                    view.status += "🟩"
-
-                view.status += "<:csStairbonk:812813052822421555>"
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
 
                 await view.wait()
                 await view.too_late()
