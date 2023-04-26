@@ -568,7 +568,7 @@ class FifthButton(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention}", self)
 
         if "_" not in self.current:
             await INTERACTION(interaction.response, f"{interaction.user.mention} saved the hangman first!", False)
@@ -593,7 +593,7 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention}", self) 
 
         if self.lifes <= 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
