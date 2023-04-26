@@ -357,7 +357,7 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
-        elif lmsg == "play hangman":
+        elif lmsg == "play hangman" and not BUTTONS["status"]:
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = FifthButton(timeout=120)
