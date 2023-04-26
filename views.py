@@ -563,7 +563,10 @@ class FifthButton(discord.ui.View):
             if str(i).lower() in self.revealed:
                 self.current += str(i).upper()
             else:
-                self.current == self.current + "_" if str(i) != " " else self.current == self.current + " " # += doesnt work here :P 
+                if str(i) != " ":
+                    self.current += "_"
+                else:
+                    self.current += " "
 
         await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n{self.current}\n\n{self.status}", self)
 

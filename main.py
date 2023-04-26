@@ -795,7 +795,10 @@ _[alignment]_ **trivia**
                 view.myword = random.choice(word_list).lower()
 
                 for i in view.myword:
-                    view.current == view.current + "_" if str(i) != " " else view.current == view.current + " " # += doesnt work here :P 
+                    if str(i) != " ":
+                        view.current += "_"
+                    else:
+                        view.current += " "
 
                 for i in range(view.lifes):
                     view.status += "🟩"
