@@ -413,7 +413,12 @@ async def on_message(message):
                 view.status += "🟩"
 
             view.status += "<:csStairbonk:812813052822421555>"
-            view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
+
+            if view.picker != None:
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word {view.picker.mention} is thinking?\n\n`{view.current}`\n\n{view.status}", view)
+            else:
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
+            
 
             await view.wait()
             await view.too_late()
