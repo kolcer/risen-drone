@@ -364,7 +364,7 @@ async def on_message(message):
             view = FifthButton(timeout=120)
             view.current = ""
             view.revealed = []
-            view.wrong = ""
+            view.wrong = " "
             view.toolate = True
             view.lifes = 5
             view.status = "<:csSleazel:786328102392954921>"

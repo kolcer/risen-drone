@@ -603,7 +603,7 @@ class FifthButton(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self) 
 
         if self.lifes <= 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} didn't save Sleazel in time. I was thinking about: `{self.myword}`", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} is wrong. The correct word was: `{self.myword}`", False)
             self.toolate = False
             self.stop()
         else:
