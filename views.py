@@ -568,10 +568,16 @@ class FifthButton(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self)
 
         if "_" not in self.current:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} saved the hangman first!", False)
+            # best_user = max(self.players, key=lambda user: len(self.players[user]))
+            max_length = max(len(guesses) for guesses in self.players.values())
+            best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
+
+            for plr in self.players.keys():
+                self.result += f"{plr.display_name}'s correct guesses: {len(self.players[plr])}\n"
+            await INTERACTION(interaction.response, f"The users with the most correct guesses are: {', '.join(best_users)}", False)
             self.toolate = False
             self.stop()
         else:
@@ -593,7 +599,7 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention}", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self) 
 
         if self.lifes <= 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
@@ -603,19 +609,28 @@ class FifthButton(discord.ui.View):
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
-        if usr == self.cp:
-            await INTERACTION(interaction.response, "It's someone else's turn now.", True)
-            return
+
+        if self.alone:
+            if usr != self.cp:
+                await INTERACTION(interaction.response, "This user is playing solo.", True)
         else:
-            self.cp = usr
+            if usr == self.cp:
+                await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+                return
+            else:
+                self.cp = usr
 
         if self.wrong == "":
-            self.wrong == "None"
+            self.wrong = "None"
+
+        self.cl = str(button.custom_id).upper()
 
         if str(button.custom_id).lower() in self.myword:
             button.style = discord.ButtonStyle.green
             button.disabled = True
             self.revealed.append(str(button.custom_id).lower())
+
+            self.players[usr].append(str(button.custom_id).upper())
 
             await self.update_revealed(interaction, button)
         else:

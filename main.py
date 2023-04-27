@@ -357,7 +357,7 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
-        elif lmsg == "play hangman" and not BUTTONS["status"]:
+        elif lmsg.startswith("play hangman") and not BUTTONS["status"]:
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = FifthButton(timeout=120)
@@ -369,6 +369,14 @@ async def on_message(message):
             view.status = "<:csSleazel:786328102392954921>"
             view.myword = "q"
             view.cp = None
+            view.cl = None
+            view.alone = False
+            view.players = {}
+            view.results = ""
+
+            if lmsg.endswith("alone"):
+                view.cp = usr
+                view.alone = True            
 
             while "q" in view.myword:
                 view.myword = random.choice(word_list).lower()
