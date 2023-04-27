@@ -397,7 +397,8 @@ async def on_message(message):
                     await SEND(ch, "Your word contains invalid characters.")
                     BUTTONS["status"] = False
                     return
-            else:
+
+            if lmsg == "play hangman" or lmsg == "play hangman alone":
                 while "q" in view.myword:
                     view.myword = random.choice(word_list).lower()
 
