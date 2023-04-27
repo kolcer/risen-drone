@@ -380,6 +380,8 @@ async def on_message(message):
 
             while "q" in view.myword:
                 view.myword = random.choice(word_list).lower()
+
+            print(view.myword)
         
             for i in view.myword:
                 if str(i) != " ":
