@@ -370,6 +370,7 @@ async def on_message(message):
             view.myword = "q"
             view.cp = None
             view.cl = None
+            view.picker = None
             view.alone = False
             view.players = {}
             view.results = ""
@@ -390,6 +391,7 @@ async def on_message(message):
                     
                     await message.delete()
                     view.myword = theword.lower()
+                    view.picker = usr
                 else:
                     await SEND(ch, "Your word contains invalid characters.")
                     BUTTONS["status"] = False

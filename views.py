@@ -619,6 +619,9 @@ class FifthButton(discord.ui.View):
             if usr == self.cp:
                 await INTERACTION(interaction.response, "It's someone else's turn now.", True)
                 return
+            elif self.picker != None and usr == self.picker:
+                await INTERACTION(interaction.response, "This is not a win for you.", True)
+                return
             else:
                 self.cp = usr
 
