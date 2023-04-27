@@ -576,8 +576,9 @@ class FifthButton(discord.ui.View):
             best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
 
             for plr in self.players.keys():
-                self.result += f"{plr.display_name}'s correct guesses: {len(self.players[plr])}\n"
-            await INTERACTION(interaction.response, f"The users with the most correct guesses are: {', '.join(best_users)}", False)
+                self.results += f"{plr.display_name}'s correct guesses: {len(self.players[plr])}\n"
+
+            await INTERACTION(interaction.response, f"The users with the most correct guesses are: {', '.join(best_users)}\n\n{self.results}", False)
             self.toolate = False
             self.stop()
         else:
