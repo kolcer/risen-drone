@@ -385,12 +385,14 @@ async def on_message(message):
                 if re.match("^[a-zA-Z ]*$", theword):
                     if "q" in theword:
                         await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
+                        BUTTONS["status"] = False
                         return
                     
                     await message.delete()
                     view.myword = theword.lower()
                 else:
                     await SEND(ch, "Your word contains invalid characters.")
+                    BUTTONS["status"] = False
                     return
 
             if lmsg == "play hangman" or lmsg == "play hangman alone":
