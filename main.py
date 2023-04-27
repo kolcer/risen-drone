@@ -358,6 +358,7 @@ async def on_message(message):
 
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
             customtrigger = lmsg.replace("play hangman ", "")
+            theword = str(customtrigger.replace("|", ""))
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = FifthButton(timeout=120)
@@ -375,12 +376,10 @@ async def on_message(message):
             view.players = {}
             view.results = ""
 
-            if customtrigger == "alone":
+            if theword == "alone":
                 view.cp = usr
                 view.alone = True   
-            else:  
-                theword = str(customtrigger.replace("|", ""))
-
+            elif theword != "":
                 if re.match("^[a-zA-Z ]*$", theword):
                     if "q" in theword:
                         await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
