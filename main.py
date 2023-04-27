@@ -383,11 +383,12 @@ async def on_message(message):
                 theword = str(customtrigger.replace("|", ""))
 
                 if re.match("^[a-zA-Z ]*$", theword):
+                    if "q" in theword:
+                        await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
+                        return
+                    
                     await message.delete()
                     view.myword = theword.lower()
-                elif "q" in theword:
-                    await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
-                    return
                 else:
                     await SEND(ch, "Your word contains invalid characters.")
                     return
