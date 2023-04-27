@@ -210,7 +210,9 @@ WISDOM = [
     "Don't be afraid to take risks and try new things. You never know what amazing opportunities may come your way.",
     "The only way to do great work is to love what you do. Keep searching, you'll find your dream job soon!",
     "Every day is a gift. Unless it's your birthday, in which case, every day is a present.",
-    # Sarcastic Responses
+    "I do not have a receipe for success, but I do have one for failure - Try to make everyone happy.",
+    "World is filled with brilliant people who have the best intentions to start working on their big project... tomorrow.",
+     # Sarcastic Responses
     "Remember, true strength lies not in winning every battle, but in persevering through every challenge. (Literally the same exact thing.)",
     "One of the keys to happiness is finding joy in the little things. Take a moment to appreciate how ugly you could have been.",
     "Success is not final, failure is not fatal: It is the courage to continue that counts. I can also count. 1, 1, 2, 3, 5, 8, 13, 21, 34",
