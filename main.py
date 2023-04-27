@@ -386,6 +386,10 @@ async def on_message(message):
                         await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
                         BUTTONS["status"] = False
                         return
+                    elif len(theword) >= 32:
+                        await SEND(ch, "Your word is too long.")
+                        BUTTONS["status"] = False
+                        return
                     
                     await message.delete()
                     view.myword = theword.lower()
