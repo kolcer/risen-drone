@@ -613,6 +613,7 @@ class FifthButton(discord.ui.View):
         if self.alone:
             if usr != self.cp:
                 await INTERACTION(interaction.response, "This user is playing solo.", True)
+                return
         else:
             if usr == self.cp:
                 await INTERACTION(interaction.response, "It's someone else's turn now.", True)
