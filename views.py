@@ -624,16 +624,15 @@ class FifthButton(discord.ui.View):
 
         self.cl = str(button.custom_id).upper()
 
+        if usr not in self.players.keys():
+            self.players[usr] = []
+
         if str(button.custom_id).lower() in self.myword:
             button.style = discord.ButtonStyle.green
             button.disabled = True
             self.revealed.append(str(button.custom_id).lower())
 
-
-            if usr in self.players.keys():
-                self.players[usr].append(str(button.custom_id).upper())
-            else:
-                self.players[usr] = [str(button.custom_id).upper()]
+            self.players[usr].append(str(button.custom_id).upper())
 
             await self.update_revealed(interaction, button)
         else:
