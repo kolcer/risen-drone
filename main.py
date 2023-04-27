@@ -379,7 +379,7 @@ async def on_message(message):
             if theword == "alone":
                 view.cp = usr
                 view.alone = True   
-            elif lmsg != "play hangman" and lmsg == "play hangman alone":
+            elif lmsg != "play hangman" and lmsg != "play hangman alone":
                 if re.match("^[a-zA-Z ]*$", theword):
                     if "q" in theword:
                         await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")

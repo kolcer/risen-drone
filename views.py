@@ -553,7 +553,7 @@ class FifthButton(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], f"How sad. I was thinking about: {str(self.myword)}.")
+            await SEND(BUTTONS["channel"], f"Time's up, the answer was: `{str(self.myword)}`.")
 
         await self.on_timeout()
 
@@ -568,7 +568,7 @@ class FifthButton(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self)
 
         if "_" not in self.current:
             # best_user = max(self.players, key=lambda user: len(self.players[user]))
@@ -576,9 +576,9 @@ class FifthButton(discord.ui.View):
             best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
 
             for plr in self.players.keys():
-                self.results += f"{plr.display_name}'s correct guesses: {len(self.players[plr])}\n"
+                self.results += f"`{plr.display_name}`: {len(self.players[plr])}\n"
 
-            await INTERACTION(interaction.response, f"The users with the most correct guesses are: {', '.join(best_users)}\n\n{self.results}", False)
+            await INTERACTION(interaction.response, f"Special thanks to: {', '.join(best_users)}\n\n{self.results}", False)
             self.toolate = False
             self.stop()
         else:
@@ -600,10 +600,10 @@ class FifthButton(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self) 
 
         if self.lifes <= 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} didn't save Sleazel in time. I was thinking about: `{self.myword}`", False)
             self.toolate = False
             self.stop()
         else:
@@ -620,7 +620,7 @@ class FifthButton(discord.ui.View):
                 await INTERACTION(interaction.response, "It's someone else's turn now.", True)
                 return
             elif self.picker != None and usr == self.picker:
-                await INTERACTION(interaction.response, f'"Guys! Look, the answer is {self.myword}!"\n\nSee? Nobody cares.', True)
+                await INTERACTION(interaction.response, "You do not deserve this victory.", True)
                 return
             else:
                 self.cp = usr
