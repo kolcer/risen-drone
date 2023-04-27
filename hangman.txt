@@ -5834,9 +5834,6 @@ brasserie
 brasses
 brassiere
 brassy
-brat
-brats
-bratty
 bravado
 brave
 braved
@@ -24754,8 +24751,6 @@ huskiest
 huskily
 husks
 husky
-hussies
-hussy
 hustings
 hustle
 hustled
@@ -46468,8 +46463,6 @@ sirloins
 sirs
 sis
 sisal
-sissies
-sissy
 sister
 sisterhood
 sisterinlaw
