@@ -375,8 +375,6 @@ async def on_message(message):
             view.players = {}
             view.results = ""
 
-            await DRONEPRINT(customtrigger)
-
             if customtrigger == "alone":
                 view.cp = usr
                 view.alone = True   
