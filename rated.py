@@ -85,7 +85,7 @@ async def DELETE(message):
     await message.delete()
 
 async def DRONEPRINT(message):
-    await SEND(CHANNELS["DEBUGS"], message)
+    await SEND(CHANNELS["debugs"], message)
     await asyncio.sleep(2)
 
 async def NEW_ROLE(server,colorpick, rolename):
