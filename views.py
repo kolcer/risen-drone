@@ -620,9 +620,6 @@ class FifthButton(discord.ui.View):
             else:
                 self.cp = usr
 
-        if self.wrong == "":
-            self.wrong = "None"
-
         self.cl = str(button.custom_id).upper()
 
         if str(button.custom_id).lower() in self.myword:
@@ -630,7 +627,11 @@ class FifthButton(discord.ui.View):
             button.disabled = True
             self.revealed.append(str(button.custom_id).lower())
 
-            self.players[usr].append(str(button.custom_id).upper())
+
+            if usr in self.players.keys():
+                self.players[usr].append(str(button.custom_id).upper())
+            else:
+                self.players[usr] = [str(button.custom_id).upper()]
 
             await self.update_revealed(interaction, button)
         else:
