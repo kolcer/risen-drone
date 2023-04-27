@@ -374,6 +374,8 @@ async def on_message(message):
             view.players = {}
             view.results = ""
 
+            await DRONEPRINT(customtrigger)
+
             if customtrigger == "alone":
                 view.cp = usr
                 view.alone = True   
@@ -781,10 +783,6 @@ _[alignment]_ **trivia**
                 await view.wait()
                 await view.too_late()
                 BUTTONS['status'] = False
-            
-
-        if (ch.id != 1001034407966150746):
-             print(buttons_chance)
 
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
