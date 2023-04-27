@@ -5,8 +5,7 @@ import os
 import random
 import asyncio
 import requests 
-import nltk
-from nltk.corpus import words
+import re
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -357,7 +356,8 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
-        elif lmsg.startswith("play hangman") and not BUTTONS["status"]:
+        elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
+            customtrigger = lmsg.replace("play hangman ", "")
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = FifthButton(timeout=120)
@@ -374,12 +374,24 @@ async def on_message(message):
             view.players = {}
             view.results = ""
 
-            if lmsg.endswith("alone"):
+            if customtrigger == "alone":
                 view.cp = usr
-                view.alone = True            
+                view.alone = True   
+            else:  
+                theword = str(customtrigger.replace("|", ""))
 
-            while "q" in view.myword:
-                view.myword = random.choice(word_list).lower()
+                if not re.match("^[a-zA-Z ]*$", theword):
+                    await SEND(ch, "Your word contains invalid characters.")
+                    return
+                elif "q" in theword:
+                    await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
+                    return
+                else:
+                    view.myword = theword.lower()
+
+            if lmsg == "play hangman" or lmsg == "play hangman alone":
+                while "q" in view.myword:
+                    view.myword = random.choice(word_list).lower()
 
             print(view.myword)
         
