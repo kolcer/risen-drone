@@ -4,7 +4,8 @@ import discord
 import os
 import random
 import asyncio
-import requests
+import requests 
+import re
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -15,7 +16,7 @@ from fighting import *
 from rated import *
 from rigs import *
 from database import *
-from quiz import *
+from quiz import * 
 ### INITIAL SETUP ### 
 
 # This allows us to know if user has updated their presence
@@ -25,6 +26,13 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 client = discord.Client(intents=intents)
+
+# prepare to get a list of words for the hangman game
+# nltk.download('words')
+# word_list = words.words()
+
+with open('hangman.txt') as input_file:
+    word_list = [line.strip() for line in input_file]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -347,6 +355,76 @@ async def on_message(message):
         elif lmsg == "join fight" and FG['status'] == "second-player" and (EXTRA_ROLES["admin"] in usr.roles or usr.id == 894573836366934047):
 
             await JoinFightingGame(usr)
+
+        elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
+            customtrigger = lmsg.replace("play hangman ", "")
+            BUTTONS["status"] = True
+            BUTTONS["channel"] = ch
+            view = FifthButton(timeout=120)
+            view.current = ""
+            view.revealed = []
+            view.wrong = ""
+            view.toolate = True
+            view.lifes = 5
+            view.status = "<:csSleazel:786328102392954921>"
+            view.myword = "q"
+            view.cp = None
+            view.cl = None
+            view.picker = None
+            view.alone = False
+            view.players = {}
+            view.results = ""
+
+            if customtrigger == "alone":
+                view.cp = usr
+                view.alone = True   
+            else:  
+                theword = str(customtrigger.replace("|", ""))
+
+                if re.match("^[a-zA-Z ]*$", theword):
+                    if "q" in theword:
+                        await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
+                        BUTTONS["status"] = False
+                        return
+                    elif len(theword) >= 32:
+                        await SEND(ch, "Your word is too long.")
+                        BUTTONS["status"] = False
+                        return
+                    
+                    await message.delete()
+                    view.myword = theword.lower()
+                    view.picker = usr
+                else:
+                    await SEND(ch, "Your word contains invalid characters.")
+                    BUTTONS["status"] = False
+                    return
+
+            if lmsg == "play hangman" or lmsg == "play hangman alone":
+                while "q" in view.myword:
+                    view.myword = random.choice(word_list).lower()
+
+            print(view.myword)
+        
+            for i in view.myword:
+                if str(i) != " ":
+                    view.current += "_"
+                else:
+                    view.current += " "
+
+            for i in range(view.lifes):
+                view.status += "🟩"
+
+            view.status += "<:csStairbonk:812813052822421555>"
+
+            if view.picker != None:
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word {view.picker.mention} is thinking?\n\n`{view.current}`\n\n{view.status}", view)
+            else:
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
+            
+
+            await view.wait()
+            await view.too_late()
+            BUTTONS["status"] = False
 
         # ## All Rigs in one
         elif "cast" in lmsg and "rig" in lmsg:
@@ -717,17 +795,13 @@ _[alignment]_ **trivia**
                 await view.wait()
                 await view.too_late()
                 BUTTONS['status'] = False
-            
-
-        if (ch.id != 1001034407966150746):
-             print(buttons_chance)
 
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
-                BUTTONS["channel"] = CHANNELS["bot-testing"]
+                BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
-                BUTTONS["phase"] = random.randint(1, 4)
+                BUTTONS["phase"] = random.randint(1, 5)
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
@@ -1025,7 +1099,6 @@ Delete: Deletes the specified quiz question by index.
                         
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            print("I AM HEREEEE")
                             await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
                             await asyncio.sleep(1)
                             await ADD_ROLES(mem, neededrole)

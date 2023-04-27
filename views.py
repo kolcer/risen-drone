@@ -544,6 +544,261 @@ class FourthButtonFinal(discord.ui.View):
         if len(self.clicked) == len(self.users):
             await self.on_closed()
 
+class FifthButton(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}", self)
+
+    async def too_late(self):
+        if self.toolate:
+            await SEND(BUTTONS["channel"], f"How sad. I was thinking about: {str(self.myword)}.")
+
+        await self.on_timeout()
+
+    async def update_revealed(self, interaction, button):
+        self.current = ""
+        for i in self.myword:
+            if str(i).lower() in self.revealed:
+                self.current += str(i).upper()
+            else:
+                if str(i) != " ":
+                    self.current += "_"
+                else:
+                    self.current += " "
+
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self)
+
+        if "_" not in self.current:
+            # best_user = max(self.players, key=lambda user: len(self.players[user]))
+            max_length = max(len(guesses) for guesses in self.players.values())
+            best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
+
+            for plr in self.players.keys():
+                self.results += f"{plr.display_name}'s correct guesses: {len(self.players[plr])}\n"
+
+            await INTERACTION(interaction.response, f"The users with the most correct guesses are: {', '.join(best_users)}\n\n{self.results}", False)
+            self.toolate = False
+            self.stop()
+        else:
+            await interaction.response.defer()
+
+    async def update_mistake(self, interaction, button):
+        self.status = "<:csSleazel:786328102392954921>"
+
+        for i in range(self.lifes):
+            if self.lifes == 1:
+                self.status += "🟥"
+            elif 2 <= self.lifes <= 3:
+                self.status += "🟧"
+            else:
+                self.status += "🟩"
+
+        if self.lifes > 0:
+            self.status += "<:csStairbonk:812813052822421555>" 
+        else:
+            self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
+
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: {self.wrong}\n\nLast move: {self.cp.mention} guessed {self.cl}", self) 
+
+        if self.lifes <= 0:
+            await INTERACTION(interaction.response, f"{interaction.user.mention} should be ashamed of themselves. I was thinking about: {self.myword}", False)
+            self.toolate = False
+            self.stop()
+        else:
+            await interaction.response.defer()
+
+    async def process_click(self, interaction, button, usr):
+
+        if self.alone:
+            if usr != self.cp:
+                await INTERACTION(interaction.response, "This user is playing solo.", True)
+                return
+        else:
+            if usr == self.cp:
+                await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+                return
+            elif self.picker != None and usr == self.picker:
+                await INTERACTION(interaction.response, f'"Guys! Look, the answer is {self.myword}!"\n\nSee? Nobody cares.', True)
+                return
+            else:
+                self.cp = usr
+
+        self.cl = str(button.custom_id).upper()
+
+        if usr not in self.players.keys():
+            self.players[usr] = []
+
+        if str(button.custom_id).lower() in self.myword:
+            button.style = discord.ButtonStyle.green
+            button.disabled = True
+            self.revealed.append(str(button.custom_id).lower())
+
+            self.players[usr].append(str(button.custom_id).upper())
+
+            await self.update_revealed(interaction, button)
+        else:
+            self.lifes -= 1
+
+            button.style = discord.ButtonStyle.secondary
+
+            if str(button.custom_id).upper() not in self.wrong:
+                self.wrong += str(button.custom_id).upper() + " "
+
+            await self.update_mistake(interaction, button)
+
+
+    @discord.ui.button(label="A", custom_id = "a",  style = discord.ButtonStyle.blurple)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="B", custom_id = "b",  style = discord.ButtonStyle.blurple)
+    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="C", custom_id = "c",  style = discord.ButtonStyle.blurple)
+    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="D", custom_id = "d",  style = discord.ButtonStyle.blurple)
+    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="E", custom_id = "e",  style = discord.ButtonStyle.blurple)
+    async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="F", custom_id = "f",  style = discord.ButtonStyle.blurple)
+    async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="G", custom_id = "g",  style = discord.ButtonStyle.blurple)
+    async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="H", custom_id = "h",  style = discord.ButtonStyle.blurple)
+    async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="I", custom_id = "i",  style = discord.ButtonStyle.blurple)
+    async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="J", custom_id = "j",  style = discord.ButtonStyle.blurple)
+    async def B10(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="K", custom_id = "k",  style = discord.ButtonStyle.blurple)
+    async def B11(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="L", custom_id = "l",  style = discord.ButtonStyle.blurple)
+    async def B12(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="M", custom_id = "m",  style = discord.ButtonStyle.blurple)
+    async def B13(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="N", custom_id = "n",  style = discord.ButtonStyle.blurple)
+    async def B14(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="O", custom_id = "o",  style = discord.ButtonStyle.blurple)
+    async def B15(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="P", custom_id = "p",  style = discord.ButtonStyle.blurple)
+    async def B16(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="R", custom_id = "r",  style = discord.ButtonStyle.blurple)
+    async def B18(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="S", custom_id = "s",  style = discord.ButtonStyle.blurple)
+    async def B19(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="T", custom_id = "t",  style = discord.ButtonStyle.blurple)
+    async def B20(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="U", custom_id = "u",  style = discord.ButtonStyle.blurple)
+    async def B21(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="V", custom_id = "v",  style = discord.ButtonStyle.blurple)
+    async def B22(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="W", custom_id = "w",  style = discord.ButtonStyle.blurple)
+    async def B23(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="X", custom_id = "x",  style = discord.ButtonStyle.blurple)
+    async def B24(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="Y", custom_id = "y",  style = discord.ButtonStyle.blurple)
+    async def B25(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="Z", custom_id = "z",  style = discord.ButtonStyle.blurple)
+    async def B17(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        await self.process_click(interaction, button, usr)
+
 class BurgerButton(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:
