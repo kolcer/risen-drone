@@ -638,7 +638,7 @@ class FifthButton(discord.ui.View):
         else:
             self.lifes -= 1
 
-            button.style = discord.ButtonStyle.red
+            button.style = discord.ButtonStyle.secondary
 
             if str(button.custom_id).upper() not in self.wrong:
                 self.wrong += str(button.custom_id).upper() + " "
