@@ -799,25 +799,22 @@ class FifthButton(discord.ui.View):
 
         await self.process_click(interaction, button, usr)
 
-class BurgerButton(discord.ui.View):
-    async def on_timeout(self):
-        for item in self.children:
-            item.disabled = True
+# class BurgerButton(discord.ui.View):
+#     async def on_timeout(self):
+#         for item in self.children:
+#             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:', self)
+#         await EDIT_VIEW_MESSAGE(self.message, 'The burger is dead D:', self)
 
-    async def too_late(self):
-        if self.toolate:
-            await SEND(BUTTONS['channel'], 'burger over')
+#     async def too_late(self):
+#         if self.toolate:
+#             await SEND(BUTTONS['channel'], 'burger over')
 
-        await self.on_timeout()
+#         await self.on_timeout()
 
-    @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
-    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await INTERACTION(interaction.response, "🍔", True)
-
-
-
+#     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
+#     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+#         await INTERACTION(interaction.response, "🍔", True)
 
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):

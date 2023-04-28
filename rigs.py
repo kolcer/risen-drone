@@ -202,18 +202,18 @@ async def Rig(rigType, ch, usr):
             elif rigType == "splicer":
                 msgCounting = await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
         
-        case "gun":
-            if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
-                await SEND(ch, "no gun imagine lmao")
-                return
-            ACTIVE_RIGS['gun'] = True
-            RIG_DATA['rigCaster'] = usr
-            msgCounting = await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
+        # case "gun":
+        #     if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
+        #         await SEND(ch, "no gun imagine lmao")
+        #         return
+        #     ACTIVE_RIGS['gun'] = True
+        #     RIG_DATA['rigCaster'] = usr
+        #     msgCounting = await SEND(ch, usr.mention + " just cast Gun Rig! I was forced to do this.")
         
-        case "impostor":
-            ACTIVE_RIGS['impostor'] = True
-            RIG_DATA['rigCaster'] = usr
-            msgCounting = await SEND(ch, f"{usr.mention} just cast Impostor rig, I guess... ?")
+        # case "impostor":
+        #     ACTIVE_RIGS['impostor'] = True
+        #     RIG_DATA['rigCaster'] = usr
+        #     msgCounting = await SEND(ch, f"{usr.mention} just cast Impostor rig, I guess... ?")
                 
     msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
@@ -238,7 +238,7 @@ async def Rig(rigType, ch, usr):
 
 async def CastRig(rigPick,ch,usr):
 
-    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "gun" and rigPick != "impostor":
+    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
         await SEND(ch, "That is not a valid rig. Try again.")
         return
     
@@ -349,18 +349,18 @@ async def ExecuteSpectreRig(ch,usr, message):
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your Message disappear with a 50% chance.")
     return
 
-async def ExecuteGunRig(ch,usr,message):
-    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles or MORPHABLE_ROLES['Guns'] in usr.roles:
-        return
-    ACTIVE_RIGS["gun"] = False
+# async def ExecuteGunRig(ch,usr,message):
+#     if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles or MORPHABLE_ROLES['Guns'] in usr.roles:
+#         return
+#     ACTIVE_RIGS["gun"] = False
 
-    # shoot message pew pew
+#     # shoot message pew pew
 
-    await MorphTo(usr, "Gun")
-    await SEND(ch, f"{RIG_DATA['rigCaster'].mention}, someone fell for your trap! They are now a gun!")
-    await asyncio.sleep(300)
-    await DemorphFrom(usr, "Gun")
-    return
+#     await MorphTo(usr, "Gun")
+#     await SEND(ch, f"{RIG_DATA['rigCaster'].mention}, someone fell for your trap! They are now a gun!")
+#     await asyncio.sleep(300)
+#     await DemorphFrom(usr, "Gun")
+#     return
 
 async def ExecuteJokerRig(ch,usr, message):
 
@@ -378,20 +378,20 @@ async def ExecuteJokerRig(ch,usr, message):
             
     return
 
-async def ExecuteImpostorRig(ch, usr, message):
-    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
-        return
-    ACTIVE_RIGS['impostor'] = False
+# async def ExecuteImpostorRig(ch, usr, message):
+#     if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
+#         return
+#     ACTIVE_RIGS['impostor'] = False
 
-    if str(usr.id) in list_decoded_entries("Impostor"):
-        await SEND(ch, "You are already ejected! Stubid idiot")
-        return
-    else:
-        await EDIT_NICK(usr, "The Sus")
-        await SEND(ch, f"{usr.mention} has been ejected! L + skill issue + lmao + bad + ratio.")
-        await asyncio.sleep(1)
-        await add_entry_with_check("Impostor", usr)
-        return
+#     if str(usr.id) in list_decoded_entries("Impostor"):
+#         await SEND(ch, "You are already ejected! Stubid idiot")
+#         return
+#     else:
+#         await EDIT_NICK(usr, "The Sus")
+#         await SEND(ch, f"{usr.mention} has been ejected! L + skill issue + lmao + bad + ratio.")
+#         await asyncio.sleep(1)
+#         await add_entry_with_check("Impostor", usr)
+#         return
 
 async def ExecuteSplicerRig(ch,usr):
  

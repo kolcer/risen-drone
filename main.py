@@ -203,6 +203,7 @@ async def on_message(message):
     
     if usr in EX_CLIMBERS:
         await DELETE(message)
+        return
 
     if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
@@ -777,23 +778,23 @@ _[alignment]_ **trivia**
                         await SEND(ch,i)
                         return
 
-            #reactions trigger
-            for i, v in REACT_TRIGGERS.items():
-                if v in lmsg:
-                    await ADD_REACTION(message,i)
-                    return
+            # #reactions trigger
+            # for i, v in REACT_TRIGGERS.items():
+            #     if v in lmsg:
+            #         await ADD_REACTION(message,i)
+            #         return
             
-            # burger trigger
-            if lmsg == '🍔' and not BUTTONS['status']:
-                BUTTONS['status'] = True
-                BUTTONS['channel'] = CHANNELS[ch.name]
-                view = BurgerButton(timeout=50)
-                view.toolate = True
-                view.message = await SEND_VIEW(ch, 'BEHOLD, THE INFINIBURGER!', view)
+            # # burger trigger
+            # if lmsg == '🍔' and not BUTTONS['status']:
+            #     BUTTONS['status'] = True
+            #     BUTTONS['channel'] = CHANNELS[ch.name]
+            #     view = BurgerButton(timeout=50)
+            #     view.toolate = True
+            #     view.message = await SEND_VIEW(ch, 'BEHOLD, THE INFINIBURGER!', view)
 
-                await view.wait()
-                await view.too_late()
-                BUTTONS['status'] = False
+            #     await view.wait()
+            #     await view.too_late()
+            #     BUTTONS['status'] = False
 
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):

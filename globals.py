@@ -118,7 +118,6 @@ RIG_LIST = [
     "hacker",
     "drifter",
     "splicer",
-    "gun",
 ]
 
 LIMITED_USE_RIGS = [
@@ -126,8 +125,6 @@ LIMITED_USE_RIGS = [
     "thief",
     "spectre",
     "splicer",
-    "gun",
-    "impostor",
 ]
 
 # worst guns ever made for the gun role
@@ -265,22 +262,8 @@ WISDOM = [
     # Suggestions from community
     "y - RealBlanket#7739",
     "nah - Amadán#9008",
-    "Balls - Chugnus Amognus",
     "I am unoriginal and cannot come up with a good quote - Xeron#7149",
-    "https://cdn.discordapp.com/attachments/750060041289072771/1094195127909634168/Screen_Shot_2023-04-08_at_11.40.40.png",
-    "|assign 898870303680241674 I was there - frfr#0431",
-    " *|| https://cdn.discordapp.com/attachments/750060041289072771/1095276098935324692/Screen_Shot_2023-04-11_at_11.15.57.png ||* ",
     "That is terrible advice, who writes this stuff? - sleazel#0820",
-    "me - roibrari#2287",
-    "one more commitment and its 1.1k commitments - cashier#6099",
-]
-
-WORD_LIST = [
-    "when the stairs are crazy",
-    "sleazel",
-    "annihilator",
-    "broken drone",
-    "hangman",
 ]
 
 # CONSTANT DICTIONARIES
@@ -337,45 +320,23 @@ SINGLE_WORD_TRIGGERS = {
         'cstrollpain',                  # YOUR MESSAGE
     "{mention} <:csRbxangryping:786325219727638535>":
         '827952429290618943',
-    "You're the one that has no balls.":
-        'no balls',
-    "The only skill issue you have is your capability to try to roast someone. Nice try.":
-        'skill issue',
-    "Oh I like you admitting to being a clown. Just like a Joker!":
-        'bozo',
-    "Oh no you don't. I know that you are bypassing, Nexieus.":
-        'fuсk',
-    "Cease.":
-        'fu*c*k',
-    "You can't bypass. You are a fool.":
-        'f*u*ck',
-    "No.":
-        '*f*uck',
-    "I am getting very pissed off. Stop.":
-        'fuc*k*',
     "It's spelt Thief.":
         "theif",
-    "🏌️‍♂️":
-        "hm",
-    "https://cdn.discordapp.com/emojis/734784926561337497.webp?size=48&name=CH_PepeScared&quality=lossless":
-        "kill",
-    "{mention} we need to cook":
-        "waltuh",
 }
 
-# ^ that but its reactions instead of responses - does not have to be a single word, just a single string
-REACT_TRIGGERS = {
-    "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
-        'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
-    "📮":
-        "among",
-    "👁":
-        "food",
-    "🧢":
-        "best",
-    "🥰":
-        "oreo",
-}
+# # ^ that but its reactions instead of responses - does not have to be a single word, just a single string
+# REACT_TRIGGERS = {
+#     "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
+#         'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
+#     "📮":
+#         "among",
+#     "👁":
+#         "food",
+#     "🧢":
+#         "best",
+#     "🥰":
+#         "oreo",
+# }
 
 # all words need to be present for this trigger to occur
 # but the order of the words does not matter
@@ -402,14 +363,6 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
-    "Sleazel is great!":
-        ['sucks', 'sleazel'],
-    "Let's not suck people, okay?":
-        ['you', 'suck'],
-    "I did actually.":
-        ['who', 'asked'],
-    "No lmao":
-        ['give', 'drone', 'master'],
 }
 
 # first word is required and any of the pool of rest of the words
@@ -444,8 +397,6 @@ COOLDOWN_SELECT = {
     "spectre": "tsj",
     "joker": "tsj",
     "splicer": "tsj",
-    "gun": "gun",
-    "impostor": "gun",
     "archon": "ha",
     "heretic": "ha",
     "patron": "patron",
@@ -460,8 +411,6 @@ RIGS_DESCRIPTION = {
     "spectre": "There's a 50% chance this message will be empty.",
     "joker": "Imagine falling for your own prank.",
     "splicer": "How does it feel to cast an exclusive Rig?",
-    "gun": "Peace is the only way.",
-    "impostor": "Amogus amogus amogus amogus",
     "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
     "archon": "I challenge you to find a typo in this fine sentence.",
     "heretic": "Fell for the oldest trick in the book.",
@@ -479,8 +428,6 @@ COOLDOWN_DURATION = {
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
-    "gun": 600,
-    "impostor": 300,
     "archon": 240,    
     "heretic": 60,
     "wicked": 60,    
@@ -503,8 +450,6 @@ ACTIVE_RIGS = {
     "thief": False,
     "spectre": False,
     "splicer": False,
-    "gun": False,
-    "impostor": False,
 }
 
 RIG_COOLDOWNS = {
@@ -512,7 +457,6 @@ RIG_COOLDOWNS = {
     "tsj": False,
     "ha": False,
     "patron": False,
-    "gun": False,
 }
 
 
@@ -704,14 +648,6 @@ SPECIAL_ROLES = {
         "You were not a chat killer in the first place.",
         "There was an attempt.",
     ],
-    "Shiny": [
-        None,
-        "You can't just morph to shiny! It's rare for a reason!",
-        "You are already pretty sparkly, no need to add more shine to the mix!",
-        "What. you don't have the role... why are you trying to lose it???",
-        "Alright, your loss! ||just kidding||",
-    ],
-
 }
 
 # pingable roles, no custom messages
@@ -801,8 +737,6 @@ BUTTONS = {
     ],
 }
 
-
-
 EXTRA_ROLES = {
     'ckr': 951424560685805588,            # chat killer
     'possessed': 988572669521842197,      # via rig
@@ -831,10 +765,6 @@ def getScoldDictionary(victim, author):
             "I am thankful to my creator, not disappointed.",
         827952429290618943:
             author.mention + " nice try.",
-        828423681914437663:
-            victim.mention + ", I am EXTREMELY disappointed in you. You know why. I do not forget.",
-        805356486960087050:
-            victim.mention + ", I am so disappointed in you... why did you even try bypassing? We all knew it wasn't going to work.",
         author.id:
             author.mention + " are you sad?",
     }
@@ -868,17 +798,10 @@ FG_PLAYERS = {}
 #     }
 # }
 
-# [0]attack    -> [1]damage
-# [0]random    -> [1]min damage             [2]max damage
-# [0]shield    -> [1]percentage protection, [2]number of turns
-# [0]heavy     -> [1]damage,                [2]cooldown
-# [0]special   -> [1]heal,                  [2]damage,                [3]charge hits
-# [0]poison    -> [1]tick damage,           [2]turns,
-# [0]h. poison -> [1]damage,                [2]tick damage,           [3]turns,               [4]cooldown
-# [0]dodge     -> [1]chance                 [2]damage if successful
-# [0]danger    -> [1]damage                 [2]self damage,
-# [0]buff      -> [1]stat buff              [2]percentage buff,       [3]turns
-# [0]debuff    -> [1]stat debuff            [2]percentage debuff,     [3]turns
+# [0]attack
+# [0]defense
+# [0]special
+
 FG_CLASSES = {
     "patron": {"holy blast": 
                ["attack", 20],
