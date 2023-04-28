@@ -397,6 +397,7 @@ async def on_message(message):
                         for badword in blacklist:
                             if badword in theword:
                                 await SEND(ch, "Your word is inappropriate.")
+                                BUTTONS["status"] = False
                                 return
                     
                     await message.delete()
