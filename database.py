@@ -23,8 +23,6 @@ async def add_entry_with_check(key, new_entry):
     if roleCounter == 0:
         await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
 
-    roleCounter = 0
-
     db.rpush(key,new_entry.id)
 
 def delete_key(key):

@@ -571,12 +571,8 @@ FUN_ROLES = [
     "Heretic Defier",
     "Architect Design",
     "Pranked the Creator",
-    "I was there",
-    "Zero",
     "Optimus",
     "Wise",
-    "Impostor",
-    "Persistent Clicker",
     "Lucky Button",
     "Last One",
     "Broken Drone Helper",
@@ -586,6 +582,7 @@ LIMITED_ROLES = {
     "I was there": "*(11/27/2022 - 11/28/2022)*",
     "Zero": "*(03/31/2023 - 04/19/2023)*",
     "Persistent Clicker": "*(04/18/2023 - 04/19/2023)*",
+    "Impostor": "*(04/11/2024 - 04/28/2023)"
 }
 
 APPROVED_ROLES = {

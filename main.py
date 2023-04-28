@@ -6,6 +6,7 @@ import random
 import asyncio
 import requests 
 import re
+import profanity_check
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -390,6 +391,10 @@ async def on_message(message):
                         await SEND(ch, "Your word is too long.")
                         BUTTONS["status"] = False
                         return
+                    elif profanity_check.predict_prob([theword]) >= 0.5:
+                        await SEND(ch, "Your word is inappropriate.")
+                        BUTTONS["status"] = False
+                        return                  
                     
                     await message.delete()
                     view.myword = theword.lower()
@@ -521,8 +526,6 @@ async def on_message(message):
             # Prepare list to show in PAGE 1 (secret roles)
             secret_roles = ""
             for role in FUN_ROLES:
-                if role in LIMITED_ROLES:
-                    continue
                 view.totsroles += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.sroles += 1
@@ -534,9 +537,7 @@ async def on_message(message):
 
             # Prepare list to show in PAGE 2 (locked roles)
             locked_roles = ""
-            for role in FUN_ROLES:
-                if role not in LIMITED_ROLES:
-                    continue
+            for role in LIMITED_ROLES.keys():
                 view.totlroles += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.lroles += 1
