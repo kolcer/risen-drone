@@ -6,7 +6,6 @@ import random
 import asyncio
 import requests 
 import re
-import joblib
 import profanity_check
 #from datetime import date
 from difflib import SequenceMatcher
