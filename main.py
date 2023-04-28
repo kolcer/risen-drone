@@ -6,9 +6,9 @@ import random
 import asyncio
 import requests 
 import re
-import profanity_check
 #from datetime import date
 from difflib import SequenceMatcher
+from profanity_check import predict_prob
 
 from globals import *
 from roles import *
@@ -391,7 +391,7 @@ async def on_message(message):
                         await SEND(ch, "Your word is too long.")
                         BUTTONS["status"] = False
                         return
-                    elif profanity_check.predict_prob([theword]) >= 0.5:
+                    elif predict_prob([theword]) >= 0.5:
                         await SEND(ch, "Your word is inappropriate.")
                         BUTTONS["status"] = False
                         return                  
