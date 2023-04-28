@@ -8,7 +8,6 @@ import requests
 import re
 #from datetime import date
 from difflib import SequenceMatcher
-from profanity_check import predict_prob
 
 from globals import *
 from roles import *
@@ -34,6 +33,9 @@ client = discord.Client(intents=intents)
 
 with open('hangman.txt') as input_file:
     word_list = [line.strip() for line in input_file]
+
+with open('blacklist.txt') as input_file:
+    blacklist = [line.strip() for line in input_file]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -391,7 +393,7 @@ async def on_message(message):
                         await SEND(ch, "Your word is too long.")
                         BUTTONS["status"] = False
                         return
-                    elif predict_prob([theword]) >= 0.5:
+                    elif [string in theword for string in blacklist]:
                         await SEND(ch, "Your word is inappropriate.")
                         BUTTONS["status"] = False
                         return                  
