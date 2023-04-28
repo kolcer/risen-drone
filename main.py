@@ -376,7 +376,7 @@ async def on_message(message):
             view.picker = None
             view.alone = False
             view.players = {}
-            view.results = ""
+            view.results = "" 
 
             if theword == "alone":
                 view.cp = usr
