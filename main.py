@@ -393,7 +393,7 @@ async def on_message(message):
                         await SEND(ch, "Your word is too long.")
                         BUTTONS["status"] = False
                         return
-                    elif [string in theword for string in blacklist]:
+                    elif [string in [theword] for string in blacklist]:
                         await SEND(ch, "Your word is inappropriate.")
                         BUTTONS["status"] = False
                         return                  
