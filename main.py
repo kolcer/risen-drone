@@ -393,10 +393,11 @@ async def on_message(message):
                         await SEND(ch, "Your word is too long.")
                         BUTTONS["status"] = False
                         return
-                    elif [string in [theword] for string in blacklist]:
-                        await SEND(ch, "Your word is inappropriate.")
-                        BUTTONS["status"] = False
-                        return                  
+                    else:
+                        for badword in blacklist:
+                            if badword in theword:
+                                await SEND(ch, "Your word is inappropriate.")
+                                break
                     
                     await message.delete()
                     view.myword = theword.lower()
