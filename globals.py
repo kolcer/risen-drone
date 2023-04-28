@@ -566,7 +566,7 @@ MORPHABLE_ROLES = {
 }
 
 FUN_ROLES = [
-    "Sanctuary Discoverer",
+    "Sanctuary Discoverer", 
     "Splicer",
     "Heretic Defier",
     "Architect Design",
