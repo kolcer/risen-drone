@@ -597,7 +597,17 @@ class FifthButton(discord.ui.View):
                 self.status += "🟩"
 
         if self.lifes > 0:
-            self.status += "<:csStairbonk:812813052822421555>" 
+            self.status += "<:csStairbonk:812813052822421555>"
+            self.current = ""
+            for i in self.myword:
+                if str(i).lower() in self.revealed:
+                    self.current += str(i).upper()
+                else:
+                    if str(i) != " ":
+                        self.current += "_"
+                    else:
+                        self.current += " "
+            self.current += f" {len(self.myword)}"
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
