@@ -196,7 +196,7 @@ WISDOM = [
     "If you are hungry... eat food.",
     "There are many minigames that you can play using `play [minigame name]`. I won't play any of them with you.",
     "The best game on roblox is Crazy Stairs.",
-    "I was going to say something... but someone already said it. Now figure out who, what, and when it was said!",
+    "I was going to say something... but someone already said it. Now figure out who said it, what it was, and when it was said!",
     "Wisdom found by playing this --> https://www.roblox.com/games/2418401851/Crazy-Stairs-VR",
     "React with burger emoji. Frfr. ⛔️🧢. Ong.",
     "Type `morph to gun` in <#750060041289072771>",
