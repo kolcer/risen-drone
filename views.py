@@ -567,6 +567,7 @@ class FifthButton(discord.ui.View):
                     self.current += "_"
                 else:
                     self.current += " "
+        self.current += f" {len(self.myword)}"
 
         await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self)
 
