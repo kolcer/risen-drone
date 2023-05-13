@@ -416,7 +416,7 @@ async def on_message(message):
         
             for i in view.myword:
                 if str(i) != " ":
-                    view.current += "_"
+                    view.current += "-"
                 else:
                     view.current += " "
 

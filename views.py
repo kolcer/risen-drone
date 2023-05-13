@@ -564,14 +564,13 @@ class FifthButton(discord.ui.View):
                 self.current += str(i).upper()
             else:
                 if str(i) != " ":
-                    self.current += "_"
+                    self.current += "-"
                 else:
                     self.current += " "
-        self.current += f" {len(self.myword)}"
 
         await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self)
 
-        if "_" not in self.current:
+        if "-" not in self.current:
             # best_user = max(self.players, key=lambda user: len(self.players[user]))
             max_length = max(len(guesses) for guesses in self.players.values())
             best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
@@ -595,19 +594,6 @@ class FifthButton(discord.ui.View):
                 self.status += "🟧"
             else:
                 self.status += "🟩"
-
-        if self.lifes > 0:
-            self.status += "<:csStairbonk:812813052822421555>"
-            self.current = ""
-            for i in self.myword:
-                if str(i).lower() in self.revealed:
-                    self.current += str(i).upper()
-                else:
-                    if str(i) != " ":
-                        self.current += "_"
-                    else:
-                        self.current += " "
-            self.current += f" {len(self.myword)}"
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
