@@ -773,6 +773,8 @@ _[alignment]_ **trivia**
                         await SEND(ch,i)
                         return
 
+            # reaction triggers need to come back pls you can sacrifice the burger
+
             # #reactions trigger
             # for i, v in REACT_TRIGGERS.items():
             #     if v in lmsg:
