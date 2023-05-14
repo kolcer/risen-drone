@@ -324,19 +324,38 @@ SINGLE_WORD_TRIGGERS = {
         "theif",
 }
 
-# # ^ that but its reactions instead of responses - does not have to be a single word, just a single string
-# REACT_TRIGGERS = {
-#     "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
-#         'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
-#     "📮":
-#         "among",
-#     "👁":
-#         "food",
-#     "🧢":
-#         "best",
-#     "🥰":
-#         "oreo",
-# }
+# ^ that but its reactions instead of responses - does not have to be a single word, just a single string
+REACT_TRIGGERS = {
+    "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
+        'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
+    "📮":
+        "among",
+    "<:csPatron:758081038697103504>":
+        'patron',
+    "<:csJoker:758081245157654599>":
+        'joker',
+    "<:csWicked:792143453035167754>":
+        'wicked',
+    "<:csSpectre:1046200431342272512>":
+        'spectre',
+    "<:csMuggle:758081353932603414>":
+        'muggle',
+    "<:csChameleon:1046200390678483045>":
+        'chameleon',
+    "<:csKeeper:758081314912993283>":
+        'keeper',
+    "<:csThief:758081386203840644>":
+        'thief',
+    "<:csHacker:758081540063494288>":
+        'hacker',
+    "<:csHeretic:786323224115281921>":
+        'heretic',
+    "<:csArchon:786323402172530688>":
+        'archon',
+    "<:csDrifter:786323335880507483>":
+        'drifter',
+    
+}
 
 # all words need to be present for this trigger to occur
 # but the order of the words does not matter

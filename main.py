@@ -773,25 +773,13 @@ _[alignment]_ **trivia**
                         await SEND(ch,i)
                         return
 
-            # reaction triggers need to come back pls you can sacrifice the burger
-
-            # #reactions trigger
-            # for i, v in REACT_TRIGGERS.items():
-            #     if v in lmsg:
-            #         await ADD_REACTION(message,i)
-            #         return
+            # sacrificed burger
+            # reaction triggers
+            for i, v in REACT_TRIGGERS.items():
+                 if v in lmsg:
+                     await ADD_REACTION(message,i)
+                     return
             
-            # # burger trigger
-            # if lmsg == '🍔' and not BUTTONS['status']:
-            #     BUTTONS['status'] = True
-            #     BUTTONS['channel'] = CHANNELS[ch.name]
-            #     view = BurgerButton(timeout=50)
-            #     view.toolate = True
-            #     view.message = await SEND_VIEW(ch, 'BEHOLD, THE INFINIBURGER!', view)
-
-            #     await view.wait()
-            #     await view.too_late()
-            #     BUTTONS['status'] = False
 
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
