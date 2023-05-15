@@ -5,7 +5,7 @@ from globals import *
 from rated import *
 from database import *
 
-# class QuestionView(discord.ui.View):  
+# class QuestionView(discord.ui.View):
 #     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
 #         self.answer1 = select_item.values
 #         self.children[0].disabled= True
