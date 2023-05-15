@@ -329,8 +329,6 @@ SINGLE_WORD_TRIGGERS = {
 REACT_TRIGGERS = {
     "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
         'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
-    "📮":
-        "among",
     "<:csPatron:758081038697103504>":
         'patron',
     "<:csJoker:758081245157654599>":
