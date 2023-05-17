@@ -594,6 +594,9 @@ class FifthButton(discord.ui.View):
                 self.status += "🟧"
             else:
                 self.status += "🟩"
+                
+        if self.lifes > 0:
+            self.status += "<:csStairbonk:812813052822421555>" 
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
