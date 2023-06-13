@@ -284,7 +284,7 @@ async def ExecuteThiefRig(ch,usr):
 
     tooLong = False
             
-    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Guns"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
                
     if len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
@@ -377,21 +377,6 @@ async def ExecuteJokerRig(ch,usr, message):
     await SEND(ch, str(msgcontent) + " - " + ":nerd: :clown:\nFrom: " + usr.mention)
             
     return
-
-# async def ExecuteImpostorRig(ch, usr, message):
-#     if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or not EXTRA_ROLES['climber'] in usr.roles:
-#         return
-#     ACTIVE_RIGS['impostor'] = False
-
-#     if str(usr.id) in list_decoded_entries("Impostor"):
-#         await SEND(ch, "You are already ejected! Stubid idiot")
-#         return
-#     else:
-#         await EDIT_NICK(usr, "The Sus")
-#         await SEND(ch, f"{usr.mention} has been ejected! L + skill issue + lmao + bad + ratio.")
-#         await asyncio.sleep(1)
-#         await add_entry_with_check("Impostor", usr)
-#         return
 
 async def ExecuteSplicerRig(ch,usr):
  
