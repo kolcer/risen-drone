@@ -380,7 +380,7 @@ async def ExecuteJokerRig(ch,usr, message):
 
 async def ExecuteSplicerRig(ch,usr):
  
-    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or rigImmunity(usr, RIG_DATA['rigCaster']):
+    if ch.name not in CHANNELS or not EXTRA_ROLES['climber'] in usr.roles or (MORPHABLE_ROLES["Guns"][0] in usr.roles) or rigImmunity(usr, RIG_DATA['rigCaster']):
         return
                 
     ACTIVE_RIGS["splicer"] = False
