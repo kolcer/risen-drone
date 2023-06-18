@@ -141,7 +141,7 @@ async def on_member_update(before, after):
         if str(after.nick).endswith(':]'):
             await add_entry_with_check(":]", after)
             await asyncio.sleep(1)
-            await SEND(CHANNELS['bot-commands'], f"Nicely done {after.mention}, the :] cult welcomes you.")
+            await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
     
     #for thief rig
     if before in NickDictionary and after.nick != NickDictionary[before]:
