@@ -594,6 +594,7 @@ FUN_ROLES = [
     "Lucky Button",
     "Last One",
     "Broken Drone Helper",
+    ":]",
 ]
 
 LIMITED_ROLES = {

@@ -136,6 +136,13 @@ async def on_member_update(before, after):
     if before.nick == after.nick:
         return
     
+    #if name ends with :] gives the role
+    if not str(after.id) in list_decoded_entries(":]"):
+        if str(after.nick).endswith(':]'):
+            await add_entry_with_check(":]", after)
+            await asyncio.sleep(1)
+            await SEND(CHANNELS['testing'], f"Nicely done {after.mention}, the :] cult welcomes you.")
+    
     #for thief rig
     if before in NickDictionary and after.nick != NickDictionary[before]:
       await EDIT_NICK(after, NickDictionary[before])
