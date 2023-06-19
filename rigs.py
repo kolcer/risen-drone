@@ -215,10 +215,10 @@ async def Rig(rigType, ch, usr):
         #     RIG_DATA['rigCaster'] = usr
         #     msgCounting = await SEND(ch, f"{usr.mention} just cast Impostor rig, I guess... ?")
                 
-    msgCountingContent = msgCounting.content
     theCooldown = COOLDOWN_DURATION[rigType]
 
     if rigType != "archon":
+        msgCountingContent = msgCounting.content
         await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
 
     await asyncio.sleep(theCooldown)
