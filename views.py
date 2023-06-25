@@ -226,7 +226,6 @@ class SecondButton(discord.ui.View):
             BUTTONS["phase"] = 3
             self.stop()
         else:
-            await interaction.response.defer()
             if self.pressed > len(BUTTONS["phase2labels"]) - 1:
                 button.label = BUTTONS["phase2labels"][10]
                 await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
@@ -238,6 +237,7 @@ class SecondButton(discord.ui.View):
 
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+            await interaction.response.defer()
 
     @discord.ui.button(label="Button", custom_id = "1",  style = discord.ButtonStyle.blurple)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
