@@ -368,6 +368,10 @@ MIXED_WORD_TRIGGERS = {
         'drone',
         ["dead", "down", "off", "vacation", "sleep"],
     ],    
+    "Type `morph to [alignment]` in ⁠bot-commands.\nType `fd help` for the full list of commands.": [
+        'role',
+        ["have", "get", "receive", "give myself", "obtain"],
+    ], 
 }
 
 SANCTUARY = {
