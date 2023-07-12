@@ -207,10 +207,9 @@ WISDOM = [
     "Never stop learning. There is always something new to discover and explore.",      
     "Don't be afraid to take risks and try new things. You never know what amazing opportunities may come your way.",
     "The only way to do great work is to love what you do. Keep searching, you'll find your dream job soon!",
-    "Every day is a gift. Unless it's your birthday, in which case, every day is a present.",
     "I do not have a receipe for success, but I do have one for failure - Try to make everyone happy.",
     "World is filled with brilliant people who have the best intentions to start working on their big project... tomorrow.",
-     # Sarcastic Responses
+    # Sarcastic Responses
     "Remember, true strength lies not in winning every battle, but in persevering through every challenge. (Literally the same exact thing.)",
     "One of the keys to happiness is finding joy in the little things. Take a moment to appreciate how ugly you could have been.",
     "Success is not final, failure is not fatal: It is the courage to continue that counts. I can also count. 1, 1, 2, 3, 5, 8, 13, 21, 34",
@@ -250,21 +249,23 @@ WISDOM = [
     "Do not give up after the first attempt, try again. Otherwise, try pretending that you never tried in the first place. It's a great way to save face.",
     # Secret Role Hints!
     "Psst, want to know a secret? To unlock one of the coveted secret roles, you just need to send a certain emoji four times in a row!",
-    "If you're looking to get a secret role, there's a little trick to it. You'll need to cast the Hacker Rig and if you happen to get all zeros, then boom - the secret role is yours. Good luck though. 1/256. I'm sorry jeff",
     "Don't forget to keep chatting and engaging with the community... you never know what surprises await you.",
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
-    "Cheating is not necessarily bad...",
-    "You know, Drone Masters can give the secret roles by typing |assign...",
-    "Cheating is based.",
     "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.",
     "Wisdom can grant roles.",
+    "I love buttons.",
     # Suggestions from community
     "y - RealBlanket#7739",
     "nah - Amadán#9008",
     "I am unoriginal and cannot come up with a good quote - Xeron#7149",
     "That is terrible advice, who writes this stuff? - sleazel#0820",
+]
+
+REDEMPTION = [
+    False,
+    False,
 ]
 
 # CONSTANT DICTIONARIES
@@ -465,6 +466,7 @@ COOLDOWN_DESCRIPTIONS = {
     "gun": "<:csThegun:786629172101513216> cooldown: ",
 }
 
+
 # this roles can be assigned via a morph to command
 # at 0 index we will put a role object during the login proccess.
 # make sure indexes match role name in the server!
@@ -574,6 +576,7 @@ FUN_ROLES = [
     "Last One",
     "Broken Drone Helper",
     ":]",
+    "Forgiven",
 ]
 
 LIMITED_ROLES = {

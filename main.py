@@ -589,8 +589,25 @@ async def on_message(message):
 
             await SEND(ch, "Redeeming yourself? Alright.")
             await asyncio.sleep(2)
-            await SEND(ch, random.choice(REVIVE_CHAT))
+
             CHAT_KILLER['reviveChat'] = False
+
+            if EXTRA_ROLES['ckr'].name == 'Ultimate Chat Killer':
+                REDEMPTION[0] = True
+            elif EXTRA_ROLES['ckr'].name == 'Professional Chat Murderer':
+                REDEMPTION[1] = True
+            elif EXTRA_ROLES['ckr'].name == 'The Awkward One':
+                if REDEMPTION[0] == True and REDEMPTION[0] == True:
+                    REDEMPTION[0] = False
+                    REDEMPTION[1] = False
+                    if not str(usr.id) in list_decoded_entries("Forgiven"):
+                        await add_entry_with_check("Forgiven", usr)
+                        await asyncio.sleep(1)
+                        await SEND(ch, f"You are forgiven for killing the chat so many times.")
+                        return
+
+            await SEND(ch, random.choice(REVIVE_CHAT))
+
  
         ## Splicer role assignment
         elif "<:cssplicer:988948000200069191>" in lmsg:
