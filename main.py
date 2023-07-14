@@ -702,7 +702,7 @@ _[alignment]_ **trivia**
 ➡️ A fun command to mess around in the server
 
 **play lucid ladders**
-➡️ Start Lucid Ladders mini game (requires at least 2 playres)
+➡️ Start Lucid Ladders mini game (requires at least 2 players)
 
 **start quiz**
 ➡️ Start Crazy Stairs knowledge quiz (2 players required)
