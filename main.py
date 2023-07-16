@@ -182,8 +182,9 @@ async def on_reaction_add(reaction, user):
         if NOT_SLEAZEL[0] == False:
             NOT_SLEAZEL[0] = True
             if reaction.message.channel.id != 1001034407966150746:
-                await SEND(reaction.message.channel, f"{user.name} you are not Sleazel. Drop the act.")
-            await asyncio.sleep(200)
+                await print(f'Psst. It was {user.name}. They were impersonating Sleazel!')
+                await SEND(reaction.message.channel, f"You are not Sleazel. Drop the act.")
+            await asyncio.sleep(300)
             NOT_SLEAZEL[0] = False
         return
 
