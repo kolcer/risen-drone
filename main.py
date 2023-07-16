@@ -179,11 +179,11 @@ async def on_raw_reaction_add(payload):
     reaction = payload.emoji
     user = payload.member
 
-    if (str(reaction.emoji) == "<:csSleazelApproves:791393163343560715>" or str(reaction.emoji) == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861 and user.id != 827952429290618943:
+    if (str(reaction) == "<:csSleazelApproves:791393163343560715>" or str(reaction) == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861 and user.id != 827952429290618943:
         await reaction.remove(user)
         if NOT_SLEAZEL[0] == False:
             NOT_SLEAZEL[0] = True
-            if reaction.message.channel.id != 1001034407966150746:
+            if payload.message.channel.id != 1001034407966150746:
                 await SEND(reaction.message.channel, f"{user.name} you are not Sleazel. Drop the act.")
             await asyncio.sleep(200)
             NOT_SLEAZEL[0] = False
