@@ -119,8 +119,8 @@ async def Rig(rigType, ch, usr):
                    # return
             await ADD_ROLES(usr, EXTRA_ROLES['possessed'])
             await asyncio.sleep(1)
-            await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
-                       "\nMaybe someone could give you some Mana?")
+            msgCounting = await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
+                            "\nMaybe someone could give you some Mana?")
             await asyncio.sleep(60)
             await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
             
