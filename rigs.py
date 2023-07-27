@@ -104,6 +104,7 @@ async def Rig(rigType, ch, usr):
 
     await updateRigTracker(rigType)
     messageAppend = "."
+    msgCountingContent = ""
     match rigType:
         
         case "heretic":
@@ -121,6 +122,8 @@ async def Rig(rigType, ch, usr):
             await asyncio.sleep(1)
             msgCounting = await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
                             "\nMaybe someone could give you some Mana?")
+            msgCountingContent = msgCounting.content
+            await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + 120)}:R>")
             await asyncio.sleep(60)
             await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
             
@@ -217,7 +220,7 @@ async def Rig(rigType, ch, usr):
                 
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    if rigType != "archon":
+    if rigType != "archon" and rigType != "heretic":
         msgCountingContent = msgCounting.content
         await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
 
