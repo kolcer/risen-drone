@@ -172,6 +172,10 @@ WORST_GUNS = [
     "Colt Python",
     "Remington EtronX Rifle",
     "Winchester Model 59",
+    ":] Gun",
+    "Heretic but gun",
+    "Mandatory Sleazel Gun",
+    "Im out of ideas",
 ]
 
 MG_SPELLS = [
