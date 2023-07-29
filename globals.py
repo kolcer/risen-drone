@@ -210,9 +210,10 @@ WISDOM = [
     "It's important to surround yourself with positive influences. Who you spend time with can greatly influence your life.",  
     "Never stop learning. There is always something new to discover and explore.",      
     "Don't be afraid to take risks and try new things. You never know what amazing opportunities may come your way.",
-    "The only way to do great work is to love what you do. Keep searching, you'll find your dream job soon!",
+    "The only way to do great work is to love what you do. Play Keeper, everyone loves it! Even Sleazel!",
     "I do not have a receipe for success, but I do have one for failure - Try to make everyone happy.",
     "World is filled with brilliant people who have the best intentions to start working on their big project... tomorrow.",
+    "I LOVE SLEAZEL :D :D :D :D (and oreos but I love SLEAZEL more)"
     # Sarcastic Responses
     "Remember, true strength lies not in winning every battle, but in persevering through every challenge. (Literally the same exact thing.)",
     "One of the keys to happiness is finding joy in the little things. Take a moment to appreciate how ugly you could have been.",
@@ -257,14 +258,14 @@ WISDOM = [
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
-    "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.",
+    # "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.", || what secret role was this for?
     "Wisdom can grant roles.",
     "I love buttons.",
     # Suggestions from community
-    "y - RealBlanket#7739",
-    "nah - Amadán#9008",
-    "I am unoriginal and cannot come up with a good quote - Xeron#7149",
-    "That is terrible advice, who writes this stuff? - sleazel#0820",
+    "y - realblanket",
+    "nah - justk1nz3r",
+    "I am unoriginal and cannot come up with a good quote - Xeron",
+    "That is terrible advice, who writes this stuff? - sleazel (i love sleazel)",
 ]
 
 REDEMPTION = [
@@ -347,13 +348,13 @@ MULTIPLE_WORD_TRIGGERS = {
         ['stuck', 'stairs'],
     "I fell and broke, okay?":
         ['break', 'drone', 'how', "?"],
-    "Are you expecting me to answer with None?": 
+    "Are you expecting me to answer with None? It's Chameleon.": 
         ['worst', 'alignment', '?'], 
-    "Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
+    "The Muggle Tower project has been cancelled. You can simulate it by managing the settings of a Custom Tower, instead.":
         ['when', 'muggle', 'tower', '?'], 
     "Thanks.":
         ['good', 'drone'], 
-    "Nobody is perfect. Robots included.":
+    "Nobody is perfect. Drones included.":
         ['bad', 'drone'],
     "Not on my watch.": 
         ['dead', 'chat'],
