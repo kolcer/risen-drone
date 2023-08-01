@@ -571,6 +571,12 @@ async def on_message(message):
             if lastrig.lower().replace(" rig", "") == "spectre":
                 view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
+            if EXTRA_ROLES["admin"] in target.roles:           
+                view.data[0] = 'Empty...'
+                view.data[1] = 'Empty...'
+                view.footers[0] = "This person knows how to get the roles, what's the point?"
+                view.footers[1] = "Nothing to see here."
+
             # Send view... hopefully
             await view.send(ch)
             await view.wait()

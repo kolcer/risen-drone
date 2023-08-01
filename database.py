@@ -1,7 +1,7 @@
 import redis
 import os
 import random
-from globals import FUN_ROLES, CHANNELS
+from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES
 from rated import SEND
 
 # Set up the data base
@@ -13,17 +13,18 @@ def add_entry(key, new_entry):
     db.rpush(key,new_entry)
 
 async def add_entry_with_check(key, new_entry):
-    roleCounter = 0
+    if not EXTRA_ROLES["admin"] in new_entry.roles:
+        roleCounter = 0
 
-    for role in FUN_ROLES:
-        if str(new_entry.id) in list_decoded_entries(role):
-            roleCounter += 1 
-            break
+        for role in FUN_ROLES:
+            if str(new_entry.id) in list_decoded_entries(role):
+                roleCounter += 1 
+                break
 
-    if roleCounter == 0:
-        await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
+        if roleCounter == 0:
+            await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
 
-    db.rpush(key,new_entry.id)
+        db.rpush(key,new_entry.id)
 
 def delete_key(key):
     db.delete(key)
