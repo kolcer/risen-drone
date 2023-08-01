@@ -266,6 +266,7 @@ WISDOM = [
     "nah - justk1nz3r",
     "I am unoriginal and cannot come up with a good quote - Xeron",
     "That is terrible advice, who writes this stuff? - sleazel (i love sleazel)",
+    "Never trim the hedge on a shoulder day.",
 ]
 
 REDEMPTION = [
