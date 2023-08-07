@@ -532,7 +532,7 @@ async def on_message(message):
                     view.sroles += 1
                     secret_roles += "**" + str(role) + "**\n"
                 else:
-                    secret_roles += "**???**\n"
+                    secret_roles += "**???**\n" 
             view.data[0] = secret_roles
             view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.sroles == view.totsroles else "{scurrent} out of {stotal} secret roles."
 
