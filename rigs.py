@@ -120,7 +120,7 @@ async def Rig(rigType, ch, usr):
                    # return
             await ADD_ROLES(usr, EXTRA_ROLES['possessed'])
             await asyncio.sleep(1)
-            msgCounting = await SEND(ch,"You cast Heretic Rig but forgot to unlock Unbeliever rank first and ended up getting Possessed..."
+            msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                             "\nMaybe someone could give you some Mana?")
             msgCountingContent = msgCounting.content
             await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + 120)}:R>")
@@ -134,12 +134,12 @@ async def Rig(rigType, ch, usr):
                     role_list.append(role)
             #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
             await usr.remove_roles(*role_list)       
-            msgCounting = await SEND(ch, "You cast Wicked Rig but forgot to unlock Devil rank first and ended up purging all your roles!")
+            msgCounting = await SEND(ch, "You cast Wicked Rig and the Devil took your roles away! Beg for forgiveness to claim them back.")
          
         case "drifter":
             im = usr.display_name[::-1]
             await EDIT_NICK(usr, im)
-            msgCounting = await SEND(ch, "You cast Drifter Rig but forgot to unlock Voyager rank first and now your name is reversed...")
+            msgCounting = await SEND(ch, "You cast Drifter Rig but you were looking the other way, causing your name to be reversed...")
             
         case "archon":
             if ch.name not in CHANNELS:
@@ -163,7 +163,7 @@ async def Rig(rigType, ch, usr):
             for i in range(8):
                 temp = str(random.randint(0, 1))
                 im += temp
-            msgCounting = await SEND(ch, "You cast Hacker Rig an- anddd##dddddddd#############")
+            msgCounting = await SEND(ch, "You cast Hacker Rig an- ####01111001###01101111###01110101#01110010#00100000#01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000#01101110#01101111#01110111#00100000#01101001#01101110#00100000#01100010#01101001#01101110#01100001#01110010#01111001#00100000#01100011#01101111#01100100#01100101#00100001")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
             if usr.display_name == '00000000':
