@@ -264,9 +264,10 @@ WISDOM = [
     # Suggestions from community
     "y - realblanket",
     "nah - justk1nz3r",
-    "I am unoriginal and cannot come up with a good quote - Xeron",
+    "I am unoriginal and cannot come up with a good quote - Xeribloom",
     "That is terrible advice, who writes this stuff? - sleazel (i love sleazel)",
     "Never trim the hedge on a shoulder day.",
+    "Yay! >w< - funkykidgaming9999",
 ]
 
 REDEMPTION = [
