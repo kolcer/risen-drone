@@ -743,11 +743,12 @@ BUTTONS = {
 }
 
 EXTRA_ROLES = {
-    'ckr': 951424560685805588,            # chat killer
-    'possessed': 988572669521842197,      # via rig
-    'admin': 993446701090222160,          # aka Drone Master (not a discord admin)
-    'murdurator': 735225462405464125,     # discord server moderator
-    'climber': 735410759206568047,        # climber (consider adding manually verified)
+    'ckr': 951424560685805588,              # chat killer
+    'possessed': 988572669521842197,        # via rig
+    'admin': 993446701090222160,            # aka Drone Master (not a discord admin)
+    'murdurator': 735225462405464125,       # discord server moderator
+    'climber': 735410759206568047,          # climber (consider adding manually verified) - ok
+    'manuallyverified': 820521310278516739, # manually assigned climber
 }
 
 CHAT_KILLER = {
