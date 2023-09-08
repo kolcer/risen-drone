@@ -31,6 +31,9 @@ def PrepareRoles(roles):
         if role.id == EXTRA_ROLES['climber']:
             EXTRA_ROLES['climber'] = role
             SPECIAL_ROLES["Climber"][0] = role
+        #manually verified
+        if role.id == EXTRA_ROLES['manuallyverified']:
+            EXTRA_ROLES['manuallyverified'] = role
         #architect
         if role.name == "Architect (Booster)":
             SPECIAL_ROLES["Architect"][0] = role
