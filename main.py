@@ -644,11 +644,12 @@ async def on_message(message):
                 THE_DRIP[usr] = 1
 
         #resurrect chat
-        elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in msg.author.roles:
+        elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
             NECROMANCY['awarded'] = True
             UPDATE_NECRO()
             for member in EXTRA_ROLES['necromancer'].members:
-                await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
+                if usr.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
+                    await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
             await SEND(ch, f"**{usr.name}** has just became a Necromancer and resurrected the chat.")
             await asyncio.sleep(5)
             await ADD_ROLES(msg.author,EXTRA_ROLES['necromancer'])
