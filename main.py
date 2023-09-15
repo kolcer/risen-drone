@@ -571,7 +571,7 @@ async def on_message(message):
             if lastrig.lower().replace(" rig", "") == "spectre":
                 view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
-            if EXTRA_ROLES["admin"] in target.roles:           
+            if target.id in GIT_COMMITTERS.values():           
                 view.data[0] = 'Empty...'
                 view.data[1] = 'Empty...'
                 view.footers[0] = "This person knows how to get the roles, what's the point?"

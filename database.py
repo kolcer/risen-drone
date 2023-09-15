@@ -1,7 +1,7 @@
 import redis
 import os
 import random
-from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES
+from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES, GIT_COMMITTERS
 from rated import SEND
 
 # Set up the data base
@@ -13,7 +13,7 @@ def add_entry(key, new_entry):
     db.rpush(key,new_entry)
 
 async def add_entry_with_check(key, new_entry):
-    if not EXTRA_ROLES["admin"] in new_entry.roles:
+    if new_entry.id in GIT_COMMITTERS.values():
         roleCounter = 0
 
         for role in FUN_ROLES:
