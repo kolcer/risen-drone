@@ -649,7 +649,7 @@ async def on_message(message):
             UPDATE_NECRO()
             for member in EXTRA_ROLES['necromancer'].members:
                 await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
-            await SEND(ch, f"**{usr.name}** has just became a Necromancer and ressurected the chat.")
+            await SEND(ch, f"**{usr.name}** has just became a Necromancer and resurrected the chat.")
             await asyncio.sleep(5)
             await ADD_ROLES(msg.author,EXTRA_ROLES['necromancer'])
             await asyncio.sleep(1)
