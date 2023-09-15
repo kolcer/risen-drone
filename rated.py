@@ -15,6 +15,9 @@ def GET_EMOJI(client,id):
 def UPDATE_CKR():
     EXTRA_ROLES['ckr'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['ckr'].id)
 
+def UPDATE_NECRO():
+    EXTRA_ROLES['necromancer'] = SERVER_DATA['server'].get_role(EXTRA_ROLES['necromancer'].id)
+
 # rate limited functions
 
 #get message

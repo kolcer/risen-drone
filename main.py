@@ -643,6 +643,17 @@ async def on_message(message):
             else:
                 THE_DRIP[usr] = 1
 
+        #resurrect chat
+        elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in msg.author.roles:
+            NECROMANCY['awarded'] = True
+            UPDATE_NECRO()
+            for member in EXTRA_ROLES['necromancer'].members:
+                await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
+            await SEND(ch, f"**{usr.name}** has just became a Necromancer and ressurected the chat.")
+            await asyncio.sleep(5)
+            await ADD_ROLES(msg.author,EXTRA_ROLES['necromancer'])
+            await asyncio.sleep(1)
+           
         #morph command
         elif lmsg.startswith("morph to"):
             morphToTarget = lsplit[2].capitalize()

@@ -23,6 +23,11 @@ def PrepareRoles(roles):
             EXTRA_ROLES['ckr'] = role
             SPECIAL_ROLES["Ultimate"][0] = role
             continue
+        #necromancer
+        if role.id == EXTRA_ROLES['necromancer']:
+            EXTRA_ROLES['necromancer'] = role
+            SPECIAL_ROLES['Necromancer'][0] = role
+            continue
         #possessed (for the rig)
         if role.id == EXTRA_ROLES['possessed']:
             EXTRA_ROLES['possessed'] = role
@@ -141,6 +146,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
             #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo(?)
             CHAT_KILLER['reviveChat'] = True
+            NECROMANCY['awarded'] = False
             print("new chat killer")
             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
             UPDATE_CKR()
@@ -160,12 +166,14 @@ async def WAIT_FOR_CHAT_KILLER(msg):
             CHAT_KILLER['reviveChat'] = True
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+                NECROMANCY['awarded'] = False
                 await SEND(CHANNELS["general"], msg.author.mention + " this is infinitely saddening. Nobody wants to talk with you.")
                 await asyncio.sleep(1)
 
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "The Awkward One", "Awkward.")
 
             if EXTRA_ROLES['ckr'].name == "Ultimate Chat Killer":
+                NECROMANCY['awarded'] = False
                 await SEND(CHANNELS["general"], msg.author.mention + " I must insist. I am here for you if you wish.")
                 await asyncio.sleep(1)
 
