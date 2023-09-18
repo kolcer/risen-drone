@@ -648,11 +648,11 @@ async def on_message(message):
             NECROMANCY['awarded'] = True
             UPDATE_NECRO()
             for member in EXTRA_ROLES['necromancer'].members:
-                if usr.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
+                if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
                     await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
             await SEND(ch, f"**{usr.name}** has just became a Necromancer and resurrected the chat.")
             await asyncio.sleep(5)
-            await ADD_ROLES(msg.author,EXTRA_ROLES['necromancer'])
+            await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
             await asyncio.sleep(1)
            
         #morph command
