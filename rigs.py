@@ -302,6 +302,7 @@ async def CastRig(rigPick,ch,usr):
 async def ExecuteThiefRig(ch,usr):
 
     tooLong = False
+    isMurdurator = False
             
     if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Guns"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
@@ -315,10 +316,16 @@ async def ExecuteThiefRig(ch,usr):
     ACTIVE_RIGS["thief"] = False
     victim = usr.display_name
 
-    NickDictionary[usr] = "N/A"
 
-    if not usr.id == 481893862864846861:
-        await EDIT_NICK(usr, "N/A")
+    for roles in usr.roles:
+        if roles.name in FULL_IMMUNITY_ROLES:
+            isMurdurator = True
+            break
+
+    if not isMurdurator:       
+        NickDictionary[usr] = "N/A"
+
+    await EDIT_NICK(usr, "N/A")
 
     await asyncio.sleep(1)
             
@@ -347,9 +354,11 @@ async def ExecuteThiefRig(ch,usr):
     if tooLong == True:
         await asyncio.sleep(1)
         await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
-            
-    await asyncio.sleep(300) #300#1800 
-    del NickDictionary[usr]
+
+
+    if not isMurdurator: 
+        await asyncio.sleep(300) #300#1800 
+        del NickDictionary[usr]
     return
 
 
