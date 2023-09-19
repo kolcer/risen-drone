@@ -32,13 +32,27 @@ from discord.ext import commands
 
 # ---END VIEWS---
 
-def rigImmunity(usr1, usr2):
-    for roles in usr1.roles:
-        if roles.name in IMMUNITY_ROLES:
+def rigImmunity(usr1, usr2, fullImmunity):
+    if fullImmunity: 
+        for roles in usr1.roles:
+            if roles.name in FULL_IMMUNITY_ROLES:
+                return True
+        if usr1 == usr2:
             return True
-    if usr1 == usr2:
-        return True
-    return False
+        return False
+    else:
+        for roles in usr1.roles:
+            if roles.name in BASIC_IMMUNITY_ROLES:
+                return True
+        if usr1 == usr2:
+            return True
+        return False
+    
+def isNewUser(usr):
+    if (not EXTRA_ROLES['climber'] in usr.roles) and (not EXTRA_ROLES['manuallyverified'] in usr.roles):
+        True
+    else:
+        False
 
 async def updateRigTracker(rigType):
     initialmsg = RIG_DATA['rigTracker'].content
@@ -289,7 +303,7 @@ async def ExecuteThiefRig(ch,usr):
 
     tooLong = False
             
-    if ch.name not in CHANNELS or (not EXTRA_ROLES['climber'] in usr.roles and not EXTRA_ROLES['manuallyverified'] in usr.roles) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Guns"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Guns"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
                
     if len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
@@ -340,8 +354,9 @@ async def ExecuteThiefRig(ch,usr):
 
 
 async def ExecuteSpectreRig(ch,usr, message):
-    if ch.name not in CHANNELS or rigImmunity(usr, RIG_DATA['rigCaster']) or (not EXTRA_ROLES['climber'] in usr.roles and not EXTRA_ROLES['manuallyverified'] in usr.roles):
+    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
         return
+    
     ACTIVE_RIGS["spectre"] = False
 
     chances = random.randint(0, 1)
@@ -369,7 +384,7 @@ async def ExecuteSpectreRig(ch,usr, message):
 
 async def ExecuteJokerRig(ch,usr, message):
 
-    if (ch.name not in CHANNELS) or (not EXTRA_ROLES['climber'] in usr.roles and not EXTRA_ROLES['manuallyverified'] in usr.roles) or ("http" in message.content) or (len(message.content) > 45):
+    if (ch.name not in CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
         return
 
     ACTIVE_RIGS["joker"] = False
@@ -385,7 +400,7 @@ async def ExecuteJokerRig(ch,usr, message):
 
 async def ExecuteSplicerRig(ch,usr):
  
-    if ch.name not in CHANNELS or (not EXTRA_ROLES['climber'] in usr.roles and not EXTRA_ROLES['manuallyverified'] in usr.roles) or (MORPHABLE_ROLES["Guns"][0] in usr.roles) or rigImmunity(usr, RIG_DATA['rigCaster']):
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Guns"][0] in usr.roles):
         return
                 
     ACTIVE_RIGS["splicer"] = False

@@ -40,7 +40,8 @@ TIPS_KEYS = [
     "possessed", "architect",
 ]
 
-IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
+FULL_IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
+BASIC_IMMUNITY_ROLES = ["Admin", "Sleazel"]
 
 IMPOSTOR_WARNINGS = [
     "It's time to stop.", "I took the liberty to change your name.",

@@ -196,7 +196,7 @@ async def on_message_edit(before, after):
 
     if ch.id == 845454640103424032 and (not after.attachments and 'http' not in msg):
         for role in usr.roles:
-            if role.name in IMMUNITY_ROLES:
+            if role.name in FULL_IMMUNITY_ROLES:
                 return
 
         await DELETE(after)
@@ -217,7 +217,7 @@ async def on_message(message):
 
     if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
-            if role.name in IMMUNITY_ROLES:
+            if role.name in FULL_IMMUNITY_ROLES:
                 return
         if usr.id == 827952429290618943 and msg == "I like your style.":
             return
