@@ -583,7 +583,6 @@ FUN_ROLES = [
     "Optimus",
     "Wise",
     "Lucky Button",
-    "Last One",
     "Broken Drone Helper",
     ":]",
     "Forgiven",
@@ -593,7 +592,8 @@ LIMITED_ROLES = {
     "I was there": "*(11/27/2022 - 11/28/2022)*",
     "Zero": "*(03/31/2023 - 04/19/2023)*",
     "Persistent Clicker": "*(04/18/2023 - 04/19/2023)*",
-    "Impostor": "*(04/11/2024 - 04/28/2023)*"
+    "Impostor": "*(04/11/2024 - 04/28/2023)*",
+    "Last One": "*(04/18/2024 - 09/20/2023)* ||Rate Limited rip||",
 }
 
 APPROVED_ROLES = {
