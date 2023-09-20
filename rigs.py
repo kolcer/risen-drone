@@ -82,13 +82,18 @@ async def updateRigTracker(rigType):
     await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
 
 
-async def necromancer(message):
+async def necromancer(channel):
  
     if RIG_DATA['ghostMsg'] != "hehehehaw":
-        await SEND(message, RIG_DATA['ghostMsg'])
+        await SEND(channel, RIG_DATA['ghostMsg'])
     else:
-        await SEND(message, "*but nobody came...*")
+        await SEND(channel, "*but nobody came...*")
 
+async def muggle(channel, user):
+    if MORPHABLE_ROLES["Muggle"][0] in user.roles:
+        await SEND(channel, "You stairjump, making a new player attempt to do the same and fail. Smh.")
+    else:
+        await SEND(channel, "Nothing happened! What did you expect...")
 
 async def Rig(rigType, ch, usr):
     msgCounting = None
@@ -147,7 +152,7 @@ async def Rig(rigType, ch, usr):
                 if role.name in MORPHABLE_ROLES or role.name in PING_ROLES:
                     role_list.append(role)
             #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
-            await usr.remove_roles(*role_list)       
+            await usr.remove_roles(*role_list)
             msgCounting = await SEND(ch, "You cast Wicked Rig and the Devil took your roles away! Beg for forgiveness to claim them back.")
          
         case "drifter":
@@ -257,7 +262,7 @@ async def Rig(rigType, ch, usr):
 
 async def CastRig(rigPick,ch,usr):
 
-    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon":
+    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "muggle":
         await SEND(ch, "That is not a valid rig. Try again.")
         return
     
@@ -294,6 +299,10 @@ async def CastRig(rigPick,ch,usr):
 
     if rigPick == "necromancer":
         await necromancer(ch)
+        return
+    
+    if rigPick == "muggle":
+        await muggle(ch, usr)
         return
 
     await Rig(rigPick,ch,usr)

@@ -651,14 +651,14 @@ SPECIAL_ROLES = {
         None,
         "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
         "You have already killed the chat.",
-        "You were not a chat killer in the first place.",
+        "You are not a chat killer in the first place.",
         "There was an attempt.",
     ],
     "Necromancer": [
         None,
         "You need to resurrect chat in <#624227331720085536> channel, after it has been murdered.",
         "You have already resurrected the chat",
-        "You were not a necromancer.",
+        "You are not a necromancer.",
         "There was an attempt.",
     ],
 }
