@@ -854,21 +854,21 @@ _[alignment]_ **trivia**
                 await view.too_late()
                 BUTTONS["status"] = False
 
+            # elif BUTTONS["phase"] == 3:
+            #     BUTTONS["status"] = True
+            #     view = ThirdButton(timeout=30)
+            #     view.tm = 30
+            #     view.clicks = 0
+            #     view.winning = None
+            #     view.users = []
+            #     view.step = 0
+            #     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
+
+            #     await view.wait()
+            #     await view.too_late()
+            #     BUTTONS["status"] = False
+
             elif BUTTONS["phase"] == 3:
-                BUTTONS["status"] = True
-                view = ThirdButton(timeout=30)
-                view.tm = 30
-                view.clicks = 0
-                view.winning = None
-                view.users = []
-                view.step = 0
-                view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
-
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
-
-            elif BUTTONS["phase"] == 4:
                 BUTTONS["status"] = True
                 view = FourthButton(timeout=60)
                 view.toolate = True
