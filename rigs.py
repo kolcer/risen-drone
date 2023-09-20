@@ -91,16 +91,16 @@ async def necromancer(channel):
 
 async def muggle(channel, user):
     if MORPHABLE_ROLES["Muggle"][0] in user.roles:
-        await SEND(channel, "You stairjump, making a new player attempt to do the same and fail. Smh.")
+        await SEND(channel, "You knew there wasn't a rig for Muggle and in fact there isn't one.")
     else:
-        await SEND(channel, "Nothing happened! What did you expect...")
+        await SEND(channel, "You thought there was a rig for Muggle but there wasn't.")
 
 async def Rig(rigType, ch, usr):
     msgCounting = None
  
     if rigType.lower() == "splicer":
         if str(usr.id) not in list_decoded_entries("Splicer"):
-            await SEND(ch, "You are not able to cast this rig yet!")
+            await SEND(ch, "The Splicer main has not yet given you permissions to cast this rig.")
             return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
@@ -113,7 +113,7 @@ async def Rig(rigType, ch, usr):
     
     if rigType in LIMITED_USE_RIGS:
         if spamCount == 2:
-            await SEND(ch, "You've been using these commands too often.")
+            await SEND(ch, "You should take a break.")
             return
         else:
             spamCount += 1

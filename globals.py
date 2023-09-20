@@ -120,6 +120,7 @@ RIG_LIST = [
     "hacker",
     "drifter",
     "splicer",
+    "muggle",
 ]
 
 LIMITED_USE_RIGS = [
@@ -128,6 +129,38 @@ LIMITED_USE_RIGS = [
     "spectre",
     "splicer",
 ]
+
+RIGS_DESCRIPTION = {
+    "thief": "How long is your stack of stolen names? Actually, don't tell me.",
+    "spectre": "There's a 50% chance this message will be empty.",
+    "joker": "Imagine falling for your own prank.",
+    "splicer": "How does it feel to cast an exclusive Rig?",
+    "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
+    "archon": "I challenge you to find a typo in this fine sentence.",
+    "heretic": "Fell for the oldest trick in the book.",
+    "patron": "Let's keep this server clean, together.",
+    "wicked": "No Roles?",
+    "keeper": "Abcdefghijklmnpoqrstuvwxyz.",
+    "hacker": "You truly deserve the Zero rank.",
+    "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
+    "muggle": "This person thought Muggle had a rig.",
+    "none": "Some cool stats, sadly nobody cares about these.",
+}
+
+ACTIVE_RIGS = {
+    "joker": False,
+    "thief": False,
+    "spectre": False,
+    "splicer": False,
+}
+
+RIG_COOLDOWNS = {
+    "general": False,
+    "tsj": False,
+    "ha": False,
+    "patron": False,
+    "muggle": False,
+}
 
 # worst guns ever made for the gun role
 WORST_GUNS = [
@@ -412,22 +445,6 @@ COOLDOWN_SELECT = {
     "drifter": "general",
 }
 
-RIGS_DESCRIPTION = {
-    "thief": "How long is your stack of stolen names? Actually, don't tell me.",
-    "spectre": "There's a 50% chance this message will be empty.",
-    "joker": "Imagine falling for your own prank.",
-    "splicer": "How does it feel to cast an exclusive Rig?",
-    "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
-    "archon": "I challenge you to find a typo in this fine sentence.",
-    "heretic": "Fell for the oldest trick in the book.",
-    "patron": "Let's keep this server clean, together.",
-    "wicked": "No Roles?",
-    "keeper": "Abcdefghijklmnpoqrstuvwxyz.",
-    "hacker": "You truly deserve the Zero rank.",
-    "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
-    "none": "Some cool stats, sadly nobody cares about these.",
-}
-
 COOLDOWN_DURATION = {
     "patron": 900,    
     "thief": 600,
@@ -450,21 +467,6 @@ SPLICER_RIG = {
     "user-name" : "",
     "rigcaster-name" : "",
 }
-
-ACTIVE_RIGS = {
-    "joker": False,
-    "thief": False,
-    "spectre": False,
-    "splicer": False,
-}
-
-RIG_COOLDOWNS = {
-    "general": False,
-    "tsj": False,
-    "ha": False,
-    "patron": False,
-}
-
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:758081540063494288> cooldown: ",
