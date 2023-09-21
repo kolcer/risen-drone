@@ -891,6 +891,12 @@ _[alignment]_ **trivia**
                 view.lastplayer = None
                 view.message = await SEND_VIEW(BUTTONS["channel"], "Let's play a game.", view)
 
+                view.board = [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None]
+                ]
+
                 await view.wait()
                 await view.too_late()
                 BUTTONS["status"] = False

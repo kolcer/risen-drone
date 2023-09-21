@@ -491,12 +491,6 @@ class ButtonGames_HelpBrokenDroneFinal(discord.ui.View):
             await self.on_closed()
 
 class ButtonGames_TicTacToe(discord.ui.View):
-    board = [
-        [None, None, None],
-        [None, None, None],
-        [None, None, None]
-    ]
-    
     button_mapping = {
         "1": (0, 0),
         "2": (0, 1),
