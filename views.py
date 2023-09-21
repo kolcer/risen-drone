@@ -653,47 +653,47 @@ class ButtonGames_TicTacToe(discord.ui.View):
         self.update_board(interaction, button)
 
 
-    @discord.ui.button(label=" ", row=0, custom_id = "1", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=0, custom_id = "1", style = discord.ButtonStyle.secondary)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=0, custom_id = "2", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=0, custom_id = "2", style = discord.ButtonStyle.secondary)
     async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=0, custom_id = "3", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=0, custom_id = "3", style = discord.ButtonStyle.secondary)
     async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=1, custom_id = "4", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=1, custom_id = "4", style = discord.ButtonStyle.secondary)
     async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=1, custom_id = "5", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=1, custom_id = "5", style = discord.ButtonStyle.secondary)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=1, custom_id = "6", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=1, custom_id = "6", style = discord.ButtonStyle.secondary)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=2, custom_id = "7", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=2, custom_id = "7", style = discord.ButtonStyle.secondary)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=2, custom_id = "8", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=2, custom_id = "8", style = discord.ButtonStyle.secondary)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=" ", row=2, custom_id = "9", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="?", row=2, custom_id = "9", style = discord.ButtonStyle.secondary)
     async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
