@@ -493,18 +493,15 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Show Profile
-        elif lmsg.startswith("bd show"):
+        elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 
             # Getting the Target
             target = None
             if lmsg == "bd show profile":
                 targetName = f"{usr.name}#{usr.discriminator}".lower()
-            elif lmsg.startswith("bd show ") and lmsg.endswith(" profile"):
+            else:
                 cleanMsg = lmsg.replace(" profile", "")
                 targetName = cleanMsg.split(" ", 2)[2]
-            else:
-                await SEND(ch, "Type `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
-                return
 
             for mem in SERVER_DATA['server'].members:
                 if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
@@ -513,7 +510,7 @@ async def on_message(message):
             
             # No Target?
             if target == None:
-                await SEND(ch, "I didn't find anyone. Sorry.")
+                await SEND(ch, "I didn't find anyone. Sorry.\nIf you believe this to be a mistake, read the following:\n\nType `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
                 return
             
             # Command will go through. Prepare the View.
