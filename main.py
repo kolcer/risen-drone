@@ -502,6 +502,9 @@ async def on_message(message):
             elif lmsg.startswith("bd show ") and lmsg.endswith(" profile"):
                 cleanMsg = lmsg.replace(" profile", "")
                 targetName = cleanMsg.split(" ", 2)[2]
+            else:
+                await SEND(ch, "Type `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
+                return
 
             for mem in SERVER_DATA['server'].members:
                 if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
