@@ -633,11 +633,12 @@ class ButtonGames_TicTacToe(discord.ui.View):
                 await INTERACTION(interaction.response, "You are too late :bangbang:", True)
                 return
             else:
-                self.users.append(usr)
                 if len(self.players) == 0:
                     self.assignments[usr] = "X"
                 else:
                     self.assignments[usr] = "O"
+                    
+                self.players.append(usr)
                 return
         
         if usr == self.lastplayer:
