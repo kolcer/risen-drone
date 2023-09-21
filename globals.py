@@ -589,11 +589,11 @@ FUN_ROLES = [
 ]
 
 LIMITED_ROLES = {
-    "I was there": "*(11/27/2022 - 11/28/2022)*",
-    "Zero": "*(03/31/2023 - 04/19/2023)*",
-    "Persistent Clicker": "*(04/18/2023 - 04/19/2023)*",
-    "Impostor": "*(04/11/2024 - 04/28/2023)*",
-    "Last One": "*(04/18/2024 - 09/20/2023)* ||Rate Limited rip||",
+    "I was there": "*(11/27/2022 - 11/28/2022)* ||The only true locked role||",
+    "Zero": "*(03/31/2023 - 04/19/2023)* ||RNG bad||",
+    "Persistent Clicker": "*(04/18/2023 - 04/19/2023)* ||Redundant||",
+    "Impostor": "*(04/11/2023 - 04/28/2023)* ||Useless role||",
+    "Last One": "*(04/18/2023 - 09/20/2023)* ||Rate Limited rip||",
 }
 
 APPROVED_ROLES = {
