@@ -890,6 +890,7 @@ _[alignment]_ **trivia**
                 view.assignments = {}
                 view.lastplayer = None
                 view.message = await SEND_VIEW(BUTTONS["channel"], "Let's play a game.", view)
+                view.turns = 0
 
                 view.board = [
                     [None, None, None],

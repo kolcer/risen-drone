@@ -551,7 +551,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
         # for item in self.children:
         #     if item.disabled == True:
         await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
-        await DRONEPRINT(self.board)
+        await asyncio.sleep(1)
 
         if (
             # Check rows
@@ -568,6 +568,12 @@ class ButtonGames_TicTacToe(discord.ui.View):
         ):
             # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
             await INTERACTION(interaction.response, f"{interaction.user.mention} was too good.", False)
+            self.toolate = False
+            await self.on_timeout()
+        elif (self.turns == 9):
+            await INTERACTION(interaction.response, f"A draw! Lame.", False)
+            await asyncio.sleep(1)
+            await SEND(BUTTONS["channel"], "We'll settle this next time.")
             self.toolate = False
             await self.on_timeout()
         else:
@@ -591,6 +597,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
             return
         
         self.lastplayer = usr
+        self.turns += 1
         self.letter = self.assignments[usr]
 
         if self.letter == "X":
