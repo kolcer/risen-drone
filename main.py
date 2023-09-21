@@ -372,7 +372,7 @@ async def on_message(message):
             theword = str(customtrigger.replace("|", ""))
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
-            view = FifthButton(timeout=120)
+            view = Minigames_Hangman(timeout=120)
             view.current = ""
             view.revealed = []
             view.wrong = " "
@@ -833,7 +833,7 @@ _[alignment]_ **trivia**
 
             if BUTTONS["phase"] == 1:
                 BUTTONS["status"] = True
-                view = FirstButton(timeout=50)
+                view = ButtonGames_FakeInteractionFailed(timeout=50)
                 view.users = {}
                 view.toolate = True
                 view.message = await SEND_VIEW(BUTTONS["channel"], "A button.", view)
@@ -844,7 +844,7 @@ _[alignment]_ **trivia**
 
             elif BUTTONS["phase"] == 2:
                 BUTTONS["status"] = True
-                view = SecondButton(timeout=50)
+                view = ButtonGames_SoManyButtons(timeout=50)
                 view.pressed = 0
                 view.toolate = True
                 view.correct_button = str(random.randint(1, 25))
@@ -870,13 +870,26 @@ _[alignment]_ **trivia**
 
             elif BUTTONS["phase"] == 3:
                 BUTTONS["status"] = True
-                view = FourthButton(timeout=60)
+                view = ButtonGames_HelpBrokenDrone(timeout=60)
                 view.toolate = True
                 view.users = []
                 view.helpers = []
                 view.step = 0
                 view.roleowners = list_decoded_entries("Broken Drone Helper")
                 view.message = await SEND_VIEW(BUTTONS["channel"], "Could you help me activating these buttons?", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 4:
+                BUTTONS["status"] = True
+                view = ButtonGames_TicTacToe(timeout=60)
+                view.toolate = True
+                view.players = []
+                view.assignments = {}
+                view.lastplayer = None
+                view.message = await SEND_VIEW(BUTTONS["channel"], "Let's play a game.", view)
 
                 await view.wait()
                 await view.too_late()
