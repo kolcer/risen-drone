@@ -553,6 +553,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
     async def check_content(self, interaction):
         # for item in self.children:
         #     if item.disabled == True:
+        await DRONEPRINT(self.board)
 
         if (
             # Check rows
