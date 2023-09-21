@@ -522,7 +522,10 @@ class ButtonGames_TicTacToe(discord.ui.View):
         "Not that one...",
         "How predictable.",
         "Even I could have come up with a better move.",
-        "How ironic."
+        "How ironic.",
+        "You are two steps ahead, I see.",
+        "TOP RIGHT.",
+        "Oh no! Anyways."
     ]
 
     async def on_timeout(self):
@@ -553,6 +556,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
     async def check_content(self, interaction):
         # for item in self.children:
         #     if item.disabled == True:
+        await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
         await DRONEPRINT(self.board)
 
         if (
@@ -571,9 +575,8 @@ class ButtonGames_TicTacToe(discord.ui.View):
             # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
             await INTERACTION(interaction.response, f"{interaction.user.mention} was too good.", False)
             self.toolate = False
-            self.stop()
+            await self.on_timeout()
         else:
-            await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
