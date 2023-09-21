@@ -292,6 +292,7 @@ WISDOM = [
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
+    "Kill chat, revive, kill chat, revive, kill chat, revive, and hope nobody interrupts you while you're doing it. Maybe then I will forgive you.",
     # "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.", || what secret role was this for?
     "Wisdom can grant roles.",
     "I love buttons.",
