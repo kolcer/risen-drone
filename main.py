@@ -510,7 +510,7 @@ async def on_message(message):
             
             # No Target?
             if target == None:
-                await SEND(ch, "I didn't find anyone. Sorry.\nIf you believe this to be a mistake, read the following:\n\nType `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
+                await SEND(ch, "No User was found.\n\nType `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
                 return
             
             # Command will go through. Prepare the View.
