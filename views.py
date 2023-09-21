@@ -567,6 +567,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
             (self.board[0][0] == self.board[1][1] == self.board[2][2] == self.assignments[interaction.user]) or
             (self.board[0][2] == self.board[1][1] == self.board[2][0] == self.assignments[interaction.user])
         ):
+            await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
             await INTERACTION(interaction.response, f"{interaction.user.mention} was too good.", False)
             self.toolate = False
             await self.stop()
@@ -595,7 +596,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
         self.letter = self.assignments[usr]
 
         if self.letter == "X":
-            button.style = discord.ButtonStyle.red
+            button.style = discord.ButtonStyle.blurple
         else:
             button.style = discord.ButtonStyle.green
 
