@@ -678,7 +678,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, "Poll is closed. Look at the results.", self)
 
     async def too_late(self):
-        if self.toolate:
+        if len(self.users) < 1:
             await SEND(BUTTONS["channel"], "No participation whatsoever.")
             await self.on_timeout()
 
@@ -704,9 +704,10 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         if (self.results == "No data."):
             self.results = f"{usr.display_name} would {self.choices[int(button.custom_id)]}.".replace("your", "their").replace("yourself", "themselves").lower()
         else:
-            self.results += f"{usr.display_name} would {self.choices[int(button.custom_id)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results += f"\n{usr.display_name} would {self.choices[int(button.custom_id)]}.".replace("your", "their").replace("yourself", "themselves").lower()
 
         await self.update_message()
+        await interaction.response.defer()
 
 
     @discord.ui.button(label=choice1, custom_id = "0", style = discord.ButtonStyle.secondary)
