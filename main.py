@@ -929,6 +929,8 @@ _[alignment]_ **trivia**
                 view.add_item(view.button3)
                 view.add_item(view.button4)
 
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
+
                 @discord.ui.button(label=view.choice1, custom_id="0")
                 async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
@@ -948,8 +950,6 @@ _[alignment]_ **trivia**
                 async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
                     await view.process_click(interaction, button, usr)
-
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()
