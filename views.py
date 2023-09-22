@@ -656,6 +656,50 @@ class ButtonGames_TicTacToe(discord.ui.View):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
+class ButtonGames_ThrowingStuff(discord.ui.View):
+
+    thrownObject = random.choice(OBJECTS.keys())
+
+    choice1 = OBJECTS[thrownObject][0]
+    choice2 = OBJECTS[thrownObject][1]
+    choice3 = OBJECTS[thrownObject][2]
+    choice4 = OBJECTS[thrownObject][3]
+
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, "Poll is closed. Look at the results.", self)
+
+    async def too_late(self):
+        if self.toolate:
+            await SEND(BUTTONS["channel"], "No participation whatsoever.")
+            await self.on_timeout()
+
+    async def process_click(self, interaction, button, usr):
+        await INTERACTION(interaction.response, "Hello", True)
+
+
+    @discord.ui.button(label=choice1, custom_id = "1", style = discord.ButtonStyle.secondary)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label=choice2, custom_id = "2", style = discord.ButtonStyle.secondary)
+    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label=choice3, custom_id = "3", style = discord.ButtonStyle.secondary)
+    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label=choice4, custom_id = "4", style = discord.ButtonStyle.secondary)
+    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
 class Minigames_Hangman(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:

@@ -902,6 +902,18 @@ _[alignment]_ **trivia**
                 await view.too_late()
                 BUTTONS["status"] = False
 
+            elif BUTTONS["phase"] == 5:
+                BUTTONS["status"] = True
+                view = ButtonGames_ThrowingStuff(timeout=60)
+                view.toolate = True
+                view.users = []
+                view.object = random.choice(OBJECTS.keys())
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.object} at you. How do you react?!", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         msginputs = msg.split(" ")
