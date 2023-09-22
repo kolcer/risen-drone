@@ -932,22 +932,22 @@ _[alignment]_ **trivia**
                 @discord.ui.button(label=view.choice1, custom_id="0")
                 async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
-                    await self.process_click(interaction, button, usr)
+                    await view.process_click(interaction, button, usr)
 
                 @discord.ui.button(label=view.choice2, custom_id="1")
                 async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
-                    await self.process_click(interaction, button, usr)
+                    await view.process_click(interaction, button, usr)
 
                 @discord.ui.button(label=view.choice3, custom_id="2")
                 async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
-                    await self.process_click(interaction, button, usr)
+                    await view.process_click(interaction, button, usr)
 
                 @discord.ui.button(label=view.choice4, custom_id="3")
                 async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
-                    await self.process_click(interaction, button, usr)
+                    await view.process_click(interaction, button, usr)
 
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
 
