@@ -907,8 +907,8 @@ _[alignment]_ **trivia**
                 view = ButtonGames_ThrowingStuff(timeout=60)
                 view.toolate = True
                 view.users = []
-                view.object = random.choice(OBJECTS.keys())
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.object} at you. How do you react?!", view)
+                view.results = "No data."
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing something at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()

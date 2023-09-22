@@ -519,7 +519,10 @@ class ButtonGames_TicTacToe(discord.ui.View):
         "How ironic.",
         "You are two steps ahead, I see.",
         "TOP RIGHT.",
-        "Oh no! Anyways."
+        "Oh no! Anyway.",
+        "🤓.",
+        "There is no way out of that.",
+        "Between you and me, I favor you."
     ]
 
     async def on_timeout(self):
@@ -666,6 +669,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     choice3 = choices[2]
     choice4 = choices[3]
 
+    embed = None
+
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
@@ -677,26 +682,44 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             await SEND(BUTTONS["channel"], "No participation whatsoever.")
             await self.on_timeout()
 
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = "Poll results"
+        embed.description = self.results
+        embed.color = discord.Colour(int("FFD700", 16)) 
+
+        self.embed = embed
+        return embed
+    
+    async def update_message(self):
+        await self.message.edit(embed=self.create_embed(), view=self)
+
     async def process_click(self, interaction, button, usr):
         await INTERACTION(interaction.response, "Hello", True)
+        if (self.results == "No data."):
+            self.results = f"{usr.display_name} would {self.choices[button.custom_id]}.".replace("your", "their").replace("yourself", "themselves").lower()
+        else:
+            self.results += f"{usr.display_name} would {self.choices[button.custom_id]}.".replace("your", "their").replace("yourself", "themselves").lower()
+
+        await self.update_message()
 
 
-    @discord.ui.button(label=choice1, custom_id = "1", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label=choice1, custom_id = "0", style = discord.ButtonStyle.secondary)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=choice2, custom_id = "2", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label=choice2, custom_id = "1", style = discord.ButtonStyle.secondary)
     async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=choice3, custom_id = "3", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label=choice3, custom_id = "2", style = discord.ButtonStyle.secondary)
     async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
 
-    @discord.ui.button(label=choice4, custom_id = "4", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label=choice4, custom_id = "3", style = discord.ButtonStyle.secondary)
     async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
