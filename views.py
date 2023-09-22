@@ -658,12 +658,13 @@ class ButtonGames_TicTacToe(discord.ui.View):
 
 class ButtonGames_ThrowingStuff(discord.ui.View):
 
-    thrownObject = random.choice(OBJECTS.keys())
+    thrownObject = random.choice(list(OBJECTS.keys()))
+    choices = OBJECTS[thrownObject]
 
-    choice1 = OBJECTS[thrownObject][0]
-    choice2 = OBJECTS[thrownObject][1]
-    choice3 = OBJECTS[thrownObject][2]
-    choice4 = OBJECTS[thrownObject][3]
+    choice1 = choices[0]
+    choice2 = choices[1]
+    choice3 = choices[2]
+    choice4 = choices[3]
 
     async def on_timeout(self):
         for item in self.children:
