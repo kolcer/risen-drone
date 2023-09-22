@@ -933,8 +933,9 @@ _[alignment]_ **trivia**
 
                 @discord.ui.button(label=view.choice1, custom_id="0")
                 async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    await view.process_click(interaction, button, usr)
+                    await INTERACTION(interaction.response, "Works.", True)
+                    # usr = interaction.user
+                    # await view.process_click(interaction, button, usr)
 
                 @discord.ui.button(label=view.choice2, custom_id="1")
                 async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
