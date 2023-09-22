@@ -923,32 +923,34 @@ _[alignment]_ **trivia**
                 button3 = discord.ui.Button(label=view.choice3, custom_id="2", style=discord.ButtonStyle.secondary)
                 button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
 
+                # Assign actions using callback
+                button1.callback = view.B1
+                button2.callback = view.B2
+                button3.callback = view.B3
+                button4.callback = view.B4
+
                 # Add buttons to the view with their labels
                 view.add_item(button1)
                 view.add_item(button2)
                 view.add_item(button3)
                 view.add_item(button4)
 
-                @discord.ui.button(label=view.choice1, custom_id="0")
-                async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    await INTERACTION(interaction.response, "Works.", True)
-                    # usr = interaction.user
-                    # await view.process_click(interaction, button, usr)
+                # async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     await INTERACTION(interaction.response, "Works.", True)
+                #     usr = interaction.user
+                #     await view.process_click(interaction, button, usr)
 
-                @discord.ui.button(label=view.choice2, custom_id="1")
-                async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    await view.process_click(interaction, button, usr)
+                # async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     await view.process_click(interaction, button, usr)
 
-                @discord.ui.button(label=view.choice3, custom_id="2")
-                async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    await view.process_click(interaction, button, usr)
+                # async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     await view.process_click(interaction, button, usr)
 
-                @discord.ui.button(label=view.choice4, custom_id="3")
-                async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    await view.process_click(interaction, button, usr)
+                # async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     await view.process_click(interaction, button, usr)
 
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
 

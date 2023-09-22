@@ -706,24 +706,24 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
 
 
     # @discord.ui.button(label=choice1, custom_id = "0", style = discord.ButtonStyle.secondary)
-    # async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-    #     usr = interaction.user
-    #     await self.process_click(interaction, button, usr)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
 
     # @discord.ui.button(label=choice2, custom_id = "1", style = discord.ButtonStyle.secondary)
-    # async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
-    #     usr = interaction.user
-    #     await self.process_click(interaction, button, usr)
+    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
 
     # @discord.ui.button(label=choice3, custom_id = "2", style = discord.ButtonStyle.secondary)
-    # async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
-    #     usr = interaction.user
-    #     await self.process_click(interaction, button, usr)
+    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
 
     # @discord.ui.button(label=choice4, custom_id = "3", style = discord.ButtonStyle.secondary)
-    # async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
-    #     usr = interaction.user
-    #     await self.process_click(interaction, button, usr)
+    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
 
 class Minigames_Hangman(discord.ui.View):
     async def on_timeout(self):
