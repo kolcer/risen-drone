@@ -659,7 +659,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
 class ButtonGames_ThrowingStuff(discord.ui.View):
 
     thrownObject = random.choice(list(OBJECTS.keys()))
-    choices = OBJECTS[thrownObject]
+    choices = list(OBJECTS[thrownObject])
 
     choice1 = choices[0]
     choice2 = choices[1]
