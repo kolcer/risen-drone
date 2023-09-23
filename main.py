@@ -912,9 +912,9 @@ _[alignment]_ **trivia**
                     timeout=60, 
                     thrownObject=theObject, 
                     choice1=theChoices[0], 
-                    choice1=theChoices[1],
-                    choice1=theChoices[2],
-                    choice1=theChoices[3]
+                    choice2=theChoices[1],
+                    choice3=theChoices[2],
+                    choice4=theChoices[3]
                 )
 
                 view.toolate = True
