@@ -980,6 +980,7 @@ class Minigames_Hangman(discord.ui.View):
 
         await self.process_click(interaction, button, usr)
 
+# crying
 # class BurgerButton(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:
