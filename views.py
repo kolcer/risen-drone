@@ -667,7 +667,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
 
     embed = None
 
-    def __init__(self, thrownObject, choice1, choice2, choice3, choice4):
+    def __init__(self, timeout, thrownObject, choice1, choice2, choice3, choice4):
+        self.timeout = timeout
         self.thrownObject = thrownObject
         ButtonGames_ThrowingStuff.choice1 = choice1  # Assign the values to the class-level variables
         ButtonGames_ThrowingStuff.choice2 = choice2
