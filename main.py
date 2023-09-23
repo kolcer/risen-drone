@@ -908,8 +908,7 @@ _[alignment]_ **trivia**
                 theObject = random.choice(list(OBJECTS.keys()))
                 theChoices = list(OBJECTS[theObject])
 
-                view = ButtonGames_ThrowingStuff(
-                    timeout=60, 
+                view = ButtonGames_ThrowingStuff( 
                     thrownObject=theObject, 
                     choice1=theChoices[0], 
                     choice2=theChoices[1],
