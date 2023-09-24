@@ -669,8 +669,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     #     ButtonGames_ThrowingStuff.choice3 = choice3
     #     ButtonGames_ThrowingStuff.choice4 = choice4
     
-    theObject = random.choice(list(OBJECTS.keys()))
-    theChoices = list(OBJECTS[theObject])
+    thrownObject = random.choice(list(OBJECTS.keys()))
+    theChoices = list(OBJECTS[thrownObject])
     
     choice1 = theChoices[0]
     choice2 = theChoices[1]
