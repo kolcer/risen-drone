@@ -947,10 +947,10 @@ _[alignment]_ **trivia**
                     await view.process_click(interaction, button, usr)
 
                 # # Assign actions using callback -  idk if this works tbh
-                button1.callback = B1(view, discord.Interaction, button1)
-                button2.callback = B1(view, discord.Interaction, button2)
-                button3.callback = B1(view, discord.Interaction, button3)
-                button4.callback = B1(view, discord.Interaction, button4)
+                button1.callback = await B1(view, discord.Interaction, button1)
+                button2.callback = await B2(view, discord.Interaction, button2)
+                button3.callback = await B3(view, discord.Interaction, button3)
+                button4.callback = await B4(view, discord.Interaction, button4)
 
                 # Add buttons to the view with their labels
                 view.add_item(button1)
