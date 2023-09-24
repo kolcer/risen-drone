@@ -929,7 +929,7 @@ _[alignment]_ **trivia**
                 button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
 
                 # # Assign actions using callback -  idk if this works tbh
-                # button1.callback = view.B1
+                button1.callback = await B1()
                 # button2.callback = view.B2
                 # button3.callback = view.B3
                 # button4.callback = view.B4
