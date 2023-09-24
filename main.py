@@ -946,10 +946,10 @@ _[alignment]_ **trivia**
                     view.process_click(interaction, button, usr)
 
                 # # Assign actions using callback -  idk if this works tbh
-                button1.callback = B1(view, button1, button1)
-                button2.callback = B2(view, button1, button2)
-                button3.callback = B3(view, button3, button3)
-                button4.callback = B4(view, button4, button4)
+                button1.callback = B1(view, button1.Interaction, button1)
+                button2.callback = B2(view, button2.Interaction, button2)
+                button3.callback = B3(view, button3.Interaction, button3)
+                button4.callback = B4(view, button4.Interaction, button4)
 
                 # Add buttons to the view with their labels
                 view.add_item(button1)
