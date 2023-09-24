@@ -928,6 +928,11 @@ _[alignment]_ **trivia**
                 button3 = discord.ui.Button(label=view.choice3, custom_id="2", style=discord.ButtonStyle.secondary)
                 button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
 
+                async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+                    await INTERACTION(interaction.response, "Works.", True)
+                    usr = interaction.user
+                    await view.process_click(interaction, button, usr)
+                    
                 # # Assign actions using callback -  idk if this works tbh
                 button1.callback = B1(view, discord.Interaction, button1)
                 # button2.callback = view.B2
@@ -941,10 +946,6 @@ _[alignment]_ **trivia**
                 view.add_item(button4)
 
                 #and idk how to give the previous buttons these functions
-                async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    await INTERACTION(interaction.response, "Works.", True)
-                    usr = interaction.user
-                    await view.process_click(interaction, button, usr)
 
                 async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
