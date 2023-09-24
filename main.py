@@ -928,24 +928,11 @@ _[alignment]_ **trivia**
                 button3 = discord.ui.Button(label=view.choice3, custom_id="2", style=discord.ButtonStyle.secondary)
                 button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
 
+                #and idk how to give the previous buttons these functions
                 async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
                     await INTERACTION(interaction.response, "Works.", True)
                     usr = interaction.user
                     await view.process_click(interaction, button, usr)
-                    
-                # # Assign actions using callback -  idk if this works tbh
-                button1.callback = B1(view, discord.Interaction, button1)
-                # button2.callback = view.B2
-                # button3.callback = view.B3
-                # button4.callback = view.B4
-
-                # Add buttons to the view with their labels
-                view.add_item(button1)
-                view.add_item(button2)
-                view.add_item(button3)
-                view.add_item(button4)
-
-                #and idk how to give the previous buttons these functions
 
                 async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
@@ -958,11 +945,20 @@ _[alignment]_ **trivia**
                 async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
                     usr = interaction.user
                     await view.process_click(interaction, button, usr)
-                    
-                try:
-                    view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
-                except:
-                    view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing `an error` at you! How do you react?!", view) # how is this any different?
+
+                # # Assign actions using callback -  idk if this works tbh
+                button1.callback = B1(view, discord.Interaction, button1)
+                button2.callback = B1(view, discord.Interaction, button2)
+                button3.callback = B1(view, discord.Interaction, button3)
+                button4.callback = B1(view, discord.Interaction, button4)
+
+                # Add buttons to the view with their labels
+                view.add_item(button1)
+                view.add_item(button2)
+                view.add_item(button3)
+                view.add_item(button4)
+
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()
