@@ -660,28 +660,22 @@ class ButtonGames_TicTacToe(discord.ui.View):
         await self.process_click(interaction, button, usr)
 
 class ButtonGames_ThrowingStuff(discord.ui.View):
-    choice1 = 'test'
-    choice2 = 'test'
-    choice3 = 'test'
-    choice4 = 'test'
-
     embed = None
 
-    def __init__(self, thrownObject, choice1, choice2, choice3, choice4):
-        self.thrownObject = thrownObject
-        ButtonGames_ThrowingStuff.choice1 = choice1  # Assign the values to the class-level variables
-        ButtonGames_ThrowingStuff.choice2 = choice2
-        ButtonGames_ThrowingStuff.choice3 = choice3
-        ButtonGames_ThrowingStuff.choice4 = choice4
-
-    # def __init__(self):
-    #     self.theObject = random.choice(list(OBJECTS.keys()))
-    #     self.theChoices = list(OBJECTS[self.theObject])
-
-    #     choice1=self.theChoices[0]
-    #     choice2=self.theChoices[1]
-    #     choice3=self.theChoices[2]
-    #     choice4=self.theChoices[3]
+    # def __init__(self, thrownObject, choice1, choice2, choice3, choice4):
+    #     self.thrownObject = thrownObject
+    #     ButtonGames_ThrowingStuff.choice1 = choice1  # Assign the values to the class-level variables
+    #     ButtonGames_ThrowingStuff.choice2 = choice2
+    #     ButtonGames_ThrowingStuff.choice3 = choice3
+    #     ButtonGames_ThrowingStuff.choice4 = choice4
+    
+    theObject = random.choice(list(OBJECTS.keys()))
+    theChoices = list(OBJECTS[theObject])
+    
+    choice1 = theChoices[0]
+    choice2 = theChoices[1]
+    choice3 = theChoices[2]
+    choice4 = theChoices[3]
 
     async def on_timeout(self):
         for item in self.children:

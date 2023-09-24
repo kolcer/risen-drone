@@ -908,13 +908,7 @@ _[alignment]_ **trivia**
                 theObject = random.choice(list(OBJECTS.keys()))
                 theChoices = list(OBJECTS[theObject])
 
-                view = ButtonGames_ThrowingStuff( 
-                    thrownObject=theObject, 
-                    choice1=theChoices[0], 
-                    choice2=theChoices[1],
-                    choice3=theChoices[2],
-                    choice4=theChoices[3]
-                )
+                view = ButtonGames_ThrowingStuff()
 
                 view.toolate = True
                 view.users = []
