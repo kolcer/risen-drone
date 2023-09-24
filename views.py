@@ -671,6 +671,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         self.choice3 = theChoices[2]
         self.choice4 = theChoices[3]
 
+    def getObject(self) -> str:
+        return self.thrownObject
+
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True

@@ -957,7 +957,7 @@ _[alignment]_ **trivia**
                 #     usr = interaction.user
                 #     await view.process_click(interaction, button, usr)
 
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.getObject()} at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()
