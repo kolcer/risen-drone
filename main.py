@@ -959,7 +959,7 @@ _[alignment]_ **trivia**
                 try:
                     view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
                 except:
-                   view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing `an error` at you! How do you react?!", view) 
+                    view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing `an error` at you! How do you react?!", view) # how is this any different?
 
                 await view.wait()
                 await view.too_late()
