@@ -930,7 +930,6 @@ _[alignment]_ **trivia**
 
                 #and idk how to give the previous buttons these functions
                 def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    INTERACTION(interaction.response, "Works.", True)
                     usr = interaction.user
                     view.process_click(interaction, button, usr)
 
