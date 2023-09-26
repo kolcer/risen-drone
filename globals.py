@@ -106,7 +106,7 @@ REVIVE_CHAT = [
     "What do you think is the biggest mistake people make when playing Crazy Stairs?",
     "What's the funniest moment you've had while playing Crazy Stairs?",
     "Banning you in 3 seconds...",
-    "If you had Game Moderator in Crazy Stairs for one day, what would you do?",
+    "If you had Game Murdurator in Crazy Stairs for one day, what would you do?",
 ]
 
 RIG_LIST = [
