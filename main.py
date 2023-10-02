@@ -215,7 +215,7 @@ async def on_message(message):
         await DELETE(message)
         return
 
-    if (ch.id == 845454640103424032 or ch.id == 1154748785415700582 or ch.id == 1154751339872653312 and (not message.attachments and 'http' not in msg):
+    if (ch.id == 845454640103424032 or ch.id == 1154748785415700582 or ch.id == 1154751339872653312) and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in FULL_IMMUNITY_ROLES:
                 return
