@@ -522,7 +522,9 @@ class ButtonGames_TicTacToe(discord.ui.View):
         "Oh no! Anyway.",
         "🤓.",
         "There is no way out of that.",
-        "Between you and me, I favor you."
+        "Between you and me, I favor you.",
+        "You cannot cheese this game.",
+        "I'm watching your every move."
     ]
 
     async def on_timeout(self):
@@ -570,7 +572,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
             (self.board[0][2] == self.board[1][1] == self.board[2][0] == self.assignments[interaction.user])
         ):
             # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
-            await INTERACTION(interaction.response, f"{interaction.user.mention} was too good.", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} won the match.", False)
             self.toolate = False
             await self.on_timeout()
         elif (self.turns == 9):
@@ -599,6 +601,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
             await INTERACTION(interaction.response, "You have already played this turn :interrobang:", True)
             return
         
+        await asyncio.sleep(2)
         self.lastplayer = usr
         self.turns += 1
         self.letter = self.assignments[usr]
