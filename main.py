@@ -160,9 +160,10 @@ async def on_member_update(before, after):
     if after.nick == 'Roingus' and MORPHABLE_ROLES['Roingus'][0] in before.roles:
         return
 
-    if MORPHABLE_ROLES['Guns'][0] in after.roles:
+    if MORPHABLE_ROLES['Guns'][0] in before.roles:
         await EDIT_NICK(after, random.choice(WORST_GUNS))
-    elif MORPHABLE_ROLES['Roingus'][0] in after.roles:
+    
+    if MORPHABLE_ROLES['Roingus'][0] in before.roles:
         await EDIT_NICK(after, 'Roingus')
     return
 
