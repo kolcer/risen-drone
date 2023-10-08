@@ -371,6 +371,15 @@ EMOJIS_TO_REACT = {
     "csMegaSecret": 987819430639730699,
 }
 
+#suggestion reactions
+
+REACTIONS_FOR_SUGGESTIONS = [
+    "<:csYes:792458050144829440>",
+    "<:csNo:792458117069668372>",
+    "<:csMaybe:1155889547180261536>",
+    "<:csDontCare:1155846534936662066>",
+]
+
 # this keywords will trigger the bot with a single occurence
 # value is the trigger, key is the response!
 # it DOES NOT have to be a single word

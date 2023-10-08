@@ -149,7 +149,7 @@ async def on_member_update(before, after):
       return
  
     #is user a gun or roingus?
-    if (not MORPHABLE_ROLES["Guns"][0] in before.roles) or (not MORPHABLE_ROLES['Roingus'][0] in before.roles): 
+    if (not MORPHABLE_ROLES["Guns"][0] in before.roles) and (not MORPHABLE_ROLES['Roingus'][0] in before.roles): 
         return
     
     #ignore if user nick after change is a gun name
@@ -267,7 +267,12 @@ async def on_message(message):
                 await SEND(ch, f"I like your style.")
                 await asyncio.sleep(1)
                 await ADD_REACTION(message, "❤️‍🔥")
-        
+
+    if ch.id == 899030333859692636:
+        for i in REACTIONS_FOR_SUGGESTIONS:
+            await ADD_REACTION(message,i)
+        return
+    
     randomchance = random.randint(0,5000)
     eligible = 0
     rolename = ""
