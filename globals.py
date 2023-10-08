@@ -160,7 +160,6 @@ RIG_COOLDOWNS = {
     "tsj": False,
     "ha": False,
     "patron": False,
-    "muggle": False,
 }
 
 # worst guns ever made for the gun role
