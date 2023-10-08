@@ -493,7 +493,7 @@ COOLDOWN_DESCRIPTIONS = {
 }
 
 
-# this roles can be assigned via a morph to command
+# these roles can be assigned via a morph to command
 # at 0 index we will put a role object during the login proccess.
 # make sure indexes match role name in the server!
 MORPHABLE_ROLES = {
@@ -588,6 +588,13 @@ MORPHABLE_ROLES = {
         "How about this gun?",
         "You are not a gun.",
      ],
+    "Roingus": [
+        None,
+        "The Roingus Society accepts you as one of them.",
+        "The Roingus Society has decided that you are no longer welcome there.",
+        "The Roingus Society has already accepted you.",
+        "You are not a part of their society.",
+    ],
 }
 
 FUN_ROLES = [
