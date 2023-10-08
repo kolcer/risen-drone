@@ -130,8 +130,11 @@ async def JoinQuiz(usr,ch):
     return
 
 async def ProcessQuizAnswer(usr,ch,message,lmsg):
+    if ch.id != 750060041289072771:
+        return
+
     if usr not in QUIZZERS:
-        await DELETE(message)
+        await message.delete()
         return
             
     #if one of the two wants to stop they can feel free to
