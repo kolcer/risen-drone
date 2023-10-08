@@ -71,6 +71,9 @@ async def MorphTo(usr,role):
         if role == "Guns":
             await EDIT_NICK(usr,random.choice(WORST_GUNS))
 
+        elif role == 'Roingus':
+            await EDIT_NICK(usr, 'Roingus')
+
         if MORPHABLE_ROLES[role][0] in usr.roles:
             # shiny check
             if randomChance == 0:

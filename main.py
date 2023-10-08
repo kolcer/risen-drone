@@ -148,15 +148,22 @@ async def on_member_update(before, after):
       await EDIT_NICK(after, NickDictionary[before])
       return
  
-    #is user a gun?
-    if not MORPHABLE_ROLES["Guns"][0] in before.roles:
+    #is user a gun or roingus?
+    if (not MORPHABLE_ROLES["Guns"][0] in before.roles) or (not MORPHABLE_ROLES['Roingus'][0] in before.roles): 
         return
     
     #ignore if user nick after change is a gun name
-    if after.nick in WORST_GUNS:
+    if after.nick in WORST_GUNS and MORPHABLE_ROLES['Guns'][0] in before.roles:
         return
 
-    await EDIT_NICK(after, random.choice(WORST_GUNS))
+    # or roingus
+    if after.nick == 'Roingus' and MORPHABLE_ROLES['Roingus'][0] in before.roles:
+        return
+
+    if MORPHABLE_ROLES['Guns'][0] in after.roles:
+        await EDIT_NICK(after, random.choice(WORST_GUNS))
+    elif MORPHABLE_ROLES['Roingus'][0] in after.roles:
+        await EDIT_NICK(after, 'Roingus')
     return
 
 #on new member join
