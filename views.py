@@ -600,8 +600,7 @@ class ButtonGames_TicTacToe(discord.ui.View):
         if usr == self.lastplayer:
             await INTERACTION(interaction.response, "You have already played this turn :interrobang:", True)
             return
-        
-        await asyncio.sleep(2)
+
         self.lastplayer = usr
         self.turns += 1
         self.letter = self.assignments[usr]
