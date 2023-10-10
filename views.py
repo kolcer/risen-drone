@@ -165,6 +165,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
     @discord.ui.button(label="What's this?", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
+        lineOfQuestioning = 0
 
         if usr not in self.users.keys():
             self.users[usr] = 0
