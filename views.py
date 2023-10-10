@@ -168,6 +168,9 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
 
         if usr not in self.users.keys():
             self.users[usr] = 0
+
+            # Generate a random index within the bounds of the list size
+            lineOfQuestioning = random.randint(0, len(FAKE_FAIL) - 1)
         else:
             self.users[usr] += 1
 
@@ -178,7 +181,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 2:
-            await INTERACTION(interaction.response, "This interaction will not fail on my watch.", True)
+            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][0], True)
 
         elif self.users[usr] == 3:
             self.users[usr] = self.users[usr]
@@ -187,10 +190,10 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 5:
-            await INTERACTION(interaction.response, "Alright. That's enough clicking.", True)
+            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][1], True)
 
         elif self.users[usr] == 6:
-            await INTERACTION(interaction.response, "I am being serious. If you keep going I'll get rate limited.", True)
+            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][2], True)
 
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully clicked this button.", False)
