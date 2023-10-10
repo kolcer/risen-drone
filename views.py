@@ -162,6 +162,8 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
         ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
         ["If I had a dollar for every time", "I was interrupted while speaking, I would", "have 2 dollars. Which is too much. Learn some respect."],
     ]
+
+    lineOfQuestioning = -1
     
     async def on_timeout(self):
         for item in self.children:
@@ -179,13 +181,12 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
     @discord.ui.button(label="What's this?", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        lineOfQuestioning = None
 
         if usr not in self.users.keys():
             self.users[usr] = 0
 
             # Generate a random index within the bounds of the list size
-            lineOfQuestioning = random.randint(0, len(self.FAKE_FAIL) - 1)
+            self.lineOfQuestioning = random.randint(0, len(self.FAKE_FAIL) - 1)
         else:
             self.users[usr] += 1
 
@@ -196,7 +197,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 2:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][0], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][0], True)
 
         elif self.users[usr] == 3:
             self.users[usr] = self.users[usr]
@@ -205,10 +206,10 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 5:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][1], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][1], True)
 
         elif self.users[usr] == 6:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][2], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][2], True)
 
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully clicked this button.", False)
