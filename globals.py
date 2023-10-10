@@ -324,19 +324,6 @@ OBJECTS = {
     "a gun": {"Stair bonk it", "Promote it to Admin", "Raise your hands", "Run away"},
 }
 
-FAKE_FAIL = [
-    ["This interaction will not fail on my watch.", "Alright. That's enough clicking.", "I am being serious. If you keep going I'll get rate limited."],
-    ["This interaction WILL fail on my watch.", "You got me.", "Yes, I was being funny."],
-    ["You are not one to give up that easily.", "Persistent much?", "I heard that if you click the button enough times, Sleazel will give you a gift."],
-    ["Still here?", "I'd figured you would just think this thing was broken and stop trying", "I was proved wrong."],
-    ["Sleazel?!?", "Made you turn around.", "Made you think I made you turn around."],
-    ["I am quite impressed, you found me out. Take this little secret role.", "I hope I did not make you feel that bad.", "Fun Fact: This button used to give a role."],
-    ["Keep clicking for 100000 Robux.", "That click just now costed you 100000 Robux.", "Profit."],
-    ["You know, I used to climb the stairs a while ago.", "It was pretty fun actually.", "But seeing people think they can stand on me is even more fun."],
-    ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
-    ["If I had a dollar for every time", "I was interrupted while speaking, I would", "have 2 dollars. Which is too much. Learn some respect."],
-]
-
 # CONSTANT DICTIONARIES
 
 # channels where bot is allowed to post  

@@ -149,6 +149,20 @@ class SplicerView(discord.ui.View):
             await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
 
 class ButtonGames_FakeInteractionFailed(discord.ui.View):
+
+    FAKE_FAIL = [
+        ["This interaction will not fail on my watch.", "Alright. That's enough clicking.", "I am being serious. If you keep going I'll get rate limited."],
+        ["This interaction WILL fail on my watch.", "You got me.", "Yes, I was being funny."],
+        ["You are not one to give up that easily.", "Persistent much?", "I heard that if you click the button enough times, Sleazel will give you a gift."],
+        ["Still here?", "I'd figured you would just think this thing was broken and stop trying", "I was proved wrong."],
+        ["Sleazel?!?", "Made you turn around.", "Made you think I made you turn around."],
+        ["I am quite impressed, you found me out. Take this little secret role.", "I hope I did not make you feel that bad.", "Fun Fact: This button used to give a role."],
+        ["Keep clicking for 100000 Robux.", "That click just now costed you 100000 Robux.", "Profit."],
+        ["You know, I used to climb the stairs a while ago.", "It was pretty fun actually.", "But seeing people think they can stand on me is even more fun."],
+        ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
+        ["If I had a dollar for every time", "I was interrupted while speaking, I would", "have 2 dollars. Which is too much. Learn some respect."],
+    ]
+    
     async def on_timeout(self):
         for item in self.children:
             item.label = "It's just a button."
@@ -165,13 +179,13 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
     @discord.ui.button(label="What's this?", style = discord.ButtonStyle.blurple)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        lineOfQuestioning = 0
+        lineOfQuestioning = None
 
         if usr not in self.users.keys():
             self.users[usr] = 0
 
             # Generate a random index within the bounds of the list size
-            lineOfQuestioning = random.randint(0, len(FAKE_FAIL) - 1)
+            lineOfQuestioning = random.randint(0, len(self.FAKE_FAIL) - 1)
         else:
             self.users[usr] += 1
 
@@ -182,7 +196,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 2:
-            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][0], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][0], True)
 
         elif self.users[usr] == 3:
             self.users[usr] = self.users[usr]
@@ -191,10 +205,10 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 5:
-            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][1], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][1], True)
 
         elif self.users[usr] == 6:
-            await INTERACTION(interaction.response, FAKE_FAIL[lineOfQuestioning][2], True)
+            await INTERACTION(interaction.response, self.FAKE_FAIL[lineOfQuestioning][2], True)
 
         elif self.users[usr] == 7:
             await INTERACTION(interaction.response, f"{usr.mention} has successfully clicked this button.", False)
