@@ -554,7 +554,12 @@ class ButtonGames_TicTacToe(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(BUTTONS["channel"], "I was waiting.")
+            if len(self.players) < 2:
+                await SEND(BUTTONS["channel"], "I was waiting.")
+                return
+            else:
+                await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
+
             await self.on_timeout()
 
     async def update_board(self, interaction, button):
