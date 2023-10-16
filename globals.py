@@ -689,7 +689,7 @@ SPECIAL_ROLES = {
     "Necromancer": [
         None,
         "You need to resurrect chat in <#624227331720085536> channel, after it has been murdered.",
-        "You have already resurrected the chat",
+        "You have already resurrected the chat.",
         "You are not a necromancer.",
         "There was an attempt.",
     ],

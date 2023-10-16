@@ -160,7 +160,9 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
         ["Keep clicking for 100000 Robux.", "That click just now costed you 100000 Robux.", "Profit."],
         ["You know, I used to climb the stairs a while ago.", "It was pretty fun actually.", "But seeing people think they can stand on me is even more fun."],
         ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
-        ["If I had a dollar for every time", "I was interrupted while speaking, I would", "have 2 dollars. Which is too much. Learn some respect."],
+        ["Once upon a time.", "There was a little drone that did not know what to do.", "But that was not me, because I am a genius."],
+        ["Can you guess my favorite game?", "You have one more attempt.", "Why do you keep clicking the button? I asked a question."],
+        ["This is the holy button.", "If you click it again you'll be cancelled.", "Blocked and reported."],
     ]
 
     lineOfQuestioning = -1
