@@ -499,7 +499,7 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Show Profile
-        elif lmsg.startswith("bd show") and lmsg.endswith("profile") and ch == CHANNELS['general']:
+        elif lmsg.startswith("bd show") and lmsg.endswith("profile") and (ch == CHANNELS['bot-commands'] or ch == CHANNELS['bot-testing']):
 
             # Getting the Target
             target = None
