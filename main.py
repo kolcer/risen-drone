@@ -499,7 +499,7 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Show Profile
-        elif lmsg.startswith("bd show") and lmsg.endswith("profile") and (ch == CHANNELS['bot-commands'] or ch == CHANNELS['bot-testing']):
+        elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 
             # Getting the Target
             target = None
@@ -584,7 +584,12 @@ async def on_message(message):
                 view.footers[1] = "Nothing to see here."
 
             # Send view... hopefully
-            await view.send(ch)
+            if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']):
+                await view.send(CHANNELS['bot-commands'])
+                await asyncio.sleep(1)
+                await SEND(CHANNELS['bot-commands'], f'{usr.mention} moving forward you should request your profile or anyone else\'s to be shown in this channel instead.')
+            else:
+                await view.send(ch)
             await view.wait()
 
         ## Revive Chat Command
