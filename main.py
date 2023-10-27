@@ -559,12 +559,12 @@ async def on_message(message):
             if target not in MSG_SENT:
                 messages = "0"
             else:
-                messages = MSG_SENT[usr]
+                messages = MSG_SENT[target]
 
             if target not in LAST_RIG:
                 lastrig = "None"
             else:
-                lastrig = LAST_RIG[usr]
+                lastrig = LAST_RIG[target]
 
             # Prepare list to show in PAGE 3 (user stats)
             user_stats = ""
