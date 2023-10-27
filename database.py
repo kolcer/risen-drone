@@ -13,7 +13,7 @@ def add_entry(key, new_entry):
     db.rpush(key,new_entry)
 
 async def add_entry_with_check(key, new_entry):
-    if new_entry.id in GIT_COMMITTERS.values():
+    if not new_entry.id in GIT_COMMITTERS.values():
         roleCounter = 0
 
         for role in FUN_ROLES:
