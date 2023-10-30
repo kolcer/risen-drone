@@ -178,18 +178,10 @@ async def Rig(rigType, ch, usr):
             await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)     
         
         case "hacker":
-            im = ""
-            for i in range(8):
-                temp = str(random.randint(0, 1))
-                im += temp
+            im = "".join(random.sample(usr.nick, len(usr.nick)))
             msgCounting = await SEND(ch, "You cast Hacker Rig an- ####01111001###01101111###01110101#01110010#00100000#01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000#01101110#01101111#01110111#00100000#01101001#01101110#00100000#01100010#01101001#01101110#01100001#01110010#01111001#00100000#01100011#01101111#01100100#01100101#00100001")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
-            if usr.display_name == '00000000':
-                await SEND(ch, "You truly deserve the Zero rank.")
-
-                # if str(usr.id) not in list_decoded_entries("Zero"):  Removing gambling. When I made this role it wasn't meant to be grinded for.
-                #     await add_entry_with_check("Zero", usr)
             
         case "keeper":
             im = ''.join(sorted(usr.display_name))
