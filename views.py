@@ -149,13 +149,13 @@ class ShowCommands(discord.ui.View):
         ''',
 
         '''
-        Once again, use these commands in <#750060041289072771>
+        With the exception of Revive Chat, use these commands in <#750060041289072771>
 
 **bd show profile**
 ➡️ Admire your roles collection and some of your statistics
 
 **cast** *[alignment]* **rig**
-➡️ Your favorite alignment's rig, but on Discord
+➡️ Your favorite Alignment's rig, but on Discord
 
 **drone of wisdom**
 ➡️ Receive wisdom directly from myself that will change how you perceive the world
@@ -167,9 +167,11 @@ class ShowCommands(discord.ui.View):
 ➡️ Use this command if I become unresponsive (which I won't) (3 users required)
 
 
+
 ** USER COMMANDS **
 
 *Reminder to use 0 if the user does not have a discriminator. This will change once Discord forces everyone to set one.*
+
 
 **bd scold** *[username#discriminator]*
 ➡️ They should not have done that
@@ -182,7 +184,7 @@ class ShowCommands(discord.ui.View):
         ''',
 
         '''
-        I hope you did not forget, but use these commands in <#750060041289072771> in case you did not read this part the previous times
+        I hope you did not forget, but use these commands in <#750060041289072771>
 
 **play lucid ladders**
 ➡️ Start Lucid Ladders minigame (requires at least 2 players)
@@ -192,10 +194,10 @@ class ShowCommands(discord.ui.View):
         ''',
 
         '''
-        If you are not already, maybe move to <#813882658156838923> 
+        I hope you showed these commands in <#813882658156838923> 
 
 **|ispy** *[channel-name]*
-➡️ Starts an "ispy" mini-game in the specified channel
+➡️ Start an "ispy" mini-game in the specified channel
 
 **|quiz** *[action] [?]*
 ➡️ New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
@@ -208,19 +210,19 @@ Delete: Deletes the specified quiz question by index.
 ➡️ Have the bot repeat what you say
 
 **|ckr to/from** *[user#discriminator]*
-➡️ Gives or removes the Chat Killer role
+➡️ Give/remove the Chat Killer role
 
 **|nr** *[name]*
-➡️ Creates new custom role :bangbang:
+➡️ Create new custom role :bangbang:
 
 **|un/assign** *[!!USER ID!!] [role-name]*
-➡️ Removes/assigns custom roles :bangbang:
+➡️ Remove/assign custom roles :bangbang:
 
 **|purge role** *[role-name]*
-➡️ Deletes a custom role :bangbang:
+➡️ Delete a custom role :bangbang:
 
 **|buttons** *[num] [channel]*
-➡️ Starts button minigame
+➡️ Start button minigame
 1: Fake Interaction
 2: So Many Buttons
 3: Help Broken Drone
@@ -234,7 +236,7 @@ Delete: Deletes the specified quiz question by index.
 
     footers = [
         "Morph to your favorite Alignments and subscribe to various pings to be notified of stuff.", 
-        "Use my commands and have some fun. **Discriminator is 0 if the user does not have one!**", 
+        "Use my commands and have some fun. !!Discriminator is 0 if the user does not have one!!", 
         "Play some of the minigames currently available. They require participation from more people.",
         "What are you up to??"
     ]
@@ -284,7 +286,7 @@ Delete: Deletes the specified quiz question by index.
             self.first_page_button.style = discord.ButtonStyle.green
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 2 or self.cp == 3:
+        if self.cp == 2:
             self.next_button.disabled = True
             self.last_page_button.disabled = True
             self.last_page_button.style = discord.ButtonStyle.gray
@@ -294,6 +296,13 @@ Delete: Deletes the specified quiz question by index.
             self.last_page_button.disabled = False
             self.last_page_button.style = discord.ButtonStyle.green
             self.next_button.style = discord.ButtonStyle.primary
+
+        if self.cp == 3:
+            self.admin_button.disabled = True
+            self.admin_button.style = discord.ButtonStyle.gray
+        else:
+            self.admin_button.disabled = False
+            self.admin_button.style = discord.ButtonStyle.red
 
 
     async def check_requester(self, interaction, button):
@@ -336,7 +345,7 @@ Delete: Deletes the specified quiz question by index.
         self.cp = 2
         await self.update_message()
 
-    @discord.ui.button(label="🛡️", custom_id='admin', style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="🛡️", custom_id='admin', style=discord.ButtonStyle.red)
     async def admin_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
         await interaction.response.defer()
