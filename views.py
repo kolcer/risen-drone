@@ -286,7 +286,7 @@ Delete: Deletes the specified quiz question by index.
             self.first_page_button.style = discord.ButtonStyle.green
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 2:
+        if self.cp == 2 or self.cp == 3:
             self.next_button.disabled = True
             self.last_page_button.disabled = True
             self.last_page_button.style = discord.ButtonStyle.gray
@@ -345,7 +345,7 @@ Delete: Deletes the specified quiz question by index.
         self.cp = 2
         await self.update_message()
 
-    @discord.ui.button(label="🛡️", custom_id='admin', style=discord.ButtonStyle.red)
+    @discord.ui.button(label="🛡️", custom_id='admin', row=2, style=discord.ButtonStyle.red)
     async def admin_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
         await interaction.response.defer()
