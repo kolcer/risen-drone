@@ -6,6 +6,7 @@ SERVER_DATA = {
 }
 
 # VARIABLE ARRAYS
+NEW_MEMBERS = []
 EX_CLIMBERS = []
 NOT_SLEAZEL = [False]
 LOSERS = []
@@ -433,11 +434,7 @@ MIXED_WORD_TRIGGERS = {
     "Wrong.": [
         'drone',
         ["dead", "down", "off", "vacation", "sleep"],
-    ],    
-    "Type `morph to [alignment]` in <#750060041289072771>.\nType `bd help` for the full list of commands.": [
-        'role',
-        ["have", "get", "receive", "recieve", "give myself", "obtain", "find"],
-    ], 
+    ],
 }
 
 SANCTUARY = {
