@@ -219,7 +219,7 @@ async def on_message(message):
         return
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles:
-        NEW_MEMBERS.pop(usr)
+        NEW_MEMBERS.remove(usr)
 
         await SEND(ch, f"{usr.mention} congratulations for verifying your account. Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>.\nAnd if you are still curious, `bd help` will show you all the commands I can respond to.")
 
