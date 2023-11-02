@@ -105,6 +105,244 @@ class ShowProfile(discord.ui.View):
         self.cp = 2
         await self.update_message()
 
+class ShowCommands(discord.ui.View):
+    cp  = 0
+    titles = [
+        "Basic Commands",
+        "Fun Commands",
+        "Minigames Commands",
+        "Drone Master Commands"
+    ]
+    
+    data = [
+        '''
+        Please use these commands only in <#750060041289072771>
+
+**morph to** *[alignment]*
+➡️ Get chosen alignment role in this server (Remember to always read the server rules)
+
+**demorph from** *[alignment]*
+➡️ Remove chosen alignment role
+
+**sub to** *[ping role]*
+➡️ Subscribe to chosen ping role
+
+**unsub from** *[ping role]*
+➡️ Unsubscribe from chosen ping role
+
+**general tip**
+➡️ Show a general tip
+
+*[alignment]* **tip**
+➡️ Show chosen alignment tip
+
+**general trivia**
+➡️ Show a general trivia
+
+*[alignment]* **trivia**
+➡️ Show chosen alignment trivia
+
+
+**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
+**Extra alignments** *(cannot be morphed into)*: Possessed, None, Architect.
+**Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Sleazel-in-game (sub if you want Prank The Creator badge)
+        ''',
+
+        '''
+        Once again, use these commands in <#750060041289072771>
+
+**bd show profile**
+➡️ Admire your roles collection and some of your statistics
+
+**cast** *[alignment]* **rig**
+➡️ Your favorite alignment's rig, but on Discord
+
+**drone of wisdom**
+➡️ Receive wisdom directly from myself that will change how you perceive the world
+
+**revive chat**
+➡️ How could YOU
+
+**reset bot**
+➡️ Use this command if I become unresponsive (which I won't) (3 users required)
+
+
+** USER COMMANDS **
+
+*Reminder to use 0 if the user does not have a discriminator. This will change once Discord forces everyone to set one.*
+
+**bd scold** *[username#discriminator]*
+➡️ They should not have done that
+
+**give mana to** *[username#discriminator]*
+➡️ Removes the Possessed role from the user (does not apply to users muted by moderators)
+
+
+**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer.
+        ''',
+
+        '''
+        I hope you did not forget, but use these commands in <#750060041289072771> in case you did not read this part the previous times
+
+**play lucid ladders**
+➡️ Start Lucid Ladders minigame (requires at least 2 players)
+
+**start quiz**
+➡️ Start Crazy Stairs knowledge quiz (2 players required, 20 questions, timed)
+        ''',
+
+        '''
+        If you are not already, maybe move to <#813882658156838923> 
+
+**|ispy** *[channel-name]*
+➡️ Starts an "ispy" mini-game in the specified channel
+
+**|quiz** *[action] [?]*
+➡️ New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
+Count: Displays the number of currently existing quiz questions.
+Print: Prints a specified quiz question with its answer, options, and responses. Specify the question index in the [?] section.
+List: Lists all current quiz questions.
+Delete: Deletes the specified quiz question by index.
+
+**|makesay** *[channel-name] [message]*
+➡️ Have the bot repeat what you say
+
+**|ckr to/from** *[user#discriminator]*
+➡️ Gives or removes the Chat Killer role
+
+**|nr** *[name]*
+➡️ Creates new custom role :bangbang:
+
+**|un/assign** *[!!USER ID!!] [role-name]*
+➡️ Removes/assigns custom roles :bangbang:
+
+**|purge role** *[role-name]*
+➡️ Deletes a custom role :bangbang:
+
+**|buttons** *[num] [channel]*
+➡️ Starts button minigame
+1: Fake Interaction
+2: So Many Buttons
+3: Help Broken Drone
+4: Tic Tac Toe
+5: Poll
+
+
+:bangbang: Must be in the FUN_ROLES list in globals.py
+        ''',
+    ]
+
+    footers = [
+        "Morph to your favorite Alignments and subscribe to various pings to be notified of stuff.", 
+        "Use my commands and have some fun. **Discriminator is 0 if the user does not have one!**", 
+        "Play some of the minigames currently available. They require participation from more people.",
+        "What are you up to??"
+    ]
+    
+    sidecolor = [
+        "FFA500",
+        "FF0000",
+        "FFC0CB",
+        "FFC0CB"
+    ]
+    
+    embed = None
+    
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await self.message.edit(embed=self.embed, view=self)
+
+    async def send(self, ch):
+        self.message = await ch.send(view=self)
+        await self.update_message()
+
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = self.titles[self.cp]
+        embed.description = self.data[self.cp]
+        embed.set_footer(text=self.footers[self.cp])
+
+        embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
+        self.embed = embed
+        return embed
+
+    async def update_message(self):
+        self.update_buttons()
+        await self.message.edit(embed=self.create_embed(), view=self)
+
+    def update_buttons(self):
+        if self.cp == 0:
+            self.first_page_button.disabled = True
+            self.prev_button.disabled = True
+            self.first_page_button.style = discord.ButtonStyle.gray
+            self.prev_button.style = discord.ButtonStyle.gray
+        else:
+            self.first_page_button.disabled = False
+            self.prev_button.disabled = False
+            self.first_page_button.style = discord.ButtonStyle.green
+            self.prev_button.style = discord.ButtonStyle.primary
+
+        if self.cp == 2 or self.cp == 3:
+            self.next_button.disabled = True
+            self.last_page_button.disabled = True
+            self.last_page_button.style = discord.ButtonStyle.gray
+            self.next_button.style = discord.ButtonStyle.gray
+        else:
+            self.next_button.disabled = False
+            self.last_page_button.disabled = False
+            self.last_page_button.style = discord.ButtonStyle.green
+            self.next_button.style = discord.ButtonStyle.primary
+
+
+    async def check_requester(self, interaction, button):
+            if interaction.user != self.requester:
+                await INTERACTION(interaction.response, "You did not ask for help, did you?", True)
+                return
+            
+            if button.custom_id == 'admin':
+                if not EXTRA_ROLES['admin'] in interaction.user.roles:
+                    await INTERACTION(interaction.response, "This is not for you.", True)
+                    return
+            
+
+    @discord.ui.button(label="|<", custom_id='0', style=discord.ButtonStyle.green)
+    async def first_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction, button)
+        await interaction.response.defer()
+        self.cp = 0
+
+        await self.update_message()
+
+    @discord.ui.button(label="<", custom_id='1', style=discord.ButtonStyle.primary)
+    async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction, button)
+        await interaction.response.defer()
+        self.cp -= 1
+        await self.update_message()
+
+    @discord.ui.button(label=">", custom_id='2', style=discord.ButtonStyle.primary)
+    async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction, button)
+        await interaction.response.defer()
+        self.cp += 1
+        await self.update_message()
+
+    @discord.ui.button(label=">|", custom_id='3', style=discord.ButtonStyle.green)
+    async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction, button)
+        await interaction.response.defer()
+        self.cp = 2
+        await self.update_message()
+
+    @discord.ui.button(label="🛡️", custom_id='admin', style=discord.ButtonStyle.blurple)
+    async def admin_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction, button)
+        await interaction.response.defer()
+        self.cp = 3
+        await self.update_message()
+
 class SplicerView(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:
