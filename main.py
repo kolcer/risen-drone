@@ -698,6 +698,7 @@ async def on_message(message):
             # Command will go through. Prepare the View.
             view = ShowCommands(timeout=500)
             view.requester = usr
+            view.channel = ch
 
             await view.send(ch)
             await view.wait()
@@ -927,38 +928,7 @@ async def on_message(message):
         lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
 
         #-----admin commands that require ONE input-----
-        if len(msginputs) == 1:
-            #full admin commands list
-            if lmsg.startswith("cmdlist", 1):
-                if ch.id != 813882658156838923:
-                    await SEND(ch, "Try to be more discreet, they do not need to know.")
-                    return
-
-                await SEND(ch,''' **ADMIN COMMANDS:**  
-|ispy [channel-name]: Starts an "ispy" mini-game in the specified channel.
-
-|quiz [action] [?]:
-
-New: Creates a new quiz question with the format "Question|Correct answer|Option 1|Option 2|Option 3|[Automatic user mention +] Good response|Bad response".
-Count: Displays the number of currently existing quiz questions.
-Print: Prints a specified quiz question with its answer, options, and responses. Specify the question index in the [?] section.
-List: Lists all current quiz questions.
-Delete: Deletes the specified quiz question by index.
-
-|makesay [channel-name] [message]: Forces the bot to type the specified message in the indicated channel.
-
-|ckr to/from [user#discriminator]: Gives or removes the Chat Killer role from the specified user.
-
-|nr [name]: Creates a new entry in retis with the specified name (add it to FUN_ROLES in globals.py).
-
-|un/assign [!!USER ID!!] [role-name]: Removes or assigns the specified role to the indicated user. The role must be in the FUN_ROLES list.
-
-|purge role [role-name]: Deletes the specified role. The role must be in the FUN_ROLES list.
-
-|edit tracker [alignment] [new-count]: Changes the tracker count for the selected alignment to the specified number.
-''')
-                return
-            
+        if len(msginputs) == 1:            
             #resets the rig tracker message  ---why would you do this? ç__ç
             if lmsg.startswith("resetcounter", 1):
                 await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")

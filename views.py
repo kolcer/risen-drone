@@ -304,6 +304,9 @@ Delete: Deletes the specified quiz question by index.
             self.admin_button.disabled = False
             self.admin_button.style = discord.ButtonStyle.red
 
+        if not EXTRA_ROLES['admin'] in self.requester.roles:
+            self.admin_button.disabled = True
+
 
     async def check_requester(self, interaction, button):
             if interaction.user != self.requester:
@@ -312,8 +315,12 @@ Delete: Deletes the specified quiz question by index.
             
             if button.custom_id == 'admin':
                 if not EXTRA_ROLES['admin'] in interaction.user.roles:
-                    await INTERACTION(interaction.response, "This is not for you.", True)
+                    await INTERACTION(interaction.response, "You somehow clicked the button, however, its content is far from your reach.", True)
                     return
+                
+    async def check_channel(self):
+            if self.channel != 813882658156838923:
+                self.data[3] = "🛡️"
             
 
     @discord.ui.button(label="|<", custom_id='0', style=discord.ButtonStyle.green)
@@ -348,6 +355,7 @@ Delete: Deletes the specified quiz question by index.
     @discord.ui.button(label="🛡️", custom_id='admin', row=2, style=discord.ButtonStyle.red)
     async def admin_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
+        await self.check_channel()
         await interaction.response.defer()
         self.cp = 3
         await self.update_message()
