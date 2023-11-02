@@ -697,6 +697,7 @@ async def on_message(message):
         elif lmsg == 'bd help':            
             # Command will go through. Prepare the View.
             view = ShowCommands(timeout=500)
+            view.requester = usr
 
             await view.send(ch)
             await view.wait()
