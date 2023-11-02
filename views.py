@@ -177,7 +177,7 @@ class ShowCommands(discord.ui.View):
 ➡️ They should not have done that
 
 **give mana to** *[username#discriminator]*
-➡️ Removes the Possessed role from the user (does not apply to users muted by moderators)
+➡️ Remove the Possessed role from the user (does not apply to users muted by moderators)
 
 
 **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer.
@@ -319,7 +319,7 @@ Delete: Deletes the specified quiz question by index.
                     return
                 
     async def check_channel(self):
-            if self.channel != 813882658156838923:
+            if self.channel.id != 813882658156838923:
                 self.data[3] = "🛡️"
             
 
