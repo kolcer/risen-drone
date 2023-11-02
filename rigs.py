@@ -178,7 +178,10 @@ async def Rig(rigType, ch, usr):
             await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)     
         
         case "hacker":
-            im = "".join(random.sample(usr.nick, len(usr.nick)))
+            nameInList = list(usr.display_name)
+            random.shuffle(nameInList)
+            im = ''.join(nameInList)
+            # im = "".join(random.sample(usr.nick, len(usr.nick)))
             msgCounting = await SEND(ch, "You cast Hacker Rig an- ####01111001##à#01101111###01110101###01110010#00100000###01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000####à01101110#01101111#01110111#00100000#01110010#01100001#01101110#01100100##01101111#01101101#01101001#01111010#01100101#01100100#00100001")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
