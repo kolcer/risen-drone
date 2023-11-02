@@ -105,15 +105,7 @@ class ShowProfile(discord.ui.View):
         self.cp = 2
         await self.update_message()
 
-class ShowCommands(discord.ui.View):
-    cp  = 0
-    titles = [
-        "Basic Commands",
-        "Fun Commands",
-        "Minigames Commands",
-        "Drone Master Commands"
-    ]
-    
+class ShowCommands(discord.ui.View):    
     data = [
         '''
         Please use these commands only in <#750060041289072771>
@@ -234,6 +226,14 @@ Delete: Deletes the specified quiz question by index.
         ''',
     ]
 
+    cp  = 0
+    titles = [
+        "Basic Commands",
+        "Fun Commands",
+        "Minigames Commands",
+        "Drone Master Commands"
+    ]
+
     footers = [
         "Morph to your favorite Alignments and subscribe to various pings to be notified of stuff.", 
         "Use my commands and have some fun. !!Discriminator is 0 if the user does not have one!!", 
@@ -247,6 +247,10 @@ Delete: Deletes the specified quiz question by index.
         "FFC0CB",
         "FFC0CB"
     ]
+
+    data_original = data.copy()
+    footers_original = footers.copy()
+    titles_original = titles.copy()
     
     embed = None
     
@@ -321,6 +325,12 @@ Delete: Deletes the specified quiz question by index.
     async def check_channel(self):
             if self.channel.id != 813882658156838923:
                 self.data[3] = "🛡️"
+                self.titles[3] = "Shield Simulator"
+                self.footers[3] = "Shiny!"
+            else:
+                self.data[3] = self.data_original[3]
+                self.titles[3] = self.titles_original[3]
+                self.footers[3] = self.footers_original[3]
             
 
     @discord.ui.button(label="|<", custom_id='0', style=discord.ButtonStyle.green)
