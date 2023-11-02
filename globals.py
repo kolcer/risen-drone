@@ -436,7 +436,7 @@ MIXED_WORD_TRIGGERS = {
     ],    
     "Type `morph to [alignment]` in <#750060041289072771>.\nType `bd help` for the full list of commands.": [
         'role',
-        ["have", "get", "receive", "give myself", "obtain"],
+        ["have", "get", "receive", "recieve", "give myself", "obtain", "find"],
     ], 
 }
 
