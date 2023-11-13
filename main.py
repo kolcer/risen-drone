@@ -668,7 +668,7 @@ async def on_message(message):
             for member in EXTRA_ROLES['necromancer'].members:
                 if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
                     await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
-            await SEND(ch, f"**{usr.name}** has just became a Necromancer and resurrected the chat.")
+            await SEND(ch, f"**{usr.name}** has just become a Necromancer and resurrected the chat.")
             await asyncio.sleep(5)
             await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
             await asyncio.sleep(1)
