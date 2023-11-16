@@ -232,6 +232,10 @@ async def on_message(message):
 
         await DELETE(message)
 
+
+    if (ch.id == 1154751339872653312 or ch.id == 1154748785415700582) and ("tenor.com" in msg.lower() or "giphy.com" in msg.lower()):
+        await DELETE(message)
+
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
     ## before returning 
