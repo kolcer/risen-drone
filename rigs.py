@@ -299,9 +299,9 @@ async def CastRig(rigPick,ch,usr):
             
             elif randomRig in RANDOM_BLACKLIST:
                 if randomAttempts == 0:
-                    await SEND(ch, "No, that's not it. Let me try again. Suspense!! 🥁🥁🥁")
+                    await SEND(ch, "No, that's not it. Let me try again. Suspense!! 🥁🥁")
                 elif randomAttempts == 1:
-                    await SEND(ch, "We can't have this one either. The next outcome will surprise you! 🥁🥁🥁")
+                    await SEND(ch, "We can't have this one either. The next outcome will surprise you! 🥁")
                 elif randomAttempts == 2:
                     await SEND(ch, "No can do. Fifth is the charm. Or was it fourth? Stay ready.")
                 
@@ -309,12 +309,12 @@ async def CastRig(rigPick,ch,usr):
                 await asyncio.sleep(4)
 
             elif randomRig == "splicer" and APPROVED_ROLES["Splicer"] not in usr.roles:
-                await SEND(ch, "This one is not for you. Let me do another roll. Be ready!! 🥁🥁🥁")
+                await SEND(ch, "This one is not for you. Let me do another roll. Be ready!! 🥁")
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
 
             elif usr in RIG_SPAMMERS and RIG_SPAMMERS[usr] == 2 and randomRig in LIMITED_USE_RIGS:
-                await SEND(ch, "Considering you are on a break, we should reserve this one for another time. Behold... 🥁🥁🥁")
+                await SEND(ch, "Considering you are on a break, we should reserve this one for another time. Behold... 🥁")
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
 
