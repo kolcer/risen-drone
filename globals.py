@@ -130,6 +130,7 @@ RIG_LIST = [
 RANDOM_BLACKLIST = [
     "patron",
     "necromancer",
+    "muggle",
 ]
 
 LIMITED_USE_RIGS = [
