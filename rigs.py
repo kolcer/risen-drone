@@ -295,7 +295,7 @@ async def CastRig(rigPick,ch,usr):
 
             if randomAttempts == 3:
                 await SEND(ch, "You know what. We can do without these rigs right now.")
-                return
+                break
             
             elif randomRig in RANDOM_BLACKLIST:
                 if randomAttempts == 0:
@@ -321,7 +321,8 @@ async def CastRig(rigPick,ch,usr):
             else:
                 break
 
-        await Rig(randomRig,ch,usr)
+        if randomAttempts < 3:   
+            await Rig(randomRig,ch,usr)
         return
 
     LAST_RIG[usr] = str(rigPick) + " Rig"
