@@ -313,6 +313,11 @@ async def CastRig(rigPick,ch,usr):
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
 
+            elif usr in RIG_SPAMMERS and RIG_SPAMMERS[usr] == 2 and randomRig in LIMITED_USE_RIGS:
+                await SEND(ch, "Considering you are on a break, we should reserve this one for another time. Behold... 🥁🥁🥁")
+                randomAttempts = randomAttempts + 1
+                await asyncio.sleep(4)
+
             else:
                 break
 
