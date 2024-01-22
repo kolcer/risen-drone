@@ -458,10 +458,14 @@ async def on_message(message):
             await view.too_late()
             BUTTONS["status"] = False
 
-        # ## All Rigs in one
-        elif "cast" in lmsg and "rig" in lmsg:
-            if lsplit[0] == "cast" and lsplit[2] == "rig":
-                await CastRig(lsplit[1],ch,usr)
+        # Old code for 'All Rigs in one'
+        # elif "cast" in lmsg and "rig" in lmsg:
+        #     if lsplit[0] == "cast" and lsplit[2] == "rig":
+        #         await CastRig(lsplit[1],ch,usr)
+
+        ## All Rigs in one
+        elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
+            await CastRig(lsplit[1],ch,usr)
 
         ## thief rig active
         elif ACTIVE_RIGS["thief"]:

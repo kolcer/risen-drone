@@ -256,9 +256,11 @@ async def Rig(rigType, ch, usr):
         del RIG_SPAMMERS[usr]      
 
 async def CastRig(rigPick,ch,usr):
+    randomRig = ""
+    randomAttempts = 0
 
-    if rigPick not in RIG_LIST and rigPick != "necromancer" and rigPick != "chameleon" and rigPick != "muggle":
-        await SEND(ch, "That is not a valid rig. Try again.")
+    if rigPick not in RIG_LIST:
+        await SEND(ch, "That's not an actual rig. And you know it. But if you didn't, type `bd help` to check which rigs you can cast.")
         return
     
     if MORPHABLE_ROLES["Guns"][0] in usr.roles and rigPick != "gun":
@@ -282,12 +284,39 @@ async def CastRig(rigPick,ch,usr):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await SEND(ch, " All cooldowns must be over for this Rig to take place. \n" + cdList)
+            await SEND(ch, " It looks like you had some fun with the other rigs. You have some waiting to do. \n" + cdList)
             return
 
-        await SEND(ch, "*drum roll*")
+        await SEND(ch, "What will it be? 🥁🥁🥁")
         await asyncio.sleep(4)
-        await Rig(random.choice(RIG_LIST),ch,usr)
+
+        while True:
+            randomRig = random.choice(RIG_LIST)
+
+            if randomAttempts == 3:
+                await SEND(ch, "You know what. We can do without these rigs right now.")
+                return
+            
+            elif randomRig in RANDOM_BLACKLIST:
+                if randomAttempts == 0:
+                    await SEND(ch, "No, that's not it. Let me try again. Suspense!! 🥁🥁🥁")
+                elif randomAttempts == 1:
+                    await SEND(ch, "We can't have this one either. The next outcome will surprise you! 🥁🥁🥁")
+                elif randomAttempts == 2:
+                    await SEND(ch, "No can do. Fifth is the charm. Or was it fourth? Stay ready.")
+                
+                randomAttempts = randomAttempts + 1
+                await asyncio.sleep(4)
+
+            elif randomRig == "splicer" and APPROVED_ROLES["Splicer"] not in usr.roles:
+                await SEND(ch, "This one is not for you. Let me do another roll. Be ready!! 🥁🥁🥁")
+                randomAttempts = randomAttempts + 1
+                await asyncio.sleep(4)
+
+            else:
+                break
+
+        await Rig(randomRig,ch,usr)
         return
 
     LAST_RIG[usr] = str(rigPick) + " Rig"

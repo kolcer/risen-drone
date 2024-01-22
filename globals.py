@@ -123,6 +123,13 @@ RIG_LIST = [
     "drifter",
     "splicer",
     "muggle",
+    "necromancer",
+    "chameleon",
+]
+
+RANDOM_BLACKLIST = [
+    "patron",
+    "necromancer",
 ]
 
 LIMITED_USE_RIGS = [
@@ -293,7 +300,7 @@ WISDOM = [
     "Don't forget to keep chatting and engaging with the community... you never know what surprises await you.",
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
-    "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank them, you'll receive the secret role as a reward.",
+    "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank him, you'll receive the secret role as a reward.",
     "Kill chat, revive, kill chat, revive, kill chat, revive, and hope nobody interrupts you while you're doing it. Maybe then I will forgive you.",
     # "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.", || what secret role was this for?
     "Wisdom can grant roles.",
@@ -616,11 +623,11 @@ FUN_ROLES = [
 ]
 
 LIMITED_ROLES = {
-    "I was there": "*(11/27/2022 - 11/28/2022)* ||The only true locked role||",
-    "Zero": "*(03/31/2023 - 04/19/2023)* ||RNG bad||",
-    "Persistent Clicker": "*(04/18/2023 - 04/19/2023)* ||Redundant||",
-    "Impostor": "*(04/11/2023 - 04/28/2023)* ||Useless role||",
-    "Last One": "*(04/18/2023 - 09/20/2023)* ||Rate Limited rip||",
+    "I was there": "*(11/27/2022 - 11/28/2022)*",
+    "Zero": "*(03/31/2023 - 04/19/2023)*",
+    "Persistent Clicker": "*(04/18/2023 - 04/19/2023)*",
+    "Impostor": "*(04/11/2023 - 04/28/2023)*",
+    "Last One": "*(04/18/2023 - 09/20/2023)*",
 }
 
 APPROVED_ROLES = {
