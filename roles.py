@@ -84,10 +84,7 @@ async def MorphTo(usr,role):
             return SPECIAL_ROLES[role][1]
                 
 
-async def DemorphFrom(usr,role):     
-    if role == "Gun":
-        role = "Guns"
-                
+async def DemorphFrom(usr,role):                
     if role in MORPHABLE_ROLES:
 
         if MORPHABLE_ROLES[role][0] not in usr.roles:
