@@ -594,7 +594,7 @@ MORPHABLE_ROLES = {
         "You cared enough to join again?",
         "You are banned from being a Heretic ever again.",
     ],
-    "Guns": [ 
+    "Gun": [ 
         None,
         "I really hate guns, but if you insist.",
         "Finally you came to your senses.",
