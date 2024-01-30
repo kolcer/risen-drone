@@ -62,45 +62,21 @@ def PrepareRoles(roles):
 #             continue
  
 async def MorphTo(usr,role):
-    if role == "Gun":
-        role = "Guns"
-
     randomChance = random.randint(0,2047) # chance to get a shiny: 1/2048
 
     if role in MORPHABLE_ROLES:
-        if role == "Guns":
+        if role == "Gun":
             await EDIT_NICK(usr,random.choice(WORST_GUNS))
 
         elif role == 'Roingus':
             await EDIT_NICK(usr, 'Roingus')
 
         if MORPHABLE_ROLES[role][0] in usr.roles:
-            # shiny check
-            if randomChance == 0:
-                if not SPECIAL_ROLES['Shiny'][0] in usr.roles:
-                    await SEND(CHANNELS['bot-commands'], f"{usr.mention} got a shiny!")
-                    await asyncio.sleep(1)
-                    await ADD_ROLES(usr, SPECIAL_ROLES['Shiny'][0])
-                    return
-                else:
-                    await SEND(CHANNELS['bot-commands'], f"{usr.mention} got ANOTHER SHINY?? I- ok.")
-                    return
             return MORPHABLE_ROLES[role][3]
         else:
-            # shiny check
-            if randomChance == 0:
-                if not SPECIAL_ROLES['Shiny'][0] in usr.roles:
-                    await SEND(CHANNELS['bot-commands'], f"{usr.mention} got a shiny!")
-                    await asyncio.sleep(1)
-                    await ADD_ROLES(usr, SPECIAL_ROLES['Shiny'][0])
-                    return
-                else:
-                    await SEND(CHANNELS['bot-commands'], f"{usr.mention} got ANOTHER SHINY?? I- ok.")
-                    return
             await ADD_ROLES(usr,MORPHABLE_ROLES[role][0])
             return MORPHABLE_ROLES[role][1]
                
-
     if role in SPECIAL_ROLES:
         if SPECIAL_ROLES[role][0] in usr.roles:
             return SPECIAL_ROLES[role][2]
