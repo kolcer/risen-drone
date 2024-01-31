@@ -956,6 +956,12 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     embed = None
 
     async def on_timeout(self):
+        for key in self.votes.keys():
+            for user in self.votes[key]:
+                if len(self.users) > 1:
+                    self.results += '\n'
+                self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+
         for item in self.children:
             item.disabled = True
 
@@ -996,7 +1002,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             for user in self.votes[key]:
                 if len(self.users) > 1:
                     self.results += '\n'
-                self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                self.results += f"A certain someone would..."
 
         
         # if (self.results == "No data."):
