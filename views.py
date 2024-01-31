@@ -962,6 +962,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
                     self.results += '\n'
                 self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
 
+        await self.update_message()
+
         for item in self.children:
             item.disabled = True
 
