@@ -475,8 +475,9 @@ async def on_message(message):
         #     if lsplit[0] == "cast" and lsplit[2] == "rig":
         #         await CastRig(lsplit[1],ch,usr)
             
-        elif lmsg.startswith('create poll|'):
+        elif lmsg.startswith('create poll|') and not BUTTONS["status"]:
             #example: create poll|what is better?|cola|fanta|sprite|pepsi
+            BUTTONS["status"] = True
             splitPoll = lmsg.split('|')
 
             if len(splitPoll) != 6:
@@ -491,7 +492,12 @@ async def on_message(message):
             pollA3 = splitPoll[4].capitalize()
             pollA4 = splitPoll[5].capitalize()
 
-            BUTTONS["status"] = True
+            for badword in blacklist:
+                if (badword in pollQ) or (badword in pollA1) or (badword in pollA2) or (badword in pollA3) or (badword in pollA4):
+                    await SEND(ch, "Your poll contains inappropriate content.")
+                    BUTTONS["status"] = False
+                    return
+
             view = ButtonGames_ThrowingStuff(timeout=120)
             view.users = []
             view.custom = True
