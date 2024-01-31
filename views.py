@@ -991,7 +991,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     async def update_message(self):
         await self.message.edit(embed=self.create_embed(), view=self)
 
-    async def process_click(self, interaction, button, usr):
+    async def process_click(self, interaction, buttonId, usr):
         if (usr in self.users):
             await INTERACTION(interaction.response, "One vote only.", True)
             return
@@ -999,9 +999,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         self.users.append(usr)
 
         if (self.results == "No data."):
-            self.results = f"{usr.display_name} would {self.theChoices[int(button.custom_id)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results = f"{usr.display_name} would {self.theChoices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
         else:
-            self.results += f"\n{usr.display_name} would {self.theChoices[int(button.custom_id)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results += f"\n{usr.display_name} would {self.theChoices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
 
         await self.update_message()
         await interaction.response.defer()

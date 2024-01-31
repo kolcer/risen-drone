@@ -208,25 +208,25 @@ async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
             custom_id = interaction.data['custom_id']
-            await DRONEPRINT(interaction.data)
+            view = interaction.message.view
+            user = interaction.user
 
-            if custom_id == "throw0":
-                # Logic for when button 1 is clicked
-                await SEND(interaction.channel, 'button 1 clicked successfully, how did you do that?')
-                await INTERACTION(interaction.response, "1!", False)
-                await interaction.response.send_message("You clicked button 1!")
-            elif custom_id == "throw1":
-                # Logic for when button 2 is clicked
-                await SEND(interaction.channel, 'button 2 works too!!!')
-                await INTERACTION(interaction.response, "2!", False)
-            elif custom_id == "throw2":
-                # Logic for when button 3 is clicked
-                await SEND(interaction.channel, 'button 3 has no issues')
-                await INTERACTION(interaction.response, "3!", False)
-            elif custom_id == "throw3":
-                # Logic for when button 4 is clicked
-                await SEND(interaction.channel, 'button 4 is fine')
-                await INTERACTION(interaction.response, "And 4! wow", False)
+            if isinstance(view, ButtonGames_ThrowingStuff):
+                # Call process_click on the instance
+                await view.process_click(interaction, custom_id, user)
+
+            # if custom_id == "throw0":
+            #     # Logic for when button 1 is clicked
+            #     await view.process_click(interaction, custom_id, user)
+            # elif custom_id == "throw1":
+            #     # Logic for when button 2 is clicked
+            #     await INTERACTION(interaction.response, "2!", False)
+            # elif custom_id == "throw2":
+            #     # Logic for when button 3 is clicked
+            #     await INTERACTION(interaction.response, "3!", False)
+            # elif custom_id == "throw3":
+            #     # Logic for when button 4 is clicked
+            #     await INTERACTION(interaction.response, "And 4! wow", False)
 
 
 #main function on each message being intercepted
