@@ -203,6 +203,27 @@ async def on_message_edit(before, after):
 
         await DELETE(after)
 
+@client.event
+async def on_interaction(interaction):
+    if isinstance(interaction, discord.Interaction):
+        if interaction.type == discord.InteractionType.component:
+            if isinstance(interaction, discord.ButtonInteraction):
+                custom_id = interaction.custom_id
+
+                if custom_id == "throw0":
+                    # Logic for when button 1 is clicked
+                    await INTERACTION(interaction.response, "1!", False)
+                elif custom_id == "throw1":
+                    # Logic for when button 2 is clicked
+                    await INTERACTION(interaction.response, "2!", False)
+                elif custom_id == "throw2":
+                    # Logic for when button 3 is clicked
+                    await INTERACTION(interaction.response, "3!", False)
+                elif custom_id == "throw3":
+                    # Logic for when button 4 is clicked
+                    await INTERACTION(interaction.response, "And 4! wow", False)
+
+
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
@@ -895,10 +916,10 @@ async def on_message(message):
                 view.choice4 = view.choices[3]
 
                 # Define the buttons without labels yet
-                button1 = discord.ui.Button(label=view.choice1, custom_id="0", style=discord.ButtonStyle.secondary)
-                button2 = discord.ui.Button(label=view.choice2, custom_id="1", style=discord.ButtonStyle.secondary)
-                button3 = discord.ui.Button(label=view.choice3, custom_id="2", style=discord.ButtonStyle.secondary)
-                button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
+                button1 = discord.ui.Button(label=view.choice1, custom_id="throw0", style=discord.ButtonStyle.secondary)
+                button2 = discord.ui.Button(label=view.choice2, custom_id="throw1", style=discord.ButtonStyle.secondary)
+                button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.secondary)
+                button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.secondary)
 
                 #and idk how to give the previous buttons these functions
                 # def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
