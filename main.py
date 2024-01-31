@@ -211,22 +211,9 @@ async def on_interaction(interaction):
             user = interaction.user
 
             if custom_id.startswith('throw'):
+                custom_id.replace('throw', '')
                 view = BUTTONS['view']
                 await view.process_click(interaction, custom_id, user)
-
-            # if custom_id == "throw0":
-            #     # Logic for when button 1 is clicked
-            #     await view.process_click(interaction, custom_id, user)
-            # elif custom_id == "throw1":
-            #     # Logic for when button 2 is clicked
-            #     await INTERACTION(interaction.response, "2!", False)
-            # elif custom_id == "throw2":
-            #     # Logic for when button 3 is clicked
-            #     await INTERACTION(interaction.response, "3!", False)
-            # elif custom_id == "throw3":
-            #     # Logic for when button 4 is clicked
-            #     await INTERACTION(interaction.response, "And 4! wow", False)
-
 
 #main function on each message being intercepted
 @client.event
