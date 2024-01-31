@@ -901,27 +901,27 @@ async def on_message(message):
                 button4 = discord.ui.Button(label=view.choice4, custom_id="3", style=discord.ButtonStyle.secondary)
 
                 #and idk how to give the previous buttons these functions
-                def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    view.process_click(interaction, button, usr)
+                # def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     view.process_click(interaction, button, usr)
 
-                def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    view.process_click(interaction, button, usr)
+                # def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     view.process_click(interaction, button, usr)
 
-                def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    view.process_click(interaction, button, usr)
+                # def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     view.process_click(interaction, button, usr)
 
-                def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
-                    usr = interaction.user
-                    view.process_click(interaction, button, usr)
+                # def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+                #     usr = interaction.user
+                #     view.process_click(interaction, button, usr)
 
-                # # Assign actions using callback -  idk if this works tbh
-                button1.callback = B1(view, button1.Interaction, button1)
-                button2.callback = B2(view, button2.Interaction, button2)
-                button3.callback = B3(view, button3.Interaction, button3)
-                button4.callback = B4(view, button4.Interaction, button4)
+                # # # Assign actions using callback -  idk if this works tbh
+                # button1.callback = B1(view, button1.Interaction, button1)
+                # button2.callback = B2(view, button2.Interaction, button2)
+                # button3.callback = B3(view, button3.Interaction, button3)
+                # button4.callback = B4(view, button4.Interaction, button4)
 
                 # Add buttons to the view with their labels
                 view.add_item(button1)
