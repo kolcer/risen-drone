@@ -208,7 +208,7 @@ async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
             custom_id = interaction.data['custom_id']
-            view = interaction.message.view
+            view = ButtonGames_ThrowingStuff()
             user = interaction.user
 
             if isinstance(view, ButtonGames_ThrowingStuff):
