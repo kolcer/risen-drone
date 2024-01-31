@@ -208,7 +208,7 @@ async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
             custom_id = interaction.data['custom_id']
-            view = interaction.view
+            view = interaction.message.view
             user = interaction.user
 
             if isinstance(view, ButtonGames_ThrowingStuff):
@@ -926,40 +926,18 @@ async def on_message(message):
                 button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.secondary)
                 button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.secondary)
 
-                #and idk how to give the previous buttons these functions
-                # def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-                #     usr = interaction.user
-                #     view.process_click(interaction, button, usr)
-
-                # def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
-                #     usr = interaction.user
-                #     view.process_click(interaction, button, usr)
-
-                # def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
-                #     usr = interaction.user
-                #     view.process_click(interaction, button, usr)
-
-                # def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
-                #     usr = interaction.user
-                #     view.process_click(interaction, button, usr)
-
-                # # # Assign actions using callback -  idk if this works tbh
-                # button1.callback = B1(view, button1.Interaction, button1)
-                # button2.callback = B2(view, button2.Interaction, button2)
-                # button3.callback = B3(view, button3.Interaction, button3)
-                # button4.callback = B4(view, button4.Interaction, button4)
-
                 # Add buttons to the view with their labels
                 view.add_item(button1)
                 view.add_item(button2)
                 view.add_item(button3)
                 view.add_item(button4)
 
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing {view.thrownObject} at you! How do you react?!", view)
+                view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing **{view.thrownObject}** at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()
                 BUTTONS["status"] = False
+                await asyncio.sleep(1)
 
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
