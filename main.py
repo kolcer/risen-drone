@@ -205,9 +205,13 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_interaction(interaction):
+    await DRONEPRINT('we are inside')
     if isinstance(interaction, discord.Interaction):
+        await DRONEPRINT('first if')
         if interaction.type == discord.InteractionType.component:
-            custom_id = discord.ui.Button.custom_id
+            await DRONEPRINT('second if')
+            custom_id = interaction.data['custom_id']
+            await DRONEPRINT(interaction.data)
 
             if custom_id == "throw0":
                 # Logic for when button 1 is clicked
