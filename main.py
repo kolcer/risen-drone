@@ -892,7 +892,7 @@ async def on_message(message):
                 # theObject = random.choice(list(OBJECTS.keys()))
                 # theChoices = list(OBJECTS[theObject])
 
-                view = ButtonGames_ThrowingStuff(timeout=60)
+                view = ButtonGames_ThrowingStuff(timeout=300)
                 view.users = []
                 view.results = "No data."
 
