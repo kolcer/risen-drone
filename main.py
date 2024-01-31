@@ -207,7 +207,7 @@ async def on_message_edit(before, after):
 async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
-            if isinstance(interaction, discord.ButtonInteraction):
+            if isinstance(interaction, discord.ui.Button):
                 custom_id = interaction.custom_id
 
                 if custom_id == "throw0":
