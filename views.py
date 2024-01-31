@@ -956,6 +956,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     embed = None
 
     async def on_timeout(self):
+        self.results = ""
         for key in self.votes.keys():
             for user in self.votes[key]:
                 if len(self.users) > 1:
@@ -1004,7 +1005,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             for user in self.votes[key]:
                 if len(self.users) > 1:
                     self.results += '\n'
-                self.results += f"A certain someone would..."
+                self.results += f"Someone would..."
 
         
         # if (self.results == "No data."):
