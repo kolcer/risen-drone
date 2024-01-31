@@ -205,25 +205,27 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_interaction(interaction):
-    await DRONEPRINT('we are inside')
     if isinstance(interaction, discord.Interaction):
-        await DRONEPRINT('first if')
         if interaction.type == discord.InteractionType.component:
-            await DRONEPRINT('second if')
             custom_id = interaction.data['custom_id']
             await DRONEPRINT(interaction.data)
 
             if custom_id == "throw0":
                 # Logic for when button 1 is clicked
+                await SEND(interaction.channel, 'button 1 clicked successfully, how did you do that?')
                 await INTERACTION(interaction.response, "1!", False)
+                await interaction.response.send_message("You clicked button 1!")
             elif custom_id == "throw1":
                 # Logic for when button 2 is clicked
+                await SEND(interaction.channel, 'button 2 works too!!!')
                 await INTERACTION(interaction.response, "2!", False)
             elif custom_id == "throw2":
                 # Logic for when button 3 is clicked
+                await SEND(interaction.channel, 'button 3 has no issues')
                 await INTERACTION(interaction.response, "3!", False)
             elif custom_id == "throw3":
                 # Logic for when button 4 is clicked
+                await SEND(interaction.channel, 'button 4 is fine')
                 await INTERACTION(interaction.response, "And 4! wow", False)
 
 
