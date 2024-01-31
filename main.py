@@ -501,6 +501,7 @@ async def on_message(message):
             view = ButtonGames_ThrowingStuff(timeout=120)
             view.users = []
             view.custom = True
+            view.customUser = usr
 
             view.results = ""
             view.votes = {
@@ -525,7 +526,8 @@ async def on_message(message):
             view.add_item(button4)
             BUTTONS["view"] = view
 
-            view.message = await SEND_VIEW(ch, pollQ, view)
+            BUTTONS["channel"] = ch
+            view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
 
             await view.wait()
             await view.too_late()
