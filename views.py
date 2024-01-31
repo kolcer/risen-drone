@@ -968,7 +968,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, "Poll is closed. Look at the results.", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"{self.message}\nPoll is closed. Look at the results.", self)
 
     async def too_late(self):
         if len(self.users) < 1:
