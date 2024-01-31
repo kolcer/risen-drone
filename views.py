@@ -961,7 +961,11 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             for user in self.votes[key]:
                 if len(self.users) > 1:
                     self.results += '\n'
-                self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+
+                if not self.custom:
+                    self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                else:
+                    self.results += f"**{user.display_name}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
 
         await self.update_message()
 
@@ -1007,11 +1011,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
                     self.results += '\n'
                 self.results += f"Someone would..."
 
-        
-        # if (self.results == "No data."):
-        #     self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
-        # else:
-        #     self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
+        if self.custom:
+            self.results = self.results.replace("would", "voted for")
 
         await self.update_message()
         await interaction.response.defer()

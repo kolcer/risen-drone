@@ -474,7 +474,56 @@ async def on_message(message):
         # elif "cast" in lmsg and "rig" in lmsg:
         #     if lsplit[0] == "cast" and lsplit[2] == "rig":
         #         await CastRig(lsplit[1],ch,usr)
+            
+        elif lmsg.startswith('create poll|'):
+            #example: create poll|what is better?|cola|fanta|sprite|pepsi
+            splitPoll = lmsg.split('|')
 
+            if len(splitPoll) != 6:
+                await SEND(ch, 'Incorrect amount of items sent to create a poll.')
+
+            pollQ = splitPoll[1].capitalize()
+            if not pollQ.endswith("?"):
+                pollQ += "?"
+
+            pollA1 = splitPoll[2].capitalize()
+            pollA2 = splitPoll[3].capitalize()
+            pollA3 = splitPoll[4].capitalize()
+            pollA4 = splitPoll[5].capitalize()
+
+            BUTTONS["status"] = True
+            view = ButtonGames_ThrowingStuff(timeout=120)
+            view.users = []
+            view.custom = True
+
+            view.results = ""
+            view.votes = {
+                "0": [],
+                "1": [],
+                "2": [],
+                "3": [],
+            }
+
+            view.choices = [pollA1, pollA2, pollA3, pollA4]
+
+            # Define the buttons without labels yet
+            button1 = discord.ui.Button(label=pollA1, custom_id="throw0", style=discord.ButtonStyle.secondary)
+            button2 = discord.ui.Button(label=pollA2, custom_id="throw1", style=discord.ButtonStyle.secondary)
+            button3 = discord.ui.Button(label=pollA3, custom_id="throw2", style=discord.ButtonStyle.secondary)
+            button4 = discord.ui.Button(label=pollA4, custom_id="throw3", style=discord.ButtonStyle.secondary)
+
+            # Add buttons to the view with their labels
+            view.add_item(button1)
+            view.add_item(button2)
+            view.add_item(button3)
+            view.add_item(button4)
+            BUTTONS["view"] = view
+
+            view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+
+            await view.wait()
+            await view.too_late()
+            BUTTONS["status"] = False
         ## All Rigs in one
         elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
             await CastRig(lsplit[1],ch,usr)
@@ -894,6 +943,7 @@ async def on_message(message):
 
                 view = ButtonGames_ThrowingStuff(timeout=120)
                 view.users = []
+                view.custom = False
 
                 view.results = ""
                 view.votes = {
