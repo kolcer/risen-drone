@@ -997,12 +997,13 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         
         self.users.append(usr)
         self.votes[buttonId].append(usr)
-
+        self.results = ""
+        
         for key in self.votes.keys():
             for user in self.votes[key]:
                 if len(self.users) > 1:
                     self.results += '\n'
-                self.results += f"{user.display_name} would {self.choices[int(buttonId)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                self.results += f"{user.display_name} would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
 
         
         # if (self.results == "No data."):
