@@ -954,6 +954,13 @@ class ButtonGames_TicTacToe(discord.ui.View):
 
 class ButtonGames_ThrowingStuff(discord.ui.View):
     embed = None
+    results = ""
+    votes = {
+        "0": [],
+        "1": [],
+        "2": [],
+        "3": [],
+    }
 
     async def on_timeout(self):
         for item in self.children:
@@ -989,11 +996,19 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             return
         
         self.users.append(usr)
+        self.votes[buttonId].append(usr)
 
-        if (self.results == "No data."):
-            self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
-        else:
-            self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
+        for key in self.votes.keys():
+            for user in self.votes[key]:
+                if len(self.users) > 1:
+                    self.results += '\n'
+                self.results += f"{user.display_name} would {self.choices[int(buttonId)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+
+        
+        # if (self.results == "No data."):
+        #     self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
+        # else:
+        #     self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
 
         await self.update_message()
         await interaction.response.defer()

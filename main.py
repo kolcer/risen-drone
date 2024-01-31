@@ -894,7 +894,6 @@ async def on_message(message):
 
                 view = ButtonGames_ThrowingStuff(timeout=300)
                 view.users = []
-                view.results = "No data."
 
                 view.thrownObject = random.choice(list(OBJECTS.keys()))
                 view.choices = list(OBJECTS[view.thrownObject])
