@@ -989,9 +989,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         self.users.append(usr)
 
         if (self.results == "No data."):
-            self.results = f"{usr.display_name} would {self.theChoices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
         else:
-            self.results += f"\n{usr.display_name} would {self.theChoices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
 
         await self.update_message()
         await interaction.response.defer()
