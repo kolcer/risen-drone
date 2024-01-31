@@ -208,11 +208,10 @@ async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
             custom_id = interaction.data['custom_id']
-            view = ButtonGames_ThrowingStuff()
             user = interaction.user
 
-            if isinstance(view, ButtonGames_ThrowingStuff):
-                # Call process_click on the instance
+            if custom_id.startswith('throw'):
+                view = ButtonGames_ThrowingStuff()
                 await view.process_click(interaction, custom_id, user)
 
             # if custom_id == "throw0":
