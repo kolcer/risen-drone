@@ -325,13 +325,14 @@ OBJECTS = {
     "a stair": {"Climb it", "Block it with a wicked wall", "Teleport somewhere else", "Steal it"},
     "an apple": {"Catch it", "Dodge it", "Kick it away", "Peel it and give it back"},
     "a refrigerator": {"Try to catch it", "See what's inside", "Stand still", "Dive"},
-    "a Mana orb": {"Absorb it", "Look at its color", "Avoid it", "Ask about its origin"},
+    "a Mana orb": {"Absorb it", "Look at its color", "Avoid it", "Be indifferent"},
     "Sleazel": {"Sleazel?!?", "Dodge him", "Try to catch him", "Shield yourself"},
     "Broken Drone": {"Phase through it", "Stand still", "Scream", "Run sideways"},
     "a Chameleon": {"Catch it", "Be disgusted", "Claim a Muggle instead", "Buy it for 200 dollars"},
     "some Robux": {"Ask for more", "Flee", "Get the giftcards", "Resell them"},
     "a book": {"Read it", "Spoil the ending", "Use a Karate move and deflect it", "Stand still"},
     "a gun": {"Stair bonk it", "Promote it to Admin", "Raise your hands", "Run away"},
+    "a Roingus": {"Be happy", "Don't let it hurt itself", "Walk away", "Save it and join the Roingus club"},
 }
 
 # CONSTANT DICTIONARIES

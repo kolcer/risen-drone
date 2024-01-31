@@ -812,7 +812,7 @@ async def on_message(message):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
-                BUTTONS["phase"] = random.randint(1, 4)
+                BUTTONS["phase"] = random.randint(1, 5)
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
@@ -892,9 +892,7 @@ async def on_message(message):
                 # theObject = random.choice(list(OBJECTS.keys()))
                 # theChoices = list(OBJECTS[theObject])
 
-                view = ButtonGames_ThrowingStuff()
-
-                view.toolate = True
+                view = ButtonGames_ThrowingStuff(timeout=60)
                 view.users = []
                 view.results = "No data."
 

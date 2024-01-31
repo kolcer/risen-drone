@@ -964,8 +964,10 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     async def too_late(self):
         if len(self.users) < 1:
             await SEND(BUTTONS["channel"], "No participation whatsoever.")
+        elif len(self.users) == 1:
+            await SEND(BUTTONS["channel"], "You spoke for everyone else.")
         else:
-            await SEND(BUTTONS["channel"], "Nice going.")
+            await SEND(BUTTONS["channel"], "Very interesting choices.")
 
         await self.on_timeout()
 
@@ -989,9 +991,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         self.users.append(usr)
 
         if (self.results == "No data."):
-            self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results = f"{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
         else:
-            self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}.".replace("your", "their").replace("yourself", "themselves").lower()
+            self.results += f"\n{usr.display_name} would {self.choices[int(buttonId)]}".replace("your", "their").replace("yourself", "themselves").replace("Don't", "not").lower()
 
         await self.update_message()
         await interaction.response.defer()
