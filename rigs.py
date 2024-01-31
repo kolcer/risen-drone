@@ -263,7 +263,7 @@ async def CastRig(rigPick,ch,usr):
         await SEND(ch, "That's not an actual rig. And you know it. But if you didn't, type `bd help` to check which rigs you can cast.")
         return
     
-    if MORPHABLE_ROLES["Guns"][0] in usr.roles and rigPick != "gun":
+    if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
         await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
@@ -343,7 +343,7 @@ async def ExecuteThiefRig(ch,usr):
     tooLong = False
     isMurdurator = False
             
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Guns"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
                
     if len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
@@ -448,7 +448,7 @@ async def ExecuteJokerRig(ch,usr, message):
 
 async def ExecuteSplicerRig(ch,usr):
  
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Guns"][0] in usr.roles):
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
         return
                 
     ACTIVE_RIGS["splicer"] = False
