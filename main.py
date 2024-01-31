@@ -211,7 +211,7 @@ async def on_interaction(interaction):
             user = interaction.user
 
             if custom_id.startswith('throw'):
-                view = ButtonGames_ThrowingStuff()
+                view = BUTTONS['view']
                 await view.process_click(interaction, custom_id, user)
 
             # if custom_id == "throw0":
@@ -930,13 +930,12 @@ async def on_message(message):
                 view.add_item(button2)
                 view.add_item(button3)
                 view.add_item(button4)
+                BUTTONS["view"] = view
 
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Look up! Someone is throwing **{view.thrownObject}** at you! How do you react?!", view)
 
                 await view.wait()
                 await view.too_late()
-                BUTTONS["status"] = False
-                await asyncio.sleep(1)
 
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):

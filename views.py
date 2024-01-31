@@ -955,16 +955,6 @@ class ButtonGames_TicTacToe(discord.ui.View):
 class ButtonGames_ThrowingStuff(discord.ui.View):
     embed = None
 
-    # def __init__(self):
-    #     thrownObject = random.choice(list(OBJECTS.keys()))
-    #     theChoices = list(OBJECTS[thrownObject])
-        
-    #     self.choice1 = theChoices[0]
-    #     self.choice2 = theChoices[1]
-    #     self.choice3 = theChoices[2]
-    #     self.choice4 = theChoices[3]
-
-
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True

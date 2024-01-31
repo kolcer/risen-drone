@@ -768,6 +768,7 @@ I_SPY = {
 BUTTONS = {
     "status": False,
     "channel": None,
+    "view": None,
     "phase": 1,
     "phase2labels": [
         "Not this one",
