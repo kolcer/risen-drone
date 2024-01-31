@@ -525,7 +525,7 @@ async def on_message(message):
             view.add_item(button4)
             BUTTONS["view"] = view
 
-            view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+            view.message = await SEND_VIEW(ch, pollQ, view)
 
             await view.wait()
             await view.too_late()
