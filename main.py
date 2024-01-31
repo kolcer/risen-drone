@@ -493,7 +493,7 @@ async def on_message(message):
             pollA4 = splitPoll[5].capitalize()
 
             for badword in blacklist:
-                if (badword in pollQ) or (badword in pollA1) or (badword in pollA2) or (badword in pollA3) or (badword in pollA4):
+                if (badword in pollQ.lower()) or (badword in pollA1.lower()) or (badword in pollA2.lower()) or (badword in pollA3.lower()) or (badword in pollA4.lower()):
                     await SEND(ch, "Your poll contains inappropriate content.")
                     BUTTONS["status"] = False
                     return
