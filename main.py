@@ -207,21 +207,20 @@ async def on_message_edit(before, after):
 async def on_interaction(interaction):
     if isinstance(interaction, discord.Interaction):
         if interaction.type == discord.InteractionType.component:
-            if isinstance(interaction, discord.ui.Button):
-                custom_id = interaction.custom_id
+            custom_id = interaction.custom_id
 
-                if custom_id == "throw0":
-                    # Logic for when button 1 is clicked
-                    await INTERACTION(interaction.response, "1!", False)
-                elif custom_id == "throw1":
-                    # Logic for when button 2 is clicked
-                    await INTERACTION(interaction.response, "2!", False)
-                elif custom_id == "throw2":
-                    # Logic for when button 3 is clicked
-                    await INTERACTION(interaction.response, "3!", False)
-                elif custom_id == "throw3":
-                    # Logic for when button 4 is clicked
-                    await INTERACTION(interaction.response, "And 4! wow", False)
+            if custom_id == "throw0":
+                # Logic for when button 1 is clicked
+                await INTERACTION(interaction.response, "1!", False)
+            elif custom_id == "throw1":
+                # Logic for when button 2 is clicked
+                await INTERACTION(interaction.response, "2!", False)
+            elif custom_id == "throw2":
+                # Logic for when button 3 is clicked
+                await INTERACTION(interaction.response, "3!", False)
+            elif custom_id == "throw3":
+                # Logic for when button 4 is clicked
+                await INTERACTION(interaction.response, "And 4! wow", False)
 
 
 #main function on each message being intercepted
