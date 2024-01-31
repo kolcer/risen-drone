@@ -211,7 +211,7 @@ async def on_interaction(interaction):
             user = interaction.user
 
             if custom_id.startswith('throw'):
-                custom_id.replace('throw', '')
+                custom_id = custom_id.replace('throw', '')
                 view = BUTTONS['view']
                 await view.process_click(interaction, custom_id, user)
 
