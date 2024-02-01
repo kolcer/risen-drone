@@ -153,10 +153,10 @@ class ShowCommands(discord.ui.View):
 ➡️ Receive wisdom directly from myself that will change how you perceive the world
 
 **create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]**
-➡️ Create a poll with a question and its possible answers, votes will be revealed after 2 minutes since last interaction
+➡️ Create a poll with a question and its possible answers, votes will be revealed after 3 minutes since last interaction
 
 **revive chat**
-➡️ How could YOU
+➡️ How could you
 
 **reset bot**
 ➡️ Use this command if I become unresponsive (which I won't) (3 users required)
@@ -188,7 +188,8 @@ class ShowCommands(discord.ui.View):
 ➡️ Start Crazy Stairs knowledge quiz (2 players required, 20 questions, timed)
 
 **play hangman** *?*
-➡️ Play hangman with the other members or by yourself [? = alone, to play alone | ? = CUSTOMWORD, to make your own hangman | leave empty for a random word]
+➡️ Play hangman with the other members or by yourself
+*[? = alone, to play alone | ? = CUSTOMWORD, to make your own hangman | leave empty for a random word]*
         ''',
 
         '''

@@ -479,53 +479,41 @@ async def on_message(message):
             #example: create poll|what is better?|cola|fanta|sprite|pepsi
             BUTTONS["status"] = True
             splitPoll = lmsg.split('|')
+            pollA = []
 
-            if len(splitPoll) != 6:
+            if len(splitPoll) < 4:
                 await SEND(ch, 'Incorrect amount of items sent to create a poll.')
+            elif len(splitPoll) > 12:
+                await SEND(ch, 'Too many options.')
 
             pollQ = splitPoll[1].capitalize()
             if not pollQ.endswith("?"):
                 pollQ += "?"
 
-            pollA1 = splitPoll[2].capitalize()
-            pollA2 = splitPoll[3].capitalize()
-            pollA3 = splitPoll[4].capitalize()
-            pollA4 = splitPoll[5].capitalize()
+            for i in range(2, len(splitPoll) - 1):
+                pollA.append(splitPoll[i].capitalize())
 
             for badword in blacklist:
-                if (badword in pollQ.lower()) or (badword in pollA1.lower()) or (badword in pollA2.lower()) or (badword in pollA3.lower()) or (badword in pollA4.lower()):
-                    await SEND(ch, "Your poll contains inappropriate content.")
-                    BUTTONS["status"] = False
-                    return
+                for answer in pollA:
+                    if (badword in answer.lower()):
+                        await SEND(ch, "Your poll contains inappropriate content.")
+                        BUTTONS["status"] = False
+                        return
 
-            view = ButtonGames_ThrowingStuff(timeout=120)
+            view = ButtonGames_ThrowingStuff(timeout=180)
             view.users = []
             view.custom = True
             view.customUser = usr
 
             view.results = ""
-            view.votes = {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-            }
+            view.votes = {}
+            view.choices = pollA
 
-            view.choices = [pollA1, pollA2, pollA3, pollA4]
+            for i in range(0, len(splitPoll) - 3):
+                view.votes[i] = []
+                view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
-            # Define the buttons without labels yet
-            button1 = discord.ui.Button(label=pollA1, custom_id="throw0", style=discord.ButtonStyle.secondary)
-            button2 = discord.ui.Button(label=pollA2, custom_id="throw1", style=discord.ButtonStyle.secondary)
-            button3 = discord.ui.Button(label=pollA3, custom_id="throw2", style=discord.ButtonStyle.secondary)
-            button4 = discord.ui.Button(label=pollA4, custom_id="throw3", style=discord.ButtonStyle.secondary)
-
-            # Add buttons to the view with their labels
-            view.add_item(button1)
-            view.add_item(button2)
-            view.add_item(button3)
-            view.add_item(button4)
             BUTTONS["view"] = view
-
             BUTTONS["channel"] = ch
             view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
 
@@ -970,10 +958,10 @@ async def on_message(message):
                 view.choice4 = view.choices[3]
 
                 # Define the buttons without labels yet
-                button1 = discord.ui.Button(label=view.choice1, custom_id="throw0", style=discord.ButtonStyle.secondary)
-                button2 = discord.ui.Button(label=view.choice2, custom_id="throw1", style=discord.ButtonStyle.secondary)
-                button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.secondary)
-                button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.secondary)
+                button1 = discord.ui.Button(label=view.choice1, custom_id="throw0", style=discord.ButtonStyle.primary)
+                button2 = discord.ui.Button(label=view.choice2, custom_id="throw1", style=discord.ButtonStyle.primary)
+                button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.primary)
+                button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.primary)
 
                 # Add buttons to the view with their labels
                 view.add_item(button1)
