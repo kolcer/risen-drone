@@ -510,7 +510,7 @@ async def on_message(message):
             view.choices = pollA
 
             for i in range(0, len(splitPoll) - 3):
-                view.votes[i] = []
+                view.votes[str(i)] = []
                 view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
             BUTTONS["view"] = view
