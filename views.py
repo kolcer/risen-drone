@@ -1007,8 +1007,10 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         if (buttonId == "close"):
             if (usr == self.customUser):
                 await self.too_late()
+                return
             else:
                 await INTERACTION(interaction.response, "Only the person who created the poll may close it.", True)
+                return
 
         if (usr in self.users):
             await INTERACTION(interaction.response, "One vote only.", True)
