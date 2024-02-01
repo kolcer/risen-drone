@@ -483,8 +483,12 @@ async def on_message(message):
 
             if len(splitPoll) < 4:
                 await SEND(ch, 'Incorrect amount of items sent to create a poll.')
+                BUTTONS["status"] = False
+                return
             elif len(splitPoll) > 12:
                 await SEND(ch, 'Too many options.')
+                BUTTONS["status"] = False
+                return
 
             pollQ = splitPoll[1].capitalize()
             if not pollQ.endswith("?"):
