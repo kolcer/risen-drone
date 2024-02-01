@@ -152,8 +152,8 @@ class ShowCommands(discord.ui.View):
 **drone of wisdom**
 ➡️ Receive wisdom directly from myself that will change how you perceive the world
 
-**create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]**
-➡️ Create a poll with a question and its possible answers, votes will be revealed after 3 minutes since last interaction
+**create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]...** (2 to 10 answers)
+➡️ Create a poll with a question and its possible answers, votes will be revealed after 3 minutes since last interaction 
 
 **revive chat**
 ➡️ How could you
