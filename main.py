@@ -490,6 +490,7 @@ async def on_message(message):
                 BUTTONS["status"] = False
                 return
 
+            pollQ = splitPoll[1]
             if not pollQ.endswith("?"):
                 pollQ += "?"
 
@@ -518,7 +519,7 @@ async def on_message(message):
 
             BUTTONS["view"] = view
             BUTTONS["channel"] = ch
-            pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
+            pollQ = pollQ[0].upper() + pollQ[1:]
             view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
 
             await view.wait()
