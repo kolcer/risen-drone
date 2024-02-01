@@ -490,7 +490,7 @@ async def on_message(message):
                 BUTTONS["status"] = False
                 return
 
-            pollQ = splitPoll[1].capitalize()
+            pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
             if not pollQ.endswith("?"):
                 pollQ += "?"
 

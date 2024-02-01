@@ -997,11 +997,6 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         embed.description = self.results
         embed.color = discord.Colour(int("FFD700", 16))
 
-        if self.custom:
-            embed.set_footer(text=f"Asked by {self.customUser.display_name} ({self.customUser.id})")
-        else:
-            embed.set_footer(text=f"Asked by Fallen Drone")
-
         self.embed = embed
         return embed
     
