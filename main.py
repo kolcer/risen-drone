@@ -494,7 +494,7 @@ async def on_message(message):
             if not pollQ.endswith("?"):
                 pollQ += "?"
 
-            for i in range(2, len(splitPoll) - 1):
+            for i in range(2, len(splitPoll)):
                 pollA.append(splitPoll[i].capitalize())
 
             for badword in blacklist:
@@ -513,7 +513,7 @@ async def on_message(message):
             view.votes = {}
             view.choices = pollA
 
-            for i in range(0, len(splitPoll) - 2):
+            for i in range(0, len(splitPoll) - 3):
                 view.votes[str(i)] = []
                 view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
