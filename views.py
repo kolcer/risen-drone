@@ -1004,6 +1004,12 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         await self.message.edit(embed=self.create_embed(), view=self)
 
     async def process_click(self, interaction, buttonId, usr):
+        if (buttonId == "close"):
+            if (usr == self.customUser):
+                await self.too_late()
+            else:
+                await INTERACTION(interaction.response, "Only the person who created the poll may close it.", True)
+
         if (usr in self.users):
             await INTERACTION(interaction.response, "One vote only.", True)
             return

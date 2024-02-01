@@ -485,7 +485,7 @@ async def on_message(message):
                 await SEND(ch, 'Incorrect amount of items sent to create a poll.')
                 BUTTONS["status"] = False
                 return
-            elif len(splitPoll) > 22:
+            elif len(splitPoll) > 21:
                 await SEND(ch, 'Too many options.')
                 BUTTONS["status"] = False
                 return
@@ -504,7 +504,7 @@ async def on_message(message):
                         BUTTONS["status"] = False
                         return
 
-            view = ButtonGames_ThrowingStuff(timeout=180)
+            view = ButtonGames_ThrowingStuff(timeout=1200)
             view.users = []
             view.custom = True
             view.customUser = usr
@@ -516,6 +516,8 @@ async def on_message(message):
             for i in range(0, len(splitPoll) - 2):
                 view.votes[str(i)] = []
                 view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
+
+            view.add_item(discord.ui.Button(label="Close Poll", custom_id="throwclose", style=discord.ButtonStyle.red))
 
             BUTTONS["view"] = view
             BUTTONS["channel"] = ch
