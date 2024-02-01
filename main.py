@@ -479,6 +479,7 @@ async def on_message(message):
             #example: create poll|what is better?|cola|fanta|sprite|pepsi
             BUTTONS["status"] = True
             splitPoll = lmsg.split('|')
+            pollQ = ""
             pollA = []
 
             if len(splitPoll) < 4:
@@ -490,7 +491,12 @@ async def on_message(message):
                 BUTTONS["status"] = False
                 return
 
-            pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
+            for i in range(0, len(splitPoll[1])):
+                if i == 0:
+                    pollQ += splitPoll[1][i].upper()
+                else:
+                    pollQ += splitPoll[1][i]
+
             if not pollQ.endswith("?"):
                 pollQ += "?"
 
