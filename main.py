@@ -508,6 +508,7 @@ async def on_message(message):
             view.users = []
             view.custom = True
             view.customUser = usr
+            view.closed = False
 
             view.results = ""
             view.votes = {}
@@ -946,6 +947,7 @@ async def on_message(message):
                 view = ButtonGames_ThrowingStuff(timeout=120)
                 view.users = []
                 view.custom = False
+                view.closed = False
 
                 view.results = ""
                 view.votes = {
