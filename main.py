@@ -478,7 +478,7 @@ async def on_message(message):
         elif lmsg.startswith('create poll|') and not BUTTONS["status"]:
             #example: create poll|what is better?|cola|fanta|sprite|pepsi
             BUTTONS["status"] = True
-            splitPoll = lmsg.split('|')
+            splitPoll = msg.split('|')
             pollA = []
 
             if len(splitPoll) < 4:
@@ -490,7 +490,7 @@ async def on_message(message):
                 BUTTONS["status"] = False
                 return
 
-            pollQ = splitPoll[1]
+            pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
             if not pollQ.endswith("?"):
                 pollQ += "?"
 
@@ -519,7 +519,6 @@ async def on_message(message):
 
             BUTTONS["view"] = view
             BUTTONS["channel"] = ch
-            pollQ = pollQ[0].upper() + pollQ[1:]
             view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
 
             await view.wait()
