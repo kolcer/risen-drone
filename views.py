@@ -979,12 +979,14 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
+
+        self.closed = True
         await EDIT_VIEW_MESSAGE(self.message, f"{self.message.content}\nPoll is closed. Look at the results.", self)
 
     async def too_late(self):
         if self.closed == True:
             return
-        
+
         if len(self.users) < 1:
             await SEND(BUTTONS["channel"], "No participation whatsoever.")
         elif len(self.users) == 1:
@@ -1009,7 +1011,6 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     async def process_click(self, interaction, buttonId, usr):
         if (buttonId == "close"):
             if (usr == self.customUser):
-                self.closed = True
                 await self.too_late()
                 return
             else:
