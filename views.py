@@ -981,6 +981,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
 
 
         self.closed = True
+        BUTTONS["status"] = False
         await EDIT_VIEW_MESSAGE(self.message, f"{self.message.content}\nPoll is closed. Look at the results.", self)
 
     async def too_late(self):
