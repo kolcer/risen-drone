@@ -1011,6 +1011,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     async def process_click(self, interaction, buttonId, usr):
         if (buttonId == "close"):
             if (usr == self.customUser):
+                await interaction.response.defer()
                 await self.too_late()
                 return
             else:
