@@ -27,7 +27,7 @@ NickDictionary = {}
 MG_PLAYERS = {}
 
 GIT_COMMITTERS = {
-    "Nicksmth": 267014823315898368,
+    "fantasygone": 267014823315898368,
     "kolcer": 481893862864846861,
     "random-deve": 898870303680241674,
     "EclipseCashier": 1053665302258384986,
