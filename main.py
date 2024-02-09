@@ -505,7 +505,7 @@ async def on_message(message):
                         BUTTONS["status"] = False
                         return
 
-            view = ButtonGames_ThrowingStuff(timeout=1200)
+            view = ButtonGames_ThrowingStuff(timeout=600)
             view.users = []
             view.custom = True
             view.customUser = usr
