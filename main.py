@@ -396,6 +396,7 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
+        # adding a comment to reset bot but rolo why does the bot break sometimes
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
             customtrigger = lmsg.replace("play hangman ", "")
             theword = str(customtrigger.replace("|", ""))
