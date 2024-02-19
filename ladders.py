@@ -28,12 +28,9 @@ def MG_SHOW_STATS():
     return toSend
 
 def MG_NEXT_PLAYER():
-    LADDERS['playerCount'] += 1
     LADDERS['currentPlayer'] += 1
     if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
         LADDERS['currentPlayer'] = 0
-    if LADDERS['playerCount'] > 3:
-        LADDERS['topLevel'] += 5
       
 
 def MG_SHOW_WINNERS():
@@ -65,11 +62,11 @@ def MG_ACTION(plr, action):
         case "muggle":
             chances = random.randint(0, 2)
             if chances == 2:
-                MG_PLAYERS[plr] -= 1
-                toSend += "got stuck and had to go down 1 level!"
+                LADDERS['topLevel'] += 1
+                toSend += " failed a stairjump, made the drones feel bad for them, and caused them to add 1 floor to the tower!"
             else:
-                MG_PLAYERS[plr] += 1
-                toSend += "did a stairjump trick, and advanced 1 extra level!"
+                MG_PLAYERS["topLevel"] += 2
+                toSend += " stairjumped and made the drones to add 2 floors to the tower!"
                 
         case "patron":
             ourLevel = MG_PLAYERS[plr]
@@ -230,7 +227,7 @@ async def LucidLaddersProcessMessage(usr,msg):
             return
 
         LADDERS['status'] = "on"
-        await MG_LOOP("Lucid Ladders have begun!")            
+        await MG_LOOP("Lucid Ladders have begun!")       
             
         return
         
@@ -268,6 +265,9 @@ async def JoinLucidLadders(usr):
         await SEND(LADDERS['channel'], "You have already joined the mini game!")
         return
     else:
+        LADDERS['playerCount'] += 1
+        if LADDERS['playerCount'] > 3:
+            LADDERS['topLevel'] += 5
         MG_PLAYERS[usr] = 0
         MG_QUEUE.append(usr)
         toSend = usr.name + " has joined Lucid Ladders!\nCurrent players:\n"
