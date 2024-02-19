@@ -736,6 +736,7 @@ LADDERS = {
     'status': 'off',
     'channel': None,
     'currentPlayer': 0,
+    'playerCount': 0,
     'tick': 0,
     'winDetect': 0,
 }

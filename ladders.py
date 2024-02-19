@@ -13,6 +13,8 @@ def MG_RESET():
     LADDERS['channel'] = None
     LADDERS['currentPlayer'] = 0
     LADDERS['winDetect'] = 0
+    LADDERS['playerCount'] = 0
+    LADDERS['topLevel'] = 21
     
 def MG_SHOW_STATS():
 
@@ -26,9 +28,12 @@ def MG_SHOW_STATS():
     return toSend
 
 def MG_NEXT_PLAYER():
+    LADDERS['playerCount'] += 1
     LADDERS['currentPlayer'] += 1
     if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
         LADDERS['currentPlayer'] = 0
+    if LADDERS['playerCount'] > 3:
+        LADDERS['topLevel'] += 5
       
 
 def MG_SHOW_WINNERS():
