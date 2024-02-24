@@ -62,7 +62,6 @@ def PrepareRoles(roles):
 #             continue
  
 async def MorphTo(usr,role):
-    randomChance = random.randint(0,2047) # chance to get a shiny: 1/2048
 
     if role in MORPHABLE_ROLES:
         if role == "Gun":
