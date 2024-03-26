@@ -623,7 +623,7 @@ FUN_ROLES = [
     "Broken Drone Helper",
     ":]",
     "Forgiven",
-    "Unscathed",
+    "Sleazel Saviour",
 ]
 
 LIMITED_ROLES = {

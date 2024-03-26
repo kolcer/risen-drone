@@ -1101,8 +1101,8 @@ class Minigames_Hangman(discord.ui.View):
 
             if len(self.myword) >= 5 and self.lifes == 5 and self.alone:
                 # for usrId in best_users_ids:
-                if not str(self.cp.id) in list_decoded_entries("Unscathed"):
-                    await add_entry_with_check("Unscathed", self.cp)
+                if not str(self.cp.id) in list_decoded_entries("Sleazel Saviour"):
+                    await add_entry_with_check("Sleazel Saviour", self.cp)
 
                 await asyncio.sleep(1)
                 await SEND(BUTTONS["channel"], "It looks like no mistakes were made this round, I'm sure Sleazel can sleep peacefully at night with you around.")
