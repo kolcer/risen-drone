@@ -564,7 +564,7 @@ async def on_message(message):
         elif lmsg.startswith("bd scold "):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
-                if member.name.lower() + "#" + member.discriminator == lmsg.split(" ",2)[2] :
+                if member.name.lower() == lmsg.split(" ",2)[2] :
                     ScoldDict = getScoldDictionary(member, usr)
                     # Scold someone in the Dictionary (User itself included)
                     if member.id in ScoldDict:
@@ -586,19 +586,19 @@ async def on_message(message):
             # Getting the Target
             target = None
             if lmsg == "bd show profile":
-                targetName = f"{usr.name}#{usr.discriminator}".lower()
+                targetName = f"{usr.name}".lower()
             else:
                 cleanMsg = lmsg.replace(" profile", "")
                 targetName = cleanMsg.split(" ", 2)[2]
 
             for mem in SERVER_DATA['server'].members:
-                if f"{mem.name.lower()}#{mem.discriminator}" == targetName:
+                if mem.name.lower() == targetName:
                     target = mem
                     break
             
             # No Target?
             if target == None:
-                await SEND(ch, "No User was found.\n\nType `bd show profile` to view your own profile.\nType `bd show [user]#[discriminator] profile` to view someone else's profile.\n\n*Note: `[discriminator]` is 0 if the user does not have one.*")
+                await SEND(ch, "No User was found.\n\nType `bd show profile` to view your own profile.\nType `bd show [username] profile` to view someone else's profile.")
                 return
             
             # Command will go through. Prepare the View.
@@ -1081,8 +1081,8 @@ async def on_message(message):
             #give ckr
             if lmsg.startswith("ckr to", 1):
                 for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() + "#" + mem.discriminator == lthird:
-                        await SEND(ch, "I gave the Chat Killer role to " + mem.name + "#" + mem.discriminator)
+                    if mem.name.lower() == lthird:
+                        await SEND(ch, "I gave the Chat Killer role to " + mem.name)
                         await asyncio.sleep(1)
                         await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
                         break
@@ -1091,8 +1091,8 @@ async def on_message(message):
             #remove ckr
             if lmsg.startswith("ckr from", 1):
                 for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() + "#" + mem.discriminator == lthird:
-                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name + "#" + mem.discriminator)
+                    if mem.name.lower() == lthird:
+                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name)
                         await asyncio.sleep(1)
                         await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
                         break
@@ -1112,7 +1112,7 @@ async def on_message(message):
                                 await SEND(ch, "They already own this role, duh.")
                                 return
 
-                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                            await SEND(ch, "I gave the role to " + mem.name)
                             await asyncio.sleep(1)
                             add_entry(third, msgsplit[1])
                                 
@@ -1141,7 +1141,7 @@ async def on_message(message):
                             index = entries.index(msgsplit[1])
                             delete_entry(third, index)
 
-                            await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                            await SEND(ch, "Took the role away from " + mem.name)
                             await asyncio.sleep(1)
 
                             break
@@ -1201,7 +1201,7 @@ async def on_message(message):
                         
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
-                            await SEND(ch, "I gave the role to " + mem.name + "#" + mem.discriminator)
+                            await SEND(ch, "I gave the role to " + mem.name)
                             await asyncio.sleep(1)
                             await ADD_ROLES(mem, neededrole)
                             break
@@ -1221,7 +1221,7 @@ async def on_message(message):
 
                 for mem in SERVER_DATA['server'].members:
                     if int(mem.id) == int(msgsplit[1]):
-                        await SEND(ch, "Took the role away from " + mem.name + "#" + mem.discriminator)
+                        await SEND(ch, "Took the role away from " + mem.name)
                         await asyncio.sleep(1)
                         await REMOVE_ROLES(mem, neededrole)
                         break

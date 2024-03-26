@@ -473,7 +473,7 @@ async def ExecuteSplicerRig(ch,usr):
     # SPLICER_RIG["RIG_DATA['rigCaster']-name"] = rcn1 + usrn2 // why is a reference to RIG-DATA[] in a string? -roibrari
     SPLICER_RIG["rigcaster-name"] = rcn1 + usrn2
 
-    toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! Press a button to proceed.\n`" + usr.name + "#" + usr.discriminator + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "#" + RIG_DATA['rigCaster'].discriminator + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
+    toSend = RIG_DATA['rigCaster'].mention + " wants to splice their name with yours! Press a button to proceed.\n`" + usr.name + "`'s name will be: " + SPLICER_RIG["user-name"] + ".\n`" + RIG_DATA['rigCaster'].name + "`'s name will be: " + SPLICER_RIG["rigcaster-name"] + "."
 
 
     view = SplicerView(timeout = 100)
@@ -511,7 +511,7 @@ async def GiveMana(ch,usr,message):
     split_message = message.content.split(" ", 3)
     target = split_message[3].lower()
     for member in SERVER_DATA['server'].members:
-        if member.name.lower() + "#" + member.discriminator == target:
+        if member.name.lower() == target:
             if role in member.roles:
                 await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
                 await asyncio.sleep(3)

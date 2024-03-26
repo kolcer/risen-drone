@@ -165,13 +165,13 @@ class ShowCommands(discord.ui.View):
 
 ** USER COMMANDS **
 
-*Reminder to use 0 if the user does not have a discriminator. This will change once Discord forces everyone to set one.*
+*Attention! The bot no longer checks for user discriminator as Discord should have forced every user to remove them.*
 
 
-**bd scold** *[username#discriminator]*
+**bd scold** *[username]*
 ➡️ They should not have done that
 
-**give mana to** *[username#discriminator]*
+**give mana to** *[username]*
 ➡️ Remove the Possessed role from the user (does not apply to users muted by moderators)
 
 
@@ -208,7 +208,7 @@ Delete: Deletes the specified quiz question by index.
 **|makesay** *[channel-name] [message]*
 ➡️ Have the bot repeat what you say
 
-**|ckr to/from** *[user#discriminator]*
+**|ckr to/from** *[username]*
 ➡️ Give/remove the Chat Killer role
 
 **|nr** *[name]*
@@ -243,7 +243,7 @@ Delete: Deletes the specified quiz question by index.
 
     footers = [
         "Morph to your favorite Alignments and subscribe to various pings to be notified of stuff.", 
-        "Use my commands and have some fun. !!Discriminator is 0 if the user does not have one!!", 
+        "Use my commands and have some fun. !!Discriminator no longer has to be included for the command to work!!", 
         "Play some of the minigames currently available. They require participation from more people.",
         "What are you up to??"
     ]
