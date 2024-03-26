@@ -1092,11 +1092,20 @@ class Minigames_Hangman(discord.ui.View):
             # best_user = max(self.players, key=lambda user: len(self.players[user]))
             max_length = max(len(guesses) for guesses in self.players.values())
             best_users = [user.mention for user, letters in self.players.items() if len(letters) == max_length]
+            best_users_ids = [user.id for user, letters in self.players.items() if len(letters) == max_length]
 
             for plr in self.players.keys():
                 self.results += f"`{plr.display_name}`: {len(self.players[plr])}\n"
 
-            await INTERACTION(interaction.response, f"Special thanks to: {', '.join(best_users)}\n\n{self.results}", False)
+            congratsMsg = await INTERACTION(interaction.response, f"Special thanks to: {', '.join(best_users)}\n\n{self.results}", False)
+
+            if len(self.myword) >= 5 and self.lifes == 5 and self.alone:
+                for usrId in best_users_ids:
+                    if not str(usrId) in list_decoded_entries("Unscathed"):
+                        await add_entry_with_check("Unscathed", usrId)
+
+                await EDIT_MESSAGE(congratsMsg, congratsMsg.content + "\n\nIt looks like no mistakes were made this round, I'm sure Sleazel can sleep peacefully at night with you around.")
+
             self.toolate = False
             self.stop()
         else:
