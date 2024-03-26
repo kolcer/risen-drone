@@ -1097,14 +1097,14 @@ class Minigames_Hangman(discord.ui.View):
             for plr in self.players.keys():
                 self.results += f"`{plr.display_name}`: {len(self.players[plr])}\n"
 
-            congratsMsg = await INTERACTION(interaction.response, f"Special thanks to: {', '.join(best_users)}\n\n{self.results}", False)
+            await INTERACTION(interaction.response, f"Special thanks to: {', '.join(best_users)}\n\n{self.results}", False)
 
             if len(self.myword) >= 5 and self.lifes == 5 and self.alone:
                 # for usrId in best_users_ids:
                 if not str(self.cp.id) in list_decoded_entries("Unscathed"):
                     await add_entry_with_check("Unscathed", self.cp)
 
-                await EDIT_MESSAGE(congratsMsg, congratsMsg.content + "\n\nIt looks like no mistakes were made this round, I'm sure Sleazel can sleep peacefully at night with you around.")
+                await SEND(BUTTONS["channel"], "It looks like no mistakes were made this round, I'm sure Sleazel can sleep peacefully at night with you around.")
 
             self.toolate = False
             self.stop()
