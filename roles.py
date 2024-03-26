@@ -39,6 +39,9 @@ def PrepareRoles(roles):
         #manually verified
         if role.id == EXTRA_ROLES['manuallyverified']:
             EXTRA_ROLES['manuallyverified'] = role
+        #image perms
+        if role.id == EXTRA_ROLES['imageperms']:
+            EXTRA_ROLES['imageperms'] = role
         #architect
         if role.name == "Architect (Booster)":
             SPECIAL_ROLES["Architect"][0] = role

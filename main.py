@@ -266,6 +266,8 @@ async def on_message(message):
         MSG_SENT[usr] = 1
     else:
         MSG_SENT[usr] += 1
+        if MSG_SENT[usr] == 5 and usr.id == 267014823315898368 and EXTRA_ROLES["imageperms"] not in usr.roles:
+            await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
 
             
     if ch.id == 845454640103424032 and message.attachments:

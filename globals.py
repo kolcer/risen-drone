@@ -623,6 +623,7 @@ FUN_ROLES = [
     "Broken Drone Helper",
     ":]",
     "Forgiven",
+    "Unscathed",
 ]
 
 LIMITED_ROLES = {
@@ -805,6 +806,7 @@ EXTRA_ROLES = {
     'murdurator': 735225462405464125,       # discord server moderator
     'climber': 735410759206568047,          # climber (consider adding manually verified) - ok
     'manuallyverified': 820521310278516739, # manually assigned climber
+    'imageperms': 1188494866594922686,      # Image perms role
 }
 
 CHAT_KILLER = {
