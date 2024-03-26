@@ -1104,6 +1104,7 @@ class Minigames_Hangman(discord.ui.View):
                 if not str(self.cp.id) in list_decoded_entries("Unscathed"):
                     await add_entry_with_check("Unscathed", self.cp)
 
+                await asyncio.sleep(1)
                 await SEND(BUTTONS["channel"], "It looks like no mistakes were made this round, I'm sure Sleazel can sleep peacefully at night with you around.")
 
             self.toolate = False
