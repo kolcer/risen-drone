@@ -1060,7 +1060,7 @@ async def on_message(message):
                     await DELETE(message)
                     return
                 except:
-                    await SEND("No.")
+                    await SEND("I refuse.")
                     return
     
             #give ckr

@@ -199,7 +199,7 @@ async def Rig(rigType, ch, usr):
                     rigActive = True
                     break
             if not rigActive:
-                await SEND(ch, "It would be useless casting this spell now.")
+                await SEND(ch, "Nothing changed.")
                 RIG_COOLDOWNS["patron"] = False
                 return
             msgCounting = await SEND(ch, "You cast Patron Rig and restored the Server!")
@@ -260,7 +260,7 @@ async def CastRig(rigPick,ch,usr):
     randomAttempts = 0
 
     if rigPick not in RIG_LIST:
-        await SEND(ch, "That's not an actual rig. And you know it. But if you didn't, type `bd help` to check which rigs you can cast.")
+        await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
         return
     
     if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
@@ -284,7 +284,7 @@ async def CastRig(rigPick,ch,usr):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await SEND(ch, " It looks like you had some fun with the other rigs. You have some waiting to do. \n" + cdList)
+            await SEND(ch, " No can do. One or more rig are still in cooldown. \n" + cdList)
             return
 
         await SEND(ch, "What will it be? 🥁🥁🥁")
@@ -527,7 +527,7 @@ async def GiveMana(ch,usr,message):
             else:
                 await SEND(message.channel,
                     member.display_name +
-                            " received your Mana, but they do not seem to need it."
+                            " refused to get your Mana."
                         )
             return
     await SEND(message.channel,
