@@ -266,7 +266,7 @@ async def on_message(message):
         MSG_SENT[usr] = 1
     else:
         MSG_SENT[usr] += 1
-        if MSG_SENT[usr] == 5 and usr.id == 267014823315898368 and EXTRA_ROLES["imageperms"] not in usr.roles:
+        if MSG_SENT[usr] == 100 and EXTRA_ROLES["imageperms"] not in usr.roles:
             await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
 
             
