@@ -295,6 +295,10 @@ async def CastRig(rigPick,ch,usr):
 
             if randomAttempts == 3:
                 await SEND(ch, "You know what. We can do without these rigs right now.")
+
+                if not str(usr.id) in list_decoded_entries("Rig Failure"):
+                    await add_entry_with_check("Rig Failure", usr)
+                    return
                 break
             
             elif randomRig in RANDOM_BLACKLIST:

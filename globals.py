@@ -622,7 +622,7 @@ FUN_ROLES = [
     "Lucky Button",
     "Broken Drone Helper",
     ":]",
-    "Forgiven",
+    "Rig Failure",
     "Sleazel Saviour",
 ]
 
