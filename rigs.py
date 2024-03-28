@@ -1,4 +1,5 @@
 import time
+import datetime
 
 from views import *
 from globals import *
@@ -100,7 +101,7 @@ async def Rig(rigType, ch, usr):
  
     if rigType.lower() == "splicer":
         if str(usr.id) not in list_decoded_entries("Splicer"):
-            await SEND(ch, "The Splicer main has not yet given you permissions to cast this rig.")
+            await SEND(ch, "The Splicer main has not given you permissions to cast this rig yet.")
             return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
@@ -258,6 +259,7 @@ async def Rig(rigType, ch, usr):
 async def CastRig(rigPick,ch,usr):
     randomRig = ""
     randomAttempts = 0
+    today = datetime.date.today()
 
     if rigPick not in RIG_LIST:
         await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
@@ -269,6 +271,12 @@ async def CastRig(rigPick,ch,usr):
 
     if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"] and ch.id != 1096887479031836793:
         rigPick = "heretic"
+
+    if today.month == 4 and today.day == 1:
+        rigPick = "joker"
+        COOLDOWN_DURATION["joker"] = 90
+    else:
+        COOLDOWN_DURATION["joker"] = 600
 
     if rigPick == "chameleon":
         cd = False
@@ -284,7 +292,7 @@ async def CastRig(rigPick,ch,usr):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await SEND(ch, " No can do. One or more rig are still in cooldown. \n" + cdList)
+            await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
             return
 
         await SEND(ch, "What will it be? 🥁🥁🥁")
@@ -307,7 +315,7 @@ async def CastRig(rigPick,ch,usr):
                 elif randomAttempts == 1:
                     await SEND(ch, "We can't have this one either. The next outcome will surprise you! 🥁")
                 elif randomAttempts == 2:
-                    await SEND(ch, "No can do. Fifth is the charm. Or was it fourth? Stay ready.")
+                    await SEND(ch, "Anything could happen now.")
                 
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
