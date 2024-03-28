@@ -5,6 +5,7 @@ import random
 import asyncio
 import requests 
 import re
+import datetime
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -579,6 +580,15 @@ async def on_message(message):
                     return
             # Scolding an User that is NOT in the Server
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
+
+        ## Happy Birthday BD!!!!!
+        elif "happy birthday broken drone" in lmsg:
+            today = datetime.date.today()
+
+            if today.month == 4 and today.day == 3:
+                await SEND("Thank you for remembering.")
+            else:
+                await SEND("How could you get my birthday date wrong?")
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
