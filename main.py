@@ -583,9 +583,9 @@ async def on_message(message):
 
         ## Happy Birthday BD!!!!!
         elif "happy birthday broken drone" in lmsg:
-            today = datetime.date.today()
+            today = datetime.today()
 
-            if today.month == 4 and today.day == 3:
+            if today.strftime("%m") == 4 and today.weekday() == 3:
                 await SEND("Thank you for remembering.")
             else:
                 await SEND("How could you get my birthday date wrong?")
