@@ -582,13 +582,13 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Happy Birthday BD!!!!!
-        elif "happy birthday broken drone" in lmsg:
-            today = datetime.today()
+        elif ("happy birthday broken drone" or "happy birthday bd") in lmsg:
+            today = datetime.date.today()
 
-            if today.strftime("%m") == 4 and today.weekday() == 3:
-                await SEND("Thank you for remembering.")
+            if today.month == 4 and today.day == 3:
+                await SEND(ch, "Thank you for remembering.")
             else:
-                await SEND("How could you get my birthday date wrong?")
+                await SEND(ch, "How could you get my birthday date wrong?")
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
