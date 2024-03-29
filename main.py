@@ -586,9 +586,9 @@ async def on_message(message):
             today = datetime.date.today()
 
             if today.month == 4 and today.day == 3:
-                await SEND("Thank you for remembering.")
+                await SEND(ch, "Thank you for remembering.")
             else:
-                await SEND("How could you get my birthday date wrong?")
+                await SEND(ch, "How could you get my birthday date wrong?")
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
