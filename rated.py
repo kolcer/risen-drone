@@ -34,7 +34,7 @@ async def REMOVE_ROLES(usr,roles):
 
 #edit nick
 async def EDIT_NICK(usr,new_nick):
-    if usr.id != 481893862864846861:
+    if usr.id != 481893862864846861 and EXTRA_ROLES["admin"] not in usr.roles:
         await usr.edit(nick=new_nick)
 
 #edit role
