@@ -272,7 +272,7 @@ async def CastRig(rigPick,ch,usr):
     if ch != CHANNELS["bot-commands"] and ch != CHANNELS["bot-testing"] and ch.id != 1096887479031836793:
         rigPick = "heretic"
 
-    if today.month == 4 and today.day == 1:
+    if today.day == 30 and today.month == 3:
         rigPick = "joker"
         COOLDOWN_DURATION["joker"] = 90
     else:

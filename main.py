@@ -225,6 +225,7 @@ async def on_message(message):
     usr = message.author
     ch = message.channel 
     buttons_chance = random.randint(1, 200)
+    today = datetime.date.today()
     
     if usr in EX_CLIMBERS:
         await DELETE(message)
@@ -583,9 +584,7 @@ async def on_message(message):
 
         ## Happy Birthday BD!!!!!
         elif ("happy birthday broken drone" or "happy birthday bd") in lmsg:
-            today = datetime.date.today()
-
-            if today.month == 4 and today.day == 3:
+            if today.day == 3 and today.month == 4:
                 await SEND(ch, "Thank you for remembering.")
             else:
                 await SEND(ch, "How could you get my birthday date wrong?")
@@ -745,12 +744,20 @@ async def on_message(message):
            
         #morph command
         elif lmsg.startswith("morph to"):
-            morphToTarget = lsplit[2].capitalize()
+            if today.day == 1 and today.month == 4:
+                morphToTarget = "Joker"
+            else:
+                morphToTarget = lsplit[2].capitalize()
+
             await SEND(ch, await MorphTo(usr,morphToTarget))
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
-            demorphFromTarget = lsplit[2].capitalize()
+            if today.day == 1 and today.month == 4:
+                demorphFromTarget = "Joker"
+            else:
+                demorphFromTarget = lsplit[2].capitalize()
+
             await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
