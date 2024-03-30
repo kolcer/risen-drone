@@ -67,10 +67,9 @@ def PrepareRoles(roles):
 async def MorphTo(usr,role):
 
     if role in MORPHABLE_ROLES:
-        if role == "Gun":
+        if role == "Gun" and EXTRA_ROLES["admin"] not in usr.roles:
             await EDIT_NICK(usr,random.choice(WORST_GUNS))
-
-        elif role == 'Roingus':
+        elif role == 'Roingus' and EXTRA_ROLES["admin"] not in usr.roles:
             await EDIT_NICK(usr, 'Roingus')
 
         if MORPHABLE_ROLES[role][0] in usr.roles:
