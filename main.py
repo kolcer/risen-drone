@@ -264,7 +264,7 @@ async def on_message(message):
         #await SEND(ch, "I will remember your sympathy.")
        # await ADD_ROLES(usr, FUN_ROLES["I was there"])
     
-    if today.day == 31 and today.month == 3 and usr.id == 267014823315898368:
+    if today.day == 1 and today.month == 4:
         if MORPHABLE_ROLES["Joker"][0] not in usr.roles:
             await ADD_ROLES(usr, MORPHABLE_ROLES['Joker'][0])
             await asyncio.sleep(1)
