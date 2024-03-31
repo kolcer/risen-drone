@@ -263,6 +263,17 @@ async def on_message(message):
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
        # await ADD_ROLES(usr, FUN_ROLES["I was there"])
+    
+    if today.day == 31 and today.month == 3 and usr.id == 267014823315898368:
+        if MORPHABLE_ROLES["Joker"][0] not in usr.roles:
+            await ADD_ROLES(usr, MORPHABLE_ROLES['Joker'][0])
+            await asyncio.sleep(1)
+
+            role_list = []
+            for role in usr.roles:
+                if role.name in MORPHABLE_ROLES and role.name != 'Joker':
+                    role_list.append(role)
+            await usr.remove_roles(*role_list)
 
     if usr not in MSG_SENT:
         MSG_SENT[usr] = 1
@@ -754,7 +765,8 @@ async def on_message(message):
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
             if today.day == 1 and today.month == 4:
-                demorphFromTarget = "Joker"
+                await SEND(ch, f"Unfortunately, this command is out of service.")
+                return
             else:
                 demorphFromTarget = lsplit[2].capitalize()
 
