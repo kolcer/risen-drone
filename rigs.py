@@ -167,7 +167,8 @@ async def Rig(rigType, ch, usr):
                 RIG_COOLDOWNS["ha"] = False
                 return
             ch2 = ch
-            while ch2 == ch or ch2.name == "bot-testing":
+            while (ch2 == ch or ch2.name == "bot-testing"):
+                print(ch2)
                 ch2 = random.choice(list(CHANNELS.values()))
             firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
             await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
