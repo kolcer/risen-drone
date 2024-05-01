@@ -138,7 +138,7 @@ async def on_member_update(before, after):
     
     #if name ends with :] gives the role
     if not str(after.id) in list_decoded_entries(":]"):
-        if str(after.nick).endswith(':]'):
+        if str(after.nick).endswith(':]') and after.id != 1053665302258384986: # ignoring just cashier for now
             await add_entry_with_check(":]", after)
             await asyncio.sleep(1)
             await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
