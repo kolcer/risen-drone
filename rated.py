@@ -48,11 +48,6 @@ async def SEND(channel, message):
         return
     return await channel.send(message)
 
-async def REPLY(message, content, mentionAuthor):
-    if content == None or content == "":
-        return
-    return await message.reply(content, mentionAuthor)
-
 #send to interactiom, optional ephemeral 
 async def INTERACTION(message, content: str, secret: bool):
     if content == None or content == "":

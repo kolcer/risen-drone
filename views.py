@@ -989,14 +989,11 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             return
 
         if len(self.users) < 1:
-            await REPLY(self.message, "No participation whatsoever.", False)
-            # await SEND(BUTTONS["channel"], "No participation whatsoever.")
+            await REPLY(self.message, "No participation whatsoever.")
         elif len(self.users) == 1:
-            await REPLY(self.message, "You spoke for everyone else.", False)
-            # await SEND(BUTTONS["channel"], "You spoke for everyone else.")
+            await REPLY(self.message, "You spoke for everyone else.")
         else:
-            await REPLY(self.message, "Very interesting choices.", False)
-            # await SEND(BUTTONS["channel"], "Very interesting choices.")
+            await REPLY(self.message, "Very interesting choices.")
 
         await self.on_timeout()
 
