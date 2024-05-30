@@ -1089,7 +1089,7 @@ async def on_message(message):
                     await DELETE(message)
                     return
                 except:
-                    await SEND("I refuse.")
+                    await SEND(CHANNELS['bot-testing'], "I refuse.")
                     return
     
             #give ckr
