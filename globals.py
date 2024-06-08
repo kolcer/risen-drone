@@ -386,8 +386,6 @@ EMOJIS_TO_REACT = {
 REACTIONS_FOR_SUGGESTIONS = [
     "<:csYes:792458050144829440>",
     "<:csNo:792458117069668372>",
-    "<:csMaybe:1155889547180261536>",
-    "<:csDontCare:1155846534936662066>",
 ]
 
 # this keywords will trigger the bot with a single occurence
