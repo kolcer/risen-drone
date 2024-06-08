@@ -121,7 +121,7 @@ async def WAIT_FOR_CHAT_KILLER(msg):
         await asyncio.sleep(CHAT_KILLER['wait'])
         
         if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
-            #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo(?)
+            #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo
             CHAT_KILLER['reviveChat'] = True
             NECROMANCY['awarded'] = False
             print("new chat killer")

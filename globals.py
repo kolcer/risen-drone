@@ -812,6 +812,7 @@ CHAT_KILLER = {
     'wait': 7200,
     'last': 0,
     'reviveChat': False,
+    'necroRevive': False,
 }
 
 NECROMANCY = {

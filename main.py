@@ -697,21 +697,22 @@ async def on_message(message):
         ## Revive Chat Command
         elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4:
             #chat has to be dead, duh
-            if not CHAT_KILLER['reviveChat']:
+            if not CHAT_KILLER['reviveChat'] or CHAT_KILLER['necroRevive']:
                 await SEND(ch, "This chat is very much alive, I am afraid.")
                 return
-
-            #only chat killers can use the command
-            if not EXTRA_ROLES['ckr'] in message.author.roles:
-                await SEND(ch, "It is not your fault.")
-                return
-
-            await SEND(ch, "Redeeming yourself? Alright.")
-            await asyncio.sleep(2)
-
-            CHAT_KILLER['reviveChat'] = False
-
-            await SEND(ch, random.choice(REVIVE_CHAT))
+            
+            # Only chat killers can use the command
+            if EXTRA_ROLES['ckr'] in message.author.roles:
+                await SEND(ch, "Redeeming yourself? Alright.")
+                await asyncio.sleep(2)
+                CHAT_KILLER['reviveChat'] = False
+                await SEND(ch, random.choice(REVIVE_CHAT))
+            elif SPECIAL_ROLES['Necromancer'][0] in message.author.roles:
+                await SEND(ch, "Doing some necromancy? Okay then...")
+                CHAT_KILLER['necroRevive'] = False
+                await SEND(ch, random.choice(REVIVE_CHAT))
+            else:
+                await SEND(ch, "It is not your fault and you do not know any necromancy.")
  
         ## Splicer role assignment
         elif "<:cssplicer:988948000200069191>" in lmsg:
@@ -744,6 +745,7 @@ async def on_message(message):
         #resurrect chat
         elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
             NECROMANCY['awarded'] = True
+            CHAT_KILLER['necroRevive'] = True
             UPDATE_NECRO()
             for member in EXTRA_ROLES['necromancer'].members:
                 if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
