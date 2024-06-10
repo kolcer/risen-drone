@@ -187,7 +187,7 @@ async def on_reaction_add(reaction, user):
             if reaction.message.channel.id != 1001034407966150746:
                 await DRONEPRINT(f'Psst. It was {user.name}. They were impersonating Sleazel!')
                 await SEND(reaction.message.channel, f"You are not Sleazel. Drop the act.")
-            await asyncio.sleep(300)
+            await asyncio.sleep(600)
             NOT_SLEAZEL[0] = False
         return
 
