@@ -717,6 +717,8 @@ PING_ROLES = {
         None,
     "Sleazel-in-game":
         None,
+    "Archive":
+        None,
 }
 
 QUIZ = {
