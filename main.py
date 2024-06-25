@@ -695,14 +695,14 @@ async def on_message(message):
             await view.wait()
 
         # Revive Chat Command
-        elif "revive" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
+        elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
             #chat has to be dead, duh
             if not CHAT_KILLER['reviveChat']:
                 await SEND(ch, "This chat is very much alive, I am afraid.")
                 return
             
             # Only chat killers can use the command
-            if EXTRA_ROLES['ckr'] in message.author.roles:
+            if EXTRA_ROLES['ckr'] in usr.roles:
                 await SEND(ch, "Redeeming yourself? Alright.")
                 await asyncio.sleep(2)
                 CHAT_KILLER['reviveChat'] = False
@@ -711,12 +711,12 @@ async def on_message(message):
                 await SEND(ch, "It is not your fault.")
         
         # Necromancer's revive chat command
-        elif "resurrect" in lmsg and "chat" in lmsg and len(lmsg.split(" ")) < 4: # same as revive chat above - esc
+        elif ("resurrect" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # same as revive chat above - esc
             if not CHAT_KILLER['necroRevive']:
                 await SEND(ch, "It appears someone has already brought the chat back from the dead.")
                 return
             
-            if SPECIAL_ROLES['Necromancer'][0] not in message.author.roles:
+            if SPECIAL_ROLES['Necromancer'][0] in usr.roles:
                 await SEND(ch, "You cast the resurrect chat spell... a faint discord notification sound can be heard in the distance...")
                 await asyncio.sleep(2)
                 CHAT_KILLER['necroRevive'] = False
