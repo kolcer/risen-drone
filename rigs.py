@@ -424,11 +424,11 @@ async def ExecuteSpectreRig(ch,usr, message):
     chances = random.randint(0, 1)
 
     if chances == 1:
-        await SEND(ch, RIG_DATA['rigCaster'].mention + " has made your Message disappear with a 50% chance!")
+        await SEND(ch, RIG_DATA['rigCaster'].mention + " has made your message disappear with a 50% chance!")
         await DELETE(message)
         return
 
-    await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your Message disappear with a 50% chance.")
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " has NOT made your message disappear with a 50% chance.")
     return
 
 # async def ExecuteGunRig(ch,usr,message):

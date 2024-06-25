@@ -135,8 +135,6 @@ async def WAIT_FOR_CHAT_KILLER(msg):
 
             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Professionals yet.")
-                REDEMPTION[0] = False
-                REDEMPTION[1] = False
             return
 
         elif msg.created_at == CHAT_KILLER['last'] and EXTRA_ROLES['ckr'] in msg.author.roles:

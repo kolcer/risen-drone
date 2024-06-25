@@ -138,7 +138,7 @@ async def on_member_update(before, after):
     
     #if name ends with :] gives the role
     if not str(after.id) in list_decoded_entries(":]"):
-        if str(after.nick).endswith(':]') and after.id != 1053665302258384986: # ignoring just cashier for now
+        if str(after.nick).endswith(':]'):
             await add_entry_with_check(":]", after)
             await asyncio.sleep(1)
             await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
@@ -1138,10 +1138,9 @@ async def on_message(message):
                                 await SEND(ch, "They already own this role, duh.")
                                 return
 
-                            await SEND(ch, "I gave the role to " + mem.name)
-                            await asyncio.sleep(1)
                             add_entry(third, msgsplit[1])
-                                
+                            await asyncio.sleep(1)
+                            await SEND(ch, "I gave the role to " + mem.name)
                             break
                 except Exception as e:
                     await SEND(ch, e)
@@ -1167,9 +1166,8 @@ async def on_message(message):
                             index = entries.index(msgsplit[1])
                             delete_entry(third, index)
 
-                            await SEND(ch, "Took the role away from " + mem.name)
                             await asyncio.sleep(1)
-
+                            await SEND(ch, "Took the role away from " + mem.name)
                             break
                 except Exception as e:
                     await SEND(ch, e)

@@ -316,23 +316,21 @@ WISDOM = [
     "Yay! >w< - funkykidgaming9999",
 ]
 
-REDEMPTION = [
-    False,
-    False,
-]
-
 OBJECTS = {
-    "a stair": {"Climb it", "Block it with a Wicked wall", "Teleport somewhere else", "Steal it"},
+    "a stair": {"Climb it", "Block it with a Wicked wall", "Glitch it away", "Steal it"},
     "an apple": {"Catch it", "Make a smartphone out of it", "Kick it away", "Peel it and give it back"},
-    "a refrigerator": {"Close yourself inside it", "See what's inside", "Stand still", "Push it away"},
+    "a refrigerator": {"Close yourself inside it", "Find out about its contents", "Stand still", "Push it away"},
     "a Mana orb": {"Absorb it", "Look at its color", "Avoid it", "Be indifferent"},
     "Sleazel": {"Scream", "Dodge him", "Act as a cushion", "Shield yourself"},
     "Broken Drone": {"Phase through it", "Edit its source code and erase it", "Be confused", "Rate limit it"},
     "a Chameleon": {"Catch it", "Be disgusted", "Claim a Muggle instead", "Buy it for 200 dollars"},
-    "some Robux": {"Ask for more", "Flee", "Get the giftcards", "Resell them"},
+    "some Robux": {"Ask for more", "Buy headless with them", "Get the giftcards", "Resell them"},
     "a book": {"Read it", "Spoil the ending", "Use a Karate move and deflect it", "Write a story based off Crazy Stairs"},
     "a gun": {"Stair bonk it", "Promote it to Admin", "Raise your hands", "Run away"},
     "a Roingus": {"Be happy", "Don't let it hurt itself", "Walk away", "Save it and join the Roingus club"},
+    "a Chair": {"Sit on it", "Throw it back", "Cast a spell to make it chase other people", "Turn it into a throne"},
+    "a Door": {"Enter the sanctuary", "Open it with a kick", "Open the Anywhere Door and enter it", "Jump away"},
+    "a Patron link": {"Move to the side it is not blocking", "Walk through it from below", "Run until it disappears", "Unlink it"},
 }
 
 # CONSTANT DICTIONARIES
@@ -341,11 +339,18 @@ OBJECTS = {
 CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
-    "crazy-stairs": 750060054090219760,  
+    "crazy-stairs": 750060054090219760,
     "bot-testing": 813882658156838923,
     "debugs": 1094687051724627998,
     "testing": 1096887479031836793,
 }
+
+# channels where bot is allowed to post, that should not be counted in public commands
+SECRET_CHANNELS = [
+    "bot-testing",
+    "debugs",
+    "testing",
+]
 
 # bot will react to the webhook emoji, if it finds in a webhook message
 # values will be replaced by emoji objects during startup
