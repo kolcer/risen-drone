@@ -302,23 +302,23 @@ async def on_message(message):
         for i in REACTIONS_FOR_SUGGESTIONS:
             await ADD_REACTION(message,i)
         return
-    
-    randomchance = random.randint(0,5000)
-    eligible = 0
-    rolename = ""
 
-    if randomchance == 0:
-        for role in usr.roles:
-            if role.name.lower() in SANCTUARY:
-                eligible += 1 #are you happy? >: -- yes i am
-                if eligible == 1:
-                    rolename = role.name.lower()
-
+    if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
+        randomchance = random.randint(0,10000)
+        eligible = 0
+        rolename = ""
         
-        if eligible == 1:
-            await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
-            await asyncio.sleep(1)
-            if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
+        if randomchance == 0:
+            for role in usr.roles:
+                if role.name.lower() in SANCTUARY:
+                    eligible += 1 #are you happy? >: -- yes i am --cool
+                    if eligible == 1:
+                        rolename = role.name.lower()
+
+            
+            if eligible == 1:
+                await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
+                await asyncio.sleep(1)
                 await add_entry_with_check("Sanctuary Discoverer", usr)
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
