@@ -706,6 +706,7 @@ async def on_message(message):
                 await SEND(ch, "Redeeming yourself? Alright.")
                 await asyncio.sleep(2)
                 CHAT_KILLER['reviveChat'] = False
+                CHAT_KILLER['necroRevive'] = False
                 await SEND(ch, random.choice(REVIVE_CHAT))
             else:
                 await SEND(ch, "It is not your fault.")
@@ -713,13 +714,14 @@ async def on_message(message):
         # Necromancer's revive chat command
         elif ("resurrect" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # same as revive chat above - esc
             if not CHAT_KILLER['necroRevive']:
-                await SEND(ch, "It appears someone has already brought the chat back from the dead.")
+                await SEND(ch, "No reviving necessary.")
                 return
-            
+
             if SPECIAL_ROLES['Necromancer'][0] in usr.roles:
                 await SEND(ch, "You cast the resurrect chat spell... a faint discord notification sound can be heard in the distance...")
                 await asyncio.sleep(2)
                 CHAT_KILLER['necroRevive'] = False
+                CHAT_KILLER['reviveChat'] = False
                 await SEND(ch, random.choice(REVIVE_CHAT))
             else:
                 await SEND("You do not know that spell... the chat continues to rest in peace.")
@@ -755,12 +757,17 @@ async def on_message(message):
         #resurrect chat
         elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
             NECROMANCY['awarded'] = True
+
+            if EXTRA_ROLES['ckr'] in usr.roles:
+                await SEND(ch, "You cannot keep the chat active all by yourself, but do try to revive it.")
+                return
+
             CHAT_KILLER['necroRevive'] = True
             UPDATE_NECRO()
             for member in EXTRA_ROLES['necromancer'].members:
                 if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
                     await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
-            await SEND(ch, f"**{usr.name}** has just become a Necromancer and resurrected the chat.")
+            await SEND(ch, f"**{usr.name}** is trying trying to talk in this lifeless chat. It's time to resurrect it and you are the perfect Necromancer for the job.")
             await asyncio.sleep(5)
             await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
             await asyncio.sleep(1)
