@@ -62,3 +62,10 @@ def get_value(key):
         return value.decode("utf-8")
     else:
         return None
+    
+def check_key(key):
+    # Check if the key exists
+    if db.exists(key):
+        return True
+    else:
+        return False
