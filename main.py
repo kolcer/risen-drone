@@ -297,7 +297,8 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await SEND(ch, f"I like your style.")
                 await asyncio.sleep(1)
-                await ADD_REACTION(message, "❤️‍🔥")
+
+            await ADD_REACTION(message, "❤️‍🔥")
 
     if ch.id == 899030333859692636:
         for i in REACTIONS_FOR_SUGGESTIONS:
