@@ -724,7 +724,7 @@ async def on_message(message):
                 CHAT_KILLER['reviveChat'] = False
                 await SEND(ch, random.choice(REVIVE_CHAT))
             else:
-                await SEND("You do not know that spell... the chat continues to rest in peace.")
+                await SEND(ch, "You do not know that spell... the chat continues to rest in peace.")
  
         ## Splicer role assignment
         elif "<:cssplicer:988948000200069191>" in lmsg:
