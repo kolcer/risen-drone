@@ -275,7 +275,7 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
-    if usr.id not in MSG_DELAY: 
+    if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles and usr.id == 267014823315898368: 
         if not check_key(usr.id):
             add_entry(usr.id, '1')
         else:
@@ -286,6 +286,7 @@ async def on_message(message):
             if messages == 5 and EXTRA_ROLES["imageperms"] not in usr.roles:
                 await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
                 await DRONEPRINT(f'**{usr.name}** just sent their 250th message and rightfully received the Image Perms role.')
+                delete_key(usr.id)
 
         MSG_DELAY.append(usr.id)
         asyncio.sleep(30)
