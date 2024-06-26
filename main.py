@@ -275,7 +275,7 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
-    if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles and usr.id == 267014823315898368: 
+    if usr.id not in MSG_DELAY and usr.id == 267014823315898368: 
         MSG_DELAY.append(usr.id)
         userId = str(usr.id)
 
