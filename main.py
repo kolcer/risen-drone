@@ -281,20 +281,21 @@ async def on_message(message):
             set_entry(userId, '1')
         else:
             messages = int(get_value(userId)) + 1
-
+            await asyncio.sleep(1)
             set_entry(userId, str(messages))
+            await asyncio.sleep(1)
             
             if messages == 5:
                 await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
+                await asyncio.sleep(2)
                 await DRONEPRINT(f'**{usr.name}** just sent their 250th message and rightfully received the Image Perms role.')
+                await asyncio.sleep(1)
                 delete_key(userId)
 
+        print(get_value(str(usr.id)))
         MSG_DELAY.append(usr.id)
         await asyncio.sleep(30)
         MSG_DELAY.remove(usr.id)
-
-    if usr.id == 267014823315898368:
-        print(get_value(str(usr.id)))
             
     if ch.id == 845454640103424032 and message.attachments:
         if usr not in ARTISTS:
