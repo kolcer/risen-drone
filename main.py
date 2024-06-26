@@ -278,7 +278,7 @@ async def on_message(message):
     if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles and usr.id == 267014823315898368: 
         userId = str(usr.id)
         if not check_key(userId):
-            add_entry(userId, '1')
+            set_entry(userId, '1')
         else:
             messages = int(get_value(userId)) + 1
 
