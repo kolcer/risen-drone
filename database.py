@@ -69,3 +69,6 @@ def check_key(key):
         return True
     else:
         return False
+    
+def increment(key):
+    return db.incr(key)
