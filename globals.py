@@ -108,6 +108,15 @@ REVIVE_CHAT = [
     "What's the funniest moment you've had while playing Crazy Stairs?",
     "Banning you in 3 seconds...",
     "If you had Game Murdurator in Crazy Stairs for one day, what would you do?",
+    "What's your favorite rig in-game?",
+    "What's your favorite discord rig?",
+    "Is there a certain alignment mechanic you wish to see in the game some day?",
+    "This one is easy. 1+1=?",
+    "What do you want to see in Crazy Stairs in the future? Wrong answers only.",
+    "Do you like the secret roles in this server?",
+    "Was there an alignment you thought was bad? Did you change your mind as you kept playing with it?",
+    "List 5 reasons explaining why Chameleon is a bad alignment.",
+    "What's the worst damage you did while playing as an 'evil' alignment?",
 ]
 
 RIG_LIST = [
