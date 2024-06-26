@@ -290,7 +290,7 @@ async def on_message(message):
                 delete_key(userId)
 
         MSG_DELAY.append(usr.id)
-        asyncio.sleep(30)
+        await asyncio.sleep(30)
         MSG_DELAY.remove(usr.id)
 
     if usr.id == 267014823315898368:
