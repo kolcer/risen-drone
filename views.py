@@ -1068,7 +1068,7 @@ class Minigames_Hangman(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}\n\n{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self)
 
     async def too_late(self):
         if self.toolate:
@@ -1087,7 +1087,7 @@ class Minigames_Hangman(discord.ui.View):
                 else:
                     self.current += " "
 
-        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`\n\n{('Custom Hangman created by: ' + self.picker.mention) if self.picker else ''}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"Keep it going!\n\n`{self.current}`\n\n{self.status}\n\n**Wrong letters used so far:** `{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self)
 
         if "-" not in self.current:
             # best_user = max(self.players, key=lambda user: len(self.players[user]))
@@ -1098,7 +1098,7 @@ class Minigames_Hangman(discord.ui.View):
             for plr in self.players.keys():
                 self.results += f"`{plr.display_name}`: {len(self.players[plr])}\n"
 
-            await INTERACTION(interaction.response, f"Sleazel was saved, but who contributed the most?{', '.join(best_users)}\n\n{self.results}\n\n{('Custom Hangman created by: ' + self.picker.mention) if self.picker else ''}", False)
+            await INTERACTION(interaction.response, f"Sleazel was saved, but who contributed the most?: {', '.join(best_users)}\n\n{self.results}", False)
 
             if len(self.myword) >= 5 and self.lifes == 5 and self.alone:
                 # for usrId in best_users_ids:
@@ -1129,10 +1129,10 @@ class Minigames_Hangman(discord.ui.View):
         else:
             self.status = "<:csPranked:786317086066343936><:csThegun:786629172101513216><:csStairbonk:812813052822421555>" 
 
-        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\nWrong letters used so far: `{self.wrong}`\n\nLast move: {self.cp.mention} guessed `{self.cl}`", self) 
+        await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\n**Wrong letters used so far:** `{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self) 
 
         if self.lifes <= 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} is wrong. The correct word was: `{self.myword}`", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} made everyone lose. The correct word was: `{self.myword}`", False)
             self.toolate = False
             self.stop()
         else:
