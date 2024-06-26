@@ -284,7 +284,7 @@ async def on_message(message):
         else:
             messages = increment(userId)
 
-            if messages == 250:
+            if messages == 5:
                 await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
                 await DRONEPRINT(f'**{usr.name}** just sent their 250th message and rightfully received the Image Perms role.')
                 await asyncio.sleep(1)
