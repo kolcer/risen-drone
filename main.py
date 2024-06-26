@@ -281,6 +281,7 @@ async def on_message(message):
         MSG_SENT[usr] += 1
         if MSG_SENT[usr] == 100 and EXTRA_ROLES["imageperms"] not in usr.roles:
             await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
+            await DRONEPRINT(f'**{usr.name}** just sent their 100th message and received the Image Perms role.')
 
             
     if ch.id == 845454640103424032 and message.attachments:
