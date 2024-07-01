@@ -1068,7 +1068,7 @@ class Minigames_Hangman(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}\n\n{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self)
+        await EDIT_VIEW_MESSAGE(self.message, f"The hangman's fate is sealed.\n\n`{self.current}`\n\n{self.status}\n\n`{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self)
 
     async def too_late(self):
         if self.toolate:
