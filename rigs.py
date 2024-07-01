@@ -150,11 +150,16 @@ async def Rig(rigType, ch, usr):
         case "wicked":
             role_list = []
             for role in usr.roles:
-                if role.name in MORPHABLE_ROLES or role.name in PING_ROLES:
+                if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES) and role.name != "Wicked":
                     role_list.append(role)
             #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
             await usr.remove_roles(*role_list)
-            msgCounting = await SEND(ch, "You cast Wicked Rig and the Devil took your roles away! Beg for forgiveness to claim them back.")
+            await asyncio.sleep(1)
+
+            if MORPHABLE_ROLES["Wicked"][0] not in usr.roles:
+                await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
+                
+            msgCounting = await SEND(ch, "You cast Wicked Rig and the Devil took your roles away! Now you are a true Wicked.")
          
         case "drifter":
             im = usr.display_name[::-1]
