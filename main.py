@@ -777,9 +777,8 @@ async def on_message(message):
                 if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
                     await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
             await SEND(ch, f"**{usr.name}** is trying trying to talk in this lifeless chat. It's time to resurrect it and you are the perfect Necromancer for the job.")
-            await asyncio.sleep(5)
-            await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
             await asyncio.sleep(1)
+            await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
            
         #morph command
         elif lmsg.startswith("morph to"):
