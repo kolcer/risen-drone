@@ -650,6 +650,7 @@ LIMITED_ROLES = {
 APPROVED_ROLES = {
     "Splicer": None,
     "Role Hunter": None,
+    "Image Perms": None,
 }
 
 FUN_LISTS = {
