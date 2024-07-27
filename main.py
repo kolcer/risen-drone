@@ -275,23 +275,23 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
-    if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles: 
-        MSG_DELAY.append(usr.id)
-        userId = str(usr.id)
+    # if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles: 
+    #     userId = str(usr.id)
+    #     MSG_DELAY.append(userId)
 
-        if not check_key(userId):
-            set_entry(userId, '1')
-        else:
-            messages = increment(userId)
+    #     if not check_key(userId):
+    #         set_entry(userId, '1')
+    #     else:
+    #         messages = increment(userId)
 
-            if messages == 150:
-                await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
-                await asyncio.sleep(1)
-                await SEND(ch, f"{usr.mention} I just gave you the Image Perms role because I noticed you have been active, but don't abuse it.")
-                delete_key(userId)
+    #         if messages == 150:
+    #             await ADD_ROLES(usr, EXTRA_ROLES["imageperms"])
+    #             await asyncio.sleep(1)
+    #             await SEND(ch, f"{usr.mention} I just gave you the Image Perms role because I noticed you have been active, but don't abuse it.")
+    #             delete_key(userId)
 
-        await asyncio.sleep(20)
-        MSG_DELAY.remove(usr.id)
+    #     await asyncio.sleep(20)
+    #     MSG_DELAY.remove(usr.id)
             
     if ch.id == 845454640103424032 and message.attachments:
         if usr not in ARTISTS:
