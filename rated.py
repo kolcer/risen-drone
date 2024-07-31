@@ -48,6 +48,13 @@ async def SEND(channel, message):
         return
     return await channel.send(message)
 
+#DM an user
+async def SEND_DM(member, message):
+    if message == None or message == "":
+        #cannot send empty message
+        return
+    return await member.send(message)
+
 #send to interactiom, optional ephemeral 
 async def INTERACTION(message, content: str, secret: bool):
     if content == None or content == "":

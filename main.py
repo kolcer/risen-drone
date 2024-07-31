@@ -163,11 +163,14 @@ async def on_member_update(before, after):
 #on new member join
 @client.event
 async def on_member_join(member):
-    await SEND(CHANNELS["general"],
-        "Welcome to Crazy Stairs Discord Server!"
-        "\nUnlike other Jokers around here, I am a real bot."
-        "\nPlease read the <#750056989207429143>, to avoid misunderstandings."
-        "\nHave fun, and remember: It's okay to be a little crazy.")
+    msg = "Welcome to Crazy Stairs Discord Server!\nUnlike other Jokers around here, I am a real bot.\nPlease read the <#750056989207429143>, to avoid misunderstandings.\nHave fun, and remember: It's okay to be a little crazy."
+
+    try:
+        await SEND_DM(member, msg)
+    except Exception as e:
+        # The bot doesn't have permission to send DMs to this user
+        print(f"An error occurred when sending a DM to {member.name}: {e}")
+        await SEND(CHANNELS["general"], msg)
     
     NEW_MEMBERS.append(member)
 
