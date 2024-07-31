@@ -236,7 +236,7 @@ async def on_message(message):
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles:
         NEW_MEMBERS.remove(usr)
-        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>. No prefix required.\nIf you are interested in more commands, type `bd help` still in <#750060041289072771> to view every input I can respond to.\nYou're on your own now, see you in the server!"
+        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>. No prefix required.\nIf you are interested in more commands, type `bd help` still in <#750060041289072771> to view every input I can respond to.\nYou're on your own now, see you around!"
 
         try:
             await SEND_DM(usr, howToMorph)
