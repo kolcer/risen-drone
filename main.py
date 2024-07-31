@@ -163,7 +163,7 @@ async def on_member_update(before, after):
 #on new member join
 @client.event
 async def on_member_join(member):
-    msg = "Welcome to Crazy Stairs Discord Server!\nUnlike other Jokers around here, I am a real bot.\nPlease read the <#750056989207429143>, to avoid misunderstandings.\nHave fun, and remember: It's okay to be a little crazy."
+    msg = "Welcome! I am the official bot for the Crazy Stairs Discord Server.\nPlease read the <#750056989207429143> to avoid misunderstandings.\nHave fun, and remember: It's okay to be a little crazy."
 
     try:
         await SEND_DM(member, msg)
@@ -236,8 +236,14 @@ async def on_message(message):
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles:
         NEW_MEMBERS.remove(usr)
+        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>. No prefix required.\nIf you are interested in more commands, type `bd help` still in <#750060041289072771> to view every input I can respond to.\nYou're on your own now, see you in the server!"
 
-        await SEND(ch, f"{usr.mention} congratulations for verifying your account. Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>.\nAnd if you are still curious, `bd help` will show you all the commands I can respond to.")
+        try:
+            await SEND_DM(usr, howToMorph)
+        except Exception as e:
+            # The bot doesn't have permission to send DMs to this user
+            print(f"An error occurred when sending a DM to {usr.name}: {e}")
+            await SEND(ch, howToMorph)
 
     if (ch.id == 845454640103424032) and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
