@@ -328,18 +328,13 @@ WISDOM = [
 
 OBJECTS = {
     "a stair": {"Climb it", "Block it with a Wicked wall", "Glitch it away", "Steal it"},
-    "an apple": {"Catch it", "Make a smartphone out of it", "Kick it away", "Peel it and give it back"},
-    "a refrigerator": {"Close yourself inside it", "Find out about its contents", "Stand still", "Push it away"},
     "a Mana orb": {"Absorb it", "Look at its color", "Avoid it", "Be indifferent"},
     "Sleazel": {"Scream", "Dodge him", "Act as a cushion", "Shield yourself"},
     "Broken Drone": {"Phase through it", "Edit its source code and erase it", "Be confused", "Rate limit it"},
     "a Chameleon": {"Catch it", "Be disgusted", "Claim a Muggle instead", "Buy it for 200 dollars"},
     "some Robux": {"Ask for more", "Buy headless with them", "Get the giftcards", "Resell them"},
-    "a book": {"Read it", "Spoil the ending", "Use a Karate move and deflect it", "Write a story based off Crazy Stairs"},
     "a gun": {"Stair bonk it", "Promote it to Admin", "Raise your hands", "Run away"},
     "a Roingus": {"Be happy", "Don't let it hurt itself", "Walk away", "Save it and join the Roingus club"},
-    "a Chair": {"Sit on it", "Throw it back", "Cast a spell to make it chase other people", "Turn it into a throne"},
-    "a Door": {"Enter the sanctuary", "Open it with a kick", "Open the Anywhere Door and enter it", "Jump away"},
     "a Patron link": {"Move to the side it is not blocking", "Walk through it from below", "Run until it disappears", "Unlink it"},
 }
 
