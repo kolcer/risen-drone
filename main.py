@@ -389,7 +389,7 @@ async def on_message(message):
         #create chat killer task
         #this should run regardless if the message was intercepted
         #by some other command 
-        # ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
+        ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
 
         #broken drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
@@ -712,37 +712,37 @@ async def on_message(message):
                 await view.send(ch)
             await view.wait()
 
-        # # Revive Chat Command
-        # elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
-        #     #chat has to be dead, duh
-        #     if not CHAT_KILLER['reviveChat']:
-        #         await SEND(ch, "This chat is very much alive, I am afraid.")
-        #         return
+        # Revive Chat Command
+        elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
+            #chat has to be dead, duh
+            if not CHAT_KILLER['reviveChat']:
+                await SEND(ch, "This chat is very much alive, I am afraid.")
+                return
             
-        #     # Only chat killers can use the command
-        #     if EXTRA_ROLES['ckr'] in usr.roles:
-        #         await SEND(ch, "Redeeming yourself? Alright.")
-        #         await asyncio.sleep(2)
-        #         CHAT_KILLER['reviveChat'] = False
-        #         CHAT_KILLER['necroRevive'] = False
-        #         await SEND(ch, random.choice(REVIVE_CHAT))
-        #     else:
-        #         await SEND(ch, "It is not your fault.")
+            # Only chat killers can use the command
+            if EXTRA_ROLES['ckr'] in usr.roles:
+                await SEND(ch, "Redeeming yourself? Alright.")
+                await asyncio.sleep(2)
+                CHAT_KILLER['reviveChat'] = False
+                CHAT_KILLER['necroRevive'] = False
+                await SEND(ch, random.choice(REVIVE_CHAT))
+            else:
+                await SEND(ch, "It is not your fault.")
         
-        # # Necromancer's revive chat command
-        # elif ("resurrect" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # same as revive chat above - esc
-        #     if not CHAT_KILLER['necroRevive']:
-        #         await SEND(ch, "No reviving necessary.")
-        #         return
+        # Necromancer's revive chat command
+        elif ("resurrect" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # same as revive chat above - esc
+            if not CHAT_KILLER['necroRevive']:
+                await SEND(ch, "No reviving necessary.")
+                return
 
-        #     if SPECIAL_ROLES['Necromancer'][0] in usr.roles:
-        #         await SEND(ch, "You cast the resurrect chat spell... a faint discord notification sound can be heard in the distance...")
-        #         await asyncio.sleep(2)
-        #         CHAT_KILLER['necroRevive'] = False
-        #         CHAT_KILLER['reviveChat'] = False
-        #         await SEND(ch, random.choice(REVIVE_CHAT))
-        #     else:
-        #         await SEND(ch, "You do not know that spell... the chat continues to rest in peace.")
+            if SPECIAL_ROLES['Necromancer'][0] in usr.roles:
+                await SEND(ch, "You cast the resurrect chat spell... a faint discord notification sound can be heard in the distance...")
+                await asyncio.sleep(2)
+                CHAT_KILLER['necroRevive'] = False
+                CHAT_KILLER['reviveChat'] = False
+                await SEND(ch, random.choice(REVIVE_CHAT))
+            else:
+                await SEND(ch, "You do not know that spell... the chat continues to rest in peace.")
  
         ## Splicer role assignment
         elif "<:cssplicer:988948000200069191>" in lmsg:
@@ -772,22 +772,22 @@ async def on_message(message):
             else:
                 THE_DRIP[usr] = 1
 
-        # #resurrect chat
-        # elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
-        #     NECROMANCY['awarded'] = True
+        #resurrect chat
+        elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
+            NECROMANCY['awarded'] = True
 
-        #     if EXTRA_ROLES['ckr'] in usr.roles:
-        #         await SEND(ch, "You cannot keep the chat active all by yourself, but do try to revive it.")
-        #         return
+            if EXTRA_ROLES['ckr'] in usr.roles:
+                await SEND(ch, "You cannot keep the chat active all by yourself, but do try to revive it.")
+                return
 
-        #     CHAT_KILLER['necroRevive'] = True
-        #     UPDATE_NECRO()
-        #     for member in EXTRA_ROLES['necromancer'].members:
-        #         if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
-        #             await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
-        #     await SEND(ch, f"**{usr.name}** is trying trying to talk in this lifeless chat. It's time to resurrect it and you are the perfect Necromancer for the job.")
-        #     await asyncio.sleep(1)
-        #     await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
+            CHAT_KILLER['necroRevive'] = True
+            UPDATE_NECRO()
+            for member in EXTRA_ROLES['necromancer'].members:
+                if member.id != 535924732571287562: #Dirk (lev the lion) is immune, as this was his alignment suggestion
+                    await REMOVE_ROLES(member,EXTRA_ROLES['necromancer'])
+            await SEND(ch, f"**{usr.name}** is trying trying to talk in this lifeless chat. It's time to resurrect it and you are the perfect Necromancer for the job.")
+            await asyncio.sleep(1)
+            await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
            
         #morph command
         elif lmsg.startswith("morph to"):
@@ -1128,25 +1128,25 @@ async def on_message(message):
                     await SEND(CHANNELS['bot-testing'], "I refuse.")
                     return
     
-            # #give ckr
-            # if lmsg.startswith("ckr to", 1):
-            #     for mem in SERVER_DATA['server'].members:
-            #         if mem.name.lower() == lthird:
-            #             await SEND(ch, "I gave the Chat Killer role to " + mem.name)
-            #             await asyncio.sleep(1)
-            #             await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
-            #             break
-            #     return  
+            #give ckr
+            if lmsg.startswith("ckr to", 1):
+                for mem in SERVER_DATA['server'].members:
+                    if mem.name.lower() == lthird:
+                        await SEND(ch, "I gave the Chat Killer role to " + mem.name)
+                        await asyncio.sleep(1)
+                        await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
+                        break
+                return  
                 
-            # #remove ckr
-            # if lmsg.startswith("ckr from", 1):
-            #     for mem in SERVER_DATA['server'].members:
-            #         if mem.name.lower() == lthird:
-            #             await SEND(ch, "I took the Chat Killer Role away from " + mem.name)
-            #             await asyncio.sleep(1)
-            #             await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
-            #             break
-            #     return   
+            #remove ckr
+            if lmsg.startswith("ckr from", 1):
+                for mem in SERVER_DATA['server'].members:
+                    if mem.name.lower() == lthird:
+                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name)
+                        await asyncio.sleep(1)
+                        await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
+                        break
+                return   
 
             #give any role
             if lmsg.startswith("assign", 1):

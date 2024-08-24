@@ -141,7 +141,7 @@ class ShowCommands(discord.ui.View):
         ''',
 
         '''
-        Use these commands in <#750060041289072771>
+        With the exception of Revive Chat, use these commands in <#750060041289072771>
 
 **bd show profile**
 ➡️ Admire your roles collection and some of your statistics
@@ -154,6 +154,9 @@ class ShowCommands(discord.ui.View):
 
 **create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]...** (2 to 19 answers)
 ➡️ Create a poll with a question and its possible answers, votes will be revealed when it's closed 
+
+**revive chat**
+➡️ How could you
 
 **reset bot**
 ➡️ Use this command if I become unresponsive (which I won't) (3 users required)
@@ -204,6 +207,9 @@ Delete: Deletes the specified quiz question by index.
 
 **|makesay** *[channel-name] [message]*
 ➡️ Have the bot repeat what you say
+
+**|ckr to/from** *[username]*
+➡️ Give/remove the Chat Killer role
 
 **|nr** *[name]*
 ➡️ Create new custom role :bangbang:
