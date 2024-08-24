@@ -810,14 +810,14 @@ BUTTONS = {
 }
 
 EXTRA_ROLES = {
-    'ckr': 951424560685805588,              # chat killer
-    'necromancer': 1152174671123468349,     # necromancer
-    'possessed': 988572669521842197,        # via rig
-    'admin': 993446701090222160,            # aka Drone Master (not a discord admin)
-    'murdurator': 735225462405464125,       # discord server moderator
-    'climber': 735410759206568047,          # climber (consider adding manually verified) - ok
-    'manuallyverified': 820521310278516739, # manually assigned climber
-    'imageperms': 1188494866594922686,      # Image perms role
+    'ckr': 1276936421168386180,              # chat killer
+    'necromancer': 1152174671123468349,      # necromancer
+    'possessed': 988572669521842197,         # via rig
+    'admin': 993446701090222160,             # aka Drone Master (not a discord admin)
+    'murdurator': 735225462405464125,        # discord server moderator
+    'climber': 735410759206568047,           # climber (consider adding manually verified) - ok
+    'manuallyverified': 820521310278516739,  # manually assigned climber
+    'imageperms': 1188494866594922686,       # Image perms role
 }
 
 CHAT_KILLER = {
