@@ -319,7 +319,9 @@ async def on_message(message):
             await ADD_REACTION(message, "❤️‍🔥")
 
     if ch.id == 899030333859692636:
+        print("message sent in suggestions")
         for i in REACTIONS_FOR_SUGGESTIONS:
+            print(f"added reaction {i}")
             await ADD_REACTION(message,i)
         return
 
