@@ -320,7 +320,8 @@ async def on_message(message):
 
     if ch.id == 899030333859692636:
         for i in REACTIONS_FOR_SUGGESTIONS:
-            print(f"added reaction {i}")
+            await ADD_REACTION(message, i)
+            await asyncio.sleep(1)
         return
 
     if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
