@@ -268,7 +268,6 @@ WISDOM = [
     "The only way to do great work is to love what you do. Play Keeper, everyone loves it! Even Sleazel!",
     "I do not have a receipe for success, but I do have one for failure - Try to make everyone happy.",
     "World is filled with brilliant people who have the best intentions to start working on their big project... tomorrow.",
-    "I LOVE SLEAZEL :D :D :D :D (and oreos but I love SLEAZEL more)"
     # Sarcastic Responses
     "Remember, true strength lies not in winning every battle, but in persevering through every challenge. (Literally the same exact thing.)",
     "One of the keys to happiness is finding joy in the little things. Take a moment to appreciate how ugly you could have been.",
@@ -313,15 +312,14 @@ WISDOM = [
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
     "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank him, you'll receive the secret role as a reward.",
-    "Kill chat, revive, kill chat, revive, kill chat, revive, and hope nobody interrupts you while you're doing it. Maybe then I will forgive you.",
-    # "How many of those impostor tokens do you have? Try casting some big boy spells, maybe even a rig.", || what secret role was this for?
+    "Chameleon rig might do nothing if it fails too many times, it can be due to a few reasons. But worry not, I will give you a little something for the issue if that happens!",
     "Wisdom can grant roles.",
-    "I love buttons.",
+    "I love buttons. You should as well.",
     # Suggestions from community
     "y - realblanket",
     "nah - justk1nz3r",
     "I am unoriginal and cannot come up with a good quote - Xeribloom",
-    "That is terrible advice, who writes this stuff? - sleazel (i love sleazel)",
+    "That is terrible advice, who writes this stuff? - sleazel",
     "Never trim the hedge on a shoulder day.",
     "Yay! >w< - funkykidgaming9999",
 ]
