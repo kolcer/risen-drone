@@ -877,14 +877,14 @@ async def on_message(message):
             ## tips/tricks trigger
             if len(lsplit) == 2:
                 if lsplit[1] == "tip" or lsplit[1] == "trick":
-                    if restricted:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
                         await SEND(ch,show_random_entry(lsplit[0]))
                         return
                 elif lsplit[1] == "trivia":
-                    if restricted:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
