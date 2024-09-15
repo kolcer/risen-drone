@@ -388,7 +388,30 @@ async def on_message(message):
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
- 
+
+        ## thief rig active
+        elif ACTIVE_RIGS["thief"]:
+
+            await ExecuteThiefRig(ch,usr)
+
+        ## Spectre Rig Active
+        elif ACTIVE_RIGS["spectre"]:
+                
+            await ExecuteSpectreRig(ch,usr,message)
+
+        ## Joker Rig Active
+        elif ACTIVE_RIGS["joker"]:
+                
+            await ExecuteJokerRig(ch,usr,message)
+
+        # Splicer Rig Active
+        elif ACTIVE_RIGS["splicer"]:
+
+            await ExecuteSplicerRig(ch,usr)
+
+        # Prevent using BD commands outside of #bot-commands and #bot-testing channels
+        elif ch not in CHANNELS['botcomm']:
+            return
         #start the quiz
         elif lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
@@ -558,25 +581,6 @@ async def on_message(message):
         elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
             await CastRig(lsplit[1],ch,usr)
 
-        ## thief rig active
-        elif ACTIVE_RIGS["thief"]:
-
-            await ExecuteThiefRig(ch,usr)
-
-        ## Spectre Rig Active
-        elif ACTIVE_RIGS["spectre"]:
-                
-            await ExecuteSpectreRig(ch,usr,message)
-
-        ## Joker Rig Active
-        elif ACTIVE_RIGS["joker"]:
-                
-            await ExecuteJokerRig(ch,usr,message)
-
-        # Splicer Rig Active
-        elif ACTIVE_RIGS["splicer"]:
-
-            await ExecuteSplicerRig(ch,usr)
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
