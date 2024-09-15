@@ -151,6 +151,21 @@ LIMITED_USE_RIGS = [
     "splicer",
 ]
 
+BOT_COMMANDS_CHANNEL_RESTRICTED = [
+    "morph to",
+    "demorph from",
+    "sub to",
+    "unsub from",
+    "bd show profile",
+    "drone of wisdom",
+    "create poll",
+    "revive chat",
+    "bd scold",
+    "give mana to",
+    "play lucid ladders",
+    "start quiz",
+    "play hangman",
+]
 RIGS_DESCRIPTION = {
     "thief": "How long is your stack of stolen names? Actually, don't tell me.",
     "spectre": "There's a 50% chance this message will be empty.",
@@ -504,6 +519,8 @@ SPLICER_RIG = {
     "user-name" : "",
     "rigcaster-name" : "",
 }
+
+
 
 COOLDOWN_DESCRIPTIONS = {
     "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",

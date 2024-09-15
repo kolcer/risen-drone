@@ -385,6 +385,13 @@ async def on_message(message):
 
         #broken drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
+
+        restricted = False
+        for command in BOT_COMMANDS_CHANNEL_RESTRICTED:
+            if lmsg.startswith(command):
+                restricted = True
+                break
+            
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
@@ -410,8 +417,9 @@ async def on_message(message):
             await ExecuteSplicerRig(ch,usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
-        elif ch not in CHANNELS['botcomm']:
-            return
+        elif ch != CHANNELS['bot_commands'] and ch != CHANNELS['testing'] and restricted:
+            await SEND(ch, "This command can be only used in <#750060041289072771>!")
+
         #start the quiz
         elif lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
 
