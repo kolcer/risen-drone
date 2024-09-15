@@ -391,7 +391,7 @@ async def on_message(message):
             if lmsg.startswith(command):
                 restricted = True
                 break
-            
+
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
@@ -417,7 +417,7 @@ async def on_message(message):
             await ExecuteSplicerRig(ch,usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
-        elif ch != CHANNELS['bot_commands'] and ch != CHANNELS['testing'] and restricted:
+        elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing'] and restricted:
             await SEND(ch, "This command can be only used in <#750060041289072771>!")
 
         #start the quiz
