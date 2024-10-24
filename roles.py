@@ -23,11 +23,11 @@ def PrepareRoles(roles):
             EXTRA_ROLES['ckr'] = role
             SPECIAL_ROLES["Ultimate"][0] = role
             continue
-        #necromancer
-        if role.id == EXTRA_ROLES['necromancer']:
-            EXTRA_ROLES['necromancer'] = role
-            SPECIAL_ROLES['Necromancer'][0] = role
-            continue
+        #necromancer - gone, reduced into atoms
+        # if role.id == EXTRA_ROLES['necromancer']:
+        #     EXTRA_ROLES['necromancer'] = role
+        #     SPECIAL_ROLES['Necromancer'][0] = role
+        #     continue
         #possessed (for the rig)
         if role.id == EXTRA_ROLES['possessed']:
             EXTRA_ROLES['possessed'] = role
