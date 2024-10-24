@@ -361,7 +361,6 @@ async def CastRig(rigPick,ch,usr):
     return
 
 async def ExecuteThiefRig(ch,usr):
-
     tooLong = False
     isMurdurator = False
             
@@ -389,24 +388,6 @@ async def ExecuteThiefRig(ch,usr):
     await EDIT_NICK(usr, "N/A")
 
     await asyncio.sleep(1)
-            
-    # if RIG_DATA['rigCaster'] in NickDictionary:
-    #     if tooLong:
-    #         NickDictionary[RIG_DATA['rigCaster']] = victim
-    #     else:
-    #         NickDictionary[RIG_DATA['rigCaster']] = RIG_DATA['rigCaster'].display_name + ", " + victim
-
-    #     await EDIT_NICK(RIG_DATA['rigCaster'], NickDictionary[RIG_DATA['rigCaster']])
-    #     await SEND(ch, RIG_DATA['rigCaster'].mention + " has just stolen your name for 5 minutes!")
-
-    #     if tooLong == True:
-    #         await asyncio.sleep(1)
-    #         await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
-
-    #     await asyncio.sleep(300) #300#1800 
-    #     del NickDictionary[RIG_DATA['rigCaster']]
-
-    #     return
                 
     await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name + ", " + victim)
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has just stolen your name for 5 minutes!")
@@ -415,7 +396,6 @@ async def ExecuteThiefRig(ch,usr):
     if tooLong == True:
         await asyncio.sleep(1)
         await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
-
 
     if not isMurdurator: 
         await asyncio.sleep(300) #300#1800 

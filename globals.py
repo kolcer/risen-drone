@@ -718,13 +718,6 @@ SPECIAL_ROLES = {
         "You are not a chat killer in the first place.",
         "There was an attempt.",
     ],
-    "Necromancer": [
-        None,
-        "You need to resurrect chat in <#624227331720085536> channel, after it has been murdered.",
-        "You have already resurrected the chat.",
-        "You are not a necromancer.",
-        "There was an attempt.",
-    ],
 }
 
 # pingable roles, no custom messages

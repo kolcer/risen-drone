@@ -1132,7 +1132,7 @@ class Minigames_Hangman(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\n**Wrong letters used so far:** `{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self) 
 
         if self.lifes <= 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} made everyone lose. The correct word was: `{self.myword}`", False)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} used up their last chance. The correct word was: `{self.myword}`", False)
             self.toolate = False
             self.stop()
         else:
