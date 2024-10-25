@@ -1030,12 +1030,11 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         await self.update_message()
         await interaction.response.defer()
 
-    async def force_stop(self) {
+    async def force_stop(self):
         for item in self.children:
             item.disabled = True
 
         await self.stop()
-    }
 
     def create_embed(self):
         embed = discord.Embed()
