@@ -979,7 +979,6 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-
         self.closed = True
         await EDIT_VIEW_MESSAGE(self.message, f"{self.message.content}\nPoll is closed. Look at the results.", self)
         BUTTONS["status"] = False
@@ -997,15 +996,6 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             await REPLY(self.message, "Very interesting choices.")
 
         await self.on_timeout()
-
-    def create_embed(self):
-        embed = discord.Embed()
-        embed.title = "Poll results"
-        embed.description = self.results
-        embed.color = discord.Colour(int("FFD700", 16))
-
-        self.embed = embed
-        return embed
     
     async def update_message(self):
         await self.message.edit(embed=self.create_embed(), view=self)
@@ -1039,6 +1029,22 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
 
         await self.update_message()
         await interaction.response.defer()
+
+    async def force_stop(self) {
+        for item in self.children:
+            item.disabled = True
+
+        await self.stop()
+    }
+
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = "Poll results"
+        embed.description = self.results
+        embed.color = discord.Colour(int("FFD700", 16))
+
+        self.embed = embed
+        return embed
 
     # async def createButtons(self):
     #     @discord.ui.button(label=self.choice1, custom_id = "0", style = discord.ButtonStyle.secondary)

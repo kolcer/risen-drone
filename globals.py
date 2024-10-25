@@ -819,7 +819,7 @@ BUTTONS = {
 
 EXTRA_ROLES = {
     'ckr': 1276936421168386180,              # chat killer
-    'necromancer': 1152174671123468349,      # necromancer
+    # 'necromancer': 1152174671123468349,    # necromancer - soon to be alignment role
     'possessed': 988572669521842197,         # via rig
     'admin': 993446701090222160,             # aka Drone Master (not a discord admin)
     'murdurator': 735225462405464125,        # discord server moderator

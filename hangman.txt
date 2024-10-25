@@ -133,6 +133,7 @@ career
 carry
 case
 catch
+category
 cause
 cell
 center
@@ -173,7 +174,7 @@ compare
 computer
 concern
 condition
-Congress
+congress
 consider
 consumer
 contain
@@ -338,6 +339,7 @@ future
 game
 garden
 gas
+gender
 general
 generation
 get
@@ -749,8 +751,6 @@ service
 set
 seven
 several
-sex
-sexual
 shake
 share
 she
