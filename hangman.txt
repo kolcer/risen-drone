@@ -363,6 +363,7 @@ hair
 half
 hand
 hang
+hangman
 happen
 happy
 hard
