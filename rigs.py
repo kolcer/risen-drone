@@ -361,21 +361,13 @@ async def CastRig(rigPick,ch,usr):
     return
 
 async def ExecuteThiefRig(ch,usr):
-    tooLong = False
     isMurdurator = False
-            
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
-        return
-               
-    if len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
-        await SEND(CHANNELS["bot-commands"], RIG_DATA['rigCaster'].mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + RIG_DATA['rigCaster'].display_name + "`)")
-        await asyncio.sleep(1)
-        await EDIT_NICK(RIG_DATA['rigCaster'], ".")
-        tooLong = True
-
-    ACTIVE_RIGS["thief"] = False
     victim = usr.display_name
 
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+        return
+
+    ACTIVE_RIGS["thief"] = False
 
     for roles in usr.roles:
         if roles.name in FULL_IMMUNITY_ROLES:
@@ -384,22 +376,23 @@ async def ExecuteThiefRig(ch,usr):
 
     if not isMurdurator:       
         NickDictionary[usr] = "N/A"
-
-    await EDIT_NICK(usr, "N/A")
+        await EDIT_NICK(usr, "N/A")
 
     await asyncio.sleep(1)
-                
-    await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name + ", " + victim)
+
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has just stolen your name for 5 minutes!")
 
-
-    if tooLong == True:
+    if len(RIG_DATA['rigCaster'].display_name + "," + victim) > 32:
+        await SEND(CHANNELS["bot-commands"], RIG_DATA['rigCaster'].mention + " someone fell for your Thief Rig, but your name is too long to include their name. I'll wipe it out. (Old name: `" + RIG_DATA['rigCaster'].display_name + "`)")
         await asyncio.sleep(1)
-        await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name.replace("., ","", 1))
+        await EDIT_NICK(RIG_DATA['rigCaster'], victim)
+    else:
+        await EDIT_NICK(RIG_DATA['rigCaster'], RIG_DATA['rigCaster'].display_name + "," + victim)
 
     if not isMurdurator: 
         await asyncio.sleep(300) #300#1800 
         del NickDictionary[usr]
+
     return
 
 
