@@ -358,16 +358,12 @@ CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
     "crazy-stairs": 750060054090219760,
-    "bot-testing": 813882658156838923,
-    "debugs": 1094687051724627998,
-    "testing": 1096887479031836793,
+    "bot-testing": 813882658156838923
 }
 
 # channels where bot is allowed to post, that should not be counted in public commands
 SECRET_CHANNELS = [
-    "bot-testing",
-    "debugs",
-    "testing",
+    "bot-testing"
 ]
 
 # bot will react to the webhook emoji, if it finds in a webhook message

@@ -416,7 +416,7 @@ async def on_message(message):
             await ExecuteSplicerRig(ch,usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
-        elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing'] and restricted:
+        elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing'] and restricted:
             await SEND(ch, "This command can be only used in <#750060041289072771>!")
 
         #start the quiz
@@ -876,14 +876,14 @@ async def on_message(message):
             ## tips/tricks trigger
             if len(lsplit) == 2:
                 if lsplit[1] == "tip" or lsplit[1] == "trick":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing']:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
                         await SEND(ch,show_random_entry(lsplit[0]))
                         return
                 elif lsplit[1] == "trivia":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['testing']:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
