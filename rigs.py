@@ -175,7 +175,8 @@ async def Rig(rigType, ch, usr):
 
             while True:
                 ch2 = random.choice(list(CHANNELS.values()))
-                await DRONEPRINT(ch2)
+                print(ch2)
+                print(list(CHANNELS.values()))
 
                 if (ch2.name != ch.name) and (ch2.name not in SECRET_CHANNELS):
                     break
