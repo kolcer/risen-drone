@@ -55,7 +55,7 @@ def showScores():
 
 #fetch questions from database. This is only done once per startup, so everytime question is added/removed/changed
 #the bot needs to restart
-async def FetchQuestions():
+async def FetchQuestions(): 
     entries = list_entries('quiz')
     for i in range(len(entries)):
         entry = entries[i].decode("utf-8")
