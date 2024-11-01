@@ -97,7 +97,7 @@ async def StartQuiz(usr,ch):
     QUIZ["second-player"] = True
     await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
-    #if no one joins within 10 seconds, event is forced closed.
+    #if no one joins within 30 seconds, event is forced closed.
     await asyncio.sleep(30)
     if QUIZ["second-player"] == True:
         await SEND(ch, "Nobody joined in time. Event is concluded.")
