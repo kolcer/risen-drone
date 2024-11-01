@@ -159,13 +159,13 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "bd show profile",
     "drone of wisdom",
     "create poll",
-    "revive chat",
     "bd scold",
     "give mana to",
     "play lucid ladders",
     "start quiz",
     "play hangman",
 ]
+
 RIGS_DESCRIPTION = {
     "thief": "How long is your stack of stolen names? Actually, don't tell me.",
     "spectre": "There's a 50% chance this message will be empty.",

@@ -141,7 +141,7 @@ class ShowCommands(discord.ui.View):
         ''',
 
         '''
-        With the exception of Revive Chat, use these commands in <#750060041289072771>
+        Again, use these commands in <#750060041289072771>!
 
 **bd show profile**
 ➡️ Admire your roles collection and some of your statistics
@@ -155,18 +155,12 @@ class ShowCommands(discord.ui.View):
 **create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]...** (2 to 19 answers)
 ➡️ Create a poll with a question and its possible answers, votes will be revealed when it's closed 
 
-**revive chat**
-➡️ How could you
-
 **reset bot**
 ➡️ Use this command if I become unresponsive (which I won't) (3 users required)
 
 
 
 ** USER COMMANDS **
-
-*Attention! The bot no longer checks for user discriminator as Discord should have forced every user to remove them.*
-
 
 **bd scold** *[username]*
 ➡️ They should not have done that
