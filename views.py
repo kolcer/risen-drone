@@ -1395,6 +1395,7 @@ class ButtonGames_ButtonFight(discord.ui.View):
 
     @discord.ui.button(label="Broken Drone button", style = discord.ButtonStyle.secondary)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        currMsg = ''
         usr = interaction.user
         button.disabled = True
 
@@ -1411,17 +1412,20 @@ class ButtonGames_ButtonFight(discord.ui.View):
             self.tm = 15
 
         if usr == self.winning:
-            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+            currMsg = BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm))
+            await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
             await interaction.response.defer()
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
             self.winning = usr
             self.clicks += 1
-            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+            currMsg = BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm))
+            
+            await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
             await interaction.response.defer()
 
         await asyncio.sleep(2)
         if (BUTTONS["status"]):
             button.disabled = False
-            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
+            await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
