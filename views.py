@@ -1374,7 +1374,7 @@ class ButtonGames_ButtonFight(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        if len(self.users) > 0:
+        if len(self.users) > 1:
             item.label = f"{self.winning.name} was here"
             await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
         else:
@@ -1412,6 +1412,7 @@ class ButtonGames_ButtonFight(discord.ui.View):
 
         if usr == self.winning:
             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+            await interaction.response.defer()
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
