@@ -953,20 +953,6 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
-            # elif BUTTONS["phase"] == 3:
-            #     BUTTONS["status"] = True
-            #     view = ThirdButton(timeout=30)
-            #     view.tm = 30
-            #     view.clicks = 0
-            #     view.winning = None
-            #     view.users = []
-            #     view.step = 0
-            #     view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
-
-            #     await view.wait()
-            #     await view.too_late()
-            #     BUTTONS["status"] = False
-
             elif BUTTONS["phase"] == 3:
                 BUTTONS["status"] = True
                 view = ButtonGames_HelpBrokenDrone(timeout=60)
@@ -1042,6 +1028,20 @@ async def on_message(message):
                 BUTTONS["view"] = view
 
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Someone is throwing **{view.thrownObject}** in your way! How do you react?!", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+            elif BUTTONS["phase"] == 6:
+                BUTTONS["status"] = True
+                view = ButtonGames_ButtonFight(timeout=30)
+                view.tm = 30
+                view.clicks = 0
+                view.winning = None
+                view.users = []
+                view.step = 0
+                view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
 
                 await view.wait()
                 await view.too_late()

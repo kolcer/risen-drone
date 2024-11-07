@@ -221,6 +221,7 @@ Delete: Deletes the specified quiz question by index.
 3: Help Broken Drone
 4: Tic Tac Toe
 5: Poll
+6: Button Fight
 
 
 :bangbang: Must be in the FUN_ROLES list in globals.py
@@ -1368,52 +1369,58 @@ class Minigames_Hangman(discord.ui.View):
 #         else:
 #             await INTERACTION(interaction.response, "You did not cast this rig.", True)
 
-# class ThirdButton(discord.ui.View):
-#     async def on_timeout(self):
-#         for item in self.children:
-#             item.disabled = True
-#             if not len(self.users) <= 1:
-#                 item.label = f"{self.winning.name} was here"
-#                 await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
-#             else:
-#                 item.label = "Still my button"
-#                 item.style = discord.ButtonStyle.red
-#                 await EDIT_VIEW_MESSAGE(self.message, "I get to keep my button.", self)
+class ButtonGames_ButtonFight(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
 
-#     async def too_late(self):
-#         if len(self.users) <= 1:
-#             await SEND(BUTTONS["channel"], "Thank you very much.")
-#         else:
-#             await SEND(BUTTONS["channel"], f"{self.winning.mention} stole my button after `{self.clicks}` interactions.")
+        if len(self.users) > 0:
+            item.label = f"{self.winning.name} was here"
+            await EDIT_VIEW_MESSAGE(self.message, "Not my button anymore.", self)
+        else:
+            item.label = "Still my button"
+            item.style = discord.ButtonStyle.red
+            await EDIT_VIEW_MESSAGE(self.message, "I get to keep my button.", self)
 
-#             if not str(self.winning.id) in list_decoded_entries("Last One"):
-#                 await add_entry_with_check("Last One", self.winning)
+    async def too_late(self):
+        if len(self.users) <= 1:
+            await SEND(BUTTONS["channel"], "Thank you very much.")
+        else:
+            await SEND(BUTTONS["channel"], f"{self.winning.mention} stole my button after `{self.clicks}` interactions.")
 
-#         await self.on_timeout()
+            # if not str(self.winning.id) in list_decoded_entries("Last One"):
+            #     await add_entry_with_check("Last One", self.winning)
 
-#     @discord.ui.button(label="Broken Drone button", style = discord.ButtonStyle.secondary)
-#     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
-#         usr = interaction.user
+        await self.on_timeout()
 
-#         if usr not in self.users:
-#             self.users.append(usr)
+    @discord.ui.button(label="Broken Drone button", style = discord.ButtonStyle.secondary)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        button.disabled = True
 
-#         if self.clicks >= 150:
-#             self.step = 2
-#             self.timeout = 5
-#             self.tm = 5
-#         elif self.clicks >= 100:
-#             self.step = 1
-#             self.timeout = 15
-#             self.tm = 15
+        if usr not in self.users:
+            self.users.append(usr)
 
-#         if usr == self.winning:
-#             await INTERACTION(interaction.response, "The button is yours.", True)
-#             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
-#         else:
-#             button.label = f"{usr.name} button"
-#             button.style = discord.ButtonStyle.green
-#             self.winning = usr
-#             self.clicks += 1
-#             await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
-#             await interaction.response.defer()
+        if self.clicks >= 150:
+            self.step = 2
+            self.timeout = 5
+            self.tm = 5
+        elif self.clicks >= 100:
+            self.step = 1
+            self.timeout = 15
+            self.tm = 15
+
+        if usr == self.winning:
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+        else:
+            button.label = f"{usr.name} button"
+            button.style = discord.ButtonStyle.green
+            self.winning = usr
+            self.clicks += 1
+            await EDIT_VIEW_MESSAGE(self.message, BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm)), self)
+            await interaction.response.defer()
+
+        await asyncio.sleep(2)
+        if (BUTTONS["status"]):
+            button.disabled = False
+            await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
