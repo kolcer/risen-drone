@@ -262,6 +262,12 @@ async def on_message(message):
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
        # await ADD_ROLES(usr, FUN_ROLES["I was there"])
+
+    #for bd profile
+    if usr.id not in MSG_SENT:
+        MSG_SENT[usr.id] = 1
+    else:
+        MSG_SENT[usr.id] = MSG_SENT[usr.id] + 1
     
     if today.day == 1 and today.month == 4:
         if MORPHABLE_ROLES["Joker"][0] not in usr.roles:
@@ -394,6 +400,10 @@ async def on_message(message):
         if compare.ratio() > 0.7:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
+
+        ## All Rigs in one, !!goes before rig activations!!
+        elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
+            await CastRig(lsplit[1],ch,usr)
 
         ## thief rig active
         elif ACTIVE_RIGS["thief"]:
@@ -584,10 +594,6 @@ async def on_message(message):
             await view.wait()
             await view.too_late()
             BUTTONS["status"] = False
-        ## All Rigs in one
-        elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
-            await CastRig(lsplit[1],ch,usr)
-
 
         ## Give Mana command
         elif msg.lower().startswith("give mana to "):
