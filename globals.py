@@ -453,7 +453,7 @@ MULTIPLE_WORD_TRIGGERS = {
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
     "A Wicked has destroyed the stair that led to the 4.0 update. Sorry for the inconvenience.":
-        ["update", "4"],
+        ["when", "update", "4"],
 }
 
 # first word is required and any of the pool of rest of the words
