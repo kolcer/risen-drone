@@ -30,8 +30,8 @@ MG_PLAYERS = {}
 GIT_COMMITTERS = {
     "fantasygone": 267014823315898368,
     "kolcer": 481893862864846861,
-    "random-deve": 898870303680241674,
     "EclipseCashier": 1053665302258384986,
+    # "random-deve": 898870303680241674,
 }
 
 # CONSTANT ARRAYS
@@ -83,42 +83,42 @@ IMPOSTOR_NICKS = [
     "Drone imposter alert!",
 ]
 
-REVIVE_CHAT = [
-    "How did you find out about Crazy Stairs?",
-    "What's your least favorite Alignment?",
-    "How many Alignments were there in the game when you started playing?",
-    "Whose Alignment's power would you rather wield in real life?",
-    "Nope. Chat is as dead as my intentions to revive it.",
-    "Is Sleazel cool?",
-    "What's your favorite feature present in the game?",
-    "What's fun about Crazy Stairs?",
-    "Do you hate Sleazel?",
-    "Don't let the chat become dead again, or I'll become quite unhappy.",
-    "Star Wars reminds me of home. I still want to go back to Death Star one day...",
-    "What's the craziest strategy you've seen someone use in Crazy Stairs?",
-    "If you could add one new feature to Crazy Stairs, what would it be?",
-    "Which alignment do you think is the most overpowered?",
-    "Have you ever played Crazy Stairs with a group of friends? How did it go?",
-    "What's the longest game of Crazy Stairs you've ever played?",
-    "If you could change one thing about the rules of Crazy Stairs, what would it be?",
-    "Have you ever won a game of Crazy Stairs by a lucky coincidence?",
-    "Do you think Crazy Stairs is more luck-based or skill-based? And why?",
-    "What advice would you give to someone who's never played Crazy Stairs before?",
-    "Have you ever introduced someone to Crazy Stairs who ended up liking it? Or the other way around?",
-    "What do you think is the biggest mistake people make when playing Crazy Stairs?",
-    "What's the funniest moment you've had while playing Crazy Stairs?",
-    "Banning you in 3 seconds...",
-    "If you had Game Murdurator in Crazy Stairs for one day, what would you do?",
-    "What's your favorite rig in-game?",
-    "What's your favorite discord rig?",
-    "Is there a certain alignment mechanic you wish to see in the game some day?",
-    "This one is easy. 1+1=?",
-    "What do you want to see in Crazy Stairs in the future? Wrong answers only.",
-    "Do you like the secret roles in this server?",
-    "Was there an alignment you thought was bad? Did you change your mind as you kept playing with it?",
-    "List 5 reasons explaining why Chameleon is a bad alignment.",
-    "What's the worst damage you did while playing as an 'evil' alignment?",
-]
+# REVIVE_CHAT = [
+#     "How did you find out about Crazy Stairs?",
+#     "What's your least favorite Alignment?",
+#     "How many Alignments were there in the game when you started playing?",
+#     "Whose Alignment's power would you rather wield in real life?",
+#     "Nope. Chat is as dead as my intentions to revive it.",
+#     "Is Sleazel cool?",
+#     "What's your favorite feature present in the game?",
+#     "What's fun about Crazy Stairs?",
+#     "Do you hate Sleazel?",
+#     "Don't let the chat become dead again, or I'll become quite unhappy.",
+#     "Star Wars reminds me of home. I still want to go back to Death Star one day...",
+#     "What's the craziest strategy you've seen someone use in Crazy Stairs?",
+#     "If you could add one new feature to Crazy Stairs, what would it be?",
+#     "Which alignment do you think is the most overpowered?",
+#     "Have you ever played Crazy Stairs with a group of friends? How did it go?",
+#     "What's the longest game of Crazy Stairs you've ever played?",
+#     "If you could change one thing about the rules of Crazy Stairs, what would it be?",
+#     "Have you ever won a game of Crazy Stairs by a lucky coincidence?",
+#     "Do you think Crazy Stairs is more luck-based or skill-based? And why?",
+#     "What advice would you give to someone who's never played Crazy Stairs before?",
+#     "Have you ever introduced someone to Crazy Stairs who ended up liking it? Or the other way around?",
+#     "What do you think is the biggest mistake people make when playing Crazy Stairs?",
+#     "What's the funniest moment you've had while playing Crazy Stairs?",
+#     "Banning you in 3 seconds...",
+#     "If you had Game Murdurator in Crazy Stairs for one day, what would you do?",
+#     "What's your favorite rig in-game?",
+#     "What's your favorite discord rig?",
+#     "Is there a certain alignment mechanic you wish to see in the game some day?",
+#     "This one is easy. 1+1=?",
+#     "What do you want to see in Crazy Stairs in the future? Wrong answers only.",
+#     "Do you like the secret roles in this server?",
+#     "Was there an alignment you thought was bad? Did you change your mind as you kept playing with it?",
+#     "List 5 reasons explaining why Chameleon is a bad alignment.",
+#     "What's the worst damage you did while playing as an 'evil' alignment?",
+# ]
 
 RIG_LIST = [
     "thief",
@@ -423,6 +423,8 @@ SINGLE_WORD_TRIGGERS = {
 REACT_TRIGGERS = {
     "<:csStairbonk:812813052822421555>":  # REACTION FROM THE BOT -> !!! MUST BE EMOJI !!!
         'gun',                            # YOUR MESSAGE -> !!! must be lowercase !!!
+    "🏌️‍♂️": 
+        "hm",
 }
 
 # all words need to be present for this trigger to occur
@@ -450,6 +452,8 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
+    "A Wicked has destroyed the stair that led to the 4.0 update. Sorry for the inconvenience.":
+        ["update", "4"],
 }
 
 # first word is required and any of the pool of rest of the words
