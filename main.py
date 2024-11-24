@@ -924,8 +924,10 @@ async def on_message(message):
             # reaction triggers
             for i, v in REACT_TRIGGERS.items():
                  if v in lmsg:
-                     await ADD_REACTION(message,i)
-                     return
+                    if v == 'hm' and len(lmsg) > 5:
+                        return
+                    await ADD_REACTION(message,i)
+                    return
             
 
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ") and not BUTTONS["status"]):
