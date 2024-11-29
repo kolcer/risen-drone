@@ -477,9 +477,9 @@ ACTIVE_RIGS = {
 }
 
 RIG_COOLDOWNS = {
+    "trap": False,     #Affects other Users
     "username": False, #Affects caster's username
     "self": False,     #Affects caster's Discord account
-    "trap": False,     #Affects other Users
     "chat": False,     #Affects the chat
     "meddle": False,   #Affects other rigs
 }
