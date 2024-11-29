@@ -183,20 +183,6 @@ RIGS_DESCRIPTION = {
     "none": "Some cool stats, sadly nobody cares about these.",
 }
 
-ACTIVE_RIGS = {
-    "joker": False,
-    "thief": False,
-    "spectre": False,
-    "splicer": False,
-}
-
-RIG_COOLDOWNS = {
-    "general": False,
-    "tsj": False,
-    "ha": False,
-    "patron": False,
-}
-
 # worst guns ever made for the gun role
 WORST_GUNS = [
     "Cochran Turret Revolver",
@@ -483,29 +469,44 @@ SANCTUARY = {
     "chameleon": " has found Chameleon's Oasis!",
 }
 
+ACTIVE_RIGS = {
+    "joker": False,
+    "thief": False,
+    "spectre": False,
+    "splicer": False,
+}
+
+RIG_COOLDOWNS = {
+    "username": False, #Affects caster's username
+    "self": False,     #Affects caster's Discord account
+    "trap": False,     #Affects other Users
+    "chat": False,     #Affects the chat
+    "meddle": False,   #Affects other rigs
+}
+
 COOLDOWN_SELECT = {
-    "thief": "tsj",
-    "spectre": "tsj",
-    "joker": "tsj",
-    "splicer": "tsj",
-    "archon": "ha",
-    "heretic": "ha",
-    "patron": "patron",
-    "wicked": "general",
-    "keeper": "general",
-    "hacker": "general",
-    "drifter": "general",
+    "thief": "trap",
+    "spectre": "trap",
+    "joker": "trap",
+    "splicer": "trap",
+    "heretic": "self",
+    "wicked": "self",
+    "archon": "chat",
+    "patron": "meddle",
+    "keeper": "username",
+    "hacker": "username",
+    "drifter": "username",
 }
 
 COOLDOWN_DURATION = {
-    "patron": 900,    
     "thief": 600,
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
-    "archon": 240,    
-    "heretic": 60,
-    "wicked": 60,    
+    "heretic": 30,
+    "wicked": 30,
+    "archon": 480,
+    "patron": 900,    
     "keeper": 20,
     "hacker": 20,
     "drifter": 20,
@@ -520,13 +521,12 @@ SPLICER_RIG = {
     "rigcaster-name" : "",
 }
 
-
-
 COOLDOWN_DESCRIPTIONS = {
-    "general": "<:csWicked:792143453035167754><:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
-    "tsj": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ", #
-    "ha": "<:csHeretic:786323224115281921><:csArchon:786323402172530688> cooldown: ",
-    "patron": "<:csPatron:758081038697103504> cooldown: ",
+    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ",
+    "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
+    "chat": "<:csArchon:786323402172530688> cooldown: ",
+    "meddle": "<:csPatron:758081038697103504> cooldown: ",
+    "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
 }
 
 
