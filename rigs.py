@@ -130,7 +130,7 @@ async def Rig(rigType, ch, usr):
         case "heretic":
             if EXTRA_ROLES['murdurator'] in usr.roles:
                 await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
-                RIG_COOLDOWNS["ha"] = False
+                RIG_COOLDOWNS["self"] = False
                 return
 
             #for member in SERVER_DATA['server'].members:
@@ -169,7 +169,7 @@ async def Rig(rigType, ch, usr):
         case "archon":
             if ch.name not in CHANNELS:
                 await SEND(ch, "Impossible to create a Split here. This channel is restricted.")
-                RIG_COOLDOWNS["ha"] = False
+                RIG_COOLDOWNS["chat"] = False
                 return
             ch2 = ch
 
@@ -211,7 +211,7 @@ async def Rig(rigType, ch, usr):
                     break
             if not rigActive:
                 await SEND(ch, "Nothing changed.")
-                RIG_COOLDOWNS["patron"] = False
+                RIG_COOLDOWNS["meddle"] = False
                 return
             msgCounting = await SEND(ch, "You cast Patron Rig and restored the Server!")
             for rig in ACTIVE_RIGS.keys():

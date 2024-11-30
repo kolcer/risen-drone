@@ -512,6 +512,14 @@ COOLDOWN_DURATION = {
     "drifter": 20,
 }
 
+COOLDOWN_DESCRIPTIONS = {
+    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ",
+    "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
+    "chat": "<:csArchon:786323402172530688> cooldown: ",
+    "meddle": "<:csPatron:758081038697103504> cooldown: ",
+    "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
+}
+
 SPLICER_RIG = {
     "user" : None,
     "answer" : None,
@@ -519,14 +527,6 @@ SPLICER_RIG = {
     "reactionmessage" : None,
     "user-name" : "",
     "rigcaster-name" : "",
-}
-
-COOLDOWN_DESCRIPTIONS = {
-    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ",
-    "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
-    "chat": "<:csArchon:786323402172530688> cooldown: ",
-    "meddle": "<:csPatron:758081038697103504> cooldown: ",
-    "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
 }
 
 
