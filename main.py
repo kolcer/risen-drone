@@ -377,8 +377,6 @@ async def on_message(message):
        
     #normal non-admin usage.
     else:
-        
-
         ## split the message to 3 strings for some commands to use
         ## no need to have more than 4 strings
         lsplit = lmsg.split(" ",3) 
