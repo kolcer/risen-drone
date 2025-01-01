@@ -66,7 +66,7 @@ def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] -= 1
                 toSend += " failed a stairjump, made the drones feel bad for them, and caused them to add 1 floor to the tower!"
             else:
-                MG_PLAYERS["topLevel"] += 2
+                LADDERS["topLevel"] += 2
                 MG_PLAYERS[plr] += 1
                 toSend += " stairjumped and made the drones to add 2 floors to the tower!"
                 
