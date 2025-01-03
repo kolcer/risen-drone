@@ -165,6 +165,9 @@ class ShowCommands(discord.ui.View):
 **bd scold** *[username]*
 ➡️ They should not have done that
 
+**bd praise** *[username]*
+➡️ They did well
+
 **give mana to** *[username]*
 ➡️ Remove the Possessed role from the user (does not apply to users muted by moderators)
 

@@ -4,6 +4,7 @@ import asyncio
 
 from globals import *
 from rated import *
+from database import *
 
 def MG_RESET():
      
@@ -46,7 +47,7 @@ def MG_SHOW_WINNERS():
     
     return toSend + " won LUCID LADDERS!"                    
     
-def MG_ACTION(plr, action):
+async def MG_ACTION(plr, action):
     
       
     #all players always advance 1 level per round
@@ -58,17 +59,18 @@ def MG_ACTION(plr, action):
     match action:
         case "none":
             toSend += "are chilling this round."
-            
         case "muggle":
-            chances = random.randint(0, 2)
-            if chances == 2:
+            chances = random.randint(0, 5)
+            if chances <= 2:
+                toSend += "got stuck and did not climb any floor."
+            elif chances <= 4:
                 LADDERS['topLevel'] += 1
                 MG_PLAYERS[plr] -= 1
-                toSend += " failed a stairjump, made the drones feel bad for them, and caused them to add 1 floor to the tower!"
+                toSend += "failed a Stairjump. The Drones felt the second-hand embarassment and created 1 more floor to the tower."
             else:
                 LADDERS["topLevel"] += 2
                 MG_PLAYERS[plr] += 1
-                toSend += " stairjumped and made the drones to add 2 floors to the tower!"
+                toSend += "perfectly executed a Stairjump. The Drones were so impressed they added 2 more floors to the tower!"
                 
         case "patron":
             ourLevel = MG_PLAYERS[plr]
@@ -187,6 +189,10 @@ def MG_ACTION(plr, action):
             else:
                 toSend += "failed to perform a dark ritual and got stranded - a level was lost."
                 MG_PLAYERS[plr] -= 1
+
+    if not str(plr.id) in list_decoded_entries("Pro Tower Climber") and MG_PLAYERS[plr] >= 31:
+        await add_entry_with_check("Pro Tower Climber", plr)
+        toSend += "\nAnd they reached the 31th floor for the first time!"
                 
     return toSend
 
@@ -196,7 +202,6 @@ async def MG_LOOP(toSend):
     ourTick = LADDERS['tick']
     
     while True:
-        
         toSend += MG_SHOW_STATS()
         if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()

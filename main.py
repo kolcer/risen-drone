@@ -618,6 +618,26 @@ async def on_message(message):
             # Scolding an User that is NOT in the Server
             await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
+        ## Praise command
+        elif lmsg.startswith("bd praise "):
+            finalmsg = None
+            for member in SERVER_DATA['server'].members:
+                if member.name.lower() == lmsg.split(" ",2)[2] :
+                    PraiseDict = getScoldDictionary(member, usr)
+                    # Praise someone in the Dictionary (User itself included)
+                    if member.id in PraiseDict:
+                        finalmsg = PraiseDict[member.id]
+                    # Praiseing a Bot
+                    elif member.bot:
+                        finalmsg = "Well done, bot friend.\n-# Between us, I am the favored."
+                    # Praising an User that is in the Server
+                    else:
+                        finalmsg = "Well done, " + member.display_name + ". Most excellent."
+                    await SEND(ch,finalmsg)
+                    return
+            # Praising an User that is NOT in the Server
+            await SEND(ch, usr.mention + " I know you tried your best, but I couldn't find anyone by that name.")
+
         ## Happy Birthday BD!!!!!
         elif ("happy birthday broken drone" or "happy birthday bd") in lmsg:
             if today.day == 3 and today.month == 4:
@@ -683,7 +703,7 @@ async def on_message(message):
 
             # Preparing stuff to handle stats
             messages = ""
-            if target not in MSG_SENT:
+            if target.id not in MSG_SENT:
                 messages = "0"
             else:
                 messages = MSG_SENT[target]

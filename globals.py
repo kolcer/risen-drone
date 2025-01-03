@@ -160,6 +160,7 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "drone of wisdom",
     "create poll",
     "bd scold",
+    "bd praise",
     "give mana to",
     "play lucid ladders",
     "start quiz",
@@ -316,6 +317,8 @@ WISDOM = [
     "Chameleon rig might do nothing if it fails too many times, it can be due to a few reasons. But worry not, I will give you a little something for the issue if that happens!",
     "Wisdom can grant roles.",
     "I love buttons. You should as well.",
+    "Are you good at Hangman? Prove it.",
+    "I've seen the Lucid Ladders tower reach 100+ floors once, you should've seen it.",
     # Suggestions from community
     "y - realblanket",
     "nah - justk1nz3r",
@@ -647,6 +650,7 @@ FUN_ROLES = [
     ":]",
     "Rig Failure",
     "Sleazel Saviour",
+    "Pro Tower Climber",
 ]
 
 LIMITED_ROLES = {
@@ -857,6 +861,18 @@ def getScoldDictionary(victim, author):
             author.mention + " are you sad?",
     }
     return ScoldDict
+
+# create praise dictionary for the praise command
+def getScoldDictionary(victim, author):
+    PraiseDict = {
+        481893862864846861:
+            "Sleazel has all my appreciation.",
+        827952429290618943:
+            author.mention + " I know, I am wonderful.",
+        author.id:
+            author.mention + " modest much?",
+    }
+    return PraiseDict
 
 def disableSplicer():
     SPLICER_RIG["user"] = None
