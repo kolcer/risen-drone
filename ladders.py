@@ -219,7 +219,7 @@ async def MG_LOOP(toSend):
         
         cp = MG_QUEUE[LADDERS['currentPlayer']]
         MG_NEXT_PLAYER()
-        toSend = MG_ACTION(cp,"none")
+        toSend = await MG_ACTION(cp,"none")
 
 async def LucidLaddersProcessMessage(usr,msg):
 
@@ -243,7 +243,7 @@ async def LucidLaddersProcessMessage(usr,msg):
         while spell == "chameleon":
             spell = random.choice(MG_SPELLS)
         MG_NEXT_PLAYER()
-        await MG_LOOP(MG_ACTION(usr,spell))
+        await MG_LOOP(await MG_ACTION(usr,spell))
 
 async def PlayLucidLadders(usr,ch):
         #mini game
