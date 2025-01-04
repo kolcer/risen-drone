@@ -347,7 +347,7 @@ async def CastRig(rigPick,ch,usr):
             await Rig(randomRig,ch,usr)
         return
 
-    LAST_RIG[usr] = str(rigPick) + " Rig"
+    LAST_RIG[usr.id] = str(rigPick) + " Rig"
 
     if rigPick == "necromancer":
         await necromancer(ch)
