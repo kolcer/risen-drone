@@ -146,6 +146,9 @@ class ShowCommands(discord.ui.View):
 **bd show profile**
 ➡️ Admire your roles collection and some of your statistics
 
+**happy birthday broken drone** (bd for short)
+➡️ You should not forget this
+
 **cast** *[alignment]* **rig**
 ➡️ Your favorite Alignment's rig, but on Discord
 

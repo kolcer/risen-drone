@@ -54,7 +54,7 @@ async def MG_ACTION(plr, action):
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
         
-    toSend = "All players advance 1 level.\n**" + plr.name + "** has played " + action + ". They "
+    toSend = "All players advance 1 level.\n**`" + plr.name + "`** has played " + action + ". They "
     
     match action:
         case "none":
@@ -192,7 +192,7 @@ async def MG_ACTION(plr, action):
 
     if not str(plr.id) in list_decoded_entries("Pro Tower Climber") and MG_PLAYERS[plr] >= 31:
         await add_entry_with_check("Pro Tower Climber", plr)
-        toSend += "\nAnd they reached the 31th floor for the first time!"
+        toSend += "\n**And they reached the 31th floor for the first time!**"
                 
     return toSend
 
@@ -209,7 +209,7 @@ async def MG_LOOP(toSend):
             MG_RESET()
             return
         else:
-            toSend += "**" + MG_QUEUE[LADDERS['currentPlayer']].name + "** turn! Choose Your alignment!"
+            toSend += MG_QUEUE[LADDERS['currentPlayer']].mention + "'s turn! Choose Your alignment!"
             await SEND(LADDERS['channel'], toSend)
         
         await asyncio.sleep(LADDERS['maxWait'])
