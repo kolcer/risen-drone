@@ -863,7 +863,7 @@ def getScoldDictionary(victim, author):
     return ScoldDict
 
 # create praise dictionary for the praise command
-def getScoldDictionary(victim, author):
+def getPraiseDictionary(victim, author):
     PraiseDict = {
         481893862864846861:
             "Sleazel has all my appreciation.",

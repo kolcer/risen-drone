@@ -623,7 +623,7 @@ async def on_message(message):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
                 if member.name.lower() == lmsg.split(" ",2)[2] :
-                    PraiseDict = getScoldDictionary(member, usr)
+                    PraiseDict = getPraiseDictionary(member, usr)
                     # Praise someone in the Dictionary (User itself included)
                     if member.id in PraiseDict:
                         finalmsg = PraiseDict[member.id]
