@@ -228,12 +228,7 @@ async def on_message(message):
         NEW_MEMBERS.remove(usr)
         howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>.\nYou may also type `bd help` to view every input I can respond to."
 
-        try:
-            await SEND_DM(usr, howToMorph)
-        except Exception as e:
-            # The bot doesn't have permission to send DMs to this user
-            print(f"An error occurred when sending a DM to {usr.name}: {e}")
-            await SEND(ch, howToMorph)
+        await SEND(ch, howToMorph)
 
     if (ch.id == 845454640103424032) and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
