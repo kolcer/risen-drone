@@ -190,9 +190,10 @@ async def MG_ACTION(plr, action):
                 toSend += "failed to perform a dark ritual and got stranded - a level was lost."
                 MG_PLAYERS[plr] -= 1
 
-    if not str(plr.id) in list_decoded_entries("Pro Tower Climber") and MG_PLAYERS[plr] >= 31:
-        await add_entry_with_check("Pro Tower Climber", plr)
-        toSend += "\n**And they reached the 31th floor for the first time!**"
+    if MG_PLAYERS[plr] >= 31:
+        if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
+            await add_entry_with_check("Pro Tower Climber", plr)
+            toSend += "\n**And they reached the 31th floor for the first time!**"
                 
     return toSend
 
