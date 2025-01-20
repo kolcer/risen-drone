@@ -21,6 +21,7 @@ RIG_SPAMMERS = {}
 SPLICER_FANS = {}
 THE_DRIP = {} # used for optimus drip role
 MSG_SENT = {}
+PRAISES = {}
 ARTISTS = {}
 QUIZZERS = {}
 QUESTIONS = {} # fill this up on startup from database
@@ -320,6 +321,7 @@ WISDOM = [
     "I love buttons. You should as well.",
     "Are you good at Hangman? Prove it.",
     "I've seen the Lucid Ladders tower reach 100+ floors once, you should've seen it.",
+    "It doesn't matter whether people like you or not, but you can scold or praise them back.",
     # Suggestions from community
     "y - realblanket",
     "nah - justk1nz3r",
@@ -652,6 +654,7 @@ FUN_ROLES = [
     "Rig Failure",
     "Sleazel Saviour",
     "Pro Tower Climber",
+    "Acclaimed",
 ]
 
 LIMITED_ROLES = {

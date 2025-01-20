@@ -618,16 +618,35 @@ async def on_message(message):
             finalmsg = None
             for member in SERVER_DATA['server'].members:
                 if member.name.lower() == lmsg.split(" ",2)[2] :
+                    # Ensure the PRAISES dictionary has the praised user's ID as a key
+                    praised_user_id = member.id
+                    praising_user_id = usr.id
+
+                    if praised_user_id not in PRAISES:
+                        PRAISES[praised_user_id] = []
+
+                    # Add the praising user's ID to the praised user's list if not already added
+                    if praising_user_id not in PRAISES[praised_user_id]:
+                        PRAISES[praised_user_id].append(praising_user_id)
+
                     PraiseDict = getPraiseDictionary(member, usr)
                     # Praise someone in the Dictionary (User itself included)
                     if member.id in PraiseDict:
                         finalmsg = PraiseDict[member.id]
                     # Praiseing a Bot
                     elif member.bot:
-                        finalmsg = "Well done, bot friend.\n-# Between us, I am the favored."
+                        finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
                     # Praising an User that is in the Server
                     else:
-                        finalmsg = "Well done, " + member.display_name + ". Most excellent."
+                        # Check if the praised user has been praised by three unique users
+                        if len(PRAISES[praised_user_id]) == 3:
+                            finalmsg = f"{member.display_name}, everyone likes you. And so do I."
+
+                            if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
+                                await add_entry_with_check("Acclaimed", member)
+                        else:
+                            finalmsg = f"Well done, {member.display_name}. Most excellent."
+                            
                     await SEND(ch,finalmsg)
                     return
             # Praising an User that is NOT in the Server
