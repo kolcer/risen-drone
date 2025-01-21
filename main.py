@@ -626,7 +626,7 @@ async def on_message(message):
                         PRAISES[praised_user_id] = []
 
                     # Add the praising user's ID to the praised user's list if not already added
-                    if praising_user_id not in PRAISES[praised_user_id]:
+                    if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
                         PRAISES[praised_user_id].append(praising_user_id)
 
                     PraiseDict = getPraiseDictionary(member, usr)
