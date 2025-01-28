@@ -497,7 +497,12 @@ async def on_message(message):
                                 BUTTONS["status"] = False
                                 return
                     
-                    await message.delete()
+                    try:
+                        await message.delete()
+                    except Exception as e:
+                        await SEND(ch, f"Your message was removed by my bot friend, I agree with its decision.")
+                        BUTTONS["status"] = False
+                        return
                     view.myword = theword.lower()
                     view.picker = usr
                 else:
