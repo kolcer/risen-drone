@@ -1206,10 +1206,10 @@ class Minigames_TicTacToe(discord.ui.View):
     async def too_late(self):
         if self.toolate:
             if len(self.players) < 2:
-                await SEND(BUTTONS["channel"], "I was waiting.")
+                await SEND(CHANNELS["bot-commands"], "I was waiting.")
                 return
             else:
-                await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
+                await SEND(CHANNELS["bot-commands"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
 
         await self.on_timeout()
 
@@ -1253,7 +1253,7 @@ class Minigames_TicTacToe(discord.ui.View):
         elif (self.turns == 9):
             await INTERACTION(interaction.response, f"A draw! Lame.", False)
             await asyncio.sleep(1)
-            await SEND(BUTTONS["channel"], "We'll settle this next time.")
+            await SEND(CHANNELS["bot-commands"], "We'll settle this next time.")
             self.toolate = False
             self.stop()
         else:
