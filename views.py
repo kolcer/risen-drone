@@ -1211,7 +1211,7 @@ class Minigames_TicTacToe(discord.ui.View):
             else:
                 await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
 
-            await self.on_timeout()
+        await self.on_timeout()
 
     async def update_board(self, interaction, button):
         self.row, self.col = self.button_mapping.get(button.custom_id)
@@ -1335,6 +1335,7 @@ class Minigames_TicTacToe(discord.ui.View):
     async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
+        
 # class BurgerButton(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:
