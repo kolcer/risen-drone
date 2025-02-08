@@ -1249,13 +1249,13 @@ class Minigames_TicTacToe(discord.ui.View):
             # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
             await INTERACTION(interaction.response, f"{interaction.user.mention} won the match.", False)
             self.toolate = False
-            await self.on_timeout()
+            self.stop()
         elif (self.turns == 9):
             await INTERACTION(interaction.response, f"A draw! Lame.", False)
             await asyncio.sleep(1)
             await SEND(BUTTONS["channel"], "We'll settle this next time.")
             self.toolate = False
-            await self.on_timeout()
+            self.stop()
         else:
             await interaction.response.defer()
 
@@ -1335,7 +1335,7 @@ class Minigames_TicTacToe(discord.ui.View):
     async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
         await self.process_click(interaction, button, usr)
-        
+
 # class BurgerButton(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:
