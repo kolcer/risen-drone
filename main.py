@@ -535,6 +535,25 @@ async def on_message(message):
             await view.too_late()
             BUTTONS["status"] = False
 
+        elif lmsg.startswith("play tic tac toe") or lmsg.startswith("play ttt") and not BUTTONS["status"]:
+            BUTTONS["status"] = True
+            view = Minigames_TicTacToe(timeout=60)
+            view.toolate = True
+            view.players = []
+            view.assignments = {}
+            view.lastplayer = None
+            view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
+            view.turns = 0
+
+            view.board = [
+                [None, None, None],
+                [None, None, None],
+                [None, None, None]
+            ]
+
+            await view.wait()
+            await view.too_late()
+            BUTTONS["status"] = False
         # Old code for 'All Rigs in one'
         # elif "cast" in lmsg and "rig" in lmsg:
         #     if lsplit[0] == "cast" and lsplit[2] == "rig":
@@ -972,7 +991,7 @@ async def on_message(message):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
-                BUTTONS["phase"] = random.randint(1, 6)
+                BUTTONS["phase"] = random.randint(1, 5)
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
@@ -1013,26 +1032,6 @@ async def on_message(message):
                 BUTTONS["status"] = False
 
             elif BUTTONS["phase"] == 4:
-                BUTTONS["status"] = True
-                view = ButtonGames_TicTacToe(timeout=60)
-                view.toolate = True
-                view.players = []
-                view.assignments = {}
-                view.lastplayer = None
-                view.message = await SEND_VIEW(BUTTONS["channel"], "Let's play a game.", view)
-                view.turns = 0
-
-                view.board = [
-                    [None, None, None],
-                    [None, None, None],
-                    [None, None, None]
-                ]
-
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
-
-            elif BUTTONS["phase"] == 5:
                 BUTTONS["status"] = True
 
                 # theObject = random.choice(list(OBJECTS.keys()))
@@ -1078,7 +1077,7 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
-            elif BUTTONS["phase"] == 6:
+            elif BUTTONS["phase"] == 5:
                 BUTTONS["status"] = True
                 view = ButtonGames_ButtonFight(timeout=30)
                 view.tm = 30

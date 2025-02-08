@@ -190,6 +190,9 @@ class ShowCommands(discord.ui.View):
 **play hangman** *?*
 ➡️ Play hangman with the other members or by yourself
 *[? = alone, to play alone | ? = CUSTOMWORD, to make your own hangman | leave empty for a random word]*
+
+**play tic tac toe** (or _play ttt_)
+➡️ Start a Tic Tac Toe match
         ''',
 
         '''
@@ -225,9 +228,8 @@ Delete: Deletes the specified quiz question by index.
 1: Fake Interaction
 2: So Many Buttons
 3: Help Broken Drone
-4: Tic Tac Toe
-5: Poll
-6: Button Fight
+4: Poll
+5: Button Fight
 
 
 :bangbang: Must be in the FUN_ROLES list in globals.py
@@ -784,182 +786,6 @@ class ButtonGames_HelpBrokenDroneFinal(discord.ui.View):
         if len(self.clicked) == len(self.users):
             await self.on_closed()
 
-class ButtonGames_TicTacToe(discord.ui.View):
-    button_mapping = {
-        "1": (0, 0),
-        "2": (0, 1),
-        "3": (0, 2),
-        "4": (1, 0),
-        "5": (1, 1),
-        "6": (1, 2),
-        "7": (2, 0),
-        "8": (2, 1),
-        "9": (2, 2),
-    }
-
-    row = None
-    col = None
-    letter = None
-
-    pick_messages = [
-        "I saw that incoming.",
-        "That's cheating.",
-        "You can do better.",
-        "Little do you know...",
-        "Your opponent must be shaking after that move.",
-        "Not that one...",
-        "How predictable.",
-        "Even I could have come up with a better move.",
-        "How ironic.",
-        "You are two steps ahead, I see.",
-        "TOP RIGHT.",
-        "Oh no! Anyway.",
-        "🤓.",
-        "There is no way out of that.",
-        "Between you and me, I favor you.",
-        "You cannot cheese this game.",
-        "I'm watching your every move."
-    ]
-
-    async def on_timeout(self):
-        for item in self.children:
-            item.disabled = True
-
-        await EDIT_VIEW_MESSAGE(self.message, "Game over.", self)
-
-    async def too_late(self):
-        if self.toolate:
-            if len(self.players) < 2:
-                await SEND(BUTTONS["channel"], "I was waiting.")
-                return
-            else:
-                await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
-
-            await self.on_timeout()
-
-    async def update_board(self, interaction, button):
-        self.row, self.col = self.button_mapping.get(button.custom_id)
-        self.board[self.row][self.col] = self.letter
-
-        await self.check_content(interaction)
-
-        # match button.custom_id:
-        #     case "1":
-        #         self.board[0][0] = letter
-        #     case "2":
-        #         self.board[0][1] = letter
-        #     case "3":
-        #         self.board[0][2] = letter
-
-    async def check_content(self, interaction):
-        # for item in self.children:
-        #     if item.disabled == True:
-        await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
-        await asyncio.sleep(1)
-
-        if (
-            # Check rows
-            (self.board[0][0] == self.board[0][1] == self.board[0][2] == self.assignments[interaction.user]) or
-            (self.board[1][0] == self.board[1][1] == self.board[1][2] == self.assignments[interaction.user]) or
-            (self.board[2][0] == self.board[2][1] == self.board[2][2] == self.assignments[interaction.user]) or
-            # Check columns
-            (self.board[0][0] == self.board[1][0] == self.board[2][0] == self.assignments[interaction.user]) or
-            (self.board[0][1] == self.board[1][1] == self.board[2][1] == self.assignments[interaction.user]) or
-            (self.board[0][2] == self.board[1][2] == self.board[2][2] == self.assignments[interaction.user]) or
-            # Check diagonals
-            (self.board[0][0] == self.board[1][1] == self.board[2][2] == self.assignments[interaction.user]) or
-            (self.board[0][2] == self.board[1][1] == self.board[2][0] == self.assignments[interaction.user])
-        ):
-            # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
-            await INTERACTION(interaction.response, f"{interaction.user.mention} won the match.", False)
-            self.toolate = False
-            await self.on_timeout()
-        elif (self.turns == 9):
-            await INTERACTION(interaction.response, f"A draw! Lame.", False)
-            await asyncio.sleep(1)
-            await SEND(BUTTONS["channel"], "We'll settle this next time.")
-            self.toolate = False
-            await self.on_timeout()
-        else:
-            await interaction.response.defer()
-
-    async def process_click(self, interaction, button, usr):
-        if usr not in self.players:
-            if len(self.players) == 2:
-                await INTERACTION(interaction.response, "You are too late :bangbang:", True)
-                return
-            else:
-                if len(self.players) == 0:
-                    self.assignments[usr] = "X"
-                else:
-                    self.assignments[usr] = "O"
-
-                self.players.append(usr)
-        
-        if usr == self.lastplayer:
-            await INTERACTION(interaction.response, "You have already played this turn :interrobang:", True)
-            return
-
-        self.lastplayer = usr
-        self.turns += 1
-        self.letter = self.assignments[usr]
-
-        if self.letter == "X":
-            button.style = discord.ButtonStyle.blurple
-        else:
-            button.style = discord.ButtonStyle.green
-
-        button.label = self.letter
-        button.disabled = True
-
-        await self.update_board(interaction, button)
-
-
-    @discord.ui.button(label="?", row=0, custom_id = "1", style = discord.ButtonStyle.secondary)
-    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=0, custom_id = "2", style = discord.ButtonStyle.secondary)
-    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=0, custom_id = "3", style = discord.ButtonStyle.secondary)
-    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=1, custom_id = "4", style = discord.ButtonStyle.secondary)
-    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=1, custom_id = "5", style = discord.ButtonStyle.secondary)
-    async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=1, custom_id = "6", style = discord.ButtonStyle.secondary)
-    async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=2, custom_id = "7", style = discord.ButtonStyle.secondary)
-    async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=2, custom_id = "8", style = discord.ButtonStyle.secondary)
-    async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
-    @discord.ui.button(label="?", row=2, custom_id = "9", style = discord.ButtonStyle.secondary)
-    async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
-        usr = interaction.user
-        await self.process_click(interaction, button, usr)
-
 class ButtonGames_ThrowingStuff(discord.ui.View):
     embed = None
 
@@ -1334,6 +1160,181 @@ class Minigames_Hangman(discord.ui.View):
 
         await self.process_click(interaction, button, usr)
 
+class Minigames_TicTacToe(discord.ui.View):
+    button_mapping = {
+        "1": (0, 0),
+        "2": (0, 1),
+        "3": (0, 2),
+        "4": (1, 0),
+        "5": (1, 1),
+        "6": (1, 2),
+        "7": (2, 0),
+        "8": (2, 1),
+        "9": (2, 2),
+    }
+
+    row = None
+    col = None
+    letter = None
+
+    pick_messages = [
+        "I saw that incoming.",
+        "That's cheating.",
+        "You can do better.",
+        "Little do you know...",
+        "Your opponent must be shaking after that move.",
+        "Not that one...",
+        "How predictable.",
+        "Even I could have come up with a better move.",
+        "How ironic.",
+        "You are two steps ahead, I see.",
+        "TOP RIGHT.",
+        "Oh no! Anyway.",
+        "🤓.",
+        "There is no way out of that.",
+        "Between you and me, I favor you.",
+        "You cannot cheese this game.",
+        "I'm watching your every move."
+    ]
+
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, "Game over.", self)
+
+    async def too_late(self):
+        if self.toolate:
+            if len(self.players) < 2:
+                await SEND(BUTTONS["channel"], "I was waiting.")
+                return
+            else:
+                await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
+
+            await self.on_timeout()
+
+    async def update_board(self, interaction, button):
+        self.row, self.col = self.button_mapping.get(button.custom_id)
+        self.board[self.row][self.col] = self.letter
+
+        await self.check_content(interaction)
+
+        # match button.custom_id:
+        #     case "1":
+        #         self.board[0][0] = letter
+        #     case "2":
+        #         self.board[0][1] = letter
+        #     case "3":
+        #         self.board[0][2] = letter
+
+    async def check_content(self, interaction):
+        # for item in self.children:
+        #     if item.disabled == True:
+        await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
+        await asyncio.sleep(1)
+
+        if (
+            # Check rows
+            (self.board[0][0] == self.board[0][1] == self.board[0][2] == self.assignments[interaction.user]) or
+            (self.board[1][0] == self.board[1][1] == self.board[1][2] == self.assignments[interaction.user]) or
+            (self.board[2][0] == self.board[2][1] == self.board[2][2] == self.assignments[interaction.user]) or
+            # Check columns
+            (self.board[0][0] == self.board[1][0] == self.board[2][0] == self.assignments[interaction.user]) or
+            (self.board[0][1] == self.board[1][1] == self.board[2][1] == self.assignments[interaction.user]) or
+            (self.board[0][2] == self.board[1][2] == self.board[2][2] == self.assignments[interaction.user]) or
+            # Check diagonals
+            (self.board[0][0] == self.board[1][1] == self.board[2][2] == self.assignments[interaction.user]) or
+            (self.board[0][2] == self.board[1][1] == self.board[2][0] == self.assignments[interaction.user])
+        ):
+            # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
+            await INTERACTION(interaction.response, f"{interaction.user.mention} won the match.", False)
+            self.toolate = False
+            await self.on_timeout()
+        elif (self.turns == 9):
+            await INTERACTION(interaction.response, f"A draw! Lame.", False)
+            await asyncio.sleep(1)
+            await SEND(BUTTONS["channel"], "We'll settle this next time.")
+            self.toolate = False
+            await self.on_timeout()
+        else:
+            await interaction.response.defer()
+
+    async def process_click(self, interaction, button, usr):
+        if usr not in self.players:
+            if len(self.players) == 2:
+                await INTERACTION(interaction.response, "You are too late :bangbang:", True)
+                return
+            else:
+                if len(self.players) == 0:
+                    self.assignments[usr] = "X"
+                else:
+                    self.assignments[usr] = "O"
+
+                self.players.append(usr)
+        
+        if usr == self.lastplayer:
+            await INTERACTION(interaction.response, "You have already played this turn :interrobang:", True)
+            return
+
+        self.lastplayer = usr
+        self.turns += 1
+        self.letter = self.assignments[usr]
+
+        if self.letter == "X":
+            button.style = discord.ButtonStyle.blurple
+        else:
+            button.style = discord.ButtonStyle.green
+
+        button.label = self.letter
+        button.disabled = True
+
+        await self.update_board(interaction, button)
+
+
+    @discord.ui.button(label="?", row=0, custom_id = "1", style = discord.ButtonStyle.secondary)
+    async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=0, custom_id = "2", style = discord.ButtonStyle.secondary)
+    async def B2(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=0, custom_id = "3", style = discord.ButtonStyle.secondary)
+    async def B3(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=1, custom_id = "4", style = discord.ButtonStyle.secondary)
+    async def B4(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=1, custom_id = "5", style = discord.ButtonStyle.secondary)
+    async def B5(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=1, custom_id = "6", style = discord.ButtonStyle.secondary)
+    async def B6(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=2, custom_id = "7", style = discord.ButtonStyle.secondary)
+    async def B7(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=2, custom_id = "8", style = discord.ButtonStyle.secondary)
+    async def B8(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
+
+    @discord.ui.button(label="?", row=2, custom_id = "9", style = discord.ButtonStyle.secondary)
+    async def B9(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+        await self.process_click(interaction, button, usr)
 # class BurgerButton(discord.ui.View):
 #     async def on_timeout(self):
 #         for item in self.children:
