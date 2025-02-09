@@ -1410,11 +1410,11 @@ class ButtonGames_ButtonFight(discord.ui.View):
         if usr not in self.users:
             self.users.append(usr)
 
-        if self.clicks >= 150:
+        if self.clicks >= 20:
             self.step = 2
             self.timeout = 5
             self.tm = 5
-        elif self.clicks >= 100:
+        elif self.clicks >= 10:
             self.step = 1
             self.timeout = 15
             self.tm = 15
