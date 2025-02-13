@@ -390,7 +390,7 @@ async def on_message(message):
                 restricted = True
                 break
 
-        if compare.ratio() > 0.7:
+        if compare.ratio() > 0.85:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
 
