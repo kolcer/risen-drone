@@ -381,8 +381,6 @@ async def on_message(message):
         #by some other command 
         # ckr_task = asyncio.create_task(WAIT_FOR_CHAT_KILLER(message))
 
-        #broken drone impostor prevention
-        compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
 
         restricted = False
         for command in BOT_COMMANDS_CHANNEL_RESTRICTED:
@@ -390,7 +388,9 @@ async def on_message(message):
                 restricted = True
                 break
 
-        if compare.ratio() > 0.85:
+        #broken drone impostor prevention
+        compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
+        if compare.ratio() > 0.55:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
 
