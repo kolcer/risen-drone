@@ -142,22 +142,24 @@ async def on_member_update(before, after):
         await asyncio.sleep(1)
         await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
     
-    #for thief rig
-    if before in NickDictionary and after.nick != NickDictionary[before]:
-      await EDIT_NICK(after, NickDictionary[before])
-      return
- 
-    #is user a gun?
-    if not MORPHABLE_ROLES["Gun"][0] in before.roles: 
+    #prevent constantly changing nick if thief rigged
+    if not before in NickDictionary:
+        #is user a gun?
+        if not MORPHABLE_ROLES["Gun"][0] in before.roles: 
+            return
+        
+        #ignore if user nick after change is a gun name
+        if after.nick in WORST_GUNS and MORPHABLE_ROLES['Gun'][0] in before.roles:
+            return
+
+        if MORPHABLE_ROLES['Gun'][0] in before.roles:
+            await EDIT_NICK(after, random.choice(WORST_GUNS))
         return
     
-    #ignore if user nick after change is a gun name
-    if after.nick in WORST_GUNS and MORPHABLE_ROLES['Gun'][0] in before.roles:
-        return
-
-    if MORPHABLE_ROLES['Gun'][0] in before.roles:
-        await EDIT_NICK(after, random.choice(WORST_GUNS))
-    return
+    #for thief rig
+    elif after.nick != NickDictionary[before]:
+      await EDIT_NICK(after, NickDictionary[before])
+      return
 
 #on new member join
 @client.event
