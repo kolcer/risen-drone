@@ -99,10 +99,10 @@ async def muggle(channel, user):
 async def Rig(rigType, ch, usr):
     msgCounting = None
  
-    if rigType.lower() == "splicer":
-        if str(usr.id) not in list_decoded_entries("Splicer"):
-            await SEND(ch, "The Splicer main has not given you permissions to cast this rig yet.")
-            return
+    # if rigType.lower() == "splicer": no longer a secret :(
+    #     if str(usr.id) not in list_decoded_entries("Splicer"):
+    #         await SEND(ch, "The Splicer main has not given you permissions to cast this rig yet.")
+    #         return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")

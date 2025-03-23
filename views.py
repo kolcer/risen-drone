@@ -135,7 +135,7 @@ class ShowCommands(discord.ui.View):
 ➡️ Show chosen alignment trivia
 
 
-**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic.
+**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer, Reaver, Gremlin.
 **Extra alignments** *(cannot be morphed into)*: Possessed, None, Architect.
 **Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Archive, Sleazel-in-game (sub if you want Prank The Creator badge)
         ''',
