@@ -648,7 +648,7 @@ MORPHABLE_ROLES = {
     ],
     "Reaver": [ 
         None,
-        "You have become one with the ghost and became a Reaver.",
+        "You have become one with the ghost and as a result you are now a Reaver.",
         "Breaking a mirror will bring you years of misfortune.",
         "Your ghost is already copying your every move.",
         "There is no mirror with your reflection.",
@@ -678,7 +678,6 @@ MORPHABLE_ROLES = {
 
 FUN_ROLES = [
     "Sanctuary Discoverer", 
-    "Splicer",
     "Heretic Defier",
     "Architect Design",
     "Pranked the Creator",
@@ -699,10 +698,10 @@ LIMITED_ROLES = {
     "Persistent Clicker": "*(04/18/2023 - 04/19/2023)*",
     "Impostor": "*(04/11/2023 - 04/28/2023)*",
     "Last One": "*(04/18/2023 - 09/20/2023)*",
+    "Splicer": "*(09/05/2022 - 03/22/2025)*"
 }
 
 APPROVED_ROLES = {
-    "Splicer": None,
     "Role Hunter": None,
     "Image Perms": None,
 }

@@ -810,19 +810,19 @@ async def on_message(message):
         #         await SEND(ch, "You do not know that spell... the chat continues to rest in peace.")
  
         ## Splicer role assignment
-        elif "<:cssplicer:988948000200069191>" in lmsg:
-            if usr in SPLICER_FANS:
-                if SPLICER_FANS[usr] == 3:
-                    if not str(usr.id) in list_decoded_entries("Splicer"):
-                        await add_entry_with_check("Splicer", usr)
-                        await asyncio.sleep(1)
-                        await ADD_ROLES(usr, APPROVED_ROLES["Splicer"])
-                        await asyncio.sleep(1)
-                        await SEND(ch, "Ok... there you go.")
-                else:
-                    SPLICER_FANS[usr] += 1
-            else:
-                SPLICER_FANS[usr] = 1
+        # elif "<:cssplicer:988948000200069191>" in lmsg:
+        #     if usr in SPLICER_FANS:
+        #         if SPLICER_FANS[usr] == 3:
+        #             if not str(usr.id) in list_decoded_entries("Splicer"):
+        #                 await add_entry_with_check("Splicer", usr)
+        #                 await asyncio.sleep(1)
+        #                 await ADD_ROLES(usr, APPROVED_ROLES["Splicer"])
+        #                 await asyncio.sleep(1)
+        #                 await SEND(ch, "Ok... there you go.")
+        #         else:
+        #             SPLICER_FANS[usr] += 1
+        #     else:
+        #         SPLICER_FANS[usr] = 1
         
         # yo but what if i did that but cooler; OPTIMUS TIMEEEE
         elif "<:csoptimus:1046224869945266226>" in lmsg:
