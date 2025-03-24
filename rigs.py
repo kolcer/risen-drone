@@ -122,7 +122,7 @@ async def Rig(rigType, ch, usr):
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
 
-    await updateRigTracker(rigType)
+    # await updateRigTracker(rigType)
     messageAppend = "."
     msgCountingContent = ""
     match rigType:
@@ -217,7 +217,7 @@ async def Rig(rigType, ch, usr):
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
                 
-        case ("joker"|"thief"|"spectre"|"splicer"):
+        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -229,6 +229,8 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch, usr.mention + " just cast Spectre Rig! Watch your step.")
             elif rigType == "splicer":
                 msgCounting = await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
+            elif rigType == "gremlin":
+                msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Stay on your guard.")
         
         # case "gun":
         #     if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
@@ -327,11 +329,6 @@ async def CastRig(rigPick,ch,usr):
                 elif randomAttempts == 2:
                     await SEND(ch, "Anything could happen now.")
                 
-                randomAttempts = randomAttempts + 1
-                await asyncio.sleep(4)
-
-            elif randomRig == "splicer" and APPROVED_ROLES["Splicer"] not in usr.roles:
-                await SEND(ch, "This one is not for you. Let me do another roll. Be ready!! 🥁")
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
 
@@ -494,12 +491,32 @@ async def ExecuteSplicerRig(ch,usr):
             
     return
 
+async def ExecuteGremlinRig(ch,usr, message):
+    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
+        return
+
+    ACTIVE_RIGS["gremlin"] = False
+
+    role_list = []
+    for role in usr.roles:
+        if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES):
+            role_list.append(role)
+    await usr.remove_roles(*role_list)
+    await asyncio.sleep(1)
+
+    await ADD_ROLES(usr, EXTRA_ROLES['hypno'])
+    await asyncio.sleep(1)
+
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
+            
+    return
 
 async def GiveMana(ch,usr,message):
  
     role = EXTRA_ROLES['possessed']
+    hypnoRole = EXTRA_ROLES['hypno']
 
-    if role in message.author.roles and ch.id != 813882658156838923:
+    if (role in message.author.roles or hypnoRole in message.author.roles) and ch.id != 813882658156838923:
         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
         return
 
@@ -510,11 +527,15 @@ async def GiveMana(ch,usr,message):
             if role in member.roles:
                 await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
                 await asyncio.sleep(3)
-                # await member.remove_roles(role)
                 await REMOVE_ROLES(member, role)
                 await asyncio.sleep(1)
                 if not str(usr.id) in list_decoded_entries("Heretic Defier"):
                     await add_entry_with_check("Heretic Defier", usr)
+            elif hypnoRole in member.roles:
+                await SEND(message.channel, member.display_name + " has received some Mana and is no longer Hypnotized!")
+                await asyncio.sleep(3)
+                await REMOVE_ROLES(member, hypnoRole)
+                await asyncio.sleep(1)
             else:
                 await SEND(message.channel,
                     member.display_name +

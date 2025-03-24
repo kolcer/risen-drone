@@ -332,6 +332,41 @@ async def on_message(message):
                 await SEND(CHANNELS["bot-commands"], usr.mention + SANCTUARY[rolename] + " (1/? chance)")
                 await asyncio.sleep(1)
                 await add_entry_with_check("Sanctuary Discoverer", usr)
+
+    if EXTRA_ROLES['hypno'] in usr.roles:
+        if lmsg.startswith('bd help'):
+            lmsg = 'bd show profile'
+        elif lmsg.startswith('bd show profile'):
+            lmsg = 'bd help'
+
+        elif lmsg.startswith('bd praise'):
+            lmsg.replace('bd praise', 'bd scold')
+        elif lmsg.startswith('bd scold'):
+            lmsg.replace('bd scold', 'bd praise')
+
+        elif 'morph to' in lmsg:
+            lmsg.replace('morph to', 'demorph from')
+        elif 'demorph from' in lmsg:
+            lmsg.replace('demorph from', 'morph to')
+            
+        elif 'sub to' in lmsg:
+            lmsg.replace('sub to', 'unsub from')
+        elif 'unsub from' in lmsg:
+            lmsg.replace('unsub from', 'sub to')
+
+        elif 'give mana to' in lmsg:
+            lmsg = 'cast heretic rig'
+        elif 'cast' in lmsg and 'rig' in lmsg:
+            lmsg = 'give mana to myself'
+
+        elif lmsg.startswith('reset bot'):
+            lmsg = 'play hangman alone'
+        elif lmsg.startswith('play hangman alone'):
+            lmsg = 'reset bot'
+
+        else:
+            if random.randint(1, 5) == 1:
+                lmsg = 'cast heretic rig'
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
@@ -417,6 +452,11 @@ async def on_message(message):
         elif ACTIVE_RIGS["splicer"]:
 
             await ExecuteSplicerRig(ch,usr)
+
+        # Gremlin Rig Active
+        elif ACTIVE_RIGS["gremlin"]:
+
+            await ExecuteGremlinRig(ch,usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
         elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing'] and restricted:

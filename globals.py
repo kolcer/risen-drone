@@ -452,8 +452,6 @@ MULTIPLE_WORD_TRIGGERS = {
         ["found", "secret", "badge"],
     "You can't hate Sleazel! What has he done to you?":
         ['hate', 'sleazel'],
-    "A Wicked has destroyed the stair that led to the 4.0 update. Sorry for the inconvenience.":
-        ["when", "4", "update", "?"],
 }
 
 # first word is required and any of the pool of rest of the words
@@ -480,6 +478,10 @@ SANCTUARY = {
     "keeper": " has found Muggle's Base!",
     "hacker": " has found Hacker's Backdoor!",
     "drifter": " has found Drifter's Shelter!",
+    "splicer": " has found Splicer's Hub!",
+    "necromancer": " has found Necromancer's Grave!",
+    "reaver": " has found Reaver's Mirror!",
+    "gremlin": " has found Gremlin's Shack!",
     "chameleon": " has found Chameleon's Oasis!",
 }
 
@@ -488,6 +490,7 @@ ACTIVE_RIGS = {
     "thief": False,
     "spectre": False,
     "splicer": False,
+    "gremlin": False,
 }
 
 RIG_COOLDOWNS = {
@@ -503,6 +506,7 @@ COOLDOWN_SELECT = {
     "spectre": "trap",
     "joker": "trap",
     "splicer": "trap",
+    "gremlin": "trap",
     "heretic": "self",
     "wicked": "self",
     "archon": "chat",
@@ -517,6 +521,7 @@ COOLDOWN_DURATION = {
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
+    "gremlin": 600,
     "heretic": 30,
     "wicked": 30,
     "archon": 480,
@@ -527,7 +532,7 @@ COOLDOWN_DURATION = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191> cooldown: ",
+    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720> cooldown: ",
     "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
     "chat": "<:csArchon:786323402172530688> cooldown: ",
     "meddle": "<:csPatron:758081038697103504> cooldown: ",
@@ -753,14 +758,21 @@ SPECIAL_ROLES = {
         "You are not possessed...",
         "Ask someone for mana.",
     ],
-    # multiple words (ultimate chat killer) would break the script logic
-    "Ultimate": [
+    "Hypnotized": [
         None,
-        "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
-        "You have already killed the chat.",
-        "You are not a chat killer in the first place.",
-        "There was an attempt.",
+        "Wait for someone to cast a Gremlin Rig.",
+        "You are already hypnotized...",
+        "You are not hypnotized...",
+        "Ask someone for mana.",
     ],
+    # # multiple words (ultimate chat killer) would break the script logic
+    # "Ultimate": [
+    #     None,
+    #     "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
+    #     "You have already killed the chat.",
+    #     "You are not a chat killer in the first place.",
+    #     "There was an attempt.",
+    # ],
 }
 
 # pingable roles, no custom messages
@@ -864,6 +876,7 @@ EXTRA_ROLES = {
     'ckr': 1276936421168386180,              # chat killer
     # 'necromancer': 1152174671123468349,    # necromancer - soon to be alignment role
     'possessed': 988572669521842197,         # via rig
+    'hypno': 1353702670619119637,            # via rig
     'admin': 993446701090222160,             # aka Drone Master (not a discord admin)
     'murdurator': 735225462405464125,        # discord server moderator
     'climber': 735410759206568047,           # climber (consider adding manually verified) - ok
@@ -871,16 +884,16 @@ EXTRA_ROLES = {
     'imageperms': 1188494866594922686,       # Image perms role
 }
 
-CHAT_KILLER = {
-    'wait': 7200,
-    'last': 0,
-    'reviveChat': False,
-    'necroRevive': False,
-}
+# CHAT_KILLER = {
+#     'wait': 7200,
+#     'last': 0,
+#     'reviveChat': False,
+#     'necroRevive': False,
+# }
 
-NECROMANCY = {
-    'awarded': True,
-}
+# NECROMANCY = {
+#     'awarded': True,
+# }
 
 RIG_DATA = {
     'rigTracker': 1004326588021743667,
