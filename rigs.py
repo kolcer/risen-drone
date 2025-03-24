@@ -223,7 +223,7 @@ async def Rig(rigType, ch, usr):
             await SEND(ch, "I will copy your every move from now on.")
             await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
 
-            await asyncio.sleep(60)
+            await asyncio.sleep(10)
             ACTIVE_RIGS["reaver"]["active"] = False
             ACTIVE_RIGS["reaver"]["user"] = None
 
