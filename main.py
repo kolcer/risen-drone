@@ -351,17 +351,17 @@ async def on_message(message):
             
         elif 'sub to' in lmsg:
             lmsg = lmsg.replace('sub to', 'unsub from')
-        elif 'unsub from' in lmsg:
-            lmsg = lmsg.replace('unsub from', 'sub to')
+        elif 'sub from' in lmsg:
+            lmsg = 'sub to ' + lmsg.split(" ")[2]
 
         elif 'tip' in lmsg:
             lmsg = lmsg.replace('tip', 'trivia')
         elif 'trivia' in lmsg:
             lmsg = lmsg.replace('trivia', 'tip')
 
-        elif lmsg == 'good drone':
+        elif 'good drone' in lmsg:
             lmsg = 'bad drone'
-        elif lmsg == 'bad drone':
+        elif 'bad drone' in lmsg:
             lmsg = 'good drone'
 
         elif 'give mana to' in lmsg:
@@ -371,7 +371,7 @@ async def on_message(message):
 
         elif lmsg.startswith('drone of wisdom'):
             lmsg = 'play hangman alone'
-        elif lmsg.startswith('play hangman alone'):
+        elif lmsg.startswith('play hangman'):
             lmsg = 'drone of wisdom'
 
         else:
