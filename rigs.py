@@ -180,11 +180,11 @@ async def Rig(rigType, ch, usr):
                     break
 
             firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
-            await SEND(ch, "https://media.giphy.com/media/LUjKnselKZBc5Zb4t4/giphy.gif")
+            await SEND(ch, "https://giphy.com/gifs/jiSabjDlIahx2P1xI0")
             await asyncio.sleep(3)
             secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
-                + ch.mention + ". " + firstmsg.jump_url)
-            await SEND(ch2, "https://media.giphy.com/media/QM1yEJoR1Z7oKAGg4Y/giphy.gif")
+                + firstmsg.jump_url + ".")
+            await SEND(ch2, "https://giphy.com/gifs/BdtSfK2OBGu3tKyvJF")
             await asyncio.sleep(3)
             await EDIT_MESSAGE(firstmsg, firstmsg.content + " " + secondmsg.jump_url)     
         
