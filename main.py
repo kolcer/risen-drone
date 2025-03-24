@@ -367,7 +367,7 @@ async def on_message(message):
         elif 'give mana to' in lmsg:
             lmsg = 'cast heretic rig'
         elif 'cast' in lmsg and 'rig' in lmsg:
-            lmsg = 'give mana to myself'
+            lmsg = 'give mana to ' + usr.name
 
         elif lmsg.startswith('drone of wisdom'):
             lmsg = 'play hangman alone'
@@ -375,7 +375,7 @@ async def on_message(message):
             lmsg = 'drone of wisdom'
 
         else:
-            if random.randint(1, 5) == 1:
+            if random.randint(1, 10) == 1:
                 lmsg = 'cast heretic rig'
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
