@@ -491,7 +491,7 @@ async def ExecuteSplicerRig(ch,usr):
             
     return
 
-async def ExecuteGremlinRig(ch,usr, message):
+async def ExecuteGremlinRig(ch,usr):
     if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
         return
 

@@ -122,22 +122,7 @@ IMPOSTOR_NICKS = [
 #     "What's the worst damage you did while playing as an 'evil' alignment?",
 # ]
 
-RIG_LIST = [
-    "thief",
-    "spectre",
-    "joker",
-    "archon",
-    "heretic",
-    "patron",
-    "wicked",
-    "keeper",
-    "hacker",
-    "drifter",
-    "splicer",
-    "muggle",
-    "necromancer",
-    "chameleon",
-]
+
 
 RANDOM_BLACKLIST = [
     "patron",
@@ -151,6 +136,7 @@ LIMITED_USE_RIGS = [
     "thief",
     "spectre",
     "splicer",
+    "gremlin"
 ]
 
 BOT_COMMANDS_CHANNEL_RESTRICTED = [
@@ -168,23 +154,6 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "start quiz",
     "play hangman",
 ]
-
-RIGS_DESCRIPTION = {
-    "thief": "How long is your stack of stolen names? Actually, don't tell me.",
-    "spectre": "There's a 50% chance this message will be empty.",
-    "joker": "Imagine falling for your own prank.",
-    "splicer": "How does it feel to cast an exclusive Rig?",
-    "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
-    "archon": "I challenge you to find a typo in this fine sentence.",
-    "heretic": "Fell for the oldest trick in the book.",
-    "patron": "Let's keep this server clean, together.",
-    "wicked": "No Roles?",
-    "keeper": "Abcdefghijklmnpoqrstuvwxyz.",
-    "hacker": "You truly deserve the Zero rank.",
-    "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
-    "muggle": "This person thought Muggle had a rig.",
-    "none": "Some cool stats, sadly nobody cares about these.",
-}
 
 # worst guns ever made for the gun role
 WORST_GUNS = [
@@ -485,6 +454,24 @@ SANCTUARY = {
     "chameleon": " has found Chameleon's Oasis!",
 }
 
+RIG_LIST = [
+    "thief",
+    "spectre",
+    "joker",
+    "archon",
+    "heretic",
+    "patron",
+    "wicked",
+    "keeper",
+    "hacker",
+    "drifter",
+    "splicer",
+    "muggle",
+    "gremlin"
+    "necromancer",
+    "chameleon",
+]
+
 ACTIVE_RIGS = {
     "joker": False,
     "thief": False,
@@ -537,6 +524,24 @@ COOLDOWN_DESCRIPTIONS = {
     "chat": "<:csArchon:786323402172530688> cooldown: ",
     "meddle": "<:csPatron:758081038697103504> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
+}
+
+RIGS_DESCRIPTION = {
+    "thief": "How long is your stack of stolen names? Actually, don't tell me.",
+    "spectre": "There's a 50% chance this message will be empty.",
+    "joker": "Imagine falling for your own prank.",
+    "splicer": "How does it feel to cast an exclusive Rig?",
+    "necromancer": "This space is sponsored by Lev. Please play their RPG game.",
+    "archon": "I challenge you to find a typo in this fine sentence.",
+    "heretic": "Fell for the oldest trick in the book.",
+    "patron": "Let's keep this server clean, together.",
+    "wicked": "No Roles?",
+    "keeper": "Abcdefghijklmnpoqrstuvwxyz.",
+    "hacker": "You truly deserve the Zero rank.",
+    "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
+    "muggle": "This person thought Muggle had a rig.",
+    "gremlin": "Distracted!",
+    "none": "Some cool stats, sadly nobody cares about these.",
 }
 
 SPLICER_RIG = {
