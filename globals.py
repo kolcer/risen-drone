@@ -467,7 +467,7 @@ RIG_LIST = [
     "drifter",
     "splicer",
     "muggle",
-    "gremlin"
+    "gremlin",
     "necromancer",
     "chameleon",
 ]
