@@ -32,6 +32,10 @@ def PrepareRoles(roles):
         if role.id == EXTRA_ROLES['possessed']:
             EXTRA_ROLES['possessed'] = role
             SPECIAL_ROLES['Possessed'][0] = role
+        #hypnotized (for the rig)
+        if role.id == EXTRA_ROLES['hypno']:
+            EXTRA_ROLES['hypno'] = role
+            SPECIAL_ROLES['hypno'][0] = role
         #climber
         if role.id == EXTRA_ROLES['climber']:
             EXTRA_ROLES['climber'] = role
