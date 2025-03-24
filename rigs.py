@@ -230,7 +230,7 @@ async def Rig(rigType, ch, usr):
             elif rigType == "splicer":
                 msgCounting = await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
             elif rigType == "gremlin":
-                msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Stay on your guard.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
         
         # case "gun":
         #     if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
@@ -286,9 +286,9 @@ async def CastRig(rigPick,ch,usr):
 
     if today.day == 1 and today.month == 4:
         rigPick = "joker"
-        COOLDOWN_DURATION["joker"] = 90
+        COOLDOWN_DURATION["gremlin"] = 90
     else:
-        COOLDOWN_DURATION["joker"] = 600
+        COOLDOWN_DURATION["gremlin"] = 600
 
     if rigPick == "chameleon":
         cd = False

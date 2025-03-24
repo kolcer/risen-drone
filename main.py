@@ -265,13 +265,13 @@ async def on_message(message):
         MSG_SENT[usr.id] = MSG_SENT[usr.id] + 1
     
     if today.day == 1 and today.month == 4:
-        if MORPHABLE_ROLES["Joker"][0] not in usr.roles:
-            await ADD_ROLES(usr, MORPHABLE_ROLES['Joker'][0])
+        if MORPHABLE_ROLES["Gremlin"][0] not in usr.roles:
+            await ADD_ROLES(usr, MORPHABLE_ROLES['Gremlin'][0])
             await asyncio.sleep(1)
 
             role_list = []
             for role in usr.roles:
-                if role.name in MORPHABLE_ROLES and role.name != 'Joker':
+                if role.name in MORPHABLE_ROLES and role.name != 'Gremlin':
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
@@ -907,7 +907,7 @@ async def on_message(message):
         #morph command
         elif lmsg.startswith("morph to"):
             if today.day == 1 and today.month == 4:
-                morphToTarget = "Joker"
+                morphToTarget = "Gremlin"
             else:
                 morphToTarget = lsplit[2].capitalize()
 

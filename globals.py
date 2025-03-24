@@ -665,7 +665,7 @@ MORPHABLE_ROLES = {
     ],
     "Gremlin": [ 
         None,
-        "You have been hypnotized! You are now a Gremlin.",
+        "You spun so fast that you became a Gremlin.",
         "You will type `morph to gremlin` **NOW**.",
         "You are probably dizzy right now.",
         "You haven't been playing with Gremlin.",
