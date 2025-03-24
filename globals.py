@@ -468,6 +468,7 @@ RIG_LIST = [
     "splicer",
     "muggle",
     "gremlin",
+    "reaver",
     "necromancer",
     "chameleon",
 ]
@@ -478,6 +479,10 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
+    "reaver": {
+        "active": False,
+        "user": None,
+    },
 }
 
 RIG_COOLDOWNS = {
@@ -497,6 +502,7 @@ COOLDOWN_SELECT = {
     "heretic": "self",
     "wicked": "self",
     "archon": "chat",
+    "reaver": "chat",
     "patron": "meddle",
     "keeper": "username",
     "hacker": "username",
@@ -512,6 +518,7 @@ COOLDOWN_DURATION = {
     "heretic": 30,
     "wicked": 30,
     "archon": 480,
+    "reaver": 480,
     "patron": 900,    
     "keeper": 20,
     "hacker": 20,
@@ -521,7 +528,7 @@ COOLDOWN_DURATION = {
 COOLDOWN_DESCRIPTIONS = {
     "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720> cooldown: ",
     "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
-    "chat": "<:csArchon:786323402172530688> cooldown: ",
+    "chat": "<:csArchon:786323402172530688><:csReaver:1353300809672294420> cooldown: ",
     "meddle": "<:csPatron:758081038697103504> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
 }
@@ -541,6 +548,7 @@ RIGS_DESCRIPTION = {
     "drifter": "There's probably someone with your name but reversed somewhere on Discord.",
     "muggle": "This person thought Muggle had a rig.",
     "gremlin": "Distracted!",
+    "reaver": "Mirror, mirror on the wall, who is the fairest one of all?",
     "none": "Some cool stats, sadly nobody cares about these.",
 }
 

@@ -216,6 +216,18 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, "You cast Patron Rig and restored the Server!")
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
+
+        case "reaver":
+            ACTIVE_RIGS["reaver"]["active"] = True
+            ACTIVE_RIGS["reaver"]["user"] = usr.id
+            await SEND(ch, "I will copy your every move from now on.")
+            await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
+
+            await asyncio.sleep(60)
+            ACTIVE_RIGS["reaver"]["active"] = False
+            ACTIVE_RIGS["reaver"]["user"] = None
+
+            await SEND(ch, "I'll go back to my usual activities now.")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
