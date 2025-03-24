@@ -340,29 +340,29 @@ async def on_message(message):
             lmsg = 'bd help'
 
         elif lmsg.startswith('bd praise'):
-            lmsg.replace('bd praise', 'bd scold')
+            lmsg = lmsg.replace('bd praise', 'bd scold')
         elif lmsg.startswith('bd scold'):
-            lmsg.replace('bd scold', 'bd praise')
+            lmsg = lmsg.replace('bd scold', 'bd praise')
 
         elif 'morph to' in lmsg:
-            lmsg.replace('morph to', 'demorph from')
+            lmsg = lmsg.replace('morph to', 'demorph from')
         elif 'demorph from' in lmsg:
-            lmsg.replace('demorph from', 'morph to')
+            lmsg = lmsg.replace('demorph from', 'morph to')
             
         elif 'sub to' in lmsg:
-            lmsg.replace('sub to', 'unsub from')
+            lmsg = lmsg.replace('sub to', 'unsub from')
         elif 'unsub from' in lmsg:
-            lmsg.replace('unsub from', 'sub to')
+            lmsg = lmsg.replace('unsub from', 'sub to')
 
         elif 'give mana to' in lmsg:
             lmsg = 'cast heretic rig'
         elif 'cast' in lmsg and 'rig' in lmsg:
             lmsg = 'give mana to myself'
 
-        elif lmsg.startswith('reset bot'):
+        elif lmsg.startswith('drone of wisdom'):
             lmsg = 'play hangman alone'
         elif lmsg.startswith('play hangman alone'):
-            lmsg = 'reset bot'
+            lmsg = 'drone of wisdom'
 
         else:
             if random.randint(1, 5) == 1:

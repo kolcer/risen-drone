@@ -499,7 +499,7 @@ async def ExecuteGremlinRig(ch,usr):
 
     role_list = []
     for role in usr.roles:
-        if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES):
+        if (role.name in MORPHABLE_ROLES):
             role_list.append(role)
     await usr.remove_roles(*role_list)
     await asyncio.sleep(1)
