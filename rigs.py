@@ -492,7 +492,7 @@ async def ExecuteSplicerRig(ch,usr):
     return
 
 async def ExecuteGremlinRig(ch,usr):
-    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
+    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr) or EXTRA_ROLES['hypno'] in usr.roles:
         return
 
     ACTIVE_RIGS["gremlin"] = False

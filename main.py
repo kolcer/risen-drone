@@ -354,6 +354,16 @@ async def on_message(message):
         elif 'unsub from' in lmsg:
             lmsg = lmsg.replace('unsub from', 'sub to')
 
+        elif 'tip' in lmsg:
+            lmsg = lmsg.replace('tip', 'trivia')
+        elif 'trivia' in lmsg:
+            lmsg = lmsg.replace('trivia', 'tip')
+
+        elif lmsg == 'good drone':
+            lmsg = 'bad drone'
+        elif lmsg == 'bad drone':
+            lmsg = 'good drone'
+
         elif 'give mana to' in lmsg:
             lmsg = 'cast heretic rig'
         elif 'cast' in lmsg and 'rig' in lmsg:
