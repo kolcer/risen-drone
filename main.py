@@ -443,10 +443,10 @@ async def on_message(message):
         elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
             await CastRig(lsplit[1],ch,usr)
 
-        elif ACTIVE_RIGS["reaver"]["active"] and ACTIVE_RIGS["reaver"]["user"] != str(usr.id):
+        elif ACTIVE_RIGS["reaver"]["active"] and ACTIVE_RIGS["reaver"]["user"] != usr.id:
             return
 
-        elif ACTIVE_RIGS["reaver"]["active"] and ACTIVE_RIGS["reaver"]["user"] == str(usr.id):
+        elif ACTIVE_RIGS["reaver"]["active"] and ACTIVE_RIGS["reaver"]["user"] == usr.id:
             if ch.name in CHANNELS:
                 await SEND(ch, msg)
 
