@@ -689,8 +689,7 @@ async def on_message(message):
 
         ## Give Mana command
         elif lmsg.startswith("give mana to "):
-        
-            await GiveMana(ch,usr,message)
+            await GiveMana(ch,usr,lmsg)
                  
         ## Scold command
         elif lmsg.startswith("bd scold "):
