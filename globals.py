@@ -712,8 +712,8 @@ FUN_ROLES = [
     "Sleazel Saviour",
     "Pro Tower Climber",
     "Acclaimed",
-    "Hypnotized Dream"
-    "Hypnotized Nightmare"
+    "Hypnotized Dream",
+    "Hypnotized Nightmare",
 ]
 
 LIMITED_ROLES = {
