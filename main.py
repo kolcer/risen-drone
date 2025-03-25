@@ -390,7 +390,8 @@ async def on_message(message):
                         await add_entry_with_check("Hypnotized Dream", usr)
                         await asyncio.sleep(1)
                         await SEND(ch, "Hypnosis is your normal status now.")
-    
+                        
+        message.content = lmsg
     
     if lmsg == "reset bot" and usr not in FIX_BOT:
 
@@ -689,7 +690,7 @@ async def on_message(message):
 
         ## Give Mana command
         elif lmsg.startswith("give mana to "):
-            await GiveMana(ch,usr,lmsg)
+            await GiveMana(ch,usr,message)
                  
         ## Scold command
         elif lmsg.startswith("bd scold "):
