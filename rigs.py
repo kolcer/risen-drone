@@ -242,6 +242,7 @@ async def Rig(rigType, ch, usr):
             elif rigType == "splicer":
                 msgCounting = await SEND(ch, usr.mention + " just cast Splicer Rig! Careful.")
             elif rigType == "gremlin":
+                DETAILED_ROLES["hnightmare"]["caster"] = usr
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
         
         # case "gun":
@@ -508,6 +509,7 @@ async def ExecuteGremlinRig(ch,usr):
         return
 
     ACTIVE_RIGS["gremlin"] = False
+    DETAILED_ROLES["hnightmare"][usr.id] = DETAILED_ROLES["hnightmare"]["caster"]
 
     role_list = []
     for role in usr.roles:

@@ -712,6 +712,8 @@ FUN_ROLES = [
     "Sleazel Saviour",
     "Pro Tower Climber",
     "Acclaimed",
+    "Hypnotized Dream"
+    "Hypnotized Nightmare"
 ]
 
 LIMITED_ROLES = {
@@ -728,16 +730,11 @@ APPROVED_ROLES = {
     "Image Perms": None,
 }
 
-FUN_LISTS = {
-    "Sanctuary Discoverer": [],
-    "Splicer": [],
-    "Heretic Defier": [],
-    "Architect Design": [],
-    "Pranked the Creator": [],
-    "I was there": [],
-    "Zero": [],
-    "Dreepy": [],
-    "Wise": [],
+DETAILED_ROLES = {
+    "hdream": {},
+    "hnightmare": {
+        "caster": None
+    }
 }
 
 # not morphable roles
@@ -770,7 +767,7 @@ SPECIAL_ROLES = {
     ],
     "Possessed": [
         None,
-        "Wait for someone to cast a Heretic Rig.",
+        "You should cast Heretic Rig.",
         "You are already possessed...",
         "You are not possessed...",
         "Ask someone for mana.",

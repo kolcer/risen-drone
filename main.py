@@ -359,9 +359,9 @@ async def on_message(message):
         elif 'trivia' in lmsg:
             lmsg = lmsg.replace('trivia', 'tip')
 
-        elif 'good drone' in lmsg:
+        elif 'good' in lmsg and 'drone' in lmsg:
             lmsg = 'bad drone'
-        elif 'bad drone' in lmsg:
+        elif 'bad' in lmsg and 'drone' in lmsg:
             lmsg = 'good drone'
 
         elif 'give mana to' in lmsg:
@@ -376,7 +376,21 @@ async def on_message(message):
 
         else:
             if random.randint(1, 10) == 1:
+                DETAILED_ROLES["hdream"][usr.id] = 0
                 lmsg = 'cast heretic rig'
+
+                if not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nighmare"):
+                    await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
+                    await asyncio.sleep(1)
+                    await SEND(ch, "That escalated quickly.")
+            else:
+                DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
+                if DETAILED_ROLES["hdream"][usr.id] == 50:
+                    if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
+                        await add_entry_with_check("Hypnotized Dream", usr)
+                        await asyncio.sleep(1)
+                        await SEND(ch, "Hypnosis is your normal status now.")
+    
     
     if msg.lower() == "reset bot" and usr not in FIX_BOT:
 
