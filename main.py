@@ -451,7 +451,7 @@ async def on_message(message):
             return
 
         elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] == usr.id:
-            if ch.name in CHANNELS and "http" not in lmsg and len(lmsg) <= 30:
+            if ch.name in CHANNELS and "http" not in lmsg and "www" not in lmsg and len(lmsg) <= 60:
                 await SEND(ch, msg)
 
         ## thief rig active
