@@ -240,7 +240,7 @@ async def on_message(message):
         await DELETE(message)
 
 
-    if (ch.id == 1154751339872653312 or ch.id == 1154748785415700582) and ("tenor.com" in msg.lower() or "giphy.com" in msg.lower()):
+    if (ch.id == 1154751339872653312 or ch.id == 1154748785415700582) and ("tenor.com" in lmsg or "giphy.com" in lmsg):
         await DELETE(message)
 
     ## user must not be a bot
@@ -392,7 +392,7 @@ async def on_message(message):
                         await SEND(ch, "Hypnosis is your normal status now.")
     
     
-    if msg.lower() == "reset bot" and usr not in FIX_BOT:
+    if lmsg == "reset bot" and usr not in FIX_BOT:
 
         FIX_BOT.append(usr)
         if len(FIX_BOT) == 1 and not EXTRA_ROLES['admin'] in usr.roles:
@@ -688,7 +688,7 @@ async def on_message(message):
             BUTTONS["status"] = False
 
         ## Give Mana command
-        elif msg.lower().startswith("give mana to "):
+        elif lmsg.startswith("give mana to "):
         
             await GiveMana(ch,usr,message)
                  
