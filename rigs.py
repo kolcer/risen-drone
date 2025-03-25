@@ -530,7 +530,7 @@ async def GiveMana(ch,usr,message):
     role = EXTRA_ROLES['possessed']
     hypnoRole = EXTRA_ROLES['hypno']
 
-    if (role in message.author.roles or hypnoRole in message.author.roles) and ch.id != 813882658156838923:
+    if (role in message.author.roles) and ch.id != 813882658156838923:
         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
         return
 
@@ -546,7 +546,11 @@ async def GiveMana(ch,usr,message):
                 if not str(usr.id) in list_decoded_entries("Heretic Defier"):
                     await add_entry_with_check("Heretic Defier", usr)
             elif hypnoRole in member.roles:
-                await SEND(message.channel, member.display_name + " has received some Mana and is no longer Hypnotized!")
+                if usr.id == member.id:
+                    await SEND(message.channel,"You accidentally stepped on a Patron Rig and freed yourself from hypnosis!")
+                else:
+                    await SEND(message.channel, member.display_name + " has received some Mana and is no longer Hypnotized!")
+
                 await asyncio.sleep(3)
                 await REMOVE_ROLES(member, hypnoRole)
                 await asyncio.sleep(1)
