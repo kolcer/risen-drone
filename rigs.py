@@ -534,6 +534,7 @@ async def GiveMana(ch,usr,message):
         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
         return
 
+    await DRONEPRINT(message)
     split_message = message.content.split(" ", 3)
     target = split_message[3].lower()
     for member in SERVER_DATA['server'].members:
