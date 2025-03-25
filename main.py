@@ -379,7 +379,7 @@ async def on_message(message):
                 DETAILED_ROLES["hdream"][usr.id] = 0
                 lmsg = 'cast heretic rig'
 
-                if not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nighmare"):
+                if not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
                     await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
                     await asyncio.sleep(1)
                     await SEND(ch, "That escalated quickly.")
