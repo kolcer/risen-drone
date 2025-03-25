@@ -346,8 +346,8 @@ async def on_message(message):
 
         elif 'morph to' in lmsg:
             lmsg = lmsg.replace('morph to', 'demorph from')
-        elif 'demorph from' in lmsg:
-            lmsg = lmsg.replace('demorph from', 'morph to')
+        elif 'morph from' in lmsg:
+            lmsg = 'morph to ' + lmsg.split(" ")[2]
             
         elif 'sub to' in lmsg:
             lmsg = lmsg.replace('sub to', 'unsub from')
