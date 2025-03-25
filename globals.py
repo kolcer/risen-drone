@@ -479,6 +479,10 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
+    "reaver": False,
+}
+
+DETAILED_RIGS = {
     "reaver": {
         "active": False,
         "user": None,

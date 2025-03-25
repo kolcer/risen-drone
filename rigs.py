@@ -218,14 +218,14 @@ async def Rig(rigType, ch, usr):
                 ACTIVE_RIGS[rig] = False
 
         case "reaver":
-            ACTIVE_RIGS["reaver"]["active"] = True
-            ACTIVE_RIGS["reaver"]["user"] = usr.id
+            DETAILED_RIGS["reaver"]["active"] = True
+            DETAILED_RIGS["reaver"]["user"] = usr.id
             msgCounting = await SEND(ch, usr.mention + ", you cast Reaver Rig and now we shall fuse together.")
             await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
 
             await asyncio.sleep(10)
-            ACTIVE_RIGS["reaver"]["active"] = False
-            ACTIVE_RIGS["reaver"]["user"] = None
+            DETAILED_RIGS["reaver"]["active"] = False
+            DETAILED_RIGS["reaver"]["user"] = None
 
             await SEND(ch, "I'll go back to my usual activities now.")
                 
