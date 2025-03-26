@@ -384,7 +384,7 @@ async def on_message(message):
                     await asyncio.sleep(1)
                     await SEND(ch, "That escalated quickly.")
             else:
-                if not COOLDOWN_SELECT["self"]:
+                if not RIG_COOLDOWNS["self"]:
                     DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
                     if DETAILED_ROLES["hdream"][usr.id] == 15:
                         if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
