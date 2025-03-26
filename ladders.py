@@ -38,6 +38,7 @@ def MG_NEXT_PLAYER():
 
 
 def MG_SHOW_WINNERS():
+    finalMsg = ""
     winners = []
     for i, v in MG_PLAYERS.items():
         if v >= LADDERS['topLevel']:
@@ -47,8 +48,13 @@ def MG_SHOW_WINNERS():
     if len(winners) > 1:
         for i in range(1,len(winners)):
             toSend += " and " + winners[i].mention
+
+    if LADDERS["tram"]["arrival"] == 0:
+        finalMsg = toSend + " had a nice trip to the orb and won LUCID LADDERS!"
+    else:
+        finalMsg = toSend + " won LUCID LADDERS!"
     
-    return toSend + " won LUCID LADDERS!"                    
+    return finalMsg                 
     
 async def MG_ACTION(plr, action):
     #all players always advance 1 level per round
