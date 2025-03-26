@@ -219,6 +219,7 @@ MG_SPELLS = [
     "archon",
     "drifter",
     "heretic",
+    "gremlin"
     "chameleon",
 ]
 
