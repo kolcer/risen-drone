@@ -364,10 +364,10 @@ async def on_message(message):
         elif 'bad' in lmsg and 'drone' in lmsg:
             lmsg = 'good drone'
 
-        # elif 'give mana to' in lmsg:
-        #     lmsg = 'cast heretic rig'
-        # elif lmsg.startswith("cast") and lmsg.endswith("rig"):
-        #     lmsg = 'give mana to ' + usr.name
+        elif 'happy birthday' in lmsg:
+            lmsg = 'cast patron rig'
+        elif lmsg.startswith("cast") and lmsg.endswith("rig"):
+            lmsg = 'happy birthday broken drone'
 
         elif lmsg.startswith('drone of wisdom'):
             lmsg = 'play hangman alone'
@@ -379,7 +379,7 @@ async def on_message(message):
                 DETAILED_ROLES["hdream"][usr.id] = 0
                 lmsg = 'cast heretic rig'
 
-                if usr.id in DETAILED_ROLES["hnightmare"] and not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
+                if not RIG_COOLDOWNS["self"] and usr.id in DETAILED_ROLES["hnightmare"] and not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
                     await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
                     await asyncio.sleep(1)
                     await SEND(ch, "That escalated quickly.")
