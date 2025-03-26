@@ -213,7 +213,8 @@ async def MG_LOOP(toSend):
     ourTick = LADDERS['tick']
     
     while True:
-        if LADDERS["tram"]["arrival"] == 0:
+        if LADDERS["tram"]["arrival"] == 0 and len(LADDERS["tram"]["travelers"]) > 0:
+            await DRONEPRINT('Tram reached the destination')
             for trav in LADDERS["tram"]["travelers"]:
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
