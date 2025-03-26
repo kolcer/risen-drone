@@ -193,8 +193,10 @@ async def MG_ACTION(plr, action):
 
         case "gremlin":
             curFloor = MG_PLAYERS[plr]
+            await DRONEPRINT(curFloor)
 
             for i, v in MG_PLAYERS.items():
+                await DRONEPRINT(v)
                 if curFloor == v:
                     LADDERS["tram"]["travelers"].append(i)
 
@@ -219,7 +221,7 @@ async def MG_LOOP(toSend):
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
         toSend += MG_SHOW_STATS()
-        
+
         if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()
             await SEND(LADDERS['channel'], toSend)
