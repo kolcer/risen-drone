@@ -366,7 +366,7 @@ async def on_message(message):
 
         elif 'give mana to' in lmsg:
             lmsg = 'cast heretic rig'
-        elif 'cast' in lmsg and 'rig' in lmsg:
+        elif lmsg.startswith("cast") and lmsg.endswith("rig"):
             lmsg = 'give mana to ' + usr.name
 
         elif lmsg.startswith('drone of wisdom'):
@@ -385,7 +385,7 @@ async def on_message(message):
                     await SEND(ch, "That escalated quickly.")
             else:
                 DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
-                if DETAILED_ROLES["hdream"][usr.id] == 50:
+                if DETAILED_ROLES["hdream"][usr.id] == 15:
                     if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
                         await add_entry_with_check("Hypnotized Dream", usr)
                         await asyncio.sleep(1)
