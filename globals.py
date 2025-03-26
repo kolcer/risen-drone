@@ -496,6 +496,7 @@ RIG_COOLDOWNS = {
     "self": False,     #Affects caster's Discord account
     "chat": False,     #Affects the chat
     "meddle": False,   #Affects other rigs
+    "help": False,     #Helps, idk
 }
 
 COOLDOWN_SELECT = {
@@ -505,26 +506,26 @@ COOLDOWN_SELECT = {
     "splicer": "trap",
     "gremlin": "trap",
     "heretic": "self",
-    "wicked": "self",
     "archon": "chat",
     "reaver": "chat",
-    "patron": "meddle",
+    "wicked": "meddle",
+    "patron": "help",
     "keeper": "username",
     "hacker": "username",
     "drifter": "username",
 }
 
 COOLDOWN_DURATION = {
+    "wicked": 900,
     "thief": 600,
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
     "gremlin": 600,
-    "heretic": 30,
-    "wicked": 30,
     "archon": 480,
     "reaver": 480,
-    "patron": 900,    
+    "patron": 180,
+    "heretic": 30,
     "keeper": 20,
     "hacker": 20,
     "drifter": 20,
@@ -532,10 +533,11 @@ COOLDOWN_DURATION = {
 
 COOLDOWN_DESCRIPTIONS = {
     "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720> cooldown: ",
-    "self": "<:csWicked:792143453035167754><:csHeretic:786323224115281921> cooldown: ",
+    "self": "<:csHeretic:786323224115281921> cooldown: ",
     "chat": "<:csArchon:786323402172530688><:csReaver:1353300809672294420> cooldown: ",
-    "meddle": "<:csPatron:758081038697103504> cooldown: ",
+    "meddle": "<:csWicked:792143453035167754> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
+    "help": "<:csPatron:758081038697103504> cooldown: ",
 }
 
 RIGS_DESCRIPTION = {

@@ -154,6 +154,19 @@ async def Rig(rigType, ch, usr):
             await REMOVE_ROLES(usr, EXTRA_ROLES['possessed'])
             
         case "wicked":
+            rigActive = False
+            for active in ACTIVE_RIGS.values():
+                if active:
+                    rigActive = True
+                    break
+            if not rigActive:
+                await SEND(ch, "Nothing to destroy.")
+                RIG_COOLDOWNS["meddle"] = False
+                return
+            msgCounting = await SEND(ch, "You cast Wicked Rig and destroyed all the nasty stairs along with your roles!")
+            for rig in ACTIVE_RIGS.keys():
+                ACTIVE_RIGS[rig] = False
+
             role_list = []
             for role in usr.roles:
                 if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES) and role.name != "Wicked":
@@ -164,8 +177,7 @@ async def Rig(rigType, ch, usr):
 
             if MORPHABLE_ROLES["Wicked"][0] not in usr.roles:
                 await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
-                
-            msgCounting = await SEND(ch, "You cast Wicked Rig and the Devil took your roles away! Now you are a true Wicked.")
+            
          
         case "drifter":
             im = usr.display_name[::-1]
@@ -210,18 +222,15 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
         
         case "patron":
-            rigActive = False
-            for active in ACTIVE_RIGS.values():
-                if active:
-                    rigActive = True
-                    break
-            if not rigActive:
-                await SEND(ch, "Nothing changed.")
-                RIG_COOLDOWNS["meddle"] = False
-                return
-            msgCounting = await SEND(ch, "You cast Patron Rig and restored the Server!")
-            for rig in ACTIVE_RIGS.keys():
-                ACTIVE_RIGS[rig] = False
+            msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
+            possessedRole = EXTRA_ROLES['possessed']
+            hypnoRole = EXTRA_ROLES['hypno']
+
+            for member in SERVER_DATA['server'].members:
+                if possessedRole in member.roles:
+                    await REMOVE_ROLES(member, possessedRole)
+                elif hypnoRole in member.roles:
+                    await REMOVE_ROLES(member, hypnoRole)
 
         case "reaver":
             DETAILED_RIGS["reaver"]["active"] = True
