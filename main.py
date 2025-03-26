@@ -384,12 +384,13 @@ async def on_message(message):
                     await asyncio.sleep(1)
                     await SEND(ch, "That escalated quickly.")
             else:
-                DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
-                if DETAILED_ROLES["hdream"][usr.id] == 15:
-                    if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
-                        await add_entry_with_check("Hypnotized Dream", usr)
-                        await asyncio.sleep(1)
-                        await SEND(ch, "Hypnosis is your normal status now.")
+                if not COOLDOWN_SELECT["self"]:
+                    DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
+                    if DETAILED_ROLES["hdream"][usr.id] == 15:
+                        if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
+                            await add_entry_with_check("Hypnotized Dream", usr)
+                            await asyncio.sleep(1)
+                            await SEND(ch, "Hypnosis is your normal status now.")
                         
         message.content = lmsg
     
