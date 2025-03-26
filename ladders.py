@@ -16,10 +16,10 @@ def MG_RESET():
     LADDERS['winDetect'] = 0
     LADDERS['playerCount'] = 0
     LADDERS['topLevel'] = 21
+    LADDERS['tram']['travelers'] = []
+    LADDERS['tram']['arrival'] = 5
     
-def MG_SHOW_STATS():
-
-    
+def MG_SHOW_STATS():    
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
         toSend += "**" + plr.name + "**: " + str(place) + " floor\n"
@@ -32,7 +32,10 @@ def MG_NEXT_PLAYER():
     LADDERS['currentPlayer'] += 1
     if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
         LADDERS['currentPlayer'] = 0
-      
+
+        if len(LADDERS["tram"]["travelers"]) >= 1:
+            LADDERS["tram"]["arrival"] -= 1
+
 
 def MG_SHOW_WINNERS():
     winners = []
@@ -48,8 +51,6 @@ def MG_SHOW_WINNERS():
     return toSend + " won LUCID LADDERS!"                    
     
 async def MG_ACTION(plr, action):
-    
-      
     #all players always advance 1 level per round
     for i in MG_PLAYERS.keys():
         MG_PLAYERS[i] += 1
@@ -190,6 +191,15 @@ async def MG_ACTION(plr, action):
                 toSend += "failed to perform a dark ritual and got stranded - a level was lost."
                 MG_PLAYERS[plr] -= 1
 
+        case "gremlin":
+            curFloor = MG_PLAYERS[plr]
+
+            for i, v in MG_PLAYERS.items():
+                if curFloor == v:
+                    LADDERS["tram"]["travelers"].append(i)
+
+            toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 5 turns!"
+
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
             await add_entry_with_check("Pro Tower Climber", plr)
@@ -203,8 +213,12 @@ async def MG_LOOP(toSend):
     ourTick = LADDERS['tick']
     
     while True:
+        if LADDERS["tram"]["arrival"] == 0:
+            for trav in LADDERS["tram"]["travelers"]:
+                MG_PLAYERS[trav] = LADDERS['topLevel']
+
         toSend += MG_SHOW_STATS()
-        if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
+        if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE):
             toSend += MG_SHOW_WINNERS()
             await SEND(LADDERS['channel'], toSend)
             MG_RESET()
@@ -223,12 +237,10 @@ async def MG_LOOP(toSend):
         toSend = await MG_ACTION(cp,"none")
 
 async def LucidLaddersProcessMessage(usr,msg):
-
-       #mini game
+    #mini game
     lmsg = msg.lower()
         
     if LADDERS['status'] == "gather" and lmsg == "begin" and usr == MG_QUEUE[0]:
-            
         if len(MG_QUEUE) < 2:
             await SEND(LADDERS['channel'], "Not enough players for the Lucid Ladders to begin!")
             #return "Not enough players for the Lucid Ladders to begin!"

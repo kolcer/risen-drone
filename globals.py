@@ -828,6 +828,10 @@ LADDERS = {
     'playerCount': 0,
     'tick': 0,
     'winDetect': 0,
+    'tram': {
+        "travelers": [],
+        "arrival": 5
+    }
 }
 
 I_SPY = {
