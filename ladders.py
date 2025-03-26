@@ -219,9 +219,8 @@ async def MG_LOOP(toSend):
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
         toSend += MG_SHOW_STATS()
-        await DRONEPRINT(LADDERS['winDetect'])
-        await DRONEPRINT(LADDERS['topLevel'])
-        if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE):
+        
+        if LADDERS['winDetect'] >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
             toSend += MG_SHOW_WINNERS()
             await SEND(LADDERS['channel'], toSend)
             MG_RESET()
