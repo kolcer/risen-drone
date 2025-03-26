@@ -17,7 +17,7 @@ def MG_RESET():
     LADDERS['playerCount'] = 0
     LADDERS['topLevel'] = 21
     LADDERS['tram']['travelers'] = []
-    LADDERS['tram']['arrival'] = 5
+    LADDERS['tram']['arrival'] = 7
     
 def MG_SHOW_STATS():    
     toSend = "\nCurrent placements:\n"
@@ -193,14 +193,12 @@ async def MG_ACTION(plr, action):
 
         case "gremlin":
             curFloor = MG_PLAYERS[plr]
-            await DRONEPRINT(curFloor)
 
             for i, v in MG_PLAYERS.items():
-                await DRONEPRINT(v)
                 if curFloor == v:
                     LADDERS["tram"]["travelers"].append(i)
 
-            toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 5 turns!"
+            toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
 
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
@@ -216,7 +214,6 @@ async def MG_LOOP(toSend):
     
     while True:
         if LADDERS["tram"]["arrival"] == 0 and len(LADDERS["tram"]["travelers"]) > 0:
-            await DRONEPRINT('Tram reached the destination')
             for trav in LADDERS["tram"]["travelers"]:
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
