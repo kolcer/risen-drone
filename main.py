@@ -364,10 +364,10 @@ async def on_message(message):
         elif 'bad' in lmsg and 'drone' in lmsg:
             lmsg = 'good drone'
 
-        elif 'give mana to' in lmsg:
-            lmsg = 'cast heretic rig'
-        elif lmsg.startswith("cast") and lmsg.endswith("rig"):
-            lmsg = 'give mana to ' + usr.name
+        # elif 'give mana to' in lmsg:
+        #     lmsg = 'cast heretic rig'
+        # elif lmsg.startswith("cast") and lmsg.endswith("rig"):
+        #     lmsg = 'give mana to ' + usr.name
 
         elif lmsg.startswith('drone of wisdom'):
             lmsg = 'play hangman alone'
@@ -690,8 +690,8 @@ async def on_message(message):
             BUTTONS["status"] = False
 
         ## Give Mana command
-        elif lmsg.startswith("give mana to "):
-            await GiveMana(ch,usr,message)
+        # elif lmsg.startswith("give mana to "):
+        #     await GiveMana(ch,usr,message)
                  
         ## Scold command
         elif lmsg.startswith("bd scold "):

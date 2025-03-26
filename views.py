@@ -171,9 +171,6 @@ class ShowCommands(discord.ui.View):
 **bd praise** *[username]*
 ➡️ They did well
 
-**give mana to** *[username]*
-➡️ Remove the Possessed role from the user (does not apply to users muted by moderators)
-
 
 **Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer.
         ''',

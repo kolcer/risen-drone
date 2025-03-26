@@ -540,41 +540,41 @@ async def ExecuteGremlinRig(ch,usr):
             
     return
 
-async def GiveMana(ch,usr,message):
+# async def GiveMana(ch,usr,message):
  
-    role = EXTRA_ROLES['possessed']
-    hypnoRole = EXTRA_ROLES['hypno']
+#     role = EXTRA_ROLES['possessed']
+#     hypnoRole = EXTRA_ROLES['hypno']
 
-    if (role in message.author.roles) and ch.id != 813882658156838923:
-        await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
-        return
+#     if (role in message.author.roles) and ch.id != 813882658156838923:
+#         await SEND(message.channel, "How silly of me. It seems I have forgotten to cover this area. Nice try though!")
+#         return
 
-    split_message = message.content.split(" ", 3)
-    target = split_message[3].lower()
-    for member in SERVER_DATA['server'].members:
-        if member.name.lower() == target:
-            if role in member.roles:
-                await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
-                await asyncio.sleep(3)
-                await REMOVE_ROLES(member, role)
-                await asyncio.sleep(1)
-                if not str(usr.id) in list_decoded_entries("Heretic Defier"):
-                    await add_entry_with_check("Heretic Defier", usr)
-            elif hypnoRole in member.roles:
-                if usr.id == member.id:
-                    await SEND(message.channel,"You accidentally stepped on a Patron Rig and freed yourself from hypnosis!")
-                else:
-                    await SEND(message.channel, member.display_name + " has received some Mana and is no longer Hypnotized!")
+#     split_message = message.content.split(" ", 3)
+#     target = split_message[3].lower()
+#     for member in SERVER_DATA['server'].members:
+#         if member.name.lower() == target:
+#             if role in member.roles:
+#                 await SEND(message.channel, member.display_name + " has received some Mana and is no longer Possessed!")
+#                 await asyncio.sleep(3)
+#                 await REMOVE_ROLES(member, role)
+#                 await asyncio.sleep(1)
+#                 if not str(usr.id) in list_decoded_entries("Heretic Defier"):
+#                     await add_entry_with_check("Heretic Defier", usr)
+#             elif hypnoRole in member.roles:
+#                 if usr.id == member.id:
+#                     await SEND(message.channel,"You accidentally stepped on a Patron Rig and freed yourself from hypnosis!")
+#                 else:
+#                     await SEND(message.channel, member.display_name + " has received some Mana and is no longer Hypnotized!")
 
-                await asyncio.sleep(3)
-                await REMOVE_ROLES(member, hypnoRole)
-                await asyncio.sleep(1)
-            else:
-                await SEND(message.channel,
-                    member.display_name +
-                            " refused to get your Mana."
-                        )
-            return
-    await SEND(message.channel,
-        "Who are you trying to share your Mana with?")
-    return
+#                 await asyncio.sleep(3)
+#                 await REMOVE_ROLES(member, hypnoRole)
+#                 await asyncio.sleep(1)
+#             else:
+#                 await SEND(message.channel,
+#                     member.display_name +
+#                             " refused to get your Mana."
+#                         )
+#             return
+#     await SEND(message.channel,
+#         "Who are you trying to share your Mana with?")
+#     return

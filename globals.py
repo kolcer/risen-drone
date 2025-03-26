@@ -149,7 +149,7 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "create poll",
     "bd scold",
     "bd praise",
-    "give mana to",
+    # "give mana to",
     "play lucid ladders",
     "start quiz",
     "play hangman",
