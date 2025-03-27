@@ -29,9 +29,9 @@ def MG_SHOW_STATS():
 
         if plr in LADDERS['tram']['travelers']:
             if LADDERS['tram']['forward']:
-                toSend += f" (in Tram⬆️, {LADDERS['tram']['arrival']} turns left)\n"
+                toSend += f" (Tram⬆️, {LADDERS['tram']['arrival']} turns left)\n"
             else:
-                toSend += f" (in Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
+                toSend += f" (Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
         else:
             toSend += "\n"
             
@@ -75,12 +75,7 @@ def MG_SHOW_WINNERS():
     
     return finalMsg                 
     
-async def MG_ACTION(plr, action):
-    toSend = "Current top floor: + " + str(LADDERS['topLevel']) + "\n**`" + plr.name + "`** has played " + action + ". They "
-
-    if LADDERS['currentPlayer'] == 0:     
-        toSend = "All players advance 1 level.\n" + toSend
-    
+async def MG_ACTION(plr, action):    
     match action:
         case "none":
             toSend += "are chilling this round."
@@ -246,6 +241,12 @@ async def MG_ACTION(plr, action):
             LADDERS["revival"][plr] = MG_PLAYERS[plr]
 
             toSend += "have created a Revival Point on their floor for good measure!"
+
+
+    toSend = "**Current top floor:** " + str(LADDERS['topLevel']) + "\n**`" + plr.name + "`** has played " + action + ". They " + toSend
+
+    if LADDERS['currentPlayer'] == 0:     
+        toSend = "All players advance 1 level.\n" + toSend
 
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
