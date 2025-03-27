@@ -238,6 +238,10 @@ async def MG_ACTION(plr, action):
             toSend += "have created a Revival Point on their floor for good measure!"
 
 
+    if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
+        MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
+        toSend += "\nThanks to your Revival Point, you recovered your previous floor.\n"
+        
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
             await add_entry_with_check("Pro Tower Climber", plr)
@@ -263,10 +267,6 @@ async def MG_LOOP(toSend):
             MG_RESET()
             return
         else:
-            if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
-                MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
-                toSend += "\nThanks to your Revival Point, you recovered your previous floor.\n"
-
             toSend += MG_QUEUE[LADDERS['currentPlayer']].mention + "'s turn! Choose Your alignment!"
             await SEND(LADDERS['channel'], toSend)
         
