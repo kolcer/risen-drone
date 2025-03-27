@@ -18,6 +18,7 @@ def MG_RESET():
     LADDERS['topLevel'] = 21
     LADDERS['tram']['travelers'] = []
     LADDERS['tram']['arrival'] = 7
+    LADDERS['tram']['forward'] = True
     
 def MG_SHOW_STATS():    
     toSend = "\nCurrent placements:\n"
@@ -38,7 +39,10 @@ def MG_NEXT_PLAYER():
             MG_PLAYERS[i] += 1
 
         if len(LADDERS["tram"]["travelers"]) >= 1:
-            LADDERS["tram"]["arrival"] -= 1
+            if LADDERS['tram']['forward']:
+                LADDERS["tram"]["arrival"] -= 1
+            else:
+                LADDERS["tram"]["arrival"] += 1
 
 
 def MG_SHOW_WINNERS():
@@ -210,8 +214,23 @@ async def MG_ACTION(plr, action):
 
                 toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
             else:
-                MG_PLAYERS[plr] -= 1
-                toSend += "has missed the Tram and wasted 1 turn waiting for nothing."
+                if plr not in LADDERS["tram"]["travelers"]:
+                    MG_PLAYERS[plr] -= 1
+                    toSend += "has missed the Tram and wasted 1 turn waiting for nothing."
+                else:
+                    if LADDERS["tram"]["forward"]:
+                        toSend += "has jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
+
+                        for trav in LADDERS["tram"]["travelers"]:
+                            MG_PLAYERS[trav] -= 2
+                    else:
+                        toSend += "has jumped and the Tram is now back on track! Everyone inside gains 2 floors."
+
+                        for trav in LADDERS["tram"]["travelers"]:
+                            MG_PLAYERS[trav] += 2
+
+                    LADDERS["tram"]["forward"] = not LADDERS["tram"]["forward"]
+
 
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
