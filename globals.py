@@ -220,6 +220,7 @@ MG_SPELLS = [
     "drifter",
     "heretic",
     "gremlin",
+    "necromancer",
     "chameleon",
 ]
 
@@ -836,7 +837,8 @@ LADDERS = {
         "travelers": [],
         "arrival": 7,
         "forward": True,
-    }
+    },
+    'revival': {},
 }
 
 I_SPY = {

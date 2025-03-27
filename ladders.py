@@ -19,6 +19,7 @@ def MG_RESET():
     LADDERS['tram']['travelers'] = []
     LADDERS['tram']['arrival'] = 7
     LADDERS['tram']['forward'] = True
+    LADDERS['revival'] = {}
     
 def MG_SHOW_STATS():    
     toSend = "\nCurrent placements:\n"
@@ -231,6 +232,11 @@ async def MG_ACTION(plr, action):
 
                     LADDERS["tram"]["forward"] = not LADDERS["tram"]["forward"]
 
+        case "necromancer":
+            LADDERS["revival"][plr] = MG_PLAYERS[plr]
+
+            toSend += "have created a Revival Point on their floor for good measure!"
+
 
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
@@ -257,6 +263,10 @@ async def MG_LOOP(toSend):
             MG_RESET()
             return
         else:
+            if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
+                MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
+                toSend += "\nThanks to your Revival Point, you recovered your previous floor.\n"
+
             toSend += MG_QUEUE[LADDERS['currentPlayer']].mention + "'s turn! Choose Your alignment!"
             await SEND(LADDERS['channel'], toSend)
         
