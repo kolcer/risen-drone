@@ -22,10 +22,19 @@ def MG_RESET():
     LADDERS['revival'] = {}
     LADDERS['revived'] = False
     
-def MG_SHOW_STATS():    
+def MG_SHOW_STATS():
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
-        toSend += "**" + plr.name + "**: " + str(place) + " floor\n"
+        toSend += "**" + plr.name + "**: " + str(place) + " floor"
+
+        if plr in LADDERS['tram']['travelers']:
+            if LADDERS['tram']['forward']:
+                toSend += f" (in Tram⬆️, {LADDERS['tram']['arrival']} turns left)\n"
+            else:
+                toSend += f" (in Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
+        else:
+            toSend += "\n"
+            
         if place > LADDERS['winDetect']:
             LADDERS['winDetect'] = place
     toSend += "-------------\n"
@@ -67,7 +76,7 @@ def MG_SHOW_WINNERS():
     return finalMsg                 
     
 async def MG_ACTION(plr, action):
-    toSend = "**`" + plr.name + "`** has played " + action + ". They "
+    toSend = "Current top floor: + " + LADDERS['topLevel'] + "\n**`" + plr.name + "`** has played " + action + ". They "
 
     if LADDERS['currentPlayer'] == 0:     
         toSend = "All players advance 1 level.\n" + toSend
