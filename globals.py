@@ -839,6 +839,7 @@ LADDERS = {
         "forward": True,
     },
     'revival': {},
+    'revived': False
 }
 
 I_SPY = {
