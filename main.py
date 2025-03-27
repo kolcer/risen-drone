@@ -753,9 +753,12 @@ async def on_message(message):
             await SEND(ch, usr.mention + " I know you tried your best, but I couldn't find anyone by that name.")
 
         ## Happy Birthday BD!!!!!
-        elif ("happy birthday broken drone" or "happy birthday bd") in lmsg:
+        elif "happy birthday broken drone" in lmsg or "happy birthday bd" in lmsg:
             if today.day == 3 and today.month == 4:
                 await SEND(ch, "Thank you for remembering.")
+
+                if not str(usr.id) in list_decoded_entries("I remembered"):
+                    await add_entry_with_check("I remembered", usr)
             else:
                 await SEND(ch, "How could you get my birthday date wrong?")
 

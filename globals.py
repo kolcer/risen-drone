@@ -717,6 +717,7 @@ FUN_ROLES = [
     "Acclaimed",
     "Hypnotized Dream",
     "Hypnotized Nightmare",
+    "I remembered",
 ]
 
 LIMITED_ROLES = {
