@@ -75,7 +75,8 @@ def MG_SHOW_WINNERS():
     
     return finalMsg                 
     
-async def MG_ACTION(plr, action):    
+async def MG_ACTION(plr, action):
+    toSend = ""
     match action:
         case "none":
             toSend += "are chilling this round."
