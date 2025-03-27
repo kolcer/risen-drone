@@ -33,6 +33,10 @@ def MG_NEXT_PLAYER():
     if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
         LADDERS['currentPlayer'] = 0
 
+        #all players always advance 1 level per round
+        for i in MG_PLAYERS.keys():
+            MG_PLAYERS[i] += 1
+
         if len(LADDERS["tram"]["travelers"]) >= 1:
             LADDERS["tram"]["arrival"] -= 1
 
@@ -57,11 +61,10 @@ def MG_SHOW_WINNERS():
     return finalMsg                 
     
 async def MG_ACTION(plr, action):
-    #all players always advance 1 level per round
-    for i in MG_PLAYERS.keys():
-        MG_PLAYERS[i] += 1
-        
-    toSend = "All players advance 1 level.\n**`" + plr.name + "`** has played " + action + ". They "
+    toSend = "`" + plr.name + "`** has played " + action + ". They "
+
+    if LADDERS['currentPlayer'] == 0:     
+        toSend = "All players advance 1 level.\n**`" + toSend
     
     match action:
         case "none":
@@ -200,11 +203,15 @@ async def MG_ACTION(plr, action):
         case "gremlin":
             curFloor = MG_PLAYERS[plr]
 
-            for i, v in MG_PLAYERS.items():
-                if curFloor == v:
-                    LADDERS["tram"]["travelers"].append(i)
+            if len(LADDERS["tram"]["travelers"]) < 1:
+                for i, v in MG_PLAYERS.items():
+                    if curFloor == v:
+                        LADDERS["tram"]["travelers"].append(i)
 
-            toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
+                toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
+            else:
+                MG_PLAYERS[plr] -= 1
+                toSend += "has missed the Tram and wasted 1 turn waiting for nothing."
 
     if MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
