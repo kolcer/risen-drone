@@ -61,10 +61,10 @@ def MG_SHOW_WINNERS():
     return finalMsg                 
     
 async def MG_ACTION(plr, action):
-    toSend = "`" + plr.name + "`** has played " + action + ". They "
+    toSend = "**`" + plr.name + "`** has played " + action + ". They "
 
     if LADDERS['currentPlayer'] == 0:     
-        toSend = "All players advance 1 level.\n**`" + toSend
+        toSend = "All players advance 1 level.\n" + toSend
     
     match action:
         case "none":
