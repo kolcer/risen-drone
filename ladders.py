@@ -216,15 +216,15 @@ async def MG_ACTION(plr, action):
             else:
                 if plr not in LADDERS["tram"]["travelers"]:
                     MG_PLAYERS[plr] -= 1
-                    toSend += "has missed the Tram and wasted 1 turn waiting for nothing."
+                    toSend += "have missed the Tram and wasted 1 turn waiting for nothing."
                 else:
                     if LADDERS["tram"]["forward"]:
-                        toSend += "has jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
+                        toSend += "have jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
 
                         for trav in LADDERS["tram"]["travelers"]:
                             MG_PLAYERS[trav] -= 2
                     else:
-                        toSend += "has jumped and the Tram is now back on track! Everyone inside gains 2 floors."
+                        toSend += "have jumped and the Tram is now back on track! Everyone inside gains 2 floors."
 
                         for trav in LADDERS["tram"]["travelers"]:
                             MG_PLAYERS[trav] += 2
