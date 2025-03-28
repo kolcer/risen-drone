@@ -22,11 +22,24 @@ def MG_RESET():
     LADDERS['revival'] = {}
     LADDERS['revived'] = False
     LADDERS['kicked'] = False
+    LADDERS['merges'] = []
     
 def MG_SHOW_STATS():
     toSend = "\nCurrent placements:\n"
     for plr, place in MG_PLAYERS.items():
-        toSend += "**" + plr.name + "**: " + str(place) + " floor"
+        # Find the pair (if it exists)
+        pair = next((pair for pair in LADDERS["merges"] if plr in pair), None)
+
+        if pair:            
+            # Only display the pair once (when handling `pair[0]`)
+            if plr == pair[0]:
+                # Get the other player
+                other_plr = pair[1] if pair[0] == plr else pair[0]
+                toSend += f"**{plr.name} & {other_plr.name}**: {str(place)} floor"
+            else:
+                continue
+        else:
+            toSend += "**" + plr.name + "**: " + str(place) + " floor"
 
         if plr in LADDERS['tram']['travelers']:
             if LADDERS['tram']['forward']:
@@ -63,7 +76,6 @@ def MG_NEXT_PLAYER():
             else:
                 LADDERS["tram"]["arrival"] += 1
 
-
 def MG_SHOW_WINNERS():
     finalMsg = ""
     winners = []
@@ -94,39 +106,48 @@ async def MG_ACTION(plr, action):
                 toSend += "got stuck and did not climb any floor."
             elif chances <= 4:
                 LADDERS['topLevel'] += 1
-                MG_PLAYERS[plr] -= 1
+                UpdateFloor(plr, -1)
+                # MG_PLAYERS[plr] -= 1
                 toSend += "failed a Stairjump. The Drones felt the second-hand embarassment and created 1 more floor to the tower."
             else:
                 LADDERS["topLevel"] += 2
-                MG_PLAYERS[plr] += 1
+                UpdateFloor(plr, 1)
+                # MG_PLAYERS[plr] += 1
                 toSend += "perfectly executed a Stairjump. The Drones were so impressed they added 2 more floors to the tower!"
                 
         case "patron":
             ourLevel = MG_PLAYERS[plr]
             for i, v in MG_PLAYERS.items():
                 if v <= ourLevel:
-                    MG_PLAYERS[i] += 1
+                    UpdateFloor(i, 1)
+                    # MG_PLAYERS[i] += 1
             toSend += "advanced 1 extra level with all other players below them."
                 
         case "joker":
-            victim = random.choice(MG_QUEUE)
-            if victim != plr:
+            chances = random.randint(0,4)
+            victim = SelectRandomUser()
+
+            if chances != 0:
                 toSend += "pranked " + victim.name + " - causing them to fell 2 levels down!"
-                MG_PLAYERS[victim] -= 2
+                # MG_PLAYERS[victim] -= 2
+                UpdateFloor(victim, -2)
             else:
                 toSend += "pranked themselves, and fell 1 level down."
-                MG_PLAYERS[victim] -= 1
+                UpdateFloor(victim, -1)
+                # MG_PLAYERS[victim] -= 1
         
         case "wicked":
             ourLevel = MG_PLAYERS[plr]
             for i, v in MG_PLAYERS.items():
                 if v > ourLevel:
-                    MG_PLAYERS[i] -= 1
+                    UpdateFloor(i, -1)
+                    # MG_PLAYERS[i] -= 1
             toSend += "purged the stairs and above players fell one level."
             
         case "spectre":
             chances = random.randint(-1, 2)
-            MG_PLAYERS[plr] += chances
+            # MG_PLAYERS[plr] += chances
+            UpdateFloor(plr, chances)
             if chances == -1:
                 toSend += "had a teleportation accident and lost one level!"
             elif chances == 0:
@@ -149,22 +170,28 @@ async def MG_ACTION(plr, action):
                if v > topl:
                     top = i
                     topl = v
-            MG_PLAYERS[top] -=1
-            MG_PLAYERS[bottom] += 1
+            # MG_PLAYERS[top] -=1
+            # MG_PLAYERS[bottom] += 1
+            UpdateFloor(top, -1)
+            UpdateFloor(bottom, 1)
             
         case "thief":
             chances = random.randint(0,1)
 
             if chances == 0 or len(LADDERS["tram"]["travelers"]) < 1 or plr in LADDERS["tram"]["travelers"]:
-                victim = random.choice(MG_QUEUE)
-                if victim != plr:
+                altchances = random.randint(0,4)
+                victim = SelectRandomUser()
+                if altchances != 0:
                     toSend += "have stolen " + victim.name + "'s place!"
                     cache = MG_PLAYERS[victim]
-                    MG_PLAYERS[victim] = MG_PLAYERS[plr]
-                    MG_PLAYERS[plr] = cache
+                    # MG_PLAYERS[victim] = MG_PLAYERS[plr]
+                    AssignFloor(victim, MG_PLAYERS[plr])
+                    # MG_PLAYERS[plr] = cache
+                    AssignFloor(plr, cache)
                 else:
                     toSend += "have been caught stealing, and had to flee one level down!"
-                    MG_PLAYERS[plr] -= 1
+                    # MG_PLAYERS[plr] -= 1
+                    UpdateFloor(plr, -1)
             else:
                 stealChance = random.randint(0,3)
 
@@ -174,42 +201,51 @@ async def MG_ACTION(plr, action):
                     toSend += "have stolen the tram, they are on their way to victory!"
                 else:
                     lostLocation = random.randint(MG_PLAYERS[plr] - 3, MG_PLAYERS[plr] + 3)
-                    MG_PLAYERS[plr] = lostLocation
+                    # MG_PLAYERS[plr] = lostLocation
+                    AssignFloor(plr, lostLocation)
                     toSend += "have miscalculated the tram's path and got lost in the tower!"
             
         case "hacker":
             chances = random.randint(0, 5)
             if chances >= 0 and chances <= 2:
                 toSend += "have teleported next to the orb instead of inside it and fell to the bottom floor!"
-                MG_PLAYERS[plr] = 0
+                # MG_PLAYERS[plr] = 0
+                AssignFloor(plr, 0)
                 
             elif chances == 3:
                 toSend += "have been frozen by a Murdurator and lost one level!"
-                MG_PLAYERS[plr] -= 1
+                # MG_PLAYERS[plr] -= 1
+                UpdateFloor(plr, -1)
             elif chances == 4:
                 toSend += "have taken an upwards escalator and risen one level!"
-                MG_PLAYERS[plr] += 1
+                # MG_PLAYERS[plr] += 1
+                UpdateFloor(plr, 1)
             else:
                 toSend += "have hacked the game. All the thieves and heretics turn to look at them!"
-                MG_PLAYERS[plr] += 10
+                # MG_PLAYERS[plr] += 10
+                UpdateFloor(plr, 10)
                 
         case "archon":
             toSend += "cast Split Event and caused players to either lost or gain an extra level."
             for i in MG_PLAYERS.keys():
                 chances = random.randint(0,1)
                 if chances == 0 or i == plr:
-                    MG_PLAYERS[i] += 1
+                    # MG_PLAYERS[i] += 1
+                    UpdateFloor(i, 1)
                 else:
-                    MG_PLAYERS[i] -= 1
+                    # MG_PLAYERS[i] -= 1
+                    UpdateFloor(i, -1)
         
         case "drifter":
             chances = random.randint(0,1)
             if chances == 0:
                 toSend += "took the elevator, but it was broken. A level was lost!"
-                MG_PLAYERS[plr] -= 1
+                # MG_PLAYERS[plr] -= 1
+                UpdateFloor(plr, -1)
             else:
                 toSend += "took the elevator, and advanced 2 extra levels!"
-                MG_PLAYERS[plr] += 2
+                # MG_PLAYERS[plr] += 2
+                UpdateFloor(plr, 2)
                 
         case "heretic":
             chances = random.randint(0,1)
@@ -227,11 +263,14 @@ async def MG_ACTION(plr, action):
                         top = i
                         topl = v
                 cache = MG_PLAYERS[top]
-                MG_PLAYERS[top] = MG_PLAYERS[bottom]
-                MG_PLAYERS[bottom] = cache
+                # MG_PLAYERS[top] = MG_PLAYERS[bottom]
+                AssignFloor(top, MG_PLAYERS[bottom])
+                # MG_PLAYERS[bottom] = cache
+                AssignFloor(bottom, cache)
             else:
                 toSend += "failed to perform a dark ritual and got stranded - a level was lost."
-                MG_PLAYERS[plr] -= 1
+                # MG_PLAYERS[plr] -= 1
+                UpdateFloor(plr, -1)
 
         case "gremlin":
             chances = random.randint(0,4)
@@ -249,19 +288,22 @@ async def MG_ACTION(plr, action):
                     toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
                 else:
                     if plr not in LADDERS["tram"]["travelers"]:
-                        MG_PLAYERS[plr] -= 1
+                        # MG_PLAYERS[plr] -= 1
+                        UpdateFloor(plr, -1)
                         toSend += "have missed the Tram and wasted 1 turn waiting for nothing."
                     else:
                         if LADDERS["tram"]["forward"]:
                             toSend += "have jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
 
                             for trav in LADDERS["tram"]["travelers"]:
-                                MG_PLAYERS[trav] -= 2
+                                # MG_PLAYERS[trav] -= 2
+                                UpdateFloor(trav, -2)
                         else:
                             toSend += "have jumped and the Tram is now back on track! Everyone inside gains 2 floors."
 
                             for trav in LADDERS["tram"]["travelers"]:
-                                MG_PLAYERS[trav] += 2
+                                # MG_PLAYERS[trav] += 2
+                                UpdateFloor(trav, 2)
 
                         LADDERS["tram"]["forward"] = not LADDERS["tram"]["forward"]
             else:
@@ -270,10 +312,12 @@ async def MG_ACTION(plr, action):
                 if subchances <= 1:
                     toSend += "have been waiting for the Tram to arrive, but it seems to be late."
                 elif subchances == 2:
-                    MG_PLAYERS[plr] -= 1
+                    # MG_PLAYERS[plr] -= 1
+                    UpdateFloor(plr, -1)
                     toSend += "are growing impatient and decided to check the previous stop."
                 else:
-                    MG_PLAYERS[plr] += 1
+                    # MG_PLAYERS[plr] += 1
+                    UpdateFloor(plr, 1)
                     toSend += "are growing impatient and decided to check the next stop."
 
         case "necromancer":
@@ -282,19 +326,37 @@ async def MG_ACTION(plr, action):
             toSend += "have created a Revival Point on their floor for good measure!"
 
         case "splicer":
-            victim = random.choice(MG_QUEUE)
-            if victim != plr:
+            chances = random.randint(0,4)
+            victim = SelectRandomUser()
+
+            if chances != 0:
                 toSend += f"have spliced their floor with {victim.name}! They will meet in the middle."
 
                 middle = (MG_PLAYERS[victim] + MG_PLAYERS[plr]) // 2
-                MG_PLAYERS[victim] = middle
-                MG_PLAYERS[plr] = middle
+                # MG_PLAYERS[victim] = middle
+                AssignFloor(victim, middle)
+                # MG_PLAYERS[plr] = middle
+                AssignFloor(plr, middle)
             else:
                 toSend += "ended up in a twisted situation and lost 1 floor!"
-                MG_PLAYERS[plr] -= 1
+                # MG_PLAYERS[plr] -= 1
+                UpdateFloor(plr, -1)
 
-        case "forfeit":
-            toSend += "have wasted everyone's time. I'll show them the door."
+        case "reaver":
+            chances = random.randint(0,4)
+            victim = SelectRandomUser()
+
+            if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
+                toSend += f"have merged with {victim.name}! They are now one and the same."
+
+                LADDERS["merges"].append([plr, victim])
+            else:
+                toSend += "have forgotten a ghost is required to walk on mirrors and fell all the way down!"
+                # MG_PLAYERS[plr] = 0
+                AssignFloor(plr, 0)
+
+        case "nothing":
+            toSend += "have wasted everyone's time, I'll show them the door."
 
 
     toSend = "**Current top floor:** " + str(LADDERS['topLevel']) + "\n**`" + plr.name + "`** has played " + action + ". They " + toSend
@@ -316,7 +378,8 @@ async def MG_LOOP(toSend):
     while True:
         if LADDERS["tram"]["arrival"] == 0 and len(LADDERS["tram"]["travelers"]) > 0:
             for trav in LADDERS["tram"]["travelers"]:
-                MG_PLAYERS[trav] = LADDERS['topLevel']
+                # MG_PLAYERS[trav] = LADDERS['topLevel']
+                AssignFloor(trav, LADDERS['topLevel'])
 
         if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
             MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
@@ -346,7 +409,7 @@ async def MG_LOOP(toSend):
         cp = MG_QUEUE[LADDERS['currentPlayer']]
         LADDERS["kicked"] = True
         MG_NEXT_PLAYER()
-        toSend = await MG_ACTION(cp,"forfeit")
+        toSend = await MG_ACTION(cp,"nothing")
 
 async def LucidLaddersProcessMessage(usr,msg):
     #mini game
@@ -407,3 +470,42 @@ async def JoinLucidLadders(usr):
             toSend += plr.name + "\n"
         await SEND(LADDERS['channel'], toSend)
         return
+
+def SelectRandomUser():
+    usr = MG_QUEUE[LADDERS['currentPlayer']]
+    found = False
+
+    # Find the paired user in LADDERS["merges"]
+    paired_user = None
+    for pair in LADDERS["merges"]:
+        if usr in pair:
+            paired_user = pair[0] if pair[1] == usr else pair[1]
+            break
+
+    # Ensure both the current user and the paired user are excluded from the random selection
+    while not found:
+        victim = random.choice(MG_QUEUE)
+        
+        # Check that the victim is not the current user or the paired user
+        if victim != usr and victim != paired_user:
+            found = True
+
+    return victim
+
+def UpdateFloor(usr, newfloor):
+    pair = next((pair for pair in LADDERS["merges"] if usr in pair), None)
+
+    if pair:
+        MG_PLAYERS[pair[0]] += newfloor
+        MG_PLAYERS[pair[1]] += newfloor
+    else:
+        MG_PLAYERS[usr] += newfloor
+
+def AssignFloor(usr, newfloor):
+    pair = next((pair for pair in LADDERS["merges"] if usr in pair), None)
+
+    if pair:
+        MG_PLAYERS[pair[0]] = newfloor
+        MG_PLAYERS[pair[1]] = newfloor
+    else:
+        MG_PLAYERS[usr] = newfloor

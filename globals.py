@@ -222,6 +222,7 @@ MG_SPELLS = [
     "gremlin",
     "necromancer",
     "splicer",
+    "reaver",
     "chameleon",
 ]
 
@@ -840,7 +841,9 @@ LADDERS = {
         "forward": True,
     },
     'revival': {},
-    'revived': False
+    'revived': False,
+    'kicked': False,
+    'merges': [],
 }
 
 I_SPY = {
