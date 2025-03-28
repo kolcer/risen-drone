@@ -293,6 +293,9 @@ async def MG_ACTION(plr, action):
                 toSend += "ended up in a twisted situation and lost 1 floor!"
                 MG_PLAYERS[plr] -= 1
 
+        case "forfeit":
+            toSend += "have wasted everyone's time. I'll show them the door."
+
 
     toSend = "**Current top floor:** " + str(LADDERS['topLevel']) + "\n**`" + plr.name + "`** has played " + action + ". They " + toSend
 
@@ -343,7 +346,7 @@ async def MG_LOOP(toSend):
         cp = MG_QUEUE[LADDERS['currentPlayer']]
         LADDERS["kicked"] = True
         MG_NEXT_PLAYER()
-        toSend = await MG_ACTION(cp,"none")
+        toSend = await MG_ACTION(cp,"forfeit")
 
 async def LucidLaddersProcessMessage(usr,msg):
     #mini game
