@@ -21,6 +21,7 @@ def MG_RESET():
     LADDERS['tram']['forward'] = True
     LADDERS['revival'] = {}
     LADDERS['revived'] = False
+    LADDERS['kicked'] = False
     
 def MG_SHOW_STATS():
     toSend = "\nCurrent placements:\n"
@@ -41,7 +42,14 @@ def MG_SHOW_STATS():
     return toSend
 
 def MG_NEXT_PLAYER():
+    if LADDERS['kicked']:
+        LADDERS['kicked'] = False
+        MG_PLAYERS.pop(MG_QUEUE[LADDERS['currentPlayer']])
+        MG_QUEUE.pop(LADDERS['currentPlayer'])
+        LADDERS['currentPlayer'] -= 1
+
     LADDERS['currentPlayer'] += 1
+
     if LADDERS['currentPlayer'] > len(MG_QUEUE) - 1:
         LADDERS['currentPlayer'] = 0
 
@@ -335,6 +343,7 @@ async def MG_LOOP(toSend):
             return
         
         cp = MG_QUEUE[LADDERS['currentPlayer']]
+        LADDERS["kicked"] = True
         MG_NEXT_PLAYER()
         toSend = await MG_ACTION(cp,"none")
 
