@@ -103,7 +103,7 @@ async def MG_ACTION(plr, action):
         case "joker":
             victim = random.choice(MG_QUEUE)
             if victim != plr:
-                toSend += "pranked " + victim.display_name + " - causing them to fell 2 levels down!"
+                toSend += "pranked " + victim.name + " - causing them to fell 2 levels down!"
                 MG_PLAYERS[victim] -= 2
             else:
                 toSend += "pranked themselves, and fell 1 level down."
@@ -150,7 +150,7 @@ async def MG_ACTION(plr, action):
             if chances == 0 or len(LADDERS["tram"]["travelers"]) < 1 or plr in LADDERS["tram"]["travelers"]:
                 victim = random.choice(MG_QUEUE)
                 if victim != plr:
-                    toSend += "have stolen " + victim.display_name + "'s place!"
+                    toSend += "have stolen " + victim.name + "'s place!"
                     cache = MG_PLAYERS[victim]
                     MG_PLAYERS[victim] = MG_PLAYERS[plr]
                     MG_PLAYERS[plr] = cache
@@ -273,6 +273,18 @@ async def MG_ACTION(plr, action):
 
             toSend += "have created a Revival Point on their floor for good measure!"
 
+        case "splicer":
+            victim = random.choice(MG_QUEUE)
+            if victim != plr:
+                toSend += f"have spliced their floor with {victim.name}! They will meet in the middle."
+                
+                middle = (MG_PLAYERS[victim] + MG_PLAYERS[plr]) // 2
+                MG_PLAYERS[victim] = middle
+                MG_PLAYERS[plr] = middle
+            else:
+                toSend += "ended up in a twisted situation and lost 1 floor!"
+                MG_PLAYERS[plr] -= 1
+
 
     toSend = "**Current top floor:** " + str(LADDERS['topLevel']) + "\n**`" + plr.name + "`** has played " + action + ". They " + toSend
 
@@ -287,7 +299,8 @@ async def MG_ACTION(plr, action):
     return toSend
 
 async def MG_LOOP(toSend):
-    
+    usr = MG_QUEUE[LADDERS['currentPlayer']]
+
     LADDERS['tick'] = time.time()
     ourTick = LADDERS['tick']
     
@@ -296,8 +309,9 @@ async def MG_LOOP(toSend):
             for trav in LADDERS["tram"]["travelers"]:
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
-        if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
-            MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
+        if usr in LADDERS["revival"] and MG_PLAYERS[usr] < LADDERS["revival"][usr]:
+            MG_PLAYERS[usr] = LADDERS["revival"][usr]
+            LADDERS["revival"][usr] = -100
             LADDERS['revived'] = True
 
         toSend += MG_SHOW_STATS()
@@ -309,10 +323,10 @@ async def MG_LOOP(toSend):
             return
         else:
             if LADDERS['revived']:
-                toSend += "Thanks to your Revival Point, you recovered your previous floor.\n"
+                toSend += "Your Revival Point brought you back up! But now it's gone."
                 LADDERS['revived'] = False
 
-            toSend += MG_QUEUE[LADDERS['currentPlayer']].mention + "'s turn! Choose Your alignment!"
+            toSend += usr.mention + "'s turn! Choose Your alignment!"
             await SEND(LADDERS['channel'], toSend)
         
         await asyncio.sleep(LADDERS['maxWait'])

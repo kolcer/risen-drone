@@ -221,6 +221,7 @@ MG_SPELLS = [
     "heretic",
     "gremlin",
     "necromancer",
+    "splicer"
     "chameleon",
 ]
 
