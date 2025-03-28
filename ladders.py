@@ -277,7 +277,7 @@ async def MG_ACTION(plr, action):
             victim = random.choice(MG_QUEUE)
             if victim != plr:
                 toSend += f"have spliced their floor with {victim.name}! They will meet in the middle."
-                
+
                 middle = (MG_PLAYERS[victim] + MG_PLAYERS[plr]) // 2
                 MG_PLAYERS[victim] = middle
                 MG_PLAYERS[plr] = middle
@@ -323,7 +323,7 @@ async def MG_LOOP(toSend):
             return
         else:
             if LADDERS['revived']:
-                toSend += "Your Revival Point brought you back up! But now it's gone."
+                toSend += "Your Revival Point brought you back up! But now it's gone.\n"
                 LADDERS['revived'] = False
 
             toSend += usr.mention + "'s turn! Choose Your alignment!"
@@ -334,8 +334,8 @@ async def MG_LOOP(toSend):
         if LADDERS['tick'] != ourTick:
             return
         
-        cp = MG_QUEUE[LADDERS['currentPlayer']]
         MG_NEXT_PLAYER()
+        cp = MG_QUEUE[LADDERS['currentPlayer']]
         toSend = await MG_ACTION(cp,"none")
 
 async def LucidLaddersProcessMessage(usr,msg):
