@@ -68,7 +68,7 @@ def MG_SHOW_WINNERS():
     finalMsg = ""
     winners = []
     for i, v in MG_PLAYERS.items():
-        if v >= LADDERS['topLevel']:
+        if v >= LADDERS['topLevel'] or len(MG_QUEUE) < 2:
             winners.append(i)
                         
     toSend = winners[0].mention
