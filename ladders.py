@@ -343,17 +343,21 @@ async def MG_ACTION(plr, action):
                 UpdateFloor(plr, -1)
 
         case "reaver":
-            chances = random.randint(0,4)
-            victim = SelectRandomUser()
-
-            if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
-                toSend += f"have merged with {victim.name}! They are now one and the same."
-
-                LADDERS["merges"].append([plr, victim])
+            if len(MG_QUEUE) - (len(LADDERS["merges"]) * 2) == 1:
+                toSend += "have broken the mirrors and lost 1 floor!"
+                UpdateFloor(plr, -1)
             else:
-                toSend += "have forgotten a ghost is required to walk on mirrors and fell all the way down!"
-                # MG_PLAYERS[plr] = 0
-                AssignFloor(plr, 0)
+                chances = random.randint(0,4)
+                victim = SelectRandomUser()
+
+                if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
+                    toSend += f"have merged with {victim.name}! They are now one and the same."
+
+                    LADDERS["merges"].append([plr, victim])
+                else:
+                    toSend += "have forgotten a ghost is required to walk on mirrors and fell all the way down!"
+                    # MG_PLAYERS[plr] = 0
+                    AssignFloor(plr, 0)
 
         case "nothing":
             toSend += "have wasted everyone's time, I'll show them the door."

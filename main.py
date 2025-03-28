@@ -468,6 +468,10 @@ async def on_message(message):
 
         elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] == usr.id:
             if ch.name in CHANNELS and "http" not in lmsg and "www" not in lmsg and len(lmsg) <= 60:
+                for badword in blacklist:
+                    if badword in lmsg:
+                        return
+                    
                 await SEND(ch, msg)
 
         ## thief rig active
