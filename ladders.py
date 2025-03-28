@@ -334,8 +334,8 @@ async def MG_LOOP(toSend):
         if LADDERS['tick'] != ourTick:
             return
         
-        MG_NEXT_PLAYER()
         cp = MG_QUEUE[LADDERS['currentPlayer']]
+        MG_NEXT_PLAYER()
         toSend = await MG_ACTION(cp,"none")
 
 async def LucidLaddersProcessMessage(usr,msg):
