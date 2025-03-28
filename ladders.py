@@ -145,15 +145,32 @@ async def MG_ACTION(plr, action):
             MG_PLAYERS[bottom] += 1
             
         case "thief":
-            victim = random.choice(MG_QUEUE)
-            if victim != plr:
-                toSend += "has stolen " + victim.display_name + "'s place!"
-                cache = MG_PLAYERS[victim]
-                MG_PLAYERS[victim] = MG_PLAYERS[plr]
-                MG_PLAYERS[plr] = cache
+            chances = random.randint(0,1)
+
+            if plr in LADDERS["tram"]["travelers"]:
+                chances = 0
+
+            if chances == 0:
+                victim = random.choice(MG_QUEUE)
+                if victim != plr:
+                    toSend += "has stolen " + victim.display_name + "'s place!"
+                    cache = MG_PLAYERS[victim]
+                    MG_PLAYERS[victim] = MG_PLAYERS[plr]
+                    MG_PLAYERS[plr] = cache
+                else:
+                    toSend += "have been caught stealing, and had to flee one level down!"
+                    MG_PLAYERS[plr] -= 1
             else:
-                toSend += "have been caught stealing, and had to flee one level down!"
-                MG_PLAYERS[plr] -= 1
+                stealChance = random.randint(0,3)
+
+                if stealChance == 0:
+                    LADDERS["tram"]["travelers"].clear()
+                    LADDERS["tram"]["travelers"].append(plr)
+                    toSend += "have stolen the tram, they are on their way to victory!"
+                else:
+                    lostLocation = random.randint(MG_PLAYERS[plr] - 3, MG_PLAYERS[plr] + 3)
+                    MG_PLAYERS[plr] = lostLocation
+                    toSend += "have miscalculated the tram's path and got lost in the tower!"
             
         case "hacker":
             chances = random.randint(0, 5)
@@ -212,31 +229,47 @@ async def MG_ACTION(plr, action):
                 MG_PLAYERS[plr] -= 1
 
         case "gremlin":
+            chances = random.randint(0,4)
             curFloor = MG_PLAYERS[plr]
 
-            if len(LADDERS["tram"]["travelers"]) < 1:
-                for i, v in MG_PLAYERS.items():
-                    if curFloor == v:
-                        LADDERS["tram"]["travelers"].append(i)
+            if plr in LADDERS["tram"]["travelers"]:
+                chances = 3
 
-                toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
-            else:
-                if plr not in LADDERS["tram"]["travelers"]:
-                    MG_PLAYERS[plr] -= 1
-                    toSend += "have missed the Tram and wasted 1 turn waiting for nothing."
+            if chances > 2:
+                if len(LADDERS["tram"]["travelers"]) < 1:
+                    for i, v in MG_PLAYERS.items():
+                        if curFloor == v:
+                            LADDERS["tram"]["travelers"].append(i)
+
+                    toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
                 else:
-                    if LADDERS["tram"]["forward"]:
-                        toSend += "have jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
-
-                        for trav in LADDERS["tram"]["travelers"]:
-                            MG_PLAYERS[trav] -= 2
+                    if plr not in LADDERS["tram"]["travelers"]:
+                        MG_PLAYERS[plr] -= 1
+                        toSend += "have missed the Tram and wasted 1 turn waiting for nothing."
                     else:
-                        toSend += "have jumped and the Tram is now back on track! Everyone inside gains 2 floors."
+                        if LADDERS["tram"]["forward"]:
+                            toSend += "have jumped and the Tram is now going backwards! Everyone inside loses 2 floors."
 
-                        for trav in LADDERS["tram"]["travelers"]:
-                            MG_PLAYERS[trav] += 2
+                            for trav in LADDERS["tram"]["travelers"]:
+                                MG_PLAYERS[trav] -= 2
+                        else:
+                            toSend += "have jumped and the Tram is now back on track! Everyone inside gains 2 floors."
 
-                    LADDERS["tram"]["forward"] = not LADDERS["tram"]["forward"]
+                            for trav in LADDERS["tram"]["travelers"]:
+                                MG_PLAYERS[trav] += 2
+
+                        LADDERS["tram"]["forward"] = not LADDERS["tram"]["forward"]
+            else:
+                subchances = random.randint(0,3)
+
+                if subchances <= 1:
+                    toSend += "have been waiting for the Tram to arrive, but it seems to be late."
+                elif subchances == 2:
+                    MG_PLAYERS[plr] -= 1
+                    toSend += "are growing impatient and decided to check the previous stop."
+                else:
+                    MG_PLAYERS[plr] += 1
+                    toSend += "are growing impatient and decided to check the next stop."
 
         case "necromancer":
             LADDERS["revival"][plr] = MG_PLAYERS[plr]
