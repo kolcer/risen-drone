@@ -125,7 +125,7 @@ async def MG_ACTION(plr, action):
                 
         case "joker":
             chances = random.randint(0,4)
-            victim = SelectRandomUser()
+            victim = SelectRandomUser(plr)
 
             if chances != 0:
                 toSend += "pranked " + victim.name + " - causing them to fell 2 levels down!"
@@ -180,7 +180,7 @@ async def MG_ACTION(plr, action):
 
             if chances == 0 or len(LADDERS["tram"]["travelers"]) < 1 or plr in LADDERS["tram"]["travelers"]:
                 altchances = random.randint(0,4)
-                victim = SelectRandomUser()
+                victim = SelectRandomUser(plr)
                 if altchances != 0:
                     toSend += "have stolen " + victim.name + "'s place!"
                     cache = MG_PLAYERS[victim]
@@ -327,7 +327,7 @@ async def MG_ACTION(plr, action):
 
         case "splicer":
             chances = random.randint(0,4)
-            victim = SelectRandomUser()
+            victim = SelectRandomUser(plr)
 
             if chances != 0:
                 toSend += f"have spliced their floor with {victim.name}! They will meet in the middle."
@@ -348,7 +348,7 @@ async def MG_ACTION(plr, action):
                 UpdateFloor(plr, -1)
             else:
                 chances = random.randint(0,4)
-                victim = SelectRandomUser()
+                victim = SelectRandomUser(plr)
 
                 if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
                     toSend += f"have merged with {victim.name}! They are now one and the same."
@@ -475,8 +475,7 @@ async def JoinLucidLadders(usr):
         await SEND(LADDERS['channel'], toSend)
         return
 
-def SelectRandomUser():
-    usr = MG_QUEUE[LADDERS['currentPlayer']]
+def SelectRandomUser(usr):
     found = False
 
     # Find the paired user in LADDERS["merges"]
