@@ -147,13 +147,10 @@ async def MG_ACTION(plr, action):
         case "thief":
             chances = random.randint(0,1)
 
-            if plr in LADDERS["tram"]["travelers"]:
-                chances = 0
-
-            if chances == 0:
+            if chances == 0 or len(LADDERS["tram"]["travelers"]) < 1 or plr in LADDERS["tram"]["travelers"]:
                 victim = random.choice(MG_QUEUE)
                 if victim != plr:
-                    toSend += "has stolen " + victim.display_name + "'s place!"
+                    toSend += "have stolen " + victim.display_name + "'s place!"
                     cache = MG_PLAYERS[victim]
                     MG_PLAYERS[victim] = MG_PLAYERS[plr]
                     MG_PLAYERS[plr] = cache
