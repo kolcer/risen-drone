@@ -825,7 +825,7 @@ async def on_message(message):
             else:
                 messages = MSG_SENT[target.id]
 
-            if target not in LAST_RIG:
+            if target.id not in LAST_RIG:
                 lastrig = "None"
             else:
                 lastrig = LAST_RIG[target.id]
