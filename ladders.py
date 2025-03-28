@@ -307,8 +307,6 @@ async def MG_ACTION(plr, action):
     return toSend
 
 async def MG_LOOP(toSend):
-    usr = MG_QUEUE[LADDERS['currentPlayer']]
-
     LADDERS['tick'] = time.time()
     ourTick = LADDERS['tick']
     
@@ -317,9 +315,9 @@ async def MG_LOOP(toSend):
             for trav in LADDERS["tram"]["travelers"]:
                 MG_PLAYERS[trav] = LADDERS['topLevel']
 
-        if usr in LADDERS["revival"] and MG_PLAYERS[usr] < LADDERS["revival"][usr]:
-            MG_PLAYERS[usr] = LADDERS["revival"][usr]
-            LADDERS["revival"][usr] = -100
+        if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
+            MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
+            LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]] = -100
             LADDERS['revived'] = True
 
         toSend += MG_SHOW_STATS()
@@ -334,7 +332,7 @@ async def MG_LOOP(toSend):
                 toSend += "Your Revival Point brought you back up! But now it's gone.\n"
                 LADDERS['revived'] = False
 
-            toSend += usr.mention + "'s turn! Choose Your alignment!"
+            toSend += MG_QUEUE[LADDERS['currentPlayer']].mention + "'s turn! Choose Your alignment!"
             await SEND(LADDERS['channel'], toSend)
         
         await asyncio.sleep(LADDERS['maxWait'])
