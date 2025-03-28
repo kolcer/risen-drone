@@ -299,7 +299,7 @@ async def MG_ACTION(plr, action):
     if LADDERS['currentPlayer'] == 0:     
         toSend = "All players advance 1 level.\n" + toSend
 
-    if MG_PLAYERS[plr] >= 31:
+    if plr in MG_PLAYERS and MG_PLAYERS[plr] >= 31:
         if not str(plr.id) in list_decoded_entries("Pro Tower Climber"):
             await add_entry_with_check("Pro Tower Climber", plr)
             toSend += "\n**And they reached the 31th floor for the first time!**"
