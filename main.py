@@ -225,6 +225,7 @@ async def on_message(message):
         return
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles and usr.name.lower() not in lmsg and usr.display_name.lower() not in lmsg:
+        print(msg)
         NEW_MEMBERS.remove(usr)
         howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>.\nYou may also type `bd help` to view every input I can respond to."
 
