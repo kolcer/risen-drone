@@ -474,31 +474,17 @@ async def on_message(message):
                     
                 await SEND(ch, msg)
 
-        elif len(msg) > 1:
-            ## thief rig active
+        elif any(ACTIVE_RIGS.values()) and len(msg) > 1:
             if ACTIVE_RIGS["thief"]:
-
-                await ExecuteThiefRig(ch,usr)
-
-            ## Spectre Rig Active
+                await ExecuteThiefRig(ch, usr)
             elif ACTIVE_RIGS["spectre"]:
-                    
-                await ExecuteSpectreRig(ch,usr,message)
-
-            ## Joker Rig Active
+                await ExecuteSpectreRig(ch, usr, message)
             elif ACTIVE_RIGS["joker"]:
-                    
-                await ExecuteJokerRig(ch,usr,message)
-
-            # Splicer Rig Active
+                await ExecuteJokerRig(ch, usr, message)
             elif ACTIVE_RIGS["splicer"]:
-
-                await ExecuteSplicerRig(ch,usr)
-
-            # Gremlin Rig Active
+                await ExecuteSplicerRig(ch, usr)
             elif ACTIVE_RIGS["gremlin"]:
-
-                await ExecuteGremlinRig(ch,usr)
+                await ExecuteGremlinRig(ch, usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
         elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing'] and restricted:
