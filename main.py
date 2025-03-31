@@ -190,7 +190,7 @@ async def on_message_edit(before, after):
     usr = after.author
     ch = after.channel
 
-    if ch.id == 845454640103424032 and (not after.attachments and 'http' not in msg):
+    if ch.id in [1154751339872653312, 845454640103424032] and (not after.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in FULL_IMMUNITY_ROLES:
                 return
@@ -230,7 +230,7 @@ async def on_message(message):
 
         await SEND(ch, howToMorph)
 
-    if (ch.id == 845454640103424032) and (not message.attachments and 'http' not in msg):
+    if ch.id in [1154751339872653312, 845454640103424032] and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in FULL_IMMUNITY_ROLES:
                 return
@@ -265,13 +265,13 @@ async def on_message(message):
         MSG_SENT[usr.id] = MSG_SENT[usr.id] + 1
     
     if today.day == 1 and today.month == 4:
-        if MORPHABLE_ROLES["Gremlin"][0] not in usr.roles:
-            await ADD_ROLES(usr, MORPHABLE_ROLES['Gremlin'][0])
+        if MORPHABLE_ROLES["Joker"][0] not in usr.roles:
+            await ADD_ROLES(usr, MORPHABLE_ROLES['Joker'][0])
             await asyncio.sleep(1)
 
             role_list = []
             for role in usr.roles:
-                if role.name in MORPHABLE_ROLES and role.name != 'Gremlin':
+                if role.name in MORPHABLE_ROLES and role.name != 'Joker':
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
@@ -927,7 +927,7 @@ async def on_message(message):
         #morph command
         elif lmsg.startswith("morph to"):
             if today.day == 1 and today.month == 4:
-                morphToTarget = "Gremlin"
+                morphToTarget = "Joker"
             else:
                 morphToTarget = lsplit[2].capitalize()
 
