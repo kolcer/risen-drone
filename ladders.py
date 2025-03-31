@@ -354,6 +354,7 @@ async def MG_ACTION(plr, action):
                     toSend += f"have merged with {victim.name}! They are now one and the same."
 
                     LADDERS["merges"].append([plr, victim])
+                    AssignFloor(victim, MG_PLAYERS[plr])
                 else:
                     toSend += "have forgotten a ghost is required to walk on mirrors and fell all the way down!"
                     # MG_PLAYERS[plr] = 0
