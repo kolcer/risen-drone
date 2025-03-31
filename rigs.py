@@ -314,9 +314,9 @@ async def CastRig(rigPick,ch,usr):
 
     if today.day == 1 and today.month == 4:
         rigPick = "joker"
-        COOLDOWN_DURATION["gremlin"] = 90
+        COOLDOWN_DURATION["joker"] = 90
     else:
-        COOLDOWN_DURATION["gremlin"] = 600
+        COOLDOWN_DURATION["joker"] = 600
 
     if rigPick == "chameleon":
         cd = False
