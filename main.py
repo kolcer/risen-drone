@@ -277,10 +277,13 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
-            await asyncio.sleep(1)
 
-        await ADD_REACTION(message,EMOJIS_TO_REACT["csJoker"])
-        
+        await asyncio.sleep(1)
+        try:
+            await ADD_REACTION(message,EMOJIS_TO_REACT["csJoker"])
+        except Exception as e:
+            return
+
     # if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles: 
     #     userId = str(usr.id)
     #     MSG_DELAY.append(userId)
