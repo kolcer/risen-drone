@@ -828,7 +828,7 @@ async def on_message(message):
                 # view.totlroles += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.counter["Locked"] += 1
-                    view.lroles += 1
+                    # view.lroles += 1
                     locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                 else:
                     locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
