@@ -253,6 +253,8 @@ async def on_message(message):
                     await ADD_REACTION(message,v)
                     return
         return
+    
+
 
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
@@ -275,6 +277,10 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
+            await asyncio.sleep(1)
+
+        await ADD_REACTION(message,EMOJIS_TO_REACT["csJoker"])
+        
     # if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles: 
     #     userId = str(usr.id)
     #     MSG_DELAY.append(userId)
