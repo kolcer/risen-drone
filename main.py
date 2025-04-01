@@ -781,8 +781,8 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowProfile(timeout=500)
-            view.data = ["", "", ""]
-            view.footers = ["", "", ""]
+            view.data = ["", "", "", ""]
+            view.footers = ["", "", "", ""]
             view.target = target
             view.requester = usr
             view.counter = {
@@ -793,10 +793,6 @@ async def on_message(message):
                 "AllLocked": 0,
                 "AllMemento": 0
             }
-            view.sroles = 0
-            view.lroles = 0
-            view.totsroles = 0
-            view.totlroles = 0
 
             # Prepare list to show in PAGE 1 (secret roles)
             secret_roles = ""
