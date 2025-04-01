@@ -785,6 +785,14 @@ async def on_message(message):
             view.footers = ["", "", ""]
             view.target = target
             view.requester = usr
+            view.counter = {
+                "Secret": 0,
+                "Locked": 0,
+                "Memento": 0,
+                "AllSecret": 0,
+                "AllLocked": 0,
+                "AllMemento": 0
+            }
             view.sroles = 0
             view.lroles = 0
             view.totsroles = 0
@@ -793,26 +801,44 @@ async def on_message(message):
             # Prepare list to show in PAGE 1 (secret roles)
             secret_roles = ""
             for role in FUN_ROLES:
-                view.totsroles += 1
+                view.counter["AllSecret"] += 1
+                # view.totsroles += 1
                 if str(target.id) in list_decoded_entries(role):
-                    view.sroles += 1
+                    view.counter["Secret"] += 1
+                    # view.sroles += 1
                     secret_roles += "**" + str(role) + "**\n"
                 else:
                     secret_roles += "**???**\n" 
             view.data[0] = secret_roles
-            view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.sroles == view.totsroles else "{scurrent} out of {stotal} secret roles."
+            view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
             # Prepare list to show in PAGE 2 (locked roles)
             locked_roles = ""
             for role in LIMITED_ROLES.keys():
-                view.totlroles += 1
+                view.counter["AllLocked"] += 1
+                # view.totlroles += 1
                 if str(target.id) in list_decoded_entries(role):
+                    view.counter["Locked"] += 1
                     view.lroles += 1
                     locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
                 else:
                     locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
+
             view.data[1] = locked_roles
-            view.footers[1] = "Let's see how long this will last." if view.lroles == view.totlroles else "{lcurrent} out of {ltotal} locked roles."
+            view.footers[1] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
+
+            # Prepare list to show in PAGE 3 (mementos)
+            memento_roles = ""
+            for role in MEMENTOS.keys():
+                view.counter["AllMemento"] += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Memento"] += 1
+                    memento_roles += "**" + role + "** 🔒 " + MEMENTOS[role] + "\n"
+                else:
+                    memento_roles += "**???** 🔒 " + MEMENTOS[role] + "\n"
+
+            view.data[1] = memento_roles
+            view.footers[1] = "You have been through them all." if view.counter["Memento"] == view.counter["AllMemento"] else "{mcurrent} out of {mtotal} mementos."
 
             # Preparing stuff to handle stats
             messages = ""

@@ -10,13 +10,18 @@ from discord.ext import commands
 
 class ShowProfile(discord.ui.View):
     cp  = 0
-    sep = 2
-    titles = ["{user}'s secret roles",
-              "{user}'s locked roles",
-              "{user}'s stats"]
-    sidecolor = ["FFA500",
-                 "FF0000",
-                 "FFC0CB"]  
+    titles = [
+        "{user}'s secret roles",
+        "{user}'s mementos",
+        "{user}'s locked roles",
+        "{user}'s stats",
+    ]
+    sidecolor = [
+        "FFA500",   
+        "FF0000",
+        "FF0000",
+        "FFC0CB"
+    ]  
     embed = None
     
     async def on_timeout(self):
@@ -33,13 +38,12 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
-        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, stotal=self.totsroles, ltotal=self.totlroles, scurrent=self.sroles, lcurrent=self.lroles))
+        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, stotal=self.counter["AllSecret"], ltotal=self.counter["AllLocked"], mtotal=self.counter["AllMemento"], scurrent=self.counter["Secret"], lcurrent=self.counter["Locked"], mcurrent=self.counter["Memento"]))
 
-        if self.sroles != self.totsroles:
+        if self.counter["Secret"] != self.counter["AllSecret"]:
             embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
         else:
             embed.color = discord.Colour(int("FFD700", 16)) 
-
 
         self.embed = embed
         return embed
@@ -60,7 +64,7 @@ class ShowProfile(discord.ui.View):
             self.first_page_button.style = discord.ButtonStyle.green
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 2:
+        if self.cp == 3:
             self.next_button.disabled = True
             self.last_page_button.disabled = True
             self.last_page_button.style = discord.ButtonStyle.gray
