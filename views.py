@@ -106,7 +106,7 @@ class ShowProfile(discord.ui.View):
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
         await interaction.response.defer()
-        self.cp = 2
+        self.cp = 3
         await self.update_message()
 
 class ShowCommands(discord.ui.View):    

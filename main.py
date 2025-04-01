@@ -812,22 +812,7 @@ async def on_message(message):
             view.data[0] = secret_roles
             view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
-            # Prepare list to show in PAGE 2 (locked roles)
-            locked_roles = ""
-            for role in LIMITED_ROLES.keys():
-                view.counter["AllLocked"] += 1
-                # view.totlroles += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Locked"] += 1
-                    view.lroles += 1
-                    locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
-                else:
-                    locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
-
-            view.data[1] = locked_roles
-            view.footers[1] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
-
-            # Prepare list to show in PAGE 3 (mementos)
+            # Prepare list to show in PAGE 2 (mementos)
             memento_roles = ""
             for role in MEMENTOS.keys():
                 view.counter["AllMemento"] += 1
@@ -839,6 +824,21 @@ async def on_message(message):
 
             view.data[1] = memento_roles
             view.footers[1] = "You have been through them all." if view.counter["Memento"] == view.counter["AllMemento"] else "{mcurrent} out of {mtotal} mementos."
+
+            # Prepare list to show in PAGE 3 (locked roles)
+            locked_roles = ""
+            for role in LIMITED_ROLES.keys():
+                view.counter["AllLocked"] += 1
+                # view.totlroles += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Locked"] += 1
+                    view.lroles += 1
+                    locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
+                else:
+                    locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
+
+            view.data[2] = locked_roles
+            view.footers[2] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
 
             # Preparing stuff to handle stats
             messages = ""
@@ -856,9 +856,9 @@ async def on_message(message):
             user_stats = ""
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
-            view.data[2] = user_stats
+            view.data[3] = user_stats
 
-            view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
+            view.footers[3] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
             if lastrig.lower().replace(" rig", "") == "spectre":
                 view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
@@ -866,8 +866,10 @@ async def on_message(message):
             if target.id in GIT_COMMITTERS.values():           
                 view.data[0] = 'Empty...'
                 view.data[1] = 'Empty...'
+                view.data[2] = 'Empty...'
                 view.footers[0] = "This person knows how to get the roles, what's the point?"
                 view.footers[1] = "Nothing to see here."
+                view.footers[2] = "Nothing to see here."
 
             # Send view... hopefully
             if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']):
