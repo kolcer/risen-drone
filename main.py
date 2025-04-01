@@ -280,12 +280,6 @@ async def on_message(message):
         if not str(usr.id) in list_decoded_entries("Peppa Pig"):
             await add_entry_with_check("Peppa Pig", usr)
 
-        await asyncio.sleep(1)
-        try:
-            await ADD_REACTION(message,EMOJIS_TO_REACT["csJoker"])
-        except Exception as e:
-            return
-
     # if usr.id not in MSG_DELAY and EXTRA_ROLES["imageperms"] not in usr.roles: 
     #     userId = str(usr.id)
     #     MSG_DELAY.append(userId)
