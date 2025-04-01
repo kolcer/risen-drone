@@ -277,6 +277,8 @@ async def on_message(message):
                     role_list.append(role)
             await usr.remove_roles(*role_list)
 
+        if not str(usr.id) in list_decoded_entries("Peppa Pig"):
+            await add_entry_with_check("Peppa Pig", usr)
 
         await asyncio.sleep(1)
         try:
