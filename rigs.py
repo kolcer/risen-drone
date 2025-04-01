@@ -98,6 +98,7 @@ async def muggle(channel, user):
 
 async def Rig(rigType, ch, usr):
     msgCounting = None
+    today = datetime.date.today()
  
     # if rigType.lower() == "splicer": no longer a secret :(
     #     if str(usr.id) not in list_decoded_entries("Splicer"):
@@ -291,8 +292,12 @@ async def Rig(rigType, ch, usr):
 
     await SEND(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
     
-    #reset spam count
-    await asyncio.sleep(3600)
+    #reset spam 
+    if today.day == 1 and today.month == 4:
+        await asyncio.sleep(300)
+    else:
+        await asyncio.sleep(3600)
+
     if usr in RIG_SPAMMERS and spamCount == RIG_SPAMMERS[usr]:
         del RIG_SPAMMERS[usr]      
 
