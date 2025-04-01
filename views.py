@@ -12,7 +12,7 @@ class ShowProfile(discord.ui.View):
     cp  = 0
     titles = [
         "{user}'s secret roles",
-        "{user}'s mementos",
+        "{user}'s recurring roles",
         "{user}'s locked roles",
         "{user}'s stats",
     ]

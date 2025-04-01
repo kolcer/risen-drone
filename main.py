@@ -808,18 +808,18 @@ async def on_message(message):
             view.data[0] = secret_roles
             view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
-            # Prepare list to show in PAGE 2 (mementos)
+            # Prepare list to show in PAGE 2 (RECURRING_ROLES)
             memento_roles = ""
-            for role in MEMENTOS.keys():
+            for role in RECURRING_ROLES.keys():
                 view.counter["AllMemento"] += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.counter["Memento"] += 1
-                    memento_roles += "**" + role + "** 🔒 " + MEMENTOS[role] + "\n"
+                    memento_roles += "**" + role + "** 🔁 " + RECURRING_ROLES[role] + "\n"
                 else:
-                    memento_roles += "**???** 🔒 " + MEMENTOS[role] + "\n"
+                    memento_roles += "**???** 🔁 " + RECURRING_ROLES[role] + "\n"
 
             view.data[1] = memento_roles
-            view.footers[1] = "You have been through them all." if view.counter["Memento"] == view.counter["AllMemento"] else "{mcurrent} out of {mtotal} mementos."
+            view.footers[1] = "You have been through them all." if view.counter["Memento"] == view.counter["AllMemento"] else "{mcurrent} out of {mtotal} recurring roles."
 
             # Prepare list to show in PAGE 3 (locked roles)
             locked_roles = ""
