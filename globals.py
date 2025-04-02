@@ -720,7 +720,6 @@ FUN_ROLES = [
     "Acclaimed",
     "Hypnotized Dream",
     "Hypnotized Nightmare",
-    "Peppa Pig"
 ]
 
 LIMITED_ROLES = {
