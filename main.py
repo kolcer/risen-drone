@@ -1303,7 +1303,7 @@ async def on_message(message):
             #give any role
             if lmsg.startswith("assign", 1):
                 try:
-                    if not third in FUN_ROLES:
+                    if all(third not in roles for roles in (FUN_ROLES, LIMITED_ROLES, RECURRING_ROLES)):
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
