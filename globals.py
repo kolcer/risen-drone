@@ -719,7 +719,7 @@ FUN_ROLES = [
     "Pro Tower Climber",
     "Acclaimed",
     "Hypnotized Dream",
-    "Hypnotized Nightmare",
+
 ]
 
 LIMITED_ROLES = {
@@ -729,7 +729,8 @@ LIMITED_ROLES = {
     "Impostor": "*(04/11/2023 - 04/28/2023)*",
     "Last One": "*(04/18/2023 - 09/20/2023)*",
     "Splicer": "*(09/05/2022 - 03/22/2025)*",
-    "Peppa Pig": "April Fool's 2025"
+    "Peppa Pig": "April Fool's 2025",
+    "Hypnotized Nightmare": "*(03/25/2025 - 04/02/2025)*",
 }
 
 RECURRING_ROLES = {

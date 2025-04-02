@@ -384,10 +384,10 @@ async def on_message(message):
                 DETAILED_ROLES["hdream"][usr.id] = 0
                 lmsg = 'cast heretic rig'
 
-                if not RIG_COOLDOWNS["self"] and usr.id in DETAILED_ROLES["hnightmare"] and not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
-                    await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
-                    await asyncio.sleep(1)
-                    await SEND(ch, "That escalated quickly.")
+                # if not RIG_COOLDOWNS["self"] and usr.id in DETAILED_ROLES["hnightmare"] and not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
+                #     await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
+                #     await asyncio.sleep(1)
+                #     await SEND(ch, "That escalated quickly.")
             else:
                 if not RIG_COOLDOWNS["self"]:
                     DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
