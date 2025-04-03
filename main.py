@@ -829,9 +829,7 @@ async def on_message(message):
             locked_roles += "\n## Removed Roles\n\n"
 
             for role in FUN_ROLES["Removed"].keys():
-                view.counter["AllLocked"] += 1
                 if str(target.id) in list_decoded_entries(role):
-                    view.counter["Locked"] += 1
                     locked_roles += "**" + role + "** ❌ " + FUN_ROLES["Removed"][role] + "\n"
                 else:
                     locked_roles += "**???** ❌ " + FUN_ROLES["Removed"][role] + "\n"
