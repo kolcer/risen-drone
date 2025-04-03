@@ -321,7 +321,7 @@ async def MG_ACTION(plr, action):
                     toSend += "are growing impatient and decided to check the next stop."
 
         case "necromancer":
-            LADDERS["revival"][plr] = MG_PLAYERS[plr]
+            AssignRevival(plr, MG_PLAYERS[plr])
 
             toSend += "have created a Revival Point on their floor for good measure!"
 
@@ -353,13 +353,7 @@ async def MG_ACTION(plr, action):
                 if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
                     toSend += f"have merged with {victim.name}! They are now one and the same."
 
-                    LADDERS["merges"].append([plr, victim])
-                    if plr in LADDERS["tram"]["travelers"]:
-                        LADDERS["tram"]["travelers"].append(victim)
-                    else:
-                        LADDERS["tram"]["travelers"].remove(victim)
-
-                    AssignFloor(victim, MG_PLAYERS[plr])
+                    SyncTeam(plr, victim)
                 else:
                     toSend += "have forgotten a ghost is required to walk on mirrors and fell all the way down!"
                     # MG_PLAYERS[plr] = 0
@@ -518,3 +512,27 @@ def AssignFloor(usr, newfloor):
         MG_PLAYERS[pair[1]] = newfloor
     else:
         MG_PLAYERS[usr] = newfloor
+
+def AssignRevival(usr, newfloor):
+    pair = next((pair for pair in LADDERS["merges"] if usr in pair), None)
+
+    if pair:
+        LADDERS["revival"][pair[0]] = newfloor
+        LADDERS["revival"][pair[1]] = newfloor
+    else:
+        MG_PLAYERS[usr] = newfloor
+
+def SyncTeam(plr, victim):
+    LADDERS["merges"].append([plr, victim])
+
+    if plr in LADDERS["tram"]["travelers"]:
+        LADDERS["tram"]["travelers"].append(victim)
+    elif plr not in LADDERS["tram"]["travelers"] and victim in LADDERS["tram"]["travelers"]:
+        LADDERS["tram"]["travelers"].remove(victim)
+
+    if plr in LADDERS["revival"].keys():
+        LADDERS["revival"][victim] = LADDERS["revival"][plr]
+    elif plr not in LADDERS["revival"].keys() and victim in LADDERS["revival"].keys():
+        LADDERS["revival"].pop(victim)
+
+    AssignFloor(victim, MG_PLAYERS[plr])

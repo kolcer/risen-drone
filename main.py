@@ -793,7 +793,7 @@ async def on_message(message):
             }
 
             # Prepare list to show in PAGE 1 (available and recurring roles)
-            secret_roles = "# Available Roles\n\n"
+            secret_roles = "## Available Roles\n\n"
             for role in FUN_ROLES["Available"]:
                 view.counter["AllSecret"] += 1
                 # view.totsroles += 1
@@ -804,7 +804,7 @@ async def on_message(message):
                 else:
                     secret_roles += "**???**\n"
 
-            secret_roles += "\n# Recurring Roles\n\n"
+            secret_roles += "\n## Recurring Roles\n\n"
 
             for role in FUN_ROLES["Recurring"].keys():
                 view.counter["AllSecret"] += 1
@@ -817,7 +817,7 @@ async def on_message(message):
             view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
             # Prepare list to show in PAGE 2 (limited and removed roles)
-            locked_roles = "# Limited Roles\n\n"
+            locked_roles = "## Limited Roles\n\n"
             for role in FUN_ROLES["Limited"].keys():
                 view.counter["AllLocked"] += 1
                 if str(target.id) in list_decoded_entries(role):
@@ -826,15 +826,15 @@ async def on_message(message):
                 else:
                     locked_roles += "**???** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
 
-            locked_roles += "\n# Removed Roles\n\n"
+            locked_roles += "\n## Removed Roles\n\n"
 
             for role in FUN_ROLES["Removed"].keys():
                 view.counter["AllLocked"] += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.counter["Locked"] += 1
-                    locked_roles += "**" + role + "** 🔒 " + FUN_ROLES["Removed"][role] + "\n"
+                    locked_roles += "**" + role + "** ❌ " + FUN_ROLES["Removed"][role] + "\n"
                 else:
-                    locked_roles += "**???** 🔒 " + FUN_ROLES["Removed"][role] + "\n"
+                    locked_roles += "**???** ❌ " + FUN_ROLES["Removed"][role] + "\n"
 
             view.data[1] = locked_roles
             view.footers[1] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."

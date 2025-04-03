@@ -146,6 +146,7 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "unsub from",
     "bd show profile",
     "drone of wisdom",
+    "bd tell me,"
     "create poll",
     "bd scold",
     "bd praise",
@@ -302,6 +303,52 @@ WISDOM = [
     "That is terrible advice, who writes this stuff? - sleazel",
     "Never trim the hedge on a shoulder day.",
     "Yay! >w< - funkykidgaming9999",
+]
+
+ANSWERS = [
+    # Broken Drone answers
+    "I must confer with Sleazel in order to answer this question.",
+    "You will never know.",
+    "My wisdom contains all the answers.",
+    "I do not work for free, I require an upfront payment. Then I'll tell you Yes.",
+    "You’ve got a 50/50 chance—good luck!",
+    "Affirmative. Proceed with caution, though.",
+    "I cannot compute that. Try again later.",
+    "Unfortunately, the answer is no. Sleazel agrees.",
+    # Drifter
+    "Drifter isn’t here right now. Maybe ask me later?",
+    "Drifter left for travels, but it confirmed your question before departing."
+    "Drifter went away on vacation after hearing such a question.",
+    "Yes, Drifter would’ve given you a thumbs up, if they were here.",
+    "Nope. Drifter’s too busy wandering the world to care.",
+    # Wicked
+    "If it involves destroying stuff, you will most definitely succeed.",
+    "Yes, but don’t get too comfortable.",
+    "I think the answer is yes, but don’t take my word for it.",
+    "Yes, but only if you promise not to ask me again.",
+    "I asked Wicked for a second opinion, but maybe I shouldn't have. They said they didn't care.",
+    "No, the winds of mischief have blown this one away.",
+    "That’s a no. Wicked wouldn’t allow it.",
+    "Wicked says no, and trust me, you don’t want to argue with them.",
+    "If you were expecting a positive outcome, think again."
+    # Joker
+    "A big fat no from the Joker.",
+    "At first glance, I'd say no. On second glance, I'd still say no.",
+    "Let’s flip a coin... flip... nope, still no.",
+    "I didn't ask.",
+    "You can't be serious.",
+    "The Joker guild gave me a look when I asked for assistance with your question, I think it's a yes.",
+    "Yes <:csTroll:814959699337412698>",
+    # Patron
+    "Positive.",
+    "Most definitely.",
+    "As long as the 'P' in Patron stands for Perfection, yes.",
+    "A resounding yes, but only because it's the right answer.",
+    # Archon
+    "According to someone's calculations, that is correct.",
+    "According to the ancient scrolls, the answer is yes… but don’t tell anyone.",
+    "This book right here has the answer, but Archon won't give it to you.",
+    "Let me concentrate, I'll let you know at a later time."
 ]
 
 OBJECTS = {
