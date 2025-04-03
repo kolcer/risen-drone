@@ -1016,7 +1016,7 @@ async def on_message(message):
             
         # Get the drone's naswer
         elif lmsg.startswith("bd tell me"):
-            await SEND(ch, f"# {random.choice(ANSWERS)}")
+            await SEND(ch, f"{random.choice(ANSWERS)}")
             return
 
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
