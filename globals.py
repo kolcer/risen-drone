@@ -322,7 +322,6 @@ ANSWERS = [
     "Yes, Drifter would’ve given you a thumbs up, if they were here.",
     "Nope. Drifter’s too busy wandering the world to care.",
     # Wicked
-    "If it involves destroying stuff, you will most definitely succeed.",
     "Yes, but don’t get too comfortable.",
     "I think the answer is yes, but don’t take my word for it.",
     "Yes, but only if you promise not to ask me again.",
