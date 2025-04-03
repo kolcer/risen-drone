@@ -317,7 +317,7 @@ ANSWERS = [
     "Unfortunately, the answer is no. Sleazel agrees.",
     # Drifter
     "Drifter isn’t here right now. Maybe ask me later?",
-    "Drifter left for travels, but it confirmed your question before departing."
+    "Drifter left for travels, but it confirmed your question before departing.",
     "Drifter went away on vacation after hearing such a question.",
     "Yes, Drifter would’ve given you a thumbs up, if they were here.",
     "Nope. Drifter’s too busy wandering the world to care.",
@@ -330,7 +330,7 @@ ANSWERS = [
     "No, the winds of mischief have blown this one away.",
     "That’s a no. Wicked wouldn’t allow it.",
     "Wicked says no, and trust me, you don’t want to argue with them.",
-    "If you were expecting a positive outcome, think again."
+    "If you were expecting a positive outcome, think again.",
     # Joker
     "A big fat no from the Joker.",
     "At first glance, I'd say no. On second glance, I'd still say no.",
@@ -348,7 +348,7 @@ ANSWERS = [
     "According to someone's calculations, that is correct.",
     "According to the ancient scrolls, the answer is yes… but don’t tell anyone.",
     "This book right here has the answer, but Archon won't give it to you.",
-    "Let me concentrate, I'll let you know at a later time."
+    "Let me concentrate, I'll let you know at a later time.",
 ]
 
 OBJECTS = {
