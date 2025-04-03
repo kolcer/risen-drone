@@ -126,6 +126,7 @@ IMPOSTOR_NICKS = [
 
 RANDOM_BLACKLIST = [
     "patron",
+    "wicked",
     "necromancer",
     "muggle",
     "chameleon",
