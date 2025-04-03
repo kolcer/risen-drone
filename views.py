@@ -12,13 +12,11 @@ class ShowProfile(discord.ui.View):
     cp  = 0
     titles = [
         "{user}'s secret roles",
-        "{user}'s recurring roles",
         "{user}'s locked roles",
         "{user}'s stats",
     ]
     sidecolor = [
         "FFA500",   
-        "FF0000",
         "FF0000",
         "FFC0CB"
     ]  
@@ -38,7 +36,7 @@ class ShowProfile(discord.ui.View):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
         embed.description = self.data[self.cp]
-        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, stotal=self.counter["AllSecret"], ltotal=self.counter["AllLocked"], mtotal=self.counter["AllMemento"], scurrent=self.counter["Secret"], lcurrent=self.counter["Locked"], mcurrent=self.counter["Memento"]))
+        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, stotal=self.counter["AllSecret"], ltotal=self.counter["AllLocked"], scurrent=self.counter["Secret"], lcurrent=self.counter["Locked"]))
 
         if self.counter["Secret"] != self.counter["AllSecret"]:
             embed.color = discord.Colour(int(self.sidecolor[self.cp], 16)) 
@@ -64,7 +62,7 @@ class ShowProfile(discord.ui.View):
             self.first_page_button.style = discord.ButtonStyle.green
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 3:
+        if self.cp == 2:
             self.next_button.disabled = True
             self.last_page_button.disabled = True
             self.last_page_button.style = discord.ButtonStyle.gray
@@ -106,7 +104,7 @@ class ShowProfile(discord.ui.View):
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
         await interaction.response.defer()
-        self.cp = 3
+        self.cp = 2
         await self.update_message()
 
 class ShowCommands(discord.ui.View):    

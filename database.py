@@ -16,7 +16,7 @@ async def add_entry_with_check(key, new_entry):
     if not new_entry.id in GIT_COMMITTERS.values():
         roleCounter = 0
 
-        for role in FUN_ROLES:
+        for role in FUN_ROLES["Available"]:
             if str(new_entry.id) in list_decoded_entries(role):
                 roleCounter += 1 
                 break

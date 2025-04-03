@@ -781,22 +781,20 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowProfile(timeout=500)
-            view.data = ["", "", "", ""]
-            view.footers = ["", "", "", ""]
+            view.data = ["", "", ""]
+            view.footers = ["", "", ""]
             view.target = target
             view.requester = usr
             view.counter = {
                 "Secret": 0,
                 "Locked": 0,
-                "Memento": 0,
                 "AllSecret": 0,
                 "AllLocked": 0,
-                "AllMemento": 0
             }
 
-            # Prepare list to show in PAGE 1 (secret roles)
-            secret_roles = ""
-            for role in FUN_ROLES:
+            # Prepare list to show in PAGE 1 (available and recurring roles)
+            secret_roles = "# Available Roles\n\n"
+            for role in FUN_ROLES["Available"]:
                 view.counter["AllSecret"] += 1
                 # view.totsroles += 1
                 if str(target.id) in list_decoded_entries(role):
@@ -804,34 +802,39 @@ async def on_message(message):
                     # view.sroles += 1
                     secret_roles += "**" + str(role) + "**\n"
                 else:
-                    secret_roles += "**???**\n" 
+                    secret_roles += "**???**\n"
+
+            secret_roles += "\n# Recurring Roles\n\n"
+
+            for role in FUN_ROLES["Recurring"].keys():
+                view.counter["AllSecret"] += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Secret"] += 1
+                    secret_roles += "**" + role + "** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
+                else:
+                    secret_roles += "**???** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
             view.data[0] = secret_roles
             view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
-            # Prepare list to show in PAGE 2 (RECURRING_ROLES)
-            memento_roles = ""
-            for role in RECURRING_ROLES.keys():
-                view.counter["AllMemento"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Memento"] += 1
-                    memento_roles += "**" + role + "** 🔁 " + RECURRING_ROLES[role] + "\n"
-                else:
-                    memento_roles += "**???** 🔁 " + RECURRING_ROLES[role] + "\n"
-
-            view.data[1] = memento_roles
-            view.footers[1] = "You have been through them all." if view.counter["Memento"] == view.counter["AllMemento"] else "{mcurrent} out of {mtotal} recurring roles."
-
-            # Prepare list to show in PAGE 3 (locked roles)
-            locked_roles = ""
-            for role in LIMITED_ROLES.keys():
+            # Prepare list to show in PAGE 2 (limited and removed roles)
+            locked_roles = "# Limited Roles\n\n"
+            for role in FUN_ROLES["Limited"].keys():
                 view.counter["AllLocked"] += 1
-                # view.totlroles += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.counter["Locked"] += 1
-                    # view.lroles += 1
-                    locked_roles += "**" + role + "** 🔒 " + LIMITED_ROLES[role] + "\n"
+                    locked_roles += "**" + role + "** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
                 else:
-                    locked_roles += "**???** 🔒 " + LIMITED_ROLES[role] + "\n"
+                    locked_roles += "**???** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
+
+            locked_roles += "\n# Removed Roles\n\n"
+
+            for role in FUN_ROLES["Removed"].keys():
+                view.counter["AllLocked"] += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Locked"] += 1
+                    locked_roles += "**" + role + "** 🔒 " + FUN_ROLES["Removed"][role] + "\n"
+                else:
+                    locked_roles += "**???** 🔒 " + FUN_ROLES["Removed"][role] + "\n"
 
             view.data[2] = locked_roles
             view.footers[2] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
@@ -1261,7 +1264,7 @@ async def on_message(message):
 
                 await SEND(ch, "Role created successfully.")
 
-                FUN_ROLES.append(second)
+                FUN_ROLES["Available"].append(second)
                 return
         
         #-----admin commands that require THREE or MORE inputs-----
@@ -1303,10 +1306,10 @@ async def on_message(message):
             #give any role
             if lmsg.startswith("assign", 1):
                 try:
-                    if all(third not in roles for roles in (FUN_ROLES, LIMITED_ROLES, RECURRING_ROLES)):
+                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
                         await SEND(ch, "You cannot assign this role through my commands.")
                         return
-                        
+
                     for mem in SERVER_DATA['server'].members:
                         if int(mem.id) == int(msgsplit[1]):
                             if msgsplit[1] in list_decoded_entries(third):
@@ -1326,8 +1329,8 @@ async def on_message(message):
             #remove any role
             if lmsg.startswith("unassign", 1):
                 try:
-                    if not third in FUN_ROLES:
-                        await SEND(ch, "You cannot unassign this role through my commands.")
+                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
+                        await SEND(ch, "You cannot assign this role through my commands.")
                         return
 
                     for mem in SERVER_DATA['server'].members:
@@ -1352,12 +1355,11 @@ async def on_message(message):
             #purge any role
             if lmsg.startswith("purge role", 1):
                 try:
-                    if not third in FUN_ROLES:
-                        await SEND(ch, "You cannot obliterate this role through my commands.")
+                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
+                        await SEND(ch, "You cannot assign this role through my commands.")
                         return
                         
                     delete_key(third)
-                    FUN_ROLES.remove(third)
                     await asyncio.sleep(1)
                     await SEND(ch, "The role is gone.")
                 except Exception as e:
