@@ -380,7 +380,7 @@ async def on_message(message):
             lmsg = 'drone of wisdom'
 
         else:
-            if random.randint(1, 10) == 1:
+            if random.randint(1, 50) == 1:
                 DETAILED_ROLES["hdream"][usr.id] = 0
                 lmsg = 'cast heretic rig'
 
@@ -391,7 +391,7 @@ async def on_message(message):
             else:
                 if not RIG_COOLDOWNS["self"]:
                     DETAILED_ROLES["hdream"][usr.id] = DETAILED_ROLES["hdream"].get(usr.id, 0) + 1
-                    if DETAILED_ROLES["hdream"][usr.id] == 15:
+                    if DETAILED_ROLES["hdream"][usr.id] == 50:
                         if not str(usr.id) in list_decoded_entries("Hypnotized Dream"):
                             await add_entry_with_check("Hypnotized Dream", usr)
                             await asyncio.sleep(1)
@@ -836,8 +836,8 @@ async def on_message(message):
                 else:
                     locked_roles += "**???** 🔒 " + FUN_ROLES["Removed"][role] + "\n"
 
-            view.data[2] = locked_roles
-            view.footers[2] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
+            view.data[1] = locked_roles
+            view.footers[1] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
 
             # Preparing stuff to handle stats
             messages = ""
@@ -855,9 +855,9 @@ async def on_message(message):
             user_stats = ""
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
-            view.data[3] = user_stats
+            view.data[2] = user_stats
 
-            view.footers[3] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
+            view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
             if lastrig.lower().replace(" rig", "") == "spectre":
                 view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
@@ -865,10 +865,8 @@ async def on_message(message):
             if target.id in GIT_COMMITTERS.values():           
                 view.data[0] = 'Empty...'
                 view.data[1] = 'Empty...'
-                view.data[2] = 'Empty...'
                 view.footers[0] = "This person knows how to get the roles, what's the point?"
                 view.footers[1] = "Nothing to see here."
-                view.footers[2] = "Nothing to see here."
 
             # Send view... hopefully
             if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']):
