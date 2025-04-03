@@ -17,7 +17,7 @@ def MG_RESET():
     LADDERS['playerCount'] = 0
     LADDERS['topLevel'] = 21
     LADDERS['tram']['travelers'] = []
-    LADDERS['tram']['arrival'] = 7
+    LADDERS['tram']['arrival'] = 10
     LADDERS['tram']['forward'] = True
     LADDERS['revival'] = {}
     LADDERS['revived'] = False
@@ -285,7 +285,7 @@ async def MG_ACTION(plr, action):
                         if curFloor == v:
                             LADDERS["tram"]["travelers"].append(i)
 
-                    toSend += "and everyone else on their floor hopped on the Tram. They will reach the destination in 7 turns!"
+                    toSend += f"and everyone else on their floor hopped on the Tram. They will reach the destination in {LADDERS['tram']['arrival']} turns!"
                 else:
                     if plr not in LADDERS["tram"]["travelers"]:
                         # MG_PLAYERS[plr] -= 1
@@ -520,7 +520,7 @@ def AssignRevival(usr, newfloor):
         LADDERS["revival"][pair[0]] = newfloor
         LADDERS["revival"][pair[1]] = newfloor
     else:
-        MG_PLAYERS[usr] = newfloor
+        LADDERS["revival"][usr] = newfloor
 
 def SyncTeam(plr, victim):
     LADDERS["merges"].append([plr, victim])

@@ -1013,6 +1013,11 @@ async def on_message(message):
                 else:
                     await SEND(ch, f"||***Wise choice.***||")
                 return
+            
+        # Get the drone's naswer
+        elif lmsg.startswith("bd tell me"):
+            await SEND(ch, f"# {random.choice(ANSWERS)}")
+            return
 
         elif I_SPY['status'] != None and ch == I_SPY['channel']:
             if lmsg == I_SPY['answers'][I_SPY['status']]: 

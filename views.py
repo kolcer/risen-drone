@@ -157,6 +157,9 @@ class ShowCommands(discord.ui.View):
 **drone of wisdom**
 ➡️ Receive wisdom directly from myself that will change how you perceive the world
 
+**bd tell me, [question]**
+➡️ Yes or No, that is the questiom
+
 **create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]...** (2 to 19 answers)
 ➡️ Create a poll with a question and its possible answers, votes will be revealed when it's closed 
 

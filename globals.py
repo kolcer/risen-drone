@@ -890,7 +890,7 @@ LADDERS = {
     'winDetect': 0,
     'tram': {
         "travelers": [],
-        "arrival": 7,
+        "arrival": 10,
         "forward": True,
     },
     'revival': {},
