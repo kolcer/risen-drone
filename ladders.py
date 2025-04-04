@@ -386,8 +386,7 @@ async def MG_LOOP(toSend):
                 AssignFloor(trav, LADDERS['topLevel'])
 
         if MG_QUEUE[LADDERS['currentPlayer']] in LADDERS["revival"] and MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] < LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]:
-            MG_PLAYERS[MG_QUEUE[LADDERS['currentPlayer']]] = LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]]
-            LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]] = -100
+            GoToRevival(MG_QUEUE[LADDERS['currentPlayer']], LADDERS["revival"][MG_QUEUE[LADDERS['currentPlayer']]])
             LADDERS['revived'] = True
 
         toSend += MG_SHOW_STATS()
@@ -521,6 +520,19 @@ def AssignRevival(usr, newfloor):
         LADDERS["revival"][pair[1]] = newfloor
     else:
         LADDERS["revival"][usr] = newfloor
+
+def GoToRevival(plr, newfloor):
+    pair = next((pair for pair in LADDERS["merges"] if plr in pair), None)
+
+    if pair:
+        MG_PLAYERS[pair[0]] = newfloor
+        MG_PLAYERS[pair[1]] = newfloor
+
+        LADDERS["revival"][pair[0]] = -100
+        LADDERS["revival"][pair[1]] = -100
+    else:
+        MG_PLAYERS[plr] = newfloor
+        LADDERS["revival"][plr] = -100
 
 def SyncTeam(plr, victim):
     LADDERS["merges"].append([plr, victim])
