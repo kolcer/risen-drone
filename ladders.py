@@ -343,7 +343,7 @@ async def MG_ACTION(plr, action):
                 UpdateFloor(plr, -1)
 
         case "reaver":
-            if len(MG_QUEUE) - (len(LADDERS["merges"]) * 2) == 1:
+            if len(MG_QUEUE) - (len(LADDERS["merges"]) * 2) == 1 or len(MG_QUEUE) < 3:
                 toSend += "have broken the mirrors and lost 1 floor!"
                 UpdateFloor(plr, -1)
             else:
