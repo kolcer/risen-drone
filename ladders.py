@@ -57,9 +57,7 @@ def MG_SHOW_STATS():
 def MG_NEXT_PLAYER():
     if LADDERS['kicked']:
         LADDERS['kicked'] = False
-        MG_PLAYERS.pop(MG_QUEUE[LADDERS['currentPlayer']])
-        MG_QUEUE.pop(LADDERS['currentPlayer'])
-        LADDERS['currentPlayer'] -= 1
+        KickPlayer(MG_QUEUE[LADDERS['currentPlayer']])
 
     LADDERS['currentPlayer'] += 1
 
@@ -548,3 +546,13 @@ def SyncTeam(plr, victim):
         LADDERS["revival"].pop(victim)
 
     AssignFloor(victim, MG_PLAYERS[plr])
+
+def KickPlayer(plr):
+    pair = next((pair for pair in LADDERS["merges"] if plr in pair), None)
+
+    if pair:
+        LADDERS["merges"].remove(pair)
+
+    MG_PLAYERS.pop(plr)
+    MG_QUEUE.pop(LADDERS['currentPlayer'])
+    LADDERS['currentPlayer'] -= 1
