@@ -526,7 +526,7 @@ EGGS = {
     "chameleon": "{user} isn't creative enough to make their own egg, but this is an exception! Behold the Chameleon Egg!",
 }
 
-EGG_CD = {
+EGG_RNG = {
     "muggle": 20,
     "necromancer": 20,
     "keeper": 15,

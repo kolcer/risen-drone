@@ -305,6 +305,7 @@ async def CastRig(rigPick,ch,usr):
     easterRng = None
     randomRig = ""
     randomAttempts = 0
+    chameleonSuccess = True
     today = datetime.date.today()
 
     if rigPick not in RIG_LIST:
@@ -330,14 +331,9 @@ async def CastRig(rigPick,ch,usr):
 
     
     if MORPHABLE_ROLES[rigPick.capitalize()] in usr.roles:
-        easterRng = random.randint(0, EGG_CD[rigPick] // 2)
+        easterRng = random.randint(0, EGG_RNG[rigPick] // 2)
     else:
-        easterRng = random.randint(0, EGG_CD[rigPick])
-
-    if easterRng == 0:
-        if not str(usr.id) in list_decoded_entries(f"{rigPick.capitalize()} Egg"):
-            await add_egg_with_check(f"{rigPick.capitalize()} Egg", usr)
-            await SEND(ch, EGGS[rigPick].format(user=usr.mention))
+        easterRng = random.randint(0, EGG_RNG[rigPick])
 
     if rigPick == "chameleon":
         cd = False
@@ -354,6 +350,7 @@ async def CastRig(rigPick,ch,usr):
                 else:
                     cdList += ":white_check_mark: \n"
             await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
+            chameleonSuccess = False
             return
 
         await SEND(ch, "What will it be? 🥁🥁🥁")
@@ -364,6 +361,7 @@ async def CastRig(rigPick,ch,usr):
 
             if randomAttempts == 3:
                 await SEND(ch, "You know what. We can do without these rigs right now.")
+                chameleonSuccess = False
 
                 if not str(usr.id) in list_decoded_entries("Rig Failure"):
                     await add_entry_with_check("Rig Failure", usr)
@@ -392,6 +390,12 @@ async def CastRig(rigPick,ch,usr):
         if randomAttempts < 3:   
             await Rig(randomRig,ch,usr)
         return
+
+    if not (rigPick == "chameleon" and not chameleonSuccess):
+        if easterRng == 0 and (rigPick == "chameleon" and chameleonSuccess):
+            if not str(usr.id) in list_decoded_entries(f"{rigPick.capitalize()} Egg"):
+                await add_egg_with_check(f"{rigPick.capitalize()} Egg", usr)
+                await SEND(ch, EGGS[rigPick].format(user=usr.mention))
 
     LAST_RIG[usr.id] = str(rigPick) + " Rig"
 
