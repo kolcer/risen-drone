@@ -992,7 +992,7 @@ I_SPY = {
 
 BUTTONS = {
     "easterTimer": 300,
-    "easterStatus": True,
+    "easterStatus": False,
     "status": False,
     "channel": None,
     "view": None,

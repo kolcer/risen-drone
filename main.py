@@ -1021,13 +1021,20 @@ async def on_message(message):
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
+            alignmentRoles = 0
+
+            for role in usr.roles:
+                if role.name in MORPHABLE_ROLES.keys():
+                    alignmentRoles += 1
+
             if today.day == 1 and today.month == 4:
                 await SEND(ch, f"Unfortunately, this command is out of service.")
                 return
             else:
                 demorphFromTarget = lsplit[2].capitalize()
 
-            await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
+            if alignmentRoles > 1:
+                await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
@@ -1095,11 +1102,12 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and BUTTONS["easterStatus"]:
-            BUTTONS["easterStatus"] = False
+        elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"]:
+            BUTTONS["easterStatus"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
+            view.type = None
 
             if SPECIAL_ROLES["Admin"][0] in usr.roles:
                 view.type = "Admin"
@@ -1112,6 +1120,10 @@ async def on_message(message):
                     if role.name in MORPHABLE_ROLES.keys():
                         view.type = role.name
                         return
+                    
+            if view.type == None:
+                BUTTONS["easterStatus"] = False
+                return
 
             view.picker = None
             view.channel = ch
@@ -1122,7 +1134,7 @@ async def on_message(message):
             await view.too_late()
 
             await asyncio.sleep(BUTTONS["easterTimer"])
-            BUTTONS["easterStatus"] = True
+            BUTTONS["easterStatus"] = False
 
         else:
             ## tips/tricks trigger
@@ -1173,9 +1185,7 @@ async def on_message(message):
                     if v == 'hm' and len(lmsg) > 5:
                         return
                     await ADD_REACTION(message,i)
-                    return
             
-
         if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (usr != None and EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ") and not BUTTONS["status"]):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
