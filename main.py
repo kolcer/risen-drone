@@ -583,7 +583,7 @@ async def on_message(message):
                     BUTTONS["status"] = False
                     return
 
-            if lmsg == "play hangman" or lmsg == "play hangman alone":
+            if "play hangman" in lmsg:
                 while "q" in view.myword:
                     view.myword = random.choice(word_list).lower()
         
