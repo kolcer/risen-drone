@@ -506,6 +506,26 @@ SANCTUARY = {
     "chameleon": " has found Chameleon's Oasis!",
 }
 
+EGGS = {
+    "none": "{user} did nothing special, but the None Egg has its appeal.",
+    "muggle": "After falling once again, {user} spotted the Muggle Egg!",
+    "thief": "{user} stole the Thief Egg while nobody was looking!",
+    "spectre": "{user} has materialized the Spectre Egg from the other world!",
+    "joker": "{user} was awarded with the Joker Egg for the best prank!",
+    "archon": "After hours spent studying, {user} has located the Archon Egg!",
+    "heretic": "Thanks to the art of the dark magic, {user} has recreated the Heretic Egg!",
+    "patron": "With the help of everyone, {user} obtained the Patron Egg!",
+    "wicked": "{user} has found the Wicked Egg under the stair they just destroyed!",
+    "keeper": "While putting their things in order, {user} has found the Keeper Egg!",
+    "hacker": "{user} has just spawned the Hacker Egg!",
+    "drifter": "During their travels, {user} has stumbled upon the Drifter Egg!",
+    "splicer": "By splicing the correct ingredients, {user} made the Splicer Egg!",
+    "necromancer": "{user} has brought the Necromancer Egg back from the dead!",
+    "reaver": "{user} has found the Reaver Egg through the mirror!",
+    "gremlin": "{user} started seeing Gremlin Eggs everywhere after spinning for too long!",
+    "chameleon": "{user} isn't creative enough to make their own egg, but this is an exception! Behold the Chameleon Egg!",
+}
+
 RIG_LIST = [
     "thief",
     "spectre",

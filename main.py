@@ -533,11 +533,8 @@ async def on_message(message):
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
             lmsg = lmsg.replace("|", "")
 
-            await DRONEPRINT(lmsg)
-
             theword = lmsg.replace("play hangman ", "")
 
-            await DRONEPRINT(theword)
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = Minigames_Hangman(timeout=120)

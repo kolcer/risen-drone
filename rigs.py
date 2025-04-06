@@ -302,12 +302,17 @@ async def Rig(rigType, ch, usr):
         del RIG_SPAMMERS[usr]      
 
 async def CastRig(rigPick,ch,usr):
+    easterRng = None
     randomRig = ""
     randomAttempts = 0
     today = datetime.date.today()
 
     if rigPick not in RIG_LIST:
         await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
+
+        if not str(usr.id) in list_decoded_entries("None Egg"):
+            await add_egg_with_check("None Egg", usr)
+            await SEND(ch, EGGS["none"].format(user=usr.mention))
         return
     
     if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
@@ -322,6 +327,17 @@ async def CastRig(rigPick,ch,usr):
         COOLDOWN_DURATION["joker"] = 90
     else:
         COOLDOWN_DURATION["joker"] = 600
+
+    
+    if MORPHABLE_ROLES[rigPick.capitalize()] in usr.roles:
+        easterRng = random.randint(0, 15)
+    else:
+        easterRng = random.randint(0, 30)
+
+    if easterRng == 0:
+        if not str(usr.id) in list_decoded_entries(f"{rigPick.capitalize()} Egg"):
+            await add_egg_with_check(f"{rigPick.capitalize()} Egg", usr)
+            await SEND(ch, EGGS[rigPick].format(user=usr.mention))
 
     if rigPick == "chameleon":
         cd = False
