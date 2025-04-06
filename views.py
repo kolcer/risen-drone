@@ -249,7 +249,7 @@ Delete: Deletes the specified quiz question by index.
 2: So Many Buttons
 3: Help Broken Drone
 4: Poll
-5: Button Fight
+5: Architect Egg
 
 
 :bangbang: Must be in the FUN_ROLES list in globals.py

@@ -844,6 +844,7 @@ FUN_ROLES = {
         "Broken Drone Egg",
         "Murdurator Egg",
         "Admin Egg",
+        "Architect Egg",
     }
 }
 

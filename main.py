@@ -1253,13 +1253,16 @@ async def on_message(message):
 
             elif BUTTONS["phase"] == 5:
                 BUTTONS["status"] = True
-                view = ButtonGames_ButtonFight(timeout=30)
-                view.tm = 30
-                view.clicks = 0
-                view.winning = None
-                view.users = []
-                view.step = 0
-                view.message = await SEND_VIEW(BUTTONS["channel"], "This is my button.", view)
+                view = ButtonEgg_Throw(timeout=30)
+                view.thrower = None
+                view.picker = None
+                view.disabled = False
+
+                view.type = "Architect"
+
+                view.channel = ch
+                view.toolate = True
+                view.message = await SEND_VIEW(BUTTONS["channel"], "The Architect Egg fell from the sky!", view)
 
                 await view.wait()
                 await view.too_late()
