@@ -1121,7 +1121,7 @@ async def on_message(message):
                 BUTTONS["easterStatus"] = True
 
                 for role in usr.roles:
-                    if role.name in MORPHABLE_ROLES:
+                    if role.name in MORPHABLE_ROLES and role.name != "Roingus" and role.name != "Gun":
                         view.type = role.name
                         break
                     
