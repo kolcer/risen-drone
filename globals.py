@@ -526,6 +526,25 @@ EGGS = {
     "chameleon": "{user} isn't creative enough to make their own egg, but this is an exception! Behold the Chameleon Egg!",
 }
 
+EGG_CD = {
+    "muggle": 20,
+    "necromancer": 20,
+    "keeper": 15,
+    "hacker": 15,
+    "drifter": 15,
+    "archon": 12,
+    "heretic": 12,
+    "patron": 10,
+    "reaver": 10,
+    "wicked": 6,
+    "thief": 5,
+    "spectre": 5,
+    "splicer": 5,
+    "joker": 5,
+    "gremlin": 5,
+    "chameleon": 5,
+}
+
 RIG_LIST = [
     "thief",
     "spectre",

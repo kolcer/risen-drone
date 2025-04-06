@@ -330,9 +330,9 @@ async def CastRig(rigPick,ch,usr):
 
     
     if MORPHABLE_ROLES[rigPick.capitalize()] in usr.roles:
-        easterRng = random.randint(0, 15)
+        easterRng = random.randint(0, EGG_CD[rigPick] // 2)
     else:
-        easterRng = random.randint(0, 30)
+        easterRng = random.randint(0, EGG_CD[rigPick])
 
     if easterRng == 0:
         if not str(usr.id) in list_decoded_entries(f"{rigPick.capitalize()} Egg"):
