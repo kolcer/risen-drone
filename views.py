@@ -1482,13 +1482,17 @@ class ButtonEgg_Throw(discord.ui.View):
         usr = interaction.user
 
         if usr.id != self.thrower and not self.disabled:
-            self.picker = usr
             self.disabled = True
+            
             if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
+                self.picker = usr
+
                 await add_egg_with_check(f"{self.type} Egg", usr)
                 await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False)
             else:
-                await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg! ...Again.", False)
+                await INTERACTION(interaction.response, "This egg... rejects you.", True)
+                self.disabled = False
+                return
 
             self.toolate = False
             self.stop()
