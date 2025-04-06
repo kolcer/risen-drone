@@ -1476,17 +1476,17 @@ class ButtonEgg_Murdurator(discord.ui.View):
 
         await self.on_timeout()
 
-    @discord.ui.button(label="Murdurator Egg", style = discord.ButtonStyle.secondary)
+    @discord.ui.button(label="Murdurator Egg", style = discord.ButtonStyle.green)
     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
         self.picker = usr
 
         if not str(usr.id) in list_decoded_entries("Murdurator Egg"):
-            await add_entry_with_check("Murdurator Egg", usr)
+            await add_egg_with_check("Murdurator Egg", usr)
 
         self.toolate = False
-        await self.stop()
+        self.stop()
 
         # if usr != self.thrower:
         # else:
