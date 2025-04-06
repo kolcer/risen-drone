@@ -916,6 +916,9 @@ async def on_message(message):
                 else:
                     egg_roles += "**???** 🧺\n"
 
+            view.data = egg_roles
+            view.footers = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
+
             # Send view... hopefully
             await view.send(ch)
             await view.wait()

@@ -124,7 +124,7 @@ class ShowEggs(discord.ui.View):
         embed = discord.Embed()
         embed.title = f"{self.target.display_name}'s eggs"
         embed.description = self.data
-        embed.set_footer(text="The Egg Hunt is back.")
+        embed.set_footer(text=self.footers.format(usr=self.target.display_name, etotal=self.counter["AllEggs"], ecurrent=self.counter["Eggs"]))
 
         embed.color = discord.Colour(int("F7C8DA", 16)) 
 
