@@ -1102,8 +1102,7 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"] and usr.id != BUTTONS["easterLast"]:
-            BUTTONS["easterStatus"] = True
+        elif lmsg == "bd throw egg" and usr.id != BUTTONS["easterLast"]:
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
@@ -1116,6 +1115,11 @@ async def on_message(message):
             elif EXTRA_ROLES["admin"] in usr.roles:
                 view.type = "Broken Drone"
             else:
+                if ch.id != 750060041289072771 or BUTTONS["easterStatus"]:
+                    return
+                
+                BUTTONS["easterStatus"] = True
+
                 for role in usr.roles:
                     if role.name in MORPHABLE_ROLES:
                         view.type = role.name
@@ -1134,9 +1138,10 @@ async def on_message(message):
             await view.wait()
             await view.too_late()
 
-            await asyncio.sleep(BUTTONS["easterTimer"])
-            await SEND(ch, "The egg launcher is ready!")
-            BUTTONS["easterStatus"] = False
+            if BUTTONS["easterStatus"]:
+                await asyncio.sleep(BUTTONS["easterTimer"])
+                await SEND(ch, "The egg launcher is ready!")
+                BUTTONS["easterStatus"] = False
 
         else:
             ## tips/tricks trigger

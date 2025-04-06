@@ -156,7 +156,6 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "play lucid ladders",
     "start quiz",
     "play hangman",
-    "bd throw egg"
 ]
 
 # worst guns ever made for the gun role
