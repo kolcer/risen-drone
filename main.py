@@ -1104,7 +1104,7 @@ async def on_message(message):
 
         elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"]:
             await DRONEPRINT("entered")
-            await DRONEPRINT(BUTTONS["easterStatus"])
+            await DRONEPRINT(str(BUTTONS["easterStatus"]))
             BUTTONS["easterStatus"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
