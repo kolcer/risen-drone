@@ -1477,7 +1477,7 @@ class ButtonEgg_Throw(discord.ui.View):
 
         await self.on_timeout()
 
-    @discord.ui.button(label="Egg", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="🥚", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
