@@ -1100,7 +1100,7 @@ async def on_message(message):
             view.picker = None
             view.channel = ch
             view.toolate = True
-            view.message = await SEND_VIEW(ch, f"{usr.mention} threw the Murdurator egg!", view)
+            view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
 
             await view.wait()
             await view.too_late()
