@@ -307,7 +307,7 @@ async def CastRig(rigPick,ch,usr):
 
         if not str(usr.id) in list_decoded_entries("None Egg"):
             await add_egg_with_check("None Egg", usr)
-            await SEND(ch, EGGS["none"].format(user=usr.mention))
+            await SEND(ch, f"{usr.mention} found the None Egg lying on the ground.")
         return
     
     if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
