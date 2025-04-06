@@ -109,16 +109,12 @@ class ShowProfile(discord.ui.View):
 
 class ShowEggs(discord.ui.View):
     embed = None
-    
-    async def on_timeout(self):
-        for item in self.children:
-            item.disabled = True
-
-        await self.message.edit(embed=self.embed, view=self)
 
     async def send(self, ch):
-        self.message = await ch.send(view=self)
-        await self.update_message()
+        # self.message = await ch.send(view=self)
+        # await self.update_message()
+
+        await ch.send(view=self, embed=self.create_embed())
 
     def create_embed(self):
         embed = discord.Embed()
@@ -131,9 +127,8 @@ class ShowEggs(discord.ui.View):
         self.embed = embed
         return embed
 
-    async def update_message(self):
-        self.update_buttons()
-        await self.message.edit(embed=self.create_embed(), view=self)
+    # async def update_message(self):
+    #     await self.message.edit(embed=self.create_embed(), view=self)
 
 
 class ShowCommands(discord.ui.View):    
