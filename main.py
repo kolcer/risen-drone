@@ -895,7 +895,7 @@ async def on_message(message):
             
             # No Target?
             if target == None:
-                await SEND(ch, "No User was found.\n\nType `bd show eggs` to view your own eggs.\nType `bd show [username] profile` to peek someone else's eggs.")
+                await SEND(ch, "No User was found.\n\nType `bd show eggs` to view your own eggs.\nType `bd show [username] eggs` to peek someone else's eggs.")
                 return
             
             # Command will go through. Prepare the View.
