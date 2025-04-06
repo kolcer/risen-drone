@@ -1084,10 +1084,18 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and usr.id == 267014823315898368:
+        elif lmsg == "bd throw egg" and any(role in usr.roles for role in [SPECIAL_ROLES["Admin"][0], EXTRA_ROLES["murdurator"], EXTRA_ROLES["admin"]]):
             BUTTONS["status"] = True
-            view = ButtonEgg_Murdurator(timeout=30)
+            view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
+
+            if SPECIAL_ROLES["Admin"][0] in usr.roles:
+                view.type = "Admin"
+            elif EXTRA_ROLES["murdurator"] in usr.roles:
+                view.type = "Murdurator"
+            else:
+                view.type = "Broken Drone"
+
             view.picker = None
             view.channel = ch
             view.toolate = True

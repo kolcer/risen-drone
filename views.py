@@ -1457,42 +1457,41 @@ class ButtonGames_ButtonFight(discord.ui.View):
         if (BUTTONS["status"]):
             button.disabled = False
             await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
-
-class ButtonEgg_Murdurator(discord.ui.View):
+        
+class ButtonEgg_Throw(discord.ui.View):
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
 
             if self.picker != None:
-                item.label = f"{self.picker.name} took the Murdurator egg"
-                await EDIT_VIEW_MESSAGE(self.message, "The Murdurator egg has been taken.", self)
+                item.label = f"{self.picker.name} took the {self.type} egg"
+                await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
             else:
                 item.label = "I will keep it for next time."
                 item.style = discord.ButtonStyle.red
-                await EDIT_VIEW_MESSAGE(self.message, "The egg is still here...", self)
+                await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
 
     async def too_late(self):
         if self.toolate:
-            await SEND(self.channel, "I will treasure the egg instead.")
+            await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
 
         await self.on_timeout()
 
-    @discord.ui.button(label="Murdurator Egg", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Egg", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
         self.picker = usr
 
-        if not str(usr.id) in list_decoded_entries("Murdurator Egg"):
-            await add_egg_with_check("Murdurator Egg", usr)
-            await INTERACTION(interaction.response, f"{usr.mention} got the Murdurator egg!", False)
+        if usr != self.thrower:
+            if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
+                await add_egg_with_check(f"{self.type} Egg", usr)
+                await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False)
+            else:
+                await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg! ...Again.", False)
+
+            self.toolate = False
+            self.stop()
         else:
-            await INTERACTION(interaction.response, f"{usr.mention} got the Murdurator egg! ...Again.", False)
-
-        self.toolate = False
-        self.stop()
-
-        # if usr != self.thrower:
-        # else:
-        #     await INTERACTION(interaction.response, "What are you even doing?", True)
-        #     return
+            await INTERACTION(interaction.response, "What are you even doing?", True)
+            return
