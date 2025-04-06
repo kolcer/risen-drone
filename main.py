@@ -1103,16 +1103,12 @@ async def on_message(message):
                 await SEND(ch,'Wrong. Better luck next time.')
 
         elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"]:
-            await DRONEPRINT("entered")
-            await DRONEPRINT(str(BUTTONS["easterStatus"]))
-
             BUTTONS["easterStatus"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
             view.type = None
 
-            await DRONEPRINT("1")
             if SPECIAL_ROLES["Admin"][0] in usr.roles:
                 view.type = "Admin"
             elif EXTRA_ROLES["murdurator"] in usr.roles:
@@ -1123,14 +1119,12 @@ async def on_message(message):
                 for role in usr.roles:
                     if role.name in MORPHABLE_ROLES:
                         view.type = role.name
-                        return
+                        break
                     
-            await DRONEPRINT("2")
             if view.type == None:
                 BUTTONS["easterStatus"] = False
                 return
 
-            await DRONEPRINT("3")
             view.picker = None
             view.channel = ch
             view.toolate = True
