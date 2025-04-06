@@ -1480,10 +1480,10 @@ class ButtonEgg_Throw(discord.ui.View):
     @discord.ui.button(label="🥚", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-
         self.picker = usr
 
-        if usr != self.thrower:
+        if usr != self.thrower or not self.disabled:
+            self.disabled = True
             if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
                 await add_egg_with_check(f"{self.type} Egg", usr)
                 await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False)
@@ -1493,5 +1493,5 @@ class ButtonEgg_Throw(discord.ui.View):
             self.toolate = False
             self.stop()
         else:
-            await INTERACTION(interaction.response, "What are you even doing?", True)
+            await INTERACTION(interaction.response, "No can do.", True)
             return

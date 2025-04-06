@@ -1088,6 +1088,7 @@ async def on_message(message):
             BUTTONS["status"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
+            view.disabled = False
 
             if SPECIAL_ROLES["Admin"][0] in usr.roles:
                 view.type = "Admin"
