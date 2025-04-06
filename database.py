@@ -26,6 +26,19 @@ async def add_entry_with_check(key, new_entry):
 
         db.rpush(key,new_entry.id)
 
+async def add_egg_with_check(key, new_entry):
+    eggCounter = 0
+
+    for role in FUN_ROLES["Easter"]:
+        if str(new_entry.id) in list_decoded_entries(role):
+            eggCounter += 1 
+            break
+
+    if eggCounter == 0:
+        await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just collected an egg! Thank you for the help. Type `bd show eggs` to look at it.")
+
+    db.rpush(key,new_entry.id)
+
 def delete_key(key):
     db.delete(key)
 

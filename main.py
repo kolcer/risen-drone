@@ -897,7 +897,7 @@ async def on_message(message):
                 return
             
             # Command will go through. Prepare the View.
-            view = ShowEggs(timeout=500)
+            view = ShowEggs()
             view.data = ""
             view.footers = ""
             view.target = target
@@ -921,7 +921,6 @@ async def on_message(message):
 
             # Send view... hopefully
             await view.send(ch)
-            await view.wait()
 
         # Revive Chat Command
         # elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
@@ -1084,6 +1083,17 @@ async def on_message(message):
             else:
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
+
+        elif lmsg == "bd throw egg" and usr.id == 267014823315898368:
+            BUTTONS["status"] = True
+            view = ButtonEgg_Murdurator(timeout=30)
+            view.thrower = usr.id
+            view.picker = None
+            view.message = await SEND_VIEW(ch, f"{usr.mention} threw the Murdurator egg!", view)
+
+            await view.wait()
+            await view.too_late()
+            BUTTONS["status"] = False
 
         else:
             ## tips/tricks trigger

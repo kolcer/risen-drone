@@ -111,9 +111,6 @@ class ShowEggs(discord.ui.View):
     embed = None
 
     async def send(self, ch):
-        # self.message = await ch.send(view=self)
-        # await self.update_message()
-
         await ch.send(view=self, embed=self.create_embed())
 
     def create_embed(self):
@@ -126,9 +123,6 @@ class ShowEggs(discord.ui.View):
 
         self.embed = embed
         return embed
-
-    # async def update_message(self):
-    #     await self.message.edit(embed=self.create_embed(), view=self)
 
 
 class ShowCommands(discord.ui.View):    
@@ -1463,3 +1457,38 @@ class ButtonGames_ButtonFight(discord.ui.View):
         if (BUTTONS["status"]):
             button.disabled = False
             await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
+
+class ButtonEgg_Murdurator(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        if self.picker != None:
+            item.label = f"{self.picker.name} took the Murdurator egg"
+            await EDIT_VIEW_MESSAGE(self.message, "The Murdurator egg has been taken.", self)
+        else:
+            item.label = "I will keep it for next time."
+            item.style = discord.ButtonStyle.red
+            await EDIT_VIEW_MESSAGE(self.message, "The egg is still here...", self)
+
+    async def too_late(self):
+        await SEND(BUTTONS["channel"], "I will treasure the egg instead.")
+
+        await self.on_timeout()
+
+    @discord.ui.button(label="Murdurator Egg", style = discord.ButtonStyle.secondary)
+    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        self.picker = usr
+
+        if not str(usr.id) in list_decoded_entries("Murdurator Egg"):
+            await add_entry_with_check("Murdurator Egg", usr)
+
+        self.toolate = False
+        await self.stop()
+
+        # if usr != self.thrower:
+        # else:
+        #     await INTERACTION(interaction.response, "What are you even doing?", True)
+        #     return
