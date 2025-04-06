@@ -107,6 +107,35 @@ class ShowProfile(discord.ui.View):
         self.cp = 2
         await self.update_message()
 
+class ShowEggs(discord.ui.View):
+    embed = None
+    
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await self.message.edit(embed=self.embed, view=self)
+
+    async def send(self, ch):
+        self.message = await ch.send(view=self)
+        await self.update_message()
+
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = f"{self.target.display_name}'s eggs"
+        embed.description = self.data
+        embed.set_footer(text="The Egg Hunt is back.")
+
+        embed.color = discord.Colour(int("F7C8DA", 16)) 
+
+        self.embed = embed
+        return embed
+
+    async def update_message(self):
+        self.update_buttons()
+        await self.message.edit(embed=self.create_embed(), view=self)
+
+
 class ShowCommands(discord.ui.View):    
     data = [
         '''

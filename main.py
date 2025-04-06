@@ -875,6 +875,51 @@ async def on_message(message):
                 await view.send(ch)
             await view.wait()
 
+        ## Show Eggs
+        elif lmsg.startswith("bd show") and lmsg.endswith("eggs"):
+
+            # Getting the Target
+            target = None
+            if lmsg == "bd show eggs":
+                targetName = f"{usr.name}".lower()
+            else:
+                cleanMsg = lmsg.replace(" eggs", "")
+                targetName = cleanMsg.split(" ", 2)[2]
+
+            for mem in SERVER_DATA['server'].members:
+                if mem.name.lower() == targetName:
+                    target = mem
+                    break
+            
+            # No Target?
+            if target == None:
+                await SEND(ch, "No User was found.\n\nType `bd show eggs` to view your own eggs.\nType `bd show [username] profile` to peek someone else's eggs.")
+                return
+            
+            # Command will go through. Prepare the View.
+            view = ShowProfile(timeout=500)
+            view.data = ""
+            view.footers = ""
+            view.target = target
+            view.counter = {
+                "Eggs": 0,
+                "AllEggs": 0,
+            }
+
+            # Prepare list to show in PAGE 1 (available and recurring roles)
+            egg_roles = "## Eggs\n\n"
+            for role in FUN_ROLES["Easter"]:
+                view.counter["AllEggs"] += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Eggs"] += 1
+                    egg_roles += "**" + str(role) + "** 🧺\n"
+                else:
+                    egg_roles += "**???** 🧺\n"
+
+            # Send view... hopefully
+            await view.send(ch)
+            await view.wait()
+
         # Revive Chat Command
         # elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
         #     #chat has to be dead, duh

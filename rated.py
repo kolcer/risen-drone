@@ -46,6 +46,8 @@ async def SEND(channel, message):
     if message == None or message == "":
         #cannot send empty message
         return
+    
+    message += " 🐇🐣"
     return await channel.send(message)
 
 #DM an user

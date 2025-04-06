@@ -146,6 +146,7 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "sub to",
     "unsub from",
     "bd show profile",
+    "bd show eggs",
     "drone of wisdom",
     "bd tell me,"
     "create poll",
@@ -782,6 +783,28 @@ FUN_ROLES = {
         "Impostor": "*(04/11/2023 - 04/28/2023)*",
         "Last One": "*(04/18/2023 - 09/20/2023)*",
         "Hypnotized Nightmare": "*(03/25/2025 - 04/02/2025)*",
+    },
+    "Easter": {
+        "Patron Egg",
+        "Joker Egg",
+        "Wicked Egg",
+        "Keeper Egg",
+        "Muggle Egg",
+        "Hacker Egg",
+        "Thief Egg",
+        "Archon Egg",
+        "Drifter Egg",
+        "Heretic Egg",
+        "Splicer Egg",
+        "Necromancer Egg",
+        "Reaver Egg",
+        "Gremlin Egg",
+        "Chameleon Egg",
+        "Spectre Egg",
+        "None Egg",
+        "Broken Drone Egg",
+        "Murdurator Egg",
+        "Admin Egg",
     }
 }
 
