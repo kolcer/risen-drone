@@ -1463,21 +1463,22 @@ class ButtonEgg_Murdurator(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        if self.picker != None:
-            item.label = f"{self.picker.name} took the Murdurator egg"
-            await EDIT_VIEW_MESSAGE(self.message, "The Murdurator egg has been taken.", self)
-        else:
-            item.label = "I will keep it for next time."
-            item.style = discord.ButtonStyle.red
-            await EDIT_VIEW_MESSAGE(self.message, "The egg is still here...", self)
+            if self.picker != None:
+                item.label = f"{self.picker.name} took the Murdurator egg"
+                await EDIT_VIEW_MESSAGE(self.message, "The Murdurator egg has been taken.", self)
+            else:
+                item.label = "I will keep it for next time."
+                item.style = discord.ButtonStyle.red
+                await EDIT_VIEW_MESSAGE(self.message, "The egg is still here...", self)
 
     async def too_late(self):
-        await SEND(BUTTONS["channel"], "I will treasure the egg instead.")
+        if self.toolate:
+            await SEND(self.channel, "I will treasure the egg instead.")
 
         await self.on_timeout()
 
     @discord.ui.button(label="Murdurator Egg", style = discord.ButtonStyle.green)
-    async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
+    async def pressed(self, interaction: discord.Interaction):
         usr = interaction.user
 
         self.picker = usr

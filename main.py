@@ -1089,6 +1089,7 @@ async def on_message(message):
             view = ButtonEgg_Murdurator(timeout=30)
             view.thrower = usr.id
             view.picker = None
+            view.channel = ch
             view.message = await SEND_VIEW(ch, f"{usr.mention} threw the Murdurator egg!", view)
 
             await view.wait()
