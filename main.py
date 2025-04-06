@@ -1102,7 +1102,7 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg":
+        elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"]:
             BUTTONS["easterStatus"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
@@ -1117,7 +1117,7 @@ async def on_message(message):
                 view.type = "Broken Drone"
             else:
                 for role in usr.roles:
-                    if role.name in MORPHABLE_ROLES.keys():
+                    if role.name in MORPHABLE_ROLES:
                         view.type = role.name
                         return
                     
