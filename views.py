@@ -1481,7 +1481,7 @@ class ButtonEgg_Throw(discord.ui.View):
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if usr != self.thrower and not self.disabled:
+        if usr.id != self.thrower and not self.disabled:
             self.picker = usr
             self.disabled = True
             if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
