@@ -1003,12 +1003,21 @@ async def on_message(message):
            
         #morph command
         elif lmsg.startswith("morph to"):
+            noRoles = True
+
             if today.day == 1 and today.month == 4:
                 morphToTarget = "Joker"
             else:
                 morphToTarget = lsplit[2].capitalize()
 
-            await SEND(ch, await MorphTo(usr,morphToTarget))
+
+            for role in usr.roles:
+                if role.name in MORPHABLE_ROLES.keys():
+                    noRoles = False
+                    return
+                
+            if noRoles:
+                await SEND(ch, await MorphTo(usr,morphToTarget))
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
@@ -1086,8 +1095,8 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and any(role in usr.roles for role in [SPECIAL_ROLES["Admin"][0], EXTRA_ROLES["murdurator"], EXTRA_ROLES["admin"]]):
-            BUTTONS["status"] = True
+        elif lmsg == "bd throw egg" and BUTTONS["easterStatus"]:
+            BUTTONS["easterStatus"] = False
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
@@ -1096,8 +1105,13 @@ async def on_message(message):
                 view.type = "Admin"
             elif EXTRA_ROLES["murdurator"] in usr.roles:
                 view.type = "Murdurator"
-            else:
+            elif EXTRA_ROLES["admin"] in usr.roles:
                 view.type = "Broken Drone"
+            else:
+                for role in usr.roles:
+                    if role.name in MORPHABLE_ROLES.keys():
+                        view.type = role.name
+                        return
 
             view.picker = None
             view.channel = ch
@@ -1106,7 +1120,9 @@ async def on_message(message):
 
             await view.wait()
             await view.too_late()
-            BUTTONS["status"] = False
+
+            await asyncio.sleep(BUTTONS["easterTimer"])
+            BUTTONS["easterStatus"] = True
 
         else:
             ## tips/tricks trigger
