@@ -794,7 +794,6 @@ MORPHABLE_ROLES = {
 FUN_ROLES = {
     "Available": [
         "Sanctuary Discoverer", 
-        "Heretic Defier",
         "Architect Design",
         "Pranked the Creator",
         "Optimus",
@@ -822,6 +821,7 @@ FUN_ROLES = {
         "Impostor": "*(04/11/2023 - 04/28/2023)*",
         "Last One": "*(04/18/2023 - 09/20/2023)*",
         "Hypnotized Nightmare": "*(03/25/2025 - 04/02/2025)*",
+        "Heretic Defier": "*unknown*",
     },
     "Easter": {
         "Patron Egg",
