@@ -1102,7 +1102,7 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"]:
+        elif lmsg == "bd throw egg" and not BUTTONS["easterStatus"] and usr.id != BUTTONS["easterLast"]:
             BUTTONS["easterStatus"] = True
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
@@ -1125,6 +1125,7 @@ async def on_message(message):
                 BUTTONS["easterStatus"] = False
                 return
 
+            BUTTONS["easterLast"] = usr.id
             view.picker = None
             view.channel = ch
             view.toolate = True

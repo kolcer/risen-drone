@@ -156,6 +156,7 @@ BOT_COMMANDS_CHANNEL_RESTRICTED = [
     "play lucid ladders",
     "start quiz",
     "play hangman",
+    "bd throw egg"
 ]
 
 # worst guns ever made for the gun role
@@ -993,6 +994,7 @@ I_SPY = {
 BUTTONS = {
     "easterTimer": 300,
     "easterStatus": False,
+    "easterLast": None,
     "status": False,
     "channel": None,
     "view": None,
