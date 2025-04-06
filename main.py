@@ -542,7 +542,7 @@ async def on_message(message):
             view.toolate = True
             view.lifes = 5
             view.status = "<:csSleazel:786328102392954921>"
-            view.myword = "q"
+            view.myword = "error"
             view.cp = None
             view.cl = None
             view.picker = None
