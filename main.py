@@ -1135,6 +1135,7 @@ async def on_message(message):
             await view.too_late()
 
             await asyncio.sleep(BUTTONS["easterTimer"])
+            await SEND(ch, "The egg launcher is ready!")
             BUTTONS["easterStatus"] = False
 
         else:
