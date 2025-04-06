@@ -531,8 +531,9 @@ async def on_message(message):
 
         # adding a comment to reset bot but rolo why does the bot break sometimes
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
-            customtrigger = lmsg.replace("play hangman ", "")
-            theword = str(customtrigger.replace("|", ""))
+            lmsg = str(lmsg.replace("|", ""))
+
+            theword = lmsg.replace("play hangman ", "")
             BUTTONS["status"] = True
             BUTTONS["channel"] = ch
             view = Minigames_Hangman(timeout=120)
@@ -583,7 +584,7 @@ async def on_message(message):
                     BUTTONS["status"] = False
                     return
 
-            if "play hangman" in lmsg:
+            if lmsg == "play hangman" or lmsg == "play hangman alone" in lmsg:
                 while "q" in view.myword:
                     view.myword = random.choice(word_list).lower()
         
