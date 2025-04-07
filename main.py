@@ -1000,7 +1000,7 @@ async def on_message(message):
 
                 view.channel = ch
                 view.toolate = True
-                view.message = await SEND_VIEW(BUTTONS["channel"], "The two Roingi made the Roingus Egg!", view)
+                view.message = await SEND_VIEW(ch, "The two Roingi made the Roingus Egg!", view)
 
                 await view.wait()
                 await view.too_late()
