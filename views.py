@@ -1488,7 +1488,9 @@ class ButtonEgg_Throw(discord.ui.View):
 
     async def too_late(self):
         if self.toolate:
-            await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
+            if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
+                await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
+                add_entry(f"{self.type} Egg", "827952429290618943")
 
         await self.on_timeout()
 
