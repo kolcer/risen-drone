@@ -1015,10 +1015,10 @@ async def on_message(message):
 
         elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771:
             if usr.id not in THE_ROINGUS:
-                THE_ROINGUS.append(usr.id)
+                THE_SHINY.append(usr.id)
 
-            if len(THE_ROINGUS) == 5:
-                THE_ROINGUS.clear()
+            if len(THE_SHINY) == 5:
+                THE_SHINY.clear()
                 BUTTONS["status"] = True
                 view = ButtonEgg_Throw(timeout=30)
                 view.thrower = None
