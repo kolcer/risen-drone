@@ -1154,7 +1154,11 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and usr.id != BUTTONS["easterLast"]:
+        elif lmsg == "bd throw egg" and :
+            if usr.id == BUTTONS["easterLast"]:
+                await SEND(ch, "This egg launcher never launches the same egg twice!")
+                return
+            
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
@@ -1170,7 +1174,11 @@ async def on_message(message):
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Broken Drone"
             else:
-                if ch.id != 750060041289072771 or BUTTONS["easterStatus"]:
+                if ch.id != 750060041289072771:
+                    await SEND(ch, "The egg launcher only works in <#750060041289072771>.")
+                    return
+                elif BUTTONS["easterStatus"]:
+                    await SEND(ch, "The egg launcher is charging. This stuff takes time.")
                     return
                 
                 BUTTONS["easterStatus"] = True
@@ -1188,7 +1196,14 @@ async def on_message(message):
             view.picker = None
             view.channel = ch
             view.toolate = True
-            view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
+            
+            try:
+                view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
+            except Exception as e:
+                await SEND(ch, str(e))
+                BUTTONS["easterStatus"] = False
+                BUTTONS["easterStaffStatus"] = False
+                return
 
             await view.wait()
             await view.too_late()
