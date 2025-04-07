@@ -1154,7 +1154,7 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg" and :
+        elif lmsg == "bd throw egg":
             if usr.id == BUTTONS["easterLast"]:
                 await SEND(ch, "This egg launcher never launches the same egg twice!")
                 return
