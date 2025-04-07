@@ -1035,7 +1035,7 @@ async def on_message(message):
 
 
             for role in usr.roles:
-                if role.name in MORPHABLE_ROLES.keys():
+                if role.name in RIG_LIST:
                     noRoles = False
                     return
                 
@@ -1047,7 +1047,7 @@ async def on_message(message):
             alignmentRoles = 0
 
             for role in usr.roles:
-                if role.name in MORPHABLE_ROLES.keys():
+                if role.name in RIG_LIST:
                     alignmentRoles += 1
 
             if today.day == 1 and today.month == 4:
