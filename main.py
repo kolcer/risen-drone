@@ -1014,7 +1014,7 @@ async def on_message(message):
                 BUTTONS["status"] = False
 
         elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771:
-            if usr.id not in THE_ROINGUS:
+            if usr.id not in THE_SHINY:
                 THE_SHINY.append(usr.id)
 
             if len(THE_SHINY) == 5:
