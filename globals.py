@@ -20,6 +20,7 @@ LAST_RIG = {}
 RIG_SPAMMERS = {}
 SPLICER_FANS = {}
 THE_DRIP = {} # used for optimus drip role
+THE_ROINGUS = []
 MSG_SENT = {}
 PRAISES = {}
 ARTISTS = {}
@@ -823,7 +824,7 @@ FUN_ROLES = {
         "Hypnotized Nightmare": "*(03/25/2025 - 04/02/2025)*",
         "Heretic Defier": "*(until 03/26/2025)*",
     },
-    "Easter": {
+    "Easter": [
         "Patron Egg",
         "Joker Egg",
         "Wicked Egg",
@@ -845,7 +846,9 @@ FUN_ROLES = {
         "Murdurator Egg",
         "Admin Egg",
         "Architect Egg",
-    }
+        "Gun Egg",
+        "Roingus Egg",
+    ]
 }
 
 APPROVED_ROLES = {

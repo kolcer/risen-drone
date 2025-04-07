@@ -985,6 +985,21 @@ class Minigames_Hangman(discord.ui.View):
 
         if self.lifes <= 0:
             await INTERACTION(interaction.response, f"{interaction.user.mention} used up their last chance. The correct word was: `{self.myword}`", False)
+
+            view = ButtonEgg_Throw(timeout=30)
+            view.thrower = None
+            view.picker = None
+            view.disabled = False
+
+            view.type = "Gun"
+
+            view.channel = BUTTONS["channel"]
+            view.toolate = True
+            view.message = await SEND_VIEW(BUTTONS["channel"], "The gun shot an egg!", view)
+
+            await view.wait()
+            await view.too_late()
+
             self.toolate = False
             self.stop()
         else:

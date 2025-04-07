@@ -984,6 +984,29 @@ async def on_message(message):
             else:
                 THE_DRIP[usr] = 1
 
+        elif "<:csroingus:1126928049678594082>" in lmsg:
+            if usr.id not in THE_ROINGUS:
+                THE_ROINGUS.append(usr.id)
+
+            if len(THE_ROINGUS) == 2:
+                THE_ROINGUS.clear()
+                BUTTONS["status"] = True
+                view = ButtonEgg_Throw(timeout=30)
+                view.thrower = None
+                view.picker = None
+                view.disabled = False
+
+                view.type = "Roingus"
+
+                view.channel = ch
+                view.toolate = True
+                view.message = await SEND_VIEW(BUTTONS["channel"], "The two Roingi made the Roingus Egg!", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
+
         #resurrect chat
         # elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
         #     NECROMANCY['awarded'] = True
@@ -1121,7 +1144,7 @@ async def on_message(message):
                 BUTTONS["easterStatus"] = True
 
                 for role in usr.roles:
-                    if role.name in MORPHABLE_ROLES and role.name != "Roingus" and role.name != "Gun":
+                    if role.name.lower() in RIG_LIST:
                         view.type = role.name
                         break
                     
