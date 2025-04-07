@@ -984,7 +984,7 @@ async def on_message(message):
             else:
                 THE_DRIP[usr] = 1
 
-        elif "<:csroingus:1126928049678594082>" in lmsg:
+        elif "<:csroingus:1126928049678594082>" in lmsg and ch.id == 750060041289072771:
             if usr.id not in THE_ROINGUS:
                 THE_ROINGUS.append(usr.id)
 
