@@ -681,7 +681,14 @@ async def on_message(message):
 
             BUTTONS["view"] = view
             BUTTONS["channel"] = ch
-            view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+
+            try:
+                view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+            except Exception as e:
+                BUTTONS["status"] = False
+                await SEND(BUTTONS["channel"], "Something went wrong!")
+                await DRONEPRINT(str(e))
+                return
 
             await view.wait()
             await view.too_late()
