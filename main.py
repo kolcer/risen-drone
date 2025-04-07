@@ -338,7 +338,7 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await add_entry_with_check("Sanctuary Discoverer", usr)
 
-    if usr.id in BOT_BLACKLIST:
+    if str(usr.id) in BOT_BLACKLIST:
         return
 
     if EXTRA_ROLES['hypno'] in usr.roles:
@@ -1494,7 +1494,7 @@ async def on_message(message):
             #blacklist someone from using bot commands
             if lmsg.startswith("blacklist", 1):
                 try:
-                    BOT_BLACKLIST.append(second)
+                    BOT_BLACKLIST.append(str(second))
                 except Exception as e:
                     await SEND(ch, e)
                     return
