@@ -21,6 +21,7 @@ RIG_SPAMMERS = {}
 SPLICER_FANS = {}
 THE_DRIP = {} # used for optimus drip role
 THE_ROINGUS = []
+THE_SHINY = []
 MSG_SENT = {}
 PRAISES = {}
 ARTISTS = {}
@@ -848,6 +849,7 @@ FUN_ROLES = {
         "Architect Egg",
         "Gun Egg",
         "Roingus Egg",
+        "Shiny Egg",
     ]
 }
 

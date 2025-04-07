@@ -1013,6 +1013,28 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
+        elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771:
+            if usr.id not in THE_ROINGUS:
+                THE_ROINGUS.append(usr.id)
+
+            if len(THE_ROINGUS) == 5:
+                THE_ROINGUS.clear()
+                BUTTONS["status"] = True
+                view = ButtonEgg_Throw(timeout=30)
+                view.thrower = None
+                view.picker = None
+                view.disabled = False
+
+                view.type = "Shiny"
+
+                view.channel = ch
+                view.toolate = True
+                view.message = await SEND_VIEW(ch, "The 5 Roingi danced and fused together, creating the Shiny Egg!", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
 
         #resurrect chat
         # elif NECROMANCY['awarded'] == False and ch == CHANNELS['general'] and not EXTRA_ROLES['necromancer'] in usr.roles:
