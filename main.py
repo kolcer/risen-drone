@@ -338,6 +338,9 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await add_entry_with_check("Sanctuary Discoverer", usr)
 
+    if usr.id in BOT_BLACKLIST:
+        return
+
     if EXTRA_ROLES['hypno'] in usr.roles:
         if lmsg.startswith('bd help'):
             lmsg = 'bd show profile'
@@ -1068,7 +1071,7 @@ async def on_message(message):
                     noRoles = False
                     return
                 
-            if noRoles:
+            if noRoles or morphToTarget.lower() not in RIG_LIST:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
@@ -1085,7 +1088,7 @@ async def on_message(message):
             else:
                 demorphFromTarget = lsplit[2].capitalize()
 
-            if alignmentRoles > 1:
+            if alignmentRoles > 1 or demorphFromTarget.lower() not in RIG_LIST:
                 await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
@@ -1183,7 +1186,7 @@ async def on_message(message):
                 
                 BUTTONS["easterStatus"] = True
 
-                for role in usr.roles:
+                for role in reversed(usr.roles):
                     if role.name.lower() in RIG_LIST:
                         view.type = role.name
                         break
@@ -1214,6 +1217,49 @@ async def on_message(message):
                 BUTTONS["easterStatus"] = False
             else:
                 BUTTONS["easterStaffStatus"] = False
+
+        # elif lmsg.startswith("bd hide egg "):
+        #     if usr.id == BUTTONS["easterLast"]:
+        #         await SEND(ch, "This egg launcher never launches the same egg twice!")
+        #         return
+            
+        #     view = ButtonEgg_Throw(timeout=30)
+        #     view.thrower = usr.id
+        #     view.disabled = False
+        #     view.type = None
+
+        #     if SPECIAL_ROLES["Admin"][0] in usr.roles:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Admin"
+        #     elif EXTRA_ROLES["murdurator"] in usr.roles:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Murdurator"
+        #     elif EXTRA_ROLES["admin"] in usr.roles:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Broken Drone"
+        #     else:
+        #         if ch.id != 750060041289072771:
+        #             await SEND(ch, "The egg launcher only works in <#750060041289072771>.")
+        #             return
+        #         elif BUTTONS["easterStatus"]:
+        #             await SEND(ch, "The egg launcher is charging. This stuff takes time.")
+        #             return
+                
+        #         BUTTONS["easterStatus"] = True
+
+        #         for role in reversed(usr.roles):
+        #             if role.name.lower() in RIG_LIST:
+        #                 view.type = role.name
+        #                 break
+                    
+        #     if view.type == None:
+        #         BUTTONS["easterStatus"] = False
+        #         return
+
+        #     BUTTONS["easterLast"] = usr.id
+        #     view.picker = None
+        #     view.channel = ch
+     
 
         else:
             ## tips/tricks trigger
@@ -1443,8 +1489,28 @@ async def on_message(message):
                     return
 
                 await SEND(ch, "Role created successfully.")
+                return
+            
+            #blacklist someone from using bot commands
+            if lmsg.startswith("blacklist", 1):
+                try:
+                    BOT_BLACKLIST.append(second)
+                except Exception as e:
+                    await SEND(ch, e)
+                    return
 
-                FUN_ROLES["Available"].append(second)
+                await SEND(ch, "Blacklisted.")
+                return
+            
+            #whitelist someone from using bot commands
+            if lmsg.startswith("whitelist", 1):
+                try:
+                    BOT_BLACKLIST.remove(second)
+                except Exception as e:
+                    await SEND(ch, e)
+                    return
+
+                await SEND(ch, "Whitelisted.")
                 return
         
         #-----admin commands that require THREE or MORE inputs-----

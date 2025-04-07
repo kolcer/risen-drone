@@ -22,6 +22,7 @@ SPLICER_FANS = {}
 THE_DRIP = {} # used for optimus drip role
 THE_ROINGUS = []
 THE_SHINY = []
+BOT_BLACKLIST = []
 MSG_SENT = {}
 PRAISES = {}
 ARTISTS = {}
