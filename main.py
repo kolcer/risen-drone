@@ -1132,10 +1132,13 @@ async def on_message(message):
             view.type = None
 
             if SPECIAL_ROLES["Admin"][0] in usr.roles:
+                BUTTONS["easterStaffStatus"] = True
                 view.type = "Admin"
             elif EXTRA_ROLES["murdurator"] in usr.roles:
+                BUTTONS["easterStaffStatus"] = True
                 view.type = "Murdurator"
             elif EXTRA_ROLES["admin"] in usr.roles:
+                BUTTONS["easterStaffStatus"] = True
                 view.type = "Broken Drone"
             else:
                 if ch.id != 750060041289072771 or BUTTONS["easterStatus"]:
@@ -1161,10 +1164,12 @@ async def on_message(message):
             await view.wait()
             await view.too_late()
 
-            if BUTTONS["easterStatus"]:
+            if not BUTTONS["easterStaffStatus"]:
                 await asyncio.sleep(BUTTONS["easterTimer"])
                 await SEND(ch, "The egg launcher is ready!")
                 BUTTONS["easterStatus"] = False
+            else:
+                BUTTONS["easterStaffStatus"] = False
 
         else:
             ## tips/tricks trigger
