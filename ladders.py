@@ -48,7 +48,7 @@ def MG_SHOW_STATS():
                 toSend += f" (Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
 
             if plr in LADDERS["revival"]:
-                toSend += f" ({LADDERS["revival"][plr]} 🌘)"
+                toSend += f" ({LADDERS['revival'][plr]} 🌘)"
         else:
             toSend += "\n"
             
