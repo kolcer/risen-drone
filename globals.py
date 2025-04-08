@@ -438,7 +438,7 @@ SINGLE_WORD_TRIGGERS = {
     "Tsk.":                             # REPLY FROM BOT
         'cstrollpain',                  # YOUR MESSAGE
     "{mention} <:csRbxangryping:786325219727638535>":
-        '827952429290618943',
+        '<@827952429290618943>',
     "It's spelt Thief.":
         "theif",
 }
