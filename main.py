@@ -1564,7 +1564,7 @@ async def on_message(message):
                                 return
 
                             if third in FUN_ROLES["Easter"]:
-                                await add_egg_with_check(third, msgsplit[1])
+                                await add_egg_with_check(third, mem)
                             else:
                                 add_entry(third, msgsplit[1])
 
