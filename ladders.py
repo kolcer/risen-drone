@@ -47,11 +47,11 @@ def MG_SHOW_STATS():
             else:
                 toSend += f" (Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
 
-            if plr in LADDERS["revival"]:
-                toSend += f" ({LADDERS['revival'][plr]} 🌘)"
-        else:
-            toSend += "\n"
-            
+        if plr in LADDERS["revival"]:
+                toSend += f" ({LADDERS['revival'][plr]} 🌘)\n"
+
+        toSend += "\n"
+
         if place > LADDERS['winDetect']:
             LADDERS['winDetect'] = place
     toSend += "-------------\n"
@@ -134,7 +134,7 @@ async def MG_ACTION(plr, action):
                 UpdateFloor(victim, -2)
             else:
                 toSend += "pranked themselves, and fell 1 level down."
-                UpdateFloor(victim, -1)
+                UpdateFloor(plr, -1)
                 # MG_PLAYERS[victim] -= 1
         
         case "wicked":
