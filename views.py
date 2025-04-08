@@ -1006,17 +1006,24 @@ class Minigames_Hangman(discord.ui.View):
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
-
+        if self.disabled:
+            await INTERACTION(interaction.response, "Too many people are interacting.", True)
+            return
+        
+        self.disabled = True
         if self.alone:
             if usr != self.cp:
                 await INTERACTION(interaction.response, "This user is playing solo.", True)
+                self.disabled = False
                 return
         else:
             if usr == self.cp:
                 await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+                self.disabled = False
                 return
             elif self.picker != None and usr == self.picker:
                 await INTERACTION(interaction.response, "You do not deserve this victory.", True)
+                self.disabled = False
                 return
             else:
                 self.cp = usr
@@ -1044,6 +1051,7 @@ class Minigames_Hangman(discord.ui.View):
 
             await self.update_mistake(interaction, button)
 
+        self.disabled = False
 
     @discord.ui.button(label="A", custom_id = "a",  style = discord.ButtonStyle.blurple)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):

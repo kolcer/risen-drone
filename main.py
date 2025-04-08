@@ -539,6 +539,7 @@ async def on_message(message):
             view = Minigames_Hangman(timeout=120)
             view.current = ""
             view.revealed = []
+            view.disabled = False
             view.wrong = " "
             view.toolate = True
             view.lifes = 5
