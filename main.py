@@ -1154,11 +1154,7 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg":
-            if usr.id == BUTTONS["easterLast"]:
-                await SEND(ch, "This egg launcher never launches the same egg twice!")
-                return
-            
+        elif lmsg == "bd throw egg":            
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
@@ -1187,12 +1183,16 @@ async def on_message(message):
                     if role.name.lower() in RIG_LIST:
                         view.type = role.name
                         break
+
+            if view.type == BUTTONS["easterLast"]:
+                await SEND(ch, "This egg launcher never launches the same egg twice!")
+                return
                     
             if view.type == None:
                 BUTTONS["easterStatus"] = False
                 return
 
-            BUTTONS["easterLast"] = usr.id
+            BUTTONS["easterLast"] = view.type
             view.picker = None
             view.channel = ch
             view.toolate = True
