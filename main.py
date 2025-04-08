@@ -464,10 +464,10 @@ async def on_message(message):
 
         #broken drone impostor prevention
         compare = SequenceMatcher(None, usr.display_name.upper(), SERVER_DATA['nick'])
-        if compare.ratio() > 0.55:
+        if compare.ratio() > 0.55 and usr.id != 827952429290618943:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
-            
+
         elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] != usr.id:
             return
 
