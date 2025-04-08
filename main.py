@@ -246,15 +246,13 @@ async def on_message(message):
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
     ## before returning 
-    if usr.bot == True:
+    if usr.bot:
         if not usr.id == 827952429290618943:
             for i, v in EMOJIS_TO_REACT.items():
                 if i in msg:
                     await ADD_REACTION(message,v)
                     return
-                
-        if not (lmsg.startswith("cast") and lmsg.endswith("rig")):
-            return
+        return
     
 
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
