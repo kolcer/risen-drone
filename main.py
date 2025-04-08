@@ -1343,7 +1343,7 @@ async def on_message(message):
                         return
                     await ADD_REACTION(message,i)
             
-        if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (usr != None and EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ") and not BUTTONS["status"]):
+        if (ch.id == 624227331720085536 and buttons_chance == 1 and not BUTTONS["status"]) or (usr != None and EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons ")):
             if EXTRA_ROLES["admin"] in usr.roles and lmsg.startswith("|buttons "):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
