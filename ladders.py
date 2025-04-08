@@ -43,12 +43,12 @@ def MG_SHOW_STATS():
 
         if plr in LADDERS['tram']['travelers']:
             if LADDERS['tram']['forward']:
-                toSend += f" (Tram⬆️, {LADDERS['tram']['arrival']} turns left)\n"
+                toSend += f" (Tram⬆️, {LADDERS['tram']['arrival']} turns left)"
             else:
-                toSend += f" (Tram⬇️, {LADDERS['tram']['arrival']} turns left)\n"
+                toSend += f" (Tram⬇️, {LADDERS['tram']['arrival']} turns left)"
 
-        if plr in LADDERS["revival"]:
-                toSend += f" ({LADDERS['revival'][plr]} 🌘)\n"
+        if plr in LADDERS["revival"] and LADDERS["revival"][plr] != -100:
+                toSend += f" ({LADDERS['revival'][plr]} 🌘)"
 
         toSend += "\n"
 
