@@ -32,9 +32,6 @@ async def add_egg_with_check(key, new_entry):
     for role in FUN_ROLES["Easter"]:
         if str(new_entry.id) in list_decoded_entries(role):
             eggCounter += 1 
-            break
-
-    print(eggCounter)
 
     if eggCounter == 0:
         await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just collected an egg! Thank you for the help. Type `bd show eggs` to look at it.")
