@@ -467,11 +467,7 @@ async def on_message(message):
         if compare.ratio() > 0.55:
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
-
-        ## All Rigs in one, !!goes before rig activations!!
-        elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
-            await CastRig(lsplit[1],ch,usr)
-
+            
         elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] != usr.id:
             return
 
@@ -482,6 +478,10 @@ async def on_message(message):
                         return
                     
                 await SEND(ch, msg)
+
+        ## All Rigs in one, !!goes before rig activations!!
+        elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
+            await CastRig(lsplit[1],ch,usr)
 
         elif any(ACTIVE_RIGS.values()) and len(msg) > 1:
             if ACTIVE_RIGS["thief"]:
