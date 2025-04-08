@@ -217,15 +217,16 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
         
         case "patron":
-            msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
-            possessedRole = EXTRA_ROLES['possessed']
-            hypnoRole = EXTRA_ROLES['hypno']
-
             for member in SERVER_DATA['server'].members:
                 if possessedRole in member.roles:
                     await REMOVE_ROLES(member, possessedRole)
                 elif hypnoRole in member.roles:
                     await REMOVE_ROLES(member, hypnoRole)
+                    
+            msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
+            possessedRole = EXTRA_ROLES['possessed']
+            hypnoRole = EXTRA_ROLES['hypno']
+
 
         case "reaver":
             DETAILED_RIGS["reaver"]["active"] = True
