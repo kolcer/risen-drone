@@ -468,9 +468,6 @@ async def on_message(message):
             await SEND(ch, usr.mention + ' ' + random.choice(IMPOSTOR_WARNINGS))
             await EDIT_NICK(usr,random.choice(IMPOSTOR_NICKS))
 
-        elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] != usr.id:
-            return
-
         elif DETAILED_RIGS["reaver"]["active"] and DETAILED_RIGS["reaver"]["user"] == usr.id:
             if ch.name in CHANNELS and "http" not in lmsg and "www" not in lmsg and len(lmsg) <= 60:
                 for badword in blacklist:
