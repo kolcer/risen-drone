@@ -1214,6 +1214,40 @@ async def on_message(message):
             else:
                 BUTTONS["easterStaffStatus"] = False
 
+        elif lmsg.startswith("bd eat") and lmsg.endswith("egg"):
+            eggToEat = lmsg.replace("bd eat ", "").replace(" egg", "").capitalize()
+
+            if eggToEat.lower() not in RIG_LIST:
+                await SEND(ch, "You cannot eat this.")
+                return
+            elif not str(usr.id) in list_decoded_entries(f"{eggToEat} Egg"):
+                await SEND(ch, "You ate some air. Delicious!")
+                return
+            elif MORPHABLE_ROLES[eggToEat][0] in usr.roles:
+                await SEND(ch, "The egg said no.")
+                return
+            elif usr.id in EGG_EATER:
+                await SEND(ch, "Too many eggs are bad for your health.")
+                return
+            
+            EGG_EATER.append(usr.id)
+
+            delete_entry_by_value(f"{eggToEat} Egg", str(usr.id))
+
+            role_list = []
+            for role in usr.roles:
+                if (role.name in MORPHABLE_ROLES):
+                    role_list.append(role)
+            await usr.remove_roles(*role_list)
+            await asyncio.sleep(1)
+
+            await ADD_ROLES(usr,MORPHABLE_ROLES[eggToEat][0])
+
+            await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
+
+            await asyncio.sleep(3600)
+            EGG_EATER.remove(usr.id)
+
         # elif lmsg.startswith("bd hide egg "):
         #     if usr.id == BUTTONS["easterLast"]:
         #         await SEND(ch, "This egg launcher never launches the same egg twice!")

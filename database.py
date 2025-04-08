@@ -47,6 +47,9 @@ def delete_entry(key, index):
     db.lset(key,index,"_del_")
     db.lrem(key,1,"_del_")
 
+def delete_entry_by_value(key, value):
+    db.lrem(key, 1, value)
+
 def list_entries(key):
     result = db.lrange(key,0,-1)
     return result
