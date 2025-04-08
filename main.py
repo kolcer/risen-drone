@@ -1186,6 +1186,7 @@ async def on_message(message):
 
             if view.type == BUTTONS["easterLast"]:
                 await SEND(ch, "This egg launcher never launches the same egg twice!")
+                BUTTONS["easterStatus"] = False
                 return
                     
             if view.type == None:
