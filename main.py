@@ -1563,7 +1563,11 @@ async def on_message(message):
                                 await SEND(ch, "They already own this role, duh.")
                                 return
 
-                            add_entry(third, msgsplit[1])
+                            if third in RIG_LIST:
+                                add_egg_with_check(third, msgsplit[1])
+                            else:
+                                add_entry(third, msgsplit[1])
+                                
                             await asyncio.sleep(1)
                             await SEND(ch, "I gave the role to " + mem.name)
                             break
