@@ -837,7 +837,7 @@ FUN_ROLES = {
         "Acclaimed",
         "Hypnotized Dream",
         "Egg Hunter",
-        "Eggcelent",
+        "Sleazy Egg",
     ],
     "Limited": {
         "I was there": "*(11/27/2022 - 11/28/2022)*",
@@ -847,7 +847,7 @@ FUN_ROLES = {
     "Recurring": {
         "I remembered": "Broken Drone's Join Date",
         "Egg Hunter": "Easter",
-        "Eggcelent": "Easter",
+        "Sleazy Egg": "Easter",
     },
     "Removed": {
         "Zero": "*(03/31/2023 - 04/19/2023)*",

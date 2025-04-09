@@ -1533,11 +1533,12 @@ class ButtonEgg_Eggcelent(discord.ui.View):
     async def too_late(self):
         await self.on_timeout()
 
-    @discord.ui.button(label="Take prize", style = discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Take Sleazy Egg", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
 
-        if not str(usr.id) in list_decoded_entries("Eggcelent"):
+        if not str(usr.id) in list_decoded_entries("Sleazy Egg"):
+            await add_egg_with_check("Sleazy Egg", usr)
             if usr.id in EGGCELENT_USERS.keys():
                 await INTERACTION(interaction.response, f"{usr.mention}... helped me with the {EGGCELENT_USERS[usr.id]} Egg. Most eggcelent.", False)
             else:

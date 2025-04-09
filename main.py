@@ -1457,7 +1457,7 @@ async def on_message(message):
 
                 view.channel = ch
                 view.toolate = True
-                view.message = await SEND_VIEW(BUTTONS["channel"], "Thank you for helping me get the eggs — you have all been eggcellent!", view)
+                view.message = await SEND_VIEW(BUTTONS["channel"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", view)
 
                 await view.wait()
                 await view.too_late()
