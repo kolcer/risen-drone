@@ -145,6 +145,7 @@ LIMITED_USE_RIGS = [
 ]
 
 BOT_COMMANDS_CHANNEL_RESTRICTED = [
+    "bd help",
     "morph to",
     "demorph from",
     "sub to",
