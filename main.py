@@ -337,7 +337,7 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await add_entry_with_check("Sanctuary Discoverer", usr)
 
-    if str(usr.id) in BOT_BLACKLIST:
+    if str(usr.id) in BOT_BLACKLIST or usr == None:
         return
 
     if EXTRA_ROLES['hypno'] in usr.roles:
