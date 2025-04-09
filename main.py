@@ -1209,11 +1209,12 @@ async def on_message(message):
             await view.wait()
             await view.too_late()
 
-            if not BUTTONS["easterStaffStatus"]:
+            if BUTTONS["easterStatus"] and not BUTTONS["easterStaffStatus"]:
                 await asyncio.sleep(BUTTONS["easterTimer"])
                 await SEND(ch, "The egg launcher is ready!")
                 BUTTONS["easterStatus"] = False
-            else:
+
+            if BUTTONS["easterStaffStatus"]:
                 BUTTONS["easterStaffStatus"] = False
 
         elif lmsg.startswith("bd eat") and lmsg.endswith("egg"):
