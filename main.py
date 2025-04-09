@@ -1451,6 +1451,18 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
+            elif BUTTONS["phase"] == 6:
+                BUTTONS["status"] = True
+                view = ButtonEgg_Eggcelent(timeout=1000)
+
+                view.channel = ch
+                view.toolate = True
+                view.message = await SEND_VIEW(BUTTONS["channel"], "Thank you for helping me get the eggs — you have all been eggcellent!", view)
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
         msginputs = msg.split(" ")

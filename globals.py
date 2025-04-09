@@ -372,6 +372,30 @@ OBJECTS = {
 
 # CONSTANT DICTIONARIES
 
+EGGCELENT_USERS = {
+    770713518042251305: "Patron",
+    1311638798865793094: "Joker",
+    941489814904143872: "Wicked",
+    1063279624915779594: "Keeper",
+    898870303680241674: "Muggle",
+    1062536749974290473: "Hacker",
+    273810076081324034: "Thief",
+    172451366650773504: "Archon",
+    1206674738546610206: "Drifter",
+    645201774680080405: "Heretic",
+    1079479159211966535: "Splicer",
+    791626344709881858: "Necromancer",
+    1062159208226758666: "Reaver",
+    658661983834603520: "Gremlin",
+    852526712831082506: "Chameleon",
+    273810076081324034: "Spectre",
+    273810076081324034: "Broken Drone",
+    349945976129060864: "Murdurator",
+    645201774680080405: "Gun",
+    645201774680080405: "Roingus",
+    739794706677891113: "Shiny",
+}
+
 # channels where bot is allowed to post  
 CHANNELS = {
     "general": 624227331720085536,
@@ -812,7 +836,8 @@ FUN_ROLES = {
         "Pro Tower Climber",
         "Acclaimed",
         "Hypnotized Dream",
-        "Egg Hunter"
+        "Egg Hunter",
+        "Eggcelent",
     ],
     "Limited": {
         "I was there": "*(11/27/2022 - 11/28/2022)*",
@@ -822,6 +847,7 @@ FUN_ROLES = {
     "Recurring": {
         "I remembered": "Broken Drone's Join Date",
         "Egg Hunter": "Easter",
+        "Eggcelent": "Easter",
     },
     "Removed": {
         "Zero": "*(03/31/2023 - 04/19/2023)*",

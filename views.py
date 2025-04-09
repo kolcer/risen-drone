@@ -1524,3 +1524,23 @@ class ButtonEgg_Throw(discord.ui.View):
         else:
             await INTERACTION(interaction.response, "No can do.", True)
             return
+        
+class ButtonEgg_Eggcelent(discord.ui.View):
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+    async def too_late(self):
+        await self.on_timeout()
+
+    @discord.ui.button(label="Take prize", style = discord.ButtonStyle.blurple)
+    async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
+        usr = interaction.user
+
+        if not str(usr.id) in list_decoded_entries("Eggcelent"):
+            if usr.id in EGGCELENT_USERS.keys():
+                await INTERACTION(interaction.response, f"{usr.mention}... helped me with the {EGGCELENT_USERS[usr.id]} Egg. Most eggcelent.", False)
+            else:
+                await INTERACTION(interaction.response, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
+        else:
+            await INTERACTION(interaction.response, "Taking the same role twice is a bit eggxtreme, don't you think?", True)
