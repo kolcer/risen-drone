@@ -379,7 +379,7 @@ EGGCELENT_USERS = {
     1063279624915779594: ["Keeper"],
     898870303680241674: ["Muggle"],
     1062536749974290473: ["Hacker"],
-    273810076081324034: ["Thief", "Spectre", "Broken Drone"],
+    273810076081324034: ["Thief", "Spectre", "None"],
     172451366650773504: ["Archon"],
     1206674738546610206: ["Drifter"],
     645201774680080405: ["Heretic", "Gun", "Roingus", "Shiny"],
