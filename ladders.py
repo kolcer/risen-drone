@@ -198,7 +198,8 @@ async def MG_ACTION(plr, action):
 
                 if stealChance == 0:
                     LADDERS["tram"]["travelers"].clear()
-                    LADDERS["tram"]["travelers"].append(plr)
+                    AssignTram(plr)
+                    # LADDERS["tram"]["travelers"].append(plr)
                     toSend += "have stolen the tram, they are on their way to victory!"
                 else:
                     lostLocation = random.randint(MG_PLAYERS[plr] - 3, MG_PLAYERS[plr] + 3)
@@ -284,7 +285,9 @@ async def MG_ACTION(plr, action):
                 if len(LADDERS["tram"]["travelers"]) < 1:
                     for i, v in MG_PLAYERS.items():
                         if curFloor == v:
-                            LADDERS["tram"]["travelers"].append(i)
+                            if i not in LADDERS["tram"]["travelers"]:
+                                AssignTram(i)
+                            # LADDERS["tram"]["travelers"].append(i)
 
                     toSend += f"and everyone else on their floor hopped on the Tram. They will reach the destination in {LADDERS['tram']['arrival']} turns!"
                 else:
@@ -521,6 +524,15 @@ def AssignRevival(usr, newfloor):
         LADDERS["revival"][pair[1]] = newfloor
     else:
         LADDERS["revival"][usr] = newfloor
+
+def AssignTram(usr):
+    pair = next((pair for pair in LADDERS["merges"] if usr in pair), None)
+
+    if pair:
+        LADDERS["tram"]["travelers"].append(pair[0])
+        LADDERS["tram"]["travelers"].append(pair[1])
+    else:
+        LADDERS["tram"]["travelers"].append(usr)
 
 def GoToRevival(plr, newfloor):
     pair = next((pair for pair in LADDERS["merges"] if plr in pair), None)
