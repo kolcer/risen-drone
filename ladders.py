@@ -35,11 +35,11 @@ def MG_SHOW_STATS():
             if plr == pair[0]:
                 # Get the other player
                 other_plr = pair[1] if pair[0] == plr else pair[0]
-                toSend += f"**{plr.name} & {other_plr.name}**: {str(place)} floor"
+                toSend += f"**`{plr.name}` & `{other_plr.name}`**: {str(place)} floor"
             else:
                 continue
         else:
-            toSend += "**" + plr.name + "**: " + str(place) + " floor"
+            toSend += "**`" + plr.name + "`**: " + str(place) + " floor"
 
         if plr in LADDERS['tram']['travelers']:
             if LADDERS['tram']['forward']:
@@ -129,7 +129,7 @@ async def MG_ACTION(plr, action):
             victim = SelectRandomUser(plr)
 
             if chances != 0:
-                toSend += "pranked " + victim.name + " - causing them to fell 2 levels down!"
+                toSend += "pranked `" + victim.name + "` - causing them to fell 2 levels down!"
                 # MG_PLAYERS[victim] -= 2
                 UpdateFloor(victim, -2)
             else:
@@ -183,7 +183,7 @@ async def MG_ACTION(plr, action):
                 altchances = random.randint(0,4)
                 victim = SelectRandomUser(plr)
                 if altchances != 0:
-                    toSend += "have stolen " + victim.name + "'s place!"
+                    toSend += "have stolen `" + victim.name + "`'s place!"
                     cache = MG_PLAYERS[victim]
                     # MG_PLAYERS[victim] = MG_PLAYERS[plr]
                     AssignFloor(victim, MG_PLAYERS[plr])
@@ -331,7 +331,7 @@ async def MG_ACTION(plr, action):
             victim = SelectRandomUser(plr)
 
             if chances != 0:
-                toSend += f"have spliced their floor with {victim.name}! They will meet in the middle."
+                toSend += f"have spliced their floor with `{victim.name}`! They will meet in the middle."
 
                 middle = (MG_PLAYERS[victim] + MG_PLAYERS[plr]) // 2
                 # MG_PLAYERS[victim] = middle
@@ -352,7 +352,7 @@ async def MG_ACTION(plr, action):
                 victim = SelectRandomUser(plr)
 
                 if chances != 0 and not any(plr in pair for pair in LADDERS["merges"]) and not any(victim in pair for pair in LADDERS["merges"]):
-                    toSend += f"have merged with {victim.name}! They are now one and the same."
+                    toSend += f"have merged with `{victim.name}`! They are now one and the same."
 
                     SyncTeam(plr, victim)
                 else:
@@ -451,7 +451,7 @@ async def PlayLucidLadders(usr,ch):
         LADDERS['channel'] = ch
         LADDERS['tick'] = time.time()
         ourTick = LADDERS['tick']
-        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n" + usr.name + " has started new Lucid Ladders game! Type 'join' to join!\n" + usr.name + " - type 'begin' to start!")
+        await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!")
         await asyncio.sleep(60)
         if LADDERS['status'] == "gather" and ourTick == LADDERS['tick']:
             await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
@@ -469,9 +469,9 @@ async def JoinLucidLadders(usr):
             LADDERS['topLevel'] += 5
         MG_PLAYERS[usr] = 0
         MG_QUEUE.append(usr)
-        toSend = usr.name + " has joined Lucid Ladders!\nCurrent players:\n"
+        toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
         for plr in MG_QUEUE:
-            toSend += plr.name + "\n"
+            toSend += f"`{plr.name}`\n"
         await SEND(LADDERS['channel'], toSend)
         return
 
