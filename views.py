@@ -1548,4 +1548,4 @@ class ButtonEgg_Eggcelent(discord.ui.View):
             else:
                 await INTERACTION(interaction.response, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
         else:
-            await INTERACTION(interaction.response, "Taking the same role twice is a bit eggxtreme, don't you think?", True)
+            await INTERACTION(interaction.response, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
