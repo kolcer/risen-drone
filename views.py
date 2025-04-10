@@ -1494,7 +1494,7 @@ class ButtonEgg_Throw(discord.ui.View):
                 item.style = discord.ButtonStyle.red
                 await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
 
-        if self.picker == None and self.type == "Broken Drone" and "827952429290618943" in list_decoded_entries("Broken Drone Egg"):
+        if self.picker == None and self.type == "Broken Drone" and "827952429290618943" in list_decoded_entries("Broken Drone Egg") and self.toolate:
             otherView = ButtonEgg_Eggcelent(timeout=1000)
 
             otherView.toolate = True
