@@ -391,6 +391,7 @@ EGGCELENT_USERS = {
     349945976129060864: ["Murdurator"],
     896820465887219803: ["Shiny"],
     739794706677891113: ["Shiny"],
+    786743350950494219: ["Admin"],
 }
 
 # channels where bot is allowed to post  

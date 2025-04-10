@@ -1494,6 +1494,14 @@ class ButtonEgg_Throw(discord.ui.View):
                 item.style = discord.ButtonStyle.red
                 await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
 
+                otherView = ButtonEgg_Eggcelent(timeout=1000)
+
+                otherView.toolate = True
+                otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
+
+                await otherView.wait()
+                await otherView.too_late()
+
     async def too_late(self):
         if self.toolate:
             if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
