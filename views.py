@@ -1499,7 +1499,7 @@ class ButtonEgg_Throw(discord.ui.View):
             if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
                 await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
 
-                if self.picker == None and self.type == "Admin" and "827952429290618943":
+                if self.picker == None and self.type == "Admin":
                     otherView = ButtonEgg_Eggcelent(timeout=86400)
 
                     otherView.toolate = True
