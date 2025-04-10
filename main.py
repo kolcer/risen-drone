@@ -1564,6 +1564,30 @@ async def on_message(message):
             lthird = msg.split(" ", 2)[2].lower() #YES lowecase
 
             ##-----COMMANDS THAT ONLY USE 3 INPUTS-----
+            #prepare architect
+            if lmsg.startswith("architect", 1):
+                try:
+                    await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>")
+                    await asyncio.sleep(int(third))
+
+                    view = ButtonEgg_Throw(timeout=30)
+                    view.thrower = None
+                    view.picker = None
+                    view.disabled = False
+
+                    view.type = "Architect"
+
+                    view.channel = CHANNELS[lmsgsplit[1]]
+                    view.toolate = True
+                    view.message = await SEND_VIEW(CHANNELS[lmsgsplit[1]], "The Architect Egg fell from the sky!", view)
+
+                    await view.wait()
+                    await view.too_late()
+                    return
+                except:
+                    await SEND(CHANNELS['bot-testing'], "Architen't.")
+                    return
+                
             #have the bot say whatever you say
             if lmsg.startswith("makesay", 1):
                 try:
