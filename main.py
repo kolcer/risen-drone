@@ -1567,7 +1567,7 @@ async def on_message(message):
             #prepare architect
             if lmsg.startswith("architect", 1):
                 try:
-                    await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>")
+                    arcMsg = await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>.")
                     await asyncio.sleep(int(third))
 
                     view = ButtonEgg_Throw(timeout=30)
@@ -1580,9 +1580,12 @@ async def on_message(message):
                     view.channel = CHANNELS[lmsgsplit[1]]
                     view.toolate = True
                     view.message = await SEND_VIEW(CHANNELS[lmsgsplit[1]], "The Architect Egg fell from the sky!", view)
+                    await asyncio.sleep(1)
+                    await EDIT_MESSAGE(arcMsg, "The Architect Egg landed gracefully.")
 
                     await view.wait()
                     await view.too_late()
+
                     return
                 except:
                     await SEND(CHANNELS['bot-testing'], "Architen't.")
