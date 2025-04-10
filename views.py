@@ -1500,10 +1500,10 @@ class ButtonEgg_Throw(discord.ui.View):
                 await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
 
                 if self.picker == None and self.type == "Admin" and "827952429290618943":
-                    otherView = ButtonEgg_Eggcelent(timeout=1000)
+                    otherView = ButtonEgg_Eggcelent(timeout=86400)
 
                     otherView.toolate = True
-                    otherView.message = await SEND_VIEW(CHANNELS["bot-testing"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
+                    otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
 
                     await otherView.wait()
                     await otherView.too_late()
