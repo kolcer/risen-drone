@@ -1498,9 +1498,8 @@ class ButtonEgg_Throw(discord.ui.View):
         if self.toolate:
             if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
                 await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
-                add_entry(f"{self.type} Egg", "827952429290618943")
 
-                if self.picker == None and self.type == "Broken Drone" and "827952429290618943" in list_decoded_entries("Broken Drone Egg"):
+                if self.picker == None and self.type == "Admin" and "827952429290618943":
                     otherView = ButtonEgg_Eggcelent(timeout=1000)
 
                     otherView.toolate = True
@@ -1508,6 +1507,9 @@ class ButtonEgg_Throw(discord.ui.View):
 
                     await otherView.wait()
                     await otherView.too_late()
+
+                add_entry(f"{self.type} Egg", "827952429290618943")
+
 
         await self.on_timeout()
 
