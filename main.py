@@ -96,7 +96,7 @@ async def on_ready():
     for i, v in CHANNELS.items():
         CHANNELS[i] = GET_CHANNEL(client,v)
     
-    RIG_DATA['rigTracker'] = await GET_MSG(CHANNELS["bot-testing"],RIG_DATA['rigTracker'])
+    # RIG_DATA['rigTracker'] = await GET_MSG(CHANNELS["bot-testing"],RIG_DATA['rigTracker'])
 
     #prepare the roles
  
