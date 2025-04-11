@@ -1503,6 +1503,7 @@ class ButtonEgg_Throw(discord.ui.View):
                     otherView = ButtonEgg_Eggcelent(timeout=86400)
 
                     otherView.toolate = True
+                    otherView.disabled = False
                     otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
 
                     await otherView.wait()
@@ -1549,14 +1550,24 @@ class ButtonEgg_Eggcelent(discord.ui.View):
         listOfEggs = ""
         usr = interaction.user
 
-        if not str(usr.id) in list_decoded_entries("Sleazy Egg"):
-            await add_egg_with_check("Sleazy Egg", usr)
+        if not self.disabled:
+            self.disabled = True
 
-            if usr.id in EGGCELENT_USERS.keys():
-                listOfEggs = ", ".join(f"{egg} Egg" for egg in EGGCELENT_USERS[usr.id])
+            if not str(usr.id) in list_decoded_entries("Sleazy Egg"):
+                await add_egg_with_check("Sleazy Egg", usr)
 
-                await INTERACTION(interaction.response, f"{usr.mention}... helped me with the {listOfEggs}. Most eggcelent.", False)
+                if usr.id in EGGCELENT_USERS.keys():
+                    listOfEggs = ", ".join(f"{egg} Egg" for egg in EGGCELENT_USERS[usr.id])
+
+                    await INTERACTION(interaction.response, f"{usr.mention}... helped me with the {listOfEggs}. Most eggcelent.", False)
+                else:
+                    await INTERACTION(interaction.response, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
+                
+                await asyncio.sleep(5)
             else:
-                await INTERACTION(interaction.response, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
+                await INTERACTION(interaction.response, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
+            
+            self.disabled = False
+            
         else:
-            await INTERACTION(interaction.response, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
+            await INTERACTION(interaction.response, "Give me the time to prepare another egg, smh.", True)
