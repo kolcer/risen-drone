@@ -170,8 +170,8 @@ async def Rig(rigType, ch, usr):
 
             await asyncio.sleep(1)
 
-            if MORPHABLE_ROLES["Wicked"][0] not in usr.roles:
-                await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
+            # if MORPHABLE_ROLES["Wicked"][0] not in usr.roles:
+            #     await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
             
          
         case "drifter":
