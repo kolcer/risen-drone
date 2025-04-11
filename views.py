@@ -1503,7 +1503,6 @@ class ButtonEgg_Throw(discord.ui.View):
                     otherView = ButtonEgg_Eggcelent(timeout=86400)
 
                     otherView.toolate = True
-                    otherView.disabled = False
                     otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
 
                     await otherView.wait()
@@ -1538,6 +1537,10 @@ class ButtonEgg_Throw(discord.ui.View):
             return
         
 class ButtonEgg_Eggcelent(discord.ui.View):
+    def __init__(self, *, timeout=180):
+        super().__init__(timeout=timeout)
+        self.cantUse = False
+        
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
@@ -1550,8 +1553,8 @@ class ButtonEgg_Eggcelent(discord.ui.View):
         listOfEggs = ""
         usr = interaction.user
 
-        if not self.disabled:
-            self.disabled = True
+        if not self.cantUse:
+            self.cantUse = True
 
             if not str(usr.id) in list_decoded_entries("Sleazy Egg"):
                 await add_egg_with_check("Sleazy Egg", usr)
@@ -1567,7 +1570,7 @@ class ButtonEgg_Eggcelent(discord.ui.View):
             else:
                 await INTERACTION(interaction.response, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
             
-            self.disabled = False
+            self.cantUse = False
             
         else:
             await INTERACTION(interaction.response, "Give me the time to prepare another egg, smh.", True)
