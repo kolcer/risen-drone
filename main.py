@@ -1083,7 +1083,7 @@ async def on_message(message):
             for role in usr.roles:
                 if role.name.lower() in RIG_LIST:
                     noRoles = False
-                    return
+                    break
                 
             if noRoles or morphToTarget.lower() not in RIG_LIST:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
