@@ -132,8 +132,8 @@ async def on_ready():
 @client.event
 async def on_member_update(before, after):
     
-    #nick has not changed 
-    if before.nick == after.nick:
+    #nick has not changed -- user has role gun  and/or new name is a gun name
+    if before.nick == after.nick or (MORPHABLE_ROLES["Gun"][0] in before.roles and after.nick in WORST_GUNS):
         return
     
     #if name ends with :] gives the role
@@ -142,20 +142,13 @@ async def on_member_update(before, after):
         await asyncio.sleep(1)
         await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
     
-    #prevent constantly changing nick if thief rigged
-    if not before in NickDictionary:
-        #is user a gun?
-        if not MORPHABLE_ROLES["Gun"][0] in before.roles: 
-            return
 
-        #ignore if user nick after change is a gun name
-        if after.nick in WORST_GUNS or MORPHABLE_ROLES["Gun"][0] in before.roles:
-            return
-
-        if MORPHABLE_ROLES['Gun'][0] in before.roles:
-            await EDIT_NICK(after, random.choice(WORST_GUNS))
+    #name not stolen but is gun
+    if not before in NickDictionary and MORPHABLE_ROLES['Gun'][0] in before.roles:
+        await EDIT_NICK(after, random.choice(WORST_GUNS))
         return
-    elif after.nick != NickDictionary[before]:
+    #name stolen and is NOT gun
+    elif after.nick != NickDictionary[before] and MORPHABLE_ROLES['Gun'][0] not in before.roles:
         await EDIT_NICK(after, NickDictionary[before])
         return
 
