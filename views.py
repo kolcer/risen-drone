@@ -138,11 +138,14 @@ class ShowEggs(discord.ui.View):
 
         await self.message.edit(embed=self.embed, view=self)
 
-    async def send(self, ch):
-        self.message = await ch.send(view=self, embed=self.create_embed())
-        self.update_buttons()
-        
+    # async def send(self, ch):
+    #     self.message = await ch.send(view=self, embed=self.create_embed())
+    #     self.update_buttons()
 
+    async def send(self, ch):
+        self.message = await ch.send(view=self)
+        await self.update_message()
+        
     def create_embed(self):
         embed = discord.Embed()
         embed.title = self.titles[self.cp].format(user=self.target.display_name)
