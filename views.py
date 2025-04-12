@@ -114,6 +114,7 @@ class ShowProfile(discord.ui.View):
 class ShowEggs(discord.ui.View):
     def __init__(self, *, timeout=180):
         super().__init__(timeout=timeout)
+        self.message = None
         self.cp = 0
         self.sidecolor = "FFA500"
         self.embed = None
@@ -138,8 +139,9 @@ class ShowEggs(discord.ui.View):
         await self.message.edit(embed=self.embed, view=self)
 
     async def send(self, ch):
-        await ch.send(view=self, embed=self.create_embed())
+        self.message = await ch.send(view=self, embed=self.create_embed())
         self.update_buttons()
+        
 
     def create_embed(self):
         embed = discord.Embed()
