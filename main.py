@@ -931,7 +931,7 @@ async def on_message(message):
                     egg_roles += "**???** 🧺\n"
 
             view.data[0] = egg_roles
-            view.footers[0] = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
+            view.footers[0] = f"{usr.name} found all the {view.counter["Eggs"]} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter["Eggs"]} out of {view.counter["AllEggs"]} eggs."
 
             egg_roles = ""
             # Prepare list to show in PAGE 1 (2026 egg hunt)
@@ -944,7 +944,7 @@ async def on_message(message):
                     egg_roles += "**???** 🧺\n"
 
             view.data[1] = egg_roles
-            view.footers[1] = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
+            view.footers[1] = f"{usr.name} found all the {view.counter["Eggs"]} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter["Eggs"]} out of {view.counter["AllEggs"]} eggs."
 
             # Send view... hopefully
             await view.send(ch)
