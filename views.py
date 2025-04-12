@@ -9,18 +9,22 @@ from globals import *
 from discord.ext import commands
 
 class ShowProfile(discord.ui.View):
-    cp  = 0
-    titles = [
-        "{user}'s secret roles",
-        "{user}'s locked roles",
-        "{user}'s stats",
-    ]
-    sidecolor = [
-        "FFA500",   
-        "FF0000",
-        "FFC0CB"
-    ]  
-    embed = None
+    def __init__(self, *, timeout=180):
+        super().__init__(timeout=timeout)
+        self.cp = 0
+        self.titles = [
+            "{user}'s secret roles",
+            "{user}'s locked roles",
+            "{user}'s stats",
+        ]
+
+        self.sidecolor = [
+            "FFA500",   
+            "FF0000",
+            "FFC0CB"
+        ]  
+
+        self.embed = None
     
     async def on_timeout(self):
         for item in self.children:
@@ -108,21 +112,88 @@ class ShowProfile(discord.ui.View):
         await self.update_message()
 
 class ShowEggs(discord.ui.View):
-    embed = None
+    def __init__(self, *, timeout=180):
+        super().__init__(timeout=timeout)
+        self.cp = 0
+        self.sidecolor = "FFA500"
+        self.embed = None
+
+        self.counter = {
+            "Eggs": 0,
+            "AllEggs": 0,
+        }
+        
+        self.titles = [
+            "{user}'s eggs 2025",
+            "{user}'s eggs 2026",
+        ]
+
+        self.data = ["", ""]
+        self.footers = ["", ""]
+
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        await self.message.edit(embed=self.embed, view=self)
 
     async def send(self, ch):
         await ch.send(view=self, embed=self.create_embed())
+        self.update_buttons()
 
     def create_embed(self):
         embed = discord.Embed()
-        embed.title = f"{self.target.display_name}'s eggs"
-        embed.description = self.data
-        embed.set_footer(text=self.footers.format(usr=self.target.display_name, etotal=self.counter["AllEggs"], ecurrent=self.counter["Eggs"]))
+        embed.title = self.titles[self.cp].format(user=self.target.display_name)
+        # embed.title = f"{self.target.display_name}'s eggs"
+        # embed.description = self.data
+        embed.description = self.data[self.cp]
+        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, etotal=self.counter["AllEggs"], ecurrent=self.counter["Eggs"]))
 
-        embed.color = discord.Colour(int("F7C8DA", 16)) 
+        embed.color = discord.Colour(int(self.sidecolor, 16)) 
 
         self.embed = embed
         return embed
+    
+    async def update_message(self):
+        self.update_buttons()
+        await self.message.edit(embed=self.create_embed(), view=self)
+
+    def update_buttons(self):
+        if self.cp == 0:
+            self.prev_button.disabled = True
+            self.prev_button.style = discord.ButtonStyle.gray
+        else:
+            self.prev_button.disabled = False
+            self.prev_button.style = discord.ButtonStyle.primary
+
+        if self.cp == 1:
+            self.next_button.disabled = True
+            self.next_button.style = discord.ButtonStyle.gray
+        else:
+            self.next_button.disabled = False
+            self.next_button.style = discord.ButtonStyle.primary
+
+        if not EXTRA_ROLES['admin'] in self.requester.roles and self.cp == 0:
+            self.next_button.disabled = True
+
+    async def check_requester(self, interaction):
+        if interaction.user != self.requester:
+            await INTERACTION(interaction.response, "You wish these eggs were yours.", True)
+            return
+
+    @discord.ui.button(label="<", style=discord.ButtonStyle.primary)
+    async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
+        await interaction.response.defer()
+        self.cp -= 1
+        await self.update_message()
+
+    @discord.ui.button(label=">", style=discord.ButtonStyle.primary)
+    async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
+        await self.check_requester(interaction)
+        await interaction.response.defer()
+        self.cp += 1
+        await self.update_message()
 
 
 class ShowCommands(discord.ui.View):    

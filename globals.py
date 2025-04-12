@@ -856,6 +856,7 @@ FUN_ROLES = {
         "Hypnotized Nightmare": "*(03/25/2025 - 04/02/2025)*",
         "Heretic Defier": "*(until 03/26/2025)*",
     },
+    # Easter25
     "Easter": [
         "Patron Egg",
         "Joker Egg",
@@ -881,6 +882,24 @@ FUN_ROLES = {
         "Gun Egg",
         "Roingus Egg",
         "Shiny Egg",
+    ],
+    "Easter26": [
+        "Saviour Egg",
+        "It Egg",
+        "Annihilator Egg",
+        "Admiral Egg",
+        "Dabsforlif Egg",
+        "Exiled Egg",
+        "Illuminati Egg",
+        "Outlaw Egg",
+        "Strider Egg",
+        "Zero Egg",
+        "Optimus Egg",
+        "Deathbringer Egg",
+        "Illusion Egg",
+        "Daemon Egg",
+        "Usurper Egg",
+        "Aether Egg",
     ]
 }
 

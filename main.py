@@ -917,16 +917,11 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowEggs()
-            view.data = ""
-            view.footers = ""
             view.target = target
-            view.counter = {
-                "Eggs": 0,
-                "AllEggs": 0,
-            }
+            view.requester = usr
 
-            # Prepare list to show in PAGE 1 (available and recurring roles)
-            egg_roles = "## Eggs\n\n"
+            egg_roles = ""
+            # Prepare list to show in PAGE 1 (2025 egg hunt)
             for role in FUN_ROLES["Easter"]:
                 view.counter["AllEggs"] += 1
                 if str(target.id) in list_decoded_entries(role):
@@ -935,8 +930,21 @@ async def on_message(message):
                 else:
                     egg_roles += "**???** 🧺\n"
 
-            view.data = egg_roles
-            view.footers = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
+            view.data[0] = egg_roles
+            view.footers[0] = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
+
+            egg_roles = ""
+            # Prepare list to show in PAGE 1 (2026 egg hunt)
+            for role in FUN_ROLES["Easter26"]:
+                view.counter["AllEggs"] += 1
+                if str(target.id) in list_decoded_entries(role):
+                    view.counter["Eggs"] += 1
+                    egg_roles += "**" + str(role) + "** 🧺\n"
+                else:
+                    egg_roles += "**???** 🧺\n"
+
+            view.data[1] = egg_roles
+            view.footers[1] = "{usr} found all the {etotal} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else "{ecurrent} out of {etotal} eggs."
 
             # Send view... hopefully
             await view.send(ch)
