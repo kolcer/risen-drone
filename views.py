@@ -124,7 +124,7 @@ class ShowEggs(discord.ui.View):
             "AllEggs": 0,
         }
         
-        self.title = "{user}'s"
+        self.title = "{user}'s basket"
 
         self.data = ["", ""]
         self.footers = ["", ""]
