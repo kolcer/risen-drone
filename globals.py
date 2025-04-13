@@ -899,6 +899,10 @@ FUN_ROLES = {
         "Daemon Egg",
         "Usurper Egg",
         "Aether Egg",
+        "Possessed Egg",
+        "Hypnotized Egg",
+        "Perfect Egg",
+        "Secret Egg",
     ]
 }
 
