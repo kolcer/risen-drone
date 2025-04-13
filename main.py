@@ -920,7 +920,7 @@ async def on_message(message):
             view.target = target
             view.requester = usr
 
-            egg_roles = ""
+            egg_roles = "## Egg Hunt 2025\n\n"
             # Prepare list to show in PAGE 1 (2025 egg hunt)
             for role in FUN_ROLES["Easter"]:
                 view.counter["AllEggs"] += 1
@@ -933,8 +933,8 @@ async def on_message(message):
             view.data[0] = egg_roles
             view.footers[0] = f"{usr.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
 
-            egg_roles = ""
-            # Prepare list to show in PAGE 1 (2026 egg hunt)
+            egg_roles = "## Egg Hunt 2026\n\n"
+            # Prepare list to show in PAGE 2 (2026 egg hunt)
             for role in FUN_ROLES["Easter26"]:
                 view.counter["AllEggs"] += 1
                 if str(target.id) in list_decoded_entries(role):

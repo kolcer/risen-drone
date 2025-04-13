@@ -124,10 +124,7 @@ class ShowEggs(discord.ui.View):
             "AllEggs": 0,
         }
         
-        self.titles = [
-            "{user}'s eggs 2025",
-            "{user}'s eggs 2026",
-        ]
+        self.title = "{user}'s"
 
         self.data = ["", ""]
         self.footers = ["", ""]
@@ -148,7 +145,7 @@ class ShowEggs(discord.ui.View):
         
     def create_embed(self):
         embed = discord.Embed()
-        embed.title = self.titles[self.cp].format(user=self.target.display_name)
+        embed.title = self.title.format(user=self.target.display_name)
         # embed.title = f"{self.target.display_name}'s eggs"
         # embed.description = self.data
         embed.description = self.data[self.cp]
