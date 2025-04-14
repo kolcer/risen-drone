@@ -1172,19 +1172,25 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg == "bd throw egg":            
+        elif lmsg.startswith("bd throw ")and lmsg.endswith(" egg"):
+            isSpecificEgg = False
+            specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
+
+            if specificEgg.lower() in RIG_LIST:
+                isSpecificEgg = True
+
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
             view.type = None
 
-            if SPECIAL_ROLES["Admin"][0] in usr.roles:
+            if SPECIAL_ROLES["Admin"][0] in usr.roles and not isSpecificEgg:
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Admin"
-            elif EXTRA_ROLES["murdurator"] in usr.roles:
+            elif EXTRA_ROLES["murdurator"] in usr.roles and not isSpecificEgg:
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Murdurator"
-            elif EXTRA_ROLES["admin"] in usr.roles:
+            elif EXTRA_ROLES["admin"] in usr.roles and not isSpecificEgg:
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Broken Drone"
             else:
