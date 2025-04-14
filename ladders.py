@@ -571,3 +571,6 @@ def KickPlayer(plr):
     MG_PLAYERS.pop(plr)
     MG_QUEUE.pop(LADDERS['currentPlayer'])
     LADDERS['currentPlayer'] -= 1
+
+    if len(MG_PLAYERS) == 2:
+        LADDERS["merges"].clear()
