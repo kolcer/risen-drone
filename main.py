@@ -1373,7 +1373,8 @@ async def on_message(message):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
-                BUTTONS["phase"] = random.randint(1, 5)
+                # BUTTONS["phase"] = random.randint(1, 5)
+                BUTTONS["phase"] = 5
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
