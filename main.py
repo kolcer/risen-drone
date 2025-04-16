@@ -1088,6 +1088,8 @@ async def on_message(message):
                 
             if noRoles or morphToTarget.lower() not in RIG_LIST:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
+            else:
+                await SEND(ch, "I'm afraid I can't let you do that.\nFor the duration of the Easter Event, you may only have 1 alignment role.\nEating eggs of any alignment will morph you instead.")
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
@@ -1105,6 +1107,8 @@ async def on_message(message):
 
             if alignmentRoles > 1 or demorphFromTarget.lower() not in RIG_LIST:
                 await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
+            else:
+                await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment — but there are no take-backsies... unless you eat an egg.")
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
