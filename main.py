@@ -1009,7 +1009,7 @@ async def on_message(message):
             else:
                 THE_DRIP[usr] = 1
 
-        elif "<:csroingus:1126928049678594082>" in lmsg and ch.id == 750060041289072771:
+        elif "<:csroingus:1126928049678594082>" in lmsg and ch.id == 750060041289072771 and EVENTS["Easter"]:
             if usr.id not in THE_ROINGUS:
                 THE_ROINGUS.append(usr.id)
 
@@ -1031,7 +1031,7 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
-        elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771:
+        elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771 and EVENTS["Easter"]:
             if usr.id not in THE_SHINY:
                 THE_SHINY.append(usr.id)
 
@@ -1080,36 +1080,38 @@ async def on_message(message):
             else:
                 morphToTarget = lsplit[2].capitalize()
 
+            if EVENTS["Easter"]:
+                for role in usr.roles:
+                    if role.name.lower() in RIG_LIST:
+                        noRoles = False
+                        break
 
-            for role in usr.roles:
-                if role.name.lower() in RIG_LIST:
-                    noRoles = False
-                    break
-                
-            if noRoles or morphToTarget.lower() not in RIG_LIST:
-                await SEND(ch, await MorphTo(usr,morphToTarget))
-            else:
+            if not noRoles and morphToTarget.lower() in RIG_LIST and EVENTS["Easter"]:
                 await SEND(ch, "I'm afraid I can't let you do that.\nFor the duration of the Easter Event, you may only have 1 alignment role.\nEating eggs of any alignment will morph you instead.")
+            else:
+                await SEND(ch, await MorphTo(usr,morphToTarget))
+
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
             alignmentRoles = 0
 
-            for role in usr.roles:
-                if role.name.lower() in RIG_LIST:
-                    alignmentRoles += 1
+            if EVENTS["Easter"]:
+                for role in usr.roles:
+                    if role.name.lower() in RIG_LIST:
+                        alignmentRoles += 1
 
             if today.day == 1 and today.month == 4:
                 await SEND(ch, f"Unfortunately, this command is out of service.")
                 return
             else:
                 demorphFromTarget = lsplit[2].capitalize()
-
-            if alignmentRoles > 1 or demorphFromTarget.lower() not in RIG_LIST:
-                await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
-            else:
+            
+            if alignmentRoles == 1 and demorphFromTarget.lower() in RIG_LIST and EVENTS["Easter"]:
                 await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment — but there are no take-backsies... unless you eat an egg.")
                 return
+            else:
+                await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
@@ -1178,6 +1180,10 @@ async def on_message(message):
                 await SEND(ch,'Wrong. Better luck next time.')
 
         elif lmsg.startswith("bd throw ")and lmsg.endswith(" egg"):
+            if not EVENTS["Easter"]:
+                await SEND(ch, f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.")
+                return
+
             isSpecificEgg = False
             specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
 
@@ -1246,7 +1252,7 @@ async def on_message(message):
             if BUTTONS["easterStaffStatus"]:
                 BUTTONS["easterStaffStatus"] = False
 
-        elif lmsg.startswith("bd eat") and lmsg.endswith("egg"):
+        elif lmsg.startswith("bd eat") and lmsg.endswith("egg") and EVENTS["Easter"]:
             eggToEat = lmsg.replace("bd eat ", "").replace(" egg", "").capitalize()
 
             if eggToEat.lower() not in RIG_LIST:
@@ -1378,8 +1384,11 @@ async def on_message(message):
                 BUTTONS["phase"] = int(msg.split(" ")[1])
                 BUTTONS["channel"] = CHANNELS[lmsg.split(" ")[2]]
             else:
-                # BUTTONS["phase"] = random.randint(1, 5)
-                BUTTONS["phase"] = 5
+                if EVENTS["Easter"]:
+                    BUTTONS["phase"] = 100
+                else:
+                    BUTTONS["phase"] = random.randint(1, 4)
+                    
                 BUTTONS["channel"] = CHANNELS["general"]
 
             if BUTTONS["phase"] == 1:
@@ -1465,7 +1474,7 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
-            elif BUTTONS["phase"] == 5:
+            elif BUTTONS["phase"] == 100:
                 BUTTONS["status"] = True
                 view = ButtonEgg_Throw(timeout=30)
                 view.thrower = None
@@ -1482,7 +1491,7 @@ async def on_message(message):
                 await view.too_late()
                 BUTTONS["status"] = False
 
-            elif BUTTONS["phase"] == 6:
+            elif BUTTONS["phase"] == 101:
                 BUTTONS["status"] = True
                 view = ButtonEgg_Eggcelent(timeout=1000)
 
@@ -1595,7 +1604,7 @@ async def on_message(message):
 
             ##-----COMMANDS THAT ONLY USE 3 INPUTS-----
             #prepare architect
-            if lmsg.startswith("architect", 1):
+            if lmsg.startswith("architect", 1) and EVENTS["Easter"]:
                 try:
                     arcMsg = await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>.")
                     await asyncio.sleep(int(third))

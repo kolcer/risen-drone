@@ -322,7 +322,8 @@ Delete: Deletes the specified quiz question by index.
 2: So Many Buttons
 3: Help Broken Drone
 4: Poll
-5: Architect Egg
+100: Architect Egg
+101: Sleazy Egg
 
 
 :bangbang: Must be in the FUN_ROLES list in globals.py
@@ -1572,14 +1573,14 @@ class ButtonEgg_Throw(discord.ui.View):
             if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
                 await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
 
-                if self.picker == None and self.type == "Admin":
-                    otherView = ButtonEgg_Eggcelent(timeout=86400)
+                # if self.picker == None and self.type == "Admin":
+                #     otherView = ButtonEgg_Eggcelent(timeout=86400)
 
-                    otherView.toolate = True
-                    otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
+                #     otherView.toolate = True
+                #     otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
 
-                    await otherView.wait()
-                    await otherView.too_late()
+                #     await otherView.wait()
+                #     await otherView.too_late()
 
                 add_entry(f"{self.type} Egg", "827952429290618943")
 

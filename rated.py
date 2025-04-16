@@ -4,6 +4,7 @@ import time
 from globals import EXTRA_ROLES
 from globals import SERVER_DATA
 from globals import CHANNELS
+from globals import EVENTS
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
@@ -47,7 +48,9 @@ async def SEND(channel, message):
         #cannot send empty message
         return
     
-    message = str(message) + " 🐇"
+    if EVENTS["Easter"]:
+        message = str(message) + " 🐇"
+
     return await channel.send(message)
 
 #DM an user

@@ -306,7 +306,7 @@ async def CastRig(rigPick,ch,usr):
     if rigPick not in RIG_LIST:
         await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
 
-        if not str(usr.id) in list_decoded_entries("None Egg"):
+        if EVENTS["Easter"] and not str(usr.id) in list_decoded_entries("None Egg"):
             await add_egg_with_check("None Egg", usr)
             await SEND(ch, f"{usr.mention} found the None Egg lying on the ground.")
         return
