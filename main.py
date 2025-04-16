@@ -1109,6 +1109,7 @@ async def on_message(message):
                 await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
             else:
                 await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment — but there are no take-backsies... unless you eat an egg.")
+                return
 
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
