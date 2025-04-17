@@ -436,6 +436,8 @@ async def on_message(message):
                 RIG_COOLDOWNS[cooldown] = False
 
             BUTTONS["status"] = False
+            BUTTONS["easterStatus"] = False
+            BUTTONS["easterStaffStatus"] = False
 
         await asyncio.sleep(60)
         if len(FIX_BOT) != 0:
