@@ -800,7 +800,7 @@ FUN_ROLES = {
         "Pro Tower Climber",
         "Acclaimed",
         "Hypnotized Dream",
-        "Egg Hunter",
+        "Egg Collector",
     ],
     "Limited": {
         "I was there": "*(11/27/2022 - 11/28/2022)*",
@@ -809,7 +809,7 @@ FUN_ROLES = {
     },
     "Recurring": {
         "I remembered": "Broken Drone's Join Date",
-        "Egg Hunter": "Easter",
+        "Egg Collector": "Easter",
         "Sleazy Egg": "Easter",
     },
     "Removed": {

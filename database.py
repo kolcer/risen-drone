@@ -1,7 +1,7 @@
 import redis
 import os
 import random
-from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES, GIT_COMMITTERS
+from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES, GIT_COMMITTERS, EVENTS
 from rated import SEND
 
 # Set up the data base
@@ -36,7 +36,7 @@ async def add_egg_with_check(key, new_entry):
     if eggCounter == 0:
         await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just collected an egg! Thank you for the help. Type `bd show eggs` to look at it.")
     elif eggCounter == 5:
-        db.rpush("Egg Hunter",new_entry.id)
+        db.rpush("Egg Collector",new_entry.id)
 
     db.rpush(key,new_entry.id)
 
