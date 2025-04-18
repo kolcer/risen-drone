@@ -877,6 +877,7 @@ FUN_ROLES = {
 APPROVED_ROLES = {
     "Role Hunter": None,
     "Image Perms": None,
+    "Egg Hunter": None,
 }
 
 DETAILED_ROLES = {
