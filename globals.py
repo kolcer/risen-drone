@@ -517,7 +517,7 @@ MIXED_WORD_TRIGGERS = {
 }
 
 EVENTS = {
-    "Easter": True,
+    "Easter": False,
 }
 
 SANCTUARY = {
