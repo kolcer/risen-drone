@@ -164,14 +164,21 @@ async def Rig(rigType, ch, usr):
                 await SEND(ch, "Nothing to destroy.")
                 RIG_COOLDOWNS["meddle"] = False
                 return
-            msgCounting = await SEND(ch, "You cast Wicked Rig and destroyed all the nasty stairs!")
+            msgCounting = await SEND(ch, "You cast Wicked Rig and destroyed all the nasty stairs along with your roles!")
             for rig in ACTIVE_RIGS.keys():
                 ACTIVE_RIGS[rig] = False
 
-            await asyncio.sleep(1)
+            if not EVENTS["Easter"]:
+                role_list = []
+                for role in usr.roles:
+                    if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES) and role.name != "Wicked":
+                        role_list.append(role)
+                #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
+                await usr.remove_roles(*role_list)
+                await asyncio.sleep(1)
 
-            # if MORPHABLE_ROLES["Wicked"][0] not in usr.roles:
-            #     await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
+            if MORPHABLE_ROLES["Wicked"][0] not in usr.roles and not EVENTS["Easter"]:
+                await ADD_ROLES(usr, MORPHABLE_ROLES["Wicked"][0])
             
          
         case "drifter":
@@ -548,6 +555,15 @@ async def ExecuteGremlinRig(ch,usr):
 
     await ADD_ROLES(usr, EXTRA_ROLES['hypno'])
     await asyncio.sleep(1)
+
+    if not EVENTS["Easter"]:
+        role_list = []
+        for role in usr.roles:
+            if (role.name in MORPHABLE_ROLES):
+                role_list.append(role)
+        #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
+        await usr.remove_roles(*role_list)
+        await asyncio.sleep(1)
 
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
             
