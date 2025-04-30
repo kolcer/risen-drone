@@ -16,12 +16,20 @@ class ShowProfile(discord.ui.View):
             "{user}'s secret roles",
             "{user}'s locked roles",
             "{user}'s stats",
+            "{user}'s total climbs",
+            "{user}'s best times in Classic Tower",
+            "{user}'s best times in Pro Tower",
+            "{user}'s best times in Infinite Tower",
         ]
 
         self.sidecolor = [
             "FFA500",   
             "FF0000",
-            "FFC0CB"
+            "FFC0CB",
+            "cf600c",
+            "19c448",
+            "688bd4",
+            "a449be"
         ]  
 
         self.embed = None
@@ -66,7 +74,7 @@ class ShowProfile(discord.ui.View):
             self.first_page_button.style = discord.ButtonStyle.green
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 2:
+        if self.cp == 6:
             self.next_button.disabled = True
             self.last_page_button.disabled = True
             self.last_page_button.style = discord.ButtonStyle.gray
@@ -108,7 +116,7 @@ class ShowProfile(discord.ui.View):
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
         await interaction.response.defer()
-        self.cp = 2
+        self.cp = 6
         await self.update_message()
 
 class ShowEggs(discord.ui.View):

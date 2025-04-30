@@ -802,8 +802,8 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowProfile(timeout=500)
-            view.data = ["", "", ""]
-            view.footers = ["", "", ""]
+            view.data = ["", "", "", "", "", "", ""]
+            view.footers = ["", "", "", "", "", "", ""]
             view.target = target
             view.requester = usr
             view.counter = {
@@ -875,6 +875,34 @@ async def on_message(message):
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
             view.data[2] = user_stats
+
+            # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
+            user_climbs = ""
+            for alignment in RIG_LIST:
+                user_climbs += f'**{alignment.capitalize()}** total climbs:\nN/A\n\n'
+
+            view.data[3] = user_climbs
+
+            # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+
+            view.data[4] = user_times
+
+            # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+
+            view.data[5] = user_times
+
+            # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+
+            view.data[6] = user_times
 
             view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
