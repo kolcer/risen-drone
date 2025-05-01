@@ -782,8 +782,13 @@ async def on_message(message):
         ## Verify for CS stats
         elif lmsg == 'bd verify':
             code = random.randint(1, 999999)
+            
             redis_add_user_data("USER_" + str(usr.id), "code",code)
-            await SEND_DM(usr, "Your code is " + str(code))
+            try:
+                await SEND_DM(usr, "Your code is " + str(code))
+            except:
+                await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code")
+            
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
