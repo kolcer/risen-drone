@@ -781,7 +781,7 @@ async def on_message(message):
 
         ## Verify for CS stats
         elif lmsg == 'bd verify':
-            await INTERACTION(msg,"Code will be given here")
+            await INTERACTION(msg, "Code will be given here", True)
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
