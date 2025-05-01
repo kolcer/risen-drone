@@ -785,11 +785,13 @@ async def on_message(message):
             
             redis_add_user_data("USER_" + str(usr.id), "code",code)
             try:
-                await SEND_DM(usr, "Your code is " + str(code))
+                await SEND_DM(usr, "Your code is " + str(code) + ". It is valid for 10 minutes.")
             except:
-                await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code")
-            
+                await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
 
+            await asyncio.sleep(600)
+            redis_remove_user_data("USER_" + str(usr.id),"code")
+           
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 

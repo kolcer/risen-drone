@@ -92,3 +92,6 @@ def increment(key):
 
 def redis_add_user_data(hash,key,value):
     db.hset(hash,key,value)
+
+def redis_remove_user_data(hash,key):
+    db.hdel(hash,key)
