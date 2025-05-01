@@ -779,6 +779,10 @@ async def on_message(message):
             else:
                 await SEND(ch, "How could you get my birthday date wrong?")
 
+        ## Verify for CS stats
+        elif lmsg == 'bd verify':
+            await INTERACTION(msg,"Code will be given here")
+
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 
