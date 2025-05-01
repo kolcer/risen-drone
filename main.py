@@ -6,6 +6,8 @@ import asyncio
 import requests 
 import re
 import datetime
+import secrets
+import string
 #from datetime import date
 from difflib import SequenceMatcher
 
@@ -781,25 +783,25 @@ async def on_message(message):
 
         ## Verify for CS stats
         elif lmsg == 'bd link':
-            code = random.randint(1, 999999)
-            
-            redis_add_user_data("USER_" + str(usr.id), "code",code)
             try:
-                await SEND_DM(usr, "Your code is " + str(code) + ". It is valid for 10 minutes.\n" +
+                alphabet = string.ascii_letters + string.digits
+                password = ''.join(secrets.choice(alphabet) for i in range(20))
+            
+                redis_add_user_data("USER_" + str(usr.id), "pasword",password)
+                await SEND_DM(usr, 
                     "Please copy and paste the following line containing your discord user id and this code into game's postbox.\n\n" +
-                    "LINK DISCORD " + str(usr.id) + " " + str(code) + "\n\n"
+                    "LINK DISCORD " + str(usr.id) + " " + password + "\n\n"
+                    "DO NOT SHARE THIS WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n" + 
                     "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
                     "UNLINK DISCORD\n\n" +
                     "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.\n" + 
-                    "Avoid linking more than one Roblox account, as we have no means automatically remove the old one. Your stats will reflect the recently used one.")
+                    "Avoid linking more than one Roblox account, as we have no means to automatically remove the old one. Your stats will only reflect the recently used one.")
             except:
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
 
-            await asyncio.sleep(600)
-            redis_remove_user_data("USER_" + str(usr.id),"code")
-           
+    
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 
