@@ -89,3 +89,6 @@ def check_key(key):
     
 def increment(key):
     return db.incr(key)
+
+def redis_add_user_data(hash,key,value):
+    db.hset(hash,key,value)
