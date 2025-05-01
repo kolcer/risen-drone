@@ -781,7 +781,8 @@ async def on_message(message):
 
         ## Verify for CS stats
         elif lmsg == 'bd verify':
-            await SEND_DM(usr, "Code will be given here")
+            code = random.randint(1, 999999)
+            await SEND_DM(usr, "Your code is " + str(code))
 
         ## Show Profile
         elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
