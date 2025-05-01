@@ -789,15 +789,14 @@ async def on_message(message):
             
                 redis_add_user_data("USER_" + str(usr.id), "pasword",password)
                 await SEND_DM(usr, 
-                    "Please copy and paste the following line containing your discord user id and this code into game's postbox.\n\n" +
+                    "Please copy and paste the following line containing your discord user id and your unique password into game's postbox.\n\n" +
                     "LINK DISCORD " + str(usr.id) + " " + password + "\n\n"
                     "DO NOT SHARE THIS WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n" + 
                     "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
                     "UNLINK DISCORD\n\n" +
-                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.\n" + 
-                    "Avoid linking more than one Roblox account, as we have no means to automatically remove the old one. Your stats will only reflect the recently used one.")
+                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
             except:
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
 
