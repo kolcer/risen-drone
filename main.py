@@ -785,12 +785,12 @@ async def on_message(message):
         elif lmsg == 'bd link':
             try:
                 alphabet = string.ascii_letters + string.digits
-                password = ''.join(secrets.choice(alphabet) for i in range(20))
+                token = ''.join(secrets.choice(alphabet) for i in range(20))
             
-                redis_add_user_data("USER_" + str(usr.id), "pasword",password)
+                redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
                     "Please copy and paste the following line containing your discord user id and your unique token into game's postbox.\n\n" +
-                    "LINK DISCORD " + str(usr.id) + " " + password + "#\n\n"
+                    "LINK DISCORD " + str(usr.id) + " " + token + "#\n\n"
                     "DO NOT SHARE THIS WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
