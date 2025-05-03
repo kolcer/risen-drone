@@ -97,4 +97,4 @@ def redis_remove_user_data(hash,key):
     db.hdel(hash,key)
 
 def get_user_stats(usr):
-    return db.hgetall('USER_' + usr.id)
+    return db.hgetall('USER_' + str(usr.id))
