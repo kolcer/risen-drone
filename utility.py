@@ -7,4 +7,4 @@ def ms_to_s(num):
     try:
         return f"{int(num) / 1000:.2f} seconds"
     except (ValueError, TypeError):
-        return "N/A"
+        return "N/A" 
