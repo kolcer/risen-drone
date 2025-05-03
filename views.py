@@ -13,23 +13,23 @@ class ShowProfile(discord.ui.View):
         super().__init__(timeout=timeout)
         self.cp = 0
         self.titles = [
-            "{user}'s secret roles",
-            "{user}'s locked roles",
-            "{user}'s stats",
             "{user}'s total climbs",
             "{user}'s best times in Classic Tower",
             "{user}'s best times in Pro Tower",
             "{user}'s best times in Infinite Tower",
+            "{user}'s secret roles",
+            "{user}'s locked roles",
+            "{user}'s stats",
         ]
 
         self.sidecolor = [
-            "FFA500",   
-            "FF0000",
-            "FFC0CB",
             "cf600c",
             "19c448",
             "688bd4",
             "a449be"
+            "FFA500",   
+            "FF0000",
+            "FFC0CB",
         ]  
 
         self.embed = None

@@ -616,12 +616,12 @@ COOLDOWN_DURATION = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "trap": f'{EMOJIS_TO_REACT["csThief"]}{EMOJIS_TO_REACT["csSpectre"]}{EMOJIS_TO_REACT["csJoker"]}{EMOJIS_TO_REACT["csSplicer"]}{EMOJIS_TO_REACT["csGremlin"]} cooldown: ',
-    "self": f'{EMOJIS_TO_REACT["csHeretic"]} cooldown: ',
-    "chat": f'{EMOJIS_TO_REACT["csArchon"]}{EMOJIS_TO_REACT["csReaver"]} cooldown: ',
-    "meddle": f'{EMOJIS_TO_REACT["csWicked"]} cooldown: ',
-    "username": f'{EMOJIS_TO_REACT["csKeeper"]}{EMOJIS_TO_REACT["csDrifter"]}{EMOJIS_TO_REACT["csHacker"]} cooldown: ',
-    "help": f'{EMOJIS_TO_REACT["csPatron"]} cooldown: ',
+    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720> cooldown: ",
+    "self": "<:csHeretic:786323224115281921> cooldown: ",
+    "chat": "<:csArchon:786323402172530688><:csReaver:1353300809672294420> cooldown: ",
+    "meddle": "<:csWicked:792143453035167754> cooldown: ",
+    "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816> cooldown: ",
+    "help": "<:csPatron:758081038697103504> cooldown: ",
 }
 
 RIGS_DESCRIPTION = {
