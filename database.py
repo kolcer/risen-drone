@@ -98,7 +98,3 @@ def redis_remove_user_data(hash,key):
 
 def get_user_stats(usr):
     return db.hgetall('USER_' + str(usr.id))
-
-def safe_get_decoded(stats, key):
-    value = stats.get(key, "N/A")
-    return value.decode("utf-8") if isinstance(value, bytes) else value

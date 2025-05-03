@@ -901,31 +901,37 @@ async def on_message(message):
 
             # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
             user_stats = get_user_stats(target)
+            print(user_stats)
 
             user_climbs = ""
             for alignment in RIG_LIST:
-                user_climbs += f'**{alignment.capitalize()}** total climbs:\n{safe_get_decoded(user_stats, f"{alignment.upper()}_climbs")}\n\n'
+                value = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
+                print(value)
+                value = value.decode("utf-8") if isinstance(value, bytes) else value
+                print(value)
+
+                user_climbs += f'**{alignment.capitalize()}** total climbs:\n{value}\n\n'
 
             view.data[3] = user_climbs
 
             # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{safe_get_decoded(user_stats, f"{alignment.upper()}_classic")}ms\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\nN/Ams\n\n'
 
             view.data[4] = user_times
 
             # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{safe_get_decoded(user_stats, f"{alignment.upper()}_pro")}ms\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\nN/Ams\n\n'
 
             view.data[5] = user_times
 
             # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{safe_get_decoded(user_stats, f"{alignment.upper()}_infinite")}ms\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\nN/Ams\n\n'
 
             view.data[6] = user_times
 
