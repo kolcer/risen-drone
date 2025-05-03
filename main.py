@@ -904,28 +904,28 @@ async def on_message(message):
 
             user_climbs = ""
             for alignment in RIG_LIST:
-                user_climbs += f'**{alignment.capitalize()}** total climbs:\n{user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
+                user_climbs += f'**{alignment.capitalize()}** total climbs:\n{user_stats.get(f"{alignment.upper()}_climbs", "N/A").decode('utf-8')}\n\n'
 
             view.data[3] = user_climbs
 
             # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_classic", "N/A").decode('utf-8')}ms\n\n'
 
             view.data[4] = user_times
 
             # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_pro", "N/A").decode('utf-8')}ms\n\n'
 
             view.data[5] = user_times
 
             # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\nN/A\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_infinite", "N/A").decode('utf-8')}ms\n\n'
 
             view.data[6] = user_times
 
