@@ -905,9 +905,9 @@ async def on_message(message):
 
             user_climbs = ""
             for alignment in RIG_LIST:
-                value = user_stats.get(f"{alignment.upper()}_climbs", "N/A") 
+                value = user_stats.get(f"{alignment.upper()}_climbs") 
                 print(value)
-                value = value.decode("utf-8") if isinstance(value, bytes) else value
+                value = value.decode("utf-8")
                 print(value)
 
                 user_climbs += f'**{alignment.capitalize()}** total climbs:\n{value}\n\n'
