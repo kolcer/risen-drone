@@ -12,6 +12,9 @@ class ShowProfile(discord.ui.View):
     def __init__(self, *, timeout=180):
         super().__init__(timeout=timeout)
         self.cp = 0
+        self.data = ["", "", "", "", "", "", ""]
+        self.footers = ["", "", "", "", "", "", ""]
+
         self.titles = [
             "{user}'s total climbs",
             "{user}'s best times in Classic Tower",
@@ -26,7 +29,7 @@ class ShowProfile(discord.ui.View):
             "cf600c",
             "19c448",
             "688bd4",
-            "a449be"
+            "a449be",
             "FFA500",   
             "FF0000",
             "FFC0CB",

@@ -826,8 +826,6 @@ async def on_message(message):
             
             # Command will go through. Prepare the View.
             view = ShowProfile(timeout=500)
-            view.data = ["", "", "", "", "", "", ""]
-            view.footers = ["", "", "", "", "", "", ""]
             view.target = target
             view.requester = usr
             view.counter = {
@@ -837,7 +835,7 @@ async def on_message(message):
                 "AllLocked": 0,
             }
 
-            # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
+            # Prepare total climbs for each alignment in PAGE 1
             user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
 
             user_climbs = ""
@@ -846,35 +844,33 @@ async def on_message(message):
 
             view.data[0] = user_climbs
 
-            # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
+            # Prepare best times for each alignment in Classic Tower in PAGE 2
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
 
             view.data[1] = user_times
 
-            # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
+            # Prepare best times for each alignment in Pro Tower in PAGE 3
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
 
             view.data[2] = user_times
 
-            # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
+            # Prepare best times for each alignment in Infinite Tower in PAGE 4
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
 
             view.data[3] = user_times
 
-            # Prepare list to show in PAGE 1 (available and recurring roles)
+            # Prepare list to show in PAGE 5 (available and recurring roles)
             secret_roles = "## Available Roles\n\n"
             for role in FUN_ROLES["Available"]:
                 view.counter["AllSecret"] += 1
-                # view.totsroles += 1
                 if str(target.id) in list_decoded_entries(role):
                     view.counter["Secret"] += 1
-                    # view.sroles += 1
                     secret_roles += "**" + str(role) + "**\n"
                 else:
                     secret_roles += "**???**\n"
@@ -891,7 +887,7 @@ async def on_message(message):
             view.data[4] = secret_roles
             view.footers[4] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
-            # Prepare list to show in PAGE 2 (limited and removed roles)
+            # Prepare list to show in PAGE 6 (limited and removed roles)
             locked_roles = "## Limited Roles\n\n"
             for role in FUN_ROLES["Limited"].keys():
                 view.counter["AllLocked"] += 1
@@ -924,7 +920,7 @@ async def on_message(message):
             else:
                 lastrig = LAST_RIG[target.id]
 
-            # Prepare list to show in PAGE 3 (user stats)
+            # Prepare list to show in PAGE 7 (user stats)
             user_stats = ""
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
