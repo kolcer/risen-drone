@@ -842,28 +842,28 @@ async def on_message(message):
 
             user_climbs = ""
             for alignment in RIG_LIST:
-                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} total climbs:\n{user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
+                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
 
             view.data[0] = user_climbs
 
             # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
 
             view.data[1] = user_times
 
             # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
 
             view.data[2] = user_times
 
             # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
 
             view.data[3] = user_times
 
@@ -932,7 +932,7 @@ async def on_message(message):
             view.footers[6] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
             if lastrig.lower().replace(" rig", "") == "spectre":
-                view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
+                view.footers[6] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
             if target.id in GIT_COMMITTERS.values():           
                 view.data[4] = 'Empty...'
