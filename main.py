@@ -912,7 +912,7 @@ async def on_message(message):
             # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
+                user_times += f'<:cs{alignment.capitalize()}:{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}> best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
 
             view.data[4] = user_times
 
