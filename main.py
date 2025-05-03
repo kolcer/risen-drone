@@ -900,14 +900,12 @@ async def on_message(message):
             view.data[2] = user_stats
 
             # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
-            user_stats = get_user_stats(target)
+            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
             print(user_stats)
 
             user_climbs = ""
             for alignment in RIG_LIST:
-                value = user_stats.get(f"{alignment.upper()}_climbs") 
-                print(value)
-                value = value.decode("utf-8")
+                value = user_stats.get(f"{alignment.upper()}_climbs", "N/A") 
                 print(value)
 
                 user_climbs += f'**{alignment.capitalize()}** total climbs:\n{value}\n\n'
