@@ -837,6 +837,36 @@ async def on_message(message):
                 "AllLocked": 0,
             }
 
+            # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
+            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
+
+            user_climbs = ""
+            for alignment in RIG_LIST:
+                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} total climbs:\n{user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
+
+            view.data[0] = user_climbs
+
+            # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
+
+            view.data[1] = user_times
+
+            # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
+
+            view.data[2] = user_times
+
+            # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
+            user_times = ""
+            for alignment in RIG_LIST:
+                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
+
+            view.data[3] = user_times
+
             # Prepare list to show in PAGE 1 (available and recurring roles)
             secret_roles = "## Available Roles\n\n"
             for role in FUN_ROLES["Available"]:
@@ -858,8 +888,8 @@ async def on_message(message):
                     secret_roles += "**" + role + "** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
                 else:
                     secret_roles += "**???** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
-            view.data[0] = secret_roles
-            view.footers[0] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
+            view.data[4] = secret_roles
+            view.footers[4] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
             # Prepare list to show in PAGE 2 (limited and removed roles)
             locked_roles = "## Limited Roles\n\n"
@@ -879,8 +909,8 @@ async def on_message(message):
                 else:
                     locked_roles += "**???** ❌ " + FUN_ROLES["Removed"][role] + "\n"
 
-            view.data[1] = locked_roles
-            view.footers[1] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
+            view.data[5] = locked_roles
+            view.footers[5] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
 
             # Preparing stuff to handle stats
             messages = ""
@@ -898,48 +928,17 @@ async def on_message(message):
             user_stats = ""
             user_stats += "**Latest messages sent:** " + str(messages) + "\n"
             user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
-            view.data[2] = user_stats
-
-            # Prepare total climbs for each alignment in PAGE 4 -- good luck sleazel
-            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
-
-            user_climbs = ""
-            for alignment in RIG_LIST:
-                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} total climbs:\n{user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
-
-            view.data[3] = user_climbs
-
-            # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
-
-            view.data[4] = user_times
-
-            # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
-
-            view.data[5] = user_times
-
-            # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]} best time:\n{cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
-
-            view.data[6] = user_times
-
-            view.footers[2] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
+            view.data[6] = user_stats
+            view.footers[6] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
             if lastrig.lower().replace(" rig", "") == "spectre":
                 view.footers[2] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
             if target.id in GIT_COMMITTERS.values():           
-                view.data[0] = 'Empty...'
-                view.data[1] = 'Empty...'
-                view.footers[0] = "This person knows how to get the roles, what's the point?"
-                view.footers[1] = "Nothing to see here."
+                view.data[4] = 'Empty...'
+                view.data[5] = 'Empty...'
+                view.footers[4] = "This person knows how to get the roles, what's the point?"
+                view.footers[5] = "Nothing to see here."
 
             # Send view... hopefully
             if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']):
