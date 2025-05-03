@@ -3,8 +3,8 @@ from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES, GIT_COMMITTERS, EVENTS
 from rated import SEND
 
 # Convert milliseconds to seconds
-def ms_to_s(num):
+def cs_to_s(num):
     try:
-        return f"{int(num) / 1000:.2f} seconds"
+        return f"{int(num) / 100:.2f} seconds"
     except (ValueError, TypeError):
         return "N/A" 
