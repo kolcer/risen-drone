@@ -616,12 +616,12 @@ COOLDOWN_DURATION = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "trap": f'<:csThief:{EMOJIS_TO_REACT["csThief"]}><:csSpectre:{EMOJIS_TO_REACT["csSpectre"]}><:csJoker:{EMOJIS_TO_REACT["csJoker"]}><:csSplicer:{EMOJIS_TO_REACT["csSplicer"]}><:csGremlin:{EMOJIS_TO_REACT["csGremlin"]}> cooldown: ',
-    "self": f'<:csHeretic:{EMOJIS_TO_REACT["csHeretic"]}> cooldown: ',
-    "chat": f'<:csArchon:{EMOJIS_TO_REACT["csArchon"]}><:csReaver:{EMOJIS_TO_REACT["csReaver"]}> cooldown: ',
-    "meddle": f'<:csWicked:{EMOJIS_TO_REACT["csWicked"]}> cooldown: ',
-    "username": f'<:csKeeper:{EMOJIS_TO_REACT["csKeeper"]}><:csDrifter:{EMOJIS_TO_REACT["csDrifter"]}><:csHacker:{EMOJIS_TO_REACT["csHacker"]}> cooldown: ',
-    "help": f'<:csPatron:{EMOJIS_TO_REACT["csPatron"]}> cooldown: ',
+    "trap": f'{EMOJIS_TO_REACT["csThief"]}{EMOJIS_TO_REACT["csSpectre"]}{EMOJIS_TO_REACT["csJoker"]}{EMOJIS_TO_REACT["csSplicer"]}{EMOJIS_TO_REACT["csGremlin"]} cooldown: ',
+    "self": f'{EMOJIS_TO_REACT["csHeretic"]} cooldown: ',
+    "chat": f'{EMOJIS_TO_REACT["csArchon"]}{EMOJIS_TO_REACT["csReaver"]} cooldown: ',
+    "meddle": f'{EMOJIS_TO_REACT["csWicked"]} cooldown: ',
+    "username": f'{EMOJIS_TO_REACT["csKeeper"]}{EMOJIS_TO_REACT["csDrifter"]}{EMOJIS_TO_REACT["csHacker"]} cooldown: ',
+    "help": f'{EMOJIS_TO_REACT["csPatron"]} cooldown: ',
 }
 
 RIGS_DESCRIPTION = {
