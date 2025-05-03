@@ -96,5 +96,5 @@ def redis_add_user_data(hash,key,value):
 def redis_remove_user_data(hash,key):
     db.hdel(hash,key)
 
-def get_user_stats(usr)
+def get_user_stats(usr):
     return db.hgetall('USER_' + usr.id)
