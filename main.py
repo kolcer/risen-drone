@@ -919,8 +919,6 @@ async def on_message(message):
             # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                value = 
-
                 user_times += f'**{alignment.capitalize()}** best time:\n{ms_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
 
             view.data[5] = user_times
