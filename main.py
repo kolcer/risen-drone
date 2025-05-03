@@ -18,6 +18,7 @@ from fighting import *
 from rated import *
 from rigs import *
 from database import *
+from utility import *
 from quiz import * 
 ### INITIAL SETUP ### 
 
@@ -911,21 +912,23 @@ async def on_message(message):
             # Prepare best times for each alignment in Classic Tower in PAGE 5 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_classic", "N/A")}ms\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\n{ms_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
 
             view.data[4] = user_times
 
             # Prepare best times for each alignment in Pro Tower in PAGE 6 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_pro", "N/A")}ms\n\n'
+                value = 
+
+                user_times += f'**{alignment.capitalize()}** best time:\n{ms_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
 
             view.data[5] = user_times
 
             # Prepare best times for each alignment in Infinite Tower in PAGE 7 -- good luck sleazel
             user_times = ""
             for alignment in RIG_LIST:
-                user_times += f'**{alignment.capitalize()}** best time:\n{user_stats.get(f"{alignment.upper()}_infinite", "N/A")}ms\n\n'
+                user_times += f'**{alignment.capitalize()}** best time:\n{ms_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
 
             view.data[6] = user_times
 

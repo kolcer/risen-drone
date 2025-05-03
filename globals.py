@@ -540,21 +540,21 @@ SANCTUARY = {
 }
 
 RIG_LIST = [
-    "thief",
-    "spectre",
-    "joker",
-    "archon",
-    "heretic",
     "patron",
+    "joker",
     "wicked",
     "keeper",
-    "hacker",
-    "drifter",
-    "splicer",
     "muggle",
-    "gremlin",
-    "reaver",
+    "hacker",
+    "thief",
+    "archon",
+    "drifter",
+    "heretic",
+    "splicer",
     "necromancer",
+    "reaver",
+    "gremlin",
+    "spectre",
     "chameleon",
 ]
 
