@@ -784,6 +784,11 @@ async def on_message(message):
 
         ## Verify for CS stats
         elif lmsg == 'bd link':
+
+            if redis_check_token(usr) != None:
+                await SEND(ch, "Please unlink first. If you no longer have access to your account, contact mods.")
+                return
+            
             try:
                 alphabet = string.ascii_letters + string.digits
                 token = ''.join(secrets.choice(alphabet) for i in range(20))
