@@ -805,6 +805,7 @@ async def on_message(message):
                     "UNLINK DISCORD\n\n" +
                     "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
             except:
+                redis_remove_token(usr)
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
 
     
