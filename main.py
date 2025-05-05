@@ -795,7 +795,7 @@ async def on_message(message):
             
                 redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
-                    "Please copy and paste the entire message I’ll send next. To link your Roblox account properly, you’ll need to submit it as a feedback message inside Crazy Stairs."
+                    "Please copy and paste the entire message I’ll send next. To link your Roblox account properly, you’ll need to submit it as a feedback message inside Crazy Stairs.\n"
                     "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
