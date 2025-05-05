@@ -795,15 +795,18 @@ async def on_message(message):
             
                 redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
-                    "Please copy and paste the following line containing your discord user id and your unique token into game's postbox.\n\n" +
-                    "`LINK DISCORD " + str(usr.id) + " " + token + "#`\n\n"
-                    "**DO NOT SHARE THIS WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n"
+                    "Please copy and paste the entire message I’ll send next. To link your Roblox account properly, you’ll need to submit it as a feedback message inside Crazy Stairs."
+                    "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
                     "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
                     "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
                     "`UNLINK DISCORD`\n\n" +
-                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
+                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.\n\n"
+                    "I will send your code now.")
+                
+                await asyncio.sleep(1)
+                await SEND_DM(usr, f"LINK DISCORD {str(usr.id)} {token}")
             except:
                 redis_remove_token(usr)
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")

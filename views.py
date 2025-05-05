@@ -247,8 +247,11 @@ class ShowCommands(discord.ui.View):
         '''
         Again, use these commands in <#750060041289072771>!
 
+**bd link**
+➡️ Link your Roblox account data with me, and I will display them in...
+
 **bd show profile**
-➡️ Admire your roles collection and some of your statistics
+➡️ ...this command. Shows Total Climbs and Best Climbs for each alignment as well as secret roles.
 
 **happy birthday broken drone** (bd for short)
 ➡️ You should not forget this
