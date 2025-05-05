@@ -835,35 +835,31 @@ async def on_message(message):
                 "AllLocked": 0,
             }
 
-            # Prepare total climbs for each alignment in PAGE 1
+            # Fetch user stats from DB
             user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
 
+            # Prepare total climbs for each alignment in PAGE 1
             user_climbs = ""
+            total_climbs = 0
             for alignment in RIG_LIST:
-                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {user_stats.get(f"{alignment.upper()}_climbs", "N/A")}\n\n'
+                ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
+
+                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {ali_climbs}\n\n'
+
+                if ali_climbs != "N/A":
+                    total_climbs += int(ali_climbs)
 
             view.data[0] = user_climbs
+            view.footers[0] = f"{total_climbs} climbs in total!"
 
             # Prepare best times for each alignment in Classic Tower in PAGE 2
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_classic", "N/A"))}\n\n'
-
-            view.data[1] = user_times
+            build_tower_page(user_stats, "classic", 1, view)
 
             # Prepare best times for each alignment in Pro Tower in PAGE 3
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_pro", "N/A"))}\n\n'
-
-            view.data[2] = user_times
+            build_tower_page(user_stats, "pro", 2, view)
 
             # Prepare best times for each alignment in Infinite Tower in PAGE 4
-            user_times = ""
-            for alignment in RIG_LIST:
-                user_times += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {cs_to_s(user_stats.get(f"{alignment.upper()}_infinite", "N/A"))}\n\n'
-
-            view.data[3] = user_times
+            build_tower_page(user_stats, "infinite", 3, view)
 
             # Prepare list to show in PAGE 5 (available and recurring roles)
             secret_roles = "## Available Roles\n\n"
