@@ -96,5 +96,11 @@ def redis_add_user_data(hash,key,value):
 def redis_remove_user_data(hash,key):
     db.hdel(hash,key)
 
+def redis_check_token(usr):
+    return db.hget('USER_' + str(usr.id),'token')
+
+def redis_remove_token(usr):
+    db.hdel('USER_' + str(usr.id),'token')
+
 def get_user_stats(usr):
     return db.hgetall('USER_' + str(usr.id))
