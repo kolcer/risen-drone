@@ -795,16 +795,15 @@ async def on_message(message):
             
                 redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
-                    "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n"
-                    f"`LINK DISCORD {str(usr.id)} {token}`\n"
-                    "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n"
+                    "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n\n"
+                    f"`LINK DISCORD {str(usr.id)} {token}`\n\n"
+                    "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
                     "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
                     "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
                     "`UNLINK DISCORD`\n\n" +
-                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.\n\n"
-                    "I will send your code now.")
+                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
                 
                 await asyncio.sleep(1)
                 await SEND_DM(usr, "https://giphy.com/gifs/TBej1fVGRJxRsVbEQS")
