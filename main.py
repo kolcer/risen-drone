@@ -795,7 +795,8 @@ async def on_message(message):
             
                 redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
-                    "Please copy and paste the entire message I’ll send next. To link your Roblox account properly, you’ll need to submit it as a feedback message inside Crazy Stairs.\n"
+                    "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n"
+                    f"`LINK DISCORD {str(usr.id)} {token}`\n"
                     "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
@@ -806,7 +807,7 @@ async def on_message(message):
                     "I will send your code now.")
                 
                 await asyncio.sleep(1)
-                await SEND_DM(usr, f"LINK DISCORD {str(usr.id)} {token}")
+                await SEND_DM(usr, "https://giphy.com/gifs/TBej1fVGRJxRsVbEQS")
             except:
                 redis_remove_token(usr)
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
