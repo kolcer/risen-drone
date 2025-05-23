@@ -543,6 +543,17 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
+        elif lmsg == "bd pin this":
+            try:
+                await message.pin()
+                await asyncio.sleep(1)
+                await message.unpin()
+            except discord.Forbidden:
+                await ch.send("❌ I don't have permission to pin messages.")
+            except discord.HTTPException as e:
+                await ch.send(f"⚠️ Failed to pin message: {e}")
+        
+
         # adding a comment to reset bot but rolo why does the bot break sometimes
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
             lmsg = lmsg.replace("|", "")
