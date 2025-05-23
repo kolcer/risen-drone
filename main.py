@@ -543,11 +543,11 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
-        elif lmsg == "bd pin this":
+        elif "bd pin this" in lmsg and ch.id == 1311716835779154090:
             try:
-                await message.pin()
+                await PIN_MESSAGE(message)
                 await asyncio.sleep(1)
-                await message.unpin()
+                await UNPIN_MESSAGE(message)
             except discord.Forbidden:
                 await ch.send("❌ I don't have permission to pin messages.")
             except discord.HTTPException as e:

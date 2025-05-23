@@ -106,3 +106,9 @@ async def DRONEPRINT(message):
 async def NEW_ROLE(server,colorpick, rolename):
     return await server.create_role(name = rolename, colour = discord.Colour(int(colorpick, 16)))
 
+async def PIN_MESSAGE(message):
+    await message.pin()
+    
+async def UNPIN_MESSAGE(message):
+    await message.unpin()
+
