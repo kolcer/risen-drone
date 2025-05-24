@@ -245,7 +245,7 @@ async def Rig(rigType, ch, usr):
             # DETAILED_RIGS["reaver"]["active"] = False
             # DETAILED_RIGS["reaver"]["user"] = None
 
-            await SEND(ch, "Reaver rig is cancelled for now.")
+            msgCounting = await SEND(ch, "Reaver rig is cancelled for now.")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
