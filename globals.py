@@ -564,7 +564,6 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
-    "reaver": False,
 }
 
 DETAILED_RIGS = {
@@ -591,9 +590,9 @@ COOLDOWN_SELECT = {
     "gremlin": "trap",
     "heretic": "self",
     "archon": "chat",
-    "reaver": "chat",
     "wicked": "meddle",
     "patron": "help",
+    "reaver": "username",
     "keeper": "username",
     "hacker": "username",
     "drifter": "username",
@@ -607,9 +606,9 @@ COOLDOWN_DURATION = {
     "splicer": 600,
     "gremlin": 600,
     "archon": 480,
-    "reaver": 480,
     "patron": 180,
     "heretic": 30,
+    "reaver": 20,
     "keeper": 20,
     "hacker": 20,
     "drifter": 20,

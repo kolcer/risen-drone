@@ -250,7 +250,7 @@ async def Rig(rigType, ch, usr):
 
             await EDIT_NICK(usr, mirrored)
 
-            msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror on your name!")
+            msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror in your name!")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
