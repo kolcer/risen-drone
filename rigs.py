@@ -236,16 +236,21 @@ async def Rig(rigType, ch, usr):
 
 
         case "reaver":
-            # DETAILED_RIGS["reaver"]["active"] = True
-            # DETAILED_RIGS["reaver"]["user"] = usr.id
-            # msgCounting = await SEND(ch, usr.mention + ", you cast Reaver Rig and now we shall fuse together.")
-            # await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
+            length = len(usr.display_name)
+            half = length // 2
 
-            # await asyncio.sleep(10)
-            # DETAILED_RIGS["reaver"]["active"] = False
-            # DETAILED_RIGS["reaver"]["user"] = None
+            if random.randint(1, 2) == 1:
+                # Mirror the first half
+                to_mirror = usr.display_name[:half]
+                mirrored = to_mirror + to_mirror[::-1]
+            else:
+                # Mirror the second half
+                to_mirror = usr.display_name[half:]
+                mirrored = to_mirror + to_mirror[::-1]
 
-            msgCounting = await SEND(ch, "Reaver rig is cancelled for now.")
+            await EDIT_NICK(usr, mirrored)
+
+            msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror on your name!")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
