@@ -236,16 +236,16 @@ async def Rig(rigType, ch, usr):
 
 
         case "reaver":
-            DETAILED_RIGS["reaver"]["active"] = True
-            DETAILED_RIGS["reaver"]["user"] = usr.id
-            msgCounting = await SEND(ch, usr.mention + ", you cast Reaver Rig and now we shall fuse together.")
-            await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
+            # DETAILED_RIGS["reaver"]["active"] = True
+            # DETAILED_RIGS["reaver"]["user"] = usr.id
+            # msgCounting = await SEND(ch, usr.mention + ", you cast Reaver Rig and now we shall fuse together.")
+            # await SEND(ch, "https://giphy.com/gifs/x50YBXwu74hWAv2ypQ")
 
-            await asyncio.sleep(10)
-            DETAILED_RIGS["reaver"]["active"] = False
-            DETAILED_RIGS["reaver"]["user"] = None
+            # await asyncio.sleep(10)
+            # DETAILED_RIGS["reaver"]["active"] = False
+            # DETAILED_RIGS["reaver"]["user"] = None
 
-            await SEND(ch, "I'll go back to my usual activities now.")
+            await SEND(ch, "Reaver rig is cancelled for now.")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
