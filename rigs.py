@@ -365,6 +365,7 @@ async def CastRig(rigPick,ch,usr):
 
         while True:
             randomRig = random.choice(RIG_LIST)
+            randomRig = 'heretic'
 
             if randomAttempts == 3:
                 await SEND(ch, "You know what. We can do without these rigs right now.")
