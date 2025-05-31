@@ -547,10 +547,40 @@ async def on_message(message):
             try:
                 await PIN_MESSAGE(message)
             except discord.Forbidden:
-                await ch.send("❌ I don't have permission to pin messages.")
+                await SEND(ch, "❌ I don't have permission to pin messages.")
             except discord.HTTPException as e:
-                await ch.send(f"⚠️ Failed to pin message: {e}")
-        
+                await SEND(ch, f"⚠️ Failed to pin message: {e}")
+                
+
+        elif "bd unpin this" in lmsg and ch.id == 1311716835779154090:
+            if message.reference is None:
+                return
+
+            try:
+                # Fetch the replied-to message
+                replied_msg = await ch.fetch_message(message.reference.message_id)
+
+                # Check if the replied message is pinned
+                if not replied_msg.pinned:
+                    await SEND(ch, "📌 That message isn't pinned.")
+                    return
+
+                # Check if the author of the replied message is the same as the command author
+                if replied_msg.author.id != usr.id:
+                    await SEND(ch, "❌ You can only unpin your own pinned messages.")
+                    return
+
+                # Unpin the message
+                await replied_msg.unpin()
+                await asyncio.sleep(1)
+                await ch.send("✅ Message unpinned.")
+                
+            except discord.NotFound:
+                await SEND(ch, "⚠️ Couldn't find the message to unpin.")
+            except discord.Forbidden:
+                await SEND(ch, "❌ I don't have permission to unpin messages.")
+            except discord.HTTPException as e:
+                await SEND(ch, f"⚠️ Failed to unpin message: {e}")
 
         # adding a comment to reset bot but rolo why does the bot break sometimes
         elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
