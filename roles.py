@@ -106,16 +106,18 @@ async def DemorphFrom(usr,role):
             return SPECIAL_ROLES[role][3]
 
 async def SubTo(usr,role):
-     if role in PING_ROLES:
+    await DRONEPRINT(role)
+    if role in PING_ROLES:
         await ADD_ROLES(usr,PING_ROLES[role])
         return "You have subscribed to " + role + "!"
-     
-     if role in SECRET_PING_ROLES:
+    
+    if role in SECRET_PING_ROLES:
         add_entry(role, usr.id)
         return "You have subscribed to " + role + "!"
 
 #unsub command (aceppts unsub, desub and any **sub from combination)
-async def UnsubFrom(usr,role):       
+async def UnsubFrom(usr,role):  
+    await DRONEPRINT(role)     
     if role in PING_ROLES:
         await REMOVE_ROLES(usr,PING_ROLES[role])
         return "You have unsubscribed from " + role + "!"
