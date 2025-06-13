@@ -543,7 +543,7 @@ async def on_message(message):
 
             await JoinFightingGame(usr)
 
-        elif "bd pin this" in lmsg and ch.id == 1311716835779154090 or ch.id == 813882658156838923:
+        elif "bd pin this" in lmsg and (ch.id == 1311716835779154090 or ch.id == 813882658156838923):
             try:
                 await PIN_MESSAGE(message)
             except discord.Forbidden:
@@ -561,7 +561,7 @@ async def on_message(message):
                     await SEND(ch, "Sadly, no music enjoyers were found.")
                 
 
-        elif "bd unpin this" in lmsg and ch.id == 1311716835779154090 or ch.id == 813882658156838923:
+        elif "bd unpin this" in lmsg and (ch.id == 1311716835779154090 or ch.id == 813882658156838923):
             if message.reference is None:
                 return
 
