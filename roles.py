@@ -2,7 +2,7 @@ import random
 
 from rated import *
 from globals import *
-from database import list_decoded_entries
+from database import *
 
 def PrepareRoles(roles):
     for role in roles:
@@ -109,12 +109,20 @@ async def SubTo(usr,role):
      if role in PING_ROLES:
         await ADD_ROLES(usr,PING_ROLES[role])
         return "You have subscribed to " + role + "!"
+     
+     if role in SECRET_PING_ROLES:
+        add_entry(role, usr.id)
+        return "You have subscribed to " + role + "!"
 
 #unsub command (aceppts unsub, desub and any **sub from combination)
 async def UnsubFrom(usr,role):       
     if role in PING_ROLES:
         await REMOVE_ROLES(usr,PING_ROLES[role])
         return "You have unsubscribed from " + role + "!"
+    
+    if role in SECRET_PING_ROLES:
+        delete_entry_by_value(role, usr.id)
+        return "You have unsubscribed to " + role + "!"
                
 #chat killer function
 async def WAIT_FOR_CHAT_KILLER(msg):
