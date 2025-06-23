@@ -506,7 +506,7 @@ async def on_message(message):
                 await ExecuteGremlinRig(ch, usr)
 
         # Prevent using BD commands outside of #bot-commands and #bot-testing channels
-        elif ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing'] and restricted:
+        elif ch.id not in [750060041289072771, 813882658156838923] and restricted:
             await SEND(ch, "This command can be only used in <#750060041289072771>!")
 
         #start the quiz
