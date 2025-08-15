@@ -1,4 +1,4 @@
-jimport time
+import time
 import datetime
 
 from views import *
