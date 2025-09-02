@@ -1228,11 +1228,11 @@ async def on_message(message):
 
         #sub command       
         elif lmsg.startswith("sub to"):
-            await SEND(ch,await SubTo(usr,lmsg.split(" ",2)[2].title()))
+            await SEND(ch,await SubTo(usr,lmsg.split(" ",2)[2].capitalize()))
 
         #unsub command
         elif lmsg.startswith("sub from",2):
-            await SEND(ch,await UnsubFrom(usr,lmsg.split(" ",2)[2].title()))
+            await SEND(ch,await UnsubFrom(usr,lmsg.split(" ",2)[2].capitalize()))
         
         #guide
         elif lmsg == 'bd help':            
