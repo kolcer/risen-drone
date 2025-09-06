@@ -188,7 +188,7 @@ async def Rig(rigType, ch, usr):
             
         case "archon":
             if ch.name not in CHANNELS:
-                await SEND(ch, "Impossible to create a Split here. This channel is restricted.")
+                await SEND(ch, "Impossible to create a Gate here. This channel is restricted.")
                 RIG_COOLDOWNS["chat"] = False
                 return
             ch2 = ch
@@ -199,10 +199,10 @@ async def Rig(rigType, ch, usr):
                 if (ch2.name != ch.name) and (ch2.name not in SECRET_CHANNELS):
                     break
 
-            firstmsg = await SEND(ch, "You cast Archon Rig and created a Split in another channel!")
+            firstmsg = await SEND(ch, "You cast Archon Rig and created a Gate in another channel!")
             await SEND(ch, "https://giphy.com/gifs/jiSabjDlIahx2P1xI0")
             await asyncio.sleep(3)
-            secondmsg = await SEND(ch2, usr.mention + " has just created a Split in this channel! They come from "
+            secondmsg = await SEND(ch2, usr.mention + " has just created a Gate in this channel! They come from "
                 + firstmsg.jump_url + ".")
             await SEND(ch2, "https://giphy.com/gifs/BdtSfK2OBGu3tKyvJF")
             await asyncio.sleep(3)

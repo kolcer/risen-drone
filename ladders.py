@@ -129,7 +129,7 @@ async def MG_ACTION(plr, action):
             victim = SelectRandomUser(plr)
 
             if chances != 0:
-                toSend += "pranked `" + victim.name + "` - causing them to fell 2 levels down!"
+                toSend += "pranked `" + victim.name + "` - causing them to fall 2 levels down!"
                 # MG_PLAYERS[victim] -= 2
                 UpdateFloor(victim, -2)
             else:
@@ -228,7 +228,7 @@ async def MG_ACTION(plr, action):
                 UpdateFloor(plr, 10)
                 
         case "archon":
-            toSend += "cast Split Event and caused players to either lost or gain an extra level."
+            toSend += "cast Gate Event and caused players to either lost or gain an extra level."
             for i in MG_PLAYERS.keys():
                 chances = random.randint(0,1)
                 if chances == 0 or i == plr:
