@@ -151,7 +151,7 @@ async def on_member_update(before, after):
         await EDIT_NICK(after, random.choice(WORST_GUNS))
         return
     #name stolen and is NOT gun
-    elif after.nick != NickDictionary[before] and MORPHABLE_ROLES['Gun'][0] not in before.roles:
+    elif NickDictionary[before] and after.nick != NickDictionary[before] and MORPHABLE_ROLES['Gun'][0] not in before.roles:
         await EDIT_NICK(after, NickDictionary[before])
         return
 
