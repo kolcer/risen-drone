@@ -298,7 +298,6 @@ WISDOM = [
     "Psst, want to know a secret? To unlock one of the coveted secret roles, you just need to send a certain emoji four times in a row!",
     "Don't forget to keep chatting and engaging with the community... you never know what surprises await you.",
     "Want to earn a secret role? Share your creative genius with us! Post some of your artworks in the Showcase channel and you might just earn yourself a special role.",
-    "To gain a secret role, you must give an offering to someone who has been overtaken by the shadows. Once they have been freed, you'll be rewarded.",
     "Do you have a knack for pulling off pranks? Cast a Joker Rig and keep an eye out for the poor Sleazel's messages. If you can successfully prank him, you'll receive the secret role as a reward.",
     "Chameleon rig might do nothing if it fails too many times, it can be due to a few reasons. But worry not, I will give you a little something for the issue if that happens!",
     "Wisdom can grant roles.",
