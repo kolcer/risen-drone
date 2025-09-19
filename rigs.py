@@ -511,12 +511,7 @@ async def ExecuteJokerRig(ch, usr, message):
         replied_msg = message.reference.resolved
         replied_user = replied_msg.author
 
-        if any(user.id == replied_user.id for user in message.mentions):
-            # Was a reply *with* ping
-            to_line = f"To: {replied_user.mention}\n"
-        else:
-            # Reply without ping
-            to_line = f"To: {replied_user.display_name}\n"
+        to_line = f"To: {replied_user.display_name}\n"
 
     await DELETE(message)
     await asyncio.sleep(2)
