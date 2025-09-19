@@ -498,6 +498,28 @@ async def ExecuteJokerRig(ch,usr, message):
             
     return
 
+async def ExecuteJokerRig(ch, usr, message):
+    if (ch.name not in CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
+        return
+
+    ACTIVE_RIGS["joker"] = False
+
+    msgcontent = message.content
+
+    to_line = ""
+    if message.reference and message.reference.resolved:
+        replied_msg = message.reference.resolved
+        if isinstance(replied_msg, discord.Message):
+            replied_user = replied_msg.author
+            
+            to_line = f"To: {replied_user.mention}\n"
+
+    await DELETE(message)
+    await asyncio.sleep(2)
+
+    await SEND(ch, f"{to_line}{msgcontent} - :nerd: :clown:\nFrom: {usr.mention}")
+    return
+
 async def ExecuteSplicerRig(ch,usr):
  
     if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
