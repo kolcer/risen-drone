@@ -907,7 +907,10 @@ async def on_message(message):
                     total_climbs += int(ali_climbs)
 
             view.data[0] = user_climbs
-            view.footers[0] = f"{total_climbs} climbs in total!"
+            if total_climbs == 0:
+                view.footers[0] = "Type 'bd link' to link your account and start tracking your climbs!"
+            else:
+                view.footers[0] = f"{total_climbs} climbs in total!"
 
             # Prepare best times for each alignment in Classic Tower in PAGE 2
             build_tower_page(user_stats, "classic", 1, view)

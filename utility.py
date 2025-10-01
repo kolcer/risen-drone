@@ -30,4 +30,4 @@ def build_tower_page(user_stats, tower_type, page_index, view):
     if valid_entries:
         view.footers[page_index] = f"Average climb time is {avg_time / valid_entries:.2f} seconds!"
     else:
-        view.footers[page_index] = "No valid climb times."
+        view.footers[page_index] = "Type 'bd link' to link your account and start tracking your times!"
