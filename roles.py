@@ -106,6 +106,7 @@ async def DemorphFrom(usr,role):
             return SPECIAL_ROLES[role][3]
 
 async def SubTo(usr,role):
+    await DRONEPRINT("Subscribing " + str(usr.id) + " to role " + role)
     if role in PING_ROLES:
         await ADD_ROLES(usr,PING_ROLES[role])
         return "You have subscribed to " + role + "!"
