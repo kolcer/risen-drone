@@ -111,6 +111,7 @@ async def SubTo(usr,role):
         return "You have subscribed to " + role + "!"
     
     if role in SECRET_PING_ROLES:
+        await DRONEPRINT("Subscribing " + str(usr.id) + " to secret role " + role)
         add_entry(role, usr.id)
         return "You have subscribed to " + role + "!"
 
