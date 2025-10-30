@@ -118,7 +118,10 @@ async def SubTo(usr,role):
         return "You have subscribed to " + role + "!"
 
 #unsub command (aceppts unsub, desub and any **sub from combination)
-async def UnsubFrom(usr,role):  
+async def UnsubFrom(usr,role): 
+    if role.lower() == 'sleazel-in-game':
+        role = 'Sleazel-in-game'
+        
     if role in PING_ROLES:
         await REMOVE_ROLES(usr,PING_ROLES[role])
         return "You have unsubscribed from " + role + "!"
