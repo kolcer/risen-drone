@@ -442,13 +442,14 @@ EMOJIS_TO_REACT = {
     "csUsurper": 1046199582805217341,
     "csOptimus": 1046224869945266226,
     "csDeathbringer": 1353301136450392075,
-    "csAlien": 1353300862834839572,
+    "csIllusion": 1437375086863585371,
     "csDaemon": 1353300733600071720,
     "csSleazelApproves": 791393163343560715,
     "csSecret": 786318938350813215,
     "csPranked": 786317086066343936,
     "csSuperSecret": 987709883010916383,
     "csMegaSecret": 987819430639730699,
+    "csBlackHole": 1437376488772206633,
 }
 
 #suggestion reactions
