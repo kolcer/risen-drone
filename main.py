@@ -1210,8 +1210,8 @@ async def on_message(message):
                 for alignment in RIG_LIST:
                     ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
 
-                if ali_climbs != "N/A":
-                    total_climbs += int(ali_climbs)
+                    if ali_climbs != "N/A":
+                        total_climbs += int(ali_climbs)
 
                 await SEND(ch, "You have:" + str(total_climbs))
             else:
