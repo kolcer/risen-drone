@@ -1195,8 +1195,29 @@ async def on_message(message):
 
             if not noRoles and morphToTarget.lower() in RIG_LIST and EVENTS["Easter"]:
                 await SEND(ch, "I'm afraid I can't let you do that.\nFor the duration of the Easter Event, you may only have 1 alignment role.\nEating eggs of any alignment will morph you instead.")
+            elif morphToTarget == "Janitor":
+
+                # Fetch user stats from DB
+                user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
+
+                #Is user linked?
+                if len(user_stats) == 0:
+                   await SEND(ch, "You need to be linked with BD and have 50 climbs minimum in the game, to morph into a Janitor.")
+                   return
+
+                # Count total climbs
+                total_climbs = 0
+                for alignment in RIG_LIST:
+                    ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
+
+                if ali_climbs != "N/A":
+                    total_climbs += int(ali_climbs)
+
+                await SEND(ch, "You have:" + str(total_climbs))
             else:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
+
+            
 
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
