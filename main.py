@@ -833,7 +833,7 @@ async def on_message(message):
         ## Verify for CS stats
         elif lmsg == 'bd link':
 
-            if redis_check_token(usr) != None:
+            if redis_check_token(usr) != None: 
                 await SEND(ch, "Please unlink first. If you no longer have access to your account, contact mods.")
                 return
             
