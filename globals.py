@@ -783,6 +783,13 @@ MORPHABLE_ROLES = {
         "The Roingus Society has decided that you are no longer welcome there.",
         "The Roingus Society has already accepted you.",
         "You are not a part of their society.",
+    ],    
+    "Janitor": [
+        None,
+        "You can now post suggestions for the game.",
+        "You can no longer post suggestions for the game.",
+        "You already are a Janitor.",
+        "You are not a Janitor.",
     ],
 }
 

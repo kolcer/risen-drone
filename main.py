@@ -1213,7 +1213,11 @@ async def on_message(message):
                     if ali_climbs != "N/A":
                         total_climbs += int(ali_climbs)
 
-                await SEND(ch, "You have:" + str(total_climbs))
+                if total_climbs < 50:
+                   await SEND(ch, "You need minimum 50 climbs in total to morph into Janitor. You currently have: " + str(total_climbs))
+                else:
+                   await SEND(ch, await MorphTo(usr,morphToTarget))
+               
             else:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
 
