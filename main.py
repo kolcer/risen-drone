@@ -893,7 +893,7 @@ async def on_message(message):
             }
 
             # Fetch user stats from DB
-            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(usr).items()}
+            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
 
             # Prepare total climbs for each alignment in PAGE 1
             user_climbs = ""
@@ -1198,7 +1198,7 @@ async def on_message(message):
             elif morphToTarget == "Janitor":
 
                 # Fetch user stats from DB
-                user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
+                user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(usr).items()}
 
                 #Is user linked?
                 if len(user_stats) == 0:
