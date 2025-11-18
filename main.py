@@ -893,7 +893,7 @@ async def on_message(message):
             }
 
             # Fetch user stats from DB
-            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
+            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(usr).items()}
 
             # Prepare total climbs for each alignment in PAGE 1
             user_climbs = ""
