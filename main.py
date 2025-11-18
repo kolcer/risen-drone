@@ -855,6 +855,8 @@ async def on_message(message):
                 
                 await asyncio.sleep(1)
                 await SEND_DM(usr, "https://giphy.com/gifs/TBej1fVGRJxRsVbEQS")
+                await asyncio.sleep(1)
+                await SEND(ch, f"{usr.mention} I have sent you a direct message with further instructions.")
             except:
                 redis_remove_token(usr)
                 await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
