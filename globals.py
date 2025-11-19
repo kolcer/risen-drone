@@ -143,7 +143,7 @@ LIMITED_USE_RIGS = [
     "thief",
     "spectre",
     "splicer",
-    "gremlin"
+    "gremlin",
 ]
 
 BOT_COMMANDS_CHANNEL_RESTRICTED = [
@@ -340,23 +340,61 @@ ANSWERS = [
     "Wicked says no, and trust me, you don’t want to argue with them.",
     "If you were expecting a positive outcome, think again.",
     # Joker
+    "The Joker guild gave me a look when I asked for assistance with your question, I think it's a yes.",
+    "Yes, but only if you do the chicken dance."
     "A big fat no from the Joker.",
     "At first glance, I'd say no. On second glance, I'd still say no.",
     "Let’s flip a coin... flip... nope, still no.",
+    "Nuh-Uh."
     "I didn't ask.",
     "You can't be serious.",
-    "The Joker guild gave me a look when I asked for assistance with your question, I think it's a yes.",
     "Yes <:csTroll:814959699337412698>",
     # Patron
     "Positive.",
     "Most definitely.",
-    "As long as the 'P' in Patron stands for Perfection, yes.",
     "A resounding yes, but only because it's the right answer.",
+    "As long as the 'P' in Patron stands for Perfection, yes.",
+    "The shock and horror on Patron's face says it all: no.",
+    "Patron would be disappointed if I said yes to that.",
     # Archon
     "According to someone's calculations, that is correct.",
     "According to the ancient scrolls, the answer is yes… but don’t tell anyone.",
     "This book right here has the answer, but Archon won't give it to you.",
+    "The stairs align in your favor, so yes.",
+    "The outcome is not in your favor.",
+    "Archon is currently travelling between Gates and cannot answer.",
     "Let me concentrate, I'll let you know at a later time.",
+    # Gremlin
+    "Gremlin says yes, but only if you promise to fix any problems that arise later.",
+    "WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE! YEEEESSS!",
+    "Hihihi yes hehehhehehehehe!",
+    "Gremlin might say yes, but only if you give it a snack first.",
+    "WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE! NOOOO!",
+    "Spin thrice and shout NOOOOOOOOOOOOOOOOOOOO!",
+    "Gremlin does not understand your question. Gremlin says NO!",
+    "Spin Gremlin right, spin them around, spin them around again! Gremlin has forgotten about your question.",
+    # Reaver
+    "The mirror reflects a yes.",
+    "The mirror broke after I asked your question, so I can’t be sure.",
+    "Reaver has sent their mirror for maintenance, so I can’t get an answer right now.",
+    "Reaver speaks a more advanced language than you do, but they seem to indicate a yes, or a no, or that I should leave them be.",
+    # Necromancer
+    "In order to get a Yes, you must sacrifice a stair to the undead.",
+    "Under a full moon, the answer is yes.",
+    "The resurrected decided to sleep once more rather than answer your question.",
+    "Necromancer no longer wishes to play with you."
+    "Your question scared Necromancer away, which is saying something."
+    # Keeper
+    "So long as things go according to plan, yes.",
+    "Keeper says yes, but only if you follow the rules.",
+    "Suspicious question. Keeper is 'keeping' an eye on you, so be on your best behavior.",
+    "Keeper cannot allow that.",
+    # Hacker
+    "Yesn't.",
+    "The system has been compromised and nothing matters anymore, so Yes.",
+    "Access Denied.",
+    "Hacker says no, but only because they can’t hack the system to make it happen.",
+    "I am not supposed to tell you, but Hacker leaked to me that-",
 ]
 
 OBJECTS = {
@@ -539,6 +577,7 @@ SANCTUARY = {
     "reaver": " has found Reaver's Mirror!",
     "gremlin": " has found Gremlin's Shack!",
     "chameleon": " has found Chameleon's Oasis!",
+    "none": " has ??!",
 }
 
 RIG_LIST = [
@@ -557,6 +596,8 @@ RIG_LIST = [
     "reaver",
     "gremlin",
     "spectre",
+    "none",
+    "janitor",
     "chameleon",
 ]
 
@@ -566,6 +607,7 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
+    "none": False,
 }
 
 DETAILED_RIGS = {
@@ -590,6 +632,7 @@ COOLDOWN_SELECT = {
     "joker": "trap",
     "splicer": "trap",
     "gremlin": "trap",
+    "none": "trap",
     "heretic": "self",
     "archon": "chat",
     "wicked": "meddle",
@@ -601,6 +644,7 @@ COOLDOWN_SELECT = {
 }
 
 COOLDOWN_DURATION = {
+    "janitor": 1200,
     "wicked": 900,
     "thief": 600,
     "spectre": 600,
@@ -608,6 +652,7 @@ COOLDOWN_DURATION = {
     "splicer": 600,
     "gremlin": 600,
     "archon": 480,
+    "none": 200,
     "patron": 180,
     "heretic": 30,
     "reaver": 20,
@@ -617,12 +662,12 @@ COOLDOWN_DURATION = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720> cooldown: ",
+    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720><:csNone:786323557650268172> cooldown: ",
     "self": "<:csHeretic:786323224115281921> cooldown: ",
     "chat": "<:csArchon:786323402172530688> cooldown: ",
     "meddle": "<:csWicked:792143453035167754> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816><:csReaver:1353300809672294420> cooldown: ",
-    "help": "<:csPatron:758081038697103504> cooldown: ",
+    "help": "<:csPatron:758081038697103504><:csJanitor:1440819274187931700> cooldown: ",
 }
 
 RIGS_DESCRIPTION = {
@@ -642,6 +687,7 @@ RIGS_DESCRIPTION = {
     "gremlin": "Distracted!",
     "reaver": "Mirror, mirror on the wall, who is the fairest one of all?",
     "none": "Some cool stats, sadly nobody cares about these.",
+    "janitor": "You take responsability for this mess.",
 }
 
 SPLICER_RIG = {
@@ -788,8 +834,15 @@ MORPHABLE_ROLES = {
         None,
         "You can now post suggestions for the game.",
         "You can no longer post suggestions for the game.",
-        "You already are a Janitor.",
-        "You are not a Janitor.",
+        "No pay raise for you.",
+        "Who hired you?",
+    ],
+    "None": [
+        None,
+        "You did nothing and became nothing.",
+        "You did nothing and became something.",
+        "???",
+        "??!",
     ],
 }
 

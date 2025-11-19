@@ -251,6 +251,28 @@ async def Rig(rigType, ch, usr):
             await EDIT_NICK(usr, mirrored)
 
             msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror in your name!")
+
+        case "janitor":
+            activeFound = False
+            for i, v in RIG_COOLDOWNS.items():
+                if v:
+                    activeFound = True
+                    break
+
+            if activeFound:
+                for rig in ACTIVE_RIGS:
+                    ACTIVE_RIGS[rig] = False 
+
+                for rig in DETAILED_RIGS:
+                    DETAILED_RIGS[rig][0] = None
+                    DETAILED_RIGS[rig][1] = None
+
+                for cooldown in RIG_COOLDOWNS:
+                    RIG_COOLDOWNS[cooldown] = False
+
+                msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active rigs!")
+            else:
+                msgCounting = await SEND(ch, "The are no loose ends in need of cleaning.")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 

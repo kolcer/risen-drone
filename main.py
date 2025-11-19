@@ -1851,7 +1851,7 @@ async def on_message(message):
             if lmsg.startswith("purge role", 1):
                 try:
                     if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
-                        await SEND(ch, "You cannot assign this role through my commands.")
+                        await SEND(ch, "You cannot purge this role through my commands.")
                         return
                         
                     delete_key(third)
