@@ -670,7 +670,8 @@ COOLDOWN_DESCRIPTIONS = {
     "chat": "<:csArchon:786323402172530688> cooldown: ",
     "meddle": "<:csWicked:792143453035167754> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816><:csReaver:1353300809672294420> cooldown: ",
-    "help": "<:csPatron:758081038697103504><:csJanitor:1440819274187931700> cooldown: ",
+    "help": "<:csPatron:758081038697103504> cooldown: ",
+    "janitor": "<:csJanitor:1440819274187931700> cooldown: ",
 }
 
 RIGS_DESCRIPTION = {
