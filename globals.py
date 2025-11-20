@@ -637,6 +637,7 @@ COOLDOWN_SELECT = {
     "heretic": "self",
     "archon": "chat",
     "wicked": "meddle",
+    "janitor": "meddle",
     "patron": "help",
     "reaver": "username",
     "keeper": "username",
