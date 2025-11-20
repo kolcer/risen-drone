@@ -234,7 +234,6 @@ async def Rig(rigType, ch, usr):
 
             msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
 
-
         case "reaver":
             length = len(usr.display_name)
             half = length // 2
@@ -253,6 +252,10 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror in your name!")
 
         case "janitor":
+            if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
+                await SEND(ch, "You are not skilled enough to cast Janitor Rig.")
+                return
+
             activeFound = False
             for i, v in RIG_COOLDOWNS.items():
                 if v:
@@ -412,7 +415,6 @@ async def CastRig(rigPick,ch,usr):
                 await SEND(ch, "Considering you are on a break, we should reserve this one for another time. Behold... 🥁")
                 randomAttempts = randomAttempts + 1
                 await asyncio.sleep(4)
-
             else:
                 break
 

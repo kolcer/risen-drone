@@ -136,6 +136,7 @@ RANDOM_BLACKLIST = [
     "necromancer",
     "muggle",
     "chameleon",
+    "janitor",
 ]
 
 LIMITED_USE_RIGS = [
