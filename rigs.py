@@ -254,6 +254,7 @@ async def Rig(rigType, ch, usr):
         case "janitor":
             if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
                 await SEND(ch, "You are not skilled enough to cast Janitor Rig.")
+                RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
                 return
 
             activeFound = False
