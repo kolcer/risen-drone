@@ -949,7 +949,8 @@ DETAILED_ROLES = {
     "hdream": {},
     "hnightmare": {
         "caster": None
-    }
+    },
+    "nonerig": False,
 }
 
 # not morphable roles

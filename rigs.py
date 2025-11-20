@@ -97,6 +97,7 @@ async def muggle(channel, user):
         await SEND(channel, "You thought there was a rig for Muggle but there wasn't.")
 
 async def Rig(rigType, ch, usr):
+    newRigType = rigType
     msgCounting = None
     today = datetime.date.today()
  
@@ -123,11 +124,14 @@ async def Rig(rigType, ch, usr):
             
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
 
+    if DETAILED_ROLES["nonerig"]:
+        DETAILED_ROLES["nonerig"] = False
+        newRigType = "noneified"
+
     # await updateRigTracker(rigType)
     messageAppend = "."
     msgCountingContent = ""
-    match rigType:
-        
+    match newRigType:
         case "heretic":
             if EXTRA_ROLES['murdurator'] in usr.roles:
                 await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
@@ -279,8 +283,11 @@ async def Rig(rigType, ch, usr):
                 RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
                 await SEND(ch, "The are no loose ends in need of cleaning.")
                 return
+            
+        case "noneified":
+            msgCounting = await SEND(ch, "nonealtevent")
                 
-        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
+        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"|"none"):
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -295,6 +302,9 @@ async def Rig(rigType, ch, usr):
             elif rigType == "gremlin":
                 DETAILED_ROLES["hnightmare"]["caster"] = usr
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
+            elif rigType == "none":
+                DETAILED_ROLES["nonerig"] = True
+                msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
         
         # case "gun":
         #     if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
@@ -311,16 +321,16 @@ async def Rig(rigType, ch, usr):
                 
     theCooldown = COOLDOWN_DURATION[rigType]
 
-    if rigType != "archon" and rigType != "heretic":
+    if newRigType != "archon" and newRigType != "heretic":
         msgCountingContent = msgCounting.content
         await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + theCooldown)}:R>")
 
     await asyncio.sleep(theCooldown)
 
-    if rigType != "archon":
+    if newRigType != "archon":
         await EDIT_MESSAGE(msgCounting, msgCountingContent)
 
-    if rigType in LIMITED_USE_RIGS and ACTIVE_RIGS[rigType] == True:
+    if newRigType in LIMITED_USE_RIGS and ACTIVE_RIGS[newRigType]:
         ACTIVE_RIGS[rigType] = False
         messageAppend = ", and the current Rig effect has worn off."
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
