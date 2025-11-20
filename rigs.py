@@ -259,7 +259,7 @@ async def Rig(rigType, ch, usr):
 
             activeFound = False
             for i, v in RIG_COOLDOWNS.items():
-                if v:
+                if v and i != 'janitor':
                     activeFound = True
                     break
 
@@ -276,6 +276,7 @@ async def Rig(rigType, ch, usr):
 
                 msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active rigs!")
             else:
+                RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
                 msgCounting = await SEND(ch, "The are no loose ends in need of cleaning.")
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
@@ -370,8 +371,8 @@ async def CastRig(rigPick,ch,usr):
 
     if rigPick == "chameleon":
         cd = False
-        for active in RIG_COOLDOWNS.values():
-            if active:
+        for i, v in RIG_COOLDOWNS.items():
+            if v and i != 'janitor':
                 cd = True
                 break
         if cd:

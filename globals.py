@@ -625,6 +625,7 @@ RIG_COOLDOWNS = {
     "chat": False,     #Affects the chat
     "meddle": False,   #Affects other rigs
     "help": False,     #Helps, idk
+    "janitor": False,  #its him, Janitor Cena
 }
 
 COOLDOWN_SELECT = {
@@ -637,7 +638,7 @@ COOLDOWN_SELECT = {
     "heretic": "self",
     "archon": "chat",
     "wicked": "meddle",
-    "janitor": "meddle",
+    "janitor": "janitor",
     "patron": "help",
     "reaver": "username",
     "keeper": "username",
