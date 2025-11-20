@@ -277,7 +277,8 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active cooldowns!")
             else:
                 RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
-                msgCounting = await SEND(ch, "The are no loose ends in need of cleaning.")
+                await SEND(ch, "The are no loose ends in need of cleaning.")
+                return
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
 
