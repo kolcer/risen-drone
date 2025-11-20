@@ -319,7 +319,7 @@ async def Rig(rigType, ch, usr):
         #     RIG_DATA['rigCaster'] = usr
         #     msgCounting = await SEND(ch, f"{usr.mention} just cast Impostor rig, I guess... ?")
                 
-    theCooldown = COOLDOWN_DURATION[rigType]
+    theCooldown = COOLDOWN_DURATION[rigType] 
 
     if newRigType != "archon" and newRigType != "heretic":
         msgCountingContent = msgCounting.content
