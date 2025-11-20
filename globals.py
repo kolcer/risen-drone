@@ -145,6 +145,7 @@ LIMITED_USE_RIGS = [
     "spectre",
     "splicer",
     "gremlin",
+    "none",
 ]
 
 BOT_COMMANDS_CHANNEL_RESTRICTED = [
