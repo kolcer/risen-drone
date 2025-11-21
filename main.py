@@ -901,6 +901,9 @@ async def on_message(message):
             user_climbs = ""
             total_climbs = 0
             for alignment in RIG_LIST:
+                if alignment in ["none", "janitor"]:
+                    continue
+
                 ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
 
                 user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {ali_climbs}\n\n'
