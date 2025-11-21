@@ -175,7 +175,7 @@ async def Rig(rigType, ch, usr):
             if not EVENTS["Easter"]:
                 role_list = []
                 for role in usr.roles:
-                    if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES) and role.name != "Wicked":
+                    if (role.name in MORPHABLE_ROLES or role.name in PING_ROLES) and role.name != "Wicked" and role.name != "Janitor":
                         role_list.append(role)
                 #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
                 await usr.remove_roles(*role_list)
@@ -622,7 +622,7 @@ async def ExecuteGremlinRig(ch,usr):
     if not EVENTS["Easter"]:
         role_list = []
         for role in usr.roles:
-            if (role.name in MORPHABLE_ROLES):
+            if (role.name in MORPHABLE_ROLES) and role.name != "Gremlin" and role.name != "Janitor":
                 role_list.append(role)
         #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
         await usr.remove_roles(*role_list)
