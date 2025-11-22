@@ -106,7 +106,7 @@ async def Rig(rigType, ch, usr):
     #         await SEND(ch, "The Splicer main has not given you permissions to cast this rig yet.")
     #         return
    
-    await DRONEPRINT(ch, f"{usr.display_name} tried to cast {rigType} with {RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]} cooldown status and {COOLDOWN_SELECT[rigType]} cooldown key.")
+    await DRONEPRINT(f"{usr.display_name} tried to cast {rigType} with {RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]} cooldown status and {COOLDOWN_SELECT[rigType]} cooldown key.")
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
         return
