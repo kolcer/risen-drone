@@ -618,14 +618,14 @@ async def ExecuteGremlinRig(ch,usr):
     await ADD_ROLES(usr, EXTRA_ROLES['hypno'])
     await asyncio.sleep(1)
 
-    if not EVENTS["Easter"]:
-        role_list = []
-        for role in usr.roles:
-            if (role.name in MORPHABLE_ROLES) and role.name != "Gremlin" and role.name != "Janitor":
-                role_list.append(role)
-        #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
-        await usr.remove_roles(*role_list)
-        await asyncio.sleep(1)
+    # if not EVENTS["Easter"]:
+    #     role_list = []
+    #     for role in usr.roles:
+    #         if (role.name in MORPHABLE_ROLES) and role.name != "Gremlin" and role.name != "Janitor":
+    #             role_list.append(role)
+    #     #TODO: Rolo, check if we can use REMOVE_ROLES() function here...
+    #     await usr.remove_roles(*role_list)
+    #     await asyncio.sleep(1)
 
     await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
             

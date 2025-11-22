@@ -648,7 +648,7 @@ COOLDOWN_SELECT = {
 }
 
 COOLDOWN_DURATION = {
-    "janitor": 1200,
+    "janitor": 1800,
     "wicked": 900,
     "thief": 600,
     "spectre": 600,
