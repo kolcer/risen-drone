@@ -106,7 +106,6 @@ async def Rig(rigType, ch, usr):
     #         await SEND(ch, "The Splicer main has not given you permissions to cast this rig yet.")
     #         return
    
-    await DRONEPRINT(f"{usr.display_name} tried to cast {rigType} with {RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]} cooldown status and {COOLDOWN_SELECT[rigType]} cooldown key.")
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
         await SEND(ch, "Ultimate spells are in cooldown.")
         return
@@ -281,7 +280,6 @@ async def Rig(rigType, ch, usr):
 
                 msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active cooldowns!")
             else:
-                RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
                 await SEND(ch, "There are no loose ends in need of cleaning.")
                 return
             
