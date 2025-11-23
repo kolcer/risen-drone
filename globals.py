@@ -672,7 +672,7 @@ COOLDOWN_DESCRIPTIONS = {
     "meddle": "<:csWicked:792143453035167754> cooldown: ",
     "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816><:csReaver:1353300809672294420> cooldown: ",
     "help": "<:csPatron:758081038697103504> cooldown: ",
-    "janitor": "<:csJanitor:1440819274187931700> cooldown: ",
+    "janitor": "<:csJanitor:1441195799743827978> cooldown: ",
 }
 
 RIGS_DESCRIPTION = {
