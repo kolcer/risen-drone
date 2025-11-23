@@ -138,13 +138,21 @@ async def MG_ACTION(plr, action):
                 # MG_PLAYERS[victim] -= 1
         
         case "wicked":
+            chances = random.randint(0, 4)
             ourLevel = MG_PLAYERS[plr]
-            for i, v in MG_PLAYERS.items():
-                if v > ourLevel:
-                    UpdateFloor(i, -1)
-                    # MG_PLAYERS[i] -= 1
-            toSend += "purged the stairs and above players fell one level."
-            
+
+            if chances != 0 or len(LADDERS["tram"]["travelers"]) < 1 or plr in LADDERS["tram"]["travelers"]:
+                for i, v in MG_PLAYERS.items():
+                    if v > ourLevel:
+                        UpdateFloor(i, -1)
+                        # MG_PLAYERS[i] -= 1
+                toSend += "purged the stairs and above players fell one level."
+            else:
+                LADDERS["tram"]["travelers"].clear()
+                LADDERS['tram']['arrival'] = 10
+                LADDERS['tram']['forward'] = True
+                toSend += "purged the Tram and put an end to their unfair journey!"
+
         case "spectre":
             chances = random.randint(-1, 2)
             # MG_PLAYERS[plr] += chances
