@@ -122,7 +122,8 @@ async def Rig(rigType, ch, usr):
             spamCount += 1
             RIG_SPAMMERS[usr] = spamCount
             
-    RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
+    if rigType != "janitor":
+        RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
 
     if DETAILED_ROLES["nonerig"]:
         DETAILED_ROLES["nonerig"] = False
@@ -258,7 +259,6 @@ async def Rig(rigType, ch, usr):
         case "janitor":
             if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
                 await SEND(ch, "You are not skilled enough to cast Janitor Rig.")
-                RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
                 return
 
             activeFound = False
@@ -278,6 +278,7 @@ async def Rig(rigType, ch, usr):
                 for cooldown in RIG_COOLDOWNS:
                     RIG_COOLDOWNS[cooldown] = False
 
+                RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
                 msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active cooldowns!")
             else:
                 await SEND(ch, "There are no loose ends in need of cleaning.")
