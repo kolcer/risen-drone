@@ -333,9 +333,17 @@ async def MG_ACTION(plr, action):
                     toSend += "are growing impatient and decided to check the next stop."
 
         case "necromancer":
-            AssignRevival(plr, MG_PLAYERS[plr])
+            chances = random.randint(0,2)
 
-            toSend += "have created a Revival Point on their floor for good measure!"
+            if chances == 0:
+                toSend += "have created a Revival Point on their floor for good measure!"
+                AssignRevival(plr, MG_PLAYERS[plr])
+            else:
+                victim = SelectRandomUser(plr)
+
+                toSend += f"have created Twin Stairs for themselves and {victim.name}! They both gained 1 floor."
+                UpdateFloor(victim, 1)
+                UpdateFloor(plr, 1)
 
         case "splicer":
             chances = random.randint(0,4)
