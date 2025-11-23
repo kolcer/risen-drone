@@ -867,6 +867,8 @@ FUN_ROLES = {
         "Acclaimed",
         "Hypnotized Dream",
         "Jukebox Enjoyer",
+        "nonealtevent",
+        "Alien",
     ],
     "Limited": {
         "I was there": "*(11/27/2022 - 11/28/2022)*",

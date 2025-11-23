@@ -285,7 +285,13 @@ async def Rig(rigType, ch, usr):
                 return
             
         case "noneified":
-            msgCounting = await SEND(ch, "nonealtevent")
+            textToSend = "nonealtevent"
+
+            if not str(usr.id) in list_decoded_entries("nonealtevent"):
+                await add_entry_with_check("nonealtevent", usr)
+                textToSend +="\n\n...?"
+
+            msgCounting = await SEND(ch, textToSend)
                 
         case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"|"none"):
 

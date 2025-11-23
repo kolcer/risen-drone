@@ -1226,8 +1226,15 @@ async def on_message(message):
             else:
                 await SEND(ch, await MorphTo(usr,morphToTarget))
 
-            
+                totalSubbedAlignments = 0
+                for role in usr.roles:
+                    if role.name.lower() in RIG_LIST:
+                        totalSubbedAlignments += 1
 
+                if totalSubbedAlignments == (len(RIG_LIST) - 2) and MORPHABLE_ROLES["Reaver"][0] not in usr.roles: #excluding janitor and reaver
+                    await SEND(ch, "What did poor Reaver do to you? Do not alienate them, they are not an illusion.")
+                    if not str(usr.id) in list_decoded_entries("Alien"):
+                        await add_entry_with_check("Alien", usr)
 
         #demorph command (accepts demorph, unmorph and any **morph from combination)
         elif lmsg.startswith("morph from",2):
