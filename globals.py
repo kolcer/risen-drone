@@ -609,7 +609,7 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
-    "none": False,
+    # "none": False,
 }
 
 DETAILED_RIGS = {
