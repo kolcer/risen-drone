@@ -493,7 +493,8 @@ async def on_message(message):
         elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
             await CastRig(lsplit[1],ch,usr)
 
-        elif any(ACTIVE_RIGS.values()) and len(msg) > 1:
+        # ignore if none, it just needs to be in the ACTIVE_RIGS dict for cooldown to work
+        elif not (list(ACTIVE_RIGS.values()).count(True) == 1 and ACTIVE_RIGS["none"]) and any(ACTIVE_RIGS.values()) and len(msg) > 1:
             if ACTIVE_RIGS["thief"]:
                 await ExecuteThiefRig(ch, usr)
             elif ACTIVE_RIGS["spectre"]:
