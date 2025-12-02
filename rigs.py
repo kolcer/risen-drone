@@ -340,6 +340,11 @@ async def Rig(rigType, ch, usr):
     if newRigType in LIMITED_USE_RIGS and ACTIVE_RIGS[newRigType]:
         ACTIVE_RIGS[rigType] = False
         messageAppend = ", and the current Rig effect has worn off."
+
+    if newRigType == 'none':
+        DETAILED_ROLES['nonerig'] = False
+        messageAppend = ", and the current Rig effect has worn off."
+
     RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = False
 
     await SEND(ch, f"{rigType.capitalize()} Rig cooldown is over{messageAppend}")
