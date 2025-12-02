@@ -293,7 +293,7 @@ async def Rig(rigType, ch, usr):
 
             msgCounting = await SEND(ch, textToSend)
                 
-        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"):
+        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"|"none"):
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -308,10 +308,9 @@ async def Rig(rigType, ch, usr):
             elif rigType == "gremlin":
                 DETAILED_ROLES["hnightmare"]["caster"] = usr
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
-        
-        case "none":
-            DETAILED_ROLES["nonerig"] = True
-            msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
+            elif rigType == "none":
+                DETAILED_ROLES["nonerig"] = True
+                msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
         
         # case "gun":
         #     if not MORPHABLE_ROLES["Guns"][0] in usr.roles:
