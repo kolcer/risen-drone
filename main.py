@@ -1208,7 +1208,7 @@ async def on_message(message):
 
                 #Is user linked?
                 if len(user_stats) == 0:
-                   await SEND(ch, "You need to be linked with BD and have 50 climbs minimum in the game, to morph into a Janitor.")
+                   await SEND(ch, "You need to be linked with BD and have 50 climbs minimum in the game, to morph into a Janitor. Use `bd link` to link your account.")
                    return
 
                 # Count total climbs
