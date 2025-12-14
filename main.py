@@ -243,13 +243,14 @@ async def on_message(message):
 
         await SEND(ch, howToMorph)
 
-    if ch.id in [1154751339872653312, 845454640103424032] and (not message.attachments and 'http' not in msg):
+    #removed for #showcase, as per TD request
+    if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in FULL_IMMUNITY_ROLES:
                 return
-        if usr.id == 827952429290618943 and msg == "I like your style.":
-            return
-
+        #if usr.id == 827952429290618943 and msg == "I like your style.":
+            #return
+    
         await DELETE(message)
 
 
