@@ -483,7 +483,7 @@ EMOJIS_TO_REACT = {
     "csOptimus": 1449422432946491414,
     "csDeathbringer": 1449422274900791376,
     "csIllusion": 1449422354748014632,
-    "csDaemon": 1449422042796523611,
+    "csDaemon": 1449819883469537292,
     "csSleazelApproves": 791393163343560715,
     "csSecret": 786318938350813215,
     "csPranked": 786317086066343936,
