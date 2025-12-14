@@ -1185,7 +1185,7 @@ async def on_message(message):
         #     await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
            
         #morph command
-        elif lmsg.startswith("morph to"):
+        elif lmsg.startswith("morph to") or lmsg.startswith("morph into"):
             noRoles = True
 
             if today.day == 1 and today.month == 4:
