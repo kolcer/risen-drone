@@ -244,7 +244,7 @@ async def on_message(message):
         await SEND(ch, howToMorph)
 
     #removed for #showcase, as per TD request
-    if ch.id == 845454640103424032 and (not message.attachments and 'http' not in msg):
+    if ch.id == 1154751339872653312 and (not message.attachments and 'http' not in msg):
         for role in usr.roles:
             if role.name in FULL_IMMUNITY_ROLES:
                 return
