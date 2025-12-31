@@ -1326,7 +1326,7 @@ async def on_message(message):
             if lmsgsplit[2] == "trivia":
                 key = key + "T"
                 #for trivia, key has extra "T" at the end
-            elif lmsgsplit[2] != "tip":
+            elif lmsgsplit[2] != "tips":
                 await SEND(ch,"Invalid alignment.")
                 return
                
