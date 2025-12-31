@@ -440,7 +440,7 @@ EGGCELENT_USERS = {
 CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
-    "crazy-stairs-chat": 750060054090219760,
+    # "crazy-stairs-chat": 750060054090219760,
     "bot-testing": 813882658156838923
 }
 
@@ -666,12 +666,12 @@ COOLDOWN_DURATION = {
 }
 
 COOLDOWN_DESCRIPTIONS = {
-    "trap": "<:csThief:1156631598016507924><:csSpectre:1046200431342272512><:csJoker:758081245157654599><:csSplicer:988948000200069191><:csGremlin:1353300678327664720><:csNone:786323557650268172> cooldown: ",
-    "self": "<:csHeretic:786323224115281921> cooldown: ",
-    "chat": "<:csArchon:786323402172530688> cooldown: ",
-    "meddle": "<:csWicked:792143453035167754> cooldown: ",
-    "username": "<:csKeeper:758081314912993283><:csDrifter:786323335880507483><:csHacker:1156633465043828816><:csReaver:1353300809672294420> cooldown: ",
-    "help": "<:csPatron:758081038697103504> cooldown: ",
+    "trap": "<:csThief:1449421749824393307><:csSpectre:1449421675476291604><:csJoker:1449421409481785565><:csSplicer:1449421710431621130><:csGremlin:1449421300551385249><:csNone:786323557650268172> cooldown: ",
+    "self": "<:csHeretic:1449421373964419183> cooldown: ",
+    "chat": "<:csArchon:1449438684163211356> cooldown: ",
+    "meddle": "<:csWicked:1449421863125254234> cooldown: ",
+    "username": "<:csKeeper:758081314912993283><:csDrifter:1449421261628510219><:csHacker:1449421338895843491><:csReaver:1449421638650302545> cooldown: ",
+    "help": "<:csPatron:1449421565631664262> cooldown: ",
     "janitor": "<:csJanitor:1441195799743827978> cooldown: ",
 }
 
