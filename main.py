@@ -1301,7 +1301,7 @@ async def on_message(message):
             return
 
         #list tips for janitors
-        elif lmsg.starswith("list"):
+        elif lmsg.startswith("list"):
 
             lmsgsplit = lmsg.split() 
 
