@@ -1274,8 +1274,10 @@ async def on_message(message):
             lmsgsplit = lmsg.split(" ",3) 
             #new hacker tip blah blah blah -> lmsgsplit[3] "blah blah blah" will not be separated
 
- 
-            if lmsgsplit[2] != "tip" and lmsgsplit[3] != "trivia":
+            if len(lmsgsplit) < 4:
+                return 
+  
+            if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
                 return #ignore, probably unrealted message that starst with "new" 
             
             if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
@@ -1305,7 +1307,10 @@ async def on_message(message):
 
             lmsgsplit = lmsg.split() 
 
-            if lmsgsplit[2] != "tips" and lmsgsplit[3] != "trivia":
+            if len(lmsgsplit) < 3:
+                return
+            
+            if lmsgsplit[2] != "tips" and lmsgsplit[2] != "trivia":
                 return #ignore, probably unrealted message that starst with "new" 
             
             if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
