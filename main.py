@@ -1296,8 +1296,8 @@ async def on_message(message):
                 return
                
             #add tip   
-            add_entry(key,msgsplit[3])
-            await SEND(ch,"New " + msgsplit[1] + " " + lmsgsplit[2] + " added.")
+            add_entry(key,lmsgsplit[3])
+            await SEND(ch,"New " + lmsgsplit[1] + " " + lmsgsplit[2] + " added.")
             return
 
         #sub command       
