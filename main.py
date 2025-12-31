@@ -1268,6 +1268,38 @@ async def on_message(message):
                 await asyncio.sleep(1)
                 await SEND(ch, "Just kidding.")
 
+        #add tip for janitors
+        elif lmsg.startswith("new"):
+
+            lmsgsplit = lmsg.split(" ",3) 
+            #new hacker tip blah blah blah -> lmsgsplit[3] "blah blah blah" will not be separated
+
+ 
+            if lmsgsplit[2] != "tip" and lmsgsplit[3] != "trivia":
+                return #ignore, probably unrealted message that starst with "new" 
+            
+            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+                await SEND(ch,"Only Janitors can add new tips and trivia.")
+                return
+            
+            key = lmsgsplit[1]
+          
+            if not key in TIPS_KEYS:
+                await SEND(ch,"Invalid argument.")
+                return
+        
+            if lmsgsplit[2] == "trivia":
+                key = key + "T"
+                #for trivia, key has extra "T" at the end
+            elif lmsgsplit[2] != "tip":
+                await SEND(ch,"Invalid alignment.")
+                return
+               
+            #add tip   
+            add_entry(key,msgsplit[3])
+            await SEND(ch,"New " + msgsplit[1] + " " + lmsgsplit[2] + " added.")
+            return
+
         #sub command       
         elif lmsg.startswith("sub to"):
             await SEND(ch,await SubTo(usr,lmsg.split(" ",2)[2].title()))

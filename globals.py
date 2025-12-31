@@ -45,7 +45,8 @@ GIT_COMMITTERS = {
 TIPS_KEYS = [
     "patron", "joker", "wicked", "spectre", "keeper", "muggle", "chameleon",
     "thief", "hacker", "archon", "drifter", "heretic", "none", "general",
-    "possessed", "architect",
+    "splicer", "necromancer", "reaver", "gremlin",
+    "possessed", "architect","hypnotized"
 ]
 
 FULL_IMMUNITY_ROLES = ["Admin", "Murdurators", "Sleazel"]
