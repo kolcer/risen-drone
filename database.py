@@ -1,7 +1,7 @@
 import redis
 import os
 import random
-from globals import FUN_ROLES, CHANNELS, EXTRA_ROLES, GIT_COMMITTERS, EVENTS
+from globals import FUN_ROLES, CHANNELS, GIT_COMMITTERS, COUNTERS
 from rated import SEND
 
 # Set up the data base
@@ -60,6 +60,14 @@ def list_decoded_entries(key):
 
 def show_random_entry(key):
     index = random.randint(0,db.llen(key)-1)
+    result = db.lrange(key,index,index)
+    return result[0].decode("utf-8")
+
+def show_next_entry(key):
+    index = COUNTERS[key]
+    COUNTERS[key] += 1
+    if COUNTERS[key] > db.llen(key)-1:
+        COUNTERS[key] = 0
     result = db.lrange(key,index,index)
     return result[0].decode("utf-8")
 

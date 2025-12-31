@@ -1550,7 +1550,7 @@ async def on_message(message):
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
-                        await SEND(ch,show_random_entry(lsplit[0]))
+                        await SEND(ch,show_next_entry(lsplit[0]))
                         return
                 elif lsplit[1] == "trivia":
                     if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
@@ -1558,7 +1558,7 @@ async def on_message(message):
                         return
                     if lsplit[0] in TIPS_KEYS:
                         key = lsplit[0] + "T"
-                        await SEND(ch,show_random_entry(key))
+                        await SEND(ch,show_next_entry(key))
                         return
 
             #single word trigger
