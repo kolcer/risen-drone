@@ -1300,6 +1300,36 @@ async def on_message(message):
             await SEND(ch,"New " + lmsgsplit[1] + " " + lmsgsplit[2] + " added.")
             return
 
+        #list tips for janitors
+        elif lmsg.starswith("list"):
+
+            lmsgsplit = lmsg.split() 
+
+            if lmsgsplit[2] != "tips" and lmsgsplit[3] != "trivia":
+                return #ignore, probably unrealted message that starst with "new" 
+            
+            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+                await SEND(ch,"Only Janitors can list full tips or trivia.")
+                return
+            
+            key = lmsgsplit[1]
+          
+            if not key in TIPS_KEYS:
+                await SEND(ch,"Invalid argument.")
+                return
+        
+            if lmsgsplit[2] == "trivia":
+                key = key + "T"
+                #for trivia, key has extra "T" at the end
+            elif lmsgsplit[2] != "tip":
+                await SEND(ch,"Invalid alignment.")
+                return
+               
+            #add tip   
+            await SEND(ch,lmsgsplit[1] + " " + lmsgsplit[2] + ":")
+            await PRINT_ENTRIES(ch, key)
+            return
+           
         #sub command       
         elif lmsg.startswith("sub to"):
             await SEND(ch,await SubTo(usr,lmsg.split(" ",2)[2].title()))
