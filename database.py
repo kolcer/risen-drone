@@ -64,6 +64,8 @@ def show_random_entry(key):
     return result[0].decode("utf-8")
 
 def show_next_entry(key):
+    if not key in COUNTERS:
+        COUNTERS[key] = 0
     index = COUNTERS[key]
     COUNTERS[key] += 1
     if COUNTERS[key] > db.llen(key)-1:
