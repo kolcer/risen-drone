@@ -354,7 +354,7 @@ async def on_message(message):
     if str(usr.id) in BOT_BLACKLIST or usr == None:
         return
 
-    if usr.roles and EXTRA_ROLES['hypno'] in usr.roles:
+    if hasattr(usr,'roles') and EXTRA_ROLES['hypno'] in usr.roles:
         if lmsg.startswith('bd help'):
             lmsg = 'bd show profile'
         elif lmsg.startswith('bd show profile'):
