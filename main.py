@@ -188,13 +188,14 @@ async def on_reaction_add(reaction, user):
     # await SplicerRig(reaction,user)
     if (str(reaction.emoji) == "<:csSleazelApproves:791393163343560715>" or str(reaction.emoji) == "<:csSleazelNotApproved:1038172235170578532>") and user.id != 481893862864846861 and user.id != 827952429290618943:
         await reaction.remove(user)
-        if NOT_SLEAZEL[0] == False:
-            NOT_SLEAZEL[0] = True
-            if reaction.message.channel.id != 1001034407966150746:
-                await DRONEPRINT(f'Psst. It was {user.name}. They were impersonating Sleazel!')
-                await SEND(reaction.message.channel, f"You are not Sleazel. Drop the act.")
-            await asyncio.sleep(600)
-            NOT_SLEAZEL[0] = False
+        # removing this as sometimes it tries to send it in the wrong channel
+        #if NOT_SLEAZEL[0] == False:
+        #    NOT_SLEAZEL[0] = True
+        #    if reaction.message.channel.id != 1001034407966150746:
+        #        await DRONEPRINT(f'Psst. It was {user.name}. They were impersonating Sleazel!')
+        #        await SEND(reaction.message.channel, f"You are not Sleazel. Drop the act.")
+        #    await asyncio.sleep(600)
+        #    NOT_SLEAZEL[0] = False
         return
 
 @client.event
@@ -233,6 +234,10 @@ async def on_message(message):
     buttons_chance = random.randint(1, 200)
     today = datetime.date.today()
     
+    #better method to prevent errors
+    if not hasattr(usr,'roles'):
+        return
+
     if usr in EX_CLIMBERS:
         await DELETE(message)
         return
@@ -354,7 +359,7 @@ async def on_message(message):
     if str(usr.id) in BOT_BLACKLIST or usr == None:
         return
 
-    if hasattr(usr,'roles') and EXTRA_ROLES['hypno'] in usr.roles:
+    if EXTRA_ROLES['hypno'] in usr.roles:
         if lmsg.startswith('bd help'):
             lmsg = 'bd show profile'
         elif lmsg.startswith('bd show profile'):
