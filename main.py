@@ -198,18 +198,19 @@ async def on_reaction_add(reaction, user):
         #    NOT_SLEAZEL[0] = False
         return
 
-@client.event
-async def on_message_edit(before, after):
-    msg = after.content
-    usr = after.author
-    ch = after.channel
+#no longer needed
+#@client.event
+#async def on_message_edit(before, after):
+#    msg = after.content
+#    usr = after.author
+#    ch = after.channel
 
-    if ch.id in [1154751339872653312, 845454640103424032] and (not after.attachments and 'http' not in msg):
-        for role in usr.roles:
-            if role.name in FULL_IMMUNITY_ROLES:
-                return
-
-        await DELETE(after)
+#    if ch.id in [1154751339872653312, 845454640103424032] and (not after.attachments and 'http' not in msg):
+#       for role in usr.roles:
+#            if role.name in FULL_IMMUNITY_ROLES:
+#                return
+#
+#        await DELETE(after)
 
 @client.event
 async def on_interaction(interaction):
@@ -245,19 +246,17 @@ async def on_message(message):
 
         await SEND(ch, howToMorph)
 
-    #removed for #showcase, as per TD request
-    if ch.id == 1154751339872653312 and (not message.attachments and 'http' not in msg):
-        for role in usr.roles:
-            if role.name in FULL_IMMUNITY_ROLES:
-                return
-        #if usr.id == 827952429290618943 and msg == "I like your style.":
-            #return
-    
-        await DELETE(message)
+    #removed as per TD request (previously removed for showcase channel)
+    #if ch.id == 1154751339872653312 and (not message.attachments and 'http' not in msg):
+    #    for role in usr.roles:
+    #        if role.name in FULL_IMMUNITY_ROLES:
+    #            return
+    #
+    #    await DELETE(message)
 
 
-    if (ch.id == 1154751339872653312 or ch.id == 1154748785415700582) and ("tenor.com" in lmsg or "giphy.com" in lmsg):
-        await DELETE(message)
+    #if (ch.id == 1154751339872653312 or ch.id == 1154748785415700582) and ("tenor.com" in lmsg or "giphy.com" in lmsg):
+    #    await DELETE(message)
 
     ## user must not be a bot
     ## but the bot will add reactions to the webhook (if any)
