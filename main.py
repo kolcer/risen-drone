@@ -234,9 +234,6 @@ async def on_message(message):
     buttons_chance = random.randint(1, 200)
     today = datetime.date.today()
     
-    #better method to prevent errors
-    if not hasattr(usr,'roles'):
-        return
 
     if usr in EX_CLIMBERS:
         await DELETE(message)
@@ -273,6 +270,9 @@ async def on_message(message):
                     return
         return
     
+    #better method to prevent errors
+    if not hasattr(usr,'roles'):
+        return
 
     #if msg.lower() == "broken drone rest in peace" and FUN_ROLES["I was there"] not in usr.roles:
         #await SEND(ch, "I will remember your sympathy.")
