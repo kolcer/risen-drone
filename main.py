@@ -1115,7 +1115,7 @@ async def on_message(message):
         #         SPLICER_FANS[usr] = 1
         
         # yo but what if i did that but cooler; OPTIMUS TIMEEEE
-        elif "<:csoptimus:1046224869945266226>" in lmsg:
+        elif "<:csOptimus:1449422432946491414>" in lmsg:
             if usr in THE_DRIP: # ok imagine THE_DRIP is THE_OPTIMUS
                 if THE_DRIP[usr] == 9:
                     if not str(usr.id) in list_decoded_entries("Optimus"):
