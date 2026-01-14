@@ -1302,8 +1302,8 @@ async def on_message(message):
                 return
                
             #add tip   
-            add_entry(key,lmsgsplit[3])
-            await SEND(ch,"New " + lmsgsplit[1] + " " + lmsgsplit[2] + " added.")
+            add_entry(key,msg.split(" ",3)[3])
+            await SEND(ch,"New " +  lmsgsplit[1].upper() + " " + lmsgsplit[2] + " added.")
             return
 
         #list tips for janitors
@@ -1335,7 +1335,7 @@ async def on_message(message):
                 return
                
             #add tip   
-            await SEND(ch,lmsgsplit[1] + " " + lmsgsplit[2] + ":")
+            await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
             await PRINT_ENTRIES(ch, key)
             return
            
