@@ -979,7 +979,14 @@ SPECIAL_ROLES = {
         "You are not an Architect...",
         "Just wait for the boost to expire.",
     ],
-    "Climber": [
+    "Wiki Editor": [
+        None,
+        "This role is given to trusted community members who help maintain the Crazy Stairs Wiki.",
+        "I believe you are already a Wiki Editor.",
+        "You are not a Wiki Editor...",
+        "Contact mods to get this role removed.",
+    ],
+     "Climber": [
         None,
         "Please verify to become a climber.",
         "To the tower you go!",

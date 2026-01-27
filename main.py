@@ -1338,7 +1338,42 @@ async def on_message(message):
             await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
             await PRINT_ENTRIES(ch, key)
             return
-           
+        
+        #delete tip for wiki editors
+        elif lmsg.startswith("delete"):
+            
+            lmsgsplit = lmsg.split(" ",3) 
+            #delete hacker tip 3 -> lmsgsplit[3] "3" will not be separated
+
+            if len(lmsgsplit) < 4:
+                return 
+  
+            if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
+                return #ignore, probably unrealted message that starst with "delete" 
+            
+            if not SPECIAL_ROLES["Wiki Editor"][0] in usr.roles:
+                await SEND(ch,"Only Wiki Editors can delete tips and trivia.")
+                return
+            
+            key = lmsgsplit[1]
+          
+            if not key in TIPS_KEYS:
+                await SEND(ch,"Invalid argument.")
+                return
+        
+            if lmsgsplit[2] == "trivia":
+                key = key + "T"
+                #for trivia, key has extra "T" at the end
+            elif lmsgsplit[2] != "tip":
+                await SEND(ch,"Invalid alignment.")
+                return
+               
+            #delete tip   
+            delete_entry(key,int(lmsgsplit[3]))
+            await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
+            await PRINT_ENTRIES(ch, key)
+            return
+        
         #sub command       
         elif lmsg.startswith("sub to"):
             await SEND(ch,await SubTo(usr,lmsg.split(" ",2)[2].title()))
