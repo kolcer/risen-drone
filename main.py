@@ -1288,6 +1288,10 @@ async def on_message(message):
                 await SEND(ch,"Only Janitors can add new tips and trivia.")
                 return
             
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+                await SEND(ch, "This command can be only used in <#750060041289072771>!")
+                return
+            
             key = lmsgsplit[1]
           
             if not key in TIPS_KEYS:
@@ -1319,6 +1323,10 @@ async def on_message(message):
             
             if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
                 await SEND(ch,"Only Janitors can list full tips or trivia.")
+                return
+            
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+                await SEND(ch, "This command can be only used in <#750060041289072771>!")
                 return
             
             key = lmsgsplit[1]
@@ -1353,6 +1361,10 @@ async def on_message(message):
             
             if not SPECIAL_ROLES["Wiki Editor"][0] in usr.roles:
                 await SEND(ch,"Only Wiki Editors can delete tips and trivia.")
+                return
+            
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+                await SEND(ch, "This command can be only used in <#750060041289072771>!")
                 return
             
             key = lmsgsplit[1]
