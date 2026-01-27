@@ -1137,6 +1137,7 @@ EXTRA_ROLES = {
     'climber': 735410759206568047,           # climber (consider adding manually verified) - ok
     'manuallyverified': 820521310278516739,  # manually assigned climber
     'imageperms': 1188494866594922686,       # Image perms role
+    'wiki editor': 789221299934330891,       # Wiki editor role
 }
 
 # CHAT_KILLER = {
