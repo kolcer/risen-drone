@@ -976,6 +976,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         embed.title = "Poll results"
         embed.description = self.results
         embed.color = discord.Colour(int("FFD700", 16))
+        if self.custom:
+                embed.set_footer("Custom poll by " + self.customUsr.name)
 
         self.embed = embed
         return embed
