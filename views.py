@@ -905,9 +905,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
                     self.results += '\n'
 
                 if not self.custom:
-                    self.results += f"**{user.display_name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                    self.results += f"**{user.name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
                 else:
-                    self.results += f"**{user.display_name}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not")
+                    self.results += f"**{user.name}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not")
 
         await self.update_message()
 
