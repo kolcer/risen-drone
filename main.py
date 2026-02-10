@@ -722,8 +722,8 @@ async def on_message(message):
            # if not pollQ.endswith("?"):
            #    pollQ += "?" # removed bc not all polls end with ?, this is a custom poll afterall, give ppl freedom
 
-           # for i in range(2, len(splitPoll)):
-           #    pollA.append(splitPoll[i].capitalize())
+            for i in range(2, len(splitPoll)):
+                pollA.append(splitPoll[i]) # no more forceful capitalization
 
             for badword in blacklist:
                 for answer in pollA:
