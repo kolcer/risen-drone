@@ -719,11 +719,11 @@ async def on_message(message):
                 return
 
             pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
-            if not pollQ.endswith("?"):
-                pollQ += "?"
+           # if not pollQ.endswith("?"):
+           #    pollQ += "?" # removed bc not all polls end with ?, this is a custom poll afterall, give ppl freedom
 
             for i in range(2, len(splitPoll)):
-                pollA.append(splitPoll[i].capitalize())
+                pollA.append(splitPoll[i]) # no more forceful capitalization
 
             for badword in blacklist:
                 for answer in pollA:
@@ -753,6 +753,7 @@ async def on_message(message):
 
             try:
                 view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+                await DELETE(message)
             except Exception as e:
                 BUTTONS["status"] = False
                 await SEND(BUTTONS["channel"], "Something went wrong!")
