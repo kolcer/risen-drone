@@ -753,6 +753,7 @@ async def on_message(message):
 
             try:
                 view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+                DELETE(message)
             except Exception as e:
                 BUTTONS["status"] = False
                 await SEND(BUTTONS["channel"], "Something went wrong!")
