@@ -719,11 +719,11 @@ async def on_message(message):
                 return
 
             pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
-           # if not pollQ.endswith("?"):
-           #    pollQ += "?" # removed bc not all polls end with ?, this is a custom poll afterall, give ppl freedom
+            # if not pollQ.endswith("?"):
+            #     pollQ += "?"
 
             for i in range(2, len(splitPoll)):
-                pollA.append(splitPoll[i]) # no more forceful capitalization
+                pollA.append(splitPoll[i])
 
             for badword in blacklist:
                 for answer in pollA:
@@ -851,7 +851,8 @@ async def on_message(message):
                 redis_add_user_data("USER_" + str(usr.id), "token",token)
                 await SEND_DM(usr, 
                     "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n\n"
-                    f"`LINK DISCORD {str(usr.id)} {token}`\n\n"
+                    f"`LINK DISCORD {str(usr.id)} {token}`\n"
+                    "'LINK DISCORD' included!\n\n"
                     "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
                     "If successful, you will be pinged in <#1001034407966150746>.\n" + 
                     "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
@@ -861,7 +862,7 @@ async def on_message(message):
                     "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
                 
                 await asyncio.sleep(1)
-                await SEND_DM(usr, "https://cdn.discordapp.com/attachments/624227331720085536/1473100628724023449/1000085878.gif?ex=6994fb5e&is=6993a9de&hm=af86bb113b32a43422a636b97dea18bc09f622a5bdcfc2a323938354c100f406&")
+                await SEND_DM(usr, "https://giphy.com/gifs/TskpnwGI2P1GCmtUJ0")
                 await asyncio.sleep(1)
                 await SEND(ch, f"{usr.mention} I have sent you a direct message with further instructions.")
             except:

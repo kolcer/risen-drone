@@ -907,7 +907,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
                 if not self.custom:
                     self.results += f"**{user.mention}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
                 else:
-                    self.results += f"**{user.mention}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not")
+                    self.results += f"**{user.mention}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
 
         await self.update_message()
 
@@ -977,7 +977,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         embed.description = self.results
         embed.color = discord.Colour(int("FFD700", 16))
         if self.custom:
-                embed.set_footer("Custom poll by " + self.customUser.mention)
+            embed.set_footer(text="Custom poll by " + self.customUser.mention)
 
         self.embed = embed
         return embed
