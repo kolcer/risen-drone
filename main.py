@@ -861,7 +861,7 @@ async def on_message(message):
                     "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
                 
                 await asyncio.sleep(1)
-                await SEND_DM(usr, "https://giphy.com/gifs/TBej1fVGRJxRsVbEQS")
+                await SEND_DM(usr, "https://cdn.discordapp.com/attachments/624227331720085536/1473100628724023449/1000085878.gif?ex=6994fb5e&is=6993a9de&hm=af86bb113b32a43422a636b97dea18bc09f622a5bdcfc2a323938354c100f406&")
                 await asyncio.sleep(1)
                 await SEND(ch, f"{usr.mention} I have sent you a direct message with further instructions.")
             except:
