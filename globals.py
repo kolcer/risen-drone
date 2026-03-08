@@ -397,7 +397,7 @@ ANSWERS = [
     "Yesn't.",
     "The system has been compromised and nothing matters anymore, so Yes.",
     "Access Denied.",
-    "Hacker says no, but only because they can’t hack the system to make it happen.",
+    "Hacker says no, but only because they can't hack the system to make it happen.",
     "I am not supposed to tell you, but Hacker leaked to me that-",
 ]
 
@@ -936,6 +936,7 @@ FUN_ROLES = {
         "Usurper Egg",
         "Possessed Egg",
         "Hypnotized Egg",
+        "Reflected Egg",
         "Full Egg",
         "Perfect Egg",
         "Secret Egg",

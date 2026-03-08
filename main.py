@@ -1470,7 +1470,7 @@ async def on_message(message):
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Broken Drone"
             else:
-                if ch.id != 750060041289072771:
+                if ch.id != 750060041289072771 and ch.id != 813882658156838923:
                     await SEND(ch, "The egg launcher only works in <#750060041289072771>.")
                     return
                 elif BUTTONS["easterStatus"]:
