@@ -386,8 +386,8 @@ ANSWERS = [
     "In order to get a Yes, you must sacrifice a stair to the undead.",
     "Under a full moon, the answer is yes.",
     "The resurrected decided to sleep once more rather than answer your question.",
-    "Necromancer no longer wishes to play with you."
-    "Your question scared Necromancer away, which is saying something."
+    "Necromancer no longer wishes to play with you.",
+    "Your question scared Necromancer away, which is saying something.",
     # Keeper
     "So long as things go according to plan, yes.",
     "Keeper says yes, but only if you follow the rules.",
