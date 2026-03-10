@@ -448,7 +448,7 @@ CHANNELS = {
 
 # channels where bot is allowed to post, that should not be counted in public commands
 SECRET_CHANNELS = [
-    "drone-masters"
+    813882658156838923
 ]
 
 # bot will react to the webhook emoji, if it finds in a webhook message
