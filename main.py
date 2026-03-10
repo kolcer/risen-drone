@@ -1790,7 +1790,7 @@ async def on_message(message):
                     await SEND(I_SPY['channel'],'Whatever.')
                 return
             
-            # does this key exist in db and whats the value
+            # does this key exist in db and whats the value 
             if lmsg.startswith("key", 1):
                 key_cap = lsecond.title()
                 key_low = lsecond.lower()
