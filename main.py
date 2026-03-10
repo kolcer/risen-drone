@@ -1487,15 +1487,16 @@ async def on_message(message):
                 if isSpecificEgg and specificEgg.capitalize() in MAX_EGGS and view.thrower in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
                     view.type = specificEgg.capitalize()
 
+            if view.type == None:
+                await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")
+                BUTTONS["easterStatus"] = False
+                return
+            
             if view.type == BUTTONS["easterLast"]:
                 await SEND(ch, "This egg launcher never launches the same egg twice!")
                 BUTTONS["easterStatus"] = False
                 return
                     
-            if view.type == None:
-                BUTTONS["easterStatus"] = False
-                return
-
             BUTTONS["easterLast"] = view.type
             view.picker = None
             view.channel = ch
