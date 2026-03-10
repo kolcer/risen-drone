@@ -33,21 +33,13 @@ from discord.ext import commands
 
 # ---END VIEWS---
 
-def rigImmunity(usr1, usr2, fullImmunity):
-    if fullImmunity: 
-        for roles in usr1.roles:
-            if roles.name in FULL_IMMUNITY_ROLES:
-                return True
-        if usr1 == usr2:
+def rigImmunity(usr1, usr2):
+    for roles in usr1.roles:
+        if roles.name in FULL_IMMUNITY_ROLES:
             return True
-        return False
-    else:
-        for roles in usr1.roles:
-            if roles.name in BASIC_IMMUNITY_ROLES:
-                return True
-        if usr1 == usr2:
-            return True
-        return False
+    if usr1 == usr2:
+        return True
+    return False
     
 def isNewUser(usr):
     if (not EXTRA_ROLES['climber'] in usr.roles) and (not EXTRA_ROLES['manuallyverified'] in usr.roles):
@@ -326,6 +318,7 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
             elif rigType == "reaver":
                 DETAILED_ROLES["reflected"]["caster"] = usr
+                DETAILED_ROLES["reflected"]["times"] = 0
                 msgCounting = await SEND(ch, usr.mention + " just cast Reaver Rig! Remember yourself.")
             elif rigType == "none":
                 DETAILED_ROLES["nonerig"] = True
@@ -488,7 +481,7 @@ async def ExecuteThiefRig(ch,usr):
     isMurdurator = False
     victim = usr.display_name
 
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
 
     ACTIVE_RIGS["thief"] = False
@@ -520,15 +513,9 @@ async def ExecuteThiefRig(ch,usr):
     return
 
 async def ExecuteReaverRig(ch,usr):
-    isMurdurator = False
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
 
-    for roles in usr.roles:
-        if roles.name in FULL_IMMUNITY_ROLES:
-            isMurdurator = True
-            break
-
-    if isMurdurator or (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
     if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
@@ -562,7 +549,7 @@ async def ExecuteReaverRig(ch,usr):
     return
 
 async def ExecuteSpectreRig(ch,usr, message):
-    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
+    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr):
         return
     
     ACTIVE_RIGS["spectre"] = False
@@ -629,7 +616,7 @@ async def ExecuteJokerRig(ch, usr, message):
 
 async def ExecuteSplicerRig(ch,usr):
  
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
         return
                 
     ACTIVE_RIGS["splicer"] = False
@@ -681,7 +668,7 @@ async def ExecuteSplicerRig(ch,usr):
     return
 
 async def ExecuteGremlinRig(ch,usr):
-    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr) or EXTRA_ROLES['hypno'] in usr.roles:
+    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr) or EXTRA_ROLES['hypno'] in usr.roles:
         return
 
     ACTIVE_RIGS["gremlin"] = False
