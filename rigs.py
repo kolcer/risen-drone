@@ -515,7 +515,13 @@ async def ExecuteReaverRig(ch,usr):
         DETAILED_ROLES["reflected"]["times"] = 0
         ACTIVE_RIGS["reaver"] = False
 
-    await EDIT_NICK(usr, reflectorName)
+    for roles in usr.roles:
+        if roles.name in FULL_IMMUNITY_ROLES:
+            isMurdurator = True
+            break
+
+    if not isMurdurator:       
+        await EDIT_NICK(usr, reflectorName)
 
     await asyncio.sleep(1)
 
