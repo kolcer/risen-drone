@@ -519,7 +519,23 @@ async def ExecuteReaverRig(ch,usr):
 
     await asyncio.sleep(1)
 
-    await SEND(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you!")
+    if EVENTS["easter"]: 
+        BUTTONS["status"] = True
+        view = ButtonEgg_Throw(timeout=30)
+        view.thrower = None
+        view.picker = None
+        view.disabled = False
+
+        view.type = "Reflected"
+
+        view.channel = ch
+        view.toolate = True
+        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you! Along with this strange egg.", view)
+        await view.wait()
+        await view.too_late()
+        BUTTONS["status"] = False
+    else:
+        await SEND(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you!")
 
     return
 
