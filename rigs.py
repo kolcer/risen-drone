@@ -154,6 +154,22 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                                 "\nMaybe someone could give you some Mana?")
                 
+            if EVENTS["easter"]: 
+                BUTTONS["status"] = True
+                view = ButtonEgg_Throw(timeout=30)
+                view.thrower = None
+                view.picker = None
+                view.disabled = False
+
+                view.type = "Possessed"
+
+                view.channel = ch
+                view.toolate = True
+                view.message = await SEND_VIEW(ch, "Within the darkness you can make out the silhouette of an egg...", view)
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+                
             msgCountingContent = msgCounting.content
             await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + 120)}:R>")
             await asyncio.sleep(60)
@@ -509,7 +525,7 @@ async def ExecuteReaverRig(ch,usr):
     if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
-    if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxtimes"] - 1:
+    if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
         DETAILED_ROLES["reflected"]["times"] += 1
     else:
         DETAILED_ROLES["reflected"]["times"] = 0
@@ -683,7 +699,23 @@ async def ExecuteGremlinRig(ch,usr):
     #     await usr.remove_roles(*role_list)
     #     await asyncio.sleep(1)
 
-    await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
+    if EVENTS["easter"]: 
+        BUTTONS["status"] = True
+        view = ButtonEgg_Throw(timeout=30)
+        view.thrower = None
+        view.picker = None
+        view.disabled = False
+
+        view.type = "Hypnotized"
+
+        view.channel = ch
+        view.toolate = True
+        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You start seeing eggs everywhere...", view)
+        await view.wait()
+        await view.too_late()
+        BUTTONS["status"] = False
+    else:
+        await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
             
     return
 
