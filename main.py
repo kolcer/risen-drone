@@ -510,6 +510,8 @@ async def on_message(message):
                 await ExecuteSplicerRig(ch, usr)
             elif ACTIVE_RIGS["gremlin"]:
                 await ExecuteGremlinRig(ch, usr)
+            elif ACTIVE_RIGS["reaver"]:
+                await ExecuteReaverRig(ch, usr)
 
         # Prevent using BD commands outside of #bot-commands and #drone-masters channels
         elif ch.id not in [750060041289072771, 813882658156838923] and restricted:
@@ -1452,7 +1454,7 @@ async def on_message(message):
             isSpecificEgg = False
             specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
 
-            if specificEgg.lower() in RIG_LIST or specificEgg.capitalize() in MAX_EGGS:
+            if specificEgg.lower() in RIG_LIST or specificEgg.title() in MAX_EGGS:
                 isSpecificEgg = True
 
             view = ButtonEgg_Throw(timeout=30)
@@ -1484,8 +1486,8 @@ async def on_message(message):
                         view.type = role.name
                         break
 
-                if isSpecificEgg and specificEgg.capitalize() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
-                    view.type = specificEgg.capitalize()
+                if isSpecificEgg and specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+                    view.type = specificEgg.title()
 
             if view.type == None:
                 await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")

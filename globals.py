@@ -147,6 +147,7 @@ LIMITED_USE_RIGS = [
     "spectre",
     "splicer",
     "gremlin",
+    "reaver",
     "none",
 ]
 
@@ -611,6 +612,7 @@ ACTIVE_RIGS = {
     "spectre": False,
     "splicer": False,
     "gremlin": False,
+    "reaver": False,
     "none": False,
 }
 
@@ -633,6 +635,7 @@ RIG_COOLDOWNS = {
 
 COOLDOWN_SELECT = {
     "thief": "trap",
+    "reaver": "trap",
     "spectre": "trap",
     "joker": "trap",
     "splicer": "trap",
@@ -653,6 +656,7 @@ COOLDOWN_DURATION = {
     "janitor": 1800,
     "wicked": 900,
     "thief": 600,
+    "reaver": 600,
     "spectre": 600,
     "joker": 600,
     "splicer": 600,
@@ -976,6 +980,11 @@ DETAILED_ROLES = {
         "caster": None
     },
     "nonerig": False,
+    "reflected": {
+        "caster": None,
+        "times": 0,
+        "maxTimes": 3,
+    },
 }
 
 # not morphable roles

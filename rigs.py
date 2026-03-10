@@ -239,22 +239,22 @@ async def Rig(rigType, ch, usr):
 
             msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
 
-        case "reaver":
-            length = len(usr.display_name)
-            half = length // 2
+        # case "reaver":
+        #     length = len(usr.display_name)
+        #     half = length // 2
 
-            if random.randint(1, 2) == 1:
-                # Mirror the first half
-                to_mirror = usr.display_name[:half]
-                mirrored = to_mirror + to_mirror[::-1]
-            else:
-                # Mirror the second half
-                to_mirror = usr.display_name[half:]
-                mirrored = to_mirror + to_mirror[::-1]
+        #     if random.randint(1, 2) == 1:
+        #         # Mirror the first half
+        #         to_mirror = usr.display_name[:half]
+        #         mirrored = to_mirror + to_mirror[::-1]
+        #     else:
+        #         # Mirror the second half
+        #         to_mirror = usr.display_name[half:]
+        #         mirrored = to_mirror + to_mirror[::-1]
 
-            await EDIT_NICK(usr, mirrored)
+        #     await EDIT_NICK(usr, mirrored)
 
-            msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror in your name!")
+        #     msgCounting = await SEND(ch, "You cast Reaver Rig and placed a mirror in your name!")
 
         case "janitor":
             if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
@@ -293,7 +293,7 @@ async def Rig(rigType, ch, usr):
 
             msgCounting = await SEND(ch, textToSend)
                 
-        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"|"none"):
+        case ("joker"|"thief"|"spectre"|"splicer"|"gremlin"|"reaver"|"none"):
 
             ACTIVE_RIGS[rigType] = True
             RIG_DATA['rigCaster'] = usr
@@ -308,6 +308,9 @@ async def Rig(rigType, ch, usr):
             elif rigType == "gremlin":
                 DETAILED_ROLES["hnightmare"]["caster"] = usr
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
+            elif rigType == "reaver":
+                DETAILED_ROLES["reflected"]["caster"] = usr
+                msgCounting = await SEND(ch, usr.mention + " just cast Reaer Rig! Remember yourself.")
             elif rigType == "none":
                 DETAILED_ROLES["nonerig"] = True
                 msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
@@ -500,6 +503,25 @@ async def ExecuteThiefRig(ch,usr):
 
     return
 
+async def ExecuteReaverRig(ch,usr):
+    reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
+
+    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+        return
+
+    if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxtimes"] - 1:
+        DETAILED_ROLES["reflected"]["times"] += 1
+    else:
+        DETAILED_ROLES["reflected"]["times"] = 0
+        ACTIVE_RIGS["reaver"] = False
+
+    await EDIT_NICK(usr, reflectorName)
+
+    await asyncio.sleep(1)
+
+    await SEND(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you!")
+
+    return
 
 async def ExecuteSpectreRig(ch,usr, message):
     if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster'], True) or isNewUser(usr):
