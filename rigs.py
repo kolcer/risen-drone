@@ -310,7 +310,7 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
             elif rigType == "reaver":
                 DETAILED_ROLES["reflected"]["caster"] = usr
-                msgCounting = await SEND(ch, usr.mention + " just cast Reaer Rig! Remember yourself.")
+                msgCounting = await SEND(ch, usr.mention + " just cast reaver Rig! Remember yourself.")
             elif rigType == "none":
                 DETAILED_ROLES["nonerig"] = True
                 msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
