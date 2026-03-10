@@ -1484,7 +1484,7 @@ async def on_message(message):
                         view.type = role.name
                         break
 
-                if isSpecificEgg and specificEgg.capitalize() in MAX_EGGS and view.thrower in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+                if isSpecificEgg and specificEgg.capitalize() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
                     view.type = specificEgg.capitalize()
 
             if view.type == None:
