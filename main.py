@@ -1792,7 +1792,7 @@ async def on_message(message):
             
             # does this key exist in db and whats the value
             if lmsg.startswith("key", 1):
-                key_cap = lsecond.capitalize()
+                key_cap = lsecond.title()
                 key_low = lsecond.lower()
                 
                 responses = []
@@ -1809,7 +1809,7 @@ async def on_message(message):
                 if responses:
                     await SEND(ch, "\n".join(responses))
                 else:
-                    await SEND(ch, f"No key found for '{lsecond}'.")
+                    await SEND(ch, f"No key found for '{key_cap}' or '{key_low}'.")
                 
                 return
 
