@@ -674,7 +674,7 @@ COOLDOWN_DESCRIPTIONS = {
     "self": "<:csHeretic:1449421373964419183> cooldown: ",
     "chat": "<:csArchon:1449438684163211356> cooldown: ",
     "meddle": "<:csWicked:1449421863125254234> cooldown: ",
-    "username": "<:csKeeper:758081314912993283><:csDrifter:1449421261628510219><:csHacker:1449421338895843491> cooldown: ",
+    "username": "<:csKeeper:1449421446861291642><:csDrifter:1449421261628510219><:csHacker:1449421338895843491> cooldown: ",
     "help": "<:csPatron:1449421565631664262> cooldown: ",
     "janitor": "<:csJanitor:1441195799743827978> cooldown: ",
 }
