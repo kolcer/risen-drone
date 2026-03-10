@@ -1452,7 +1452,7 @@ async def on_message(message):
             isSpecificEgg = False
             specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
 
-            if specificEgg.lower() in RIG_LIST:
+            if specificEgg.lower() in RIG_LIST or specificEgg.capitalize() in MAX_EGGS:
                 isSpecificEgg = True
 
             view = ButtonEgg_Throw(timeout=30)
