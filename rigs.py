@@ -154,7 +154,7 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                                 "\nMaybe someone could give you some Mana?")
                 
-            if EVENTS["easter"]: 
+            if EVENTS["Easter"]: 
                 BUTTONS["status"] = True
                 view = ButtonEgg_Throw(timeout=30)
                 view.thrower = None
@@ -326,7 +326,7 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch, usr.mention + " just cast Gremlin Rig! Be on guard.")
             elif rigType == "reaver":
                 DETAILED_ROLES["reflected"]["caster"] = usr
-                msgCounting = await SEND(ch, usr.mention + " just cast reaver Rig! Remember yourself.")
+                msgCounting = await SEND(ch, usr.mention + " just cast Reaver Rig! Remember yourself.")
             elif rigType == "none":
                 DETAILED_ROLES["nonerig"] = True
                 msgCounting = await SEND(ch, usr.mention + " just cast None Rig! This better not-")
@@ -542,7 +542,7 @@ async def ExecuteReaverRig(ch,usr):
 
     await asyncio.sleep(1)
 
-    if EVENTS["easter"]: 
+    if EVENTS["Easter"]: 
         BUTTONS["status"] = True
         view = ButtonEgg_Throw(timeout=30)
         view.thrower = None
@@ -700,7 +700,7 @@ async def ExecuteGremlinRig(ch,usr):
     #     await usr.remove_roles(*role_list)
     #     await asyncio.sleep(1)
 
-    if EVENTS["easter"]: 
+    if EVENTS["Easter"]: 
         BUTTONS["status"] = True
         view = ButtonEgg_Throw(timeout=30)
         view.thrower = None
