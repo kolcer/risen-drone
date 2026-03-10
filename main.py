@@ -1445,7 +1445,7 @@ async def on_message(message):
                 await SEND(ch,'Wrong. Better luck next time.')
 
         elif lmsg.startswith("bd throw ")and lmsg.endswith(" egg"):
-            if not EVENTS["Easter"]:
+            if not EVENTS["Easter"] and ch.id != 813882658156838923:
                 await SEND(ch, f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.")
                 return
 
@@ -1471,10 +1471,10 @@ async def on_message(message):
                 view.type = "Broken Drone"
             else:
                 if ch.id != 750060041289072771 and ch.id != 813882658156838923:
-                    await SEND(ch, "The egg launcher only works in <#750060041289072771>.")
+                    await SEND(ch, "The Egg Launcher only works in <#750060041289072771>.")
                     return
                 elif BUTTONS["easterStatus"]:
-                    await SEND(ch, "The egg launcher is charging. This stuff takes time.")
+                    await SEND(ch, "The Egg Launcher is charging. This stuff takes time.")
                     return
                 
                 BUTTONS["easterStatus"] = True
@@ -1483,6 +1483,9 @@ async def on_message(message):
                     if role.name.lower() in RIG_LIST:
                         view.type = role.name
                         break
+
+                if isSpecificEgg and specificEgg.capitalize() in MAX_EGGS and view.thrower in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+                    view.type = specificEgg.capitalize()
 
             if view.type == BUTTONS["easterLast"]:
                 await SEND(ch, "This egg launcher never launches the same egg twice!")
@@ -1549,50 +1552,7 @@ async def on_message(message):
             await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
 
             await asyncio.sleep(3600)
-            EGG_EATER.remove(usr.id)
-
-        # elif lmsg.startswith("bd hide egg "):
-        #     if usr.id == BUTTONS["easterLast"]:
-        #         await SEND(ch, "This egg launcher never launches the same egg twice!")
-        #         return
-            
-        #     view = ButtonEgg_Throw(timeout=30)
-        #     view.thrower = usr.id
-        #     view.disabled = False
-        #     view.type = None
-
-        #     if SPECIAL_ROLES["Admin"][0] in usr.roles:
-        #         BUTTONS["easterStaffStatus"] = True
-        #         view.type = "Admin"
-        #     elif EXTRA_ROLES["murdurator"] in usr.roles:
-        #         BUTTONS["easterStaffStatus"] = True
-        #         view.type = "Murdurator"
-        #     elif EXTRA_ROLES["admin"] in usr.roles:
-        #         BUTTONS["easterStaffStatus"] = True
-        #         view.type = "Broken Drone"
-        #     else:
-        #         if ch.id != 750060041289072771:
-        #             await SEND(ch, "The egg launcher only works in <#750060041289072771>.")
-        #             return
-        #         elif BUTTONS["easterStatus"]:
-        #             await SEND(ch, "The egg launcher is charging. This stuff takes time.")
-        #             return
-                
-        #         BUTTONS["easterStatus"] = True
-
-        #         for role in reversed(usr.roles):
-        #             if role.name.lower() in RIG_LIST:
-        #                 view.type = role.name
-        #                 break
-                    
-        #     if view.type == None:
-        #         BUTTONS["easterStatus"] = False
-        #         return
-
-        #     BUTTONS["easterLast"] = usr.id
-        #     view.picker = None
-        #     view.channel = ch
-     
+            EGG_EATER.remove(usr.id)    
 
         else:
             ## tips/tricks trigger

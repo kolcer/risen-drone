@@ -186,8 +186,8 @@ class ShowEggs(discord.ui.View):
             self.next_button.disabled = False
             self.next_button.style = discord.ButtonStyle.primary
 
-        if not EXTRA_ROLES['admin'] in self.requester.roles and self.cp == 0:
-            self.next_button.disabled = True
+        # if not EXTRA_ROLES['admin'] in self.requester.roles and self.cp == 0:
+        #     self.next_button.disabled = True
 
     async def check_requester(self, interaction):
         if interaction.user != self.requester:

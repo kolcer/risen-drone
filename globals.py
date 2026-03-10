@@ -945,6 +945,25 @@ FUN_ROLES = {
     ]
 }
 
+MAX_EGGS = {
+    "Saviour": "Patron",
+    "It": "Joker",
+    "Annihilator": "Wicked",
+    "Admiral": "Keeper",
+    "Dabsforlif": "Muggle",
+    "Zero": "Hacker",
+    "Outlaw": "Thief",
+    "Illuminati": "Archon",
+    "Strider": "Drifter",
+    "Exiled": "Heretic",
+    "Optimus": "Splicer",
+    "Deathbringer": "Necromancer",
+    "Illusion": "Reaver",
+    "Daemon": "Gremlin",
+    "Aether": "Spectre",
+    "Usurper": "Chameleon"
+}
+
 APPROVED_ROLES = {
     "Role Hunter": None,
     "Image Perms": None,
