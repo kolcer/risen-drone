@@ -99,7 +99,7 @@ async def on_ready():
     for i, v in CHANNELS.items():
         CHANNELS[i] = GET_CHANNEL(client,v)
     
-    # RIG_DATA['rigTracker'] = await GET_MSG(CHANNELS["bot-testing"],RIG_DATA['rigTracker'])
+    # RIG_DATA['rigTracker'] = await GET_MSG(CHANNELS["drone-masters"],RIG_DATA['rigTracker'])
 
     #prepare the roles
  
@@ -127,7 +127,7 @@ async def on_ready():
         ping = str(os.environ['RAILWAY_GIT_AUTHOR'])
 
     #send ready to the test channel
-    await SEND(CHANNELS["bot-testing"], f"The last edited code is now effective for the **{restarts}th** time.\nSummary: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
+    await SEND(CHANNELS["drone-masters"], f"The last edited code is now effective for the **{restarts}th** time.\nSummary: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
 
     set_entry("restarts", str(restarts))
 
@@ -511,7 +511,7 @@ async def on_message(message):
             elif ACTIVE_RIGS["gremlin"]:
                 await ExecuteGremlinRig(ch, usr)
 
-        # Prevent using BD commands outside of #bot-commands and #bot-testing channels
+        # Prevent using BD commands outside of #bot-commands and #drone-masters channels
         elif ch.id not in [750060041289072771, 813882658156838923] and restricted:
             await SEND(ch, "This command can be only used in <#750060041289072771>!")
 
@@ -1005,7 +1005,7 @@ async def on_message(message):
                 view.footers[5] = "Nothing to see here."
 
             # Send view... hopefully
-            if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']):
+            if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']):
                 await view.send(CHANNELS['bot-commands'])
                 await asyncio.sleep(1)
                 await SEND(CHANNELS['bot-commands'], f'{usr.mention} moving forward you should request your profile or anyone else\'s to be shown in this channel instead.')
@@ -1289,7 +1289,7 @@ async def on_message(message):
                 await SEND(ch,"Only Janitors can add new tips and trivia.")
                 return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
                 await SEND(ch, "This command can be only used in <#750060041289072771>!")
                 return
             
@@ -1326,7 +1326,7 @@ async def on_message(message):
                 await SEND(ch,"Only Janitors can list full tips or trivia.")
                 return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
                 await SEND(ch, "This command can be only used in <#750060041289072771>!")
                 return
             
@@ -1364,7 +1364,7 @@ async def on_message(message):
                 await SEND(ch,"Only Wiki Editors can delete tips and trivia.")
                 return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
                 await SEND(ch, "This command can be only used in <#750060041289072771>!")
                 return
             
@@ -1598,14 +1598,14 @@ async def on_message(message):
             ## tips/tricks trigger
             if len(lsplit) == 2:
                 if lsplit[1] == "tip" or lsplit[1] == "trick":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
                         await SEND(ch,show_next_entry(lsplit[0]))
                         return
                 elif lsplit[1] == "trivia":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['bot-testing']:
+                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
                         await SEND(ch, "This command can be only used in <#750060041289072771>!")
                         return
                     if lsplit[0] in TIPS_KEYS:
@@ -1892,7 +1892,7 @@ async def on_message(message):
 
                     return
                 except:
-                    await SEND(CHANNELS['bot-testing'], "Architen't.")
+                    await SEND(CHANNELS['drone-masters'], "Architen't.")
                     return
                 
             #have the bot say whatever you say
@@ -1902,7 +1902,7 @@ async def on_message(message):
                     await DELETE(message)
                     return
                 except:
-                    await SEND(CHANNELS['bot-testing'], "I refuse.")
+                    await SEND(CHANNELS['drone-masters'], "I refuse.")
                     return
     
             #give ckr
