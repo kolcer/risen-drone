@@ -523,22 +523,21 @@ async def ExecuteReaverRig(ch,usr):
     isMurdurator = False
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
 
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+    for roles in usr.roles:
+        if roles.name in FULL_IMMUNITY_ROLES:
+            isMurdurator = True
+            break
+
+    if isMurdurator or (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
     if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
         DETAILED_ROLES["reflected"]["times"] += 1
     else:
         DETAILED_ROLES["reflected"]["times"] = 0
-        ACTIVE_RIGS["reaver"] = False
-
-    for roles in usr.roles:
-        if roles.name in FULL_IMMUNITY_ROLES:
-            isMurdurator = True
-            break
-
-    if not isMurdurator:       
-        await EDIT_NICK(usr, reflectorName)
+        ACTIVE_RIGS["reaver"] = False      
+        
+    await EDIT_NICK(usr, reflectorName)
 
     await asyncio.sleep(1)
 
@@ -711,7 +710,7 @@ async def ExecuteGremlinRig(ch,usr):
 
         view.channel = ch
         view.toolate = True
-        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You start seeing eggs everywhere...", view)
+        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You begin seeing eggs everywhere...", view)
         await view.wait()
         await view.too_late()
         BUTTONS["status"] = False
