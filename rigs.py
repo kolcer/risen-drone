@@ -520,6 +520,7 @@ async def ExecuteThiefRig(ch,usr):
     return
 
 async def ExecuteReaverRig(ch,usr):
+    isMurdurator = False
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
 
     if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster'], False) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
