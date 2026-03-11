@@ -50,10 +50,7 @@ TIPS_KEYS = [
 ]
 COUNTERS = {}
 
-# There are two because Murdurators now have higher perms than BD and must appear in both and I dont wanna
-# Change the logic where they're used rn
 FULL_IMMUNITY_ROLES = ["Admin", "Sleazel", "Game Murdurator", "Chat Murdurator"]
-BASIC_IMMUNITY_ROLES = ["Admin", "Sleazel", "Game Murdurator", "Chat Murdurator"]
 
 IMPOSTOR_WARNINGS = [
     "It's time to stop.", "I took the liberty to change your name.",

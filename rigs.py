@@ -515,7 +515,7 @@ async def ExecuteThiefRig(ch,usr):
 async def ExecuteReaverRig(ch,usr):
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
 
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+    if (ch.name not in CHANNELS) or usr in NickDictionary or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
     if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
