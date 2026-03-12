@@ -1584,7 +1584,7 @@ class ButtonEgg_Throw(discord.ui.View):
                 item.label = "I will keep it for next time."
                 item.style = discord.ButtonStyle.red
                 if self.type == "Mega Secret":
-                    MEGA_SECRET_LAUNCHER = []
+                    MEGA_SECRET_LAUNCHER["user"] = None
                 await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
 
     async def too_late(self):
@@ -1618,7 +1618,7 @@ class ButtonEgg_Throw(discord.ui.View):
 
                 await add_egg_with_check(f"{self.type} Egg", usr)
                 if self.type == "Mega Secret":
-                    MEGA_SECRET_LAUNCHER = [usr]
+                    MEGA_SECRET_LAUNCHER["user"] = usr.id
                 await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False) 
             else:
                 await INTERACTION(interaction.response, "This egg... rejects you.", True)

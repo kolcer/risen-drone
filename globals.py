@@ -14,7 +14,6 @@ LOSERS = []
 MG_QUEUE = []
 # if game breaks there must be 3 people telling the bot to reset
 FIX_BOT = []
-MEGA_SECRET_LAUNCHER = []
 
 # VARIABLE DICTIONARIES
 LAST_RIG = {}
@@ -983,6 +982,10 @@ MAX_EGGS = {
     "Daemon": "Gremlin",
     "Aether": "Spectre",
     "Usurper": "Chameleon"
+}
+
+MEGA_SECRET_LAUNCHER = {
+    "user": None,
 }
 
 APPROVED_ROLES = {

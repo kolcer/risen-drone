@@ -1510,7 +1510,7 @@ async def on_message(message):
                         BUTTONS["easterStatus"] = False
                         return
                     
-                    if (specificEgg.title() == "Mega Secret" and (usr in MEGA_SECRET_LAUNCHER or not MEGA_SECRET_LAUNCHER)):
+                    if (specificEgg.title() == "Mega Secret" and (MEGA_SECRET_LAUNCHER["user"] == usr.id or MEGA_SECRET_LAUNCHER["user"] == None)):
                         view.type = specificEgg.title()
                     elif specificEgg.title() == "Mega Secret":
                         await SEND(ch, "You don't have it on you.")
