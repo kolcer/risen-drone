@@ -1271,8 +1271,6 @@ async def on_message(message):
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
                 await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
-                await asyncio.sleep(1)
-                await launch_egg(CHANNELS["verification"], "Mega Secret", "An egg that you feel shouldn't be here appears in front of you...")
                 await asyncio.sleep(10)
                 await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
                 EX_CLIMBERS.remove(usr)
@@ -1511,6 +1509,16 @@ async def on_message(message):
                         await SEND(ch, "Nobody is perfect, but you aren't even close.")
                         BUTTONS["easterStatus"] = False
                         return
+                    
+                    if (specificEgg.title() == "Mega Secret" and (usr in MEGA_SECRET_LAUNCHER or not MEGA_SECRET_LAUNCHER)):
+                        view.type = specificEgg.title()
+                    elif specificEgg.title() == "Mega Secret":
+                        await SEND(ch, "You don't have it on you.")
+                        BUTTONS["easterStatus"] = False
+                        return
+                    
+            if random.randint(1, 11) == 1:
+                view.type = "Super Secret"
 
             if view.type == None:
                 await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")
@@ -1528,7 +1536,10 @@ async def on_message(message):
             view.toolate = True
             
             try:
-                view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
+                if view.type == "Super Secret":
+                    view.message = await SEND_VIEW(ch, f"{usr.mention}'s Egg Launcher malfunctioned and threw a strange looking egg!'", view)
+                else:
+                    view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
             except Exception as e:
                 await SEND(ch, str(e))
                 BUTTONS["easterStatus"] = False

@@ -14,6 +14,7 @@ LOSERS = []
 MG_QUEUE = []
 # if game breaks there must be 3 people telling the bot to reset
 FIX_BOT = []
+MEGA_SECRET_LAUNCHER = []
 
 # VARIABLE DICTIONARIES
 LAST_RIG = {}
@@ -444,13 +445,11 @@ CHANNELS = {
     "bot-commands": 750060041289072771,
     # "crazy-stairs-chat": 750060054090219760,
     "drone-masters": 813882658156838923,
-    "verification": 735406774718562324,
 }
 
 # channels where bot is allowed to post, that should not be counted in public commands
 SECRET_CHANNELS = [
     813882658156838923,
-    735406774718562324
 ]
 
 # bot will react to the webhook emoji, if it finds in a webhook message
