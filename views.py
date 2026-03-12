@@ -1615,7 +1615,8 @@ class ButtonEgg_Throw(discord.ui.View):
                 self.picker = usr
 
                 await add_egg_with_check(f"{self.type} Egg", usr)
-                MEGA_SECRET_LAUNCHER = [usr]
+                if self.type == "Mega Secret":
+                    MEGA_SECRET_LAUNCHER = [usr]
                 await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False)
             else:
                 await INTERACTION(interaction.response, "This egg... rejects you.", True)
