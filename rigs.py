@@ -202,7 +202,7 @@ async def Rig(rigType, ch, usr):
             msgCounting = await SEND(ch, "You cast Drifter Rig but you were looking the other way, causing your name to be reversed...")
             
         case "archon":
-            if ch.name not in CHANNELS:
+            if ch.name not in CHANNELS or ch.id in SECRET_CHANNELS:
                 await SEND(ch, "Impossible to create a Gate here. This channel is restricted.")
                 RIG_COOLDOWNS["chat"] = False
                 return
@@ -483,7 +483,7 @@ async def ExecuteThiefRig(ch,usr):
     isMurdurator = False
     victim = usr.display_name
 
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles): #or len(RIG_DATA['rigCaster'].display_name + ", " + usr.display_name) > 32:
         return
 
     ACTIVE_RIGS["thief"] = False
@@ -517,7 +517,7 @@ async def ExecuteThiefRig(ch,usr):
 async def ExecuteReaverRig(ch,usr):
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
 
-    if (ch.name not in CHANNELS) or usr in NickDictionary or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or usr in NickDictionary or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
     if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
@@ -552,7 +552,7 @@ async def ExecuteReaverRig(ch,usr):
     return
 
 async def ExecuteSpectreRig(ch,usr, message):
-    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr):
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr):
         return
     
     ACTIVE_RIGS["spectre"] = False
@@ -582,7 +582,7 @@ async def ExecuteSpectreRig(ch,usr, message):
 
 async def ExecuteJokerRig(ch,usr, message):
 
-    if (ch.name not in CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
         return
 
     ACTIVE_RIGS["joker"] = False
@@ -597,7 +597,7 @@ async def ExecuteJokerRig(ch,usr, message):
     return
 
 async def ExecuteJokerRig(ch, usr, message):
-    if (ch.name not in CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
         return
 
     ACTIVE_RIGS["joker"] = False
@@ -619,7 +619,7 @@ async def ExecuteJokerRig(ch, usr, message):
 
 async def ExecuteSplicerRig(ch,usr):
  
-    if (ch.name not in CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles):
         return
                 
     ACTIVE_RIGS["splicer"] = False
@@ -671,7 +671,7 @@ async def ExecuteSplicerRig(ch,usr):
     return
 
 async def ExecuteGremlinRig(ch,usr):
-    if (ch.name not in CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr) or EXTRA_ROLES['hypno'] in usr.roles:
+    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or rigImmunity(usr, RIG_DATA['rigCaster']) or isNewUser(usr) or EXTRA_ROLES['hypno'] in usr.roles:
         return
 
     ACTIVE_RIGS["gremlin"] = False

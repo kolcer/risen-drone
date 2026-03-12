@@ -1263,7 +1263,7 @@ async def on_message(message):
                 demorphFromTarget = lsplit[2].capitalize()
             
             if alignmentRoles == 1 and demorphFromTarget.lower() in RIG_LIST and EVENTS["Easter"]:
-                await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment — but there are no take-backsies... unless you eat an egg.")
+                await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment but there are no take-backsies... unless you eat an egg.")
                 return
             else:
                 await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
@@ -1271,6 +1271,9 @@ async def on_message(message):
             if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
                 EX_CLIMBERS.append(usr)
                 await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
+                await asyncio.sleep(1)
+                if EVENTS["Easter"]: 
+                    await launch_egg(CHANNELS["verification"], "Mega Secret", "An egg that you feel shouldn't be here appears in front of you...")
                 await asyncio.sleep(10)
                 await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
                 EX_CLIMBERS.remove(usr)
@@ -1488,11 +1491,27 @@ async def on_message(message):
                         view.type = role.name
                         break
 
-                #IK these two ifs can be merged but it would be way too long
-                if isSpecificEgg and specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
-                    view.type = specificEgg.title()
-                elif isSpecificEgg and (specificEgg.title() == "Full" and check_full_egg_conditions(usr)) or (specificEgg.title() == "Perfect" and check_perfect_egg_conditions(usr)):
-                    view.type = specificEgg.title()
+                if isSpecificEgg:
+                    if specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+                        view.type = specificEgg.title()
+                    elif specificEgg.title() in MAX_EGGS:
+                        await SEND(ch, "To launch that egg, you must first have the base one.")
+                        BUTTONS["easterStatus"] = False
+                        return
+
+                    if (specificEgg.title() == "Full" and check_full_egg_conditions(usr)):
+                        view.type = specificEgg.title()
+                    elif specificEgg.title() == "Full":
+                        await SEND(ch, "Aren't you full of yourself? Or perhaps not full enough.")
+                        BUTTONS["easterStatus"] = False
+                        return
+
+                    if (specificEgg.title() == "Perfect" and check_perfect_egg_conditions(usr)):
+                        view.type = specificEgg.title()
+                    elif specificEgg.title() == "Perfect":
+                        await SEND(ch, "Nobody is perfect, but you aren't even close.")
+                        BUTTONS["easterStatus"] = False
+                        return
 
             if view.type == None:
                 await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")
@@ -1531,7 +1550,7 @@ async def on_message(message):
         elif lmsg.startswith("bd eat") and lmsg.endswith("egg") and EVENTS["Easter"]:
             eggToEat = lmsg.replace("bd eat ", "").replace(" egg", "").capitalize()
 
-            if eggToEat.lower() not in RIG_LIST:
+            if eggToEat.lower() not in EDIBLE_EGGS:
                 await SEND(ch, "You cannot eat this.")
                 return
             elif not str(usr.id) in list_decoded_entries(f"{eggToEat} Egg"):
@@ -1544,23 +1563,26 @@ async def on_message(message):
                 await SEND(ch, "Too many eggs are bad for your health.")
                 return
             
-            EGG_EATER.append(usr.id)
+            if random.randint(1, 3) == 1:
+                await launch_egg(ch, "Secret", "Before you get the chance to eat the egg, it cracks and reveals... Another egg?")
+            else:
+                EGG_EATER.append(usr.id)
 
-            delete_entry_by_value(f"{eggToEat} Egg", str(usr.id))
+                delete_entry_by_value(f"{eggToEat} Egg", str(usr.id))
 
-            role_list = []
-            for role in usr.roles:
-                if (role.name in MORPHABLE_ROLES):
-                    role_list.append(role)
-            await usr.remove_roles(*role_list)
-            await asyncio.sleep(1)
+                role_list = []
+                for role in usr.roles:
+                    if (role.name in MORPHABLE_ROLES):
+                        role_list.append(role)
+                await usr.remove_roles(*role_list)
+                await asyncio.sleep(1)
 
-            await ADD_ROLES(usr,MORPHABLE_ROLES[eggToEat][0])
+                await ADD_ROLES(usr,MORPHABLE_ROLES[eggToEat][0])
 
-            await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
+                await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
 
-            await asyncio.sleep(3600)
-            EGG_EATER.remove(usr.id)    
+                await asyncio.sleep(3600)
+                EGG_EATER.remove(usr.id)    
 
         else:
             ## tips/tricks trigger

@@ -443,12 +443,14 @@ CHANNELS = {
     "general": 624227331720085536,
     "bot-commands": 750060041289072771,
     # "crazy-stairs-chat": 750060054090219760,
-    "drone-masters": 813882658156838923
+    "drone-masters": 813882658156838923,
+    "verification": 735406774718562324,
 }
 
 # channels where bot is allowed to post, that should not be counted in public commands
 SECRET_CHANNELS = [
-    813882658156838923
+    813882658156838923,
+    735406774718562324
 ]
 
 # bot will react to the webhook emoji, if it finds in a webhook message
@@ -602,6 +604,25 @@ RIG_LIST = [
     "spectre",
     "none",
     "janitor",
+    "chameleon",
+]
+
+EDIBLE_EGGS = [
+    "patron",
+    "joker",
+    "wicked",
+    "keeper",
+    "muggle",
+    "hacker",
+    "thief",
+    "archon",
+    "drifter",
+    "heretic",
+    "splicer",
+    "necromancer",
+    "reaver",
+    "gremlin",
+    "spectre",
     "chameleon",
 ]
 
