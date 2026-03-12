@@ -1,7 +1,7 @@
 import redis
 import os
 import random
-from globals import FUN_ROLES, CHANNELS, GIT_COMMITTERS, COUNTERS
+from globals import FUN_ROLES, CHANNELS, GIT_COMMITTERS, COUNTERS, MAX_EGGS
 from rated import SEND
 
 # Set up the data base
@@ -42,6 +42,16 @@ async def add_egg_with_check(key, new_entry):
         db.rpush("Egg Collector",new_entry.id)
 
     db.rpush(key,new_entry.id)
+
+def check_full_egg_conditions(usr):
+    user_id = str(usr.id)
+    # Checks if user is in "Patron Egg", "Joker Egg", etc.
+    return all(user_id in list_decoded_entries(f"{val} Egg") for val in MAX_EGGS.values())
+
+def check_perfect_egg_conditions(usr):
+    user_id = str(usr.id)
+    # Checks if user is in "Saviour Egg", "It Egg", etc.
+    return all(user_id in list_decoded_entries(f"{key} Egg") for key in MAX_EGGS.keys())
 
 def delete_key(key):
     db.delete(key)

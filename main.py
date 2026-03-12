@@ -1136,21 +1136,22 @@ async def on_message(message):
 
             if len(THE_ROINGUS) == 2:
                 THE_ROINGUS.clear()
-                BUTTONS["status"] = True
-                view = ButtonEgg_Throw(timeout=30)
-                view.thrower = None
-                view.picker = None
-                view.disabled = False
+                await launch_egg(ch, "Roingus", "The two Roingi made the Roingus Egg!")
+                # BUTTONS["status"] = True
+                # view = ButtonEgg_Throw(timeout=30)
+                # view.thrower = None
+                # view.picker = None
+                # view.disabled = False
 
-                view.type = "Roingus"
+                # view.type = "Roingus"
 
-                view.channel = ch
-                view.toolate = True
-                view.message = await SEND_VIEW(ch, "The two Roingi made the Roingus Egg!", view)
+                # view.channel = ch
+                # view.toolate = True
+                # view.message = await SEND_VIEW(ch, "The two Roingi made the Roingus Egg!", view)
 
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
+                # await view.wait()
+                # await view.too_late()
+                # BUTTONS["status"] = False
 
         elif "<:csshinyroing:1208795855717670973>" in lmsg and ch.id == 750060041289072771 and EVENTS["Easter"]:
             if usr.id not in THE_SHINY:
@@ -1158,21 +1159,22 @@ async def on_message(message):
 
             if len(THE_SHINY) == 5:
                 THE_SHINY.clear()
-                BUTTONS["status"] = True
-                view = ButtonEgg_Throw(timeout=30)
-                view.thrower = None
-                view.picker = None
-                view.disabled = False
+                await launch_egg(ch, "Shiny", "The 5 Roingi danced and fused together, creating the Shiny Egg!")
+                # BUTTONS["status"] = True
+                # view = ButtonEgg_Throw(timeout=30)
+                # view.thrower = None
+                # view.picker = None
+                # view.disabled = False
 
-                view.type = "Shiny"
+                # view.type = "Shiny"
 
-                view.channel = ch
-                view.toolate = True
-                view.message = await SEND_VIEW(ch, "The 5 Roingi danced and fused together, creating the Shiny Egg!", view)
+                # view.channel = ch
+                # view.toolate = True
+                # view.message = await SEND_VIEW(ch, "The 5 Roingi danced and fused together, creating the Shiny Egg!", view)
 
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
+                # await view.wait()
+                # await view.too_late()
+                # BUTTONS["status"] = False
 
 
         #resurrect chat
@@ -1454,7 +1456,7 @@ async def on_message(message):
             isSpecificEgg = False
             specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
 
-            if specificEgg.lower() in RIG_LIST or specificEgg.title() in MAX_EGGS:
+            if specificEgg.lower() in RIG_LIST or specificEgg.title() in MAX_EGGS or specificEgg.lower() in ["full", "perfect"]:
                 isSpecificEgg = True
 
             view = ButtonEgg_Throw(timeout=30)
@@ -1486,7 +1488,10 @@ async def on_message(message):
                         view.type = role.name
                         break
 
+                #IK these two ifs can be merged but it would be way too long
                 if isSpecificEgg and specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+                    view.type = specificEgg.title()
+                elif isSpecificEgg and (specificEgg.title() == "Full" and check_full_egg_conditions(usr)) or (specificEgg.title() == "Perfect" and check_perfect_egg_conditions(usr)):
                     view.type = specificEgg.title()
 
             if view.type == None:
@@ -1703,21 +1708,22 @@ async def on_message(message):
                 BUTTONS["status"] = False
 
             elif BUTTONS["phase"] == 100:
-                BUTTONS["status"] = True
-                view = ButtonEgg_Throw(timeout=30)
-                view.thrower = None
-                view.picker = None
-                view.disabled = False
+                await launch_egg(BUTTONS["channel"], "Architect", "The Architect Egg fell from the sky!")
+                # BUTTONS["status"] = True
+                # view = ButtonEgg_Throw(timeout=30)
+                # view.thrower = None
+                # view.picker = None
+                # view.disabled = False
 
-                view.type = "Architect"
+                # view.type = "Architect"
 
-                view.channel = ch
-                view.toolate = True
-                view.message = await SEND_VIEW(BUTTONS["channel"], "The Architect Egg fell from the sky!", view)
+                # view.channel = ch
+                # view.toolate = True
+                # view.message = await SEND_VIEW(BUTTONS["channel"], "The Architect Egg fell from the sky!", view)
 
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
+                # await view.wait()
+                # await view.too_late()
+                # BUTTONS["status"] = False
 
             elif BUTTONS["phase"] == 101:
                 BUTTONS["status"] = True

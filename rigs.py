@@ -6,6 +6,7 @@ from globals import *
 from rated import *
 from roles import *
 from database import *
+from utility import *
 from redis import *
 from discord.ext import commands
 
@@ -147,20 +148,21 @@ async def Rig(rigType, ch, usr):
                                 "\nMaybe someone could give you some Mana?")
                 
             if EVENTS["Easter"]: 
-                BUTTONS["status"] = True
-                view = ButtonEgg_Throw(timeout=30)
-                view.thrower = None
-                view.picker = None
-                view.disabled = False
+                await launch_egg(ch, "Possessed", "Within the darkness you can make out the silhouette of an egg...")
+                # BUTTONS["status"] = True
+                # view = ButtonEgg_Throw(timeout=30)
+                # view.thrower = None
+                # view.picker = None
+                # view.disabled = False
 
-                view.type = "Possessed"
+                # view.type = "Possessed"
 
-                view.channel = ch
-                view.toolate = True
-                view.message = await SEND_VIEW(ch, "Within the darkness you can make out the silhouette of an egg...", view)
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
+                # view.channel = ch
+                # view.toolate = True
+                # view.message = await SEND_VIEW(ch, "Within the darkness you can make out the silhouette of an egg...", view)
+                # await view.wait()
+                # await view.too_late()
+                # BUTTONS["status"] = False
                 
             msgCountingContent = msgCounting.content
             await EDIT_MESSAGE(msgCounting, msgCountingContent + f"\n\n*Cooldown ends* <t:{round(time.time() + 120)}:R>")
@@ -529,20 +531,21 @@ async def ExecuteReaverRig(ch,usr):
     await asyncio.sleep(1)
 
     if EVENTS["Easter"]: 
-        BUTTONS["status"] = True
-        view = ButtonEgg_Throw(timeout=30)
-        view.thrower = None
-        view.picker = None
-        view.disabled = False
+        await launch_egg(ch, "Reflected", RIG_DATA['rigCaster'].mention + " has just reflected their display name on you! Along with this strange egg.")
+        # BUTTONS["status"] = True
+        # view = ButtonEgg_Throw(timeout=30)
+        # view.thrower = None
+        # view.picker = None
+        # view.disabled = False
 
-        view.type = "Reflected"
+        # view.type = "Reflected"
 
-        view.channel = ch
-        view.toolate = True
-        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you! Along with this strange egg.", view)
-        await view.wait()
-        await view.too_late()
-        BUTTONS["status"] = False
+        # view.channel = ch
+        # view.toolate = True
+        # view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you! Along with this strange egg.", view)
+        # await view.wait()
+        # await view.too_late()
+        # BUTTONS["status"] = False
     else:
         await SEND(ch, RIG_DATA['rigCaster'].mention + " has just reflected their display name on you!")
 
@@ -687,20 +690,21 @@ async def ExecuteGremlinRig(ch,usr):
     #     await asyncio.sleep(1)
 
     if EVENTS["Easter"]: 
-        BUTTONS["status"] = True
-        view = ButtonEgg_Throw(timeout=30)
-        view.thrower = None
-        view.picker = None
-        view.disabled = False
+        await launch_egg(ch, "Hypnotized", RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You begin seeing eggs everywhere...")
+        # BUTTONS["status"] = True
+        # view = ButtonEgg_Throw(timeout=30)
+        # view.thrower = None
+        # view.picker = None
+        # view.disabled = False
 
-        view.type = "Hypnotized"
+        # view.type = "Hypnotized"
 
-        view.channel = ch
-        view.toolate = True
-        view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You begin seeing eggs everywhere...", view)
-        await view.wait()
-        await view.too_late()
-        BUTTONS["status"] = False
+        # view.channel = ch
+        # view.toolate = True
+        # view.message = await SEND_VIEW(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good... You begin seeing eggs everywhere...", view)
+        # await view.wait()
+        # await view.too_late()
+        # BUTTONS["status"] = False
     else:
         await SEND(ch, RIG_DATA['rigCaster'].mention + " has hypnotized you! You don't feel too good...")
             

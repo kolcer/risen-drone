@@ -1,6 +1,7 @@
 import random
-from globals import RIG_LIST, EMOJIS_TO_REACT
+from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS
 from rated import SEND
+from views import *
 
 # Convert milliseconds to seconds
 def convert_best_times(num):
@@ -34,3 +35,19 @@ def build_tower_page(user_stats, tower_type, page_index, view):
         view.footers[page_index] = f"Average climb time is {avg_time / valid_entries:.2f} seconds!"
     else:
         view.footers[page_index] = "Type 'bd link' to link your account and start tracking your times!"
+
+async def launch_egg(ch, eggType, msg):
+    BUTTONS["status"] = True
+    view = ButtonEgg_Throw(timeout=30)
+    view.thrower = None
+    view.picker = None
+    view.disabled = False
+
+    view.type = eggType
+
+    view.channel = ch
+    view.toolate = True
+    view.message = await SEND_VIEW(ch, msg, view)
+    await view.wait()
+    await view.too_late()
+    BUTTONS["status"] = False
