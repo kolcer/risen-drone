@@ -1583,6 +1583,8 @@ class ButtonEgg_Throw(discord.ui.View):
             else:
                 item.label = "I will keep it for next time."
                 item.style = discord.ButtonStyle.red
+                if self.type == "Mega Secret":
+                    MEGA_SECRET_LAUNCHER = []
                 await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
 
     async def too_late(self):
