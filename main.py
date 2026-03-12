@@ -1272,8 +1272,7 @@ async def on_message(message):
                 EX_CLIMBERS.append(usr)
                 await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
                 await asyncio.sleep(1)
-                if EVENTS["Easter"]: 
-                    await launch_egg(CHANNELS["verification"], "Mega Secret", "An egg that you feel shouldn't be here appears in front of you...")
+                await launch_egg(CHANNELS["verification"], "Mega Secret", "An egg that you feel shouldn't be here appears in front of you...")
                 await asyncio.sleep(10)
                 await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
                 EX_CLIMBERS.remove(usr)
