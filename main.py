@@ -337,12 +337,13 @@ async def on_message(message):
             await asyncio.sleep(1)
         return
 
-    if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
-        randomchance = random.randint(0,10000)
-        eligible = 0
-        rolename = ""
-        
-        if randomchance == 0:
+
+    randomChance = random.randint(0,10000)
+    if randomChance == 0:
+        if not str(usr.id) in list_decoded_entries("Sanctuary Discoverer"):
+            eligible = 0
+            rolename = ""
+            
             for role in usr.roles:
                 if role.name.lower() in SANCTUARY:
                     eligible += 1 #are you happy? >: -- yes i am --cool
