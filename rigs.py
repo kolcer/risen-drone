@@ -7,6 +7,7 @@ from rated import *
 from roles import *
 from database import *
 from utility import *
+from difflib import SequenceMatcher
 from redis import *
 from discord.ext import commands
 
@@ -516,8 +517,9 @@ async def ExecuteThiefRig(ch,usr):
 
 async def ExecuteReaverRig(ch,usr):
     reflectorName = DETAILED_ROLES["reflected"]["caster"].display_name
+    compare = SequenceMatcher(None, reflectorName, SERVER_DATA['nick'])
 
-    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or usr in NickDictionary or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
+    if (compare.ratio() > 0.55) or (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or usr in NickDictionary or isNewUser(usr) or rigImmunity(usr, RIG_DATA['rigCaster']) or (MORPHABLE_ROLES["Gun"][0] in usr.roles) or usr.display_name == reflectorName:
         return
 
     if DETAILED_ROLES["reflected"]["times"] < DETAILED_ROLES["reflected"]["maxTimes"] - 1:
