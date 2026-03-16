@@ -146,7 +146,7 @@ async def on_member_update(before, after):
         await SEND(CHANNELS['bot-commands'], f"What have you done {after.mention}? There is no escape from :].")
     
 
-    #name not stolen but is gun
+    #name not stolen but is gun 
     if not before in NickDictionary and MORPHABLE_ROLES['Gun'][0] in before.roles:
         await EDIT_NICK(after, random.choice(WORST_GUNS))
         return
