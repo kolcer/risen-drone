@@ -1853,7 +1853,7 @@ async def on_message(message):
                 else:
                     await SEND(ch, f"No key found for '{key_cap}' or '{key_low}'.")
                 
-                return
+                return 
             
             # remove key from db
             if lmsg.startswith("dkey", 1):
