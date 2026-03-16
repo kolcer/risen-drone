@@ -61,7 +61,7 @@ async def POST_TIPS(channel,key):
         await SEND(channel, "-----\n" + entries[i].decode("utf-8") + "\n-----")
         await asyncio.sleep(3)
  
-#print questions
+#print questions 
 async def PRINT_QUESTIONS(channel):
     entries = list_entries('quiz')
     combined_string = ""
