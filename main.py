@@ -1818,8 +1818,8 @@ async def on_message(message):
         #-----admin commands that require TWO inputs-----
         elif len(msginputs) == 2 or lmsg.startswith("nr", 1):
             secondVal = msg.split(" ", 1)[1]
-            second = val.replace("_", " ")          # NOT lowercase
-            lsecond = val.lower().replace("_", " ") # YES lowercase
+            second = secondVal.replace("_", " ")          # NOT lowercase
+            lsecond = secondVal.lower().replace("_", " ") # YES lowercase
             #ispy command
             if lmsg.startswith("ispy",1):
                 I_SPY['channel'] = CHANNELS[lsecond]
