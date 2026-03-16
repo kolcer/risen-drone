@@ -1817,7 +1817,7 @@ async def on_message(message):
 
         #-----admin commands that require TWO inputs-----
         elif len(msginputs) == 2 or lmsg.startswith("nr", 1):
-            val = msg.split(" ", 1)[1]
+            secondVal = msg.split(" ", 1)[1]
             second = val.replace("_", " ")          # NOT lowercase
             lsecond = val.lower().replace("_", " ") # YES lowercase
             #ispy command
@@ -1839,7 +1839,7 @@ async def on_message(message):
                 
                 responses = []
 
-                for k in [key_cap, key_low, val]:
+                for k in [key_cap, key_low, secondVal]:
                     if check_key(k):
                         value = list_decoded_entries(k)
 
@@ -1858,8 +1858,8 @@ async def on_message(message):
             # remove key from db
             if lmsg.startswith("dkey", 1):
                 try:
-                    delete_key(val)
-                    await SEND(ch, f"Key '{val}' deleted successfully.")
+                    delete_key(secondVal)
+                    await SEND(ch, f"Key '{secondVal}' deleted successfully.")
                 except Exception as e:
                     await SEND(ch, e)
                 
