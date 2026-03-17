@@ -509,7 +509,9 @@ async def on_message(message):
 
         ## All Rigs in one, !!goes before rig activations!!
         elif lmsg.startswith('cast') and lmsg.endswith('rig') and len(lmsg.split()) == 3:
-            await CastRig(lsplit[1],ch,usr)
+            await SEND(ch, "This command has moved to a slash command for better code organization and to decrease errors. Please use `/cast [rig]`.")
+            return
+            # await CastRig(lsplit[1],ch,usr)
 
         # ignore if none, it just needs to be in the ACTIVE_RIGS dict for cooldown to work
         elif not (list(ACTIVE_RIGS.values()).count(True) == 1 and ACTIVE_RIGS["none"]) and any(ACTIVE_RIGS.values()) and len(msg) > 1:
