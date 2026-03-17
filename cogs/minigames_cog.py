@@ -1,4 +1,5 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 from globals import QUIZ, QUIZZERS, LADDERS, MG_PLAYERS, MG_QUEUE
@@ -11,7 +12,8 @@ class MinigamesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @discord.app_commands.command(name="start_game", description="Start game: quiz or lucid ladders")
+    start_group = app_commands.Group(name="start", description="Commands to start things")
+    @start_group.command(name="game", description="Start game: quiz or lucid ladders")
     @discord.app_commands.choices(mode=[
         discord.app_commands.Choice(name="Quiz", value="quiz"),
         discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders")
