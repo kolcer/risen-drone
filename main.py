@@ -12,6 +12,7 @@ import string
 from discord.ext import commands
 from difflib import SequenceMatcher
 
+from rig_cog import RigCog
 from globals import *
 from roles import *
 from ladders import *
@@ -137,17 +138,10 @@ async def on_ready():
     except Exception:
         pass
 
-# Slash command: /cast <rig>
-@client.tree.command(name='cast', description='Cast a rig (same as "cast x rig" text command)')
-async def cast(interaction: discord.Interaction, rig: str):
-    rig_lower = rig.lower().strip()
-    if interaction.guild is None or interaction.channel is None:
-        await interaction.response.send_message('This command must be used in a guild channel.', ephemeral=True)
-        return
-
-    await interaction.response.defer(ephemeral=True)
-    await CastRig(rig_lower, interaction.channel, interaction.user)
-    await interaction.followup.send(f'Slash cast attempted: `{rig_lower} rig`', ephemeral=True)
+    try:
+        await client.add_cog(RigCog(client))
+    except Exception:
+        pass
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
