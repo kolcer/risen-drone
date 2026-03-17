@@ -1765,14 +1765,18 @@ class LucidLadders(discord.ui.View):
 
     @discord.ui.button(label="Begin", style=discord.ButtonStyle.green)
     async def begin(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if LADDERS['status'] == "gather" and interaction.user == self.started_user:
+        if LADDERS['status'] == "gather" and interaction.user != self.started_user:
             await INTERACTION(interaction.response, "You must have started the game with at least 2 partecipants.", True)
             return
         
         await interaction.response.defer()
         try:
-            self.children[0].label = "Started"
-            self.children[0].style = discord.ButtonStyle.gray
+            self.children[0].label = "Closed"
+            self.children[1].label = "Started"
+            for item in self.children:
+                item.disabled = True
+                item.style = discord.ButtonStyle.gray
+                
             await EDIT_VIEW_MESSAGE(self.message, "Starting...", self)
             from ladders import LucidLaddersProcessMessage
             await LucidLaddersProcessMessage(interaction.user, "begin")
