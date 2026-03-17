@@ -479,7 +479,7 @@ async def PlayLucidLadders(usr, ch, interaction = None, duelists = None):
     msg = "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game!"
     if duelists:
         view.duelists = duelists
-        msg += f"{msg}\n{duelists[1].mention}, you have been challenged by {interaction.user.mention}!"
+        msg += f"\n{duelists[1].mention}, you have been challenged by {interaction.user.mention}!"
     view.message = await send_followup(ch, msg, interaction, False, view)
     return
 

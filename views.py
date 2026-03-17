@@ -1340,6 +1340,7 @@ class Minigames_TicTacToe(discord.ui.View):
         self.assignments = {}
         self.lastplayer = None
         self.turns = 0
+        self.duelists = []
 
     async def on_timeout(self):
         for item in self.children:
@@ -1394,7 +1395,7 @@ class Minigames_TicTacToe(discord.ui.View):
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
-        if self.duelist and usr not in self.duelist:
+        if self.duelists and usr not in self.duelists:
             await INTERACTION(interaction.response, "This game is private.", True)
             return
 
