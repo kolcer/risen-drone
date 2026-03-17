@@ -534,16 +534,6 @@ async def on_message(message):
         elif ch.id not in [750060041289072771, 813882658156838923] and restricted:
             await SEND(ch, "This command can be only used in <#750060041289072771>!")
 
-        #start the quiz
-        elif lmsg == "start quiz" and not QUIZ["active"] and not QUIZ["second-player"]:
-
-            await StartQuiz(usr,ch)
-
-        #join an ongoing quiz
-        elif lmsg == "join quiz" and QUIZ["second-player"] and usr not in QUIZZERS:
-            
-            await JoinQuiz(usr,ch)
-
         elif QUIZ["active"] and not QUIZ["second-player"] and QUIZ["can-answer"]:
             
             await ProcessQuizAnswer(usr,ch,message,lmsg)

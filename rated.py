@@ -51,7 +51,10 @@ async def SEND(channel, message, view=None):
     if EVENTS["Easter"]:
         message = str(message) + " 🐇"
 
-    return await channel.send(message, view=view)
+    if view is not None:
+        return await channel.send(message, view=view)
+    else:
+        return await channel.send(message)
 
 #sends a view with a message
 async def SEND_VIEW(channel, content, view):
@@ -66,7 +69,10 @@ async def FOLLOWUP(message, interaction, ephemeral=False, view=None):
     if EVENTS["Easter"]:
         message = str(message) + " 🐇"
 
-    return await interaction.followup.send(message, ephemeral=ephemeral, view=view)
+    if view is not None:
+        return await interaction.followup.send(message, ephemeral=ephemeral, view=view)
+    else:
+        return await interaction.followup.send(message, ephemeral=ephemeral)
 
 #defer
 async def DEFER(interaction, ephemeral=False):
