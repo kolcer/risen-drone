@@ -22,7 +22,7 @@ class MinigamesCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
-        duelists = [duelist, interaction.user] if duelist else None
+        duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None
 
         await DEFER(interaction)
 
@@ -60,4 +60,6 @@ class MinigamesCog(commands.Cog):
                 except Exception as exc:
                     await FOLLOWUP(f"Something went wrong with `/play ttt`: {exc}", interaction)
                     raise
+            else:
+                await FOLLOWUP(f"Another game is in progress.", interaction, True)
 
