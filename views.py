@@ -1755,33 +1755,21 @@ class LucidLadders(discord.ui.View):
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
         from ladders import JoinLucidLadders
 
-        if self.locked:
-            await INTERACTION(interaction.response, "Someone is already joining, you were just a little late.", True)
-            return
-        
-        self.locked = True
         try:
             await JoinLucidLadders(interaction.user, interaction)
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not join Lucid Ladders: {exc}", True)
             raise
-        finally:
-            self.locked = False
 
     @discord.ui.button(label="Begin", style=discord.ButtonStyle.green)
     async def begin(self, interaction: discord.Interaction, button: discord.ui.Button):
         from ladders import LucidLaddersProcessMessage
-
-        if self.locked:
-            await INTERACTION(interaction.response, "Someone is still joining!", True)
-            return
         
-        self.locked = True
         try:
             await LucidLaddersProcessMessage(interaction.user, "begin")
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
             raise
         finally:
-            self.locked = False
+            self.stop()
 
