@@ -19,7 +19,7 @@ class RigCog(commands.Cog):
             return
 
         rig_lower = rig.strip().lower()
-        await interaction.response.defer(ephemeral=True)
+        await interaction.response.defer(ephemeral=False)
 
         try:
             await CastRig(rig_lower, interaction.channel, interaction.user, interaction=interaction)
