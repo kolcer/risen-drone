@@ -1755,6 +1755,7 @@ class LucidLadders(discord.ui.View):
             await INTERACTION(interaction.response, "You have already joined Lucid Ladders!", True)
             return
         
+        await interaction.response.defer()
         try:
             from ladders import JoinLucidLadders
             await JoinLucidLadders(interaction.user, interaction)
@@ -1768,6 +1769,7 @@ class LucidLadders(discord.ui.View):
             await INTERACTION(interaction.response, "You must have started the game with at least 2 partecipants.", True)
             return
         
+        await interaction.response.defer()
         try:
             self.children[0].label = "Started"
             self.children[0].style = discord.ButtonStyle.gray
