@@ -538,15 +538,15 @@ async def on_message(message):
             
             await ProcessQuizAnswer(usr,ch,message,lmsg)
 
-        #start mini game
-        elif lmsg == "play lucid ladders":
+        # #start mini game
+        # elif lmsg == "play lucid ladders":
 
-            await PlayLucidLadders(usr,ch)
+        #     await PlayLucidLadders(usr,ch)
 
-        #join mini game
-        elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
+        # #join mini game
+        # elif lmsg == "join" and LADDERS['status'] == "gather" and LADDERS['channel'] == ch:
 
-            await JoinLucidLadders(usr)
+        #     await JoinLucidLadders(usr)
 
         #start mini game
         elif lmsg == "start fight" and (EXTRA_ROLES["admin"] in usr.roles or usr.id == 894573836366934047):

@@ -459,48 +459,38 @@ async def LucidLaddersProcessMessage(usr,msg):
         await MG_LOOP(await MG_ACTION(usr,spell))
 
 async def PlayLucidLadders(usr, ch, interaction = None):
-    if LADDERS['status'] != "off":
-        await send_followup(ch, "A game is already in progress. Please wait for it to finish.", interaction)
-        # await SEND(ch, "A game is already in progress. Please wait for it to finish.")
-        return
-    else:
-        LADDERS['status'] = "gather"
-        MG_PLAYERS[usr] = 0
-        MG_QUEUE.append(usr)
-        LADDERS['currentPlayer'] = 0
-        LADDERS['channel'] = ch
-        LADDERS['tick'] = time.time()
-        ourTick = LADDERS['tick']
-        
-        # await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction)
-        # await asyncio.sleep(60)
-        # if LADDERS['status'] == "gather" and ourTick == LADDERS['tick']:
-        #     await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
-        #     MG_RESET()
+    LADDERS['status'] = "gather"
+    MG_PLAYERS[usr] = 0
+    MG_QUEUE.append(usr)
+    LADDERS['currentPlayer'] = 0
+    LADDERS['channel'] = ch
+    LADDERS['tick'] = time.time()
+    # ourTick = LADDERS['tick']
+    
+    # await SEND(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction)
+    # await asyncio.sleep(60)
+    # if LADDERS['status'] == "gather" and ourTick == LADDERS['tick']:
+    #     await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
+    #     MG_RESET()
 
-        view = LucidLaddersView(starter=usr, timeout=60)
-        view.started_user = usr
-        view.message = await send_followup(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction, False, view)
-        return
+    view = LucidLaddersView(timeout=60)
+    view.started_user = usr
+    view.message = await send_followup(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction, False, view)
+    return
 
 async def JoinLucidLadders(usr, interaction = None):
-    if usr in MG_PLAYERS:
-        await send_followup(LADDERS['channel'], "You have already joined the mini game!", interaction, True)
-        # await SEND(LADDERS['channel'], "You have already joined the mini game!")
-        return
-    else:
-        LADDERS['playerCount'] += 1
-        if LADDERS['playerCount'] > 3:
-            LADDERS['topLevel'] += 5
-        MG_PLAYERS[usr] = 0
-        MG_QUEUE.append(usr)
-        # toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
-        # for plr in MG_QUEUE:
-        #     toSend += f"`{plr.name}`\n"
+    LADDERS['playerCount'] += 1
+    if LADDERS['playerCount'] > 3:
+        LADDERS['topLevel'] += 5
+    MG_PLAYERS[usr] = 0
+    MG_QUEUE.append(usr)
+    # toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
+    # for plr in MG_QUEUE:
+    #     toSend += f"`{plr.name}`\n"
 
-        await send_followup(LADDERS['channel'], f"`{usr.name}` has joined Lucid Ladders!", interaction)
-        # await SEND(LADDERS['channel'], toSend)
-        return
+    await send_followup(LADDERS['channel'], f"`{usr.name}` has joined Lucid Ladders!", interaction)
+    # await SEND(LADDERS['channel'], toSend)
+    return
 
 def SelectRandomUser(usr):
     found = False

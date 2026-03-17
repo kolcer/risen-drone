@@ -1734,9 +1734,8 @@ class Quiz(discord.ui.View):
 
 
 class LucidLadders(discord.ui.View):
-    def __init__(self, starter, *, timeout=60):
+    def __init__(self, *, timeout=60):
         super().__init__(timeout=timeout)
-        self.starter = starter
 
     async def on_timeout(self):
         editMsg = ""
@@ -1752,9 +1751,12 @@ class LucidLadders(discord.ui.View):
 
     @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
-        from ladders import JoinLucidLadders
-
+        if interaction.user in MG_PLAYERS:
+            await INTERACTION(interaction.response, "You have already joined Lucid Ladders!", True)
+            return
+        
         try:
+            from ladders import JoinLucidLadders
             await JoinLucidLadders(interaction.user, interaction)
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not join Lucid Ladders: {exc}", True)
@@ -1762,14 +1764,16 @@ class LucidLadders(discord.ui.View):
 
     @discord.ui.button(label="Begin", style=discord.ButtonStyle.green)
     async def begin(self, interaction: discord.Interaction, button: discord.ui.Button):
-        from ladders import LucidLaddersProcessMessage
+        if LADDERS['status'] == "gather" and interaction.user == self.started_user:
+            await INTERACTION(interaction.response, "You must have started the game with at least 2 partecipants.", True)
+            return
         
         try:
+            self.children[0].label = "Started"
+            self.children[0].style = discord.ButtonStyle.gray
+            await EDIT_VIEW_MESSAGE(self.message, "Starting...", self)
+            from ladders import LucidLaddersProcessMessage
             await LucidLaddersProcessMessage(interaction.user, "begin")
-
-            if self.starter == interaction.user:
-                self.stop()
-                
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
             raise

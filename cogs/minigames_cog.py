@@ -13,8 +13,8 @@ class MinigamesCog(commands.Cog):
 
     @discord.app_commands.command(name="start_game", description="Start game: quiz or lucid ladders")
     @discord.app_commands.choices(mode=[
-        discord.app_commands.Choice(name="quiz", value="quiz"),
-        discord.app_commands.Choice(name="lucid_ladders", value="lucid_ladders")
+        discord.app_commands.Choice(name="Quiz", value="quiz"),
+        discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders")
     ])
     async def start_game(self, interaction: discord.Interaction, mode: str):
         if interaction.guild is None or interaction.channel is None:
@@ -23,16 +23,15 @@ class MinigamesCog(commands.Cog):
 
         await DEFER(interaction)
 
+        if (QUIZ["active"] or QUIZ["second-player"]) or (LADDERS['status'] != "off"):
+            await FOLLOWUP(f"Another game is in progress.", interaction, True)
+
         if mode == "quiz":
-            if not QUIZ["active"] and not QUIZ["second-player"]:
-                try:
-                    await StartQuiz(interaction.user, interaction.channel, interaction)
-                except Exception as exc:
-                    await FOLLOWUP(f"Something went wrong with `/start_game quiz`: {exc}", interaction)
-                    raise
-            else:
-                await FOLLOWUP("A quiz is already in progress!", interaction)
-            return
+            try:
+                await StartQuiz(interaction.user, interaction.channel, interaction)
+            except Exception as exc:
+                await FOLLOWUP(f"Something went wrong with `/start_game quiz`: {exc}", interaction)
+                raise
         else:
             try:
                 await PlayLucidLadders(interaction.user, interaction.channel, interaction)
