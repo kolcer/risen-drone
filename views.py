@@ -1755,7 +1755,7 @@ class LucidLadders(discord.ui.View):
         from ladders import JoinLucidLadders
         
         try:
-            JoinLucidLadders(interaction.user)
+            await JoinLucidLadders(interaction.user)
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not join Lucid Ladders: {exc}", True)
             raise
@@ -1765,7 +1765,7 @@ class LucidLadders(discord.ui.View):
         from ladders import LucidLaddersProcessMessage
         
         try:
-            LucidLaddersProcessMessage(interaction.user, "begin")
+            await LucidLaddersProcessMessage(interaction.user, "begin")
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
             raise
