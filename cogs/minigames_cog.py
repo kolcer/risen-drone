@@ -37,7 +37,7 @@ class MinigamesCog(commands.Cog):
                 raise
         elif game == "lucid_ladders":
             try:
-                await PlayLucidLadders(interaction.user, interaction.channel, interaction)
+                await PlayLucidLadders(interaction.user, interaction.channel, interaction, duelists)
             except Exception as exc:
                 await FOLLOWUP(f"Something went wrong with `/play lucid_ladders`: {exc}", interaction)
                 raise
@@ -50,7 +50,7 @@ class MinigamesCog(commands.Cog):
                     msg = f"Let's play a game."
                     if duelist:
                         view.duelists = duelists
-                        msg = f"{duelist.mention}, you have been challenged by {interaction.user.mention}!"
+                        msg = f"\n{duelist.mention}, you have been challenged by {interaction.user.mention}!"
 
                     view.message = await FOLLOWUP(msg, interaction, False, view)
 

@@ -458,7 +458,7 @@ async def LucidLaddersProcessMessage(usr,msg):
         MG_NEXT_PLAYER()
         await MG_LOOP(await MG_ACTION(usr,spell))
 
-async def PlayLucidLadders(usr, ch, interaction = None):
+async def PlayLucidLadders(usr, ch, interaction = None, duelists = None):
     LADDERS['status'] = "gather"
     MG_PLAYERS[usr] = 0
     MG_QUEUE.append(usr)
@@ -475,7 +475,12 @@ async def PlayLucidLadders(usr, ch, interaction = None):
 
     view = LucidLaddersView(timeout=60)
     view.started_user = usr
-    view.message = await send_followup(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction, False, view)
+
+    msg = "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game!"
+    if duelists:
+        view.duelists = duelists
+        msg = f"\n{duelists[1].mention}, you have been challenged by {interaction.user.mention}!"
+    view.message = await send_followup(ch, msg, interaction, False, view)
     return
 
 async def JoinLucidLadders(usr, interaction = None):

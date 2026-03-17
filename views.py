@@ -1759,6 +1759,10 @@ class LucidLadders(discord.ui.View):
 
     @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.duelists and interaction.user not in self.duelists:
+            await INTERACTION(interaction.response, "This game is private.", True)
+            return
+
         if interaction.user in MG_PLAYERS:
             await INTERACTION(interaction.response, "You have already joined Lucid Ladders!", True)
             return
