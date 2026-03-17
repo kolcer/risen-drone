@@ -28,7 +28,7 @@ from quiz import *
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-client = discord.Client(intents=intents)
+client = discord.Bot(intents=intents)
 
 # prepare to get a list of words for the hangman game
 # nltk.download('words')
@@ -130,6 +130,18 @@ async def on_ready():
     await SEND(CHANNELS["drone-masters"], f"The last edited code is now effective for the **{restarts}th** time.\nSummary: `{os.environ['RAILWAY_GIT_COMMIT_MESSAGE']}`\nAuthor: {ping}")
 
     set_entry("restarts", str(restarts))
+
+# Slash command: /cast <rig>
+@client.slash_command(name='cast', description='Cast a rig (same as "cast x rig" text command)')
+async def cast(ctx: discord.ApplicationContext, rig: str):
+    rig_lower = rig.lower().strip()
+    if ctx.guild is None or ctx.channel is None:
+        await ctx.respond('This command must be used in a guild channel.', ephemeral=True)
+        return
+
+    await ctx.defer(thinking=True, ephemeral=True)
+    await CastRig(rig_lower, ctx.channel, ctx.author)
+    await ctx.followup.send(f'Slash cast attempted: `{rig_lower} rig`', ephemeral=True)
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
