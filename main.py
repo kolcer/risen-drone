@@ -134,12 +134,12 @@ async def on_ready():
     set_entry("restarts", str(restarts))
 
     try:
-        await client.tree.sync()
+        await client.add_cog(RigCog(client))
     except Exception:
         pass
 
     try:
-        await client.add_cog(RigCog(client))
+        await client.tree.sync()
     except Exception:
         pass
 
