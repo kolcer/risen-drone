@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from globals import RIG_LIST
+from rated import FOLLOWUP
 from rigs import CastRig
 
 class RigCog(commands.Cog):
@@ -24,9 +25,9 @@ class RigCog(commands.Cog):
         try:
             await CastRig(rig_lower, interaction.channel, interaction.user, interaction=interaction)
         except Exception as exc:
-            await interaction.followup.send(
+            await FOLLOWUP(
                 f"Something went wrong when casting `{rig_lower}` rig: {exc}",
-                ephemeral=False
+                interaction
             )
             raise
 

@@ -212,7 +212,7 @@ async def Rig(rigType, ch, usr, interaction = None):
                 if (ch2.name != ch.name) and (ch2.id not in SECRET_CHANNELS):
                     break
 
-            firstmsg = send_rig_message(ch, "You cast Archon Rig and created a Gate in another channel!", interaction)
+            firstmsg = await send_rig_message(ch, "You cast Archon Rig and created a Gate in another channel!", interaction)
             # firstmsg = await SEND(ch, "You cast Archon Rig and created a Gate in another channel!")
             await SEND(ch, "https://giphy.com/gifs/jiSabjDlIahx2P1xI0")
             await asyncio.sleep(3)
