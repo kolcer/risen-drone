@@ -1732,3 +1732,41 @@ class Quiz(discord.ui.View):
         finally:
             self.joining_lock = False
 
+
+class LucidLadders(discord.ui.View):
+    def __init__(self, starter, *, timeout=60):
+        super().__init__(timeout=timeout)
+        self.starter = starter
+
+    async def on_timeout(self):
+        editMsg = ""
+        if LADDERS.get("status") == "gather":
+            from ladders import MG_RESET
+            MG_RESET()
+            editMsg = "Lucid Ladders gathering timed out and was cancelled."
+
+        for item in self.children:
+            item.disabled = True
+
+        await EDIT_VIEW_MESSAGE(self.message, editMsg or "Lucid Ladders is no longer joinable.", self)
+
+    @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
+    async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
+        from ladders import JoinLucidLadders
+        
+        try:
+            JoinLucidLadders(interaction.user)
+        except Exception as exc:
+            await INTERACTION(interaction.response, f"Could not join Lucid Ladders: {exc}", True)
+            raise
+
+    @discord.ui.button(label="Begin", style=discord.ButtonStyle.green)
+    async def begin(self, interaction: discord.Interaction, button: discord.ui.Button):
+        from ladders import LucidLaddersProcessMessage
+        
+        try:
+            LucidLaddersProcessMessage(interaction.user, "begin")
+        except Exception as exc:
+            await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
+            raise
+
