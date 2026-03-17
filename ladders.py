@@ -478,7 +478,7 @@ async def PlayLucidLadders(usr, ch, interaction = None):
         #     await SEND(ch, "Lucid Ladders have been cancelled due to inactivity.")
         #     MG_RESET()
 
-        view = LucidLaddersView(timeout=60)
+        view = LucidLaddersView(starter=usr, timeout=60)
         view.started_user = usr
         view.message = await send_followup(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction, False, view)
         return

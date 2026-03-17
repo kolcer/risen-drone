@@ -34,4 +34,8 @@ class MinigamesCog(commands.Cog):
                 await FOLLOWUP("A quiz is already in progress!", interaction)
             return
         else:
-            await PlayLucidLadders(interaction.user, interaction.channel, interaction)
+            try:
+                await PlayLucidLadders(interaction.user, interaction.channel, interaction)
+            except Exception as exc:
+                await FOLLOWUP(f"Something went wrong with `/start_game lucid_ladders`: {exc}", interaction)
+                raise
