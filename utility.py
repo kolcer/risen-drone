@@ -54,6 +54,6 @@ async def launch_egg(ch, eggType, msg):
 
 async def send_rig_message(ch, msg, interaction=None, ephemeral=False):
     if interaction is not None:
-        await interaction.followup.send(msg, ephemeral=ephemeral)
+        return await FOLLOWUP(msg, interaction, ephemeral)
     else:
-        await SEND(ch, msg)
+        return await SEND(ch, msg)

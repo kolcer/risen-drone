@@ -53,6 +53,17 @@ async def SEND(channel, message):
 
     return await channel.send(message)
 
+#send follow up message
+async def FOLLOWUP(message, interaction, ephemeral=False):
+    if message == None or message == "":
+        #cannot send empty message
+        return
+    
+    if EVENTS["Easter"]:
+        message = str(message) + " 🐇"
+
+    return await interaction.followup.send(message, ephemeral=ephemeral)
+
 #DM an user
 async def SEND_DM(member, message):
     if message == None or message == "":
