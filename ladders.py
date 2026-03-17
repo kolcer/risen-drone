@@ -494,11 +494,11 @@ async def JoinLucidLadders(usr, interaction = None):
             LADDERS['topLevel'] += 5
         MG_PLAYERS[usr] = 0
         MG_QUEUE.append(usr)
-        toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
-        for plr in MG_QUEUE:
-            toSend += f"`{plr.name}`\n"
+        # toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
+        # for plr in MG_QUEUE:
+        #     toSend += f"`{plr.name}`\n"
 
-        await send_followup(LADDERS['channel'], toSend, interaction)
+        await send_followup(LADDERS['channel'], f"`{usr.name}` has joined Lucid Ladders!", interaction)
         # await SEND(LADDERS['channel'], toSend)
         return
 
