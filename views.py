@@ -1737,7 +1737,6 @@ class LucidLadders(discord.ui.View):
     def __init__(self, starter, *, timeout=60):
         super().__init__(timeout=timeout)
         self.starter = starter
-        self.locked = False
 
     async def on_timeout(self):
         editMsg = ""
@@ -1767,9 +1766,12 @@ class LucidLadders(discord.ui.View):
         
         try:
             await LucidLaddersProcessMessage(interaction.user, "begin")
+
+            if self.starter == interaction.user:
+                self.stop()
+                
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
             raise
-        finally:
-            self.stop()
+            
 
