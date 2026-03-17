@@ -6,7 +6,6 @@ from database import *
 from rated import *
 from roles import *
 from globals import *
-from quiz import FORCE_CLOSE_EVENT, JoinQuiz
 from discord.ext import commands
 
 class ShowProfile(discord.ui.View):
@@ -1683,6 +1682,7 @@ class Quiz(discord.ui.View):
             item.disabled = True
 
         if QUIZ.get("second-player"):
+            from quiz import FORCE_CLOSE_EVENT
             FORCE_CLOSE_EVENT()
 
         await EDIT_VIEW_MESSAGE(self.message, "Entry no longer available.", self)
@@ -1720,6 +1720,7 @@ class Quiz(discord.ui.View):
             self.children[0].label = "Joined"
             self.children[0].style = discord.ButtonStyle.gray
             await EDIT_VIEW_MESSAGE(self.message, f"{interaction.user.mention} joined the quiz! Starting...", self)
+            from quiz import JoinQuiz
             await JoinQuiz(interaction.user, interaction.channel, interaction)
 
         except Exception as exc:
