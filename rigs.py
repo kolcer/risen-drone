@@ -148,7 +148,7 @@ async def Rig(rigType, ch, usr):
                 msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                                 "\nMaybe someone could give you some Mana?")
                 
-            if EVENTS["Easter"]: 
+            if EVENTS["Easter"] or ch.id == 813882658156838923: 
                 await launch_egg(ch, "Possessed", "Within the darkness you can make out the silhouette of an egg...")
                 # BUTTONS["status"] = True
                 # view = ButtonEgg_Throw(timeout=30)
