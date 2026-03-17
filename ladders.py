@@ -483,9 +483,10 @@ async def PlayLucidLadders(usr, ch, interaction = None):
         view.message = await send_followup(ch, "<@&" + str(PING_ROLES["Minigames"].id) + ">\n`" + usr.name + "` has started new Lucid Ladders game! Type 'join' to join!\n`" + usr.name + "` - type 'begin' to start!", interaction, False, view)
         return
 
-async def JoinLucidLadders(usr):
+async def JoinLucidLadders(usr, interaction = None):
     if usr in MG_PLAYERS:
-        await SEND(LADDERS['channel'], "You have already joined the mini game!")
+        await send_followup(LADDERS['channel'], "You have already joined the mini game!", interaction, True)
+        # await SEND(LADDERS['channel'], "You have already joined the mini game!")
         return
     else:
         LADDERS['playerCount'] += 1
@@ -496,7 +497,9 @@ async def JoinLucidLadders(usr):
         toSend = f"`{usr.name}` has joined Lucid Ladders!\nCurrent players:\n"
         for plr in MG_QUEUE:
             toSend += f"`{plr.name}`\n"
-        await SEND(LADDERS['channel'], toSend)
+
+        await send_followup(LADDERS['channel'], toSend, interaction)
+        # await SEND(LADDERS['channel'], toSend)
         return
 
 def SelectRandomUser(usr):
