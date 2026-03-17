@@ -15,9 +15,8 @@ class MinigamesCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
+        await DEFER(interaction)
         if not QUIZ["active"] and not QUIZ["second-player"]:
-            await DEFER(interaction)
-
             try:
                 await StartQuiz(interaction.user, interaction.channel, interaction)
             except Exception as exc:
@@ -32,9 +31,8 @@ class MinigamesCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
+        await DEFER(interaction)
         if QUIZ["second-player"] and interaction.user not in QUIZZERS:
-            await DEFER(interaction)
-
             try:
                 await JoinQuiz(interaction.user, interaction.channel)
             except Exception as exc:
