@@ -77,18 +77,25 @@ async def updateRigTracker(rigType):
     await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
 
 
-async def necromancer(channel):
- 
+async def necromancer(channel, interaction = None):
+    msg = ""
     if RIG_DATA['ghostMsg'] != "hehehehaw":
-        await SEND(channel, RIG_DATA['ghostMsg'])
+        msg = RIG_DATA['ghostMsg']
+        # await SEND(channel, RIG_DATA['ghostMsg'])
     else:
-        await SEND(channel, "*but nobody came...*")
+        msg = "*but nobody came...*"
+        # await SEND(channel, "*but nobody came...*")
+    await send_rig_message(channel, msg, interaction)
 
-async def muggle(channel, user):
+async def muggle(channel, user, interaction = None):
+    msg = ""
     if MORPHABLE_ROLES["Muggle"][0] in user.roles:
-        await SEND(channel, "You knew there wasn't a rig for Muggle and in fact there isn't one.")
+        msg = "You knew there wasn't a rig for Muggle and in fact there isn't one."
     else:
-        await SEND(channel, "You thought there was a rig for Muggle but there wasn't.")
+        msg = "You thought there was a rig for Muggle but there wasn't."
+        # await SEND(channel, "You thought there was a rig for Muggle but there wasn't.")
+
+    await send_rig_message(channel, msg, interaction)
 
 async def Rig(rigType, ch, usr, interaction = None):
     newRigType = rigType
@@ -490,11 +497,11 @@ async def CastRig(rigPick, ch, usr, interaction = None):
     LAST_RIG[usr.id] = str(rigPick) + " Rig"
 
     if rigPick == "necromancer":
-        await necromancer(ch)
+        await necromancer(ch, interaction)
         return
     
     if rigPick == "muggle":
-        await muggle(ch, usr)
+        await muggle(ch, usr, interaction)
         return
 
     await Rig(rigPick, ch, usr, interaction)
