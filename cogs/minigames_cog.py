@@ -24,9 +24,3 @@ class MinigamesCog(commands.Cog):
                 raise
         else:
             await FOLLOWUP("A quiz is already in progress! Type 'join quiz' to participate.", interaction)
-
-    # quiz_join is now replaced with the join button in the Quiz view.
-    # Keep this command around for backwards compatibility, but do not use it.
-    @discord.app_commands.command(name="quiz_join", description="Deprecated: use the Join button in the quiz start message")
-    async def join_quiz(self, interaction: discord.Interaction):
-        await INTERACTION(interaction, "Use the Join button that appears in the channel after /quiz_start is used.", True)

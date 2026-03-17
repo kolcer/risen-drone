@@ -101,7 +101,8 @@ async def StartQuiz(usr, ch, interaction = None):
     # send a view with join button instead of separate join slash
     view = QuizView(timeout=30)
     view.started_user = usr
-    view.message = await SEND_VIEW(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", view)
+    view.message = await send_followup(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", interaction, False, view)
+    # view.message = await SEND_VIEW(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", view)
     return
 
 async def JoinQuiz(usr, ch, interaction = None):
@@ -112,8 +113,7 @@ async def JoinQuiz(usr, ch, interaction = None):
     #preparation to announce the two players
     users = list(QUIZZERS.keys())
     quizzerson = users[0].mention + " and " + users[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
-    await send_followup(ch, quizzerson, interaction)
-    # await SEND(ch, quizzerson)
+    await SEND(ch, quizzerson)
     #turn started from 0, now it begins
     QUIZ["turn"] += 1
     QUIZ["cturn"] = 1

@@ -43,7 +43,7 @@ async def EDIT_ROLE(targetrole, newname, motivation):
     await targetrole.edit(name = newname, reason = motivation)
 
 #send message
-async def SEND(channel, message):
+async def SEND(channel, message, view=None):
     if message == None or message == "":
         #cannot send empty message
         return
@@ -51,10 +51,14 @@ async def SEND(channel, message):
     if EVENTS["Easter"]:
         message = str(message) + " 🐇"
 
-    return await channel.send(message)
+    return await channel.send(message, view=view)
+
+#sends a view with a message
+async def SEND_VIEW(channel, content, view):
+    return await channel.send(content, view = view)
 
 #send follow up message
-async def FOLLOWUP(message, interaction, ephemeral=False):
+async def FOLLOWUP(message, interaction, ephemeral=False, view=None):
     if message == None or message == "":
         #cannot send empty message
         return
@@ -62,7 +66,7 @@ async def FOLLOWUP(message, interaction, ephemeral=False):
     if EVENTS["Easter"]:
         message = str(message) + " 🐇"
 
-    return await interaction.followup.send(message, ephemeral=ephemeral)
+    return await interaction.followup.send(message, ephemeral=ephemeral, view=view)
 
 #defer
 async def DEFER(interaction, ephemeral=False):
@@ -81,10 +85,6 @@ async def INTERACTION(interaction, content: str, secret: bool):
         #cannot send empty message
         return
     return await interaction.send_message(content, ephemeral = secret)
-
-#sends a view with a message
-async def SEND_VIEW(channel, content, view):
-    return await channel.send(content, view = view)
 
 #send a reply! ephemeral option included
 # included where???
