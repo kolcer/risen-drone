@@ -17,10 +17,12 @@ class MinigamesCog(commands.Cog):
         discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders"),
         discord.app_commands.Choice(name="Tic Tac Toe", value="ttt")
     ])
-    async def start_game(self, interaction: discord.Interaction, game: str):
+    async def start_game(self, interaction: discord.Interaction, game: str, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
+        
+        duelists = [duelist, interaction.user] if duelist else None
 
         await DEFER(interaction)
 
@@ -29,7 +31,7 @@ class MinigamesCog(commands.Cog):
 
         if game == "quiz":
             try:
-                await StartQuiz(interaction.user, interaction.channel, interaction)
+                await StartQuiz(interaction.user, interaction.channel, interaction, duelists)
             except Exception as exc:
                 await FOLLOWUP(f"Something went wrong with `/play quiz`: {exc}", interaction)
                 raise
@@ -45,8 +47,12 @@ class MinigamesCog(commands.Cog):
                     BUTTONS["status"] = True
                     view = Minigames_TicTacToe(timeout=60)
 
-                    view.message = await FOLLOWUP("Let's play a game.", interaction, False, view)
-                    # view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
+                    msg = f"Let's play a game."
+                    if duelist:
+                        view.duelists = duelists
+                        msg = f"{duelist.mention}, you have been challenged by {interaction.user.mention}!"
+
+                    view.message = await FOLLOWUP(msg, interaction, False, view)
 
                     await view.wait()
                     await view.too_late()

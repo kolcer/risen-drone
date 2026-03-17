@@ -90,7 +90,7 @@ async def nextQuestion(ch):
     
     return
 
-async def StartQuiz(usr, ch, interaction = None):
+async def StartQuiz(usr, ch, interaction = None, duelists = None):
     #add user to the quiz users with 0 points.
     QUIZZERS[usr] = 0
 
@@ -101,6 +101,7 @@ async def StartQuiz(usr, ch, interaction = None):
     # send a view with join button instead of separate join slash
     view = QuizView(timeout=30)
     view.started_user = usr
+    view.duelists = duelists
     view.message = await send_followup(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", interaction, False, view)
     # view.message = await SEND_VIEW(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", view)
     return

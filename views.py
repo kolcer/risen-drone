@@ -1394,6 +1394,10 @@ class Minigames_TicTacToe(discord.ui.View):
             await interaction.response.defer()
 
     async def process_click(self, interaction, button, usr):
+        if self.duelist and usr not in self.duelist:
+            await INTERACTION(interaction.response, "This game is private.", True)
+            return
+
         if usr not in self.players:
             if len(self.players) == 2:
                 await INTERACTION(interaction.response, "You are too late :bangbang:", True)
@@ -1692,6 +1696,10 @@ class Quiz(discord.ui.View):
 
     @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.duelists and interaction.user not in self.duelists:
+            await INTERACTION(interaction.response, "This game is private.", True)
+            return
+
         if self.joining_lock:
             await INTERACTION(interaction.response, "Someone is already joining, you were just a little late.", True)
             return
