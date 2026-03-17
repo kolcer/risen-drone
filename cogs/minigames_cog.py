@@ -31,28 +31,27 @@ class MinigamesCog(commands.Cog):
             try:
                 await StartQuiz(interaction.user, interaction.channel, interaction)
             except Exception as exc:
-                await FOLLOWUP(f"Something went wrong with `/start_game quiz`: {exc}", interaction)
+                await FOLLOWUP(f"Something went wrong with `/play quiz`: {exc}", interaction)
                 raise
         elif game == "lucid_ladders":
             try:
                 await PlayLucidLadders(interaction.user, interaction.channel, interaction)
             except Exception as exc:
-                await FOLLOWUP(f"Something went wrong with `/start_game lucid_ladders`: {exc}", interaction)
+                await FOLLOWUP(f"Something went wrong with `/play lucid_ladders`: {exc}", interaction)
                 raise
         else:
             if not BUTTONS["status"]:
-                BUTTONS["status"] = True
-                view = Minigames_TicTacToe(timeout=60)
+                try:
+                    BUTTONS["status"] = True
+                    view = Minigames_TicTacToe(timeout=60)
 
-                view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
+                    view.message = await FOLLOWUP("Let's play a game.", interaction, False, view)
+                    # view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
 
-                view.board = [
-                    [None, None, None],
-                    [None, None, None],
-                    [None, None, None]
-                ]
-
-                await view.wait()
-                await view.too_late()
-                BUTTONS["status"] = False
+                    await view.wait()
+                    await view.too_late()
+                    BUTTONS["status"] = False
+                except Exception as exc:
+                    await FOLLOWUP(f"Something went wrong with `/play ttt`: {exc}", interaction)
+                    raise
 

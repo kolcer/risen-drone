@@ -1327,6 +1327,11 @@ class Minigames_TicTacToe(discord.ui.View):
             "You cannot cheese this game.",
             "I'm watching your every move."
         ]
+        self.board = [
+            [None, None, None],
+            [None, None, None],
+            [None, None, None]
+        ]
         self.row = None
         self.col = None
         self.letter = None
@@ -1335,10 +1340,6 @@ class Minigames_TicTacToe(discord.ui.View):
         self.assignments = {}
         self.lastplayer = None
         self.turns = 0
-
-
-
-
 
     async def on_timeout(self):
         for item in self.children:
@@ -1362,17 +1363,7 @@ class Minigames_TicTacToe(discord.ui.View):
 
         await self.check_content(interaction)
 
-        # match button.custom_id:
-        #     case "1":
-        #         self.board[0][0] = letter
-        #     case "2":
-        #         self.board[0][1] = letter
-        #     case "3":
-        #         self.board[0][2] = letter
-
     async def check_content(self, interaction):
-        # for item in self.children:
-        #     if item.disabled == True:
         await EDIT_VIEW_MESSAGE(self.message, random.choice(self.pick_messages), self)
         await asyncio.sleep(1)
 
