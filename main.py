@@ -9,6 +9,7 @@ import datetime
 import secrets
 import string
 #from datetime import date
+from discord import commands
 from difflib import SequenceMatcher
 
 from globals import *
@@ -28,7 +29,7 @@ from quiz import *
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
-client = discord.Bot(intents=intents)
+client = commands.Bot(command_prefix='bd ', intents=intents)
 
 # prepare to get a list of words for the hangman game
 # nltk.download('words')
@@ -131,17 +132,22 @@ async def on_ready():
 
     set_entry("restarts", str(restarts))
 
+    try:
+        await client.tree.sync()
+    except Exception:
+        pass
+
 # Slash command: /cast <rig>
-@client.slash_command(name='cast', description='Cast a rig (same as "cast x rig" text command)')
-async def cast(ctx: discord.ApplicationContext, rig: str):
+@client.tree.command(name='cast', description='Cast a rig (same as "cast x rig" text command)')
+async def cast(interaction: discord.Interaction, rig: str):
     rig_lower = rig.lower().strip()
-    if ctx.guild is None or ctx.channel is None:
-        await ctx.respond('This command must be used in a guild channel.', ephemeral=True)
+    if interaction.guild is None or interaction.channel is None:
+        await interaction.response.send_message('This command must be used in a guild channel.', ephemeral=True)
         return
 
-    await ctx.defer(thinking=True, ephemeral=True)
-    await CastRig(rig_lower, ctx.channel, ctx.author)
-    await ctx.followup.send(f'Slash cast attempted: `{rig_lower} rig`', ephemeral=True)
+    await interaction.response.defer(ephemeral=True)
+    await CastRig(rig_lower, interaction.channel, interaction.user)
+    await interaction.followup.send(f'Slash cast attempted: `{rig_lower} rig`', ephemeral=True)
 
 #member update, prevent changing gun nick to anything other than the gun name
 @client.event
