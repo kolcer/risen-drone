@@ -4,6 +4,7 @@ import random
 from globals import *
 from rated import *
 from database import *
+from utility import send_followup
 
 # class QuestionView(discord.ui.View):
 #     async def select_answer(self, interaction:discord.Interaction, select_item : discord.ui.Select):
@@ -88,14 +89,16 @@ async def nextQuestion(ch):
     
     return
 
-async def StartQuiz(usr,ch):
+async def StartQuiz(usr, ch, interaction = None):
     #add user to the quiz users with 0 points.
     QUIZZERS[usr] = 0
 
     #activates the quiz, activates looking for second player.
     QUIZ["active"] = True
     QUIZ["second-player"] = True
-    await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
+
+    await send_followup(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)", interaction)
+    # await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
 
     #if no one joins within 30 seconds, event is forced closed.
     await asyncio.sleep(30)
@@ -104,7 +107,7 @@ async def StartQuiz(usr,ch):
         FORCE_CLOSE_EVENT()
     return
 
-async def JoinQuiz(usr,ch):
+async def JoinQuiz(usr, ch, interaction = None):
     #disables looking for second player
     QUIZ["second-player"] = False
     #adds the new user to the quiz users
@@ -112,7 +115,8 @@ async def JoinQuiz(usr,ch):
     #preparation to announce the two players
     users = list(QUIZZERS.keys())
     quizzerson = users[0].mention + " and " + users[1].mention + " have joined the Quiz. Questions are to follow. Good luck."
-    await SEND(ch, quizzerson)
+    await send_followup(ch, quizzerson, interaction)
+    # await SEND(ch, quizzerson)
     #turn started from 0, now it begins
     QUIZ["turn"] += 1
     QUIZ["cturn"] = 1

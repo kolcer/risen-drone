@@ -64,6 +64,10 @@ async def FOLLOWUP(message, interaction, ephemeral=False):
 
     return await interaction.followup.send(message, ephemeral=ephemeral)
 
+#defer
+async def DEFER(interaction, ephemeral=False):
+    return await interaction.response.defer(ephemeral=ephemeral)
+
 #DM an user
 async def SEND_DM(member, message):
     if message == None or message == "":
@@ -72,11 +76,11 @@ async def SEND_DM(member, message):
     return await member.send(message)
 
 #send to interactiom, optional ephemeral 
-async def INTERACTION(message, content: str, secret: bool):
+async def INTERACTION(interaction, content: str, secret: bool):
     if content == None or content == "":
         #cannot send empty message
         return
-    return await message.send_message(content, ephemeral = secret)
+    return await interaction.send_message(content, ephemeral = secret)
 
 #sends a view with a message
 async def SEND_VIEW(channel, content, view):

@@ -12,7 +12,8 @@ import string
 from discord.ext import commands
 from difflib import SequenceMatcher
 
-from rig_cog import RigCog
+from cogs.rig_cog import RigCog
+from cogs.minigames_cog import MinigamesCog
 from globals import *
 from roles import *
 from ladders import *
@@ -135,6 +136,7 @@ async def on_ready():
 
     try:
         await client.add_cog(RigCog(client))
+        await client.add_cog(MinigamesCog(client))
     except Exception:
         pass
 
