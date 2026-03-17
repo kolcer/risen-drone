@@ -1680,6 +1680,7 @@ class Quiz(discord.ui.View):
         self.started_user = None
         self.joined_user = None
         self.joining_lock = False
+        self.duelists = []
 
     async def on_timeout(self):
         for item in self.children:
@@ -1744,6 +1745,7 @@ class Quiz(discord.ui.View):
 class LucidLadders(discord.ui.View):
     def __init__(self, *, timeout=60):
         super().__init__(timeout=timeout)
+        self.duelists = []
 
     async def on_timeout(self):
         editMsg = ""
