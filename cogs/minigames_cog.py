@@ -1,24 +1,23 @@
 import discord
-from discord import app_commands
 from discord.ext import commands
 
-from globals import QUIZ, QUIZZERS, LADDERS, MG_PLAYERS, MG_QUEUE
-from rated import DEFER, FOLLOWUP, INTERACTION
+from globals import BUTTONS, CHANNELS, QUIZ, QUIZZERS, LADDERS, MG_PLAYERS, MG_QUEUE
+from rated import DEFER, FOLLOWUP, INTERACTION, SEND_VIEW
 from quiz import StartQuiz
 from ladders import PlayLucidLadders
-from views import LucidLadders
+from views import Minigames_TicTacToe
 
 class MinigamesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    start_group = app_commands.Group(name="start", description="Commands to start things")
-    @start_group.command(name="game", description="Start game: quiz or lucid ladders")
-    @discord.app_commands.choices(mode=[
+    @discord.app_commands.command(name="play", description="Start game: quiz or lucid ladders")
+    @discord.app_commands.choices(game=[
         discord.app_commands.Choice(name="Quiz", value="quiz"),
-        discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders")
+        discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders"),
+        discord.app_commands.Choice(name="Tic Tac Toe", value="ttt")
     ])
-    async def start_game(self, interaction: discord.Interaction, mode: str):
+    async def start_game(self, interaction: discord.Interaction, game: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
@@ -28,15 +27,32 @@ class MinigamesCog(commands.Cog):
         if (QUIZ["active"] or QUIZ["second-player"]) or (LADDERS['status'] != "off"):
             await FOLLOWUP(f"Another game is in progress.", interaction, True)
 
-        if mode == "quiz":
+        if game == "quiz":
             try:
                 await StartQuiz(interaction.user, interaction.channel, interaction)
             except Exception as exc:
                 await FOLLOWUP(f"Something went wrong with `/start_game quiz`: {exc}", interaction)
                 raise
-        else:
+        elif game == "lucid_ladders":
             try:
                 await PlayLucidLadders(interaction.user, interaction.channel, interaction)
             except Exception as exc:
                 await FOLLOWUP(f"Something went wrong with `/start_game lucid_ladders`: {exc}", interaction)
                 raise
+        else:
+            if not BUTTONS["status"]:
+                BUTTONS["status"] = True
+                view = Minigames_TicTacToe(timeout=60)
+
+                view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
+
+                view.board = [
+                    [None, None, None],
+                    [None, None, None],
+                    [None, None, None]
+                ]
+
+                await view.wait()
+                await view.too_late()
+                BUTTONS["status"] = False
+

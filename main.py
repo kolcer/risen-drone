@@ -688,25 +688,25 @@ async def on_message(message):
             await view.too_late()
             BUTTONS["status"] = False
 
-        elif lmsg.startswith("play tic tac toe") or lmsg.startswith("play ttt") and not BUTTONS["status"]:
-            BUTTONS["status"] = True
-            view = Minigames_TicTacToe(timeout=60)
-            view.toolate = True
-            view.players = []
-            view.assignments = {}
-            view.lastplayer = None
-            view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
-            view.turns = 0
+        # elif lmsg.startswith("play tic tac toe") or lmsg.startswith("play ttt") and not BUTTONS["status"]:
+        #     BUTTONS["status"] = True
+        #     view = Minigames_TicTacToe(timeout=60)
+        #     view.toolate = True
+        #     view.players = []
+        #     view.assignments = {}
+        #     view.lastplayer = None
+        #     view.turns = 0
+        #     view.message = await SEND_VIEW(CHANNELS["bot-commands"], "Let's play a game.", view)
 
-            view.board = [
-                [None, None, None],
-                [None, None, None],
-                [None, None, None]
-            ]
+        #     view.board = [
+        #         [None, None, None],
+        #         [None, None, None],
+        #         [None, None, None]
+        #     ]
 
-            await view.wait()
-            await view.too_late()
-            BUTTONS["status"] = False
+        #     await view.wait()
+        #     await view.too_late()
+        #     BUTTONS["status"] = False
         # Old code for 'All Rigs in one'
         # elif "cast" in lmsg and "rig" in lmsg:
         #     if lsplit[0] == "cast" and lsplit[2] == "rig":

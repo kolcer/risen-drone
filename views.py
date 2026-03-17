@@ -1295,41 +1295,50 @@ class Minigames_Hangman(discord.ui.View):
         await self.process_click(interaction, button, usr)
 
 class Minigames_TicTacToe(discord.ui.View):
-    button_mapping = {
-        "1": (0, 0),
-        "2": (0, 1),
-        "3": (0, 2),
-        "4": (1, 0),
-        "5": (1, 1),
-        "6": (1, 2),
-        "7": (2, 0),
-        "8": (2, 1),
-        "9": (2, 2),
-    }
+    def __init__(self, *, timeout=30):
+        super().__init__(timeout=timeout)
+        self.button_mapping = {
+            "1": (0, 0),
+            "2": (0, 1),
+            "3": (0, 2),
+            "4": (1, 0),
+            "5": (1, 1),
+            "6": (1, 2),
+            "7": (2, 0),
+            "8": (2, 1),
+            "9": (2, 2),
+        }
+        self.pick_messages = [
+            "I saw that incoming.",
+            "That's cheating.",
+            "You can do better.",
+            "Little do you know...",
+            "Your opponent must be shaking after that move.",
+            "Not that one...",
+            "How predictable.",
+            "Even I could have come up with a better move.",
+            "How ironic.",
+            "You are two steps ahead, I see.",
+            "TOP RIGHT.",
+            "Oh no! Anyway.",
+            "🤓.",
+            "There is no way out of that.",
+            "Between you and me, I favor you.",
+            "You cannot cheese this game.",
+            "I'm watching your every move."
+        ]
+        self.row = None
+        self.col = None
+        self.letter = None
+        self.toolate = True
+        self.players = []
+        self.assignments = {}
+        self.lastplayer = None
+        self.turns = 0
 
-    row = None
-    col = None
-    letter = None
 
-    pick_messages = [
-        "I saw that incoming.",
-        "That's cheating.",
-        "You can do better.",
-        "Little do you know...",
-        "Your opponent must be shaking after that move.",
-        "Not that one...",
-        "How predictable.",
-        "Even I could have come up with a better move.",
-        "How ironic.",
-        "You are two steps ahead, I see.",
-        "TOP RIGHT.",
-        "Oh no! Anyway.",
-        "🤓.",
-        "There is no way out of that.",
-        "Between you and me, I favor you.",
-        "You cannot cheese this game.",
-        "I'm watching your every move."
-    ]
+
+
 
     async def on_timeout(self):
         for item in self.children:
@@ -1776,7 +1785,7 @@ class LucidLadders(discord.ui.View):
             for item in self.children:
                 item.disabled = True
                 item.style = discord.ButtonStyle.gray
-                
+
             await EDIT_VIEW_MESSAGE(self.message, "Starting...", self)
             from ladders import LucidLaddersProcessMessage
             await LucidLaddersProcessMessage(interaction.user, "begin")
