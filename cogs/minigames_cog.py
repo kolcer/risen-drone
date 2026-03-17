@@ -50,7 +50,7 @@ class MinigamesCog(commands.Cog):
                     msg = f"Let's play a game."
                     if duelist:
                         view.duelists = duelists
-                        msg = f"\n{duelist.mention}, you have been challenged by {interaction.user.mention}!"
+                        msg += f"{msg}\n{duelist.mention}, you have been challenged by {interaction.user.mention}!"
 
                     view.message = await FOLLOWUP(msg, interaction, False, view)
 

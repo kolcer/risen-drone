@@ -105,7 +105,7 @@ async def StartQuiz(usr, ch, interaction = None, duelists = None):
     msg = f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)"
     if duelists:
         view.duelists = duelists
-        msg = f"\n{duelists[1].mention}, you have been challenged by {interaction.user.mention}!"
+        msg += f"\n{duelists[1].mention}, you have been challenged by {interaction.user.mention}!"
 
     view.message = await send_followup(ch, msg, interaction, False, view)
     # view.message = await SEND_VIEW(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", view)
