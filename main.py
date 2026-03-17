@@ -9,7 +9,7 @@ import datetime
 import secrets
 import string
 #from datetime import date
-from discord import commands
+from discord.ext import commands
 from difflib import SequenceMatcher
 
 from globals import *
