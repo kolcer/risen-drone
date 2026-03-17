@@ -4,6 +4,7 @@ import random
 from globals import *
 from rated import *
 from database import *
+from views import Quiz as QuizView
 from utility import send_followup
 
 # class QuestionView(discord.ui.View):
@@ -97,14 +98,10 @@ async def StartQuiz(usr, ch, interaction = None):
     QUIZ["active"] = True
     QUIZ["second-player"] = True
 
-    await send_followup(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)", interaction)
-    # await SEND(ch, usr.mention + " just started the Crazy Stairs Quiz!\nType 'join quiz' to begin with the questions. (BETA)")
-
-    #if no one joins within 30 seconds, event is forced closed.
-    await asyncio.sleep(30)
-    if QUIZ["second-player"] == True:
-        await SEND(ch, "Nobody joined in time. Event is concluded.")
-        FORCE_CLOSE_EVENT()
+    # send a view with join button instead of separate join slash
+    view = QuizView(timeout=30)
+    view.started_user = usr
+    view.message = await SEND_VIEW(ch, f"{usr.mention} just started the Crazy Stairs Quiz! Click Join to participate. (BETA)", view)
     return
 
 async def JoinQuiz(usr, ch, interaction = None):

@@ -6,6 +6,7 @@ from database import *
 from rated import *
 from roles import *
 from globals import *
+from quiz import FORCE_CLOSE_EVENT, JoinQuiz
 from discord.ext import commands
 
 class ShowProfile(discord.ui.View):
@@ -1669,3 +1670,64 @@ class ButtonEgg_Eggcelent(discord.ui.View):
             
         else:
             await INTERACTION(interaction.response, "Give me the time to prepare another egg, smh.", True)
+
+class Quiz(discord.ui.View):
+    def __init__(self, *, timeout=30):
+        super().__init__(timeout=timeout)
+        self.started_user = None
+        self.joined_user = None
+        self.joining_lock = False
+
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        if QUIZ.get("second-player"):
+            FORCE_CLOSE_EVENT()
+
+        await EDIT_VIEW_MESSAGE(self.message, "Entry no longer available.", self)
+
+    async def too_late(self):
+        await self.on_timeout()
+
+    @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
+    async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.joining_lock:
+            await INTERACTION(interaction.response, "Someone is already joining, you were just a little late.", True)
+            return
+
+        if self.joined_user is not None:
+            await INTERACTION(interaction.response, "The slots are full.", True)
+            return
+
+        if not QUIZ.get("active") or not QUIZ.get("second-player"):
+            await INTERACTION(interaction.response, "The quiz is inactive.", True)
+            return
+
+        if interaction.user == self.started_user:
+            await INTERACTION(interaction.response, "Boring.", True)
+            return
+
+        if interaction.user in QUIZZERS:
+            await INTERACTION(interaction.response, "You are already in the quiz.", True)
+            return
+
+        self.joining_lock = True
+        self.joined_user = interaction.user
+        self.children[0].disabled = True
+
+        try:
+            self.children[0].label = "Joined"
+            self.children[0].style = discord.ButtonStyle.gray
+            await EDIT_VIEW_MESSAGE(self.message, f"{interaction.user.mention} joined the quiz! Starting...", self)
+            await JoinQuiz(interaction.user, interaction.channel, interaction)
+
+        except Exception as exc:
+            await INTERACTION(interaction.response, f"Could not join quiz: {exc}", True)
+            self.joined_user = None
+            self.children[0].disabled = False
+            raise
+
+        finally:
+            self.joining_lock = False
+
