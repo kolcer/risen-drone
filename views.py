@@ -1759,7 +1759,7 @@ class LucidLadders(discord.ui.View):
 
         await EDIT_VIEW_MESSAGE(self.message, editMsg or "Lucid Ladders is no longer joinable.", self)
 
-    @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
+    @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple) 
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
         if self.duelists and interaction.user not in self.duelists:
             await INTERACTION(interaction.response, "This game is private.", True)
