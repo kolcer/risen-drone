@@ -51,3 +51,9 @@ async def launch_egg(ch, eggType, msg):
     await view.wait()
     await view.too_late()
     BUTTONS["status"] = False
+
+async def send_rig_message(ch, msg, interaction=None, ephemeral=False):
+    if interaction is not None:
+        await interaction.followup.send(msg, ephemeral=ephemeral)
+    else:
+        await SEND(ch, msg)

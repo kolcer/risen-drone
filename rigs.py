@@ -372,7 +372,7 @@ async def Rig(rigType, ch, usr):
     if usr in RIG_SPAMMERS and spamCount == RIG_SPAMMERS[usr]:
         del RIG_SPAMMERS[usr]      
 
-async def CastRig(rigPick,ch,usr):
+async def CastRig(rigPick, ch, usr, interaction):
     # easterRng = None
     randomRig = ""
     randomAttempts = 0
@@ -380,7 +380,7 @@ async def CastRig(rigPick,ch,usr):
     today = datetime.date.today()
 
     if rigPick not in RIG_LIST:
-        await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
+        await send_rig_message(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.", interaction, False)
 
         if EVENTS["Easter"] and not str(usr.id) in list_decoded_entries("None Egg"):
             await add_egg_with_check("None Egg", usr)
@@ -388,7 +388,7 @@ async def CastRig(rigPick,ch,usr):
         return
     
     if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
-        await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
+        await send_rig_message(ch, "Would you look at that. A gun trying to cast a rig.", interaction, False)
         return
 
     if ch.id not in [750060041289072771, 813882658156838923]:
@@ -420,11 +420,14 @@ async def CastRig(rigPick,ch,usr):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
+            # await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
+            await send_rig_message(ch, " One or more rigs are still in cooldown. \n" + cdList, interaction, False)
             # chameleonSuccess = False
             return
 
-        await SEND(ch, "What will it be? 🥁🥁🥁")
+        # await SEND(ch, "What will it be? 🥁🥁🥁")
+        await send_rig_message(ch, "What will it be? 🥁🥁🥁", interaction, False)
+
         await asyncio.sleep(4)
 
         while True:
