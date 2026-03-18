@@ -8,7 +8,7 @@ from rated import DEFER, FOLLOWUP, INTERACTION
 from views import ShowProfile, ShowEggs, ShowCommands
 from database import get_user_stats, list_decoded_entries
 
-class RigCog(commands.Cog):
+class PersonalCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
