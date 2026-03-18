@@ -14,6 +14,7 @@ from difflib import SequenceMatcher
 
 from cogs.rig_cog import RigCog
 from cogs.minigames_cog import MinigamesCog
+from cogs.personal_cog import PersonalCog
 from globals import *
 from roles import *
 from ladders import *
@@ -134,6 +135,7 @@ async def on_ready():
     try:
         await client.add_cog(RigCog(client))
         await client.add_cog(MinigamesCog(client))
+        await client.add_cog(PersonalCog(client))
     except Exception:
         pass
 

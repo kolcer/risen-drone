@@ -25,7 +25,3 @@ class RigCog(commands.Cog):
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/cast {rig_lower}`: {exc}", interaction)
             raise
-
-
-async def setup(bot: commands.Bot):
-    await bot.add_cog(RigCog(bot))

@@ -57,3 +57,55 @@ async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None):
         return await FOLLOWUP(msg, interaction, ephemeral, view)
     else:
         return await SEND(ch, msg, view)
+    
+def build_role_page(self, view, target, index):
+    # --- PAGE 5: SECRET ROLES (Available & Recurring) ---
+    secret_roles = "## Available Roles\n\n"
+    for role in FUN_ROLES["Available"]:
+        view.counter["AllSecret"] += 1
+
+        if str(target.id) in list_decoded_entries(role):
+            view.counter["Secret"] += 1
+            secret_roles += f"**{role}**\n"
+        else:
+            secret_roles += "**???**\n"
+
+    secret_roles += "\n## Recurring Roles\n\n"
+    for role, desc in FUN_ROLES["Recurring"].items():
+        view.counter["AllSecret"] += 1
+        if str(target.id) in list_decoded_entries(role):
+            view.counter["Secret"] += 1
+            secret_roles += f"**{role}** 🔁 {desc}\n"
+        else:
+            secret_roles += f"**???** 🔁 {desc}\n"
+
+    view.data[index] = secret_roles
+    view.footers[index] = ("All secret roles collected!" if view.counter["Secret"] == view.counter["AllSecret"] 
+                        else f"{view.counter['Secret']} / {view.counter['AllSecret']} secret roles.")
+
+    # --- PAGE 6: LOCKED ROLES (Limited & Removed) ---
+    locked_roles = "## Limited Roles\n\n"
+    for role, desc in FUN_ROLES["Limited"].items():
+        view.counter["AllLocked"] += 1
+        if str(target.id) in list_decoded_entries(role):
+            view.counter["Locked"] += 1
+            locked_roles += f"**{role}** 🔒 {desc}\n"
+        else:
+            locked_roles += f"**???** 🔒 {desc}\n"
+
+    locked_roles += "\n## Removed Roles\n\n"
+    for role, desc in FUN_ROLES["Removed"].items():
+        if str(target.id) in list_decoded_entries(role):
+            locked_roles += f"**{role}** ❌ {desc}\n"
+        else:
+            locked_roles += f"**???** ❌ {desc}\n"
+
+    view.data[index + 1] = locked_roles
+    view.footers[index + 1] = (f"{view.counter['Locked']} / {view.counter['AllLocked']} locked roles.")
+
+    # --- DEVELOPER OVERRIDE ---
+    if target.id in GIT_COMMITTERS.values():           
+        view.data[index] = 'Empty...'
+        view.data[index + 1] = 'Empty...'
+        view.footers[index] = "This person knows how to get the roles, what's the point?"
+        view.footers[index + 1] = "Nothing to see here."
