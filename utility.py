@@ -58,7 +58,7 @@ async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None):
     else:
         return await SEND(ch, msg, view)
     
-def build_role_page(self, view, target, index):
+def build_role_page(view, target, index):
     # --- PAGE 5: SECRET ROLES (Available & Recurring) ---
     secret_roles = "## Available Roles\n\n"
     for role in FUN_ROLES["Available"]:
