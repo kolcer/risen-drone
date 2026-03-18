@@ -38,7 +38,7 @@ class MinigamesCog(commands.Cog):
         newGame = game
 
         if EXTRA_ROLES['hypno'] in interaction.user.roles:
-            newGame = HYPNO_SWAPS.get(game)
+            newGame = HYPNO_SWAPS.get(game, game)
         
         duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None
 

@@ -34,7 +34,7 @@ class PersonalCog(commands.Cog):
             target = interaction.user
 
         if EXTRA_ROLES['hypno'] in interaction.user.roles:
-            newType = HYPNO_SWAPS.get(type)
+            newType = HYPNO_SWAPS.get(type, type)
 
         await DEFER(interaction)
 

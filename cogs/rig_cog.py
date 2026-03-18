@@ -21,7 +21,7 @@ class RigCog(commands.Cog):
         newRig = rigLower
 
         if EXTRA_ROLES['hypno'] in interaction.user.roles:
-            newRig = HYPNO_SWAPS.get(rigLower)
+            newRig = HYPNO_SWAPS.get(rigLower, rigLower)
 
         await DEFER(interaction)
 
