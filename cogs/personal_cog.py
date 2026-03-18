@@ -80,7 +80,7 @@ class PersonalCog(commands.Cog):
         rig_key = str(lastrig).lower().replace(" rig", "")
         view.footers[6] = RIGS_DESCRIPTION.get(rig_key, "No rig data found.")
 
-        await FOLLOWUP("", interaction, False, view)
+        await FOLLOWUP("There you go.", interaction, False, view)
 
     async def _show_eggs(self, interaction, target):
         view = ShowEggs()
@@ -114,10 +114,10 @@ class PersonalCog(commands.Cog):
         view.footers[1] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
 
         # Send view... hopefully
-        await FOLLOWUP("", interaction, False, view)
+        await FOLLOWUP("There you go.", interaction, False, view)
 
     async def _show_help(self, interaction):
         view = ShowCommands(timeout=500)
         view.requester = interaction.user
         view.channel = interaction.channel
-        await FOLLOWUP("", interaction, False, view)
+        await FOLLOWUP("There you go.", interaction, False, view)

@@ -208,7 +208,6 @@ class ShowEggs(discord.ui.View):
         self.cp += 1
         await self.update_message()
 
-
 class ShowCommands(discord.ui.View):    
     data = [
         '''
