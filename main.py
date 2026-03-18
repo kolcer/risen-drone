@@ -865,203 +865,203 @@ async def on_message(message):
 
     
         ## Show Profile
-        elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
+        # elif lmsg.startswith("bd show") and lmsg.endswith("profile"):
 
-            # Getting the Target
-            target = None
-            if lmsg == "bd show profile":
-                targetName = f"{usr.name}".lower()
-            else:
-                cleanMsg = lmsg.replace(" profile", "")
-                targetName = cleanMsg.split(" ", 2)[2]
+        #     # Getting the Target
+        #     target = None
+        #     if lmsg == "bd show profile":
+        #         targetName = f"{usr.name}".lower()
+        #     else:
+        #         cleanMsg = lmsg.replace(" profile", "")
+        #         targetName = cleanMsg.split(" ", 2)[2]
 
-            for mem in SERVER_DATA['server'].members:
-                if mem.name.lower() == targetName:
-                    target = mem
-                    break
+        #     for mem in SERVER_DATA['server'].members:
+        #         if mem.name.lower() == targetName:
+        #             target = mem
+        #             break
             
-            # No Target?
-            if target == None:
-                await SEND(ch, "No User was found.\n\nType `bd show profile` to view your own profile.\nType `bd show [username] profile` to view someone else's profile.")
-                return
+        #     # No Target?
+        #     if target == None:
+        #         await SEND(ch, "No User was found.\n\nType `bd show profile` to view your own profile.\nType `bd show [username] profile` to view someone else's profile.")
+        #         return
             
-            # Command will go through. Prepare the View.
-            view = ShowProfile(timeout=500)
-            view.target = target
-            view.requester = usr
-            view.counter = {
-                "Secret": 0,
-                "Locked": 0,
-                "AllSecret": 0,
-                "AllLocked": 0,
-            }
+        #     # Command will go through. Prepare the View.
+        #     view = ShowProfile(timeout=500)
+        #     view.target = target
+        #     view.requester = usr
+        #     view.counter = {
+        #         "Secret": 0,
+        #         "Locked": 0,
+        #         "AllSecret": 0,
+        #         "AllLocked": 0,
+        #     }
 
-            # Fetch user stats from DB
-            user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
+        #     # Fetch user stats from DB
+        #     user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(target).items()}
 
-            # Prepare total climbs for each alignment in PAGE 1
-            user_climbs = ""
-            total_climbs = 0
-            for alignment in RIG_LIST:
-                if alignment in ["none", "janitor"]:
-                    continue
+        #     # Prepare total climbs for each alignment in PAGE 1
+        #     user_climbs = ""
+        #     total_climbs = 0
+        #     for alignment in RIG_LIST:
+        #         if alignment in ["none", "janitor"]:
+        #             continue
 
-                ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
+        #         ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
 
-                user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {ali_climbs}\n\n'
+        #         user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {ali_climbs}\n\n'
 
-                if ali_climbs != "N/A":
-                    total_climbs += int(ali_climbs)
+        #         if ali_climbs != "N/A":
+        #             total_climbs += int(ali_climbs)
 
-            view.data[0] = user_climbs
-            if total_climbs == 0:
-                view.footers[0] = "Type 'bd link' to link your account and start tracking your climbs!"
-            else:
-                view.footers[0] = f"{total_climbs} climbs in total!"
+        #     view.data[0] = user_climbs
+        #     if total_climbs == 0:
+        #         view.footers[0] = "Type 'bd link' to link your account and start tracking your climbs!"
+        #     else:
+        #         view.footers[0] = f"{total_climbs} climbs in total!"
 
-            # Prepare best times for each alignment in Classic Tower in PAGE 2
-            build_tower_page(user_stats, "classic", 1, view)
+        #     # Prepare best times for each alignment in Classic Tower in PAGE 2
+        #     build_tower_page(user_stats, "classic", 1, view)
 
-            # Prepare best times for each alignment in Pro Tower in PAGE 3
-            build_tower_page(user_stats, "pro", 2, view)
+        #     # Prepare best times for each alignment in Pro Tower in PAGE 3
+        #     build_tower_page(user_stats, "pro", 2, view)
 
-            # Prepare best times for each alignment in Infinite Tower in PAGE 4
-            build_tower_page(user_stats, "infinite", 3, view)
+        #     # Prepare best times for each alignment in Infinite Tower in PAGE 4
+        #     build_tower_page(user_stats, "infinite", 3, view)
 
-            # Prepare list to show in PAGE 5 (available and recurring roles)
-            secret_roles = "## Available Roles\n\n"
-            for role in FUN_ROLES["Available"]:
-                view.counter["AllSecret"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Secret"] += 1
-                    secret_roles += "**" + str(role) + "**\n"
-                else:
-                    secret_roles += "**???**\n"
+        #     # Prepare list to show in PAGE 5 (available and recurring roles)
+        #     secret_roles = "## Available Roles\n\n"
+        #     for role in FUN_ROLES["Available"]:
+        #         view.counter["AllSecret"] += 1
+        #         if str(target.id) in list_decoded_entries(role):
+        #             view.counter["Secret"] += 1
+        #             secret_roles += "**" + str(role) + "**\n"
+        #         else:
+        #             secret_roles += "**???**\n"
 
-            secret_roles += "\n## Recurring Roles\n\n"
+        #     secret_roles += "\n## Recurring Roles\n\n"
 
-            for role in FUN_ROLES["Recurring"].keys():
-                view.counter["AllSecret"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Secret"] += 1
-                    secret_roles += "**" + role + "** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
-                else:
-                    secret_roles += "**???** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
-            view.data[4] = secret_roles
-            view.footers[4] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
+        #     for role in FUN_ROLES["Recurring"].keys():
+        #         view.counter["AllSecret"] += 1
+        #         if str(target.id) in list_decoded_entries(role):
+        #             view.counter["Secret"] += 1
+        #             secret_roles += "**" + role + "** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
+        #         else:
+        #             secret_roles += "**???** 🔁 " + FUN_ROLES["Recurring"][role] + "\n"
+        #     view.data[4] = secret_roles
+        #     view.footers[4] = "{usr} collected all {stotal} secret roles, congrats!" if view.counter["Secret"] == view.counter["AllSecret"] else "{scurrent} out of {stotal} secret roles."
 
-            # Prepare list to show in PAGE 6 (limited and removed roles)
-            locked_roles = "## Limited Roles\n\n"
-            for role in FUN_ROLES["Limited"].keys():
-                view.counter["AllLocked"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Locked"] += 1
-                    locked_roles += "**" + role + "** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
-                else:
-                    locked_roles += "**???** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
+        #     # Prepare list to show in PAGE 6 (limited and removed roles)
+        #     locked_roles = "## Limited Roles\n\n"
+        #     for role in FUN_ROLES["Limited"].keys():
+        #         view.counter["AllLocked"] += 1
+        #         if str(target.id) in list_decoded_entries(role):
+        #             view.counter["Locked"] += 1
+        #             locked_roles += "**" + role + "** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
+        #         else:
+        #             locked_roles += "**???** 🔒 " + FUN_ROLES["Limited"][role] + "\n"
 
-            locked_roles += "\n## Removed Roles\n\n"
+        #     locked_roles += "\n## Removed Roles\n\n"
 
-            for role in FUN_ROLES["Removed"].keys():
-                if str(target.id) in list_decoded_entries(role):
-                    locked_roles += "**" + role + "** ❌ " + FUN_ROLES["Removed"][role] + "\n"
-                else:
-                    locked_roles += "**???** ❌ " + FUN_ROLES["Removed"][role] + "\n"
+        #     for role in FUN_ROLES["Removed"].keys():
+        #         if str(target.id) in list_decoded_entries(role):
+        #             locked_roles += "**" + role + "** ❌ " + FUN_ROLES["Removed"][role] + "\n"
+        #         else:
+        #             locked_roles += "**???** ❌ " + FUN_ROLES["Removed"][role] + "\n"
 
-            view.data[5] = locked_roles
-            view.footers[5] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
+        #     view.data[5] = locked_roles
+        #     view.footers[5] = "Let's see how long this will last." if view.counter["Locked"] == view.counter["AllLocked"] else "{lcurrent} out of {ltotal} locked roles."
 
-            # Preparing stuff to handle stats
-            messages = ""
-            if target.id not in MSG_SENT:
-                messages = "0"
-            else:
-                messages = MSG_SENT[target.id]
+        #     # Preparing stuff to handle stats
+        #     messages = ""
+        #     if target.id not in MSG_SENT:
+        #         messages = "0"
+        #     else:
+        #         messages = MSG_SENT[target.id]
 
-            if target.id not in LAST_RIG:
-                lastrig = "None"
-            else:
-                lastrig = LAST_RIG[target.id]
+        #     if target.id not in LAST_RIG:
+        #         lastrig = "None"
+        #     else:
+        #         lastrig = LAST_RIG[target.id]
 
-            # Prepare list to show in PAGE 7 (user stats)
-            user_stats = ""
-            user_stats += "**Latest messages sent:** " + str(messages) + "\n"
-            user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
-            view.data[6] = user_stats
-            view.footers[6] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
+        #     # Prepare list to show in PAGE 7 (user stats)
+        #     user_stats = ""
+        #     user_stats += "**Latest messages sent:** " + str(messages) + "\n"
+        #     user_stats += "**Last rig cast:** " + str(lastrig).capitalize() + ""
+        #     view.data[6] = user_stats
+        #     view.footers[6] = RIGS_DESCRIPTION[lastrig.lower().replace(" rig", "")]
 
-            if lastrig.lower().replace(" rig", "") == "spectre":
-                view.footers[6] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
+        #     if lastrig.lower().replace(" rig", "") == "spectre":
+        #         view.footers[6] = "There's a 50% chance this message will be empty." if random.randint(1, 2) == 1 else ""
 
-            if target.id in GIT_COMMITTERS.values():           
-                view.data[4] = 'Empty...'
-                view.data[5] = 'Empty...'
-                view.footers[4] = "This person knows how to get the roles, what's the point?"
-                view.footers[5] = "Nothing to see here."
+        #     if target.id in GIT_COMMITTERS.values():           
+        #         view.data[4] = 'Empty...'
+        #         view.data[5] = 'Empty...'
+        #         view.footers[4] = "This person knows how to get the roles, what's the point?"
+        #         view.footers[5] = "Nothing to see here."
 
-            # Send view... hopefully
-            if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']):
-                await view.send(CHANNELS['bot-commands'])
-                await asyncio.sleep(1)
-                await SEND(CHANNELS['bot-commands'], f'{usr.mention} moving forward you should request your profile or anyone else\'s to be shown in this channel instead.')
-            else:
-                await view.send(ch)
-            await view.wait()
+        #     # Send view... hopefully
+        #     if (ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']):
+        #         await view.send(CHANNELS['bot-commands'])
+        #         await asyncio.sleep(1)
+        #         await SEND(CHANNELS['bot-commands'], f'{usr.mention} moving forward you should request your profile or anyone else\'s to be shown in this channel instead.')
+        #     else:
+        #         await view.send(ch)
+        #     await view.wait()
 
         ## Show Eggs
-        elif lmsg.startswith("bd show") and lmsg.endswith("eggs"):
+        # elif lmsg.startswith("bd show") and lmsg.endswith("eggs"):
 
-            # Getting the Target
-            target = None
-            if lmsg == "bd show eggs":
-                targetName = f"{usr.name}".lower()
-            else:
-                cleanMsg = lmsg.replace(" eggs", "")
-                targetName = cleanMsg.split(" ", 2)[2]
+        #     # Getting the Target
+        #     target = None
+        #     if lmsg == "bd show eggs":
+        #         targetName = f"{usr.name}".lower()
+        #     else:
+        #         cleanMsg = lmsg.replace(" eggs", "")
+        #         targetName = cleanMsg.split(" ", 2)[2]
 
-            for mem in SERVER_DATA['server'].members:
-                if mem.name.lower() == targetName:
-                    target = mem
-                    break
+        #     for mem in SERVER_DATA['server'].members:
+        #         if mem.name.lower() == targetName:
+        #             target = mem
+        #             break
             
-            # No Target?
-            if target == None:
-                await SEND(ch, "No User was found.\n\nType `bd show eggs` to view your own eggs.\nType `bd show [username] eggs` to peek someone else's eggs.")
-                return
+        #     # No Target?
+        #     if target == None:
+        #         await SEND(ch, "No User was found.\n\nType `bd show eggs` to view your own eggs.\nType `bd show [username] eggs` to peek someone else's eggs.")
+        #         return
             
-            # Command will go through. Prepare the View.
-            view = ShowEggs()
-            view.target = target
-            view.requester = usr
+        #     # Command will go through. Prepare the View.
+        #     view = ShowEggs()
+        #     view.target = target
+        #     view.requester = usr
 
-            egg_roles = "## Egg Hunt 2025\n\n"
-            # Prepare list to show in PAGE 1 (2025 egg hunt)
-            for role in FUN_ROLES["Easter"]:
-                view.counter["AllEggs"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Eggs"] += 1
-                    egg_roles += "**" + str(role) + "** 🧺\n"
-                else:
-                    egg_roles += "**???** 🧺\n"
+        #     egg_roles = "## Egg Hunt 2025\n\n"
+        #     # Prepare list to show in PAGE 1 (2025 egg hunt)
+        #     for role in FUN_ROLES["Easter"]:
+        #         view.counter["AllEggs"] += 1
+        #         if str(target.id) in list_decoded_entries(role):
+        #             view.counter["Eggs"] += 1
+        #             egg_roles += "**" + str(role) + "** 🧺\n"
+        #         else:
+        #             egg_roles += "**???** 🧺\n"
 
-            view.data[0] = egg_roles
-            view.footers[0] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
+        #     view.data[0] = egg_roles
+        #     view.footers[0] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
 
-            egg_roles = "## Egg Hunt 2026\n\n"
-            # Prepare list to show in PAGE 2 (2026 egg hunt)
-            for role in FUN_ROLES["Easter26"]:
-                view.counter["AllEggs"] += 1
-                if str(target.id) in list_decoded_entries(role):
-                    view.counter["Eggs"] += 1
-                    egg_roles += "**" + str(role) + "** 🧺\n"
-                else:
-                    egg_roles += "**???** 🧺\n"
+        #     egg_roles = "## Egg Hunt 2026\n\n"
+        #     # Prepare list to show in PAGE 2 (2026 egg hunt)
+        #     for role in FUN_ROLES["Easter26"]:
+        #         view.counter["AllEggs"] += 1
+        #         if str(target.id) in list_decoded_entries(role):
+        #             view.counter["Eggs"] += 1
+        #             egg_roles += "**" + str(role) + "** 🧺\n"
+        #         else:
+        #             egg_roles += "**???** 🧺\n"
 
-            view.data[1] = egg_roles
-            view.footers[1] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
+        #     view.data[1] = egg_roles
+        #     view.footers[1] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
 
-            # Send view... hopefully
-            await view.send(ch)
+        #     # Send view... hopefully
+        #     await view.send(ch)
 
         # Revive Chat Command
         # elif ("revive" in lmsg) and ("chat" in lmsg) and len(lmsg.split(" ")) < 4: # if its revive chat, why are we checking for length < 4 and not < 2? - esc
@@ -1393,14 +1393,14 @@ async def on_message(message):
             await SEND(ch,await UnsubFrom(usr,lmsg.split(" ",2)[2].title()))
         
         #guide
-        elif lmsg == 'bd help':            
-            # Command will go through. Prepare the View.
-            view = ShowCommands(timeout=500)
-            view.requester = usr
-            view.channel = ch
+        # elif lmsg == 'bd help':            
+        #     # Command will go through. Prepare the View.
+        #     view = ShowCommands(timeout=500)
+        #     view.requester = usr
+        #     view.channel = ch
 
-            await view.send(ch)
-            await view.wait()
+        #     await view.send(ch)
+        #     await view.wait()
         
         # Get the drone's wisdom
         elif lmsg.startswith("drone of wisdom"):
