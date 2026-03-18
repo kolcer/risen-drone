@@ -37,9 +37,6 @@ client = commands.Bot(command_prefix='bd ', intents=intents)
 # nltk.download('words')
 # word_list = words.words()
 
-with open('hangman.txt') as input_file:
-    word_list = [line.strip() for line in input_file]
-
 with open('blacklist.txt') as input_file:
     blacklist = [line.strip() for line in input_file]
 
@@ -607,86 +604,73 @@ async def on_message(message):
                 await SEND(ch, f"⚠️ Failed to unpin message: {e}")
 
         # adding a comment to reset bot but rolo why does the bot break sometimes
-        elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
-            lmsg = lmsg.replace("|", "")
+        # elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone
+        #     lmsg = lmsg.replace("|", "")
 
-            theword = lmsg.replace("play hangman ", "")
+        #     theword = lmsg.replace("play hangman ", "")
 
-            BUTTONS["status"] = True
-            BUTTONS["channel"] = ch
-            view = Minigames_Hangman(timeout=120)
-            view.current = ""
-            view.revealed = []
-            view.disabled = False
-            view.wrong = " "
-            view.toolate = True
-            view.lifes = 5
-            view.status = "<:csSleazel:786328102392954921>"
-            view.myword = "q"
-            view.cp = None
-            view.cl = None
-            view.picker = None
-            view.alone = False
-            view.players = {}
-            view.results = "" 
+        #     BUTTONS["status"] = True
+        #     BUTTONS["channel"] = ch
+        #     view = Minigames_Hangman(timeout=120)
 
-            if theword == "alone":
-                view.cp = usr
-                view.alone = True   
-            elif lmsg != "play hangman" and lmsg != "play hangman alone":
-                if re.match("^[a-zA-Z ]*$", theword):
-                    if "q" in theword:
-                        await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
-                        BUTTONS["status"] = False
-                        return
-                    elif len(theword) >= 32:
-                        await SEND(ch, "Your word is too long.")
-                        BUTTONS["status"] = False
-                        return
-                    else:
-                        for badword in blacklist:
-                            if badword in theword:
-                                await SEND(ch, "Your word is inappropriate.")
-                                BUTTONS["status"] = False
-                                return
+
+        #     if theword == "alone":
+        #         view.cp = usr
+        #         view.alone = True   
+        #     elif lmsg != "play hangman" and lmsg != "play hangman alone":
+        #         if re.match("^[a-zA-Z ]*$", theword):
+        #             if "q" in theword:
+        #                 await SEND(ch, "Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.")
+        #                 BUTTONS["status"] = False
+        #                 return
+        #             elif len(theword) >= 32:
+        #                 await SEND(ch, "Your word is too long.")
+        #                 BUTTONS["status"] = False
+        #                 return
+        #             else:
+        #                 for badword in blacklist:
+        #                     if badword in theword:
+        #                         await SEND(ch, "Your word is inappropriate.")
+        #                         BUTTONS["status"] = False
+        #                         return
                     
-                    try:
-                        await message.delete()
-                    except Exception as e:
-                        await SEND(ch, f"Your message was removed by my bot friend, I agree with its decision.")
-                        BUTTONS["status"] = False
-                        return
-                    view.myword = theword.lower()
-                    view.picker = usr
-                else:
-                    await SEND(ch, "Your word contains invalid characters.")
-                    BUTTONS["status"] = False
-                    return
+        #             try:
+        #                 await message.delete()
+        #             except Exception as e:
+        #                 await SEND(ch, f"Your message was removed by my bot friend, I agree with its decision.")
+        #                 BUTTONS["status"] = False
+        #                 return
+        #             view.myword = theword.lower()
+        #             view.picker = usr
+        #         else:
+        #             await SEND(ch, "Your word contains invalid characters.")
+        #             BUTTONS["status"] = False
+        #             return
 
-            if lmsg == "play hangman" or lmsg == "play hangman alone":
-                while "q" in view.myword:
-                    view.myword = random.choice(word_list).lower()
+        #     if lmsg == "play hangman" or lmsg == "play hangman alone":
+        #         while "q" in view.myword:
+        #             view.myword = random.choice(word_list).lower()
         
-            for i in view.myword:
-                if str(i) != " ":
-                    view.current += "-"
-                else:
-                    view.current += " "
+        #     for i in view.myword:
+        #         if str(i) != " ":
+        #             view.current += "-"
+        #         else:
+        #             view.current += " "
 
-            for i in range(view.lifes):
-                view.status += "🟩"
+        #     for i in range(view.lifes):
+        #         view.status += "🟩"
 
-            view.status += "<:csStairbonk:812813052822421555>"
+        #     view.status += "<:csStairbonk:812813052822421555>"
 
-            if view.picker != None:
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word {view.picker.mention} is thinking?\n\n`{view.current}`\n\n{view.status}", view)
-            else:
-                view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
+        #     if view.picker != None:
+        #         view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word {view.picker.mention} is thinking?\n\n`{view.current}`\n\n{view.status}", view)
+        #     else:
+        #         view.message = await SEND_VIEW(BUTTONS["channel"], f"Can you guess the word I am thinking?\n\n`{view.current}`\n\n{view.status}", view)
             
 
-            await view.wait()
-            await view.too_late()
-            BUTTONS["status"] = False
+        #     await view.wait()
+        #     await view.too_late()
+        #     BUTTONS["status"] = False
 
         # elif lmsg.startswith("play tic tac toe") or lmsg.startswith("play ttt") and not BUTTONS["status"]:
         #     BUTTONS["status"] = True

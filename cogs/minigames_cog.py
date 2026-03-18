@@ -1,3 +1,6 @@
+from random import random
+import re
+
 import discord
 from discord.ext import commands
 
@@ -5,13 +8,19 @@ from globals import BUTTONS, CHANNELS, QUIZ, QUIZZERS, LADDERS, MG_PLAYERS, MG_Q
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND_VIEW
 from quiz import StartQuiz
 from ladders import PlayLucidLadders
-from views import Minigames_TicTacToe
+from views import Minigames_Hangman, Minigames_TicTacToe
+
+with open('hangman.txt') as input_file:
+    word_list = [line.strip() for line in input_file]
+
+with open('blacklist.txt') as input_file:
+    blacklist = [line.strip() for line in input_file]
 
 class MinigamesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @discord.app_commands.command(name="play", description="Start game: quiz or lucid ladders")
+    @discord.app_commands.command(name="play", description="Start game: Quiz, Lucid Ladders, or Tic Tac Toe")
     @discord.app_commands.choices(game=[
         discord.app_commands.Choice(name="Quiz", value="quiz"),
         discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders"),
@@ -56,10 +65,105 @@ class MinigamesCog(commands.Cog):
 
                     await view.wait()
                     await view.too_late()
-                    BUTTONS["status"] = False
                 except Exception as exc:
                     await FOLLOWUP(f"Something went wrong with `/play ttt`: {exc}", interaction)
                     raise
+                finally:
+                    BUTTONS["status"] = False
             else:
                 await FOLLOWUP(f"Another game is in progress.", interaction, True)
+
+    @discord.app_commands.command(name="hangman", description="Play a game of hangman")
+    @discord.app_commands.describe(
+        word="Optional: Provide a custom word to guess (leave empty for a random word)",
+        alone="If true, only you can interact with the buttons"
+    )
+    async def start_game(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the server!", True)
+            return
+
+        duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None
+        await DEFER(interaction)
+
+        if BUTTONS["status"]:
+            await FOLLOWUP("Another game is in progress.", interaction, True)
+            return
+
+        if word and alone:
+            await FOLLOWUP("You cannot provide a custom word if you want to play alone. Please pick another word or set alone to false.", interaction, True)
+            return
+        
+        if duelist and alone:
+            await FOLLOWUP("You cannot challenge someone if you want to play alone. Please remove the duelists or set alone to false.", interaction, True)
+            return
+        
+        if duelist and word:
+            await FOLLOWUP("You cannot provide a custom word if you want to challenge someone. Please pick another word or remove the duelist.", interaction, True)
+            return
+        
+        try:
+            target_word = word.lower() if word else None
+            view = Minigames_Hangman(timeout=120)
+            view.alone = alone
+            BUTTONS["status"] = True
+            BUTTONS["channel"] = interaction.channel
+
+            if word:
+                if not re.match("^[a-zA-Z ]*$", target_word):
+                    await FOLLOWUP("Your word contains invalid characters.", interaction, True)
+                    BUTTONS["status"] = False
+                    return
+                
+                if "q" in target_word:
+                    await FOLLOWUP("Your word contains the letter Q. Since the button limit is 25, one letter of the alphabet had to go. Pick another word.", interaction, True)
+                    BUTTONS["status"] = False
+                    return
+                
+                if len(target_word) >= 32:
+                    await FOLLOWUP("Your word is too long.", interaction, True)
+                    BUTTONS["status"] = False
+                    return
+
+                for badword in blacklist:
+                    if badword in target_word:
+                        await FOLLOWUP("Your word is inappropriate.", interaction, True)
+                        BUTTONS["status"] = False
+                        return
+
+                view.myword = target_word
+                view.picker = interaction.user
+            else:
+                random_word = random.choice(word_list).lower()
+                while "q" in random_word:
+                    random_word = random.choice(word_list).lower()
+                view.myword = random_word
+
+            view.current = "".join([" " if i == " " else "-" for i in view.myword])
+            
+            view.status = ""
+            for i in range(view.lifes):
+                view.status += "🟩"
+            view.status += "<:csStairbonk:812813052822421555>"
+
+            if view.alone:
+                view.cp = interaction.user
+
+            msg = f"Can you guess the word {view.picker.mention if view.picker else 'I am'} thinking?\n\n`{view.current}`\n\n{view.status}"
+            
+            await FOLLOWUP("Setting up the poor Hangman...", interaction, True)
+
+            if duelist:
+                view.duelists = duelists
+                msg += f"\n{duelist.mention}, you have been challenged by {interaction.user.mention}!"
+
+            view.message = await SEND_VIEW(BUTTONS["channel"], msg, view)
+
+            await view.wait()
+            await view.too_late()
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/hangman`: {exc}", interaction)
+            raise
+        finally:
+            BUTTONS["status"] = False
 

@@ -1006,6 +1006,24 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     #     await self.createButtons()
 
 class Minigames_Hangman(discord.ui.View):
+    def __init__(self, *, timeout=30):
+        super().__init__(timeout=timeout)
+        self.current = ""
+        self.revealed = []
+        self.disabled = False
+        self.wrong = " "
+        self.toolate = True
+        self.lifes = 5
+        self.status = "<:csSleazel:786328102392954921>"
+        self.myword = "q"
+        self.cp = None
+        self.cl = None
+        self.picker = None
+        self.alone = False
+        self.players = {}
+        self.results = ""
+        self.duelists = []
+
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
@@ -1101,6 +1119,10 @@ class Minigames_Hangman(discord.ui.View):
             await INTERACTION(interaction.response, "Too many people are interacting.", True)
             return
         
+        if self.duelists and usr not in self.duelists:
+            await INTERACTION(interaction.response, "This game is private.", True)
+            return
+
         self.disabled = True
         if self.alone:
             if usr != self.cp:

@@ -446,7 +446,8 @@ async def CastRig(rigPick, ch, usr, interaction = None):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
+            await send_followup(ch, "One or more rigs are still in cooldown. \n" + cdList, interaction)
+            # await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
             # chameleonSuccess = False
             return
 
