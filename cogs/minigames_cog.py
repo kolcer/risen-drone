@@ -83,7 +83,7 @@ class MinigamesCog(commands.Cog):
         alone="Optional: Set to true if you want to play alone (default: false)",
         duelist="Optional: Challenge a friend to play with you."
     )
-    async def start_game(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
+    async def hangman(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the server!", True)
             return
@@ -96,15 +96,15 @@ class MinigamesCog(commands.Cog):
             return
 
         if word and alone:
-            await FOLLOWUP("You cannot provide a custom word if you want to play alone. Please pick another word or set alone to false.", interaction, True)
+            await FOLLOWUP("You want me to play along like that?", interaction, True)
             return
         
         if duelist and alone:
-            await FOLLOWUP("You cannot challenge someone if you want to play alone. Please remove the duelists or set alone to false.", interaction, True)
+            await FOLLOWUP("Make a decision... To play alone, or to challenge someone!", interaction, True)
             return
         
         if duelist and word:
-            await FOLLOWUP("You cannot provide a custom word if you want to challenge someone. Please pick another word or remove the duelist.", interaction, True)
+            await FOLLOWUP("They were right in saying Hangman is rigged!", interaction, True)
             return
         
         try:
