@@ -1,6 +1,5 @@
-from random import random
+import random
 import re
-
 import discord
 from discord.ext import commands
 
@@ -26,6 +25,10 @@ class MinigamesCog(commands.Cog):
         discord.app_commands.Choice(name="Lucid Ladders", value="lucid_ladders"),
         discord.app_commands.Choice(name="Tic Tac Toe", value="ttt")
     ])
+    @discord.app_commands.describe(
+        game="How can I entertain you?",
+        duelist="Optional: Challenge a friend to play with you."
+    )
     async def start_game(self, interaction: discord.Interaction, game: str, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
@@ -76,7 +79,8 @@ class MinigamesCog(commands.Cog):
     @discord.app_commands.command(name="hangman", description="Play a game of hangman")
     @discord.app_commands.describe(
         word="Optional: Provide a custom word to guess (leave empty for a random word)",
-        alone="If true, only you can interact with the buttons"
+        alone="Optional: Set to true if you want to play alone (default: false)",
+        duelist="Optional: Challenge a friend to play with you."
     )
     async def start_game(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
