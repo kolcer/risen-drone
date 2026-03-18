@@ -1816,6 +1816,7 @@ class LucidLadders(discord.ui.View):
 
             await EDIT_VIEW_MESSAGE(self.message, "Starting...", self)
             from ladders import LucidLaddersProcessMessage
+            await asyncio.sleep(1)
             await LucidLaddersProcessMessage(interaction.user, "begin")
         except Exception as exc:
             await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)

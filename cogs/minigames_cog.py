@@ -1,3 +1,4 @@
+import asyncio
 import random
 import re
 import discord
@@ -88,7 +89,7 @@ class MinigamesCog(commands.Cog):
             return
 
         duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None
-        await DEFER(interaction)
+        await DEFER(interaction, True)
 
         if BUTTONS["status"]:
             await FOLLOWUP("Another game is in progress.", interaction, True)
@@ -156,6 +157,8 @@ class MinigamesCog(commands.Cog):
             msg = f"Can you guess the word {view.picker.mention if view.picker else 'I am'} thinking?\n\n`{view.current}`\n\n{view.status}"
             
             await FOLLOWUP("Setting up the poor Hangman...", interaction, True)
+
+            await asyncio.sleep(1)
 
             if duelist:
                 view.duelists = duelists
