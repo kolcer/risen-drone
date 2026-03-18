@@ -70,7 +70,6 @@ class PersonalCog(commands.Cog):
         build_tower_page(user_stats, "infinite", 3, view)
 
         # Page 5 & 6: Roles
-        self._prepare_role_pages(view, target)
         build_role_page(view, target, 4)
 
         # Page 7: Misc Stats
