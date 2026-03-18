@@ -80,7 +80,8 @@ class PersonalCog(commands.Cog):
         rig_key = str(lastrig).lower().replace(" rig", "")
         view.footers[6] = RIGS_DESCRIPTION.get(rig_key, "No rig data found.")
 
-        view.message = await FOLLOWUP("There you go.", interaction, False, view)
+        view.message = await FOLLOWUP(None, interaction, False, view)
+        await view.update_message()
 
     async def _show_eggs(self, interaction, target):
         view = ShowEggs()
@@ -115,9 +116,11 @@ class PersonalCog(commands.Cog):
 
         # Send view... hopefully
         view.message = await FOLLOWUP("There you go.", interaction, False, view)
+        await view.update_message()
 
     async def _show_help(self, interaction):
         view = ShowCommands(timeout=500)
         view.requester = interaction.user
         view.channel = interaction.channel
         view.message = await FOLLOWUP("There you go.", interaction, False, view)
+        await view.update_message()

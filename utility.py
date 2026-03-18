@@ -52,11 +52,11 @@ async def launch_egg(ch, eggType, msg):
     await view.too_late()
     BUTTONS["status"] = False
 
-async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None):
+async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None, embed=None):
     if interaction is not None:
-        return await FOLLOWUP(msg, interaction, ephemeral, view)
+        return await FOLLOWUP(msg, interaction, ephemeral, view, embed)
     else:
-        return await SEND(ch, msg, view)
+        return await SEND(ch, msg, view, embed)
     
 def build_role_page(view, target, index):
     # --- PAGE 5: SECRET ROLES (Available & Recurring) ---

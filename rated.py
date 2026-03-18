@@ -61,18 +61,32 @@ async def SEND_VIEW(channel, content, view):
     return await channel.send(content, view = view)
 
 #send follow up message
-async def FOLLOWUP(message, interaction, ephemeral=False, view=None):
-    if message == None or message == "":
-        #cannot send empty message
-        return
-    
-    if EVENTS["Easter"]:
+async def FOLLOWUP(message, interaction, ephemeral=False, view=None, embed=None):
+    if not message and not view and not embed:
+        return 
+
+    if EVENTS.get("Easter") and message:
         message = str(message) + " 🐇"
 
-    if view is not None:
-        return await interaction.followup.send(message, ephemeral=ephemeral, view=view)
-    else:
-        return await interaction.followup.send(message, ephemeral=ephemeral)
+    return await interaction.followup.send(
+        content=message, 
+        ephemeral=ephemeral, 
+        view=view, 
+        embed=embed
+    )
+
+# async def FOLLOWUP(message, interaction, ephemeral=False, view=None, embed=None):
+#     if message == None or message == "":
+#         #cannot send empty message
+#         return
+    
+#     if EVENTS["Easter"]:
+#         message = str(message) + " 🐇"
+
+#     if view is not None:
+#         return await interaction.followup.send(message, ephemeral=ephemeral, view=view)
+#     else:
+#         return await interaction.followup.send(message, ephemeral=ephemeral)
 
 #defer
 async def DEFER(interaction, ephemeral=False):
