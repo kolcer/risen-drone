@@ -4,7 +4,7 @@ import re
 import discord
 from discord.ext import commands
 
-from globals import BUTTONS, CHANNELS, QUIZ, QUIZZERS, LADDERS, MG_PLAYERS, MG_QUEUE
+from globals import BUTTONS, HYPNO_SWAPS, QUIZ, LADDERS, EXTRA_ROLES
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND_VIEW
 from quiz import StartQuiz
 from ladders import PlayLucidLadders
@@ -35,6 +35,11 @@ class MinigamesCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
+        newGame = game
+
+        if EXTRA_ROLES['hypno'] in interaction.user.roles:
+            newGame = HYPNO_SWAPS.get(game)
+        
         duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None
 
         await DEFER(interaction)
@@ -42,13 +47,13 @@ class MinigamesCog(commands.Cog):
         if (QUIZ["active"] or QUIZ["second-player"]) or (LADDERS['status'] != "off"):
             await FOLLOWUP(f"Another game is in progress.", interaction, True)
 
-        if game == "quiz":
+        if newGame == "quiz":
             try:
                 await StartQuiz(interaction.user, interaction.channel, interaction, duelists)
             except Exception as exc:
                 await FOLLOWUP(f"Something went wrong with `/play quiz`: {exc}", interaction)
                 raise
-        elif game == "lucid_ladders":
+        elif newGame == "lucid_ladders":
             try:
                 await PlayLucidLadders(interaction.user, interaction.channel, interaction, duelists)
             except Exception as exc:

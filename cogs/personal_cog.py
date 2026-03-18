@@ -2,8 +2,8 @@ import discord
 import views
 from discord.ext import commands
 
-from utility import build_tower_page, build_role_page
-from globals import RIG_LIST, EMOJIS_TO_REACT, FUN_ROLES, RIGS_DESCRIPTION, MSG_SENT, LAST_RIG
+from utility import build_tower_page, build_role_page, send_followup
+from globals import HYPNO_SWAPS, RIG_LIST, EMOJIS_TO_REACT, FUN_ROLES, RIGS_DESCRIPTION, MSG_SENT, LAST_RIG, RIG_COOLDOWNS, COOLDOWN_DESCRIPTIONS, EXTRA_ROLES
 from rated import DEFER, FOLLOWUP, INTERACTION
 from views import ShowProfile, ShowEggs, ShowCommands
 from database import get_user_stats, list_decoded_entries
@@ -14,9 +14,10 @@ class PersonalCog(commands.Cog):
 
     @discord.app_commands.command(name="show", description="Show profiles, eggs, or commands")
     @discord.app_commands.choices(type=[
-        discord.app_commands.Choice(name="Profile", value="profile"),
         discord.app_commands.Choice(name="Commands", value="help"),
+        discord.app_commands.Choice(name="Profile", value="profile"),
         discord.app_commands.Choice(name="Eggs", value="eggs"),
+        discord.app_commands.Choice(name="Cooldowns", value="cd"),
     ])
     @discord.app_commands.describe(
         type="What do you want to see?",
@@ -26,21 +27,28 @@ class PersonalCog(commands.Cog):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
+        
+        newType = type
 
         if target is None:
             target = interaction.user
 
+        if EXTRA_ROLES['hypno'] in interaction.user.roles:
+            newType = HYPNO_SWAPS.get(type)
+
         await DEFER(interaction)
 
         try:
-            if type == "profile":
+            if newType == "profile":
                 await self._show_profile(interaction, target)
-            elif type == "eggs":
+            elif newType == "eggs":
                 await self._show_eggs(interaction, target)
-            elif type == "help":
+            elif newType == "help":
                 await self._show_help(interaction)
+            elif newType == "cd":
+                await self._show_cd(interaction)
         except Exception as exc:
-            await FOLLOWUP(f"Something went wrong with `/show {type}`: {exc}", interaction)
+            await FOLLOWUP(f"Something went wrong with `/show {newType}`: {exc}", interaction)
             raise
 
     async def _show_profile(self, interaction, target):
@@ -124,3 +132,24 @@ class PersonalCog(commands.Cog):
         view.channel = interaction.channel
         view.message = await FOLLOWUP(None, interaction, False, view)
         await view.update_message()
+
+    async def _show_cd(self, interaction):
+        cd = False
+        for i, v in RIG_COOLDOWNS.items():
+            if v and i != 'janitor':
+                cd = True
+                break
+
+        cdList = ""
+        for i, v in RIG_COOLDOWNS.items():
+            cdList += COOLDOWN_DESCRIPTIONS[i]
+            if v:
+                cdList += ":x: \n"
+            else:
+                cdList += ":white_check_mark: \n"
+
+
+        header = "One or more rigs are still in cooldown. \n" if cd else "Janitor is taking a rest. \n"
+        final_msg = f"{header}{cdList}"
+
+        await send_followup(interaction.channel, final_msg, interaction)

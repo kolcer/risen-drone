@@ -584,6 +584,34 @@ SANCTUARY = {
     "none": " has ??!",
 }
 
+HYPNO_SWAPS = {
+    "patron": "wicked",
+    "wicked": "patron",
+    "joker": "archon",
+    "archon": "joker",
+    "keeper": "splicer",
+    "splicer": "keeper",
+    "muggle": "none",
+    "none": "muggle",
+    "drifter": "gremlin",
+    "gremlin": "drifter",
+    "reaver": "spectre",
+    "spectre": "reaver",
+    "necromancer": "heretic",
+    "heretic": "necromancer",
+    "thief": "chameleon",
+    "chameleon": "thief",
+    "hacker": "janitor",
+    "janitor": "hacker",
+    "quiz": "lucid_ladders",
+    "lucid_ladders": "ttt",
+    "ttt": "quiz",
+    "profile": "help",
+    "help": "profile",
+    "eggs": "cd",
+    "cd": "eggs",
+}
+
 RIG_LIST = [
     "patron",
     "joker",

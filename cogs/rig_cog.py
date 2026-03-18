@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from globals import RIG_LIST
+from globals import HYPNO_SWAPS, RIG_LIST, EXTRA_ROLES
 from rated import DEFER, FOLLOWUP, INTERACTION
 from rigs import CastRig
 
@@ -16,12 +16,17 @@ class RigCog(commands.Cog):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
+        
+        rigLower = rig.strip().lower()
+        newRig = rigLower
 
-        rig_lower = rig.strip().lower()
+        if EXTRA_ROLES['hypno'] in interaction.user.roles:
+            newRig = HYPNO_SWAPS.get(rigLower)
+
         await DEFER(interaction)
 
         try:
-            await CastRig(rig_lower, interaction.channel, interaction.user, interaction=interaction)
+            await CastRig(newRig, interaction.channel, interaction.user, interaction=interaction)
         except Exception as exc:
-            await FOLLOWUP(f"Something went wrong with `/cast {rig_lower}`: {exc}", interaction)
+            await FOLLOWUP(f"Something went wrong with `/cast {newRig}`: {exc}", interaction)
             raise
