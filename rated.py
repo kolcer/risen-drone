@@ -68,12 +68,18 @@ async def FOLLOWUP(message, interaction, ephemeral=False, view=None, embed=None)
     if EVENTS.get("Easter") and message:
         message = str(message) + " 🐇"
 
-    return await interaction.followup.send(
-        content=message, 
-        ephemeral=ephemeral, 
-        view=view, 
-        embed=embed
-    )
+    kwargs = {
+        "content": message,
+        "ephemeral": ephemeral
+    }
+
+    # 4. ONLY add view/embed if they are NOT None
+    if view is not None:
+        kwargs["view"] = view
+    if embed is not None:
+        kwargs["embed"] = embed
+
+    return await interaction.followup.send(**kwargs)
 
 # async def FOLLOWUP(message, interaction, ephemeral=False, view=None, embed=None):
 #     if message == None or message == "":
