@@ -3,6 +3,7 @@ import random
 from rated import *
 from globals import *
 from database import *
+from utility import send_followup
 
 def PrepareRoles(roles):
     for role in roles:
@@ -72,6 +73,28 @@ def PrepareRoles(roles):
 #             continue
  
 async def MorphTo(usr,role):
+    if role.title() == "All":
+        roles_to_add = [
+            data[0] for name, data in MORPHABLE_ROLES.items() 
+            if name != "Janitor" and data[0] is not None and data[0] not in usr.roles
+        ]
+        
+        if roles_to_add:
+            await ADD_ROLES(usr, roles_to_add)
+            return "You have morphed into all Alignments! Chameleon would be proud."
+        
+        return "Nope, you've got enough already."
+
+    if role == "Janitor":
+        raw_stats = get_user_stats(usr)
+        if not raw_stats:
+            return "You need to be linked and have 50+ climbs to be a Janitor. Use `/link`."
+
+        user_stats = {k.decode("utf-8").lower(): v.decode("utf-8") for k, v in raw_stats.items()}
+        total_climbs = sum(int(user_stats.get(f"{ali.lower()}_climbs", 0)) for ali in RIG_LIST)
+
+        if total_climbs < 50:
+            return f"You need 50 climbs (Total: {total_climbs}) to morph into Janitor."
 
     if role in MORPHABLE_ROLES:
         if role == "Gun":
@@ -92,9 +115,20 @@ async def MorphTo(usr,role):
             return SPECIAL_ROLES[role][1]
                 
 
-async def DemorphFrom(usr,role):                
+async def DemorphFrom(usr,role):
+    if role.title() == "All":
+        roles_to_remove = [
+            data[0] for data in MORPHABLE_ROLES.values() 
+            if data[0] is not None and data[0] in usr.roles
+        ]
+        
+        if roles_to_remove:
+            await REMOVE_ROLES(usr, roles_to_remove)
+            return "You have demorphed from all Alignments! Chameleon would be angry."
+        
+        return "You got nothing to lose."
+            
     if role in MORPHABLE_ROLES:
-
         if MORPHABLE_ROLES[role][0] not in usr.roles:
             return MORPHABLE_ROLES[role][4]
         else:

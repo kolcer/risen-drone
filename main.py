@@ -307,7 +307,7 @@ async def on_message(message):
             for role in usr.roles:
                 if role.name in MORPHABLE_ROLES and role.name != 'Joker':
                     role_list.append(role)
-            await usr.remove_roles(*role_list)
+            await REMOVE_ROLES(usr, role_list)
 
         # if not str(usr.id) in list_decoded_entries("Peppa Pig"):
         #     await add_entry_with_check("Peppa Pig", usr)
@@ -1190,87 +1190,87 @@ async def on_message(message):
         #     await ADD_ROLES(usr,EXTRA_ROLES['necromancer'])
            
         #morph command
-        elif lmsg.startswith("morph to") or lmsg.startswith("morph into"):
-            noRoles = True
+        # elif lmsg.startswith("morph to") or lmsg.startswith("morph into"):
+        #     noRoles = True
 
-            if today.day == 1 and today.month == 4:
-                morphToTarget = "Joker"
-            else:
-                morphToTarget = lsplit[2].capitalize()
+        #     if today.day == 1 and today.month == 4:
+        #         morphToTarget = "Joker"
+        #     else:
+        #         morphToTarget = lsplit[2].capitalize()
 
-            if EVENTS["Easter"]:
-                for role in usr.roles:
-                    if role.name.lower() in RIG_LIST:
-                        noRoles = False
-                        break
+        #     if EVENTS["Easter"]:
+        #         for role in usr.roles:
+        #             if role.name.lower() in RIG_LIST:
+        #                 noRoles = False
+        #                 break
 
-            if not noRoles and morphToTarget.lower() in RIG_LIST and EVENTS["Easter"]:
-                await SEND(ch, "I'm afraid I can't let you do that.\nFor the duration of the Easter Event, you may only have 1 alignment role.\nEating eggs of any alignment will morph you instead.")
-            elif morphToTarget == "Janitor":
+        #     if not noRoles and morphToTarget.lower() in RIG_LIST and EVENTS["Easter"]:
+        #         await SEND(ch, "I'm afraid I can't let you do that.\nFor the duration of the Easter Event, you may only have 1 alignment role.\nEating eggs of any alignment will morph you instead.")
+        #     elif morphToTarget == "Janitor":
 
-                # Fetch user stats from DB
-                user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(usr).items()}
+        #         # Fetch user stats from DB
+        #         user_stats = {k.decode("utf-8"): v.decode("utf-8") for k, v in get_user_stats(usr).items()}
 
-                #Is user linked?
-                if len(user_stats) == 0:
-                   await SEND(ch, "You need to be linked with BD and have 50 climbs minimum in the game, to morph into a Janitor. Use `bd link` to link your account.")
-                   return
+        #         #Is user linked?
+        #         if len(user_stats) == 0:
+        #            await SEND(ch, "You need to be linked with BD and have 50 climbs minimum in the game, to morph into a Janitor. Use `bd link` to link your account.")
+        #            return
 
-                # Count total climbs
-                total_climbs = 0
-                for alignment in RIG_LIST:
-                    ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
+        #         # Count total climbs
+        #         total_climbs = 0
+        #         for alignment in RIG_LIST:
+        #             ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "N/A")
 
-                    if ali_climbs != "N/A":
-                        total_climbs += int(ali_climbs)
+        #             if ali_climbs != "N/A":
+        #                 total_climbs += int(ali_climbs)
 
-                if total_climbs < 50:
-                   await SEND(ch, "You need minimum 50 climbs in total to morph into Janitor. You currently have: " + str(total_climbs))
-                else:
-                   await SEND(ch, await MorphTo(usr,morphToTarget))
+        #         if total_climbs < 50:
+        #            await SEND(ch, "You need minimum 50 climbs in total to morph into Janitor. You currently have: " + str(total_climbs))
+        #         else:
+        #            await SEND(ch, await MorphTo(usr,morphToTarget))
                
-            else:
-                await SEND(ch, await MorphTo(usr,morphToTarget))
+        #     else:
+        #         await SEND(ch, await MorphTo(usr,morphToTarget))
 
-                totalSubbedAlignments = 0
-                for role in usr.roles:
-                    if role.name.lower() in RIG_LIST:
-                        totalSubbedAlignments += 1
+        #         totalSubbedAlignments = 0
+        #         for role in usr.roles:
+        #             if role.name.lower() in RIG_LIST:
+        #                 totalSubbedAlignments += 1
 
-                if totalSubbedAlignments == (len(RIG_LIST) - 2) and MORPHABLE_ROLES["Reaver"][0] not in usr.roles: #excluding janitor and reaver
-                    await SEND(ch, "What did poor Reaver do to you? Do not alienate them, they are not an illusion.")
-                    if not str(usr.id) in list_decoded_entries("Alien"):
-                        await add_entry_with_check("Alien", usr)
+        #         if totalSubbedAlignments == (len(RIG_LIST) - 2) and MORPHABLE_ROLES["Reaver"][0] not in usr.roles: #excluding janitor and reaver
+        #             await SEND(ch, "What did poor Reaver do to you? Do not alienate them, they are not an illusion.")
+        #             if not str(usr.id) in list_decoded_entries("Alien"):
+        #                 await add_entry_with_check("Alien", usr)
 
-        #demorph command (accepts demorph, unmorph and any **morph from combination)
-        elif lmsg.startswith("morph from",2):
-            alignmentRoles = 0
+        # #demorph command (accepts demorph, unmorph and any **morph from combination)
+        # elif lmsg.startswith("morph from",2):
+        #     alignmentRoles = 0
 
-            if EVENTS["Easter"]:
-                for role in usr.roles:
-                    if role.name.lower() in RIG_LIST:
-                        alignmentRoles += 1
+        #     if EVENTS["Easter"]:
+        #         for role in usr.roles:
+        #             if role.name.lower() in RIG_LIST:
+        #                 alignmentRoles += 1
 
-            if today.day == 1 and today.month == 4:
-                await SEND(ch, f"Unfortunately, this command is out of service.")
-                return
-            else:
-                demorphFromTarget = lsplit[2].capitalize()
+        #     if today.day == 1 and today.month == 4:
+        #         await SEND(ch, f"Unfortunately, this command is out of service.")
+        #         return
+        #     else:
+        #         demorphFromTarget = lsplit[2].capitalize()
             
-            if alignmentRoles == 1 and demorphFromTarget.lower() in RIG_LIST and EVENTS["Easter"]:
-                await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment but there are no take-backsies... unless you eat an egg.")
-                return
-            else:
-                await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
+        #     if alignmentRoles == 1 and demorphFromTarget.lower() in RIG_LIST and EVENTS["Easter"]:
+        #         await SEND(ch, "I'm afraid you're stuck with that alignment for now.\nDuring the Easter Event, you can side with any alignment but there are no take-backsies... unless you eat an egg.")
+        #         return
+        #     else:
+        #         await SEND(ch,await DemorphFrom(usr,demorphFromTarget))
 
-            if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
-                EX_CLIMBERS.append(usr)
-                await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
-                await asyncio.sleep(10)
-                await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
-                EX_CLIMBERS.remove(usr)
-                await asyncio.sleep(1)
-                await SEND(ch, "Just kidding.")
+        #     if demorphFromTarget == "Climber" and SPECIAL_ROLES["Climber"][0] in usr.roles:
+        #         EX_CLIMBERS.append(usr)
+        #         await REMOVE_ROLES(usr, SPECIAL_ROLES["Climber"][0])
+        #         await asyncio.sleep(10)
+        #         await ADD_ROLES(usr, SPECIAL_ROLES["Climber"][0])
+        #         EX_CLIMBERS.remove(usr)
+        #         await asyncio.sleep(1)
+        #         await SEND(ch, "Just kidding.")
 
         #add tip for janitors
         elif lmsg.startswith("new"):

@@ -1056,14 +1056,7 @@ SPECIAL_ROLES = {
         "You are not an Architect...",
         "Just wait for the boost to expire.",
     ],
-    "Wiki Editor": [
-        None,
-        "This role is given to trusted community members who help maintain the Crazy Stairs Wiki.",
-        "I believe you are already a Wiki Editor.",
-        "You are not a Wiki Editor...",
-        "Contact mods to get this role removed.",
-    ],
-     "Climber": [
+    "Climber": [
         None,
         "Please verify to become a climber.",
         "To the tower you go!",
@@ -1084,14 +1077,6 @@ SPECIAL_ROLES = {
         "You are not hypnotized...",
         "Ask someone for mana.",
     ],
-    # # multiple words (ultimate chat killer) would break the script logic
-    # "Ultimate": [
-    #     None,
-    #     "Your message needs to be last for 2 hours in the <#624227331720085536> channel.",
-    #     "You have already killed the chat.",
-    #     "You are not a chat killer in the first place.",
-    #     "There was an attempt.",
-    # ],
 }
 
 # pingable roles, no custom messages

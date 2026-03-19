@@ -9,9 +9,14 @@ class RigCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
+    sorted_choices = [
+        discord.app_commands.Choice(name=rig.capitalize(), value=rig) 
+        for rig in sorted(RIG_LIST)
+    ]
+
     # Cast Rig Command
     @discord.app_commands.command(name="cast", description="Cast a rig (former 'cast X rig')")
-    @discord.app_commands.choices(rig=[discord.app_commands.Choice(name=rig.capitalize(), value=rig) for rig in RIG_LIST])
+    @discord.app_commands.choices(rig=sorted_choices)
     async def cast(self, interaction: discord.Interaction, rig: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
