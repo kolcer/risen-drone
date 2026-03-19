@@ -99,10 +99,9 @@ class RolesCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/morph {role}`: {exc}", interaction)
             raise
 
-        current_alignment_count = len(alignment_roles_count)
         reaver_role = MORPHABLE_ROLES.get("Reaver", [None])[0]
 
-        if current_alignment_count == (len(RIG_LIST) - 2) and reaver_role not in user.roles:
+        if alignment_roles_count == (len(RIG_LIST) - 2) and reaver_role not in user.roles:
             await SEND(interaction.channel, "What did poor Reaver do to you? They are not an illusion.")
             
             if str(user.id) not in list_decoded_entries("Alien"):
