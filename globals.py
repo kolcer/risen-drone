@@ -1056,6 +1056,13 @@ SPECIAL_ROLES = {
         "You are not an Architect...",
         "Just wait for the boost to expire.",
     ],
+    # "Wiki Editor": [
+    #     None,
+    #     "This role is given to trusted community members who help maintain the Crazy Stairs Wiki.",
+    #     "I believe you are already a Wiki Editor.",
+    #     "You are not a Wiki Editor...",
+    #     "Contact mods to get this role removed.",
+    # ],
     "Climber": [
         None,
         "Please verify to become a climber.",
@@ -1063,20 +1070,20 @@ SPECIAL_ROLES = {
         "You are no longer a Climber. Goodbye.",
         "You are no longer a Climber. Goodbye.",
     ],
-    "Possessed": [
-        None,
-        "You should cast Heretic Rig.",
-        "You are already possessed...",
-        "You are not possessed...",
-        "Ask someone for mana.",
-    ],
-    "Hypnotized": [
-        None,
-        "Wait for someone to cast a Gremlin Rig.",
-        "You are already hypnotized...",
-        "You are not hypnotized...",
-        "Ask someone for mana.",
-    ],
+    # "Possessed": [
+    #     None,
+    #     "You should cast Heretic Rig.",
+    #     "You are already possessed...",
+    #     "You are not possessed...",
+    #     "Ask someone for mana.",
+    # ],
+    # "Hypnotized": [
+    #     None,
+    #     "Wait for someone to cast a Gremlin Rig.",
+    #     "You are already hypnotized...",
+    #     "You are not hypnotized...",
+    #     "Ask someone for mana.",
+    # ],
 }
 
 # pingable roles, no custom messages

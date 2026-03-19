@@ -32,14 +32,14 @@ def PrepareRoles(roles):
         #possessed (for the rig)
         if role.id == EXTRA_ROLES['possessed']:
             EXTRA_ROLES['possessed'] = role
-            SPECIAL_ROLES['Possessed'][0] = role
+            # SPECIAL_ROLES['Possessed'][0] = role
         if role.id == EXTRA_ROLES['wiki editor']:
             EXTRA_ROLES['wiki editor'] = role
             # SPECIAL_ROLES['Wiki Editor'][0] = role
         #hypnotized (for the rig)
         if role.id == EXTRA_ROLES['hypno']:
             EXTRA_ROLES['hypno'] = role
-            SPECIAL_ROLES['Hypnotized'][0] = role
+            # SPECIAL_ROLES['Hypnotized'][0] = role
         #climber
         if role.id == EXTRA_ROLES['climber']:
             EXTRA_ROLES['climber'] = role
