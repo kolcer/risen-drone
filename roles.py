@@ -109,29 +109,53 @@ async def DemorphFrom(usr,role):
             return SPECIAL_ROLES[role][3]
 
 async def SubTo(usr,role):
+    if role == "All":
+        for r in PING_ROLES.values():
+            if r not in usr.roles:
+                await ADD_ROLES(usr, r)
+
+        return "You have subscribed to all roles!"
+
     if role.lower() == 'sleazel-in-game':
         role = 'Sleazel-in-game'
 
     if role in PING_ROLES:
+        if PING_ROLES[role] in usr.roles:
+            return "You are already subscribed to " + role + "!"
+        
         await ADD_ROLES(usr,PING_ROLES[role])
         return "You have subscribed to " + role + "!"
     
     if role in SECRET_PING_ROLES:
+        if str(usr.id) in list_decoded_entries(role):
+            return "You are already subscribed to " + role + "!"
         add_entry(role, usr.id)
         return "You have subscribed to " + role + "!"
 
 #unsub command (aceppts unsub, desub and any **sub from combination)
-async def UnsubFrom(usr,role): 
+async def UnsubFrom(usr,role):
+    if role == "All":
+        for r in PING_ROLES.values():
+            if r in usr.roles:
+                await REMOVE_ROLES(usr, r)
+        return "You have unsubscribed from all roles!"
+
     if role.lower() == 'sleazel-in-game':
         role = 'Sleazel-in-game'
         
     if role in PING_ROLES:
+        if PING_ROLES[role] not in usr.roles:
+            return "You are not subscribed to " + role + "!"
+        
         await REMOVE_ROLES(usr,PING_ROLES[role])
         return "You have unsubscribed from " + role + "!"
     
     if role in SECRET_PING_ROLES:
+        if str(usr.id) not in list_decoded_entries(role):
+            return "You are not subscribed to " + role + "!"
+        
         delete_entry_by_value(role, usr.id)
-        return "You have unsubscribed to " + role + "!"
+        return "You have unsubscribed from " + role + "!"
                
 #chat killer function
 async def WAIT_FOR_CHAT_KILLER(msg):

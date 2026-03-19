@@ -11,9 +11,11 @@ class RolesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    role_choices = [
+    _raw_roles = list(PING_ROLES.keys()) + SECRET_PING_ROLES
+    _sorted_roles = sorted(_raw_roles)
+    role_choices = [app_commands.Choice(name="All Roles", value="all")] + [
         app_commands.Choice(name=role, value=role) 
-        for role in list(PING_ROLES.keys()) + SECRET_PING_ROLES
+        for role in _sorted_roles
     ]
 
     @discord.app_commands.command(name="sub", description="Subscribe to a role")
