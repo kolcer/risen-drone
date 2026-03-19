@@ -80,14 +80,15 @@ class RolesCog(commands.Cog):
         today = datetime.date.today()
         
         morph_target = "Joker" if (today.day == 1 and today.month == 4) else role.title()
-        is_easter = EVENTS.get("Easter", False)
+        alignment_roles_count = len([r for r in user.roles if r.name.lower() in RIG_LIST])
 
-        if is_easter:
-            msg = ("I'm afraid I can't let you do that.\n"
-                   "For the duration of the Easter Event, you may only have 1 alignment role.\n"
-                   "Eating eggs of any alignment will morph you instead.")
-            await FOLLOWUP(msg, interaction, True)
-            return
+        if EVENTS.get("Easter", False):
+            if alignment_roles_count >= 1:
+                msg = ("I'm afraid I can't let you do that.\n"
+                    "For the duration of the Easter Event, you may only have 1 alignment role.\n"
+                    "Eating eggs of any alignment will morph you instead.")
+                await FOLLOWUP(msg, interaction, True)
+                return
 
         try:
             if EXTRA_ROLES['hypno'] in interaction.user.roles:
@@ -98,7 +99,7 @@ class RolesCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/morph {role}`: {exc}", interaction)
             raise
 
-        current_alignment_count = len([r for r in user.roles if r.name.lower() in RIG_LIST])
+        current_alignment_count = len(alignment_roles_count)
         reaver_role = MORPHABLE_ROLES.get("Reaver", [None])[0]
 
         if current_alignment_count == (len(RIG_LIST) - 2) and reaver_role not in user.roles:
@@ -118,7 +119,6 @@ class RolesCog(commands.Cog):
         await DEFER(interaction)
         user = interaction.user
         today = datetime.date.today()
-        is_easter = EVENTS.get("Easter", False)
 
         if today.day == 1 and today.month == 4:
             await FOLLOWUP("Unfortunately, this command is out of service.", interaction, True)
@@ -126,7 +126,7 @@ class RolesCog(commands.Cog):
 
         demorph_target = role.title()
 
-        if is_easter:
+        if EVENTS.get("Easter", False):
             alignment_roles_count = len([r for r in user.roles if r.name.lower() in RIG_LIST])
             
             if alignment_roles_count == 1:
