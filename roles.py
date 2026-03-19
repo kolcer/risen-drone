@@ -110,11 +110,12 @@ async def DemorphFrom(usr,role):
 
 async def SubTo(usr,role):
     if role == "All":
-        for r in PING_ROLES.values():
-            if r not in usr.roles:
-                await ADD_ROLES(usr, r)
-
-        return "You have subscribed to all roles!"
+        roles_to_add = [r for r in PING_ROLES.values() if r not in usr.roles]
+        
+        if roles_to_add:
+            await ADD_ROLES(usr, roles_to_add)
+            return "You have subscribed to all roles!"
+        return "You already have all the roles!"
 
     if role.lower() == 'sleazel-in-game':
         role = 'Sleazel-in-game'
@@ -135,10 +136,12 @@ async def SubTo(usr,role):
 #unsub command (aceppts unsub, desub and any **sub from combination)
 async def UnsubFrom(usr,role):
     if role == "All":
-        for r in PING_ROLES.values():
-            if r in usr.roles:
-                await REMOVE_ROLES(usr, r)
-        return "You have unsubscribed from all roles!"
+        roles_to_remove = [r for r in PING_ROLES.values() if r in usr.roles]
+        
+        if roles_to_remove:
+            await REMOVE_ROLES(usr, roles_to_remove)
+            return "You have unsubscribed from all roles!"
+        return "You are not subscribed to any role!"
 
     if role.lower() == 'sleazel-in-game':
         role = 'Sleazel-in-game'
@@ -158,45 +161,45 @@ async def UnsubFrom(usr,role):
         return "You have unsubscribed from " + role + "!"
                
 #chat killer function
-async def WAIT_FOR_CHAT_KILLER(msg):
-    if msg.channel == CHANNELS["general"]:
-        CHAT_KILLER['last'] = msg.created_at
+# async def WAIT_FOR_CHAT_KILLER(msg):
+#     if msg.channel == CHANNELS["general"]:
+#         CHAT_KILLER['last'] = msg.created_at
         
-        #wait 2 hours
-        await asyncio.sleep(CHAT_KILLER['wait'])
+#         #wait 2 hours
+#         await asyncio.sleep(CHAT_KILLER['wait'])
         
-        if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
-            #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo
-            CHAT_KILLER['reviveChat'] = True
-            NECROMANCY['awarded'] = False
-            print("new chat killer")
-            await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
-            UPDATE_CKR()
-            for member in EXTRA_ROLES['ckr'].members:
-                await REMOVE_ROLES(member,EXTRA_ROLES['ckr'])
-            await asyncio.sleep(5)
-            await ADD_ROLES(msg.author,EXTRA_ROLES['ckr'])
-            await asyncio.sleep(1)
+#         if msg.created_at == CHAT_KILLER['last'] and not EXTRA_ROLES['ckr'] in msg.author.roles:
+#             #thirdkill = None # Nick - i have removed this, seems to be unused - sleazel #Sleazel - it seems i have used it for something and then forgot to delete - rolo
+#             CHAT_KILLER['reviveChat'] = True
+#             NECROMANCY['awarded'] = False
+#             print("new chat killer")
+#             await SEND(CHANNELS["general"],msg.author.mention + " do not worry, I can talk with you if no one else will.")
+#             UPDATE_CKR()
+#             for member in EXTRA_ROLES['ckr'].members:
+#                 await REMOVE_ROLES(member,EXTRA_ROLES['ckr'])
+#             await asyncio.sleep(5)
+#             await ADD_ROLES(msg.author,EXTRA_ROLES['ckr'])
+#             await asyncio.sleep(1)
 
-            if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
-                await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Professionals yet.")
-            return
+#             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+#                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Ultimate Chat Killer", "New chat killer. They are not Professionals yet.")
+#             return
 
-        elif msg.created_at == CHAT_KILLER['last'] and EXTRA_ROLES['ckr'] in msg.author.roles:
-            CHAT_KILLER['reviveChat'] = True
+#         elif msg.created_at == CHAT_KILLER['last'] and EXTRA_ROLES['ckr'] in msg.author.roles:
+#             CHAT_KILLER['reviveChat'] = True
 
-            if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
-                NECROMANCY['awarded'] = False
-                await SEND(CHANNELS["general"], msg.author.mention + " this is infinitely saddening. Nobody wants to talk with you.")
-                await asyncio.sleep(1)
+#             if EXTRA_ROLES['ckr'].name != "Ultimate Chat Killer":
+#                 NECROMANCY['awarded'] = False
+#                 await SEND(CHANNELS["general"], msg.author.mention + " this is infinitely saddening. Nobody wants to talk with you.")
+#                 await asyncio.sleep(1)
 
-                await EDIT_ROLE(EXTRA_ROLES['ckr'], "The Awkward One", "Awkward.")
+#                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "The Awkward One", "Awkward.")
 
-            if EXTRA_ROLES['ckr'].name == "Ultimate Chat Killer":
-                NECROMANCY['awarded'] = False
-                await SEND(CHANNELS["general"], msg.author.mention + " I must insist. I am here for you if you wish.")
-                await asyncio.sleep(1)
+#             if EXTRA_ROLES['ckr'].name == "Ultimate Chat Killer":
+#                 NECROMANCY['awarded'] = False
+#                 await SEND(CHANNELS["general"], msg.author.mention + " I must insist. I am here for you if you wish.")
+#                 await asyncio.sleep(1)
 
-                await EDIT_ROLE(EXTRA_ROLES['ckr'], "Professional Chat Murderer", "Yikes, they have killed the chat again.")
+#                 await EDIT_ROLE(EXTRA_ROLES['ckr'], "Professional Chat Murderer", "Yikes, they have killed the chat again.")
       
     

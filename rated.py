@@ -5,6 +5,7 @@ from globals import EXTRA_ROLES
 from globals import SERVER_DATA
 from globals import CHANNELS
 from globals import EVENTS
+import roles
 
 def GET_CHANNEL(client,id):
     return client.get_channel(id)
@@ -27,11 +28,17 @@ async def GET_MSG(ch,msgID):
 
 #add roles
 async def ADD_ROLES(usr,roles):
-    await usr.add_roles(roles)
+    if isinstance(roles, list):
+        await usr.add_roles(*roles)
+    else:
+        await usr.add_roles(roles)
     
 #remove roles
 async def REMOVE_ROLES(usr,roles):
-    await usr.remove_roles(roles)
+    if isinstance(roles, list):
+        await usr.remove_roles(*roles)
+    else:
+        await usr.remove_roles(roles)
 
 #edit nick
 async def EDIT_NICK(usr,new_nick):
