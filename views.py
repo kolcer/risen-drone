@@ -41,7 +41,13 @@ class ShowProfile(discord.ui.View):
         for item in self.children:
             item.disabled = True
 
-        await self.message.edit(embed=self.embed, view=self)
+        try:
+            if self.message:
+                await self.message.edit(embed=self.embed, view=self)
+        except discord.NotFound:
+            pass
+        except discord.HTTPException as e:
+            await DRONEPRINT(f"Failed to edit message on timeout: {e}")
 
     async def send(self, ch):
         self.message = await ch.send(view=self)

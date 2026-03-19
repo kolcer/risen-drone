@@ -257,7 +257,7 @@ async def on_message(message):
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles and len(lmsg) > 1:
         NEW_MEMBERS.remove(usr)
-        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `morph to [alignment]` in <#750060041289072771>.\nYou may also type `bd help` to view every input I can respond to."
+        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `/morph` in <#750060041289072771>.\nYou may also type `bd help` to view every input I can respond to."
 
         await SEND(ch, howToMorph)
 
