@@ -99,10 +99,9 @@ class MiscCog(commands.Cog):
                 BUTTONS["status"] = False
                 return
 
-
             for badword in self.bot.blacklist:
                 for answer in pollA:
-                    if (badword in answer.lower()):
+                    if (badword in answer.lower()) or (badword in pollQ.lower()):
                         await FOLLOWUP("Your poll contains inappropriate content.", interaction, True)
                         # await SEND(ch, "Your poll contains inappropriate content.")
                         BUTTONS["status"] = False
