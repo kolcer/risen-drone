@@ -10,12 +10,6 @@ from quiz import StartQuiz
 from ladders import PlayLucidLadders
 from views import Minigames_Hangman, Minigames_TicTacToe
 
-with open('hangman.txt') as input_file:
-    word_list = [line.strip() for line in input_file]
-
-with open('blacklist.txt') as input_file:
-    blacklist = [line.strip() for line in input_file]
-
 class MinigamesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -135,7 +129,7 @@ class MinigamesCog(commands.Cog):
                     BUTTONS["status"] = False
                     return
 
-                for badword in blacklist:
+                for badword in self.bot.blacklist:
                     if badword in target_word:
                         await FOLLOWUP("Your word is inappropriate.", interaction, True)
                         BUTTONS["status"] = False
@@ -144,9 +138,9 @@ class MinigamesCog(commands.Cog):
                 view.myword = target_word
                 view.picker = interaction.user
             else:
-                random_word = random.choice(word_list).lower()
+                random_word = random.choice(self.bot.word_list).lower()
                 while "q" in random_word:
-                    random_word = random.choice(word_list).lower()
+                    random_word = random.choice(self.bot.word_list).lower()
                 view.myword = random_word
 
             view.current = "".join([" " if i == " " else "-" for i in view.myword])

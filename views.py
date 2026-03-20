@@ -900,7 +900,14 @@ class ButtonGames_HelpBrokenDroneFinal(discord.ui.View):
             await self.on_closed()
 
 class ButtonGames_ThrowingStuff(discord.ui.View):
-    embed = None
+    def __init__(self, *, timeout=180):
+        super().__init__(timeout=timeout)
+        self.embed = None
+        self.users = []
+        self.custom = True
+        self.closed = False
+        self.results = ""
+        self.votes = {}
 
     async def on_timeout(self):
         self.results = ""

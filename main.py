@@ -41,7 +41,10 @@ client = commands.Bot(command_prefix='bd ', intents=intents)
 # word_list = words.words()
 
 with open('blacklist.txt') as input_file:
-    blacklist = [line.strip() for line in input_file]
+    client.blacklist = [line.strip() for line in input_file]
+
+with open('hangman.txt') as input_file:
+    client.word_list = [line.strip() for line in input_file]
 
 #print tips
 async def PRINT_ENTRIES(channel,key):
@@ -702,65 +705,65 @@ async def on_message(message):
         #     if lsplit[0] == "cast" and lsplit[2] == "rig":
         #         await CastRig(lsplit[1],ch,usr)
             
-        elif lmsg.startswith('create poll|') and not BUTTONS["status"]:
-            #example: create poll|what is better?|cola|fanta|sprite|pepsi
-            BUTTONS["status"] = True
-            splitPoll = msg.split('|')
-            pollA = []
+        # elif lmsg.startswith('create poll|') and not BUTTONS["status"]:
+        #     #example: create poll|what is better?|cola|fanta|sprite|pepsi
+        #     BUTTONS["status"] = True
+        #     splitPoll = msg.split('|')
+        #     pollA = []
 
-            if len(splitPoll) < 4:
-                await SEND(ch, 'Incorrect amount of items sent to create a poll.')
-                BUTTONS["status"] = False
-                return
-            elif len(splitPoll) > 21:
-                await SEND(ch, 'Too many options.')
-                BUTTONS["status"] = False
-                return
+        #     if len(splitPoll) < 4:
+        #         await SEND(ch, 'Incorrect amount of items sent to create a poll.')
+        #         BUTTONS["status"] = False
+        #         return
+        #     elif len(splitPoll) > 21:
+        #         await SEND(ch, 'Too many options.')
+        #         BUTTONS["status"] = False
+        #         return
 
-            pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
-            # if not pollQ.endswith("?"):
-            #     pollQ += "?"
+        #     pollQ = splitPoll[1][0].upper() + splitPoll[1][1:]
+        #     # if not pollQ.endswith("?"):
+        #     #     pollQ += "?"
 
-            for i in range(2, len(splitPoll)):
-                pollA.append(splitPoll[i])
+        #     for i in range(2, len(splitPoll)):
+        #         pollA.append(splitPoll[i])
 
-            for badword in blacklist:
-                for answer in pollA:
-                    if (badword in answer.lower()):
-                        await SEND(ch, "Your poll contains inappropriate content.")
-                        BUTTONS["status"] = False
-                        return
+        #     for badword in blacklist:
+        #         for answer in pollA:
+        #             if (badword in answer.lower()):
+        #                 await SEND(ch, "Your poll contains inappropriate content.")
+        #                 BUTTONS["status"] = False
+        #                 return
 
-            view = ButtonGames_ThrowingStuff(timeout=600)
-            view.users = []
-            view.custom = True
-            view.customUser = usr
-            view.closed = False
+        #     view = ButtonGames_ThrowingStuff(timeout=600)
+        #     view.users = []
+        #     view.custom = True
+        #     view.customUser = usr
+        #     view.closed = False
 
-            view.results = ""
-            view.votes = {}
-            view.choices = pollA
+        #     view.results = ""
+        #     view.votes = {}
+        #     view.choices = pollA
 
-            for i in range(0, len(splitPoll) - 2):
-                view.votes[str(i)] = []
-                view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
+        #     for i in range(0, len(splitPoll) - 2):
+        #         view.votes[str(i)] = []
+        #         view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
-            view.add_item(discord.ui.Button(label="Close Poll", custom_id="throwclose", style=discord.ButtonStyle.red))
+        #     view.add_item(discord.ui.Button(label="Close Poll", custom_id="throwclose", style=discord.ButtonStyle.red))
 
-            BUTTONS["view"] = view
-            BUTTONS["channel"] = ch
+        #     BUTTONS["view"] = view
+        #     BUTTONS["channel"] = ch
 
-            try:
-                view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
-            except Exception as e:
-                BUTTONS["status"] = False
-                await SEND(BUTTONS["channel"], "Something went wrong!")
-                await DRONEPRINT(str(e))
-                return
+        #     try:
+        #         view.message = await SEND_VIEW(BUTTONS["channel"], pollQ, view)
+        #     except Exception as e:
+        #         BUTTONS["status"] = False
+        #         await SEND(BUTTONS["channel"], "Something went wrong!")
+        #         await DRONEPRINT(str(e))
+        #         return
 
-            await view.wait()
-            await view.too_late()
-            BUTTONS["status"] = False
+        #     await view.wait()
+        #     await view.too_late()
+        #     BUTTONS["status"] = False
 
         ## Give Mana command
         # elif lmsg.startswith("give mana to "):
