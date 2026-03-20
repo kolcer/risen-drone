@@ -112,7 +112,7 @@ class MiscCog(commands.Cog):
             view.choices = pollA
             view.customUser = usr
 
-            for i in range(0, len(active_options) - 2):
+            for i in range(0, len(active_options)):
                 view.votes[str(i)] = []
                 view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
