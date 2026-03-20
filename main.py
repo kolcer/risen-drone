@@ -16,6 +16,7 @@ from cogs.rig_cog import RigCog
 from cogs.minigames_cog import MinigamesCog
 from cogs.personal_cog import PersonalCog
 from cogs.roles_cog import RolesCog
+from cogs.misc_cog import MiscCog
 from globals import *
 from roles import *
 from ladders import *
@@ -138,6 +139,7 @@ async def on_ready():
         await client.add_cog(MinigamesCog(client))
         await client.add_cog(PersonalCog(client))
         await client.add_cog(RolesCog(client))
+        await client.add_cog(MiscCog(client))
     except Exception:
         pass
 
@@ -435,39 +437,39 @@ async def on_message(message):
                         
         message.content = lmsg
     
-    if lmsg == "reset bot" and usr not in FIX_BOT:
+    # if lmsg == "reset bot" and usr not in FIX_BOT:
 
-        FIX_BOT.append(usr)
-        if len(FIX_BOT) == 1 and not EXTRA_ROLES['admin'] in usr.roles:
-            await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
-        elif len(FIX_BOT) == 2 and not EXTRA_ROLES['admin'] in usr.roles:
-            await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
-        else:
-            await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
-            FIX_BOT.clear()
-            FORCE_CLOSE_EVENT()
-            MG_RESET()
-            FG_RESET()
+    #     FIX_BOT.append(usr)
+    #     if len(FIX_BOT) == 1 and not EXTRA_ROLES['admin'] in usr.roles:
+    #         await SEND(ch, "One User wants me to reset. 2 more people are required for it to take effect.")
+    #     elif len(FIX_BOT) == 2 and not EXTRA_ROLES['admin'] in usr.roles:
+    #         await SEND(ch, "Two Users want me to reset. 1 more person is required for it to take effect.")
+    #     else:
+    #         await SEND(ch, "All Games and Rigs (along with their Cooldowns) have been reset.")
+    #         FIX_BOT.clear()
+    #         FORCE_CLOSE_EVENT()
+    #         MG_RESET()
+    #         FG_RESET()
 
-            for rig in ACTIVE_RIGS:
-                ACTIVE_RIGS[rig] = False 
+    #         for rig in ACTIVE_RIGS:
+    #             ACTIVE_RIGS[rig] = False 
 
-            for rig in DETAILED_RIGS:
-                DETAILED_RIGS[rig][0] = None
-                DETAILED_RIGS[rig][1] = None
+    #         for rig in DETAILED_RIGS:
+    #             DETAILED_RIGS[rig][0] = None
+    #             DETAILED_RIGS[rig][1] = None
 
-            for cooldown in RIG_COOLDOWNS:
-                RIG_COOLDOWNS[cooldown] = False
+    #         for cooldown in RIG_COOLDOWNS:
+    #             RIG_COOLDOWNS[cooldown] = False
 
-            BUTTONS["status"] = False
-            BUTTONS["easterStatus"] = False
-            BUTTONS["easterStaffStatus"] = False
+    #         BUTTONS["status"] = False
+    #         BUTTONS["easterStatus"] = False
+    #         BUTTONS["easterStaffStatus"] = False
 
-        await asyncio.sleep(60)
-        if len(FIX_BOT) != 0:
-            await SEND(ch, "Games have not been reset due to lack of users asking to.")
-            FIX_BOT.clear()
-        return
+    #     await asyncio.sleep(60)
+    #     if len(FIX_BOT) != 0:
+    #         await SEND(ch, "Games have not been reset due to lack of users asking to.")
+    #         FIX_BOT.clear()
+    #     return
 
     #mini game in progress
     if LADDERS['status'] != "off" and usr in MG_QUEUE and ch == LADDERS['channel']:
