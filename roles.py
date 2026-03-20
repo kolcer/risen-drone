@@ -76,7 +76,7 @@ async def MorphTo(usr,role):
     if role.title() == "All":
         roles_to_add = [
             data[0] for name, data in MORPHABLE_ROLES.items() 
-            if name != "Janitor" and data[0] is not None and data[0] not in usr.roles
+            if name != "Janitor" and name != "Gun" and name != "Roingus" and data[0] is not None and data[0] not in usr.roles
         ]
         
         if roles_to_add:
@@ -118,8 +118,8 @@ async def MorphTo(usr,role):
 async def DemorphFrom(usr,role):
     if role.title() == "All":
         roles_to_remove = [
-            data[0] for data in MORPHABLE_ROLES.values() 
-            if data[0] is not None and data[0] in usr.roles
+            data[0] for name, data in MORPHABLE_ROLES.items() 
+            if name != "Janitor" and name != "Gun" and name != "Roingus" and data[0] is not None and data[0] in usr.roles
         ]
         
         if roles_to_remove:
