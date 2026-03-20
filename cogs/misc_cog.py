@@ -84,7 +84,7 @@ class MiscCog(commands.Cog):
         active_options = [opt for opt in all_options if opt is not None]
 
         if BUTTONS["status"]:
-            await FOLLOWUP("A poll is already active.", interaction, True)
+            await INTERACTION(interaction, "A poll is already active.", True)
             return
 
         await DEFER(interaction)
