@@ -24,7 +24,7 @@ class MiscCog(commands.Cog):
         ch = interaction.channel
 
         if usr in FIX_BOT:
-            await FOLLOWUP("Not again.", interaction, True)
+            await INTERACTION(interaction.response, "Not again.", True)
             return
         
         await DEFER(interaction)
