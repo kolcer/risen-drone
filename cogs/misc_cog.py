@@ -66,8 +66,6 @@ class MiscCog(commands.Cog):
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/reset`: {exc}", interaction)
             raise
-
-        @discord.app_commands.command(name="reset", description="Reset Broken Drone")
     
     @discord.app_commands.command(name="poll", description="Create a poll with buttons")
     async def poll(self, interaction: discord.Interaction, question: str, option1: str, option2: str, option3: str = None, option4: str = None, option5: str = None, option6: str = None, option7: str = None, option8: str = None, option9: str = None, option10: str = None, option11: str = None, option12: str = None, option13: str = None, option14: str = None, option15: str = None, option16: str = None, option17: str = None, option18: str = None, option19: str = None, option20: str = None):
