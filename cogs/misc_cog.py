@@ -2,18 +2,17 @@ import asyncio
 import secrets
 import string
 
-from database import delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
 import discord
 from discord import app_commands
 from discord.ext import commands
 
 from globals import CHANNELS, FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, getScoldDictionary, getPraiseDictionary
-from main import PRINT_ENTRIES
+from utility import print_entries
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
-from database import add_entry_with_check, add_entry
+from database import add_entry_with_check, add_entry, delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
 
 class MiscCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -323,7 +322,7 @@ class MiscCog(commands.Cog):
                
             await FOLLOWUP(f"Listing all " + type.title() + " for " + alignment.title() + ":", interaction, False)
             await asyncio.sleep(1)
-            await PRINT_ENTRIES(ch, key)
+            await print_entries(ch, key)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip_list`: {exc}", interaction)
             raise
@@ -358,7 +357,7 @@ class MiscCog(commands.Cog):
             delete_entry(key, int(position))
             await FOLLOWUP(f"Deleted " + type.title() + " number " + str(position) + " for " + alignment.title() + ".", interaction, False)
             await asyncio.sleep(1)
-            await PRINT_ENTRIES(ch, key)
+            await print_entries(ch, key)
             return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip_delete`: {exc}", interaction)

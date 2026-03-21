@@ -43,18 +43,6 @@ with open('blacklist.txt') as input_file:
 with open('hangman.txt') as input_file:
     client.word_list = [line.strip() for line in input_file]
 
-#print tips
-async def PRINT_ENTRIES(channel,key):
-    entries = list_entries(key)
-    combined_string = ""
-    for i in range(len(entries)):
-        new_string = combined_string + str(i) + ") " + entries[i].decode("utf-8") + "\n"
-        if len(new_string) > 2000:
-            await SEND(channel,combined_string)
-            combined_string = str(i) + ") " + entries[i].decode("utf-8") + "\n"
-        else:
-            combined_string = new_string
-    await SEND(channel,combined_string)
 
 #post tips
 async def POST_TIPS(channel,key):
@@ -1346,7 +1334,7 @@ async def on_message(message):
                
         #     #add tip   
         #     await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
-        #     await PRINT_ENTRIES(ch, key)
+        #     await print_entries(ch, key)
         #     return
         
         #delete tip for wiki editors
@@ -1385,7 +1373,7 @@ async def on_message(message):
         #     #delete tip   
         #     delete_entry(key,int(lmsgsplit[3]))
         #     await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
-        #     await PRINT_ENTRIES(ch, key)
+        #     await print_entries(ch, key)
         #     return
         
         # #sub command       
@@ -2169,14 +2157,14 @@ async def on_message(message):
             #list tips
             if msg.startswith("l",1):
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
-                await PRINT_ENTRIES(ch, key)
+                await print_entries(ch, key)
                 return
                 
             #delete tip
             if msg.startswith("d",1):
                 delete_entry(key,int(msgsplit[2]))
                 await SEND(ch,msgsplit[1] + " " + tot + "(s):")
-                await PRINT_ENTRIES(ch, key)
+                await print_entries(ch, key)
                 #hmmmm
                 return
             

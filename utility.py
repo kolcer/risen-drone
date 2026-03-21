@@ -109,3 +109,16 @@ def build_role_page(view, target, index):
         view.data[index + 1] = 'Empty...'
         view.footers[index] = "This person knows how to get the roles, what's the point?"
         view.footers[index + 1] = "Nothing to see here."
+
+#print tips
+async def print_entries(channel, key):
+    entries = list_entries(key)
+    combined_string = ""
+    for i in range(len(entries)):
+        new_string = combined_string + str(i) + ") " + entries[i].decode("utf-8") + "\n"
+        if len(new_string) > 2000:
+            await SEND(channel,combined_string)
+            combined_string = str(i) + ") " + entries[i].decode("utf-8") + "\n"
+        else:
+            combined_string = new_string
+    await SEND(channel, combined_string)
