@@ -1,5 +1,5 @@
 import asyncio
-from random import random
+import random
 import secrets
 import string
 
@@ -365,7 +365,7 @@ class MiscCog(commands.Cog):
             raise
 
     @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")
-    async def wisdom(self, interaction: discord.Interaction, alignment: str=None):
+    async def wisdom(self, interaction: discord.Interaction):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
