@@ -964,7 +964,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         await self.finalize_poll(reason)
 
     async def process_click(self, interaction, buttonId, usr):
-        if buttonId == "close":
+        if buttonId == "throwclose":
             if usr == self.customUser:
                 await interaction.response.defer()
                 await self.finalize_poll("Poll was closed manually by the creator.")
