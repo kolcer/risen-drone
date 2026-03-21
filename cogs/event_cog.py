@@ -34,7 +34,7 @@ class EventCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not EVENTS["Easter"]:
+            if not EVENTS["Easter"] and ch.id != 813882658156838923:
                 await FOLLOWUP(f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.", interaction)
                 return
 
@@ -144,7 +144,7 @@ class EventCog(commands.Cog):
         usr = interaction.user
         ch = interaction.channel
 
-        if not EVENTS["Easter"]:
+        if not EVENTS["Easter"] and ch.id != 813882658156838923:
             await INTERACTION(interaction, "I ate all the eggs, sorry not sorry.", True)
             return
 
