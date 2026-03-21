@@ -14,6 +14,7 @@ from cogs.minigames_cog import MinigamesCog
 from cogs.personal_cog import PersonalCog
 from cogs.roles_cog import RolesCog
 from cogs.misc_cog import MiscCog
+from cogs.event_cog import EventCog
 from globals import *
 from roles import *
 from ladders import *
@@ -128,6 +129,7 @@ async def on_ready():
         await client.add_cog(PersonalCog(client))
         await client.add_cog(RolesCog(client))
         await client.add_cog(MiscCog(client))
+        await client.add_cog(EventCog(client))
     except Exception:
         pass
 
