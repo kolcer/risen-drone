@@ -2,17 +2,18 @@ import asyncio
 import secrets
 import string
 
-from database import list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
+from database import delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, PRAISES, RIG_COOLDOWNS, BUTTONS, getScoldDictionary, getPraiseDictionary
+from globals import CHANNELS, FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, getScoldDictionary, getPraiseDictionary
+from main import PRINT_ENTRIES
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
-from database import add_entry_with_check
+from database import add_entry_with_check, add_entry
 
 class MiscCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -261,3 +262,104 @@ class MiscCog(commands.Cog):
         except:
             redis_remove_token(usr)
             await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
+
+    @discord.app_commands.command(name="tip_add", description="Add a tip to the database")
+    @discord.app_commands.choices(type=[
+        discord.app_commands.Choice(name="Tip", value="tip"),
+        discord.app_commands.Choice(name="Trivia", value="trivia"),
+    ])
+    @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
+    async def tip_add(self, interaction: discord.Interaction, type: str, alignment: str, content: str):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        key = alignment
+
+        await DEFER(interaction)
+
+        try:
+            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+                await FOLLOWUP("Only Janitors can add new Tips and Trivia.", interaction, True)
+                return
+        
+            #for trivia, key has extra "T" at the end
+            if type == "trivia":
+                key = alignment + "T"
+                
+            #add tip   
+            add_entry(key, content)
+            await FOLLOWUP(f"New " + type.title() + " for " + alignment.title() + " added.", interaction, False)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/tip_add`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="tip_list", description="List all tips and trivia")
+    @discord.app_commands.choices(type=[
+        discord.app_commands.Choice(name="Tip", value="tip"),
+        discord.app_commands.Choice(name="Trivia", value="trivia"),
+    ])
+    @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
+    async def tip_list(self, interaction: discord.Interaction, alignment: str, type: str):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        ch = interaction.channel
+        key = alignment
+
+        await DEFER(interaction)
+
+        try:
+            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+                await FOLLOWUP("Only Janitors can add new Tips and Trivia.", interaction, True)
+                return
+            
+            #for trivia, key has extra "T" at the end
+            if type == "trivia":
+                key = alignment + "T"
+               
+            await FOLLOWUP(f"Listing all " + type.title() + " for " + alignment.title() + ":", interaction, False)
+            await asyncio.sleep(1)
+            await PRINT_ENTRIES(ch, key)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/tip_list`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="tip_delete", description="Delete a tip or trivia")
+    @discord.app_commands.choices(type=[
+        discord.app_commands.Choice(name="Tip", value="tip"),
+        discord.app_commands.Choice(name="Trivia", value="trivia"),
+    ])
+    @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
+    async def tip_delete(self, interaction: discord.Interaction, alignment: str, type: str, position: int):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        ch = interaction.channel
+        key = alignment
+
+        await DEFER(interaction)
+
+        try:
+            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+                await FOLLOWUP("Only Janitors can add new Tips and Trivia.", interaction, True)
+                return
+          
+            #for trivia, key has extra "T" at the end
+            if type == "trivia":
+                key = alignment + "T"
+               
+            #delete tip   
+            delete_entry(key, int(position))
+            await FOLLOWUP(f"Deleted " + type.title() + " number " + str(position) + " for " + alignment.title() + ".", interaction, False)
+            await asyncio.sleep(1)
+            await PRINT_ENTRIES(ch, key)
+            return
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/tip_delete`: {exc}", interaction)
+            raise

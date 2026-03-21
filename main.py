@@ -1275,118 +1275,118 @@ async def on_message(message):
         #         await SEND(ch, "Just kidding.")
 
         #add tip for janitors
-        elif lmsg.startswith("new"):
+        # elif lmsg.startswith("new"):
 
-            lmsgsplit = lmsg.split(" ",3) 
-            #new hacker tip blah blah blah -> lmsgsplit[3] "blah blah blah" will not be separated
+        #     lmsgsplit = lmsg.split(" ",3) 
+        #     #new hacker tip blah blah blah -> lmsgsplit[3] "blah blah blah" will not be separated
 
-            if len(lmsgsplit) < 4:
-                return 
+        #     if len(lmsgsplit) < 4:
+        #         return 
   
-            if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
-                return #ignore, probably unrealted message that starst with "new" 
+        #     if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
+        #         return #ignore, probably unrealted message that starst with "new" 
             
-            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
-                await SEND(ch,"Only Janitors can add new tips and trivia.")
-                return
+        #     if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+        #         await SEND(ch,"Only Janitors can add new tips and trivia.")
+        #         return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
-                await SEND(ch, "This command can be only used in <#750060041289072771>!")
-                return
+        #     if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
+        #         await SEND(ch, "This command can be only used in <#750060041289072771>!")
+        #         return
             
-            key = lmsgsplit[1]
+        #     key = lmsgsplit[1]
           
-            if not key in TIPS_KEYS:
-                await SEND(ch,"Invalid argument.")
-                return
+        #     if not key in TIPS_KEYS:
+        #         await SEND(ch,"Invalid argument.")
+        #         return
         
-            if lmsgsplit[2] == "trivia":
-                key = key + "T"
-                #for trivia, key has extra "T" at the end
-            elif lmsgsplit[2] != "tip":
-                await SEND(ch,"Invalid alignment.")
-                return
+        #     if lmsgsplit[2] == "trivia":
+        #         key = key + "T"
+        #         #for trivia, key has extra "T" at the end
+        #     elif lmsgsplit[2] != "tip":
+        #         await SEND(ch,"Invalid alignment.")
+        #         return
                
-            #add tip   
-            add_entry(key,msg.split(" ",3)[3])
-            await SEND(ch,"New " +  lmsgsplit[1].upper() + " " + lmsgsplit[2] + " added.")
-            return
+        #     #add tip   
+        #     add_entry(key,msg.split(" ",3)[3])
+        #     await SEND(ch,"New " +  lmsgsplit[1].upper() + " " + lmsgsplit[2] + " added.")
+        #     return
 
         #list tips for janitors
-        elif lmsg.startswith("list"):
+        # elif lmsg.startswith("list"):
 
-            lmsgsplit = lmsg.split() 
+        #     lmsgsplit = lmsg.split() 
 
-            if len(lmsgsplit) < 3:
-                return
+        #     if len(lmsgsplit) < 3:
+        #         return
             
-            if lmsgsplit[2] != "tips" and lmsgsplit[2] != "trivia":
-                return #ignore, probably unrealted message that starst with "new" 
+        #     if lmsgsplit[2] != "tips" and lmsgsplit[2] != "trivia":
+        #         return #ignore, probably unrealted message that starst with "new" 
             
-            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
-                await SEND(ch,"Only Janitors can list full tips or trivia.")
-                return
+        #     if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
+        #         await SEND(ch,"Only Janitors can list full tips or trivia.")
+        #         return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
-                await SEND(ch, "This command can be only used in <#750060041289072771>!")
-                return
+        #     if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
+        #         await SEND(ch, "This command can be only used in <#750060041289072771>!")
+        #         return
             
-            key = lmsgsplit[1]
+        #     key = lmsgsplit[1]
           
-            if not key in TIPS_KEYS:
-                await SEND(ch,"Invalid argument.")
-                return
+        #     if not key in TIPS_KEYS:
+        #         await SEND(ch,"Invalid argument.")
+        #         return
         
-            if lmsgsplit[2] == "trivia":
-                key = key + "T"
-                #for trivia, key has extra "T" at the end
-            elif lmsgsplit[2] != "tips":
-                await SEND(ch,"Invalid alignment.")
-                return
+        #     if lmsgsplit[2] == "trivia":
+        #         key = key + "T"
+        #         #for trivia, key has extra "T" at the end
+        #     elif lmsgsplit[2] != "tips":
+        #         await SEND(ch,"Invalid alignment.")
+        #         return
                
-            #add tip   
-            await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
-            await PRINT_ENTRIES(ch, key)
-            return
+        #     #add tip   
+        #     await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
+        #     await PRINT_ENTRIES(ch, key)
+        #     return
         
         #delete tip for wiki editors
-        elif lmsg.startswith("delete"):
+        # elif lmsg.startswith("delete"):
             
-            lmsgsplit = lmsg.split(" ",3) 
-            #delete hacker tip 3 -> lmsgsplit[3] "3" will not be separated
+        #     lmsgsplit = lmsg.split(" ",3) 
+        #     #delete hacker tip 3 -> lmsgsplit[3] "3" will not be separated
 
-            if len(lmsgsplit) < 4:
-                return 
+        #     if len(lmsgsplit) < 4:
+        #         return 
   
-            if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
-                return #ignore, probably unrealted message that starst with "delete" 
+        #     if lmsgsplit[2] != "tip" and lmsgsplit[2] != "trivia":
+        #         return #ignore, probably unrealted message that starst with "delete" 
             
-            if not SPECIAL_ROLES["Wiki Editor"][0] in usr.roles:
-                await SEND(ch,"Only Wiki Editors can delete tips and trivia.")
-                return
+        #     if not SPECIAL_ROLES["Wiki Editor"][0] in usr.roles:
+        #         await SEND(ch,"Only Wiki Editors can delete tips and trivia.")
+        #         return
             
-            if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
-                await SEND(ch, "This command can be only used in <#750060041289072771>!")
-                return
+        #     if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
+        #         await SEND(ch, "This command can be only used in <#750060041289072771>!")
+        #         return
             
-            key = lmsgsplit[1]
+        #     key = lmsgsplit[1]
           
-            if not key in TIPS_KEYS:
-                await SEND(ch,"Invalid argument.")
-                return
+        #     if not key in TIPS_KEYS:
+        #         await SEND(ch,"Invalid argument.")
+        #         return
         
-            if lmsgsplit[2] == "trivia":
-                key = key + "T"
-                #for trivia, key has extra "T" at the end
-            elif lmsgsplit[2] != "tip":
-                await SEND(ch,"Invalid alignment.")
-                return
+        #     if lmsgsplit[2] == "trivia":
+        #         key = key + "T"
+        #         #for trivia, key has extra "T" at the end
+        #     elif lmsgsplit[2] != "tip":
+        #         await SEND(ch,"Invalid alignment.")
+        #         return
                
-            #delete tip   
-            delete_entry(key,int(lmsgsplit[3]))
-            await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
-            await PRINT_ENTRIES(ch, key)
-            return
+        #     #delete tip   
+        #     delete_entry(key,int(lmsgsplit[3]))
+        #     await SEND(ch,lmsgsplit[1].upper() + " " + lmsgsplit[2] + ":")
+        #     await PRINT_ENTRIES(ch, key)
+        #     return
         
         # #sub command       
         # elif lmsg.startswith("sub to"):
