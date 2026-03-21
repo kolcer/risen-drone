@@ -232,17 +232,17 @@ async def on_reaction_add(reaction, user):
 #
 #        await DELETE(after)
 
-@client.event
-async def on_interaction(interaction):
-    if isinstance(interaction, discord.Interaction):
-        if interaction.type == discord.InteractionType.component:
-            custom_id = interaction.data['custom_id']
-            user = interaction.user
+# @client.event
+# async def on_interaction(interaction):
+#     if isinstance(interaction, discord.Interaction):
+#         if interaction.type == discord.InteractionType.component:
+#             custom_id = interaction.data['custom_id']
+#             user = interaction.user
 
-            if custom_id.startswith('throw'):
-                custom_id = custom_id.replace('throw', '')
-                view = BUTTONS['view']
-                await view.process_click(interaction, custom_id, user)
+#             if custom_id.startswith('throw'):
+#                 custom_id = custom_id.replace('throw', '')
+#                 view = BUTTONS['view']
+#                 await view.process_click(interaction, custom_id, user)
 
 #main function on each message being intercepted
 @client.event
