@@ -124,12 +124,12 @@ async def SEND_DM(member, message):
     return await member.send(message)
 
 #send to interactiom, optional ephemeral 
-async def INTERACTION(interaction, content: str, secret: bool):
+async def INTERACTION(interaction, content: str, secret: bool=False):
     if content == None or content == "":
         #cannot send empty message
         return
     
-    return await interaction.send_message(content, ephemeral = secret)
+    return await interaction.response.send_message(content, ephemeral = secret)
 
 async def EDIT_INTERACTION(interaction, content: str, view=None, embed=None):
     if content == None or content == "":

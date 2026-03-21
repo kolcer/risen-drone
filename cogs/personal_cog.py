@@ -25,7 +25,7 @@ class PersonalCog(commands.Cog):
     )
     async def show(self, interaction: discord.Interaction, type: str, target: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
         newType = type

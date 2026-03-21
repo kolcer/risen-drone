@@ -96,13 +96,13 @@ class ShowProfile(discord.ui.View):
 
     async def check_requester(self, interaction):
             if interaction.user != self.requester:
-                await INTERACTION(interaction.response, "Keep your hands to yourself.", True)
+                await INTERACTION(interaction, "Keep your hands to yourself.", True)
                 return
 
     @discord.ui.button(label="|<", style=discord.ButtonStyle.green)
     async def first_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp = 0
 
         await self.update_message()
@@ -110,21 +110,21 @@ class ShowProfile(discord.ui.View):
     @discord.ui.button(label="<", style=discord.ButtonStyle.primary)
     async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp -= 1
         await self.update_message()
 
     @discord.ui.button(label=">", style=discord.ButtonStyle.primary)
     async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp += 1
         await self.update_message()
 
     @discord.ui.button(label=">|", style=discord.ButtonStyle.green)
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp = 6
         await self.update_message()
 
@@ -197,20 +197,20 @@ class ShowEggs(discord.ui.View):
 
     async def check_requester(self, interaction):
         if interaction.user != self.requester:
-            await INTERACTION(interaction.response, "You wish these eggs were yours.", True)
+            await INTERACTION(interaction, "You wish these eggs were yours.", True)
             return
 
     @discord.ui.button(label="<", style=discord.ButtonStyle.primary)
     async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp -= 1
         await self.update_message()
 
     @discord.ui.button(label=">", style=discord.ButtonStyle.primary)
     async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp += 1
         await self.update_message()
 
@@ -437,12 +437,12 @@ Delete: Deletes the specified quiz question by index.
 
     async def check_requester(self, interaction, button):
             if interaction.user != self.requester:
-                await INTERACTION(interaction.response, "You did not ask for help, did you?", True)
+                await INTERACTION(interaction, "You did not ask for help, did you?", True)
                 return
             
             if button.custom_id == 'admin':
                 if not EXTRA_ROLES['admin'] in interaction.user.roles:
-                    await INTERACTION(interaction.response, "You somehow clicked the button, however, its content is far from your reach.", True)
+                    await INTERACTION(interaction, "You somehow clicked the button, however, its content is far from your reach.", True)
                     return
                 
     async def check_channel(self):
@@ -459,7 +459,7 @@ Delete: Deletes the specified quiz question by index.
     @discord.ui.button(label="|<", custom_id='0', style=discord.ButtonStyle.green)
     async def first_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp = 0
 
         await self.update_message()
@@ -467,21 +467,21 @@ Delete: Deletes the specified quiz question by index.
     @discord.ui.button(label="<", custom_id='1', style=discord.ButtonStyle.primary)
     async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp -= 1
         await self.update_message()
 
     @discord.ui.button(label=">", custom_id='2', style=discord.ButtonStyle.primary)
     async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp += 1
         await self.update_message()
 
     @discord.ui.button(label=">|", custom_id='3', style=discord.ButtonStyle.green)
     async def last_page_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp = 2
         await self.update_message()
 
@@ -489,7 +489,7 @@ Delete: Deletes the specified quiz question by index.
     async def admin_button(self, interaction:discord.Interaction, button: discord.ui.Button):
         await self.check_requester(interaction, button)
         await self.check_channel()
-        await interaction.response.defer()
+        await DEFER(interaction)
         self.cp = 3
         await self.update_message()
 
@@ -514,11 +514,11 @@ class SplicerView(discord.ui.View):
         if usr == SPLICER_RIG["user"] and SPLICER_RIG["active"]:
             disableSplicer()
             
-            await INTERACTION(interaction.response, "Splice request declined. That's too bad.", False)
+            await INTERACTION(interaction, "Splice request declined. That's too bad.", False)
             self.toolate = False
             self.stop()
         else:
-            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
+            await INTERACTION(interaction, "Do not force your opinion on others.", True)
 
     @discord.ui.button(label="Accept your fate", custom_id = "SpliceNameYes", style = discord.ButtonStyle.green)
     async def accepted(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -530,11 +530,11 @@ class SplicerView(discord.ui.View):
 
             disableSplicer()
 
-            await INTERACTION(interaction.response, "Splice request accepted. Enjoy your new display names.", False)
+            await INTERACTION(interaction, "Splice request accepted. Enjoy your new display names.", False)
             self.toolate = False
             self.stop()
         else:
-            await INTERACTION(interaction.response, "Do not force your opinion on others.", True)
+            await INTERACTION(interaction, "Do not force your opinion on others.", True)
 
 class ButtonGames_FakeInteractionFailed(discord.ui.View):
 
@@ -587,7 +587,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 2:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][0], True)
+            await INTERACTION(interaction, self.FAKE_FAIL[self.lineOfQuestioning][0], True)
 
         elif self.users[usr] == 3:
             self.users[usr] = self.users[usr]
@@ -596,13 +596,13 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
             self.users[usr] = self.users[usr]
 
         elif self.users[usr] == 5:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][1], True)
+            await INTERACTION(interaction, self.FAKE_FAIL[self.lineOfQuestioning][1], True)
 
         elif self.users[usr] == 6:
-            await INTERACTION(interaction.response, self.FAKE_FAIL[self.lineOfQuestioning][2], True)
+            await INTERACTION(interaction, self.FAKE_FAIL[self.lineOfQuestioning][2], True)
 
         elif self.users[usr] == 7:
-            await INTERACTION(interaction.response, f"{usr.mention} has successfully clicked this button.", False)
+            await INTERACTION(interaction, f"{usr.mention} has successfully clicked this button.", False)
             self.toolate = False
 
             # if not str(usr.id) in list_decoded_entries("Persistent Clicker"): 3 roles for 3 games are enough. next ones will not grant roles either.
@@ -626,7 +626,7 @@ class ButtonGames_SoManyButtons(discord.ui.View):
 
     async def process_click(self, interaction, button, usr):
         if button.custom_id == self.correct_button:
-            await INTERACTION(interaction.response, f"{usr.mention} clicked the correct button.", False)
+            await INTERACTION(interaction, f"{usr.mention} clicked the correct button.", False)
             button.style = discord.ButtonStyle.green
             self.toolate = False
             if not str(usr.id) in list_decoded_entries("Lucky Button"):
@@ -644,7 +644,7 @@ class ButtonGames_SoManyButtons(discord.ui.View):
 
             self.pressed += 1
             await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
-            await interaction.response.defer()
+            await DEFER(interaction)
 
     @discord.ui.button(label="Button", custom_id = "1",  style = discord.ButtonStyle.blurple)
     async def B1(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -813,16 +813,16 @@ class ButtonGames_HelpBrokenDrone(discord.ui.View):
 
     async def process_click(self, interaction, button, usr):
         if usr in self.users:
-            await INTERACTION(interaction.response, "I need someone else now.", True)
+            await INTERACTION(interaction, "I need someone else now.", True)
             return
         elif str(usr.id) in self.roleowners:
-            await INTERACTION(interaction.response, "You have been helpful to me in the past, but I don't require your assistance at the moment.", True)
+            await INTERACTION(interaction, "You have been helpful to me in the past, but I don't require your assistance at the moment.", True)
             return
 
         self.users.append(usr)
         self.step += 1
         if self.step < 4:
-            await interaction.response.defer()
+            await DEFER(interaction)
             button.label = f"{usr.name}"
             button.style = discord.ButtonStyle.green
             button.disabled = True
@@ -886,14 +886,14 @@ class ButtonGames_HelpBrokenDroneFinal(discord.ui.View):
         usr = interaction.user
 
         if usr not in self.users:
-            await INTERACTION(interaction.response, "You did not help.", True)
+            await INTERACTION(interaction, "You did not help.", True)
             return
         elif usr in self.clicked:
-            await INTERACTION(interaction.response, "I do not have any more buttons for you.", True)
+            await INTERACTION(interaction, "I do not have any more buttons for you.", True)
             return
         
         self.clicked.append(usr)
-        await INTERACTION(interaction.response, "Here, take this button.", True)
+        await INTERACTION(interaction, "Here, take this button.", True)
         await add_entry_with_check("Broken Drone Helper", usr)
 
         if len(self.clicked) == len(self.users):
@@ -948,32 +948,30 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             item.disabled = True
 
         await EDIT_MESSAGE(self.message, f"{self.message.content}\n{reason_text}", embed=self.create_embed(), view=self)
+
+        if len(self.users) < 1:
+            quantityCheck = "No participation whatsoever."
+        elif len(self.users) == 1:
+            quantityCheck = "You spoke for everyone else."
+        else:
+            quantityCheck = "Very interesting choices."
+
+        await REPLY(self.message, quantityCheck)
         
         BUTTONS["status"] = False
         self.stop()
 
-    async def on_timeout(self):
-        # Determine the flavor text based on participation
-        if len(self.users) < 1:
-            reason = "No participation whatsoever."
-        elif len(self.users) == 1:
-            reason = "You spoke for everyone else."
-        else:
-            reason = "Very interesting choices."
-        
-        await self.finalize_poll(reason)
-
     async def process_click(self, interaction, buttonId, usr):
         if buttonId == "throwclose":
             if usr == self.customUser:
-                await interaction.response.defer()
+                await DEFER(interaction)
                 await self.finalize_poll("Poll was closed manually by the creator.")
             else:
-                await INTERACTION(interaction.response, "Only the creator can close this.", True)
+                await INTERACTION(interaction, "Only the creator can close this.", True)
             return
 
         if usr in self.users:
-            await INTERACTION(interaction.response, "One vote only.", True)
+            await INTERACTION(interaction, "One vote only.", True)
             return
         
         self.users.append(usr)
@@ -987,7 +985,7 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         
         self.results = live_results
         await self.update_message()
-        await interaction.response.defer()
+        await DEFER(interaction)
 
     # async def createButtons(self):
     #     @discord.ui.button(label=self.choice1, custom_id = "0", style = discord.ButtonStyle.secondary)
@@ -1065,7 +1063,7 @@ class Minigames_Hangman(discord.ui.View):
             for plr in self.players.keys():
                 self.results += f"`{plr.display_name}`: {len(self.players[plr])}\n"
 
-            await INTERACTION(interaction.response, f"Sleazel was saved, but who contributed the most?: {', '.join(best_users)}\n\n{self.results}", False)
+            await INTERACTION(interaction, f"Sleazel was saved, but who contributed the most?: {', '.join(best_users)}\n\n{self.results}", False)
 
             if len(self.myword) >= 5 and self.lifes == 5 and self.alone:
                 # for usrId in best_users_ids:
@@ -1078,7 +1076,7 @@ class Minigames_Hangman(discord.ui.View):
             self.toolate = False
             self.stop()
         else:
-            await interaction.response.defer()
+            await DEFER(interaction)
 
     async def update_mistake(self, interaction, button):
         self.status = "<:csSleazel:786328102392954921>"
@@ -1099,7 +1097,7 @@ class Minigames_Hangman(discord.ui.View):
         await EDIT_VIEW_MESSAGE(self.message, f"How reckless.\n\n`{self.current}`\n\n{self.status}\n\n**Wrong letters used so far:** `{self.wrong}`\n\n**Last move:** {self.cp.mention} guessed `{self.cl}`\n\n{('**Custom Hangman created by:** ' + self.picker.mention) if self.picker else ''}", self) 
 
         if self.lifes <= 0:
-            await INTERACTION(interaction.response, f"{interaction.user.mention} used up their last chance. The correct word was: `{self.myword}`", False)
+            await INTERACTION(interaction, f"{interaction.user.mention} used up their last chance. The correct word was: `{self.myword}`", False)
 
             if EVENTS["Easter"]:
                 view = ButtonEgg_Throw(timeout=30)
@@ -1119,30 +1117,30 @@ class Minigames_Hangman(discord.ui.View):
             self.toolate = False
             self.stop()
         else:
-            await interaction.response.defer()
+            await DEFER(interaction)
 
     async def process_click(self, interaction, button, usr):
         if self.disabled:
-            await INTERACTION(interaction.response, "Too many people are interacting.", True)
+            await INTERACTION(interaction, "Too many people are interacting.", True)
             return
         
         if self.duelists and usr not in self.duelists:
-            await INTERACTION(interaction.response, "This game is private.", True)
+            await INTERACTION(interaction, "This game is private.", True)
             return
 
         self.disabled = True
         if self.alone:
             if usr != self.cp:
-                await INTERACTION(interaction.response, "This user is playing solo.", True)
+                await INTERACTION(interaction, "This user is playing solo.", True)
                 self.disabled = False
                 return
         else:
             if usr == self.cp:
-                await INTERACTION(interaction.response, "It's someone else's turn now.", True)
+                await INTERACTION(interaction, "It's someone else's turn now.", True)
                 self.disabled = False
                 return
             elif self.picker != None and usr == self.picker:
-                await INTERACTION(interaction.response, "You do not deserve this victory.", True)
+                await INTERACTION(interaction, "You do not deserve this victory.", True)
                 self.disabled = False
                 return
             else:
@@ -1411,26 +1409,26 @@ class Minigames_TicTacToe(discord.ui.View):
             (self.board[0][2] == self.board[1][1] == self.board[2][0] == self.assignments[interaction.user])
         ):
             # await EDIT_VIEW_MESSAGE(self.message, 'Nicely done.', self)
-            await INTERACTION(interaction.response, f"{interaction.user.mention} won the match.", False)
+            await INTERACTION(interaction, f"{interaction.user.mention} won the match.", False)
             self.toolate = False
             self.stop()
         elif (self.turns == 9):
-            await INTERACTION(interaction.response, f"A draw! Lame.", False)
+            await INTERACTION(interaction, f"A draw! Lame.", False)
             await asyncio.sleep(1)
             await SEND(CHANNELS["bot-commands"], "We'll settle this next time.")
             self.toolate = False
             self.stop()
         else:
-            await interaction.response.defer()
+            await DEFER(interaction)
 
     async def process_click(self, interaction, button, usr):
         if self.duelists and usr not in self.duelists:
-            await INTERACTION(interaction.response, "This game is private.", True)
+            await INTERACTION(interaction, "This game is private.", True)
             return
 
         if usr not in self.players:
             if len(self.players) == 2:
-                await INTERACTION(interaction.response, "You are too late :bangbang:", True)
+                await INTERACTION(interaction, "You are too late :bangbang:", True)
                 return
             else:
                 if len(self.players) == 0:
@@ -1441,7 +1439,7 @@ class Minigames_TicTacToe(discord.ui.View):
                 self.players.append(usr)
         
         if usr == self.lastplayer:
-            await INTERACTION(interaction.response, "You have already played this turn :interrobang:", True)
+            await INTERACTION(interaction, "You have already played this turn :interrobang:", True)
             return
 
         self.lastplayer = usr
@@ -1519,7 +1517,7 @@ class Minigames_TicTacToe(discord.ui.View):
 
 #     @discord.ui.button(label="🍔", style = discord.ButtonStyle.blurple)
 #     async def pressed(self, interaction: discord.Interaction, button: discord.ui.Button):
-#         await INTERACTION(interaction.response, "🍔", True)
+#         await INTERACTION(interaction, "🍔", True)
 
 # class CastAgain(discord.ui.View):
 #     async def on_timeout(self):
@@ -1543,7 +1541,7 @@ class Minigames_TicTacToe(discord.ui.View):
 #             await Rig(RIG_DATA["rigType"], RIG_DATA["rigChannel"], RIG_DATA["rigCaster"])
 #             self.stop()
 #         else:
-#             await INTERACTION(interaction.response, "You did not cast this rig.", True)
+#             await INTERACTION(interaction, "You did not cast this rig.", True)
 
 class ButtonGames_ButtonFight(discord.ui.View):
     async def on_timeout(self):
@@ -1590,7 +1588,7 @@ class ButtonGames_ButtonFight(discord.ui.View):
         if usr == self.winning:
             currMsg = BUTTONS["phase3again"][self.step].format(mention = usr.name, time = round(time.time() + self.tm))
             await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
-            await interaction.response.defer()
+            await DEFER(interaction)
         else:
             button.label = f"{usr.name} button"
             button.style = discord.ButtonStyle.green
@@ -1599,7 +1597,7 @@ class ButtonGames_ButtonFight(discord.ui.View):
             currMsg = BUTTONS["phase3new"][self.step].format(mention = usr.name, time = round(time.time() + self.tm))
             
             await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
-            await interaction.response.defer()
+            await DEFER(interaction)
 
         await asyncio.sleep(2)
         if (BUTTONS["status"]):
@@ -1653,16 +1651,16 @@ class ButtonEgg_Throw(discord.ui.View):
                 await add_egg_with_check(f"{self.type} Egg", usr)
                 if self.type == "Mega Secret":
                     MEGA_SECRET_LAUNCHER["user"] = usr.id
-                await INTERACTION(interaction.response, f"{usr.mention} got the {self.type} egg!", False) 
+                await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
             else:
-                await INTERACTION(interaction.response, "This egg... rejects you.", True)
+                await INTERACTION(interaction, "This egg... rejects you.", True)
                 self.disabled = False
                 return
 
             self.toolate = False
             self.stop()
         else:
-            await INTERACTION(interaction.response, "No can do.", True)
+            await INTERACTION(interaction, "No can do.", True)
             return
         
 class ButtonEgg_Eggcelent(discord.ui.View):
@@ -1691,18 +1689,18 @@ class ButtonEgg_Eggcelent(discord.ui.View):
                 if usr.id in EGGCELENT_USERS.keys():
                     listOfEggs = ", ".join(f"{egg} Egg" for egg in EGGCELENT_USERS[usr.id])
 
-                    await INTERACTION(interaction.response, f"{usr.mention}... helped me with the {listOfEggs}. Most eggcelent.", False)
+                    await INTERACTION(interaction, f"{usr.mention}... helped me with the {listOfEggs}. Most eggcelent.", False)
                 else:
-                    await INTERACTION(interaction.response, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
+                    await INTERACTION(interaction, f"{usr.mention}... wasn't especially helpful, but I'll make an eggception.", False)
                 
                 await asyncio.sleep(5)
             else:
-                await INTERACTION(interaction.response, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
+                await INTERACTION(interaction, "Taking the same egg twice is a bit eggxtreme, don't you think?", True)
             
             self.cantUse = False
             
         else:
-            await INTERACTION(interaction.response, "Give me the time to prepare another egg, smh.", True)
+            await INTERACTION(interaction, "Give me the time to prepare another egg, smh.", True)
 
 class Quiz(discord.ui.View):
     def __init__(self, *, timeout=30):
@@ -1728,27 +1726,27 @@ class Quiz(discord.ui.View):
     @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple)
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
         if self.duelists and interaction.user not in self.duelists:
-            await INTERACTION(interaction.response, "This game is private.", True)
+            await INTERACTION(interaction, "This game is private.", True)
             return
 
         if self.joining_lock:
-            await INTERACTION(interaction.response, "Someone is already joining, you were just a little late.", True)
+            await INTERACTION(interaction, "Someone is already joining, you were just a little late.", True)
             return
 
         if self.joined_user is not None:
-            await INTERACTION(interaction.response, "The slots are full.", True)
+            await INTERACTION(interaction, "The slots are full.", True)
             return
 
         if not QUIZ.get("active") or not QUIZ.get("second-player"):
-            await INTERACTION(interaction.response, "The quiz is inactive.", True)
+            await INTERACTION(interaction, "The quiz is inactive.", True)
             return
 
         if interaction.user == self.started_user:
-            await INTERACTION(interaction.response, "Boring.", True)
+            await INTERACTION(interaction, "Boring.", True)
             return
 
         if interaction.user in QUIZZERS:
-            await INTERACTION(interaction.response, "You are already in the quiz.", True)
+            await INTERACTION(interaction, "You are already in the quiz.", True)
             return
 
         self.joining_lock = True
@@ -1763,7 +1761,7 @@ class Quiz(discord.ui.View):
             await JoinQuiz(interaction.user, interaction.channel, interaction)
 
         except Exception as exc:
-            await INTERACTION(interaction.response, f"Could not join quiz: {exc}", True)
+            await INTERACTION(interaction, f"Could not join quiz: {exc}", True)
             self.joined_user = None
             self.children[0].disabled = False
             raise
@@ -1792,28 +1790,28 @@ class LucidLadders(discord.ui.View):
     @discord.ui.button(label="Join", style=discord.ButtonStyle.blurple) 
     async def join(self, interaction: discord.Interaction, button: discord.ui.Button):
         if self.duelists and interaction.user not in self.duelists:
-            await INTERACTION(interaction.response, "This game is private.", True)
+            await INTERACTION(interaction, "This game is private.", True)
             return
 
         if interaction.user in MG_PLAYERS:
-            await INTERACTION(interaction.response, "You have already joined Lucid Ladders!", True)
+            await INTERACTION(interaction, "You have already joined Lucid Ladders!", True)
             return
         
-        await interaction.response.defer()
+        await DEFER(interaction)
         try:
             from ladders import JoinLucidLadders
             await JoinLucidLadders(interaction.user, interaction)
         except Exception as exc:
-            await INTERACTION(interaction.response, f"Could not join Lucid Ladders: {exc}", True)
+            await INTERACTION(interaction, f"Could not join Lucid Ladders: {exc}", True)
             raise
 
     @discord.ui.button(label="Begin", style=discord.ButtonStyle.green)
     async def begin(self, interaction: discord.Interaction, button: discord.ui.Button):
         if LADDERS['status'] == "gather" and interaction.user != self.started_user:
-            await INTERACTION(interaction.response, "You must have started the game with at least 2 partecipants.", True)
+            await INTERACTION(interaction, "You must have started the game with at least 2 partecipants.", True)
             return
         
-        await interaction.response.defer()
+        await DEFER(interaction)
         try:
             self.children[0].label = "Closed"
             self.children[1].label = "Started"
@@ -1826,7 +1824,7 @@ class LucidLadders(discord.ui.View):
             await asyncio.sleep(1)
             await LucidLaddersProcessMessage(interaction.user, "begin")
         except Exception as exc:
-            await INTERACTION(interaction.response, f"Could not start Lucid Ladders: {exc}", True)
+            await INTERACTION(interaction, f"Could not start Lucid Ladders: {exc}", True)
             raise
             
 

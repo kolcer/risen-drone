@@ -19,14 +19,14 @@ class MiscCog(commands.Cog):
     @discord.app_commands.command(name="reset", description="Reset Broken Drone")
     async def reset(self, interaction: discord.Interaction):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         usr = interaction.user
         ch = interaction.channel
 
         if usr in FIX_BOT:
-            await INTERACTION(interaction.response, "Not again.", True)
+            await INTERACTION(interaction, "Not again.", True)
             return
         
         await DEFER(interaction)
@@ -72,7 +72,7 @@ class MiscCog(commands.Cog):
     @discord.app_commands.command(name="poll", description="Create a poll with buttons")
     async def poll(self, interaction: discord.Interaction, question: str, option1: str, option2: str, option3: str = None, option4: str = None, option5: str = None, option6: str = None, option7: str = None, option8: str = None, option9: str = None, option10: str = None, option11: str = None, option12: str = None, option13: str = None, option14: str = None, option15: str = None, option16: str = None, option17: str = None, option18: str = None, option19: str = None, option20: str = None):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         usr = interaction.user
@@ -86,7 +86,7 @@ class MiscCog(commands.Cog):
         active_options = [opt for opt in all_options if opt is not None]
 
         if BUTTONS["status"]:
-            await INTERACTION(interaction.response, "A poll is already active.", True)
+            await INTERACTION(interaction, "A poll is already active.", True)
             return
 
         await DEFER(interaction)
@@ -125,7 +125,7 @@ class MiscCog(commands.Cog):
                 async def callback_wrapper(interaction, button_index=str(i)):
                     await view.process_click(interaction, button_index, usr)
                 btn.callback = callback_wrapper
-                
+
                 view.add_item(btn)
 
             close_btn = discord.ui.Button(label="Close Poll", style=discord.ButtonStyle.red)
@@ -149,7 +149,7 @@ class MiscCog(commands.Cog):
     @discord.app_commands.command(name="scold", description="Scold someone")
     async def scold(self, interaction: discord.Interaction, target: discord.Member):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         usr = interaction.user
@@ -168,16 +168,16 @@ class MiscCog(commands.Cog):
             else:
                 finalmsg = target.display_name + ", I am very disappointed in you."
 
-            await INTERACTION(interaction.response, finalmsg)
+            await INTERACTION(interaction, finalmsg)
             return
         except Exception as exc:
-            await INTERACTION(interaction.response, f"Something went wrong with `/scold`: {exc}")
+            await INTERACTION(interaction, f"Something went wrong with `/scold`: {exc}")
             raise
 
     @discord.app_commands.command(name="praise", description="Praise someone")
     async def praise(self, interaction: discord.Interaction, target: discord.Member):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         usr = interaction.user
@@ -212,8 +212,8 @@ class MiscCog(commands.Cog):
                 else:
                     finalmsg = f"Well done, {target.display_name}. Most excellent."
                     
-            await INTERACTION(interaction.response, finalmsg)
+            await INTERACTION(interaction, finalmsg)
             return
         except Exception as exc:
-            await INTERACTION(interaction.response, f"Something went wrong with `/praise`: {exc}")
+            await INTERACTION(interaction, f"Something went wrong with `/praise`: {exc}")
             raise

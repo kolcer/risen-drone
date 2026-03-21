@@ -19,7 +19,7 @@ class RigCog(commands.Cog):
     @discord.app_commands.choices(rig=sorted_choices)
     async def cast(self, interaction: discord.Interaction, rig: str):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
         rigLower = rig.strip().lower()

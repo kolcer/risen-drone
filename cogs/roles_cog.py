@@ -32,7 +32,7 @@ class RolesCog(commands.Cog):
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def sub(self, interaction: discord.Interaction, role: str):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         role_name = role.title()
@@ -52,7 +52,7 @@ class RolesCog(commands.Cog):
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def unsub(self, interaction: discord.Interaction, role: str):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         role_name = role.title()
@@ -72,7 +72,7 @@ class RolesCog(commands.Cog):
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def morph(self, interaction: discord.Interaction, role: str):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         await DEFER(interaction)
@@ -112,7 +112,7 @@ class RolesCog(commands.Cog):
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def demorph(self, interaction: discord.Interaction, role: str):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
         await DEFER(interaction)
@@ -161,6 +161,6 @@ class RolesCog(commands.Cog):
     async def role_error_handler(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
         if isinstance(error, app_commands.CommandOnCooldown):
             seconds = round(error.retry_after, 1)
-            await INTERACTION(interaction.response.response, f"Chill. You can use this command again in **{seconds}s**.", True)
+            await INTERACTION(interaction.response, f"Chill. You can use this command again in **{seconds}s**.", True)
         else:
             raise error

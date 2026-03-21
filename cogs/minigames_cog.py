@@ -26,7 +26,7 @@ class MinigamesCog(commands.Cog):
     )
     async def start_game(self, interaction: discord.Interaction, game: str, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
         
         newGame = game
@@ -84,7 +84,7 @@ class MinigamesCog(commands.Cog):
     )
     async def hangman(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction.response, "Use this command in the server!", True)
+            await INTERACTION(interaction, "Use this command in the server!", True)
             return
 
         duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None

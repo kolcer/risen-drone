@@ -31,7 +31,7 @@ from discord.ext import commands
 #             await Rig(self.type, self.channel, self.caster)
 #             self.stop()
 #         else:
-#             await INTERACTION(interaction.response, "You did not cast this rig.", True)
+#             await INTERACTION(interaction, "You did not cast this rig.", True)
 
 # ---END VIEWS---
 
