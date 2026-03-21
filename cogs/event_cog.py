@@ -8,7 +8,6 @@ from globals import EDIBLE_EGGS, EGG_EATER, EVENTS, EXTRA_ROLES, MAX_EGGS, MEGA_
 from rated import ADD_ROLES, DEFER, FOLLOWUP, INTERACTION, REMOVE_ROLES, SEND
 from database import check_full_egg_conditions, check_perfect_egg_conditions, delete_entry_by_value, list_decoded_entries
 from utility import launch_egg
-from views import ButtonEgg_Throw
 
 class EventCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -38,6 +37,7 @@ class EventCog(commands.Cog):
                 await FOLLOWUP(f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.", interaction)
                 return
 
+            from views import ButtonEgg_Throw
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = usr.id
             view.disabled = False
