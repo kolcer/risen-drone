@@ -1,4 +1,5 @@
 import asyncio
+from random import random
 import secrets
 import string
 
@@ -6,7 +7,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import CHANNELS, FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, getScoldDictionary, getPraiseDictionary
+from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, WISDOM, getScoldDictionary, getPraiseDictionary
 from utility import print_entries
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
@@ -268,7 +269,7 @@ class MiscCog(commands.Cog):
         discord.app_commands.Choice(name="Trivia", value="trivia"),
     ])
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
-    async def tip_add(self, interaction: discord.Interaction, type: str, alignment: str, content: str):
+    async def tip_add(self, interaction: discord.Interaction, alignment: str, type: str, content: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
@@ -361,4 +362,31 @@ class MiscCog(commands.Cog):
             return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip_delete`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")
+    async def wisdom(self, interaction: discord.Interaction, alignment: str=None):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        ch = interaction.channel
+
+        await DEFER(interaction)
+
+        try:
+            if random.randint(1, 100) > 1:
+                await SEND(ch, f"||*{random.choice(WISDOM)}*||")
+                return
+            else:
+                if not str(usr.id) in list_decoded_entries("Wise"):
+                    await add_entry_with_check("Wise", usr)
+                    await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
+                    await asyncio.sleep(2)
+                else:
+                    await SEND(ch, f"||***Wise choice.***||")
+                return
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/wisdom`: {exc}", interaction)
             raise

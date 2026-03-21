@@ -51,6 +51,24 @@ class PersonalCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/show {newType}`: {exc}", interaction)
             raise
 
+    @discord.app_commands.command(name="help", description="Get Help")
+    async def help(self, interaction: discord.Interaction):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            view = ShowCommands(timeout=500)
+            view.requester = interaction.user
+            view.channel = interaction.channel
+            view.message = await FOLLOWUP(None, interaction, False, view)
+            await view.update_message()
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/help`: {exc}", interaction)
+            raise
+
     async def _show_profile(self, interaction, target):
         view = ShowProfile(timeout=500)
         view.target = target
@@ -123,13 +141,6 @@ class PersonalCog(commands.Cog):
         view.footers[1] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
 
         # Send view... hopefully
-        view.message = await FOLLOWUP(None, interaction, False, view)
-        await view.update_message()
-
-    async def _show_help(self, interaction):
-        view = ShowCommands(timeout=500)
-        view.requester = interaction.user
-        view.channel = interaction.channel
         view.message = await FOLLOWUP(None, interaction, False, view)
         await view.update_message()
 

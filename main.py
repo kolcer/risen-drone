@@ -1395,18 +1395,18 @@ async def on_message(message):
         #     await view.wait()
         
         # Get the drone's wisdom
-        elif lmsg.startswith("drone of wisdom"):
-            if random.randint(1, 100) > 1:
-                await SEND(ch, f"||*{random.choice(WISDOM)}*||")
-                return
-            else:
-                if not str(usr.id) in list_decoded_entries("Wise"):
-                    await add_entry_with_check("Wise", usr)
-                    await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
-                    await asyncio.sleep(2)
-                else:
-                    await SEND(ch, f"||***Wise choice.***||")
-                return
+        # elif lmsg.startswith("drone of wisdom"):
+        #     if random.randint(1, 100) > 1:
+        #         await SEND(ch, f"||*{random.choice(WISDOM)}*||")
+        #         return
+        #     else:
+        #         if not str(usr.id) in list_decoded_entries("Wise"):
+        #             await add_entry_with_check("Wise", usr)
+        #             await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
+        #             await asyncio.sleep(2)
+        #         else:
+        #             await SEND(ch, f"||***Wise choice.***||")
+        #         return
             
         # Get the drone's naswer
         elif lmsg.startswith("bd tell me"):
