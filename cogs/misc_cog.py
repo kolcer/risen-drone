@@ -1,12 +1,14 @@
 import asyncio
+import secrets
+import string
 
-from database import list_decoded_entries
+from database import list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
 import discord
 from discord import app_commands
 from discord.ext import commands
 
 from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, PRAISES, RIG_COOLDOWNS, BUTTONS, getScoldDictionary, getPraiseDictionary
-from rated import DEFER, FOLLOWUP, INTERACTION, SEND
+from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
@@ -61,6 +63,7 @@ class MiscCog(commands.Cog):
                 BUTTONS["easterStaffStatus"] = False
 
             await asyncio.sleep(60)
+
             if len(FIX_BOT) != 0:
                 await SEND(ch, "Games have not been reset due to lack of users asking to.")
                 FIX_BOT.clear()
@@ -217,3 +220,44 @@ class MiscCog(commands.Cog):
         except Exception as exc:
             await INTERACTION(interaction, f"Something went wrong with `/praise`: {exc}")
             raise
+
+    @discord.app_commands.command(name="link", description="Link account for Janitor role")
+    async def link(self, interaction: discord.Interaction):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        ch = interaction.channel
+
+        await DEFER(interaction)
+
+        if redis_check_token(usr) != None: 
+            await FOLLOWUP("Please unlink first. If you no longer have access to your account, contact mods.", interaction, True)
+            return
+        
+        try:
+            alphabet = string.ascii_letters + string.digits
+            token = ''.join(secrets.choice(alphabet) for i in range(20))
+        
+            redis_add_user_data("USER_" + str(usr.id), "token", token)
+
+            await SEND_DM(usr, 
+                "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n\n"
+                f"`LINK DISCORD {str(usr.id)} {token}`\n"
+                "'LINK DISCORD' included!\n\n"
+                "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
+                "If successful, you will be pinged in <#1001034407966150746>.\n" + 
+                "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
+                "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
+                "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
+                "`UNLINK DISCORD`\n\n" +
+                "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
+            
+            await asyncio.sleep(1)
+            await SEND_DM(usr, "https://giphy.com/gifs/TskpnwGI2P1GCmtUJ0")
+            await asyncio.sleep(1)
+            await FOLLOWUP("I have sent you a direct message with further instructions.", interaction, False)
+        except:
+            redis_remove_token(usr)
+            await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")

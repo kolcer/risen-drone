@@ -4,10 +4,7 @@ import os
 import random
 import asyncio
 import requests 
-import re
 import datetime
-import secrets
-import string
 #from datetime import date
 from discord.ext import commands
 from difflib import SequenceMatcher
@@ -839,36 +836,36 @@ async def on_message(message):
                 await SEND(ch, "How could you get my birthday date wrong?")
 
         ## Verify for CS stats
-        elif lmsg == 'bd link':
+        # elif lmsg == 'bd link':
 
-            if redis_check_token(usr) != None: 
-                await SEND(ch, "Please unlink first. If you no longer have access to your account, contact mods.")
-                return
+        #     if redis_check_token(usr) != None: 
+        #         await SEND(ch, "Please unlink first. If you no longer have access to your account, contact mods.")
+        #         return
             
-            try:
-                alphabet = string.ascii_letters + string.digits
-                token = ''.join(secrets.choice(alphabet) for i in range(20))
+        #     try:
+        #         alphabet = string.ascii_letters + string.digits
+        #         token = ''.join(secrets.choice(alphabet) for i in range(20))
             
-                redis_add_user_data("USER_" + str(usr.id), "token",token)
-                await SEND_DM(usr, 
-                    "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n\n"
-                    f"`LINK DISCORD {str(usr.id)} {token}`\n"
-                    "'LINK DISCORD' included!\n\n"
-                    "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
-                    "If successful, you will be pinged in <#1001034407966150746>.\n" + 
-                    "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
-                    "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
-                    "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
-                    "`UNLINK DISCORD`\n\n" +
-                    "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
+        #         redis_add_user_data("USER_" + str(usr.id), "token",token)
+        #         await SEND_DM(usr, 
+        #             "Please copy this code. To link your Roblox account properly, you'll need to submit it as a feedback message within the Roblox game itself.\n\n"
+        #             f"`LINK DISCORD {str(usr.id)} {token}`\n"
+        #             "'LINK DISCORD' included!\n\n"
+        #             "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
+        #             "If successful, you will be pinged in <#1001034407966150746>.\n" + 
+        #             "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
+        #             "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
+        #             "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
+        #             "`UNLINK DISCORD`\n\n" +
+        #             "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
                 
-                await asyncio.sleep(1)
-                await SEND_DM(usr, "https://giphy.com/gifs/TskpnwGI2P1GCmtUJ0")
-                await asyncio.sleep(1)
-                await SEND(ch, f"{usr.mention} I have sent you a direct message with further instructions.")
-            except:
-                redis_remove_token(usr)
-                await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
+        #         await asyncio.sleep(1)
+        #         await SEND_DM(usr, "https://giphy.com/gifs/TskpnwGI2P1GCmtUJ0")
+        #         await asyncio.sleep(1)
+        #         await SEND(ch, f"{usr.mention} I have sent you a direct message with further instructions.")
+        #     except:
+        #         redis_remove_token(usr)
+        #         await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
 
     
         ## Show Profile

@@ -6,7 +6,6 @@ from database import *
 from rated import *
 from roles import *
 from globals import *
-from discord.ext import commands
 
 class ShowProfile(discord.ui.View):
     def __init__(self, *, timeout=180):
