@@ -1707,17 +1707,34 @@ async def on_message(message):
                 view.choice3 = view.choices[2]
                 view.choice4 = view.choices[3]
 
+                for i, choice_text in enumerate(view.choices):
+                    view.votes[str(i)] = []
+
+                    btn = discord.ui.Button(
+                        label=choice_text, 
+                        custom_id=f"throw{i}", 
+                        style=discord.ButtonStyle.primary
+                    )
+
+                    async def create_callback(index):
+                        async def callback(interaction: discord.Interaction):
+                            await view.process_click(interaction, str(index), interaction.user)
+                        return callback
+
+                    btn.callback = await create_callback(i)
+                    view.add_item(btn)
+
                 # Define the buttons without labels yet
-                button1 = discord.ui.Button(label=view.choice1, custom_id="throw0", style=discord.ButtonStyle.primary)
-                button2 = discord.ui.Button(label=view.choice2, custom_id="throw1", style=discord.ButtonStyle.primary)
-                button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.primary)
-                button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.primary)
+                # button1 = discord.ui.Button(label=view.choice1, custom_id="throw0", style=discord.ButtonStyle.primary)
+                # button2 = discord.ui.Button(label=view.choice2, custom_id="throw1", style=discord.ButtonStyle.primary)
+                # button3 = discord.ui.Button(label=view.choice3, custom_id="throw2", style=discord.ButtonStyle.primary)
+                # button4 = discord.ui.Button(label=view.choice4, custom_id="throw3", style=discord.ButtonStyle.primary)
 
                 # Add buttons to the view with their labels
-                view.add_item(button1)
-                view.add_item(button2)
-                view.add_item(button3)
-                view.add_item(button4)
+                # view.add_item(button1)
+                # view.add_item(button2)
+                # view.add_item(button3)
+                # view.add_item(button4)
                 BUTTONS["view"] = view
 
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Someone is throwing **{view.thrownObject}** in your way! How do you react?!", view)
