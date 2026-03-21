@@ -1,7 +1,7 @@
 import random
 from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS
 from rated import SEND
-from views import *
+from views import ButtonEgg_Throw
 
 # Convert milliseconds to seconds
 def convert_best_times(num):
