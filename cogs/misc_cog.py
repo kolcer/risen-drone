@@ -13,7 +13,7 @@ from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
-from database import add_entry_with_check, add_entry, delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token
+from database import add_entry_with_check, add_entry, delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token, show_next_entry
 
 class MiscCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -358,6 +358,47 @@ class MiscCog(commands.Cog):
             return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip_delete`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="tip", description="Show a Tip for an Alignment")
+    @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
+    async def tip(self, interaction: discord.Interaction, alignment: str):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        ch = interaction.channel
+
+        await DEFER(interaction)
+
+        try:
+            ## tips/tricks trigger
+            if alignment in TIPS_KEYS:
+                await SEND(ch,show_next_entry(alignment))
+                return
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/tip`: {exc}", interaction)
+            raise
+        
+    @discord.app_commands.command(name="trivia", description="Show a Trivia for an Alignment")
+    @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
+    async def trivia(self, interaction: discord.Interaction, alignment: str):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        ch = interaction.channel
+        key = alignment + "T"
+
+        await DEFER(interaction)
+
+        try:
+            ## trivia trigger
+            if alignment in TIPS_KEYS:
+                await SEND(ch,show_next_entry(key))
+                return
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/trivia`: {exc}", interaction)
             raise
 
     # @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")

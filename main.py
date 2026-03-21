@@ -1582,23 +1582,23 @@ async def on_message(message):
         #         EGG_EATER.remove(usr.id)    
 
         else:
-            ## tips/tricks trigger
-            if len(lsplit) == 2:
-                if lsplit[1] == "tip" or lsplit[1] == "trick":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
-                        await SEND(ch, "This command can be only used in <#750060041289072771>!")
-                        return
-                    if lsplit[0] in TIPS_KEYS:
-                        await SEND(ch,show_next_entry(lsplit[0]))
-                        return
-                elif lsplit[1] == "trivia":
-                    if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
-                        await SEND(ch, "This command can be only used in <#750060041289072771>!")
-                        return
-                    if lsplit[0] in TIPS_KEYS:
-                        key = lsplit[0] + "T"
-                        await SEND(ch,show_next_entry(key))
-                        return
+            # ## tips/tricks trigger
+            # if len(lsplit) == 2:
+            #     if lsplit[1] == "tip" or lsplit[1] == "trick":
+            #         if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
+            #             await SEND(ch, "This command can be only used in <#750060041289072771>!")
+            #             return
+            #         if lsplit[0] in TIPS_KEYS:
+            #             await SEND(ch,show_next_entry(lsplit[0]))
+            #             return
+            #     elif lsplit[1] == "trivia":
+            #         if ch != CHANNELS['bot-commands'] and ch != CHANNELS['drone-masters']:
+            #             await SEND(ch, "This command can be only used in <#750060041289072771>!")
+            #             return
+            #         if lsplit[0] in TIPS_KEYS:
+            #             key = lsplit[0] + "T"
+            #             await SEND(ch,show_next_entry(key))
+            #             return
 
             #single word trigger
             for i, v in SINGLE_WORD_TRIGGERS.items():
