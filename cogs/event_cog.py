@@ -176,7 +176,7 @@ class EventCog(commands.Cog):
                 for role in usr.roles:
                     if (role.name in MORPHABLE_ROLES):
                         role_list.append(role)
-                await REMOVE_ROLES(role_list)
+                await REMOVE_ROLES(usr, role_list)
                 await asyncio.sleep(1)
 
                 await ADD_ROLES(usr,MORPHABLE_ROLES[type.title()][0])
