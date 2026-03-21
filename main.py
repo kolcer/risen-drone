@@ -770,63 +770,63 @@ async def on_message(message):
         #     await GiveMana(ch,usr,message)
                  
         ## Scold command
-        elif lmsg.startswith("bd scold "):
-            finalmsg = None
-            for member in SERVER_DATA['server'].members:
-                if member.name.lower() == lmsg.split(" ",2)[2] :
-                    ScoldDict = getScoldDictionary(member, usr)
-                    # Scold someone in the Dictionary (User itself included)
-                    if member.id in ScoldDict:
-                        finalmsg = ScoldDict[member.id]
-                    # Scolding a Bot
-                    elif member.bot:
-                        finalmsg = "I love my bot friends."
-                    # Scolding an User that is in the Server
-                    else:
-                        finalmsg = member.display_name + ", I am very disappointed in you."
-                    await SEND(ch,finalmsg)
-                    return
-            # Scolding an User that is NOT in the Server
-            await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
+        # elif lmsg.startswith("bd scold "):
+        #     finalmsg = None
+        #     for member in SERVER_DATA['server'].members:
+        #         if member.name.lower() == lmsg.split(" ",2)[2] :
+        #             ScoldDict = getScoldDictionary(member, usr)
+        #             # Scold someone in the Dictionary (User itself included)
+        #             if member.id in ScoldDict:
+        #                 finalmsg = ScoldDict[member.id]
+        #             # Scolding a Bot
+        #             elif member.bot:
+        #                 finalmsg = "I love my bot friends."
+        #             # Scolding an User that is in the Server
+        #             else:
+        #                 finalmsg = member.display_name + ", I am very disappointed in you."
+        #             await SEND(ch,finalmsg)
+        #             return
+        #     # Scolding an User that is NOT in the Server
+        #     await SEND(ch, usr.mention + " I am disappointed, you couldn't even give me a correct name.")
 
         ## Praise command
-        elif lmsg.startswith("bd praise "):
-            finalmsg = None
-            for member in SERVER_DATA['server'].members:
-                if member.name.lower() == lmsg.split(" ",2)[2] :
-                    # Ensure the PRAISES dictionary has the praised user's ID as a key
-                    praised_user_id = member.id
-                    praising_user_id = usr.id
+        # elif lmsg.startswith("bd praise "):
+        #     finalmsg = None
+        #     for member in SERVER_DATA['server'].members:
+        #         if member.name.lower() == lmsg.split(" ",2)[2] :
+        #             # Ensure the PRAISES dictionary has the praised user's ID as a key
+        #             praised_user_id = member.id
+        #             praising_user_id = usr.id
 
-                    if praised_user_id not in PRAISES:
-                        PRAISES[praised_user_id] = []
+        #             if praised_user_id not in PRAISES:
+        #                 PRAISES[praised_user_id] = []
 
-                    # Add the praising user's ID to the praised user's list if not already added
-                    if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
-                        PRAISES[praised_user_id].append(praising_user_id)
+        #             # Add the praising user's ID to the praised user's list if not already added
+        #             if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
+        #                 PRAISES[praised_user_id].append(praising_user_id)
 
-                    PraiseDict = getPraiseDictionary(member, usr)
-                    # Praise someone in the Dictionary (User itself included)
-                    if member.id in PraiseDict:
-                        finalmsg = PraiseDict[member.id]
-                    # Praiseing a Bot
-                    elif member.bot:
-                        finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
-                    # Praising an User that is in the Server
-                    else:
-                        # Check if the praised user has been praised by three unique users
-                        if len(PRAISES[praised_user_id]) == 3:
-                            finalmsg = f"{member.display_name}, everyone likes you. And so do I."
+        #             PraiseDict = getPraiseDictionary(member, usr)
+        #             # Praise someone in the Dictionary (User itself included)
+        #             if member.id in PraiseDict:
+        #                 finalmsg = PraiseDict[member.id]
+        #             # Praiseing a Bot
+        #             elif member.bot:
+        #                 finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
+        #             # Praising an User that is in the Server
+        #             else:
+        #                 # Check if the praised user has been praised by three unique users
+        #                 if len(PRAISES[praised_user_id]) == 3:
+        #                     finalmsg = f"{member.display_name}, everyone likes you. And so do I."
 
-                            if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
-                                await add_entry_with_check("Acclaimed", member)
-                        else:
-                            finalmsg = f"Well done, {member.display_name}. Most excellent."
+        #                     if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
+        #                         await add_entry_with_check("Acclaimed", member)
+        #                 else:
+        #                     finalmsg = f"Well done, {member.display_name}. Most excellent."
                             
-                    await SEND(ch,finalmsg)
-                    return
-            # Praising an User that is NOT in the Server
-            await SEND(ch, usr.mention + " I know you tried your best, but I couldn't find anyone by that name.")
+        #             await SEND(ch,finalmsg)
+        #             return
+        #     # Praising an User that is NOT in the Server
+        #     await SEND(ch, usr.mention + " I know you tried your best, but I couldn't find anyone by that name.")
 
         ## Happy Birthday BD!!!!!
         elif "happy birthday broken drone" in lmsg or "happy birthday bd" in lmsg:

@@ -60,6 +60,19 @@ async def SEND(channel, message, view=None):
         return await channel.send(message, view=view)
     else:
         return await channel.send(message)
+    
+#edit message
+async def EDIT_MESSAGE(msg, con, view=None, embed=None):
+    kwargs = {
+        "content": con,
+    }
+
+    if view is not None:
+        kwargs["view"] = view
+    if embed is not None:
+        kwargs["embed"] = embed
+
+    await msg.edit(**kwargs)
 
 #sends a view with a message
 async def SEND_VIEW(channel, content, view):
@@ -115,7 +128,27 @@ async def INTERACTION(interaction, content: str, secret: bool):
     if content == None or content == "":
         #cannot send empty message
         return
+    
     return await interaction.send_message(content, ephemeral = secret)
+
+async def EDIT_INTERACTION(interaction, content: str, view=None, embed=None):
+    if content == None or content == "":
+        #cannot send empty message
+        return
+    
+    kwargs = {
+        "content": content,
+    }
+
+    # 4. ONLY add view/embed if they are NOT None
+    if view is not None:
+        kwargs["view"] = view
+    if embed is not None:
+        kwargs["embed"] = embed
+
+    return await interaction.response.edit_message(**kwargs)
+
+    # return await interaction.send_message(content, ephemeral = secret)
 
 #send a reply! ephemeral option included
 # included where???
@@ -132,10 +165,6 @@ async def PURGE_ROLES(role):
 #add reaction    
 async def ADD_REACTION(msg,reaction):
     await msg.add_reaction(reaction)
-
-#edit message
-async def EDIT_MESSAGE(msg, con):
-    await msg.edit(content = con)
 
 #edit views and/or its message
 async def EDIT_VIEW_MESSAGE(msg, con, view):

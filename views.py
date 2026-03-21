@@ -909,90 +909,85 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
         self.results = ""
         self.votes = {}
 
-    async def on_timeout(self):
-        self.results = ""
+    def create_embed(self):
+        embed = discord.Embed()
+        embed.title = "Poll results"
+        # If no one has voted yet, show a placeholder
+        embed.description = self.results if self.results else "No votes yet..."
+        embed.color = discord.Colour(int("FFD700", 16))
+        if self.custom and hasattr(self, 'customUser'):
+            embed.set_footer(text=f"Custom poll by {self.customUser.name}")
+        self.embed = embed
+        return embed
+
+    async def update_message(self):
+        await self.message.edit(embed=self.create_embed(), view=self)
+
+    async def finalize_poll(self, reason_text):
+        if self.closed:
+            return
+        self.closed = True
+
+        final_results = ""
         for key in self.votes.keys():
             for user in self.votes[key]:
-                if len(self.users) > 1:
-                    self.results += '\n'
-
+                if final_results != "":
+                    final_results += '\n'
+                
+                option_text = self.choices[int(key)]
                 if not self.custom:
-                    self.results += f"**{user.name}** would {self.choices[int(key)]}".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                    line = f"**{user.name}** would {option_text}"
                 else:
-                    self.results += f"**{user.name}** voted for \"{self.choices[int(key)]}\"".replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
+                    line = f"**{user.name}** voted for \"{option_text}\""
+                
+                final_results += line.replace("yourself", "themselves").replace("your", "their").replace("Don't", "not").lower()
 
-        await self.update_message()
+        self.results = final_results
 
         for item in self.children:
             item.disabled = True
 
-        self.closed = True
-        await EDIT_VIEW_MESSAGE(self.message, f"{self.message.content}\nPoll is closed. Look at the results.", self)
+        await EDIT_MESSAGE(self.message, f"{self.message.content}\n{reason_text}", embed=self.create_embed(), view=self)
+        
         BUTTONS["status"] = False
-        await self.stop()
+        self.stop()
 
-    async def too_late(self):
-        if self.closed == True:
-            return
-
+    async def on_timeout(self):
+        # Determine the flavor text based on participation
         if len(self.users) < 1:
-            await REPLY(self.message, "No participation whatsoever.")
+            reason = "No participation whatsoever."
         elif len(self.users) == 1:
-            await REPLY(self.message, "You spoke for everyone else.")
+            reason = "You spoke for everyone else."
         else:
-            await REPLY(self.message, "Very interesting choices.")
-
-        await self.on_timeout()
-    
-    async def update_message(self):
-        await self.message.edit(embed=self.create_embed(), view=self)
+            reason = "Very interesting choices."
+        
+        await self.finalize_poll(reason)
 
     async def process_click(self, interaction, buttonId, usr):
-        if (buttonId == "close"):
-            if (usr == self.customUser):
+        if buttonId == "close":
+            if usr == self.customUser:
                 await interaction.response.defer()
-                await self.too_late()
-                return
+                await self.finalize_poll("Poll was closed manually by the creator.")
             else:
-                await INTERACTION(interaction.response, "Only the person who created the poll may close it.", True)
-                return
+                await INTERACTION(interaction.response, "Only the creator can close this.", True)
+            return
 
-        if (usr in self.users):
+        if usr in self.users:
             await INTERACTION(interaction.response, "One vote only.", True)
             return
         
         self.users.append(usr)
         self.votes[buttonId].append(usr)
-        self.results = ""
-
-        for key in self.votes.keys():
-            for user in self.votes[key]:
-                if len(self.users) > 1:
-                    self.results += '\n'
-                self.results += f"Someone would..."
-
-        if self.custom:
-            self.results = self.results.replace("would", "voted for")
-
+        
+        live_results = ""
+        for _ in range(len(self.users)):
+            if live_results != "":
+                live_results += "\n"
+            live_results += "Someone voted for..." if self.custom else "Someone would..."
+        
+        self.results = live_results
         await self.update_message()
         await interaction.response.defer()
-
-    async def force_stop(self):
-        for item in self.children:
-            item.disabled = True
-
-        await self.stop()
-
-    def create_embed(self):
-        embed = discord.Embed()
-        embed.title = "Poll results"
-        embed.description = self.results
-        embed.color = discord.Colour(int("FFD700", 16))
-        if self.custom:
-            embed.set_footer(text="Custom poll by " + self.customUser.name)
-
-        self.embed = embed
-        return embed
 
     # async def createButtons(self):
     #     @discord.ui.button(label=self.choice1, custom_id = "0", style = discord.ButtonStyle.secondary)

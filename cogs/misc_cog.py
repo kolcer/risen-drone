@@ -1,14 +1,16 @@
 import asyncio
 
+from database import list_decoded_entries
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, RIG_COOLDOWNS, BUTTONS
+from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, PRAISES, RIG_COOLDOWNS, BUTTONS, getScoldDictionary, getPraiseDictionary
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
+from database import add_entry_with_check
 
 class MiscCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -115,6 +117,24 @@ class MiscCog(commands.Cog):
                 view.votes[str(i)] = []
                 view.add_item(discord.ui.Button(label=view.choices[i], custom_id=f"throw{i}", style=discord.ButtonStyle.primary))
 
+                async def button_callback(interaction, b_id=f"throw{i}"):
+                        await view.process_click(interaction, b_id, interaction.user)
+
+            for i in range(len(active_options)):
+                view.votes[str(i)] = []
+                
+                btn = discord.ui.Button(
+                    label=active_options[i], 
+                    custom_id=f"throw{i}", 
+                    style=discord.ButtonStyle.primary
+                )
+
+                async def callback_wrapper(interaction, button_index=str(i)):
+                    await view.process_click(interaction, button_index, usr)
+
+                btn.callback = callback_wrapper
+                view.add_item(btn)
+
             view.add_item(discord.ui.Button(label="Close Poll", custom_id="throwclose", style=discord.ButtonStyle.red))
 
             BUTTONS["view"] = view
@@ -124,8 +144,79 @@ class MiscCog(commands.Cog):
             view.message = await FOLLOWUP(pollQ, interaction, False, view=view)
 
             await view.wait()
-            await view.too_late()
             BUTTONS["status"] = False
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/poll`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="scold", description="Scold someone")
+    async def scold(self, interaction: discord.Interaction, target: discord.Member):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        finalmsg = None
+
+        try:
+            ScoldDict = getScoldDictionary(target, usr)
+
+            # Scold someone in the Dictionary (User itself included)
+            if target.id in ScoldDict:
+                finalmsg = ScoldDict[target.id]
+            # Scolding a Bot
+            elif target.bot:
+                finalmsg = "I love my bot friends."
+            # Scolding an User that is in the Server
+            else:
+                finalmsg = target.display_name + ", I am very disappointed in you."
+
+            await INTERACTION(interaction.response, finalmsg)
+            return
+        except Exception as exc:
+            await INTERACTION(interaction.response, f"Something went wrong with `/scold`: {exc}")
+            raise
+
+    @discord.app_commands.command(name="praise", description="Praise someone")
+    async def praise(self, interaction: discord.Interaction, target: discord.Member):
+        if interaction.guild is None or interaction.channel is None:
+            await INTERACTION(interaction.response, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        usr = interaction.user
+        finalmsg = None
+
+        try:
+            praised_user_id = target.id
+            praising_user_id = usr.id
+
+            if praised_user_id not in PRAISES:
+                PRAISES[praised_user_id] = []
+
+            # Add the praising user's ID to the praised user's list if not already added
+            if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
+                PRAISES[praised_user_id].append(praising_user_id)
+
+            PraiseDict = getPraiseDictionary(target, usr)
+            # Praise someone in the Dictionary (User itself included)
+            if praised_user_id in PraiseDict:
+                finalmsg = PraiseDict[praised_user_id]
+            # Praising a Bot
+            elif target.bot:
+                finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
+            # Praising an User that is in the Server
+            else:
+                # Check if the praised user has been praised by three unique users
+                if len(PRAISES[praised_user_id]) == 3:
+                    finalmsg = f"{target.display_name}, everyone likes you. And so do I."
+
+                    if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
+                        await add_entry_with_check("Acclaimed", target)
+                else:
+                    finalmsg = f"Well done, {target.display_name}. Most excellent."
+                    
+            await INTERACTION(interaction.response, finalmsg)
+            return
+        except Exception as exc:
+            await INTERACTION(interaction.response, f"Something went wrong with `/praise`: {exc}")
             raise
