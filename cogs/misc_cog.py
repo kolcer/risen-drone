@@ -367,14 +367,12 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
-        ch = interaction.channel
-
         await DEFER(interaction)
 
         try:
             ## tips/tricks trigger
             if alignment in TIPS_KEYS:
-                await SEND(ch,show_next_entry(alignment))
+                await FOLLOWUP(show_next_entry(alignment), interaction)
                 return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip`: {exc}", interaction)
@@ -387,7 +385,6 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
-        ch = interaction.channel
         key = alignment + "T"
 
         await DEFER(interaction)
@@ -395,7 +392,7 @@ class MiscCog(commands.Cog):
         try:
             ## trivia trigger
             if alignment in TIPS_KEYS:
-                await SEND(ch,show_next_entry(key))
+                await FOLLOWUP(show_next_entry(key), interaction)
                 return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/trivia`: {exc}", interaction)
