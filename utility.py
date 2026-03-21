@@ -1,7 +1,6 @@
 import random
 from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS
 from rated import SEND
-from views import ButtonEgg_Throw
 
 # Convert milliseconds to seconds
 def convert_best_times(num):
@@ -37,6 +36,7 @@ def build_tower_page(user_stats, tower_type, page_index, view):
         view.footers[page_index] = "Type 'bd link' to link your account and start tracking your times!"
 
 async def launch_egg(ch, eggType, msg, interaction=None):
+    from views import ButtonEgg_Throw
     BUTTONS["status"] = True
     view = ButtonEgg_Throw(timeout=30)
     view.thrower = None
