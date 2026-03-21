@@ -124,12 +124,16 @@ class MiscCog(commands.Cog):
 
                 async def callback_wrapper(interaction, button_index=str(i)):
                     await view.process_click(interaction, button_index, usr)
-
                 btn.callback = callback_wrapper
+                
                 view.add_item(btn)
 
-            view.add_item(discord.ui.Button(label="Close Poll", custom_id="throwclose", style=discord.ButtonStyle.red))
+            close_btn = discord.ui.Button(label="Close Poll", style=discord.ButtonStyle.red)
+            async def close_callback(interaction):
+                await view.process_click(interaction, "throwclose", usr)
+            close_btn.callback = close_callback
 
+            view.add_item(close_btn)
             BUTTONS["view"] = view
             BUTTONS["channel"] = ch
 
