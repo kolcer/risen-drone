@@ -923,6 +923,9 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
     async def update_message(self):
         await self.message.edit(embed=self.create_embed(), view=self)
 
+    async def on_timeout(self):
+        await self.finalize_poll("Poll timed out.")
+
     async def finalize_poll(self, reason_text):
         if self.closed:
             return
@@ -948,6 +951,8 @@ class ButtonGames_ThrowingStuff(discord.ui.View):
             item.disabled = True
 
         await EDIT_MESSAGE(self.message, f"{self.message.content}\n{reason_text}", embed=self.create_embed(), view=self)
+
+        await asyncio.sleep(1)
 
         if len(self.users) < 1:
             quantityCheck = "No participation whatsoever."
