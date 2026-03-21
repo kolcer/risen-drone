@@ -36,7 +36,7 @@ def build_tower_page(user_stats, tower_type, page_index, view):
     else:
         view.footers[page_index] = "Type 'bd link' to link your account and start tracking your times!"
 
-async def launch_egg(ch, eggType, msg):
+async def launch_egg(ch, eggType, msg, interaction=None):
     BUTTONS["status"] = True
     view = ButtonEgg_Throw(timeout=30)
     view.thrower = None
@@ -47,7 +47,10 @@ async def launch_egg(ch, eggType, msg):
 
     view.channel = ch
     view.toolate = True
-    view.message = await SEND_VIEW(ch, msg, view)
+    if interaction is not None:
+        view.message = await FOLLOWUP(msg, interaction, False, view)
+    else:
+        view.message = await SEND_VIEW(ch, msg, view)
     await view.wait()
     await view.too_late()
     BUTTONS["status"] = False

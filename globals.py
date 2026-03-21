@@ -606,10 +606,9 @@ HYPNO_SWAPS = {
     "quiz": "lucid_ladders",
     "lucid_ladders": "ttt",
     "ttt": "quiz",
-    "profile": "help",
-    "help": "profile",
+    "profile": "eggs",
     "eggs": "cd",
-    "cd": "eggs",
+    "cd": "profile",
 }
 
 RIG_LIST = [

@@ -14,7 +14,6 @@ class PersonalCog(commands.Cog):
 
     @discord.app_commands.command(name="show", description="Show profiles, eggs, or commands")
     @discord.app_commands.choices(type=[
-        discord.app_commands.Choice(name="Commands", value="help"),
         discord.app_commands.Choice(name="Profile", value="profile"),
         discord.app_commands.Choice(name="Eggs", value="eggs"),
         discord.app_commands.Choice(name="Cooldowns", value="cd"),
@@ -43,8 +42,6 @@ class PersonalCog(commands.Cog):
                 await self._show_profile(interaction, target)
             elif newType == "eggs":
                 await self._show_eggs(interaction, target)
-            elif newType == "help":
-                await self._show_help(interaction)
             elif newType == "cd":
                 await self._show_cd(interaction)
         except Exception as exc:

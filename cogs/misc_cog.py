@@ -313,10 +313,6 @@ class MiscCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
-                await FOLLOWUP("Only Janitors can add new Tips and Trivia.", interaction, True)
-                return
-            
             #for trivia, key has extra "T" at the end
             if type == "trivia":
                 key = alignment + "T"
@@ -347,7 +343,7 @@ class MiscCog(commands.Cog):
 
         try:
             if not MORPHABLE_ROLES["Janitor"][0] in usr.roles:
-                await FOLLOWUP("Only Janitors can add new Tips and Trivia.", interaction, True)
+                await FOLLOWUP("Only Janitors can delete Tips and Trivia.", interaction, True)
                 return
           
             #for trivia, key has extra "T" at the end
@@ -364,29 +360,29 @@ class MiscCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/tip_delete`: {exc}", interaction)
             raise
 
-    @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")
-    async def wisdom(self, interaction: discord.Interaction):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
+    # @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")
+    # async def wisdom(self, interaction: discord.Interaction):
+    #     if interaction.guild is None or interaction.channel is None:
+    #         await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+    #         return
 
-        usr = interaction.user
-        ch = interaction.channel
+    #     usr = interaction.user
+    #     ch = interaction.channel
 
-        await DEFER(interaction)
+    #     await DEFER(interaction)
 
-        try:
-            if random.randint(1, 100) > 1:
-                await SEND(ch, f"||*{random.choice(WISDOM)}*||")
-                return
-            else:
-                if not str(usr.id) in list_decoded_entries("Wise"):
-                    await add_entry_with_check("Wise", usr)
-                    await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
-                    await asyncio.sleep(2)
-                else:
-                    await SEND(ch, f"||***Wise choice.***||")
-                return
-        except Exception as exc:
-            await FOLLOWUP(f"Something went wrong with `/wisdom`: {exc}", interaction)
-            raise
+    #     try:
+    #         if random.randint(1, 100) > 1:
+    #             await SEND(ch, f"||*{random.choice(WISDOM)}*||")
+    #             return
+    #         else:
+    #             if not str(usr.id) in list_decoded_entries("Wise"):
+    #                 await add_entry_with_check("Wise", usr)
+    #                 await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
+    #                 await asyncio.sleep(2)
+    #             else:
+    #                 await SEND(ch, f"||***Wise choice.***||")
+    #             return
+    #     except Exception as exc:
+    #         await FOLLOWUP(f"Something went wrong with `/wisdom`: {exc}", interaction)
+    #         raise

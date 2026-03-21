@@ -1395,20 +1395,20 @@ async def on_message(message):
         #     await view.wait()
         
         # Get the drone's wisdom
-        # elif lmsg.startswith("drone of wisdom"):
-        #     if random.randint(1, 100) > 1:
-        #         await SEND(ch, f"||*{random.choice(WISDOM)}*||")
-        #         return
-        #     else:
-        #         if not str(usr.id) in list_decoded_entries("Wise"):
-        #             await add_entry_with_check("Wise", usr)
-        #             await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
-        #             await asyncio.sleep(2)
-        #         else:
-        #             await SEND(ch, f"||***Wise choice.***||")
-        #         return
+        elif lmsg.startswith("drone of wisdom"):
+            if random.randint(1, 100) > 1:
+                await SEND(ch, f"||*{random.choice(WISDOM)}*||")
+                return
+            else:
+                if not str(usr.id) in list_decoded_entries("Wise"):
+                    await add_entry_with_check("Wise", usr)
+                    await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
+                    await asyncio.sleep(2)
+                else:
+                    await SEND(ch, f"||***Wise choice.***||")
+                return
             
-        # Get the drone's naswer
+        # Get the drone's opinion on the matter
         elif lmsg.startswith("bd tell me"):
             await SEND(ch, f"{random.choice(ANSWERS)}")
             return
@@ -1433,151 +1433,151 @@ async def on_message(message):
                 I_SPY['status'] = None
                 await SEND(ch,'Wrong. Better luck next time.')
 
-        elif lmsg.startswith("bd throw ")and lmsg.endswith(" egg"):
-            if not EVENTS["Easter"] and ch.id != 813882658156838923:
-                await SEND(ch, f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.")
-                return
+        # elif lmsg.startswith("bd throw ")and lmsg.endswith(" egg"):
+        #     if not EVENTS["Easter"] and ch.id != 813882658156838923:
+        #         await SEND(ch, f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.")
+        #         return
 
-            isSpecificEgg = False
-            specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
+        #     isSpecificEgg = False
+        #     specificEgg = lmsg.replace("bd throw ", "").replace(" egg", "")
 
-            if specificEgg.lower() in RIG_LIST or specificEgg.title() in MAX_EGGS or specificEgg.lower() in ["full", "perfect", "mega secret"]:
-                isSpecificEgg = True
+        #     if specificEgg.lower() in RIG_LIST or specificEgg.title() in MAX_EGGS or specificEgg.lower() in ["full", "perfect", "mega secret"]:
+        #         isSpecificEgg = True
 
-            view = ButtonEgg_Throw(timeout=30)
-            view.thrower = usr.id
-            view.disabled = False
-            view.type = None
+        #     view = ButtonEgg_Throw(timeout=30)
+        #     view.thrower = usr.id
+        #     view.disabled = False
+        #     view.type = None
 
-            if SPECIAL_ROLES["Admin"][0] in usr.roles and not isSpecificEgg:
-                BUTTONS["easterStaffStatus"] = True
-                view.type = "Admin"
-            elif EXTRA_ROLES["murdurator"] in usr.roles and not isSpecificEgg:
-                BUTTONS["easterStaffStatus"] = True
-                view.type = "Murdurator"
-            elif EXTRA_ROLES["admin"] in usr.roles and not isSpecificEgg:
-                BUTTONS["easterStaffStatus"] = True
-                view.type = "Broken Drone"
-            else:
-                if ch.id != 750060041289072771 and ch.id != 813882658156838923:
-                    await SEND(ch, "The Egg Launcher only works in <#750060041289072771>.")
-                    return
-                elif BUTTONS["easterStatus"]:
-                    await SEND(ch, "The Egg Launcher is charging. This stuff takes time.")
-                    return
+        #     if SPECIAL_ROLES["Admin"][0] in usr.roles and not isSpecificEgg:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Admin"
+        #     elif EXTRA_ROLES["murdurator"] in usr.roles and not isSpecificEgg:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Murdurator"
+        #     elif EXTRA_ROLES["admin"] in usr.roles and not isSpecificEgg:
+        #         BUTTONS["easterStaffStatus"] = True
+        #         view.type = "Broken Drone"
+        #     else:
+        #         if ch.id != 750060041289072771 and ch.id != 813882658156838923:
+        #             await SEND(ch, "The Egg Launcher only works in <#750060041289072771>.")
+        #             return
+        #         elif BUTTONS["easterStatus"]:
+        #             await SEND(ch, "The Egg Launcher is charging. This stuff takes time.")
+        #             return
                 
-                BUTTONS["easterStatus"] = True
+        #         BUTTONS["easterStatus"] = True
 
-                for role in reversed(usr.roles):
-                    if role.name.lower() in RIG_LIST:
-                        view.type = role.name
-                        break
+        #         for role in reversed(usr.roles):
+        #             if role.name.lower() in RIG_LIST:
+        #                 view.type = role.name
+        #                 break
 
-                if isSpecificEgg:
-                    if specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
-                        view.type = specificEgg.title()
-                    elif specificEgg.title() in MAX_EGGS:
-                        await SEND(ch, "To launch that egg, you must first have the base one.")
-                        BUTTONS["easterStatus"] = False
-                        return
+        #         if isSpecificEgg:
+        #             if specificEgg.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[specificEgg.capitalize()]} Egg"):
+        #                 view.type = specificEgg.title()
+        #             elif specificEgg.title() in MAX_EGGS:
+        #                 await SEND(ch, "To launch that egg, you must first have the base one.")
+        #                 BUTTONS["easterStatus"] = False
+        #                 return
 
-                    if (specificEgg.title() == "Full" and check_full_egg_conditions(usr)):
-                        view.type = specificEgg.title()
-                    elif specificEgg.title() == "Full":
-                        await SEND(ch, "Aren't you full of yourself? Or perhaps not full enough.")
-                        BUTTONS["easterStatus"] = False
-                        return
+        #             if (specificEgg.title() == "Full" and check_full_egg_conditions(usr)):
+        #                 view.type = specificEgg.title()
+        #             elif specificEgg.title() == "Full":
+        #                 await SEND(ch, "Aren't you full of yourself? Or perhaps not full enough.")
+        #                 BUTTONS["easterStatus"] = False
+        #                 return
 
-                    if (specificEgg.title() == "Perfect" and check_perfect_egg_conditions(usr)):
-                        view.type = specificEgg.title()
-                    elif specificEgg.title() == "Perfect":
-                        await SEND(ch, "Nobody is perfect, but you aren't even close.")
-                        BUTTONS["easterStatus"] = False
-                        return
+        #             if (specificEgg.title() == "Perfect" and check_perfect_egg_conditions(usr)):
+        #                 view.type = specificEgg.title()
+        #             elif specificEgg.title() == "Perfect":
+        #                 await SEND(ch, "Nobody is perfect, but you aren't even close.")
+        #                 BUTTONS["easterStatus"] = False
+        #                 return
                     
-                    if (specificEgg.title() == "Mega Secret" and (MEGA_SECRET_LAUNCHER["user"] == usr.id or MEGA_SECRET_LAUNCHER["user"] == None)):
-                        view.type = specificEgg.title()
-                    elif specificEgg.title() == "Mega Secret":
-                        await SEND(ch, "You don't have it on you.")
-                        BUTTONS["easterStatus"] = False
-                        return
+        #             if (specificEgg.title() == "Mega Secret" and (MEGA_SECRET_LAUNCHER["user"] == usr.id or MEGA_SECRET_LAUNCHER["user"] == None)):
+        #                 view.type = specificEgg.title()
+        #             elif specificEgg.title() == "Mega Secret":
+        #                 await SEND(ch, "You don't have it on you.")
+        #                 BUTTONS["easterStatus"] = False
+        #                 return
                     
-            if random.randint(1, 11) == 1:
-                view.type = "Super Secret"
+        #     if random.randint(1, 11) == 1:
+        #         view.type = "Super Secret"
 
-            if view.type == None:
-                await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")
-                BUTTONS["easterStatus"] = False
-                return
+        #     if view.type == None:
+        #         await SEND(ch, "The Egg Launcher is confused... It doesn't know which Egg to launch!")
+        #         BUTTONS["easterStatus"] = False
+        #         return
             
-            if view.type == BUTTONS["easterLast"]:
-                await SEND(ch, "This egg launcher never launches the same egg twice!")
-                BUTTONS["easterStatus"] = False
-                return
+        #     if view.type == BUTTONS["easterLast"]:
+        #         await SEND(ch, "This egg launcher never launches the same egg twice!")
+        #         BUTTONS["easterStatus"] = False
+        #         return
                     
-            BUTTONS["easterLast"] = view.type
-            view.picker = None
-            view.channel = ch
-            view.toolate = True
+        #     BUTTONS["easterLast"] = view.type
+        #     view.picker = None
+        #     view.channel = ch
+        #     view.toolate = True
             
-            try:
-                if view.type == "Super Secret":
-                    view.message = await SEND_VIEW(ch, f"{usr.mention}'s Egg Launcher malfunctioned and threw a strange looking egg!'", view)
-                else:
-                    view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
-            except Exception as e:
-                await SEND(ch, str(e))
-                BUTTONS["easterStatus"] = False
-                BUTTONS["easterStaffStatus"] = False
-                return
+        #     try:
+        #         if view.type == "Super Secret":
+        #             view.message = await SEND_VIEW(ch, f"{usr.mention}'s Egg Launcher malfunctioned and threw a strange looking egg!'", view)
+        #         else:
+        #             view.message = await SEND_VIEW(ch, f"{usr.mention} threw the {view.type} egg!", view)
+        #     except Exception as e:
+        #         await SEND(ch, str(e))
+        #         BUTTONS["easterStatus"] = False
+        #         BUTTONS["easterStaffStatus"] = False
+        #         return
 
-            await view.wait()
-            await view.too_late()
+        #     await view.wait()
+        #     await view.too_late()
 
-            if BUTTONS["easterStatus"] and not BUTTONS["easterStaffStatus"]:
-                await asyncio.sleep(BUTTONS["easterTimer"])
-                await SEND(ch, "The egg launcher is ready!")
-                BUTTONS["easterStatus"] = False
+        #     if BUTTONS["easterStatus"] and not BUTTONS["easterStaffStatus"]:
+        #         await asyncio.sleep(BUTTONS["easterTimer"])
+        #         await SEND(ch, "The egg launcher is ready!")
+        #         BUTTONS["easterStatus"] = False
 
-            if BUTTONS["easterStaffStatus"]:
-                BUTTONS["easterStaffStatus"] = False
+        #     if BUTTONS["easterStaffStatus"]:
+        #         BUTTONS["easterStaffStatus"] = False
 
-        elif lmsg.startswith("bd eat") and lmsg.endswith("egg") and EVENTS["Easter"]:
-            eggToEat = lmsg.replace("bd eat ", "").replace(" egg", "").capitalize()
+        # elif lmsg.startswith("bd eat") and lmsg.endswith("egg") and EVENTS["Easter"]:
+        #     eggToEat = lmsg.replace("bd eat ", "").replace(" egg", "").capitalize()
 
-            if eggToEat.lower() not in EDIBLE_EGGS:
-                await SEND(ch, "You cannot eat this.")
-                return
-            elif not str(usr.id) in list_decoded_entries(f"{eggToEat} Egg"):
-                await SEND(ch, "You ate some air. Delicious!")
-                return
-            elif MORPHABLE_ROLES[eggToEat][0] in usr.roles:
-                await SEND(ch, "The egg said no.")
-                return
-            elif usr.id in EGG_EATER:
-                await SEND(ch, "Too many eggs are bad for your health.")
-                return
+        #     if eggToEat.lower() not in EDIBLE_EGGS:
+        #         await SEND(ch, "You cannot eat this.")
+        #         return
+        #     elif not str(usr.id) in list_decoded_entries(f"{eggToEat} Egg"):
+        #         await SEND(ch, "You ate some air. Delicious!")
+        #         return
+        #     elif MORPHABLE_ROLES[eggToEat][0] in usr.roles:
+        #         await SEND(ch, "The egg said no.")
+        #         return
+        #     elif usr.id in EGG_EATER:
+        #         await SEND(ch, "Too many eggs are bad for your health.")
+        #         return
             
-            if random.randint(1, 3) == 1:
-                await launch_egg(ch, "Secret", "Before you get the chance to eat the egg, it cracks and reveals... Another egg?")
-            else:
-                EGG_EATER.append(usr.id)
+        #     if random.randint(1, 3) == 1:
+        #         await launch_egg(ch, "Secret", "Before you get the chance to eat the egg, it cracks and reveals... Another egg?")
+        #     else:
+        #         EGG_EATER.append(usr.id)
 
-                delete_entry_by_value(f"{eggToEat} Egg", str(usr.id))
+        #         delete_entry_by_value(f"{eggToEat} Egg", str(usr.id))
 
-                role_list = []
-                for role in usr.roles:
-                    if (role.name in MORPHABLE_ROLES):
-                        role_list.append(role)
-                await usr.remove_roles(*role_list)
-                await asyncio.sleep(1)
+        #         role_list = []
+        #         for role in usr.roles:
+        #             if (role.name in MORPHABLE_ROLES):
+        #                 role_list.append(role)
+        #         await usr.remove_roles(*role_list)
+        #         await asyncio.sleep(1)
 
-                await ADD_ROLES(usr,MORPHABLE_ROLES[eggToEat][0])
+        #         await ADD_ROLES(usr,MORPHABLE_ROLES[eggToEat][0])
 
-                await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
+        #         await SEND(ch, f"{usr.mention} ate the {eggToEat} Egg! They feel different now.")
 
-                await asyncio.sleep(3600)
-                EGG_EATER.remove(usr.id)    
+        #         await asyncio.sleep(3600)
+        #         EGG_EATER.remove(usr.id)    
 
         else:
             ## tips/tricks trigger
