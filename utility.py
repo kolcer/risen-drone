@@ -1,6 +1,7 @@
 import random
-from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS
-from rated import SEND
+from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS, FUN_ROLES, GIT_COMMITTERS
+from rated import SEND, FOLLOWUP, SEND_VIEW
+from database import list_decoded_entries, list_entries
 
 # Convert milliseconds to seconds
 def convert_best_times(num):
