@@ -58,7 +58,12 @@ async def launch_egg(ch, eggType, msg, interaction=None):
 
 async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None, embed=None):
     if interaction is not None:
-        return await FOLLOWUP(msg, interaction, ephemeral, view, embed)
+        try:
+            # Try to use the interaction first
+            return await FOLLOWUP(msg, interaction, ephemeral, view, embed)
+        except Exception:
+            # If the token is invalid/expired, fall back to a normal message
+            return await SEND(ch, msg, view, embed)
     else:
         return await SEND(ch, msg, view, embed)
     

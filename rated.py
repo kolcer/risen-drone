@@ -48,18 +48,26 @@ async def EDIT_ROLE(targetrole, newname, motivation):
     await targetrole.edit(name = newname, reason = motivation)
 
 #send message
-async def SEND(channel, message, view=None):
+async def SEND(channel, message, view=None, embed=None):
     if message == None or message == "":
         #cannot send empty message
         return
     
+    toSend = message
+    
     if EVENTS["Easter"]:
-        message = str(message) + " 🐇"
+        toSend = str(message) + " 🐇"
+
+    kwargs = {
+        "content": toSend,
+    }
 
     if view is not None:
-        return await channel.send(message, view=view)
-    else:
-        return await channel.send(message)
+        kwargs["view"] = view
+    if embed is not None:
+        kwargs["embed"] = embed
+
+    await channel.send(**kwargs)
     
 #edit message
 async def EDIT_MESSAGE(msg, con, view=None, embed=None):

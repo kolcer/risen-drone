@@ -1,5 +1,4 @@
 import discord
-import views
 from discord.ext import commands
 
 from utility import build_tower_page, build_role_page, send_followup
