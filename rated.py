@@ -67,7 +67,7 @@ async def SEND(channel, message, view=None, embed=None):
     if embed is not None:
         kwargs["embed"] = embed
 
-    await channel.send(**kwargs)
+    return await channel.send(**kwargs)
     
 #edit message
 async def EDIT_MESSAGE(msg, con, view=None, embed=None):
