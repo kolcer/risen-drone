@@ -46,12 +46,12 @@ async def add_egg_with_check(key, new_entry):
 def check_full_egg_conditions(usr):
     user_id = str(usr.id)
     # Checks if user is in "Patron Egg", "Joker Egg", etc.
-    return all(user_id in list_decoded_entries(f"{val} Egg") for val in MAX_EGGS.values())
+    return all(user_id in list_decoded_entries(f"{val} Egg") for val in MAX_EGGS.keys())
 
 def check_perfect_egg_conditions(usr):
     user_id = str(usr.id)
     # Checks if user is in "Saviour Egg", "It Egg", etc.
-    return all(user_id in list_decoded_entries(f"{key} Egg") for key in MAX_EGGS.keys())
+    return all(user_id in list_decoded_entries(f"{key} Egg") for key in MAX_EGGS.values())
 
 def delete_key(key):
     db.delete(key)

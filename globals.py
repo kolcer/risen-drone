@@ -993,22 +993,22 @@ FUN_ROLES = {
 }
 
 MAX_EGGS = {
-    "Saviour": "Patron",
-    "It": "Joker",
-    "Annihilator": "Wicked",
-    "Admiral": "Keeper",
-    "Dabsforlif": "Muggle",
-    "Zero": "Hacker",
-    "Outlaw": "Thief",
-    "Illuminati": "Archon",
-    "Strider": "Drifter",
-    "Exiled": "Heretic",
-    "Optimus": "Splicer",
-    "Deathbringer": "Necromancer",
-    "Illusion": "Reaver",
-    "Daemon": "Gremlin",
-    "Aether": "Spectre",
-    "Usurper": "Chameleon"
+    "Patron": "Saviour",
+    "Joker": "It",
+    "Wicked": "Annihilator",
+    "Keeper": "Admiral",
+    "Muggle": "Dabsforlif",
+    "Hacker": "Zero",
+    "Thief": "Outlaw",
+    "Archon": "Illuminati",
+    "Drifter": "Strider",
+    "Heretic": "Exiled",
+    "Splicer": "Optimus",
+    "Necromancer": "Deathbringer",
+    "Reaver": "Illusion",
+    "Gremlin": "Daemon",
+    "Spectre": "Aether",
+    "Chameleon": "Usurper"
 }
 
 MEGA_SECRET_LAUNCHER = {

@@ -14,7 +14,8 @@ class EventCog(commands.Cog):
         self.bot = bot
 
     @discord.app_commands.command(name="launch", description="Launch an egg with your trusty Egg Launcher!")
-    @discord.app_commands.choices(type=[discord.app_commands.Choice(name=k.title(), value=k.lower()) for k in MAX_EGGS.keys()] + [
+    @discord.app_commands.choices(type=[
+        discord.app_commands.Choice(name="Max", value="max"),
         discord.app_commands.Choice(name="Full", value="full"),
         discord.app_commands.Choice(name="Perfect", value="perfect"),
         discord.app_commands.Choice(name="Mega Secret", value="mega"),
@@ -65,9 +66,9 @@ class EventCog(commands.Cog):
                         break
 
                 if type:
-                    if type.title() in MAX_EGGS and str(view.thrower) in list_decoded_entries(f"{MAX_EGGS[type.capitalize()]} Egg"):
+                    if type.title() == "Max" and str(view.thrower) in list_decoded_entries(f"{view.type.title()} Egg"):
                         view.type = type.title()
-                    elif type.title() in MAX_EGGS:
+                    elif type.title() == "Max":
                         await FOLLOWUP("To launch that egg, you must first have the base one.", interaction)
                         BUTTONS["easterStatus"] = False
                         return
