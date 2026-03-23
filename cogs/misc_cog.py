@@ -134,7 +134,7 @@ class MiscCog(commands.Cog):
 
             close_btn = discord.ui.Button(label="Close Poll", style=discord.ButtonStyle.red)
             async def close_callback(interaction):
-                await view.process_click(interaction, "throwclose", usr)
+                await view.process_click(interaction, "throwclose", interaction.user)
             close_btn.callback = close_callback
 
             view.add_item(close_btn)
