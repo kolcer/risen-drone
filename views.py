@@ -1639,6 +1639,9 @@ class ButtonEgg_Throw(discord.ui.View):
 
                 add_entry(f"{self.type} Egg", "827952429290618943")
 
+            if self.type == "Mega Secret":
+                MEGA_SECRET_LAUNCHER["user"] = None
+
 
         await self.on_timeout()
 
