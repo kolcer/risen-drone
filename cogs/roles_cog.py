@@ -6,7 +6,7 @@ from discord.ext import commands
 import datetime
 from roles import DemorphFrom, MorphTo, MorphTo, SubTo, UnsubFrom
 from utility import send_followup
-from globals import EVENTS, EXTRA_ROLES, PING_ROLES, RIG_LIST, SECRET_PING_ROLES, MORPHABLE_ROLES, SPECIAL_ROLES, EX_CLIMBERS
+from globals import EVENTS, EXTRA_ROLES, PING_ROLES, RIG_LIST, SECRET_PING_ROLES, MORPHABLE_ROLES, SPECIAL_ROLES, EX_CLIMBERS, MAX_EGGS
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, REMOVE_ROLES, ADD_ROLES
 from database import list_decoded_entries, add_entry_with_check
 
@@ -80,10 +80,10 @@ class RolesCog(commands.Cog):
         today = datetime.date.today()
         
         morph_target = "Joker" if (today.day == 1 and today.month == 4) else role.title()
-        alignment_roles_count = len([r for r in user.roles if r.name.lower() in RIG_LIST])
+        alignment_roles_count = len([r for r in user.roles if r.name.title() in MAX_EGGS])
 
         if EVENTS.get("Easter", False):
-            if alignment_roles_count >= 1:
+            if alignment_roles_count >= 1 or role == "all":
                 msg = ("I'm afraid I can't let you do that.\n"
                     "For the duration of the Easter Event, you may only have 1 alignment role.\n"
                     "Eating eggs of any alignment will morph you instead.")
@@ -126,7 +126,7 @@ class RolesCog(commands.Cog):
         demorph_target = role.title()
 
         if EVENTS.get("Easter", False):
-            alignment_roles_count = len([r for r in user.roles if r.name.lower() in RIG_LIST])
+            alignment_roles_count = len([r for r in user.roles if r.name.title() in MAX_EGGS])
             
             if alignment_roles_count == 1:
                 msg = ("I'm afraid you're stuck with that alignment for now.\n"
