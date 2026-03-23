@@ -649,6 +649,7 @@ EDIBLE_EGGS = [
     "gremlin",
     "spectre",
     "chameleon",
+    "none",
 ]
 
 ACTIVE_RIGS = {
