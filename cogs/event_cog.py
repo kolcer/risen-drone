@@ -22,7 +22,7 @@ class EventCog(commands.Cog):
         discord.app_commands.Choice(name="Murdurator (Murdurators Only)", value="murdurator"),
         discord.app_commands.Choice(name="Master (Drone Masters Only)", value="master"),
     ])
-    async def launch(self, interaction: discord.Interaction, type: str):
+    async def launch(self, interaction: discord.Interaction, type: str = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
@@ -87,7 +87,7 @@ class EventCog(commands.Cog):
                         return
                     
                     if (type.title() == "Mega" and (MEGA_SECRET_LAUNCHER["user"] == usr.id or MEGA_SECRET_LAUNCHER["user"] == None)):
-                        view.type = type.title()
+                        view.type = "Mega Secret"
                     elif type.title() == "Mega":
                         await FOLLOWUP("The Mega Secret Egg Launcher can only be used once, and by the person who found it. Maybe that person is you... someday.", interaction)
                         BUTTONS["easterStatus"] = False
