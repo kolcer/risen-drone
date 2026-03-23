@@ -64,6 +64,7 @@ class MinigamesCog(commands.Cog):
                         view.duelists = duelists
                         msg += f"\n{duelist.mention}, you have been challenged by {interaction.user.mention}!"
 
+                    BUTTONS["channel"] = interaction.channel
                     view.message = await FOLLOWUP(msg, interaction, False, view)
 
                     await view.wait()

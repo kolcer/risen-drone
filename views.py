@@ -1382,10 +1382,10 @@ class Minigames_TicTacToe(discord.ui.View):
     async def too_late(self):
         if self.toolate:
             if len(self.players) < 2:
-                await SEND(CHANNELS["bot-commands"], "I was waiting.")
+                await SEND(BUTTONS["channel"], "I was waiting.")
                 return
             else:
-                await SEND(CHANNELS["bot-commands"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
+                await SEND(BUTTONS["channel"], f"{self.lastplayer.mention} won due to the other player forfeiting.")
 
         await self.on_timeout()
 
