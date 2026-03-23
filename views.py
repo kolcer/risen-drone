@@ -1669,7 +1669,7 @@ class ButtonEgg_Throw(discord.ui.View):
         self.disabled = True
         
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
-            await INTERACTION(interaction, "This egg... rejects you.", True)
+            await INTERACTION(interaction, "The basket barely has space for one egg of each type.", True)
             self.disabled = False
             return
         
