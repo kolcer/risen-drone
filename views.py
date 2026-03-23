@@ -1669,6 +1669,7 @@ class ButtonEgg_Throw(discord.ui.View):
             MEGA_SECRET_LAUNCHER["user"] = usr.id
         
         self.picker = usr
+        self.toolate = False
         await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
         self.stop()
 
