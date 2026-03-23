@@ -1664,7 +1664,7 @@ class ButtonEgg_Throw(discord.ui.View):
             self.disabled = False
             return
         
-        await add_egg_with_check(f"{self.type} Egg", usr)
+        await add_egg_with_check(f"{self.type} Egg", usr) 
         if self.type == "Mega Secret":
             MEGA_SECRET_LAUNCHER["user"] = usr.id
         
