@@ -1609,6 +1609,11 @@ class ButtonGames_ButtonFight(discord.ui.View):
             await EDIT_VIEW_MESSAGE(self.message, currMsg, self)
         
 class ButtonEgg_Throw(discord.ui.View):
+    def __init__(self, *, timeout=60):
+        super().__init__(timeout=timeout)
+        self.disabled = False
+        self.priority = None
+
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
@@ -1648,16 +1653,20 @@ class ButtonEgg_Throw(discord.ui.View):
     @discord.ui.button(label="🥚", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-        if self.disabled or usr.id == self.thrower:
-            await INTERACTION(interaction, "No can do.", True)
+        if self.disabled:
+            await INTERACTION(interaction, "Too many people are interacting right now.", True)
             return
+        
+        if usr.id == self.thrower:
+            await INTERACTION(interaction, "You cannot take your own egg.", True)
+            return
+        
+        if self.priority is not None:
+            if usr.id != self.priority:
+                await INTERACTION(interaction, "This egg is reserved for a short while.", True)
+                return
         
         self.disabled = True
-        
-        if self.priority is not None and usr.id != self.priority:
-            await INTERACTION(interaction, "This egg is reserved for a short while.", True)
-            self.disabled = False
-            return
         
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
             await INTERACTION(interaction, "This egg... rejects you.", True)
