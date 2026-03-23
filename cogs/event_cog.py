@@ -61,7 +61,7 @@ class EventCog(commands.Cog):
                 BUTTONS["easterStatus"] = True
 
                 for role in reversed(usr.roles):
-                    if role.name.lower() in RIG_LIST:
+                    if role.name.title() in MAX_EGGS:
                         view.type = role.name
                         break
 
