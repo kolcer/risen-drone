@@ -120,7 +120,7 @@ class EventCog(commands.Cog):
                 viewMsg = f"{usr.mention} threw the {view.type} Egg!"
 
             view.message = await FOLLOWUP(viewMsg, interaction, False, view)
-            await asyncio.sleep(3)
+            await asyncio.sleep(1.7)
             view.priority = None
             await view.wait()
             await view.too_late()
