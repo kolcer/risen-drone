@@ -136,7 +136,7 @@ class EventCog(commands.Cog):
             raise
 
     @discord.app_commands.command(name="eat", description="Eat a base Alignment egg you own.")
-    @discord.app_commands.choices(type=[discord.app_commands.Choice(name=k.title(), value=k.lower()) for k in MAX_EGGS.values()])
+    @discord.app_commands.choices(type=[discord.app_commands.Choice(name=k.title(), value=k.lower()) for k in MAX_EGGS])
     async def eat(self, interaction: discord.Interaction, type: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
