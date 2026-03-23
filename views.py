@@ -1648,27 +1648,49 @@ class ButtonEgg_Throw(discord.ui.View):
     @discord.ui.button(label="🥚", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
-
-        if (usr.id != self.thrower and not self.disabled) and (self.priority is not None and usr.id == self.priority):
-            self.disabled = True
-            
-            if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
-                self.picker = usr
-
-                await add_egg_with_check(f"{self.type} Egg", usr)
-                if self.type == "Mega Secret":
-                    MEGA_SECRET_LAUNCHER["user"] = usr.id
-                await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
-            else:
-                await INTERACTION(interaction, "This egg... rejects you.", True)
-                self.disabled = False
-                return
-
-            self.toolate = False
-            self.stop()
-        else:
+        if self.disabled or usr.id == self.thrower:
             await INTERACTION(interaction, "No can do.", True)
             return
+        
+        self.disabled = True
+        
+        if self.priority is not None and usr.id != self.priority:
+            await INTERACTION(interaction, "This egg is reserved for a short while.", True)
+            self.disabled = False
+            return
+        
+        if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
+            await INTERACTION(interaction, "This egg... rejects you.", True)
+            self.disabled = False
+            return
+        
+        await add_egg_with_check(f"{self.type} Egg", usr)
+        if self.type == "Mega Secret":
+            MEGA_SECRET_LAUNCHER["user"] = usr.id
+            
+        await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
+        self.stop()
+
+        # if (usr.id != self.thrower and not self.disabled) and (self.priority is not None and usr.id == self.priority):
+        #     self.disabled = True
+            
+        #     if not str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
+        #         self.picker = usr
+
+        #         await add_egg_with_check(f"{self.type} Egg", usr)
+        #         if self.type == "Mega Secret":
+        #             MEGA_SECRET_LAUNCHER["user"] = usr.id
+        #         await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
+        #     else:
+        #         await INTERACTION(interaction, "This egg... rejects you.", True)
+        #         self.disabled = False
+        #         return
+
+        #     self.toolate = False
+        #     self.stop()
+        # else:
+        #     await INTERACTION(interaction, "No can do.", True)
+        #     return
         
 class ButtonEgg_Eggcelent(discord.ui.View):
     def __init__(self, *, timeout=180):
