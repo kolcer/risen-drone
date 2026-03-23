@@ -981,6 +981,7 @@ FUN_ROLES = {
         "Daemon Egg",
         "Aether Egg",
         "Usurper Egg",
+        "Black Hole Egg",
         "Possessed Egg",
         "Hypnotized Egg",
         "Reflected Egg",
@@ -1008,7 +1009,8 @@ MAX_EGGS = {
     "Reaver": "Illusion",
     "Gremlin": "Daemon",
     "Spectre": "Aether",
-    "Chameleon": "Usurper"
+    "Chameleon": "Usurper",
+    "None": "Black Hole"
 }
 
 MEGA_SECRET_LAUNCHER = {

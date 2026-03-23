@@ -67,7 +67,7 @@ class EventCog(commands.Cog):
 
                 if type:
                     if type.title() == "Max" and str(view.thrower) in list_decoded_entries(f"{view.type.title()} Egg"):
-                        view.type = type.title()
+                        view.type = MAX_EGGS[type.title()]
                     elif type.title() == "Max":
                         await FOLLOWUP("To launch that egg, you must first have the base one.", interaction)
                         BUTTONS["easterStatus"] = False
