@@ -23,7 +23,8 @@ class EventCog(commands.Cog):
         discord.app_commands.Choice(name="Murdurator (Murdurators Only)", value="murdurator"),
         discord.app_commands.Choice(name="Master (Drone Masters Only)", value="master"),
     ])
-    async def launch(self, interaction: discord.Interaction, type: str = None, priority: discord.Member = None):
+    # , priority: discord.Member = None
+    async def launch(self, interaction: discord.Interaction, type: str = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
@@ -43,7 +44,7 @@ class EventCog(commands.Cog):
             view.thrower = usr.id
             view.disabled = False
             view.type = None
-            view.priority = priority.id if priority else None
+            # view.priority = priority.id if priority else None
 
             if SPECIAL_ROLES["Admin"][0] in usr.roles and type == "admin":
                 BUTTONS["easterStaffStatus"] = True
@@ -121,7 +122,6 @@ class EventCog(commands.Cog):
 
             view.message = await FOLLOWUP(viewMsg, interaction, False, view)
             await asyncio.sleep(1.7)
-            view.priority = None
             await view.wait()
             await view.too_late()
 
