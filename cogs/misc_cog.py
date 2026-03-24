@@ -7,7 +7,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, WISDOM, getScoldDictionary, getPraiseDictionary
+from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, BOT_BLACKLIST, getScoldDictionary, getPraiseDictionary
 from utility import print_entries
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
@@ -23,6 +23,10 @@ class MiscCog(commands.Cog):
     async def reset(self, interaction: discord.Interaction):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -77,6 +81,10 @@ class MiscCog(commands.Cog):
     async def poll(self, interaction: discord.Interaction, question: str, option1: str, option2: str, option3: str = None, option4: str = None, option5: str = None, option6: str = None, option7: str = None, option8: str = None, option9: str = None, option10: str = None, option11: str = None, option12: str = None, option13: str = None, option14: str = None, option15: str = None, option16: str = None, option17: str = None, option18: str = None, option19: str = None, option20: str = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -156,6 +164,10 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+            return
+
         usr = interaction.user
         finalmsg = None
 
@@ -182,6 +194,10 @@ class MiscCog(commands.Cog):
     async def praise(self, interaction: discord.Interaction, target: discord.Member):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -226,6 +242,10 @@ class MiscCog(commands.Cog):
     async def link(self, interaction: discord.Interaction):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -274,6 +294,10 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+            return
+
         usr = interaction.user
         key = alignment
 
@@ -306,6 +330,10 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+            return
+
         usr = interaction.user
         ch = interaction.channel
         key = alignment
@@ -333,6 +361,10 @@ class MiscCog(commands.Cog):
     async def tip_delete(self, interaction: discord.Interaction, alignment: str, type: str, position: int):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -367,6 +399,10 @@ class MiscCog(commands.Cog):
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
             return
 
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+            return
+
         await DEFER(interaction)
 
         try:
@@ -383,6 +419,10 @@ class MiscCog(commands.Cog):
     async def trivia(self, interaction: discord.Interaction, alignment: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         key = alignment + "T"

@@ -53,6 +53,11 @@ def check_perfect_egg_conditions(usr):
     # Checks if user is in "Saviour Egg", "It Egg", etc.
     return all(user_id in list_decoded_entries(f"{key} Egg") for key in MAX_EGGS.values())
 
+# Update the year every year
+def check_broken_drone_eggs():
+    user_id = 827952429290618943
+    return all(user_id in list_decoded_entries(key) for key in FUN_ROLES["Easter26"])
+
 def delete_key(key):
     db.delete(key)
 

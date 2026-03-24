@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from globals import HYPNO_SWAPS, RIG_LIST, EXTRA_ROLES
+from globals import HYPNO_SWAPS, RIG_LIST, EXTRA_ROLES, BOT_BLACKLIST
 from rated import DEFER, FOLLOWUP, INTERACTION
 from rigs import CastRig
 
@@ -20,6 +20,10 @@ class RigCog(commands.Cog):
     async def cast(self, interaction: discord.Interaction, rig: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
         
         rigLower = rig.strip().lower()

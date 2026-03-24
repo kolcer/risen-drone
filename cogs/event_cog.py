@@ -4,7 +4,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import EDIBLE_EGGS, EGG_EATER, EVENTS, EXTRA_ROLES, MAX_EGGS, MEGA_SECRET_LAUNCHER, MORPHABLE_ROLES, BUTTONS, RIG_LIST, SPECIAL_ROLES
+from globals import EDIBLE_EGGS, EGG_EATER, EVENTS, EXTRA_ROLES, MAX_EGGS, MEGA_SECRET_LAUNCHER, MORPHABLE_ROLES, BUTTONS, BOT_BLACKLIST, SPECIAL_ROLES
 from rated import ADD_ROLES, DEFER, FOLLOWUP, INTERACTION, REMOVE_ROLES, SEND
 from database import check_full_egg_conditions, check_perfect_egg_conditions, delete_entry_by_value, list_decoded_entries
 from utility import launch_egg
@@ -19,14 +19,18 @@ class EventCog(commands.Cog):
         discord.app_commands.Choice(name="Full", value="full"),
         discord.app_commands.Choice(name="Perfect", value="perfect"),
         discord.app_commands.Choice(name="Mega Secret", value="mega"),
-        discord.app_commands.Choice(name="Admin (Admins Only)", value="admin"),
-        discord.app_commands.Choice(name="Murdurator (Murdurators Only)", value="murdurator"),
         discord.app_commands.Choice(name="Master (Drone Masters Only)", value="master"),
+        discord.app_commands.Choice(name="Murdurator (Murdurators Only)", value="murdurator"),
+        discord.app_commands.Choice(name="Admin (Admins Only)", value="admin"),
     ])
     # , priority: discord.Member = None
     async def launch(self, interaction: discord.Interaction, type: str = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+        
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user
@@ -143,6 +147,10 @@ class EventCog(commands.Cog):
     async def eat(self, interaction: discord.Interaction, type: str):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         usr = interaction.user

@@ -991,6 +991,7 @@ FUN_ROLES = {
         "Secret Egg",
         "Super Secret Egg",
         "Mega Secret Egg",
+        "Misnamed Egg",
     ]
 }
 

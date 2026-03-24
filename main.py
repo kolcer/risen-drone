@@ -579,25 +579,32 @@ async def on_message(message):
 
                 # Check if the replied message is pinned
                 if not replied_msg.pinned:
-                    await SEND(ch, "📌 That message isn't pinned.")
+                    await SEND(ch, "That's not pinned right now.")
                     return
 
                 # Check if the author of the replied message is the same as the command author
                 if replied_msg.author.id != usr.id:
-                    await SEND(ch, "❌ You can only unpin your own pinned messages.")
+                    await SEND(ch, "I won't take down other people's pins.")
                     return
 
                 # Unpin the message
                 await replied_msg.unpin()
                 await asyncio.sleep(1)
-                await ch.send("✅ Message unpinned.")
+                await ch.send("That is done.")
+
+                audio_count = len([a for a in replied_msg.attachments if a.content_type and a.content_type.startswith('audio')])
+                now = discord.utils.utcnow()
+                diff = now - replied_msg.created_at
+                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 3600 and EVENTS["Easter"] and ch.id == 813882658156838923:
+                    await launch_egg(ch, "Misnamed", "Can you guess which egg this is?")
+                    return
                 
             except discord.NotFound:
-                await SEND(ch, "⚠️ Couldn't find the message to unpin.")
+                await SEND(ch, "No such message.")
             except discord.Forbidden:
-                await SEND(ch, "❌ I don't have permission to unpin messages.")
+                await SEND(ch, "I've lost my powers.")
             except discord.HTTPException as e:
-                await SEND(ch, f"⚠️ Failed to unpin message: {e}")
+                await SEND(ch, f"Failed to unpin message: {e}")
 
         # adding a comment to reset bot but rolo why does the bot break sometimes
         # elif lmsg.startswith("play hangman") and not BUTTONS["status"]: #play hangman alone

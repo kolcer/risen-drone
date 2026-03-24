@@ -4,7 +4,7 @@ import re
 import discord
 from discord.ext import commands
 
-from globals import BUTTONS, HYPNO_SWAPS, QUIZ, LADDERS, EXTRA_ROLES
+from globals import BUTTONS, HYPNO_SWAPS, QUIZ, LADDERS, EXTRA_ROLES, BOT_BLACKLIST
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND_VIEW
 from quiz import StartQuiz
 from ladders import PlayLucidLadders
@@ -27,6 +27,10 @@ class MinigamesCog(commands.Cog):
     async def start_game(self, interaction: discord.Interaction, game: str, duelist: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
         
         newGame = game

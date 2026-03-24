@@ -1613,36 +1613,63 @@ class ButtonEgg_Throw(discord.ui.View):
         super().__init__(timeout=timeout)
         self.disabled = False
         self.priority = None
+        self.closing = False
+        self.picker = []
 
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
 
-            if self.picker != None:
-                item.label = f"{self.picker.name} took the {self.type} egg"
-                await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
-            else:
+        # if self.picker != None:
+        #     item.label = f"{self.picker.name} took the {self.type} egg"
+        #     await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
+        # else:
+        #     item.label = "I will keep it for next time."
+        #     item.style = discord.ButtonStyle.red
+        #     if self.type == "Mega Secret":
+        #         MEGA_SECRET_LAUNCHER["user"] = None
+        #     await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
+
+        if not self.picker:
+            for item in self.children:
                 item.label = "I will keep it for next time."
                 item.style = discord.ButtonStyle.red
-                if self.type == "Mega Secret":
-                    MEGA_SECRET_LAUNCHER["user"] = None
-                await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
+            
+            if self.type == "Mega Secret":
+                MEGA_SECRET_LAUNCHER["user"] = None
+            
+            await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
+        
+        else:
+            if self.type == "Misnamed":
+                if len(self.picker) > 1:
+                    label_text = f"Many people took the {self.type} egg"
+                else:
+                    label_text = f"{self.picker[0].name} took the {self.type} egg"
+            else:
+                label_text = f"{self.picker[0].name} took the {self.type} egg"
+
+            for item in self.children:
+                item.label = label_text
+            
+            await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
 
     async def too_late(self):
         if self.toolate:
             if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
                 await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
 
-                # if self.picker == None and self.type == "Admin":
-                #     otherView = ButtonEgg_Eggcelent(timeout=86400)
-
-                #     otherView.toolate = True
-                #     otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
-
-                #     await otherView.wait()
-                #     await otherView.too_late()
-
                 add_entry(f"{self.type} Egg", "827952429290618943")
+
+                if not self.picker and check_broken_drone_eggs():
+                    otherView = ButtonEgg_Eggcelent(timeout=86400)
+
+                    otherView.toolate = True
+                    otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
+
+                    await otherView.wait()
+                    await otherView.too_late()
+
 
             if self.type == "Mega Secret":
                 MEGA_SECRET_LAUNCHER["user"] = None
@@ -1666,10 +1693,11 @@ class ButtonEgg_Throw(discord.ui.View):
                 await INTERACTION(interaction, "This egg is reserved for a short while.", True)
                 return
         
-        self.disabled = True
+        if self.type != "Misnamed":
+            self.disabled = True
         
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
-            await INTERACTION(interaction, "The basket barely has space for one egg of each type.", True)
+            await INTERACTION(interaction, "The basket barely has enough space for one egg of each kind.", True)
             self.disabled = False
             return
         
@@ -1677,11 +1705,17 @@ class ButtonEgg_Throw(discord.ui.View):
         if self.type == "Mega Secret":
             MEGA_SECRET_LAUNCHER["user"] = usr.id
         
-        self.picker = usr
+        
+        self.picker.append(usr)
         self.toolate = False
-        await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False) 
-        self.stop()
 
+        await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False)
+
+        if self.type == "Misnamed" and not self.closing:
+            self.closing = True
+            await asyncio.sleep(30)
+
+        self.stop()
         # if (usr.id != self.thrower and not self.disabled) and (self.priority is not None and usr.id == self.priority):
         #     self.disabled = True
             
@@ -1809,7 +1843,6 @@ class Quiz(discord.ui.View):
         finally:
             self.joining_lock = False
 
-
 class LucidLadders(discord.ui.View):
     def __init__(self, *, timeout=60):
         super().__init__(timeout=timeout)
@@ -1866,5 +1899,3 @@ class LucidLadders(discord.ui.View):
         except Exception as exc:
             await INTERACTION(interaction, f"Could not start Lucid Ladders: {exc}", True)
             raise
-            
-

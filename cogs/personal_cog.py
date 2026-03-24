@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 from utility import build_tower_page, build_role_page, send_followup
-from globals import HYPNO_SWAPS, RIG_LIST, EMOJIS_TO_REACT, FUN_ROLES, RIGS_DESCRIPTION, MSG_SENT, LAST_RIG, RIG_COOLDOWNS, COOLDOWN_DESCRIPTIONS, EXTRA_ROLES
+from globals import HYPNO_SWAPS, RIG_LIST, EMOJIS_TO_REACT, FUN_ROLES, RIGS_DESCRIPTION, MSG_SENT, LAST_RIG, RIG_COOLDOWNS, COOLDOWN_DESCRIPTIONS, EXTRA_ROLES, BOT_BLACKLIST
 from rated import DEFER, FOLLOWUP, INTERACTION
 from views import ShowProfile, ShowEggs, ShowCommands
 from database import get_user_stats, list_decoded_entries
@@ -24,6 +24,10 @@ class PersonalCog(commands.Cog):
     async def show(self, interaction: discord.Interaction, type: str, target: discord.Member = None):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
         
         newType = type
@@ -51,6 +55,10 @@ class PersonalCog(commands.Cog):
     async def help(self, interaction: discord.Interaction):
         if interaction.guild is None or interaction.channel is None:
             await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+            return
+
+        if str(interaction.user.id) in BOT_BLACKLIST:
+            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
             return
 
         await DEFER(interaction)
