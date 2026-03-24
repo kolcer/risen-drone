@@ -595,7 +595,7 @@ async def on_message(message):
                 audio_count = len([a for a in replied_msg.attachments if a.content_type and a.content_type.startswith('audio')])
                 now = discord.utils.utcnow()
                 diff = now - replied_msg.created_at
-                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 3600 and EVENTS["Easter"] and ch.id == 813882658156838923:
+                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and ch.id == 813882658156838923:
                     await launch_egg(ch, "Misnamed", "Can you guess which egg this is?")
                     return
                 
