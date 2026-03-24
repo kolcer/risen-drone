@@ -41,7 +41,6 @@ async def launch_egg(ch, eggType, msg, interaction=None):
     BUTTONS["status"] = True
     view = ButtonEgg_Throw(timeout=30)
     view.thrower = None
-    view.picker = None
     view.disabled = False
 
     view.type = eggType
