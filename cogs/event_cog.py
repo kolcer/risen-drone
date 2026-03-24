@@ -114,7 +114,6 @@ class EventCog(commands.Cog):
                 return
                     
             BUTTONS["easterLast"] = view.type
-            view.picker = None
             view.channel = ch
             view.toolate = True
             viewMsg = ""
