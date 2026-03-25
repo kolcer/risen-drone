@@ -521,7 +521,7 @@ async def on_message(message):
             current_pins = await ch.pins()
 
             try:
-                if len(current_pins) >= 3:
+                if len(current_pins) > 30:
                     await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
                     return
 
@@ -555,7 +555,7 @@ async def on_message(message):
                     return
 
                 # Check if the author of the replied message is the same as the command author
-                if replied_msg.author.id != usr.id:
+                if replied_msg.author.id != usr.id and EXTRA_ROLES["admin"] not in usr.roles:
                     await SEND(ch, "I won't take down other people's pins.")
                     return
 
@@ -567,7 +567,7 @@ async def on_message(message):
                 audio_count = len([a for a in replied_msg.attachments if a.content_type and a.content_type.startswith('audio')])
                 now = discord.utils.utcnow()
                 diff = now - replied_msg.created_at
-                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and ch.id == 813882658156838923:
+                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and replied_msg.author.id == usr.id and ch.id == 813882658156838923:
                     await asyncio.sleep(1)
                     await launch_egg(ch, "Misnamed", "My turn now. I also have 4 eggs here, can you guess what's the wrong one?")
                     return
