@@ -521,7 +521,7 @@ async def on_message(message):
             current_pins = await ch.pins()
 
             try:
-                if len(current_pins) > 30:
+                if len(current_pins) > 3:
                     await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
                     return
 
@@ -567,9 +567,9 @@ async def on_message(message):
                 audio_count = len([a for a in replied_msg.attachments if a.content_type and a.content_type.startswith('audio')])
                 now = discord.utils.utcnow()
                 diff = now - replied_msg.created_at
-                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and replied_msg.author.id == usr.id and ch.id == 813882658156838923:
+                if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 3600 and EVENTS["Easter"] and replied_msg.author.id == usr.id:
                     await asyncio.sleep(1)
-                    await launch_egg(ch, "Misnamed", "My turn now. I also have 4 eggs here, can you guess what's the wrong one?")
+                    await launch_egg(ch, "Misnamed", "My turn now. I also have 4 eggs here, can you find the wrong one?")
                     return
                 
             except discord.NotFound:

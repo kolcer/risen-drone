@@ -55,7 +55,7 @@ async def launch_egg(ch, eggType, msg, interaction=None):
         await view.wait()
         await view.too_late()
     else:
-        view = MisnamedEgg(timeout=30)
+        view = MisnamedEgg(timeout=60)
         view.type = eggType
         view.channel = ch
 
