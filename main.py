@@ -518,12 +518,18 @@ async def on_message(message):
             await JoinFightingGame(usr)
 
         elif "bd pin this" in lmsg and (ch.id == 1311716835779154090 or ch.id == 813882658156838923):
+            current_pins = await ch.pins()
+
             try:
+                if len(current_pins) >= 3:
+                    await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
+                    return
+
                 await PIN_MESSAGE(message)
             except discord.Forbidden:
-                await SEND(ch, "❌ I don't have permission to pin messages.")
+                await SEND(ch, "I lost my powers.")
             except discord.HTTPException as e:
-                await SEND(ch, f"⚠️ Failed to pin message: {e}")
+                await SEND(ch, f"Failed to pin message: {e}")
 
             if "misnamed melodies" in lmsg:
                 musicEnjoyers = list_decoded_entries("Misnamed Melodies")
@@ -562,6 +568,7 @@ async def on_message(message):
                 now = discord.utils.utcnow()
                 diff = now - replied_msg.created_at
                 if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and ch.id == 813882658156838923:
+                    await asyncio.sleep(1)
                     await launch_egg(ch, "Misnamed", "My turn now. I also have 4 eggs here, can you guess what's the wrong one?")
                     return
                 

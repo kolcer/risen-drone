@@ -1914,7 +1914,8 @@ class MisnamedEgg(discord.ui.View):
 
         if not self.winners:
             for item in self.children:
-                item.label = "I will keep it for next time."
+                if isinstance(item, discord.ui.Button) and int(item.custom_id) == int(self.correct_id):
+                    item.label = "I will keep it for next time."
                 item.style = discord.ButtonStyle.red
             
             await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
@@ -1925,8 +1926,9 @@ class MisnamedEgg(discord.ui.View):
                 label_text = f"{self.winners[0].name} took the {self.type} egg"
 
             for item in self.children:
-                item.label = label_text
-            
+                if isinstance(item, discord.ui.Button) and int(item.custom_id) == int(self.correct_id):
+                    item.label = label_text
+                    
             await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
 
     async def too_late(self):
