@@ -1,6 +1,6 @@
 import random
-from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS, FUN_ROLES, GIT_COMMITTERS
-from rated import SEND, FOLLOWUP, SEND_VIEW
+from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS, FUN_ROLES, GIT_COMMITTERS, BOT_BLACKLIST
+from rated import SEND, FOLLOWUP, SEND_VIEW, INTERACTION
 from database import list_decoded_entries, list_entries
 
 # Convert milliseconds to seconds
@@ -37,22 +37,35 @@ def build_tower_page(user_stats, tower_type, page_index, view):
         view.footers[page_index] = "Type 'bd link' to link your account and start tracking your times!"
 
 async def launch_egg(ch, eggType, msg, interaction=None):
-    from views import ButtonEgg_Throw
+    from views import ButtonEgg_Throw, MisnamedEgg
     BUTTONS["status"] = True
-    view = ButtonEgg_Throw(timeout=30)
-    view.thrower = None
-    view.disabled = False
 
-    view.type = eggType
+    if eggType != "Misnamed":
+        view = ButtonEgg_Throw(timeout=30)
+        view.thrower = None
+        view.disabled = False
 
-    view.channel = ch
-    view.toolate = True
-    if interaction is not None:
-        view.message = await FOLLOWUP(msg, interaction, False, view)
+        view.type = eggType
+
+        view.channel = ch
+        if interaction is not None:
+            view.message = await FOLLOWUP(msg, interaction, False, view)
+        else:
+            view.message = await SEND_VIEW(ch, msg, view)
+        await view.wait()
+        await view.too_late()
     else:
-        view.message = await SEND_VIEW(ch, msg, view)
-    await view.wait()
-    await view.too_late()
+        view = MisnamedEgg(timeout=30)
+        view.type = eggType
+        view.channel = ch
+        
+        if interaction is not None:
+            view.message = await FOLLOWUP(msg, interaction, False, view)
+        else:
+            view.message = await SEND_VIEW(ch, msg, view)
+        await view.wait()
+        await view.too_late()
+
     BUTTONS["status"] = False
 
 async def send_followup(ch, msg, interaction=None, ephemeral=False, view=None, embed=None):
@@ -130,3 +143,12 @@ async def print_entries(channel, key):
         else:
             combined_string = new_string
     await SEND(channel, combined_string)
+
+def command_check(interaction):
+    if interaction.guild is None or interaction.channel is None:
+        return "Use this command in the Crazy Stairs server!"
+
+    if str(interaction.user.id) in BOT_BLACKLIST:
+        return "You have been naughty, and I don't like naughty users."
+    
+    return None

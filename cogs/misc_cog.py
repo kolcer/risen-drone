@@ -1,5 +1,4 @@
 import asyncio
-import random
 import secrets
 import string
 
@@ -7,8 +6,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, BOT_BLACKLIST, getScoldDictionary, getPraiseDictionary
-from utility import print_entries
+from globals import FIX_BOT, EXTRA_ROLES, ACTIVE_RIGS, DETAILED_RIGS, MORPHABLE_ROLES, PRAISES, RIG_COOLDOWNS, BUTTONS, TIPS_KEYS, getScoldDictionary, getPraiseDictionary
+from utility import print_entries, command_check
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
@@ -21,12 +20,9 @@ class MiscCog(commands.Cog):
 
     @discord.app_commands.command(name="reset", description="Reset Broken Drone")
     async def reset(self, interaction: discord.Interaction):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -79,12 +75,9 @@ class MiscCog(commands.Cog):
     
     @discord.app_commands.command(name="poll", description="Create a poll with buttons")
     async def poll(self, interaction: discord.Interaction, question: str, option1: str, option2: str, option3: str = None, option4: str = None, option5: str = None, option6: str = None, option7: str = None, option8: str = None, option9: str = None, option10: str = None, option11: str = None, option12: str = None, option13: str = None, option14: str = None, option15: str = None, option16: str = None, option17: str = None, option18: str = None, option19: str = None, option20: str = None):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -160,31 +153,20 @@ class MiscCog(commands.Cog):
 
     @discord.app_commands.command(name="scold", description="Scold someone")
     async def scold(self, interaction: discord.Interaction, target: discord.Member):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
-            return
-
+        
         usr = interaction.user
-        finalmsg = None
 
         try:
-            ScoldDict = getScoldDictionary(target, usr)
-
-            # Scold someone in the Dictionary (User itself included)
-            if target.id in ScoldDict:
-                finalmsg = ScoldDict[target.id]
-            # Scolding a Bot
-            elif target.bot:
-                finalmsg = "I love my bot friends."
-            # Scolding an User that is in the Server
+            if EXTRA_ROLES['hypno'] in usr.roles:
+                content = await self._praise(target)
             else:
-                finalmsg = target.display_name + ", I am very disappointed in you."
+                content = self._scold(target)
 
-            await INTERACTION(interaction, finalmsg)
+            await INTERACTION(interaction, content)
             return
         except Exception as exc:
             await INTERACTION(interaction, f"Something went wrong with `/scold`: {exc}")
@@ -192,47 +174,20 @@ class MiscCog(commands.Cog):
 
     @discord.app_commands.command(name="praise", description="Praise someone")
     async def praise(self, interaction: discord.Interaction, target: discord.Member):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
-            return
-
+        
         usr = interaction.user
-        finalmsg = None
-
+        
         try:
-            praised_user_id = target.id
-            praising_user_id = usr.id
-
-            if praised_user_id not in PRAISES:
-                PRAISES[praised_user_id] = []
-
-            # Add the praising user's ID to the praised user's list if not already added
-            if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
-                PRAISES[praised_user_id].append(praising_user_id)
-
-            PraiseDict = getPraiseDictionary(target, usr)
-            # Praise someone in the Dictionary (User itself included)
-            if praised_user_id in PraiseDict:
-                finalmsg = PraiseDict[praised_user_id]
-            # Praising a Bot
-            elif target.bot:
-                finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
-            # Praising an User that is in the Server
+            if EXTRA_ROLES['hypno'] in usr.roles:
+                content = self._scold(target)
             else:
-                # Check if the praised user has been praised by three unique users
-                if len(PRAISES[praised_user_id]) == 3:
-                    finalmsg = f"{target.display_name}, everyone likes you. And so do I."
+                content = await self._praise(target)
 
-                    if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
-                        await add_entry_with_check("Acclaimed", target)
-                else:
-                    finalmsg = f"Well done, {target.display_name}. Most excellent."
-                    
-            await INTERACTION(interaction, finalmsg)
+            await INTERACTION(interaction, content)
             return
         except Exception as exc:
             await INTERACTION(interaction, f"Something went wrong with `/praise`: {exc}")
@@ -240,12 +195,9 @@ class MiscCog(commands.Cog):
 
     @discord.app_commands.command(name="link", description="Link account for Janitor role")
     async def link(self, interaction: discord.Interaction):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -290,12 +242,9 @@ class MiscCog(commands.Cog):
     ])
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
     async def tip_add(self, interaction: discord.Interaction, alignment: str, type: str, content: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -326,15 +275,11 @@ class MiscCog(commands.Cog):
     ])
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
     async def tip_list(self, interaction: discord.Interaction, alignment: str, type: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
-            return
-
-        usr = interaction.user
         ch = interaction.channel
         key = alignment
 
@@ -359,12 +304,9 @@ class MiscCog(commands.Cog):
     ])
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
     async def tip_delete(self, interaction: discord.Interaction, alignment: str, type: str, position: int):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -395,20 +337,23 @@ class MiscCog(commands.Cog):
     @discord.app_commands.command(name="tip", description="Show a Tip for an Alignment")
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
     async def tip(self, interaction: discord.Interaction, alignment: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
-            return
+        usr = interaction.user
+        key = alignment
 
         await DEFER(interaction)
 
         try:
+            if EXTRA_ROLES['hypno'] in usr.roles:
+                key = alignment + "T"
+
             ## tips/tricks trigger
             if alignment in TIPS_KEYS:
-                await FOLLOWUP(show_next_entry(alignment), interaction)
+                await FOLLOWUP(show_next_entry(key), interaction)
                 return
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/tip`: {exc}", interaction)
@@ -417,19 +362,20 @@ class MiscCog(commands.Cog):
     @discord.app_commands.command(name="trivia", description="Show a Trivia for an Alignment")
     @discord.app_commands.choices(alignment=[discord.app_commands.Choice(name=k.title(), value=k) for k in TIPS_KEYS])
     async def trivia(self, interaction: discord.Interaction, alignment: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
-            return
-
-        key = alignment + "T"
+        usr = interaction.user
+        key = alignment
 
         await DEFER(interaction)
 
         try:
+            if not EXTRA_ROLES['hypno'] in usr.roles:
+                key = alignment + "T"
+
             ## trivia trigger
             if alignment in TIPS_KEYS:
                 await FOLLOWUP(show_next_entry(key), interaction)
@@ -438,29 +384,56 @@ class MiscCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/trivia`: {exc}", interaction)
             raise
 
-    # @discord.app_commands.command(name="wisdom", description="Ask for some wisdom from yours truly")
-    # async def wisdom(self, interaction: discord.Interaction):
-    #     if interaction.guild is None or interaction.channel is None:
-    #         await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-    #         return
 
-    #     usr = interaction.user
-    #     ch = interaction.channel
 
-    #     await DEFER(interaction)
 
-    #     try:
-    #         if random.randint(1, 100) > 1:
-    #             await SEND(ch, f"||*{random.choice(WISDOM)}*||")
-    #             return
-    #         else:
-    #             if not str(usr.id) in list_decoded_entries("Wise"):
-    #                 await add_entry_with_check("Wise", usr)
-    #                 await SEND(ch, f"||***The student has surpassed the master, you have reached the peak of wisdom.***||")
-    #                 await asyncio.sleep(2)
-    #             else:
-    #                 await SEND(ch, f"||***Wise choice.***||")
-    #             return
-    #     except Exception as exc:
-    #         await FOLLOWUP(f"Something went wrong with `/wisdom`: {exc}", interaction)
-    #         raise
+
+
+    ## HELPER ##
+    async def _praise(self, interaction, target):
+        praised_user_id = target.id
+        praising_user_id = interaction.user.id
+        finalmsg = ""
+
+        if praised_user_id not in PRAISES:
+            PRAISES[praised_user_id] = []
+
+        # Add the praising user's ID to the praised user's list if not already added
+        if praising_user_id not in PRAISES[praised_user_id] and praising_user_id != praised_user_id:
+            PRAISES[praised_user_id].append(praising_user_id)
+
+        PraiseDict = getPraiseDictionary(target, interaction.user)
+        # Praise someone in the Dictionary (User itself included)
+        if praised_user_id in PraiseDict:
+            finalmsg = PraiseDict[praised_user_id]
+        # Praising a Bot
+        elif target.bot:
+            finalmsg = "Well done, bot friend.\n-# Between us, I am the best."
+        # Praising an User that is in the Server
+        else:
+            # Check if the praised user has been praised by three unique users
+            if len(PRAISES[praised_user_id]) == 3:
+                finalmsg = f"{target.display_name}, everyone likes you. And so do I."
+
+                if not str(praised_user_id) in list_decoded_entries("Acclaimed"):
+                    await add_entry_with_check("Acclaimed", target)
+            else:
+                finalmsg = f"Well done, {target.display_name}. Most excellent."
+
+        return finalmsg
+
+    def _scold(self, interaction, target):
+        ScoldDict = getScoldDictionary(target, interaction.user)
+        finalmsg = ""
+
+        # Scold someone in the Dictionary (User itself included)
+        if target.id in ScoldDict:
+            finalmsg = ScoldDict[target.id]
+        # Scolding a Bot
+        elif target.bot:
+            finalmsg = "I love my bot friends."
+        # Scolding an User that is in the Server
+        else:
+            finalmsg = target.display_name + ", I am very disappointed in you."
+
+        return finalmsg

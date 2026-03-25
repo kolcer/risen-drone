@@ -1615,6 +1615,7 @@ class ButtonEgg_Throw(discord.ui.View):
         self.priority = None
         self.closing = False
         self.picker = []
+        self.toolate = True
 
     async def on_timeout(self):
         for item in self.children:
@@ -1662,6 +1663,7 @@ class ButtonEgg_Throw(discord.ui.View):
                 add_entry(f"{self.type} Egg", "827952429290618943")
 
                 if not self.picker and check_broken_drone_eggs():
+                    BUTTONS["easterBrokenDrone"] = True
                     otherView = ButtonEgg_Eggcelent(timeout=86400)
 
                     otherView.toolate = True
@@ -1693,8 +1695,7 @@ class ButtonEgg_Throw(discord.ui.View):
                 await INTERACTION(interaction, "This egg is reserved for a short while.", True)
                 return
         
-        if self.type != "Misnamed":
-            self.disabled = True
+        self.disabled = True
         
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
             await INTERACTION(interaction, "The basket barely has enough space for one egg of each kind.", True)
@@ -1710,10 +1711,6 @@ class ButtonEgg_Throw(discord.ui.View):
         self.toolate = False
 
         await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False)
-
-        if self.type == "Misnamed" and not self.closing:
-            self.closing = True
-            await asyncio.sleep(30)
 
         self.stop()
         # if (usr.id != self.thrower and not self.disabled) and (self.priority is not None and usr.id == self.priority):
@@ -1899,3 +1896,105 @@ class LucidLadders(discord.ui.View):
         except Exception as exc:
             await INTERACTION(interaction, f"Could not start Lucid Ladders: {exc}", True)
             raise
+
+class MisnamedEgg(discord.ui.View):
+    def __init__(self, *, timeout=60):
+        super().__init__(timeout=timeout)
+        self.type = "Misnamed"
+        self.toolate = True
+        self.closing = False
+        self.disabled = False
+        self.guessers = []
+        self.winners = []
+        self.correct_id = random.randint(1,3)
+
+    async def on_timeout(self):
+        for item in self.children:
+            item.disabled = True
+
+        if not self.winners:
+            for item in self.children:
+                item.label = "I will keep it for next time."
+                item.style = discord.ButtonStyle.red
+            
+            await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg is still here...", self)
+        else:
+            if len(self.winners) > 1:
+                label_text = f"Many people took the {self.type} egg"
+            else:
+                label_text = f"{self.winners[0].name} took the {self.type} egg"
+
+            for item in self.children:
+                item.label = label_text
+            
+            await EDIT_VIEW_MESSAGE(self.message, f"The {self.type} egg has been taken.", self)
+
+    async def too_late(self):
+        if self.toolate:
+            if not "827952429290618943" in list_decoded_entries(f"{self.type} Egg"):
+                await SEND(self.channel, f"I will treasure the {self.type} egg instead.")
+
+                add_entry(f"{self.type} Egg", "827952429290618943")
+
+                if not self.winners and check_broken_drone_eggs():
+                    BUTTONS["easterBrokenDrone"] = True
+                    otherView = ButtonEgg_Eggcelent(timeout=86400)
+
+                    otherView.toolate = True
+                    otherView.message = await SEND_VIEW(CHANNELS["bot-commands"], "Thank you for helping me get the eggs — you have all been eggcellent! I have a little something, but do not tell Sleazel.", otherView)
+
+                    await otherView.wait()
+                    await otherView.too_late()
+
+        await self.on_timeout()
+
+    async def process_click(self, interaction, button):
+        usr = interaction.user
+        
+        if self.disabled:
+            await INTERACTION(interaction, "Too many people are interacting right now.", True)
+            return
+        elif usr in self.guessers:
+            await INTERACTION(interaction, "We are done here.", True)
+            return
+        
+        self.disabled = True
+        
+        if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
+            await INTERACTION(interaction, "The basket barely has enough space for one egg of each kind.", True)
+            self.disabled = False
+            return
+        
+        self.guessers.append(usr)
+        if int(self.correct_id) != int(button.custom_id):
+            await INTERACTION(interaction, f"{interaction.user.mention} that was indeed the correct egg, but you had to pick the wrong one.", False)
+            self.disabled = False
+            return
+        
+        await add_egg_with_check(f"{self.type} Egg", usr)
+        self.toolate = False
+        self.winners.append(usr)
+
+        await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False)
+        self.disabled = False
+
+        if not self.closing:
+            self.closing = True
+            await asyncio.sleep(30)
+            self.stop()
+
+    @discord.ui.button(label="🥚", custom_id = "0", style = discord.ButtonStyle.blurple)
+    async def egg_emoji(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self.process_click(interaction, button)
+
+    @discord.ui.button(label="Egg", custom_id = "1", style = discord.ButtonStyle.blurple)
+    async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self.process_click(interaction, button)
+
+    @discord.ui.button(label="Gge", custom_id = "2", style = discord.ButtonStyle.blurple)
+    async def gge(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self.process_click(interaction, button)
+
+    @discord.ui.button(label="Bnuuy", custom_id = "3", style = discord.ButtonStyle.blurple)
+    async def bnuuy(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await self.process_click(interaction, button)

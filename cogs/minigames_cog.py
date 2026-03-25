@@ -4,11 +4,12 @@ import re
 import discord
 from discord.ext import commands
 
-from globals import BUTTONS, HYPNO_SWAPS, QUIZ, LADDERS, EXTRA_ROLES, BOT_BLACKLIST
+from globals import BUTTONS, HYPNO_SWAPS, QUIZ, LADDERS, EXTRA_ROLES
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND_VIEW
 from quiz import StartQuiz
 from ladders import PlayLucidLadders
 from views import Minigames_Hangman, Minigames_TicTacToe
+from utility import command_check
 
 class MinigamesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -25,12 +26,9 @@ class MinigamesCog(commands.Cog):
         duelist="Optional: Challenge a friend to play with you."
     )
     async def start_game(self, interaction: discord.Interaction, game: str, duelist: discord.Member = None):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
         
         newGame = game
@@ -88,8 +86,9 @@ class MinigamesCog(commands.Cog):
         duelist="Optional: Challenge a friend to play with you."
     )
     async def hangman(self, interaction: discord.Interaction, word: str = None, alone: bool = False, duelist: discord.Member = None):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the server!", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         duelists = [duelist, interaction.user] if duelist and duelist != interaction.user else None

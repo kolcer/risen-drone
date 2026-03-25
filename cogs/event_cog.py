@@ -7,7 +7,7 @@ from discord.ext import commands
 from globals import EDIBLE_EGGS, EGG_EATER, EVENTS, EXTRA_ROLES, MAX_EGGS, MEGA_SECRET_LAUNCHER, MORPHABLE_ROLES, BUTTONS, BOT_BLACKLIST, SPECIAL_ROLES
 from rated import ADD_ROLES, DEFER, FOLLOWUP, INTERACTION, REMOVE_ROLES, SEND
 from database import check_full_egg_conditions, check_perfect_egg_conditions, delete_entry_by_value, list_decoded_entries
-from utility import launch_egg
+from utility import launch_egg, command_check
 
 class EventCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -25,12 +25,9 @@ class EventCog(commands.Cog):
     ])
     # , priority: discord.Member = None
     async def launch(self, interaction: discord.Interaction, type: str = None):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-        
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user
@@ -144,12 +141,9 @@ class EventCog(commands.Cog):
     @discord.app_commands.command(name="eat", description="Eat a base Alignment egg you own.")
     @discord.app_commands.choices(type=[discord.app_commands.Choice(name=k.title(), value=k.lower()) for k in MAX_EGGS])
     async def eat(self, interaction: discord.Interaction, type: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         usr = interaction.user

@@ -1,9 +1,10 @@
 import discord
 from discord.ext import commands
 
-from globals import HYPNO_SWAPS, RIG_LIST, EXTRA_ROLES, BOT_BLACKLIST
+from globals import HYPNO_SWAPS, RIG_LIST, EXTRA_ROLES
 from rated import DEFER, FOLLOWUP, INTERACTION
 from rigs import CastRig
+from utility import command_check
 
 class RigCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -18,24 +19,22 @@ class RigCog(commands.Cog):
     @discord.app_commands.command(name="cast", description="Cast a rig (former 'cast X rig')")
     @discord.app_commands.choices(rig=sorted_choices)
     async def cast(self, interaction: discord.Interaction, rig: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
         
+        usr = interaction.user
         rigLower = rig.strip().lower()
         newRig = rigLower
 
-        if EXTRA_ROLES['hypno'] in interaction.user.roles:
+        if EXTRA_ROLES['hypno'] in usr.roles:
             newRig = HYPNO_SWAPS.get(rigLower, rigLower)
 
         await DEFER(interaction)
 
         try:
-            await CastRig(newRig, interaction.channel, interaction.user, interaction=interaction)
+            await CastRig(newRig, interaction.channel, usr, interaction=interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/cast {newRig}`: {exc}", interaction)
             raise

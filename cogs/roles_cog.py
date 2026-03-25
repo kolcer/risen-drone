@@ -5,7 +5,7 @@ from discord import app_commands
 from discord.ext import commands
 import datetime
 from roles import DemorphFrom, MorphTo, MorphTo, SubTo, UnsubFrom
-from utility import send_followup
+from utility import send_followup, command_check
 from globals import EVENTS, EXTRA_ROLES, PING_ROLES, RIG_LIST, SECRET_PING_ROLES, MORPHABLE_ROLES, SPECIAL_ROLES, EX_CLIMBERS, MAX_EGGS, BOT_BLACKLIST
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, REMOVE_ROLES, ADD_ROLES
 from database import list_decoded_entries, add_entry_with_check
@@ -31,12 +31,9 @@ class RolesCog(commands.Cog):
     @discord.app_commands.choices(role=role_choices)
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def sub(self, interaction: discord.Interaction, role: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         role_name = role.title()
@@ -55,12 +52,9 @@ class RolesCog(commands.Cog):
     @discord.app_commands.choices(role=role_choices)
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def unsub(self, interaction: discord.Interaction, role: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         role_name = role.title()
@@ -79,12 +73,9 @@ class RolesCog(commands.Cog):
     @discord.app_commands.choices(role=sorted_alignments)
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def morph(self, interaction: discord.Interaction, role: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         await DEFER(interaction)
@@ -123,12 +114,9 @@ class RolesCog(commands.Cog):
     @discord.app_commands.choices(role=sorted_alignments)
     @app_commands.checks.cooldown(1, 5.0, key=lambda i: (i.guild_id, i.user.id))
     async def demorph(self, interaction: discord.Interaction, role: str):
-        if interaction.guild is None or interaction.channel is None:
-            await INTERACTION(interaction, "Use this command in the Crazy Stairs server!", True)
-            return
-
-        if str(interaction.user.id) in BOT_BLACKLIST:
-            await INTERACTION(interaction, "You have been naughty, and I don't like naughty users.", True)
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
             return
 
         await DEFER(interaction)

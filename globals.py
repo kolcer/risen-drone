@@ -1170,6 +1170,8 @@ BUTTONS = {
     "easterStatus": False,
     "easterStaffStatus": False,
     "easterLast": None,
+    # Set to True once done!
+    "easterBrokenDrone": False,
     "status": False,
     "channel": None,
     "view": None,
