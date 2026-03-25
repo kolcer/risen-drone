@@ -562,7 +562,7 @@ async def on_message(message):
                 now = discord.utils.utcnow()
                 diff = now - replied_msg.created_at
                 if "misnamed melodies" in replied_msg.content.lower() and audio_count > 1 and diff.total_seconds() >= 30 and EVENTS["Easter"] and ch.id == 813882658156838923:
-                    await launch_egg(ch, "Misnamed", "Can you guess which egg this is?")
+                    await launch_egg(ch, "Misnamed", "My turn now. I also have 4 eggs here, can you guess what's the wrong one?")
                     return
                 
             except discord.NotFound:
