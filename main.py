@@ -80,7 +80,7 @@ async def ADMIN_CHECK(usr, ch):
 async def on_ready():
     
     print('We have logged in as {0.user}'.format(client))
-    game = discord.Game("bd help")
+    game = discord.Game("/help")
     await client.change_presence(activity=game)
 
     #get the guild
@@ -249,7 +249,7 @@ async def on_message(message):
     
     if usr in NEW_MEMBERS and EXTRA_ROLES['climber'] in usr.roles and len(lmsg) > 1:
         NEW_MEMBERS.remove(usr)
-        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `/morph` in <#750060041289072771>.\nYou may also type `bd help` to view every input I can respond to."
+        howToMorph = f"It seems you've sent your first message after verifying, good job! Not everyone makes it.\nYou can assign yourself Alignment roles by typing `/morph` in <#750060041289072771>.\nYou may also type `/help` to view every input I can respond to."
 
         await SEND(ch, howToMorph)
 
@@ -367,50 +367,14 @@ async def on_message(message):
         return
 
     if EXTRA_ROLES['hypno'] in usr.roles:
-        if lmsg.startswith('bd help'):
-            lmsg = 'bd show profile'
-        elif lmsg.startswith('bd show profile'):
-            lmsg = 'bd help'
-
-        elif lmsg.startswith('bd praise'):
-            lmsg = lmsg.replace('bd praise', 'bd scold')
-        elif lmsg.startswith('bd scold'):
-            lmsg = lmsg.replace('bd scold', 'bd praise')
-
-        elif 'morph to' in lmsg:
-            lmsg = lmsg.replace('morph to', 'demorph from')
-        elif 'morph from' in lmsg:
-            lmsg = 'morph to ' + lmsg.split(" ")[2]
-            
-        elif 'sub to' in lmsg:
-            lmsg = lmsg.replace('sub to', 'unsub from')
-        elif 'sub from' in lmsg:
-            lmsg = 'sub to ' + lmsg.split(" ")[2]
-
-        elif 'tip' in lmsg:
-            lmsg = lmsg.replace('tip', 'trivia')
-        elif 'trivia' in lmsg:
-            lmsg = lmsg.replace('trivia', 'tip')
-
-        elif 'good' in lmsg and 'drone' in lmsg:
+        if 'good' in lmsg and 'drone' in lmsg:
             lmsg = 'bad drone'
         elif 'bad' in lmsg and 'drone' in lmsg:
             lmsg = 'good drone'
-
-        elif 'happy birthday' in lmsg:
-            lmsg = 'cast patron rig'
-        elif lmsg.startswith("cast") and lmsg.endswith("rig"):
-            lmsg = 'happy birthday broken drone'
-
-        elif lmsg.startswith('drone of wisdom'):
-            lmsg = 'play hangman alone'
-        elif lmsg.startswith('play hangman'):
-            lmsg = 'drone of wisdom'
-
         else:
             if random.randint(1, 50) == 1:
                 DETAILED_ROLES["hdream"][usr.id] = 0
-                lmsg = 'cast heretic rig'
+                await CastRig("heretic", ch, usr)
 
                 # if not RIG_COOLDOWNS["self"] and usr.id in DETAILED_ROLES["hnightmare"] and not str(DETAILED_ROLES["hnightmare"][usr.id].id) in list_decoded_entries("Hypnotized Nightmare"):
                 #     await add_entry_with_check("Hypnotized Nightmare", DETAILED_ROLES["hnightmare"][usr.id])
@@ -1922,7 +1886,6 @@ async def on_message(message):
 
                     view = ButtonEgg_Throw(timeout=30)
                     view.thrower = None
-                    view.picker = None
                     view.disabled = False
 
                     view.type = "Architect"
