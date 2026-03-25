@@ -1,6 +1,6 @@
 import random
-from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS, FUN_ROLES, GIT_COMMITTERS, BOT_BLACKLIST
-from rated import SEND, FOLLOWUP, SEND_VIEW, INTERACTION
+from globals import RIG_LIST, EMOJIS_TO_REACT, BUTTONS, FUN_ROLES, GIT_COMMITTERS, BOT_BLACKLIST, EXTRA_ROLES
+from rated import SEND, FOLLOWUP, SEND_VIEW
 from database import list_decoded_entries, list_entries
 
 # Convert milliseconds to seconds
@@ -58,7 +58,7 @@ async def launch_egg(ch, eggType, msg, interaction=None):
         view = MisnamedEgg(timeout=30)
         view.type = eggType
         view.channel = ch
-        
+
         if interaction is not None:
             view.message = await FOLLOWUP(msg, interaction, False, view)
         else:
@@ -144,7 +144,10 @@ async def print_entries(channel, key):
             combined_string = new_string
     await SEND(channel, combined_string)
 
-def command_check(interaction):
+def command_check(interaction, admin=False):
+    if admin and EXTRA_ROLES['admin'] not in interaction.user.roles:
+        return "You are not supposed to use this command."
+    
     if interaction.guild is None or interaction.channel is None:
         return "Use this command in the Crazy Stairs server!"
 

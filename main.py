@@ -15,6 +15,7 @@ from cogs.personal_cog import PersonalCog
 from cogs.roles_cog import RolesCog
 from cogs.misc_cog import MiscCog
 from cogs.event_cog import EventCog
+from cogs.admin_cog import AdminCog
 from globals import *
 from roles import *
 from ladders import *
@@ -130,6 +131,7 @@ async def on_ready():
         await client.add_cog(RolesCog(client))
         await client.add_cog(MiscCog(client))
         await client.add_cog(EventCog(client))
+        await client.add_cog(AdminCog(client))
     except Exception:
         pass
 
@@ -1746,6 +1748,7 @@ async def on_message(message):
 
     ## admin commands
     if EXTRA_ROLES['admin'] in usr.roles and msg.startswith("|"):
+        drone_master_ch = CHANNELS["drone-masters"]
         msginputs = msg.split(" ")
         msgsplit = msg.split(" ", 2) #creates a list from the input received. "Hello world say HI!" becomes LIST["Hello", "world", "say HI!"]
         lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
