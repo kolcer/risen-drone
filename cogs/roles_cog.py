@@ -129,7 +129,7 @@ class RolesCog(commands.Cog):
 
         demorph_target = role.title()
 
-        if EVENTS.get("Easter", False):
+        if EVENTS.get("Easter", False) and demorph_target != "Janitor":
             alignment_roles_count = len([r for r in user.roles if r.name.title() in MAX_EGGS])
             
             if alignment_roles_count == 1:

@@ -12,7 +12,7 @@ from rated import DEFER, FOLLOWUP, INTERACTION, SEND, SEND_DM
 from quiz import FORCE_CLOSE_EVENT
 from ladders import MG_RESET
 from views import ButtonGames_ThrowingStuff
-from database import add_entry_with_check, add_entry, delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token, show_next_entry
+from database import add_entry_with_check, add_entry, check_key, delete_entry, list_decoded_entries, redis_add_user_data, redis_check_token, redis_remove_token, show_next_entry
 
 class MiscCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -162,9 +162,9 @@ class MiscCog(commands.Cog):
 
         try:
             if EXTRA_ROLES['hypno'] in usr.roles:
-                content = await self._praise(target)
+                content = await self._praise(interaction, target)
             else:
-                content = self._scold(target)
+                content = self._scold(interaction, target)
 
             await INTERACTION(interaction, content)
             return
@@ -183,9 +183,9 @@ class MiscCog(commands.Cog):
         
         try:
             if EXTRA_ROLES['hypno'] in usr.roles:
-                content = self._scold(target)
+                content = self._scold(interaction, target)
             else:
-                content = await self._praise(target)
+                content = await self._praise(interaction, target)
 
             await INTERACTION(interaction, content)
             return
@@ -324,7 +324,11 @@ class MiscCog(commands.Cog):
             if type == "trivia":
                 key = alignment + "T"
                
-            #delete tip   
+            #delete tip
+            if not check_key(key):
+                await FOLLOWUP("There is no " + type.title() + " for " + alignment.title() + " in that position.", interaction, True)
+                return
+            
             delete_entry(key, int(position))
             await FOLLOWUP(f"Deleted " + type.title() + " number " + str(position) + " for " + alignment.title() + ".", interaction, False)
             await asyncio.sleep(1)
