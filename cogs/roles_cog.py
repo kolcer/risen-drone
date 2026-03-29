@@ -86,7 +86,7 @@ class RolesCog(commands.Cog):
         alignment_roles_count = len([r for r in user.roles if r.name.title() in MAX_EGGS])
 
         if EVENTS.get("Easter", False):
-            if alignment_roles_count >= 1 or role == "all":
+            if morph_target != "Janitor" and (alignment_roles_count >= 1 or role == "all"):
                 msg = ("I'm afraid I can't let you do that.\n"
                     "For the duration of the Easter Event, you may only have 1 alignment role.\n"
                     "Eating eggs of any alignment will morph you instead.")
