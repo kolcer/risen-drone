@@ -1959,6 +1959,12 @@ class MisnamedEgg(discord.ui.View):
 
         await self.on_timeout()
 
+    async def start_closing(self):
+        if not self.closing:
+            self.closing = True
+            await asyncio.sleep(30)
+            self.stop()
+
     async def process_click(self, interaction, button):
         usr = interaction.user
         
@@ -1967,6 +1973,7 @@ class MisnamedEgg(discord.ui.View):
             return
         elif usr in self.guessers:
             await INTERACTION(interaction, "We are done here.", True)
+            self.start_closing()
             return
         
         self.disabled = True
@@ -1974,6 +1981,7 @@ class MisnamedEgg(discord.ui.View):
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
             await INTERACTION(interaction, "The basket barely has enough space for one egg of each kind.", True)
             self.disabled = False
+            self.start_closing()
             return
         
         self.guessers.append(usr)
@@ -1989,10 +1997,7 @@ class MisnamedEgg(discord.ui.View):
         await INTERACTION(interaction, f"{usr.mention} got the {self.type} egg!", False)
         self.disabled = False
 
-        if not self.closing:
-            self.closing = True
-            await asyncio.sleep(30)
-            self.stop()
+        self.start_closing()
 
     @discord.ui.button(label="🥚", custom_id = "0", style = discord.ButtonStyle.blurple)
     async def egg_emoji(self, interaction: discord.Interaction, button: discord.ui.Button):
