@@ -518,12 +518,14 @@ async def on_message(message):
             await JoinFightingGame(usr)
 
         elif "bd pin this" in lmsg and (ch.id == 1311716835779154090 or ch.id == 813882658156838923):
-            current_pins = await ch.pins()
-
             try:
-                if len(current_pins) > 3:
-                    await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
-                    return
+                if EVENTS["Easter"]:
+                    current_pins = await ch.pins()
+                    melody_pins = [m for m in current_pins if "misnamed melodies" in m.content.lower()]
+
+                    if len(melody_pins) >= 2:
+                        await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
+                        return
 
                 await PIN_MESSAGE(message)
             except discord.Forbidden:
