@@ -523,7 +523,7 @@ async def on_message(message):
                     current_pins = await ch.pins()
                     melody_pins = [m for m in current_pins if "misnamed melodies" in m.content.lower()]
 
-                    if len(melody_pins) >= 2:
+                    if len(melody_pins) >= 3:
                         await SEND(ch, "Max 2 Misnamed Melodies can run at once.")
                         return
 
