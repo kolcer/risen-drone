@@ -1616,6 +1616,7 @@ class ButtonEgg_Throw(discord.ui.View):
         self.closing = False
         self.picker = []
         self.toolate = True
+        self.closing = False
 
     async def on_timeout(self):
         for item in self.children:
@@ -1679,6 +1680,12 @@ class ButtonEgg_Throw(discord.ui.View):
 
         await self.on_timeout()
 
+    async def start_closing(self):
+        if not self.closing:
+            self.closing = True
+            await asyncio.sleep(30)
+            self.stop()
+
     @discord.ui.button(label="🥚", style = discord.ButtonStyle.blurple)
     async def egg(self, interaction: discord.Interaction, button: discord.ui.Button):
         usr = interaction.user
@@ -1688,6 +1695,7 @@ class ButtonEgg_Throw(discord.ui.View):
         
         if usr.id == self.thrower:
             await INTERACTION(interaction, "You cannot take your own egg.", True)
+            await self.start_closing()
             return
         
         if self.priority is not None:
@@ -1700,6 +1708,7 @@ class ButtonEgg_Throw(discord.ui.View):
         if str(usr.id) in list_decoded_entries(f"{self.type} Egg"):
             await INTERACTION(interaction, "The basket barely has enough space for one egg of each kind.", True)
             self.disabled = False
+            await self.start_closing()
             return
         
         await add_egg_with_check(f"{self.type} Egg", usr) 
