@@ -160,12 +160,6 @@ async def SubTo(usr,role):
         
         await ADD_ROLES(usr,PING_ROLES[role])
         return "You have subscribed to " + role + "!"
-    
-    if role in SECRET_PING_ROLES:
-        if str(usr.id) in list_decoded_entries(role):
-            return "You are already subscribed to " + role + "!"
-        add_entry(role, usr.id)
-        return "You have subscribed to " + role + "!"
 
 #unsub command (aceppts unsub, desub and any **sub from combination)
 async def UnsubFrom(usr,role):
@@ -185,13 +179,6 @@ async def UnsubFrom(usr,role):
             return "You are not subscribed to " + role + "!"
         
         await REMOVE_ROLES(usr,PING_ROLES[role])
-        return "You have unsubscribed from " + role + "!"
-    
-    if role in SECRET_PING_ROLES:
-        if str(usr.id) not in list_decoded_entries(role):
-            return "You are not subscribed to " + role + "!"
-        
-        delete_entry_by_value(role, usr.id)
         return "You have unsubscribed from " + role + "!"
                
 #chat killer function

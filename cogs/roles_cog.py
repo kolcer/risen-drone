@@ -6,7 +6,7 @@ from discord.ext import commands
 import datetime
 from roles import DemorphFrom, MorphTo, MorphTo, SubTo, UnsubFrom
 from utility import send_followup, command_check
-from globals import EVENTS, EXTRA_ROLES, PING_ROLES, RIG_LIST, SECRET_PING_ROLES, MORPHABLE_ROLES, SPECIAL_ROLES, EX_CLIMBERS, MAX_EGGS, BOT_BLACKLIST
+from globals import EVENTS, EXTRA_ROLES, PING_ROLES, RIG_LIST, MORPHABLE_ROLES, SPECIAL_ROLES, EX_CLIMBERS, MAX_EGGS, BOT_BLACKLIST
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND, REMOVE_ROLES, ADD_ROLES
 from database import list_decoded_entries, add_entry_with_check
 
@@ -14,14 +14,13 @@ class RolesCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    _raw_roles = list(PING_ROLES.keys()) + SECRET_PING_ROLES
+    _raw_roles = list(PING_ROLES.keys())
     _sorted_roles = sorted(_raw_roles)
     role_choices = [app_commands.Choice(name="All Roles", value="all")] + [
         discord.app_commands.Choice(name=role, value=role) 
         for role in _sorted_roles
     ]
 
-    # !!! max 25 choices allowed and sorted_alignments rn is exactly 25.
     sorted_alignments = [app_commands.Choice(name="All Alignments", value="all")] + [
         discord.app_commands.Choice(name=ali.capitalize(), value=ali.lower()) 
         for ali in sorted(MORPHABLE_ROLES.keys()) + sorted(SPECIAL_ROLES.keys())

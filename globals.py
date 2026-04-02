@@ -127,10 +127,6 @@ IMPOSTOR_NICKS = [
 #     "What's the worst damage you did while playing as an 'evil' alignment?",
 # ]
 
-SECRET_PING_ROLES = [
-    "Misnamed Melodies"
-]
-
 RANDOM_BLACKLIST = [
     "patron",
     "wicked",
@@ -1105,6 +1101,8 @@ PING_ROLES = {
     "Sleazel-in-game":
         None,
     "Archive":
+        None,
+    "Mismels":
         None,
 }
 
