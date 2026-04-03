@@ -175,7 +175,7 @@ class EventCog(commands.Cog):
             else:
                 EGG_EATER.append(usr.id)
 
-                # delete_entry_by_value(f"{type.title()} Egg", str(usr.id))
+                delete_entry_by_value(f"{type.title()} Egg", str(usr.id))
 
                 role_list = []
                 for role in usr.roles:
@@ -187,7 +187,7 @@ class EventCog(commands.Cog):
                 await ADD_ROLES(usr,MORPHABLE_ROLES[type.title()][0])
 
                 await FOLLOWUP(f"{usr.mention} ate the {type.title()} Egg! They feel different now.", interaction)
-                await asyncio.sleep(86400)
+                await asyncio.sleep(3600)
                 EGG_EATER.remove(usr.id)    
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/eat`: {exc}", interaction)

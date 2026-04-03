@@ -22,7 +22,7 @@ async def add_entry_with_check(key, new_entry):
                 break
 
         if roleCounter == 0:
-            await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `bd show profile` to view it.")
+            await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just found your first secret role. Type `/show profile` to view it.")
 
         db.rpush(key,new_entry.id)
 
@@ -37,7 +37,7 @@ async def add_egg_with_check(key, new_entry):
             eggCounter += 1 
 
     if eggCounter == 0:
-        await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just collected an egg! Thank you for the help. Type `bd show eggs` to look at it.")
+        await SEND(CHANNELS["bot-commands"], f"{new_entry.name}, you just collected an egg! Thank you for the help. Type `/show eggs` to look at it.")
     elif eggCounter == 10:
         db.rpush("Egg Collector",new_entry.id)
 

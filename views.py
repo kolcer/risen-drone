@@ -218,49 +218,38 @@ class ShowCommands(discord.ui.View):
         '''
         Please use these commands only in <#750060041289072771>
 
-**morph to** *[alignment]*
+**/morph** *[alignment]*
 ➡️ Get chosen alignment role in this server (Remember to always read the server rules)
 
-**demorph from** *[alignment]*
+**/demorph** *[alignment]*
 ➡️ Remove chosen alignment role
 
-**sub to** *[ping role]*
+**/sub** *[ping role]*
 ➡️ Subscribe to chosen ping role
 
-**unsub from** *[ping role]*
+**/unsub** *[ping role]*
 ➡️ Unsubscribe from chosen ping role
 
-**general tip**
-➡️ Show a general tip
-
-*[alignment]* **tip**
+**/tip** *[alignment]*
 ➡️ Show chosen alignment tip
 
-**general trivia**
-➡️ Show a general trivia
-
-*[alignment]* **trivia**
+**/trivia** *[alignment]*
 ➡️ Show chosen alignment trivia
-
-
-**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer, Reaver, Gremlin.
-**Extra alignments** *(cannot be morphed into)*: Possessed, None, Architect.
-**Available ping roles**: Updates, Announcements, Events, Polls, Minigames, Archive, Sleazel-in-game (sub if you want Prank The Creator badge)
         ''',
 
         '''
         Again, use these commands in <#750060041289072771>!
 
-**bd link**
+**/link**
 ➡️ Link your Roblox account data with me, and I will display them in...
 
-**bd show profile**
+**/show profile**
 ➡️ ...this command. Shows Total Climbs and Best Climbs for each alignment as well as secret roles.
 
 **happy birthday broken drone** (bd for short)
 ➡️ You should not forget this
 
-**cast** *[alignment]* **rig**
+**/cast** *[alignment]*
 ➡️ Your favorite Alignment's rig, but on Discord
 
 **drone of wisdom**
@@ -269,40 +258,36 @@ class ShowCommands(discord.ui.View):
 **bd tell me, [question]**
 ➡️ I know all, ask me
 
-**create poll|[question]|[answer 1]|[answer 2]|[answer 3]|[answer 4]...** (2 to 19 answers)
+**/poll**
 ➡️ Create a poll with a question and its possible answers, votes will be revealed when it's closed 
 
-**reset bot**
+**/reset**
 ➡️ Use this command if I become unresponsive (which I won't) (3 users required)
 
 
 
 ** USER COMMANDS **
 
-**bd scold** *[username]*
+**/scold** *[username]*
 ➡️ They should not have done that
 
-**bd praise** *[username]*
+**/praise** *[username]*
 ➡️ They did well
-
-
-**Available aligments**: Patron, Joker, Wicked, Spectre, Muggle, Chameleon, Keeper, Hacker, Thief, Archon, Drifter, Heretic, Splicer, Necromancer.
         ''',
 
         '''
         I hope you did not forget, but use these commands in <#750060041289072771>
 
-**play lucid ladders**
+**/play lucid ladders**
 ➡️ Start Lucid Ladders minigame (requires at least 2 players)
 
-**start quiz**
+**/play quiz**
 ➡️ Start Crazy Stairs knowledge quiz (2 players required, 20 questions, timed)
 
-**play hangman** *?*
+**/hangman**
 ➡️ Play hangman with the other members or by yourself
-*[? = alone, to play alone | ? = CUSTOMWORD, to make your own hangman | leave empty for a random word]*
 
-**play tic tac toe** (or _play ttt_)
+**/play tic tac toe**
 ➡️ Start a Tic Tac Toe match
         ''',
 
