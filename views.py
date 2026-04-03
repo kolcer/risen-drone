@@ -331,7 +331,7 @@ Delete: Deletes the specified quiz question by index.
 
 :bangbang: Must be in the FUN_ROLES list in globals.py
         ''',
-    ]
+    ] 
 
     cp  = 0
     titles = [
