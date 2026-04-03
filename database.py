@@ -55,7 +55,7 @@ def check_perfect_egg_conditions(usr):
 
 # Update the year every year
 def check_broken_drone_eggs():
-    user_id = 827952429290618943
+    user_id = "827952429290618943"
     return all(user_id in list_decoded_entries(key) for key in FUN_ROLES["Easter26"]) and not BUTTONS["easterBrokenDrone"]
 
 def delete_key(key):
