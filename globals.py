@@ -988,6 +988,33 @@ FUN_ROLES = {
         "Super Secret Egg",
         "Mega Secret Egg",
         "Misnamed Egg",
+    ],
+    ## Whoever is reading... you shouldn't be spoiling yourself next year eggs smh my head.
+    "Easter27": [
+        "Vivid Egg",         ## Patron
+        "Banana Egg",        ## Joker
+        "Lava Egg",          ## Wicked
+        "Beer Egg",          ## Keeper
+        "White Egg",         ## Muggle
+        "Rose Egg",          ## Hacker
+        "Turquoise Egg",     ## Thief
+        "Teal Egg",          ## Archon
+        "Sage Egg",          ## Drifter
+        "Violet Egg",        ## Heretic
+        "Green Egg",         ## Splicer
+        "Lilac Egg",         ## Necromancer
+        "Periwinkle Egg",    ## Reaver
+        "Khaki Egg",         ## Gremlin
+        "Aqua Egg",          ## Spectre
+        "Fuchsia Egg",       ## Chameleon
+        "Missing Egg",       ## None
+        "Janitor Egg",       ## Esc exclusive apparently also soon tm
+        "Crazy Egg",         ## Soon tm
+        "Rainbow Egg",       ## Soon tm
+        "Archnitnent Egg",   ## Soon tm
+        "Trinity Egg",       ## Soon tm
+        "Fallen Egg",        ## Soon tm
+        "Broken Egg",        ## Soon tm
     ]
 }
 
@@ -1169,7 +1196,7 @@ BUTTONS = {
     "easterStaffStatus": False,
     "easterLast": None,
     # Set to True once done!
-    "easterBrokenDrone": False,
+    "easterBrokenDrone": True,
     "status": False,
     "channel": None,
     "view": None,

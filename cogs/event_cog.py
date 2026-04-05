@@ -22,6 +22,7 @@ class EventCog(commands.Cog):
         discord.app_commands.Choice(name="Master (Drone Masters Only)", value="master"),
         discord.app_commands.Choice(name="Murdurator (Murdurators Only)", value="murdurator"),
         discord.app_commands.Choice(name="Admin (Admins Only)", value="admin"),
+        discord.app_commands.Choice(name="??? (??? Only)", value="someone"),
     ])
     # , priority: discord.Member = None
     async def launch(self, interaction: discord.Interaction, type: str = None):
@@ -36,7 +37,7 @@ class EventCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not EVENTS["Easter"] and ch.id != 813882658156838923:
+            if (not EVENTS["Easter"] and ch.id != 813882658156838923) or type == "someone":
                 await FOLLOWUP(f"{usr.mention} threw the Sleazy Egg! ...But it fell on the ground and broke.", interaction)
                 return
 
@@ -56,6 +57,9 @@ class EventCog(commands.Cog):
             elif EXTRA_ROLES["admin"] in usr.roles and type == "master":
                 BUTTONS["easterStaffStatus"] = True
                 view.type = "Broken Drone"
+            elif 1 == 1 and type == "someone":
+                BUTTONS["easterStaffStatus"] = True
+                view.type = "???"
             else:
                 if BUTTONS["easterStatus"]:
                     await FOLLOWUP("The Egg Launcher is charging. This stuff takes time.", interaction)
@@ -191,4 +195,32 @@ class EventCog(commands.Cog):
                 EGG_EATER.remove(usr.id)    
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/eat`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="talk", description="I will relay your message to the person of your choice.")
+    @discord.app_commands.choices(who=[
+        discord.app_commands.Choice(name="Janitor", value="janitor"),
+        discord.app_commands.Choice(name="Broken Drone", value="bd"),
+        discord.app_commands.Choice(name="Sleazel", value="sleazel"),
+    ])
+    async def talk(self, interaction: discord.Interaction, who: str):
+        stopMsg = command_check(interaction)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        usr = interaction.user
+        ch = interaction.channel
+
+        await DEFER(interaction)
+
+        try:
+            if who == "janitor":
+                await FOLLOWUP("Janitor is a bit on the edge due to the excessive amount of eggs they have to clean, you'd better not disturb them.", interaction)
+            elif who == "bd":
+                await FOLLOWUP("...Me? You can speak to me anytime.", interaction)
+            elif who == "sleazel":
+                await FOLLOWUP("I asked Sleazel and they said they will get back to you soon.", interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/talk`: {exc}", interaction)
             raise

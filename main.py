@@ -534,14 +534,8 @@ async def on_message(message):
                 await SEND(ch, f"Failed to pin message: {e}")
 
             if "misnamed melodies" in lmsg:
-                musicEnjoyers = list_decoded_entries("Misnamed Melodies")
-
-                if musicEnjoyers:
-                    pings = ' '.join(f"<@{uid}>" for uid in musicEnjoyers)
-                    await SEND(ch, f"There are some new tracks to guess!\n\n{pings}")
-                else:
-                    await SEND(ch, "Sadly, no music enjoyers were found.")
-                
+                # musicEnjoyers = list_decoded_entries("Misnamed Melodies")
+                await SEND(ch, f"<@&{str(PING_ROLES['Mismels'].id)}>\nThere are some new tracks to guess!")
 
         elif "bd unpin this" in lmsg and (ch.id == 1311716835779154090 or ch.id == 813882658156838923):
             if message.reference is None:
