@@ -557,7 +557,7 @@ MIXED_WORD_TRIGGERS = {
 }
 
 EVENTS = {
-    "Easter": True,
+    "Easter": False,
 }
 
 SANCTUARY = {
@@ -1196,7 +1196,7 @@ BUTTONS = {
     "easterStaffStatus": False,
     "easterLast": None,
     # Set to True once done!
-    "easterBrokenDrone": True,
+    "easterBrokenDrone": False,
     "status": False,
     "channel": None,
     "view": None,
