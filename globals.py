@@ -450,6 +450,7 @@ SECRET_CHANNELS = [
 # bot will react to the webhook emoji, if it finds in a webhook message
 # values will be replaced by emoji objects during startup
 EMOJIS_TO_REACT = {
+    "csNone": 786323557650268172,
     "csPatron": 1449421565631664262,
     "csJoker": 1449421409481785565,
     "csWicked": 1449421863125254234,

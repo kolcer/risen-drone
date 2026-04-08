@@ -17,7 +17,7 @@ def build_tower_page(user_stats, tower_type, page_index, view):
     valid_entries = 0
 
     for alignment in RIG_LIST:
-        if alignment in ["none", "janitor"]:
+        if alignment in ["janitor"]:
             continue
         
         ali_time = convert_best_times(user_stats.get(f"{alignment.upper()}_{tower_type}", "N/A"))
