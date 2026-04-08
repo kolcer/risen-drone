@@ -84,7 +84,7 @@ class PersonalCog(commands.Cog):
         user_climbs = ""
         total_climbs = 0
         for alignment in RIG_LIST:
-            if alignment in ["none", "janitor"]: continue
+            if alignment in ["janitor"]: continue
             ali_climbs = user_stats.get(f"{alignment.upper()}_climbs", "0")
             user_climbs += f'{EMOJIS_TO_REACT[f"cs{alignment.capitalize()}"]}: {ali_climbs}\n\n'
             if ali_climbs.isdigit(): total_climbs += int(ali_climbs)
