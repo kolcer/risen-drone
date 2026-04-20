@@ -33,9 +33,8 @@ class RigCog(commands.Cog):
         if EXTRA_ROLES['hypno'] in usr.roles:
             newRig = HYPNO_SWAPS.get(rigLower, rigLower)
 
-
         try:
-            await FOLLOWUP(f"Preparing the {newRig} rig...", interaction, True)
+            await INTERACTION(interaction, f"Preparing the {newRig} rig...", True)
             await asyncio.sleep(1)
             await CastRig(newRig, interaction.channel, usr)
         except Exception as exc:
