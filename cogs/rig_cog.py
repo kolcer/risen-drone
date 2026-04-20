@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from discord.ext import commands
 
@@ -31,10 +33,11 @@ class RigCog(commands.Cog):
         if EXTRA_ROLES['hypno'] in usr.roles:
             newRig = HYPNO_SWAPS.get(rigLower, rigLower)
 
-        await DEFER(interaction)
 
         try:
-            await CastRig(newRig, interaction.channel, usr, interaction=interaction)
+            await FOLLOWUP(f"Preparing the {newRig} rig...", interaction, True)
+            await asyncio.sleep(1)
+            await CastRig(newRig, interaction.channel, usr)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/cast {newRig}`: {exc}", interaction)
             raise

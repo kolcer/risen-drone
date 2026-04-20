@@ -25,7 +25,7 @@ from discord.ext import commands
 #         await EDIT_VIEW_MESSAGE(self.message, self.message.content, self)
 
 #     @discord.ui.button(label="Cast again!", custom_id = "Recast", style = discord.ButtonStyle.primary)
-#     async def casting(self, interaction: discord.Interaction, button: discord.ui.Button):
+#     async def casting(self: discord.Interaction, button: discord.ui.Button):
 #         usr = interaction.user
 #         if usr == self.caster:
 #             await Rig(self.type, self.channel, self.caster)
@@ -77,7 +77,7 @@ async def updateRigTracker(rigType):
     await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
 
 
-async def necromancer(channel, interaction = None):
+async def necromancer(channel):
     msg = ""
     if RIG_DATA['ghostMsg'] != "hehehehaw":
         msg = RIG_DATA['ghostMsg']
@@ -85,9 +85,9 @@ async def necromancer(channel, interaction = None):
     else:
         msg = "*but nobody came...*"
         # await SEND(channel, "*but nobody came...*")
-    await send_followup(channel, msg, interaction)
+    await send_followup(channel, msg)
 
-async def muggle(channel, user, interaction = None):
+async def muggle(channel, user):
     msg = ""
     if MORPHABLE_ROLES["Muggle"][0] in user.roles:
         msg = "You knew there wasn't a rig for Muggle and in fact there isn't one."
@@ -95,9 +95,9 @@ async def muggle(channel, user, interaction = None):
         msg = "You thought there was a rig for Muggle but there wasn't."
         # await SEND(channel, "You thought there was a rig for Muggle but there wasn't.")
 
-    await send_followup(channel, msg, interaction)
+    await send_followup(channel, msg)
 
-async def Rig(rigType, ch, usr, interaction = None):
+async def Rig(rigType, ch, usr):
     newRigType = rigType
     msgCounting = None
     msgText = ""
@@ -109,7 +109,7 @@ async def Rig(rigType, ch, usr, interaction = None):
     #         return
    
     if RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]]:
-        await send_followup(ch, "Ultimate spells are in cooldown.", interaction)
+        await send_followup(ch, "Ultimate spells are in cooldown.")
         # await SEND(ch, "Ultimate spells are in cooldown."s)
         return
         
@@ -119,7 +119,7 @@ async def Rig(rigType, ch, usr, interaction = None):
     
     if rigType in LIMITED_USE_RIGS:
         if spamCount == 2:
-            await send_followup(ch, "Touch some grass.", interaction)
+            await send_followup(ch, "Touch some grass.")
             # await SEND(ch, "You should take a break.")
             return
         else:
@@ -139,7 +139,7 @@ async def Rig(rigType, ch, usr, interaction = None):
     match newRigType:
         case "heretic":
             if EXTRA_ROLES['murdurator'] in usr.roles:
-                await send_followup(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.", interaction)
+                await send_followup(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
                 # await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
                 RIG_COOLDOWNS["self"] = False
                 return
@@ -168,7 +168,7 @@ async def Rig(rigType, ch, usr, interaction = None):
                     rigActive = True
                     break
             if not rigActive:
-                await send_followup(ch, "Nothing to destroy.", interaction)
+                await send_followup(ch, "Nothing to destroy.")
                 # await SEND(ch, "Nothing to destroy.")
                 RIG_COOLDOWNS["meddle"] = False
                 return
@@ -200,7 +200,7 @@ async def Rig(rigType, ch, usr, interaction = None):
             
         case "archon":
             if ch.name not in CHANNELS or ch.id in SECRET_CHANNELS:
-                await send_followup(ch, "Impossible to create a Gate here. This channel is restricted.", interaction)
+                await send_followup(ch, "Impossible to create a Gate here. This channel is restricted.")
                 # await SEND(ch, "Impossible to create a Gate here. This channel is restricted.")
                 RIG_COOLDOWNS["chat"] = False
                 return
@@ -212,7 +212,7 @@ async def Rig(rigType, ch, usr, interaction = None):
                 if (ch2.name != ch.name) and (ch2.id not in SECRET_CHANNELS):
                     break
 
-            firstmsg = await send_followup(ch, "You cast Archon Rig and created a Gate in another channel!", interaction)
+            firstmsg = await send_followup(ch, "You cast Archon Rig and created a Gate in another channel!")
             # firstmsg = await SEND(ch, "You cast Archon Rig and created a Gate in another channel!")
             await SEND(ch, "https://giphy.com/gifs/jiSabjDlIahx2P1xI0")
             await asyncio.sleep(3)
@@ -270,7 +270,7 @@ async def Rig(rigType, ch, usr, interaction = None):
 
         case "janitor":
             if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
-                await send_followup(ch, "You are not skilled enough to cast Janitor Rig.", interaction)
+                await send_followup(ch, "You are not skilled enough to cast Janitor Rig.")
                 # await SEND(ch, "You are not skilled enough to cast Janitor Rig.")
                 return
 
@@ -295,7 +295,7 @@ async def Rig(rigType, ch, usr, interaction = None):
                 msgText = "You cast Janitor Rig and cleaned up all active cooldowns!"
                 # msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active cooldowns!")
             else:
-                await send_followup(ch, "There are no active rigs to clean up.", interaction)
+                await send_followup(ch, "There are no active rigs to clean up.")
                 # await SEND(ch, "There are no loose ends in need of cleaning.")
                 return
             
@@ -353,7 +353,7 @@ async def Rig(rigType, ch, usr, interaction = None):
 
     # msgCounting = await SEND(ch, msgText)
     if newRigType != "archon":
-        msgCounting = await send_followup(ch, msgText, interaction)
+        msgCounting = await send_followup(ch, msgText)
 
         if EVENTS["Easter"] and newRigType == "heretic": 
             await launch_egg(ch, "Possessed", "Within the darkness you can make out the silhouette of an egg...")
@@ -396,7 +396,7 @@ async def Rig(rigType, ch, usr, interaction = None):
     if usr in RIG_SPAMMERS and spamCount == RIG_SPAMMERS[usr]:
         del RIG_SPAMMERS[usr]      
 
-async def CastRig(rigPick, ch, usr, interaction = None):
+async def CastRig(rigPick, ch, usr):
     # easterRng = None
     randomRig = ""
     randomAttempts = 0
@@ -404,7 +404,7 @@ async def CastRig(rigPick, ch, usr, interaction = None):
     today = datetime.date.today()
 
     if rigPick not in RIG_LIST:
-        await send_followup(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.", interaction)
+        await send_followup(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
         # await SEND(ch, "That's not a valid rig. Type `bd help` to check which rigs you can cast.")
 
         if EVENTS["Easter"] and not str(usr.id) in list_decoded_entries("None Egg"):
@@ -413,7 +413,7 @@ async def CastRig(rigPick, ch, usr, interaction = None):
         return
     
     if MORPHABLE_ROLES["Gun"][0] in usr.roles and rigPick != "gun":
-        await send_followup(ch, "Would you look at that. A gun trying to cast a rig.", interaction)
+        await send_followup(ch, "Would you look at that. A gun trying to cast a rig.")
         # await SEND(ch, "Would you look at that. A gun trying to cast a rig.")
         return
 
@@ -446,12 +446,12 @@ async def CastRig(rigPick, ch, usr, interaction = None):
                     cdList += ":x: \n"
                 else:
                     cdList += ":white_check_mark: \n"
-            await send_followup(ch, "One or more rigs are still in cooldown. \n" + cdList, interaction)
+            await send_followup(ch, "One or more rigs are still in cooldown. \n" + cdList)
             # await SEND(ch, " One or more rigs are still in cooldown. \n" + cdList)
             # chameleonSuccess = False
             return
 
-        await send_followup(ch, "You cast Chameleon Rig! Let's see what you got... 🥁🥁🥁", interaction)
+        await send_followup(ch, "You cast Chameleon Rig! Let's see what you got... 🥁🥁🥁")
         # await SEND(ch, "What will it be? 🥁🥁🥁")
         await asyncio.sleep(4)
 
@@ -486,7 +486,7 @@ async def CastRig(rigPick, ch, usr, interaction = None):
                 break
 
         if randomAttempts < 3:   
-            await Rig(randomRig, ch, usr, interaction)
+            await Rig(randomRig, ch, usr)
         return
 
     # if not (rigPick == "chameleon" and not chameleonSuccess):
@@ -498,14 +498,14 @@ async def CastRig(rigPick, ch, usr, interaction = None):
     LAST_RIG[usr.id] = str(rigPick) + " Rig"
 
     if rigPick == "necromancer":
-        await necromancer(ch, interaction)
+        await necromancer(ch)
         return
     
     if rigPick == "muggle":
-        await muggle(ch, usr, interaction)
+        await muggle(ch, usr)
         return
 
-    await Rig(rigPick, ch, usr, interaction)
+    await Rig(rigPick, ch, usr)
     return
 
 async def ExecuteThiefRig(ch,usr):

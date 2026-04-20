@@ -1716,7 +1716,6 @@ async def on_message(message):
                 view.message = await SEND_VIEW(BUTTONS["channel"], f"Someone is throwing **{view.thrownObject}** in your way! How do you react?!", view)
 
                 await view.wait()
-                await view.too_late()
                 BUTTONS["status"] = False
 
             elif BUTTONS["phase"] == 100:
