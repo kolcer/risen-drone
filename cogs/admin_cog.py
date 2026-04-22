@@ -1,6 +1,6 @@
 import asyncio
 
-from database import add_entry
+from database import add_entry, check_key, get_value, list_decoded_entries
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -79,6 +79,35 @@ class AdminCog(commands.Cog):
             await FOLLOWUP("Role created successfully.", interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/nr`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="check_key", description="Check if a key exists in the database.")
+    async def check_key(self, interaction: discord.Interaction, key: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            responses = []
+
+            if check_key(key):
+                value = list_decoded_entries(key)
+
+                if not value:
+                    value = get_value(key)
+                
+                responses.append(f"Key `{key}` found! Value: {value}")
+
+            if responses:
+                await FOLLOWUP("\n".join(responses), interaction)
+            else:
+                await FOLLOWUP(f"No key found for '{key}'.", interaction)
+                
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/check_key`: {exc}", interaction)
             raise
 
     @discord.app_commands.command(name="ispy", description="Begin a game of ispy.")

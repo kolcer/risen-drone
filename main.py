@@ -1812,27 +1812,27 @@ async def on_message(message):
             #     return
             
             # does this key exist in db and whats the value 
-            if lmsg.startswith("key", 1):
-                key_cap = lsecond.title()
-                key_low = lsecond.lower()
+            # if lmsg.startswith("key", 1):
+            #     key_cap = lsecond.title()
+            #     key_low = lsecond.lower()
                 
-                responses = []
+            #     responses = []
 
-                for k in [key_cap, key_low, secondVal]:
-                    if check_key(k):
-                        value = list_decoded_entries(k)
+            #     for k in [key_cap, key_low, secondVal]:
+            #         if check_key(k):
+            #             value = list_decoded_entries(k)
 
-                        if not value:
-                            value = get_value(k)
+            #             if not value:
+            #                 value = get_value(k)
                         
-                        responses.append(f"Key `{k}` found! Value: {value}")
+            #             responses.append(f"Key `{k}` found! Value: {value}")
 
-                if responses:
-                    await SEND(ch, "\n".join(responses))
-                else:
-                    await SEND(ch, f"No key found for '{key_cap}' or '{key_low}'.")
+            #     if responses:
+            #         await SEND(ch, "\n".join(responses))
+            #     else:
+            #         await SEND(ch, f"No key found for '{key_cap}' or '{key_low}'.")
                 
-                return 
+            #     return 
             
             # remove key from db
             if lmsg.startswith("dkey", 1):
