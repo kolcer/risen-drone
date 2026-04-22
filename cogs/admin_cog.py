@@ -6,7 +6,8 @@ from discord import app_commands
 from discord.ext import commands
 from utility import command_check
 from globals import BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM
-from rated import DEFER, FOLLOWUP, INTERACTION, SEND
+from rated import DEFER, EDIT_MESSAGE, FOLLOWUP, INTERACTION, SEND, SEND_VIEW
+from views import ButtonEgg_Throw
 
 class AdminCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -131,7 +132,7 @@ class AdminCog(commands.Cog):
         discord.app_commands.Choice(name='Blacklist', value='blacklist'),
         discord.app_commands.Choice(name='Whitelist', value='whitelist')
     ])
-    async def enlist(self, interaction: discord.Interaction, list: str):
+    async def enlist(self, interaction: discord.Interaction, list: str, target: discord.Member):
         stopMsg = command_check(interaction, True)
         if stopMsg:
             await INTERACTION(interaction, stopMsg, True)
@@ -142,17 +143,17 @@ class AdminCog(commands.Cog):
         try:
             finalMsg = ""
             if list == 'blacklist':
-                if str(interaction.user.id) not in BOT_BLACKLIST:
-                    BOT_BLACKLIST.append(str(interaction.user.id))
-                    finalMsg = f"{interaction.user.mention} has been blacklisted."
+                if str(target.id) not in BOT_BLACKLIST:
+                    BOT_BLACKLIST.append(str(target.id))
+                    finalMsg = f"{target.mention} has been blacklisted."
                 else:
-                    finalMsg = f"{interaction.user.mention} is already blacklisted."
+                    finalMsg = f"{target.mention} is already blacklisted."
             elif list == 'whitelist':
-                if str(interaction.user.id) in BOT_BLACKLIST:
-                    BOT_BLACKLIST.remove(str(interaction.user.id))
-                    finalMsg = f"{interaction.user.mention} has been whitelisted."
+                if str(target.id) in BOT_BLACKLIST:
+                    BOT_BLACKLIST.remove(str(target.id))
+                    finalMsg = f"{target.mention} has been whitelisted."
                 else:
-                    finalMsg = f"{interaction.user.mention} is not in the blacklist."
+                    finalMsg = f"{target.mention} is not in the blacklist."
 
             await FOLLOWUP(finalMsg, interaction)
         except Exception as exc:
@@ -184,4 +185,39 @@ class AdminCog(commands.Cog):
                 await SEND(I_SPY['channel'],'Whatever.')
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/ispy`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="architect", description="Drop Architect Egg.")
+    @discord.app_commands.choices(channel=channel_choices)
+    async def architect(self, interaction: discord.Interaction, channel: str, time: int):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            await FOLLOWUP(f"Launching Architect Egg in {channel}...", interaction)
+            await asyncio.sleep(1)
+
+            arcMsg = await SEND(CHANNELS[channel], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(time))}:R>.")
+            await asyncio.sleep(int(time))
+
+            view = ButtonEgg_Throw(timeout=30)
+            view.thrower = None
+            view.disabled = False
+
+            view.type = "Architect"
+
+            view.channel = CHANNELS[channel]
+            view.toolate = True
+            view.message = await SEND_VIEW(CHANNELS[channel], "The Architect Egg fell from the sky!", view)
+            await asyncio.sleep(1)
+            await EDIT_MESSAGE(arcMsg, "The Architect Egg landed gracefully.")
+
+            await view.wait()
+            await view.too_late()
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/architect`: {exc}", interaction)
             raise

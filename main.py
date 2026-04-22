@@ -1884,30 +1884,30 @@ async def on_message(message):
 
             ##-----COMMANDS THAT ONLY USE 3 INPUTS-----
             #prepare architect
-            if lmsg.startswith("architect", 1) and EVENTS["Easter"]:
-                try:
-                    arcMsg = await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>.")
-                    await asyncio.sleep(int(third))
+            # if lmsg.startswith("architect", 1) and EVENTS["Easter"]:
+            #     try:
+            #         arcMsg = await SEND(CHANNELS[lmsgsplit[1]], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(third))}:R>.")
+            #         await asyncio.sleep(int(third))
 
-                    view = ButtonEgg_Throw(timeout=30)
-                    view.thrower = None
-                    view.disabled = False
+            #         view = ButtonEgg_Throw(timeout=30)
+            #         view.thrower = None
+            #         view.disabled = False
 
-                    view.type = "Architect"
+            #         view.type = "Architect"
 
-                    view.channel = CHANNELS[lmsgsplit[1]]
-                    view.toolate = True
-                    view.message = await SEND_VIEW(CHANNELS[lmsgsplit[1]], "The Architect Egg fell from the sky!", view)
-                    await asyncio.sleep(1)
-                    await EDIT_MESSAGE(arcMsg, "The Architect Egg landed gracefully.")
+            #         view.channel = CHANNELS[lmsgsplit[1]]
+            #         view.toolate = True
+            #         view.message = await SEND_VIEW(CHANNELS[lmsgsplit[1]], "The Architect Egg fell from the sky!", view)
+            #         await asyncio.sleep(1)
+            #         await EDIT_MESSAGE(arcMsg, "The Architect Egg landed gracefully.")
 
-                    await view.wait()
-                    await view.too_late()
+            #         await view.wait()
+            #         await view.too_late()
 
-                    return
-                except:
-                    await SEND(CHANNELS['drone-masters'], "Architen't.")
-                    return
+            #         return
+            #     except:
+            #         await SEND(CHANNELS['drone-masters'], "Architen't.")
+            #         return
                 
             #have the bot say whatever you say
             if lmsg.startswith("makesay", 1):
