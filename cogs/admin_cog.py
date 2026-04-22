@@ -1,15 +1,21 @@
 import asyncio
 
+from database import add_entry
 import discord
 from discord import app_commands
 from discord.ext import commands
 from utility import command_check
-from globals import CHANNELS, BOT_BLACKLIST
-from rated import DEFER, FOLLOWUP, INTERACTION
+from globals import CHANNELS, I_SPY, WISDOM
+from rated import DEFER, FOLLOWUP, INTERACTION, SEND
 
 class AdminCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+    channel_choices = [
+        discord.app_commands.Choice(name=ch.title(), value=ch) 
+        for ch in sorted(CHANNELS.keys())
+    ]
 
     @discord.app_commands.command(name="invite", description="Give access to Drone Masters chat")
     async def invite(self, interaction: discord.Interaction, target: discord.Member):
@@ -42,4 +48,62 @@ class AdminCog(commands.Cog):
             await FOLLOWUP(f"Farewell, {target.display_name}. Their access to the Drone Master channel has been dissolved.", interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/bid_farewell`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="wisdoms", description="Show the number of wisdoms")
+    async def wisdoms(self, interaction: discord.Interaction):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            await FOLLOWUP(f"I have {len(WISDOM)} wisdoms.", interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/wisdoms`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="nr", description="Add a new secret role.")
+    async def nr(self, interaction: discord.Interaction, name: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            add_entry(name, "dummy")
+            await FOLLOWUP("Role created successfully.", interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/nr`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="ispy", description="Begin a game of ispy.")
+    @discord.app_commands.choices(channel=channel_choices)
+    async def ispy(self, interaction: discord.Interaction, channel: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            await FOLLOWUP(f"Starting ispy game in {channel}...", interaction)
+
+            I_SPY['channel'] = CHANNELS[channel]
+            I_SPY['status'] = 0
+
+            await SEND(I_SPY['channel'], I_SPY['questions'][0])
+
+            await asyncio.sleep(I_SPY['maxwait'])
+
+            if I_SPY['status'] == 0:
+                I_SPY['status'] = None
+                await SEND(I_SPY['channel'],'Whatever.')
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/ispy`: {exc}", interaction)
             raise

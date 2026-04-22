@@ -529,12 +529,16 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
         ["Still here?", "I'd figured you would just think this thing was broken and stop trying", "I was proved wrong."],
         ["Sleazel?!?", "Made you turn around.", "Made you think I made you turn around."],
         ["I am quite impressed, you found me out. Take this little secret role.", "I hope I did not make you feel that bad.", "Fun Fact: This button used to give a role."],
-        ["Keep clicking for 100000 Robux.", "That click just now costed you 100000 Robux.", "Profit."],
+        ["Keep clicking for 100000 Robux.", "That click just now cost you 100000 Robux.", "Profit."],
         ["You know, I used to climb the stairs a while ago.", "It was pretty fun actually.", "But seeing people think they can stand on me is even more fun."],
         ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
         ["Once upon a time.", "There was a little drone that did not know what to do.", "But that was not me, because I am a genius."],
         ["Can you guess my favorite game?", "You have one more attempt.", "Why do you keep clicking the button? I asked a question."],
         ["This is the holy button.", "If you click it again you'll be cancelled.", "Blocked and reported."],
+        ["Hmmm?", "Who goes there?!", "I was merely kidding, I see all."],
+        ["There's a saying that goes like...", "If you click this button, you'll click the same button again.", "It seems they were right."],
+        ["To be or not to be.", "That is the question.", "But I have an even more important question: Why are you still clicking this button?"],
+        ["Are you 100% sure about this?", "This button is not for the faint of heart.", "You did not prove anything to me."],
     ]
 
     lineOfQuestioning = -1

@@ -49,32 +49,32 @@ def isNewUser(usr):
     else:
         False
 
-async def updateRigTracker(rigType):
-    initialmsg = RIG_DATA['rigTracker'].content
-    blankmsg = initialmsg.replace("\n","").split(",")
-    currentnumber = None
-    finalmsg = ""
-    counter = 0
+# async def updateRigTracker(rigType):
+#     initialmsg = RIG_DATA['rigTracker'].content
+#     blankmsg = initialmsg.replace("\n","").split(",")
+#     currentnumber = None
+#     finalmsg = ""
+#     counter = 0
 
-    for i in blankmsg:
-        counter += 1
-        if rigType.upper() in i:
-            #currentnumber = i.split(" ")[1].replace(",","")
-            currentnumber = db.get(rigType.lower() + "uses")
+#     for i in blankmsg:
+#         counter += 1
+#         if rigType.upper() in i:
+#             #currentnumber = i.split(" ")[1].replace(",","")
+#             currentnumber = db.get(rigType.lower() + "uses")
 
-            #i = i.replace(currentnumber, str(int(currentnumber) + 1))
-            db.set(rigType.lower() + "uses", int(currentnumber) + 1)
-            newnumber = db.get(rigType.lower() + "uses").decode("utf-8")
-            i = i.replace(i.split(" ")[1].replace(",",""), str(newnumber))
+#             #i = i.replace(currentnumber, str(int(currentnumber) + 1))
+#             db.set(rigType.lower() + "uses", int(currentnumber) + 1)
+#             newnumber = db.get(rigType.lower() + "uses").decode("utf-8")
+#             i = i.replace(i.split(" ")[1].replace(",",""), str(newnumber))
 
-            finalmsg += i + ",\n"
-        else:
-            if counter == 12:
-                finalmsg += i + "\n"
-            else:
-                finalmsg += i + ",\n"
+#             finalmsg += i + ",\n"
+#         else:
+#             if counter == 12:
+#                 finalmsg += i + "\n"
+#             else:
+#                 finalmsg += i + ",\n"
 
-    await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
+#     await EDIT_MESSAGE(RIG_DATA['rigTracker'], finalmsg)
 
 
 async def necromancer(channel):

@@ -233,7 +233,7 @@ class MiscCog(commands.Cog):
             await FOLLOWUP("I have sent you a direct message with further instructions.", interaction, False)
         except:
             redis_remove_token(usr)
-            await SEND(ch, "You need to accept DMs from me, as I need to send you a verification code.")
+            await FOLLOWUP("You need to accept DMs from me, as I need to send you a verification code.", interaction, False)
 
     @discord.app_commands.command(name="tip_add", description="Add a tip to the database")
     @discord.app_commands.choices(type=[

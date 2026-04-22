@@ -1756,16 +1756,16 @@ async def on_message(message):
         lmsgsplit = lmsg.split(" ", 2) #creates a list from the input received and makes it lowercase. "Hello world say HI!" becomes LIST["hello", "world", "say hi!"]
 
         #-----admin commands that require ONE input-----
-        if len(msginputs) == 1:            
+        # if len(msginputs) == 1:            
             #resets the rig tracker message  ---why would you do this? ç__ç
-            if lmsg.startswith("resetcounter", 1):
-                await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
-                return
+            # if lmsg.startswith("resetcounter", 1):
+            #     await EDIT_MESSAGE(RIG_DATA['rigTracker'], "**RIGS TRACKER**,\nPATRON: 0,\nJOKER: 0,\nWICKED: 0,\nKEEPER: 0,\nHACKER: 0,\nTHIEF: 0,\nSPECTRE: 0,\nARCHON: 0,\nDRIFTER: 0,\nHERETIC: 0,\nCHAMELEON: 0")
+            #     return
             
             # how many wisdoms are there - i swear to god bro why is this not working
-            if lmsg.startswith("wisdoms", 1):
-                await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
-                return
+            # if lmsg.startswith("wisdoms", 1):
+            #     await SEND(ch, f"I have {len(WISDOM)} wisdoms.")
+            #     return
             
             # if lmsg.startswith("adduserids", 1):
             #     try:
@@ -1795,21 +1795,21 @@ async def on_message(message):
             #     return
 
         #-----admin commands that require TWO inputs-----
-        elif len(msginputs) == 2 or lmsg.startswith("nr", 1):
+        if len(msginputs) == 2 or lmsg.startswith("nr", 1):
             secondVal = msg.split(" ", 1)[1]
             second = secondVal.replace("_", " ")          # NOT lowercase
             lsecond = secondVal.lower().replace("_", " ") # YES lowercase
             #ispy command
-            if lmsg.startswith("ispy",1):
-                I_SPY['channel'] = CHANNELS[lsecond]
-                I_SPY['status'] = 0
-                await SEND(I_SPY['channel'], I_SPY['questions'][0])
-                await DELETE(message)
-                await asyncio.sleep(I_SPY['maxwait'])
-                if I_SPY['status'] == 0:
-                    I_SPY['status'] = None
-                    await SEND(I_SPY['channel'],'Whatever.')
-                return
+            # if lmsg.startswith("ispy",1):
+            #     I_SPY['channel'] = CHANNELS[lsecond]
+            #     I_SPY['status'] = 0
+            #     await SEND(I_SPY['channel'], I_SPY['questions'][0])
+            #     await DELETE(message)
+            #     await asyncio.sleep(I_SPY['maxwait'])
+            #     if I_SPY['status'] == 0:
+            #         I_SPY['status'] = None
+            #         await SEND(I_SPY['channel'],'Whatever.')
+            #     return
             
             # does this key exist in db and whats the value 
             if lmsg.startswith("key", 1):
@@ -1845,15 +1845,15 @@ async def on_message(message):
                 return
 
             #create a new role with name
-            if lmsg.startswith("nr", 1):
-                try:
-                    add_entry(second, "dummy")
-                except Exception as e:
-                    await SEND(ch, e)
-                    return
+            # if lmsg.startswith("nr", 1):
+            #     try:
+            #         add_entry(second, "dummy")
+            #     except Exception as e:
+            #         await SEND(ch, e)
+            #         return
 
-                await SEND(ch, "Role created successfully.")
-                return
+            #     await SEND(ch, "Role created successfully.")
+            #     return
             
             #blacklist someone from using bot commands
             if lmsg.startswith("blacklist", 1):
