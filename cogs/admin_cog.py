@@ -127,10 +127,10 @@ class AdminCog(commands.Cog):
             raise
 
     @discord.app_commands.command(name="enlist", description="Add an user to the blacklist, or remove them if they are already blacklisted.")
-    @discord.app_commands.choices(
+    @discord.app_commands.choices(list=[
         discord.app_commands.Choice(name='Blacklist', value='blacklist'),
         discord.app_commands.Choice(name='Whitelist', value='whitelist')
-    )
+    ])
     async def enlist(self, interaction: discord.Interaction, list: str):
         stopMsg = command_check(interaction, True)
         if stopMsg:
