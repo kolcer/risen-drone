@@ -1835,14 +1835,14 @@ async def on_message(message):
             #     return 
             
             # remove key from db
-            if lmsg.startswith("dkey", 1):
-                try:
-                    delete_key(secondVal)
-                    await SEND(ch, f"Key '{secondVal}' deleted successfully.")
-                except Exception as e:
-                    await SEND(ch, e)
+            # if lmsg.startswith("dkey", 1):
+            #     try:
+            #         delete_key(secondVal)
+            #         await SEND(ch, f"Key '{secondVal}' deleted successfully.")
+            #     except Exception as e:
+            #         await SEND(ch, e)
                 
-                return
+            #     return
 
             #create a new role with name
             # if lmsg.startswith("nr", 1):
@@ -1856,26 +1856,26 @@ async def on_message(message):
             #     return
             
             #blacklist someone from using bot commands
-            if lmsg.startswith("blacklist", 1):
-                try:
-                    BOT_BLACKLIST.append(str(second))
-                except Exception as e:
-                    await SEND(ch, e)
-                    return
+            # if lmsg.startswith("blacklist", 1):
+            #     try:
+            #         BOT_BLACKLIST.append(str(second))
+            #     except Exception as e:
+            #         await SEND(ch, e)
+            #         return
 
-                await SEND(ch, "Blacklisted.")
-                return
+            #     await SEND(ch, "Blacklisted.")
+            #     return
             
-            #whitelist someone from using bot commands
-            if lmsg.startswith("whitelist", 1):
-                try:
-                    BOT_BLACKLIST.remove(second)
-                except Exception as e:
-                    await SEND(ch, e)
-                    return
+            # #whitelist someone from using bot commands
+            # if lmsg.startswith("whitelist", 1):
+            #     try:
+            #         BOT_BLACKLIST.remove(second)
+            #     except Exception as e:
+            #         await SEND(ch, e)
+            #         return
 
-                await SEND(ch, "Whitelisted.")
-                return
+            #     await SEND(ch, "Whitelisted.")
+            #     return
         
         #-----admin commands that require THREE or MORE inputs-----
         elif len(msginputs) >= 3:

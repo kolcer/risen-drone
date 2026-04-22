@@ -1,11 +1,11 @@
 import asyncio
 
-from database import add_entry, check_key, get_value, list_decoded_entries
+from database import add_entry, check_key, delete_key, get_value, list_decoded_entries
 import discord
 from discord import app_commands
 from discord.ext import commands
 from utility import command_check
-from globals import CHANNELS, I_SPY, WISDOM
+from globals import BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM
 from rated import DEFER, FOLLOWUP, INTERACTION, SEND
 
 class AdminCog(commands.Cog):
@@ -108,6 +108,55 @@ class AdminCog(commands.Cog):
                 
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/check_key`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="delete_key", description="Delete a key from the database.")
+    async def delete_key(self, interaction: discord.Interaction, key: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            delete_key(key)
+            await FOLLOWUP(f"Key '{key}' deleted successfully.", interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/delete_key`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="enlist", description="Add an user to the blacklist, or remove them if they are already blacklisted.")
+    @discord.app_commands.choices(
+        discord.app_commands.Choice(name='Blacklist', value='blacklist'),
+        discord.app_commands.Choice(name='Whitelist', value='whitelist')
+    )
+    async def enlist(self, interaction: discord.Interaction, list: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            finalMsg = ""
+            if list == 'blacklist':
+                if str(interaction.user.id) not in BOT_BLACKLIST:
+                    BOT_BLACKLIST.append(str(interaction.user.id))
+                    finalMsg = f"{interaction.user.mention} has been blacklisted."
+                else:
+                    finalMsg = f"{interaction.user.mention} is already blacklisted."
+            elif list == 'whitelist':
+                if str(interaction.user.id) in BOT_BLACKLIST:
+                    BOT_BLACKLIST.remove(str(interaction.user.id))
+                    finalMsg = f"{interaction.user.mention} has been whitelisted."
+                else:
+                    finalMsg = f"{interaction.user.mention} is not in the blacklist."
+
+            await FOLLOWUP(finalMsg, interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/delete_key`: {exc}", interaction)
             raise
 
     @discord.app_commands.command(name="ispy", description="Begin a game of ispy.")
