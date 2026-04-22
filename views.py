@@ -529,7 +529,7 @@ class ButtonGames_FakeInteractionFailed(discord.ui.View):
         ["Still here?", "I'd figured you would just think this thing was broken and stop trying", "I was proved wrong."],
         ["Sleazel?!?", "Made you turn around.", "Made you think I made you turn around."],
         ["I am quite impressed, you found me out. Take this little secret role.", "I hope I did not make you feel that bad.", "Fun Fact: This button used to give a role."],
-        ["Keep clicking for 100000 Robux.", "That click just now costed you 100000 Robux.", "Profit."],
+        ["Keep clicking for 100000 Robux.", "That click just now cost you 100000 Robux.", "Profit."],
         ["You know, I used to climb the stairs a while ago.", "It was pretty fun actually.", "But seeing people think they can stand on me is even more fun."],
         ["CON####GR###S##", "Y###U#####MA#######D######I####T#####J", "Do not worry. I am fine."],
         ["Once upon a time.", "There was a little drone that did not know what to do.", "But that was not me, because I am a genius."],
