@@ -1,13 +1,13 @@
 import asyncio
 import time
 
-from database import add_entry, check_key, delete_key, get_value, list_decoded_entries
+from database import add_egg_with_check, add_entry, check_key, delete_entry, delete_key, get_value, list_decoded_entries
 import discord
 from discord import app_commands
 from discord.ext import commands
 from utility import command_check
-from globals import BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM
-from rated import DEFER, EDIT_MESSAGE, FOLLOWUP, INTERACTION, SEND, SEND_VIEW
+from globals import BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM, FUN_ROLES
+from rated import DEFER, DELETE, EDIT_MESSAGE, FOLLOWUP, INTERACTION, SEND, SEND_VIEW
 from views import ButtonEgg_Throw
 
 class AdminCog(commands.Cog):
@@ -128,6 +128,66 @@ class AdminCog(commands.Cog):
             await FOLLOWUP(f"Something went wrong with `/delete_key`: {exc}", interaction)
             raise
 
+    @discord.app_commands.command(name="assign", description="Assign a role to a user.")
+    async def assign(self, interaction: discord.Interaction, user: discord.Member, role: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            if not any(role in roles if isinstance(roles, list) else role in roles.keys() for roles in FUN_ROLES.values()):
+                await FOLLOWUP("You cannot assign this role through my commands.", interaction)
+                return
+
+            if user.id in list_decoded_entries(role):
+                await asyncio.sleep(1)
+                await FOLLOWUP("They already own this role, duh.", interaction)
+                return
+
+            if role in FUN_ROLES["Easter"]:
+                await add_egg_with_check(role, user.id)
+            else:
+                add_entry(role, user.id)
+
+            await asyncio.sleep(1)
+            await FOLLOWUP("I gave the role to " + user.mention, interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/assign`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="unassign", description="Remove a role from a user.")
+    async def unassign(self, interaction: discord.Interaction, user: discord.Member, role: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            if not any(role in roles if isinstance(roles, list) else role in roles.keys() for roles in FUN_ROLES.values()):
+                await FOLLOWUP("You cannot unassign this role through my commands.", interaction)
+                return
+
+            entries = list_decoded_entries(role)
+
+            if not user.id in entries:
+                await asyncio.sleep(1)
+                await FOLLOWUP("They do not own the role. Are you ok?", interaction)
+                return
+
+            index = entries.index(user.id)
+            delete_entry(role, index)
+
+            await asyncio.sleep(1)
+            await FOLLOWUP("Took the role away from " + user.mention, interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/unassign`: {exc}", interaction)
+            raise
+
     @discord.app_commands.command(name="enlist", description="Add an user to the blacklist, or remove them if they are already blacklisted.")
     @discord.app_commands.choices(list=[
         discord.app_commands.Choice(name='Blacklist', value='blacklist'),
@@ -221,4 +281,20 @@ class AdminCog(commands.Cog):
             await view.too_late()
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/architect`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="makesay", description="Have the drone speak your words.")
+    @discord.app_commands.choices(channel=channel_choices)
+    async def makesay(self, interaction: discord.Interaction, channel: str, txt: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            await SEND(CHANNELS[channel], txt)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/makesay`: {exc}", interaction)
             raise

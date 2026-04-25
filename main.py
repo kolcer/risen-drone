@@ -1910,87 +1910,87 @@ async def on_message(message):
             #         return
                 
             #have the bot say whatever you say
-            if lmsg.startswith("makesay", 1):
-                try:
-                    await SEND(CHANNELS[lmsgsplit[1]], third)
-                    await DELETE(message)
-                    return
-                except:
-                    await SEND(CHANNELS['drone-masters'], "I refuse.")
-                    return
+            # if lmsg.startswith("makesay", 1):
+            #     try:
+            #         await SEND(CHANNELS[lmsgsplit[1]], third)
+            #         await DELETE(message)
+            #         return
+            #     except:
+            #         await SEND(CHANNELS['drone-masters'], "I refuse.")
+            #         return
     
             #give ckr
-            if lmsg.startswith("ckr to", 1):
-                for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() == lthird:
-                        await SEND(ch, "I gave the Chat Killer role to " + mem.name)
-                        await asyncio.sleep(1)
-                        await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
-                        break
-                return  
+            # if lmsg.startswith("ckr to", 1):
+            #     for mem in SERVER_DATA['server'].members:
+            #         if mem.name.lower() == lthird:
+            #             await SEND(ch, "I gave the Chat Killer role to " + mem.name)
+            #             await asyncio.sleep(1)
+            #             await ADD_ROLES(mem, EXTRA_ROLES['ckr'])
+            #             break
+            #     return  
                 
             #remove ckr
-            if lmsg.startswith("ckr from", 1):
-                for mem in SERVER_DATA['server'].members:
-                    if mem.name.lower() == lthird:
-                        await SEND(ch, "I took the Chat Killer Role away from " + mem.name)
-                        await asyncio.sleep(1)
-                        await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
-                        break
-                return   
+            # if lmsg.startswith("ckr from", 1):
+            #     for mem in SERVER_DATA['server'].members:
+            #         if mem.name.lower() == lthird:
+            #             await SEND(ch, "I took the Chat Killer Role away from " + mem.name)
+            #             await asyncio.sleep(1)
+            #             await REMOVE_ROLES(mem, EXTRA_ROLES['ckr'])
+            #             break
+            #     return   
 
             #give any role
-            if lmsg.startswith("assign", 1):
-                try:
-                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
-                        await SEND(ch, "You cannot assign this role through my commands.")
-                        return
+            # if lmsg.startswith("assign", 1):
+            #     try:
+            #         if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
+            #             await SEND(ch, "You cannot assign this role through my commands.")
+            #             return
 
-                    for mem in SERVER_DATA['server'].members:
-                        if int(mem.id) == int(msgsplit[1]):
-                            if msgsplit[1] in list_decoded_entries(third):
-                                await asyncio.sleep(1)
-                                await SEND(ch, "They already own this role, duh.")
-                                return
+            #         for mem in SERVER_DATA['server'].members:
+            #             if int(mem.id) == int(msgsplit[1]):
+            #                 if msgsplit[1] in list_decoded_entries(third):
+            #                     await asyncio.sleep(1)
+            #                     await SEND(ch, "They already own this role, duh.")
+            #                     return
 
-                            if third in FUN_ROLES["Easter"]:
-                                await add_egg_with_check(third, mem)
-                            else:
-                                add_entry(third, msgsplit[1])
+            #                 if third in FUN_ROLES["Easter"]:
+            #                     await add_egg_with_check(third, mem)
+            #                 else:
+            #                     add_entry(third, msgsplit[1])
 
-                            await asyncio.sleep(1)
-                            await SEND(ch, "I gave the role to " + mem.name)
-                            break
-                except Exception as e:
-                    await SEND(ch, e)
+            #                 await asyncio.sleep(1)
+            #                 await SEND(ch, "I gave the role to " + mem.name)
+            #                 break
+            #     except Exception as e:
+            #         await SEND(ch, e)
 
-                return  
+            #     return  
 
-            #remove any role
-            if lmsg.startswith("unassign", 1):
-                try:
-                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
-                        await SEND(ch, "You cannot assign this role through my commands.")
-                        return
+            # #remove any role
+            # if lmsg.startswith("unassign", 1):
+            #     try:
+            #         if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
+            #             await SEND(ch, "You cannot assign this role through my commands.")
+            #             return
 
-                    for mem in SERVER_DATA['server'].members:
-                        if int(mem.id) == int(msgsplit[1]):
-                            entries = list_decoded_entries(third)
+            #         for mem in SERVER_DATA['server'].members:
+            #             if int(mem.id) == int(msgsplit[1]):
+            #                 entries = list_decoded_entries(third)
 
-                            if not msgsplit[1] in entries:
-                                await asyncio.sleep(1)
-                                await SEND(ch, "They do not own the role. Are you ok?")
-                                return
+            #                 if not msgsplit[1] in entries:
+            #                     await asyncio.sleep(1)
+            #                     await SEND(ch, "They do not own the role. Are you ok?")
+            #                     return
 
-                            index = entries.index(msgsplit[1])
-                            delete_entry(third, index)
+            #                 index = entries.index(msgsplit[1])
+            #                 delete_entry(third, index)
 
-                            await asyncio.sleep(1)
-                            await SEND(ch, "Took the role away from " + mem.name)
-                            break
-                except Exception as e:
-                    await SEND(ch, e)
-                return  
+            #                 await asyncio.sleep(1)
+            #                 await SEND(ch, "Took the role away from " + mem.name)
+            #                 break
+            #     except Exception as e:
+            #         await SEND(ch, e)
+            #     return  
 
             #purge any role
             if lmsg.startswith("purge role", 1):
