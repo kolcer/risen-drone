@@ -157,7 +157,7 @@ async def Rig(rigType, ch, usr):
                 # msgCounting = await SEND(ch,"You accidentally walked backwards and triggered a Heretic Rig!"
                 #                 "\nMaybe someone could give you some Mana?")
             else:
-                msgText = f"{usr.mention} cast Heretic Rig but as a result you ended up getting Possessed...\nMaybe someone could give you some Mana?"
+                msgText = f"{usr.mention} cast Heretic Rig but as a result they ended up getting Possessed...\nMaybe someone could give them some Mana?"
                 # msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                 #                 "\nMaybe someone could give you some Mana?")
             
