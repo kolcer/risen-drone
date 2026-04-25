@@ -147,7 +147,7 @@ class AdminCog(commands.Cog):
                 await FOLLOWUP("They already own this role, duh.", interaction)
                 return
 
-            if role in any(FUN_ROLES["Easter"], FUN_ROLES["Easter26"], FUN_ROLES["Easter27"]):
+            if role in any(FUN_ROLES["Easter"] + FUN_ROLES["Easter26"] + FUN_ROLES["Easter27"]):
                 await add_egg_with_check(role, user)
             else:
                 add_entry(role, user.id)
