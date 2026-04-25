@@ -148,7 +148,7 @@ class AdminCog(commands.Cog):
                 return
 
             if role in FUN_ROLES["Easter"]:
-                await add_egg_with_check(role, user.id)
+                await add_egg_with_check(role, user)
             else:
                 add_entry(role, user.id)
 
@@ -294,6 +294,8 @@ class AdminCog(commands.Cog):
         await DEFER(interaction)
 
         try:
+            await FOLLOWUP(f"I'm clearing my voice...", interaction)
+            await asyncio.sleep(1)
             await SEND(CHANNELS[channel], txt)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/makesay`: {exc}", interaction)
