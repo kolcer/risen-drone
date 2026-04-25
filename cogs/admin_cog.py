@@ -138,7 +138,7 @@ class AdminCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not any(role in roles if isinstance(roles, list) else role in roles.keys() for roles in FUN_ROLES.values()):
+            if not any(role in category_data for category_data in FUN_ROLES.values()):
                 await FOLLOWUP("You cannot assign this role through my commands.", interaction)
                 return
 
@@ -147,13 +147,13 @@ class AdminCog(commands.Cog):
                 await FOLLOWUP("They already own this role, duh.", interaction)
                 return
 
-            if role in FUN_ROLES["Easter"]:
+            if role in any(FUN_ROLES["Easter"], FUN_ROLES["Easter26"], FUN_ROLES["Easter27"]):
                 await add_egg_with_check(role, user)
             else:
                 add_entry(role, user.id)
 
             await asyncio.sleep(1)
-            await FOLLOWUP("I gave the role to " + user.mention, interaction)
+            await FOLLOWUP(f"I gave the role to {user.mention}.", interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/assign`: {exc}", interaction)
             raise
@@ -168,7 +168,7 @@ class AdminCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not any(role in roles if isinstance(roles, list) else role in roles.keys() for roles in FUN_ROLES.values()):
+            if not any(role in category_data for category_data in FUN_ROLES.values()):
                 await FOLLOWUP("You cannot unassign this role through my commands.", interaction)
                 return
 
@@ -183,7 +183,7 @@ class AdminCog(commands.Cog):
             delete_entry(role, index)
 
             await asyncio.sleep(1)
-            await FOLLOWUP("Took the role away from " + user.mention, interaction)
+            await FOLLOWUP(f"Took the role away from {user.mention}.", interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/unassign`: {exc}", interaction)
             raise

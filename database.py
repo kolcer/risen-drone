@@ -29,10 +29,7 @@ async def add_entry_with_check(key, new_entry):
 async def add_egg_with_check(key, new_entry):
     eggCounter = 0
 
-    for role in FUN_ROLES["Easter"]:
-        if str(new_entry.id) in list_decoded_entries(role):
-            eggCounter += 1 
-    for role in FUN_ROLES["Easter26"]:
+    for role in FUN_ROLES["Easter"] + FUN_ROLES["Easter26"] + FUN_ROLES["Easter27"]:
         if str(new_entry.id) in list_decoded_entries(role):
             eggCounter += 1 
 
