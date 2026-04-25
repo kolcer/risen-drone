@@ -1,5 +1,5 @@
 import asyncio
-from time import time
+import time
 
 from database import add_entry, check_key, delete_key, get_value, list_decoded_entries
 import discord
