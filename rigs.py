@@ -153,11 +153,11 @@ async def Rig(rigType, ch, usr):
             await asyncio.sleep(1)
 
             if EXTRA_ROLES['hypno'] in usr.roles:
-                msgText = "You accidentally walked backwards and triggered a Heretic Rig!\nMaybe someone could give you some Mana?"
+                msgText = f"{usr.mention}, you accidentally walked backwards and triggered a Heretic Rig!\nMaybe someone could give you some Mana?"
                 # msgCounting = await SEND(ch,"You accidentally walked backwards and triggered a Heretic Rig!"
                 #                 "\nMaybe someone could give you some Mana?")
             else:
-                msgText = "You cast Heretic Rig but as a result you ended up getting Possessed...\nMaybe someone could give you some Mana?"
+                msgText = f"{usr.mention} cast Heretic Rig but as a result you ended up getting Possessed...\nMaybe someone could give you some Mana?"
                 # msgCounting = await SEND(ch,"You cast Heretic Rig but as a result you ended up getting Possessed..."
                 #                 "\nMaybe someone could give you some Mana?")
             
