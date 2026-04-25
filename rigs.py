@@ -139,7 +139,7 @@ async def Rig(rigType, ch, usr):
     match newRigType:
         case "heretic":
             if EXTRA_ROLES['murdurator'] in usr.roles:
-                await send_followup(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
+                await send_followup(ch, f"{usr.mention} cast Heretic Rig but thanks to their Unbeliever rank, they didn't get possessed.")
                 # await SEND(ch, "You cast Heretic Rig but thanks to your Unbeliever rank, you didn't get possessed.")
                 RIG_COOLDOWNS["self"] = False
                 return
@@ -173,7 +173,7 @@ async def Rig(rigType, ch, usr):
                 RIG_COOLDOWNS["meddle"] = False
                 return
             
-            msgText = "You cast Wicked Rig and destroyed all the nasty stairs along with your roles!"
+            msgText = f"{usr.mention} cast Wicked Rig and destroyed all the nasty stairs along with their roles!"
             # msgCounting = await SEND(ch, "You cast Wicked Rig and destroyed all the nasty stairs along with your roles!")
 
             for rig in ACTIVE_RIGS.keys():
@@ -195,7 +195,7 @@ async def Rig(rigType, ch, usr):
         case "drifter":
             im = usr.display_name[::-1]
             await EDIT_NICK(usr, im)
-            msgText = "You cast Drifter Rig but you were looking the other way, causing your name to be reversed!"
+            msgText = f"{usr.mention} cast Drifter Rig but they were looking the other way, causing their name to be reversed!"
             # msgCounting = await SEND(ch, "You cast Drifter Rig but you were looking the other way, causing your name to be reversed...")
             
         case "archon":
@@ -212,7 +212,7 @@ async def Rig(rigType, ch, usr):
                 if (ch2.name != ch.name) and (ch2.id not in SECRET_CHANNELS):
                     break
 
-            firstmsg = await send_followup(ch, "You cast Archon Rig and created a Gate in another channel!")
+            firstmsg = await send_followup(ch, f"{usr.mention} cast Archon Rig and created a Gate in another channel!")
             # firstmsg = await SEND(ch, "You cast Archon Rig and created a Gate in another channel!")
             await SEND(ch, "https://giphy.com/gifs/jiSabjDlIahx2P1xI0")
             await asyncio.sleep(3)
@@ -227,7 +227,7 @@ async def Rig(rigType, ch, usr):
             random.shuffle(nameInList)
             im = ''.join(nameInList)
             # im = "".join(random.sample(usr.nick, len(usr.nick)))
-            msgText = "You cast Hacker Rig an- ####01111001##à#01101111###01110101###01110010#00100000###01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000####à01101110#01101111#01110111#00100000#01110010#01100001#01101110#01100100##01101111#01101101#01101001#01111010#01100101#01100100#00100001"
+            msgText = f"{usr.mention} cast Hacker Rig an- ####01111001##à#01101111###01110101###01110010#00100000###01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000####à01101110#01101111#01110111#00100000#01110010#01100001#01101110#01100100##01101111#01101101#01101001#01111010#01100101#01100100#00100001"
             # msgCounting = await SEND(ch, "You cast Hacker Rig an- ####01111001##à#01101111###01110101###01110010#00100000###01101110#01100001#01101101#01100101#00100000#01101001#01110011#00100000####à01101110#01101111#01110111#00100000#01110010#01100001#01101110#01100100##01101111#01101101#01101001#01111010#01100101#01100100#00100001")
             await asyncio.sleep(3)
             await EDIT_NICK(usr, im)
@@ -236,7 +236,7 @@ async def Rig(rigType, ch, usr):
             im = ''.join(sorted(usr.display_name))
             await EDIT_NICK(usr, im)
             await asyncio.sleep(1)
-            msgText = "You cast Keeper Rig and now your name follows a logic order!"
+            msgText = f"{usr.mention} cast Keeper Rig and now their name follows a logic order!"
             # msgCounting = await SEND(ch, "You cast Keeper Rig and now your name follows a logic order!")
         
         case "patron":
@@ -248,7 +248,7 @@ async def Rig(rigType, ch, usr):
                 elif hypnoRole in member.roles:
                     await REMOVE_ROLES(member, hypnoRole)
 
-            msgText = "You cast Patron Rig and set up Mana Rigs all over the server!"
+            msgText = f"{usr.mention} cast Patron Rig and set up Mana Rigs all over the server!"
             # msgCounting = await SEND(ch, "You cast Patron Rig and set up Mana Rigs all over the server!")
 
         # case "reaver":
@@ -270,7 +270,7 @@ async def Rig(rigType, ch, usr):
 
         case "janitor":
             if MORPHABLE_ROLES["Janitor"][0] not in usr.roles:
-                await send_followup(ch, "You are not skilled enough to cast Janitor Rig.")
+                await send_followup(ch, f"{usr.mention} is not skilled enough to cast Janitor Rig.")
                 # await SEND(ch, "You are not skilled enough to cast Janitor Rig.")
                 return
 
@@ -292,7 +292,7 @@ async def Rig(rigType, ch, usr):
                     RIG_COOLDOWNS[cooldown] = False
 
                 RIG_COOLDOWNS[COOLDOWN_SELECT[rigType]] = True
-                msgText = "You cast Janitor Rig and cleaned up all active cooldowns!"
+                msgText = f"{usr.mention} cast Janitor Rig and cleaned up all active cooldowns!"
                 # msgCounting = await SEND(ch, "You cast Janitor Rig and cleaned up all active cooldowns!")
             else:
                 await send_followup(ch, "There are no active rigs to clean up.")
