@@ -1,4 +1,5 @@
 import asyncio
+from time import time
 
 from database import add_entry, check_key, delete_key, get_value, list_decoded_entries
 import discord
@@ -189,7 +190,7 @@ class AdminCog(commands.Cog):
 
     @discord.app_commands.command(name="architect", description="Drop Architect Egg.")
     @discord.app_commands.choices(channel=channel_choices)
-    async def architect(self, interaction: discord.Interaction, channel: str, time: int):
+    async def architect(self, interaction: discord.Interaction, channel: str, countdown: int):
         stopMsg = command_check(interaction, True)
         if stopMsg:
             await INTERACTION(interaction, stopMsg, True)
@@ -201,8 +202,8 @@ class AdminCog(commands.Cog):
             await FOLLOWUP(f"Launching Architect Egg in {channel}...", interaction)
             await asyncio.sleep(1)
 
-            arcMsg = await SEND(CHANNELS[channel], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + int(time))}:R>.")
-            await asyncio.sleep(int(time))
+            arcMsg = await SEND(CHANNELS[channel], f"The Architect Egg is falling at terminal velocity in this channel! Take cover <t:{round(time.time() + countdown)}:R>.")
+            await asyncio.sleep(countdown)
 
             view = ButtonEgg_Throw(timeout=30)
             view.thrower = None
