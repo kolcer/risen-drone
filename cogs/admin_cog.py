@@ -142,7 +142,7 @@ class AdminCog(commands.Cog):
                 await FOLLOWUP("You cannot assign this role through my commands.", interaction)
                 return
 
-            if user.id in list_decoded_entries(role):
+            if str(user.id) in list_decoded_entries(role):
                 await asyncio.sleep(1)
                 await FOLLOWUP("They already own this role, duh.", interaction)
                 return
@@ -150,7 +150,7 @@ class AdminCog(commands.Cog):
             if role in (FUN_ROLES["Easter"] + FUN_ROLES["Easter26"] + FUN_ROLES["Easter27"]):
                 await add_egg_with_check(role, user)
             else:
-                add_entry(role, user.id)
+                add_entry(role, str(user.id))
 
             await asyncio.sleep(1)
             await FOLLOWUP(f"I gave the role to {user.mention}.", interaction)
@@ -174,12 +174,12 @@ class AdminCog(commands.Cog):
 
             entries = list_decoded_entries(role)
 
-            if not user.id in entries:
+            if not str(user.id) in entries:
                 await asyncio.sleep(1)
                 await FOLLOWUP("They do not own the role. Are you ok?", interaction)
                 return
 
-            index = entries.index(user.id)
+            index = entries.index(str(user.id))
             delete_entry(role, index)
 
             await asyncio.sleep(1)
