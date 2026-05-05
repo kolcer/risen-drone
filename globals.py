@@ -341,11 +341,11 @@ ANSWERS = [
     "If you were expecting a positive outcome, think again.",
     # Joker
     "The Joker guild gave me a look when I asked for assistance with your question, I think it's a yes.",
-    "Yes, but only if you do the chicken dance."
+    "Yes, but only if you do the chicken dance.",
     "A big fat no from the Joker.",
     "At first glance, I'd say no. On second glance, I'd still say no.",
     "Let’s flip a coin... flip... nope, still no.",
-    "Nuh-Uh."
+    "Nuh-Uh.",
     "I didn't ask.",
     "You can't be serious.",
     "Yes <:csTroll:814959699337412698>",
@@ -365,7 +365,7 @@ ANSWERS = [
     "Archon is currently travelling between Gates and cannot answer.",
     "Let me concentrate, I'll let you know at a later time.",
     # Gremlin
-    "Gremlin says yes, but only if you promise to fix any problems that arise later.",
+    "Gremlin says yes, but only if you promise to fix any problems that may arise later.",
     "WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE! YEEEESSS!",
     "Hihihi yes hehehhehehehehe!",
     "Gremlin might say yes, but only if you give it a snack first.",
