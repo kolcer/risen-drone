@@ -90,7 +90,7 @@ class PersonalCog(commands.Cog):
             if ali_climbs.isdigit(): total_climbs += int(ali_climbs)
 
         view.data[0] = user_climbs
-        view.footers[0] = f"{total_climbs} climbs in total!" if total_climbs > 0 else "Type 'bd link' to start tracking!"
+        view.footers[0] = f"{total_climbs} climbs in total!" if total_climbs > 0 else "Type '/link' to start tracking!"
 
         # Pages 2-4: Towers
         build_tower_page(user_stats, "classic", 1, view)

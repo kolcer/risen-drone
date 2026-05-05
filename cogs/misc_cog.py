@@ -221,8 +221,8 @@ class MiscCog(commands.Cog):
                 "'LINK DISCORD' included!\n\n"
                 "**DO NOT SHARE IT WITH ANYONE, WE WILL NEVER ASK YOU FOR THAT INFORMATION.**\n\n"
                 "If successful, you will be pinged in <#1001034407966150746>.\n" + 
-                "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your discord user id.\n"
-                "Your climbs, wins and personal records will be accessible via a 'bd show profile' command. Be aware that anyone in the server can view your profile at any time." + 
+                "By doing this you agree for your Crazy Stairs Roblox data to be stored on external server and for Crazy Stairs to keep your Discord user ID.\n"
+                "Your climbs, wins and personal records will be accessible via the '/show profile' command. Be aware that anyone in the server can view your profile at any time." + 
                 "You can unlink and delete your data from external servers at any time by sending this command into Roblox postbox:\n\n" +
                 "`UNLINK DISCORD`\n\n" +
                 "If you no longer have access to your Roblox account and want us to remove your data, contact sleazel directly.")
