@@ -150,7 +150,7 @@ class AdminCog(commands.Cog):
             if role in (FUN_ROLES["Easter"] + FUN_ROLES["Easter26"] + FUN_ROLES["Easter27"]):
                 await add_egg_with_check(role, user)
             elif role in APPROVED_ROLES:
-                await ADD_ROLES(user, role)
+                await ADD_ROLES(user, APPROVED_ROLES[role])
             else:
                 add_entry(role, str(user.id))
 
