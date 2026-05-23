@@ -6,8 +6,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from utility import command_check
-from globals import BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM, FUN_ROLES
-from rated import DEFER, DELETE, EDIT_MESSAGE, FOLLOWUP, INTERACTION, SEND, SEND_VIEW
+from globals import APPROVED_ROLES, BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM, FUN_ROLES
+from rated import DEFER, DELETE, EDIT_MESSAGE, FOLLOWUP, INTERACTION, PURGE_ROLES, REMOVE_ROLES, SEND, SEND_VIEW
 from views import ButtonEgg_Throw
 
 class AdminCog(commands.Cog):
@@ -138,11 +138,11 @@ class AdminCog(commands.Cog):
         await DEFER(interaction)
 
         try:
-            if not any(role in category_data for category_data in FUN_ROLES.values()):
+            if not any(role in category_data for category_data in FUN_ROLES.values()) and role not in APPROVED_ROLES:
                 await FOLLOWUP("You cannot assign this role through my commands.", interaction)
                 return
 
-            if str(user.id) in list_decoded_entries(role):
+            if (role not in APPROVED_ROLES and str(user.id) in list_decoded_entries(role)) or (role in APPROVED_ROLES and APPROVED_ROLES[role] in user.roles):
                 await asyncio.sleep(1)
                 await FOLLOWUP("They already own this role, duh.", interaction)
                 return
@@ -164,28 +164,59 @@ class AdminCog(commands.Cog):
         if stopMsg:
             await INTERACTION(interaction, stopMsg, True)
             return
+        
+        entries = []
 
         await DEFER(interaction)
 
         try:
-            if not any(role in category_data for category_data in FUN_ROLES.values()):
+            if not any(role in category_data for category_data in FUN_ROLES.values()) and role not in APPROVED_ROLES:
                 await FOLLOWUP("You cannot unassign this role through my commands.", interaction)
                 return
 
-            entries = list_decoded_entries(role)
+            if role not in APPROVED_ROLES:
+                entries = list_decoded_entries(role)
 
-            if not str(user.id) in entries:
+            if (role not in APPROVED_ROLES and not str(user.id) in entries) or (role in APPROVED_ROLES and not APPROVED_ROLES[role] in user.roles):
                 await asyncio.sleep(1)
                 await FOLLOWUP("They do not own the role. Are you ok?", interaction)
                 return
 
-            index = entries.index(str(user.id))
-            delete_entry(role, index)
+            if role not in APPROVED_ROLES:
+                index = entries.index(str(user.id))
+                delete_entry(role, index)
+            else:
+                await REMOVE_ROLES(user, APPROVED_ROLES[role])
 
             await asyncio.sleep(1)
             await FOLLOWUP(f"Took the role away from {user.mention}.", interaction)
         except Exception as exc:
             await FOLLOWUP(f"Something went wrong with `/unassign`: {exc}", interaction)
+            raise
+
+    @discord.app_commands.command(name="purge", description="Purge a role.")
+    async def purge(self, interaction: discord.Interaction, user: discord.Member, role: str):
+        stopMsg = command_check(interaction, True)
+        if stopMsg:
+            await INTERACTION(interaction, stopMsg, True)
+            return
+
+        await DEFER(interaction)
+
+        try:
+            if not any(role in category_data for category_data in FUN_ROLES.values()) and role not in APPROVED_ROLES:
+                await FOLLOWUP("You cannot purge this role through my commands.", interaction)
+                return
+            
+            if role in APPROVED_ROLES:
+                await PURGE_ROLES(APPROVED_ROLES[role])
+            else:
+                delete_key(role)
+
+            await asyncio.sleep(1)
+            await FOLLOWUP("The role is gone.", interaction)
+        except Exception as exc:
+            await FOLLOWUP(f"Something went wrong with `/purge`: {exc}", interaction)
             raise
 
     @discord.app_commands.command(name="enlist", description="Add an user to the blacklist, or remove them if they are already blacklisted.")

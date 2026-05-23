@@ -1993,31 +1993,31 @@ async def on_message(message):
             #     return  
 
             #purge any role
-            if lmsg.startswith("purge role", 1):
-                try:
-                    if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
-                        await SEND(ch, "You cannot purge this role through my commands.")
-                        return
+            # if lmsg.startswith("purge role", 1):
+            #     try:
+            #         if not any(third in roles if isinstance(roles, list) else third in roles.keys() for roles in FUN_ROLES.values()):
+            #             await SEND(ch, "You cannot purge this role through my commands.")
+            #             return
                         
-                    delete_key(third)
-                    await asyncio.sleep(1)
-                    await SEND(ch, "The role is gone.")
-                except Exception as e:
-                    await SEND(ch, e)
-                return 
+            #         delete_key(third)
+            #         await asyncio.sleep(1)
+            #         await SEND(ch, "The role is gone.")
+            #     except Exception as e:
+            #         await SEND(ch, e)
+            #     return 
             
             #purge any role
-            if lmsg.startswith("purge drole", 1):
-                if third in APPROVED_ROLES:
-                    neededrole = APPROVED_ROLES[third]
-                else:
-                    await SEND(ch, "You cannot obliterate this role through my commands.")
-                    return
+            # if lmsg.startswith("purge drole", 1):
+            #     if third in APPROVED_ROLES:
+            #         neededrole = APPROVED_ROLES[third]
+            #     else:
+            #         await SEND(ch, "You cannot obliterate this role through my commands.")
+            #         return
                     
-                await PURGE_ROLES(neededrole)
-                await asyncio.sleep(1)
-                await SEND(ch, "The Discord role is gone.")
-                return  
+            #     await PURGE_ROLES(neededrole)
+            #     await asyncio.sleep(1)
+            #     await SEND(ch, "The Discord role is gone.")
+            #     return  
             
             #create a new role with name and color 
             if lmsg.startswith("ndr", 1):
