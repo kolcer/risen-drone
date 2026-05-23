@@ -7,7 +7,7 @@ from discord import app_commands
 from discord.ext import commands
 from utility import command_check
 from globals import APPROVED_ROLES, BOT_BLACKLIST, CHANNELS, I_SPY, WISDOM, FUN_ROLES
-from rated import DEFER, DELETE, EDIT_MESSAGE, FOLLOWUP, INTERACTION, PURGE_ROLES, REMOVE_ROLES, SEND, SEND_VIEW
+from rated import DEFER, EDIT_MESSAGE, FOLLOWUP, INTERACTION, PURGE_ROLES, REMOVE_ROLES, ADD_ROLES, SEND, SEND_VIEW
 from views import ButtonEgg_Throw
 
 class AdminCog(commands.Cog):
@@ -149,6 +149,8 @@ class AdminCog(commands.Cog):
 
             if role in (FUN_ROLES["Easter"] + FUN_ROLES["Easter26"] + FUN_ROLES["Easter27"]):
                 await add_egg_with_check(role, user)
+            elif role in APPROVED_ROLES:
+                await ADD_ROLES(user, role)
             else:
                 add_entry(role, str(user.id))
 
