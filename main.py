@@ -233,9 +233,23 @@ async def on_reaction_add(reaction, user):
 #                 view = BUTTONS['view']
 #                 await view.process_click(interaction, custom_id, user)
 
+@client.event
+async def on_guild_join(guild):
+    if guild.id != 624227331720085528:
+        await guild.leave()
+        await DRONEPRINT(f"Joined unauthorized Server: {guild.name} ({guild.id}). Leaving...")
+
 #main function on each message being intercepted
 @client.event
 async def on_message(message):
+    if message.guild is None:
+        return
+
+    if message.guild.id != 624227331720085528:
+        await message.guild.leave()
+        await DRONEPRINT(f"Joined unauthorized Server: {message.guild.name} ({message.guild.id}). Leaving...")
+        return
+
     msg = message.content
     ## lowercase the message for some commands to use
     lmsg = msg.lower()
