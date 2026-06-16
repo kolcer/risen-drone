@@ -148,7 +148,7 @@ def command_check(interaction, admin=False):
     if admin and EXTRA_ROLES['admin'] not in interaction.user.roles:
         return "You are not supposed to use this command."
     
-    if interaction.guild is None or interaction.channel is None:
+    if interaction.guild is None or interaction.guild.id != 624227331720085528 or interaction.channel is None:
         return "Use this command in the Crazy Stairs server!"
 
     if str(interaction.user.id) in BOT_BLACKLIST:
