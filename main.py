@@ -241,7 +241,7 @@ async def on_guild_join(guild):
 
 #main function on each message being intercepted
 @client.event
-async def on_message(message):
+async def on_message(message): 
     if message.guild is None:
         return
 
@@ -2046,66 +2046,66 @@ async def on_message(message):
                 APPROVED_ROLES[third] = newrole
                 return
             
-            #give any role
-            if lmsg.startswith("dassign", 1):
-                try:
-                    if third in APPROVED_ROLES:
-                        neededrole = APPROVED_ROLES[third]
-                    else:
-                        await SEND(ch, "You cannot assign this role through my commands.")
-                        return
+            # #give any role
+            # if lmsg.startswith("dassign", 1):
+            #     try:
+            #         if third in APPROVED_ROLES:
+            #             neededrole = APPROVED_ROLES[third]
+            #         else:
+            #             await SEND(ch, "You cannot assign this role through my commands.")
+            #             return
                         
-                    for mem in SERVER_DATA['server'].members:
-                        if int(mem.id) == int(msgsplit[1]):
-                            await SEND(ch, "I gave the role to " + mem.name)
-                            await asyncio.sleep(1)
-                            await ADD_ROLES(mem, neededrole)
-                            break
-                except Exception as e:
-                    print(e)
-                    await SEND(ch, e)
+            #         for mem in SERVER_DATA['server'].members:
+            #             if int(mem.id) == int(msgsplit[1]):
+            #                 await SEND(ch, "I gave the role to " + mem.name)
+            #                 await asyncio.sleep(1)
+            #                 await ADD_ROLES(mem, neededrole)
+            #                 break
+            #     except Exception as e:
+            #         print(e)
+            #         await SEND(ch, e)
 
-                return  
+            #     return  
 
-            #remove any role
-            if lmsg.startswith("dunassign", 1):
-                if third in APPROVED_ROLES:
-                    neededrole = APPROVED_ROLES[third]
-                else:
-                    await SEND(ch, "You cannot unassign this role through my commands.")
-                    return
+            # #remove any role
+            # if lmsg.startswith("dunassign", 1):
+            #     if third in APPROVED_ROLES:
+            #         neededrole = APPROVED_ROLES[third]
+            #     else:
+            #         await SEND(ch, "You cannot unassign this role through my commands.")
+            #         return
 
-                for mem in SERVER_DATA['server'].members:
-                    if int(mem.id) == int(msgsplit[1]):
-                        await SEND(ch, "Took the role away from " + mem.name)
-                        await asyncio.sleep(1)
-                        await REMOVE_ROLES(mem, neededrole)
-                        break
-                return  
+            #     for mem in SERVER_DATA['server'].members:
+            #         if int(mem.id) == int(msgsplit[1]):
+            #             await SEND(ch, "Took the role away from " + mem.name)
+            #             await asyncio.sleep(1)
+            #             await REMOVE_ROLES(mem, neededrole)
+            #             break
+            #     return  
             
-            #creates new emoji
-            if lmsg.startswith("ne", 1):
-                try:
-                    url = msgsplit[1]
-                    name = third
+            # #creates new emoji
+            # if lmsg.startswith("ne", 1):
+            #     try:
+            #         url = msgsplit[1]
+            #         name = third
                     
-                    # Download the image data
-                    response = requests.get(url)
-                    if response.status_code == 200:
-                        image_data = response.content
-                        emoji = await message.guild.create_custom_emoji(name=name, image=image_data)
-                        await message.channel.send(f"Emoji {emoji.name} has been added!")
-                    else:
-                        await message.channel.send("Could not download image.")
+            #         # Download the image data
+            #         response = requests.get(url)
+            #         if response.status_code == 200:
+            #             image_data = response.content
+            #             emoji = await message.guild.create_custom_emoji(name=name, image=image_data)
+            #             await message.channel.send(f"Emoji {emoji.name} has been added!")
+            #         else:
+            #             await message.channel.send("Could not download image.")
                         
-                except Exception as e:
-                    await message.channel.send(f"Error creating emoji: {str(e)}")
+            #     except Exception as e:
+            #         await message.channel.send(f"Error creating emoji: {str(e)}")
 
-            #-----COMMANDS THAT ONLY USE 4 INPUTS-----
-            #edits db rig tracking count for specific alignment
-            if lmsg.startswith("edit tracker", 1):
-                db.set(lthird + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
-                return
+            # #-----COMMANDS THAT ONLY USE 4 INPUTS-----
+            # #edits db rig tracking count for specific alignment
+            # if lmsg.startswith("edit tracker", 1):
+            #     db.set(lthird + "uses", msg.split(" ", 3)[3])  #edit tracker patron 2 
+            #     return
             
             #-----COMMANDS THAT ONLY USE EVEN MORE INPUTS-----
             #empty so far-
