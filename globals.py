@@ -67,6 +67,8 @@ IMPOSTOR_WARNINGS = [
     "Good luck on copying me.",
 ]
 
+ALLOWED_GUILDS = [624227331720085528, 1222614666333782207]
+
 IMPOSTOR_NICKS = [
     "I am a thief",
     "my plan, foiled!",
