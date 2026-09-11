@@ -131,86 +131,112 @@ class ShowEggs(discord.ui.View):
     def __init__(self, *, timeout=180):
         super().__init__(timeout=timeout)
         self.message = None
-        self.cp = 0
+        self.cp = 0  # Current page index
         self.sidecolor = "FFA500"
         self.embed = None
+        self.target = None
+        self.requester = None
 
         self.counter = {
             "Eggs": 0,
             "AllEggs": 0,
         }
-        
+
         self.title = "{user}'s basket"
 
-        self.data = ["", ""]
-        self.footers = ["", ""]
+        # Dynamic lists initialized empty
+        self.data = []
+        self.footers = []
+
+    @property
+    def max_page(self) -> int:
+        total_pages = len(self.data)
+        if total_pages == 0:
+            return 0
+
+        is_admin = EXTRA_ROLES["admin"] in self.requester.roles
+        # Non-admins cap at index 1 (Page 2), admins can view all pages
+        return total_pages - 1 if is_admin else min(1, total_pages - 1)
 
     async def on_timeout(self):
         for item in self.children:
             item.disabled = True
-
-        await self.message.edit(embed=self.embed, view=self)
-
-    # async def send(self, ch):
-    #     self.message = await ch.send(view=self, embed=self.create_embed())
-    #     self.update_buttons()
+        if self.message:
+            await self.message.edit(embed=self.embed, view=self)
 
     async def send(self, ch):
         self.message = await ch.send(view=self)
         await self.update_message()
-        
+
     def create_embed(self):
         embed = discord.Embed()
         embed.title = self.title.format(user=self.target.display_name)
-        # embed.title = f"{self.target.display_name}'s eggs"
-        # embed.description = self.data
-        embed.description = self.data[self.cp]
-        embed.set_footer(text=self.footers[self.cp].format(usr=self.target.display_name, etotal=self.counter["AllEggs"], ecurrent=self.counter["Eggs"]))
+        embed.description = (
+            self.data[self.cp] if self.cp < len(self.data) else ""
+        )
 
-        embed.color = discord.Colour(int(self.sidecolor, 16)) 
+        footer_text = (
+            self.footers[self.cp] if self.cp < len(self.footers) else ""
+        )
+        embed.set_footer(
+            text=footer_text.format(
+                usr=self.target.display_name,
+                etotal=self.counter["AllEggs"],
+                ecurrent=self.counter["Eggs"],
+            )
+        )
 
+        embed.color = discord.Colour(int(self.sidecolor, 16))
         self.embed = embed
         return embed
-    
+
     async def update_message(self):
         self.update_buttons()
         await self.message.edit(embed=self.create_embed(), view=self)
 
     def update_buttons(self):
-        if self.cp == 0:
+        # Disable prev button at start
+        if self.cp <= 0:
             self.prev_button.disabled = True
             self.prev_button.style = discord.ButtonStyle.gray
         else:
             self.prev_button.disabled = False
             self.prev_button.style = discord.ButtonStyle.primary
 
-        if self.cp == 1:
+        # Disable next button at maximum allowed page
+        if self.cp >= self.max_page:
             self.next_button.disabled = True
             self.next_button.style = discord.ButtonStyle.gray
         else:
             self.next_button.disabled = False
             self.next_button.style = discord.ButtonStyle.primary
 
-        # if not EXTRA_ROLES['admin'] in self.requester.roles and self.cp == 0:
-        #     self.next_button.disabled = True
-
-    async def check_requester(self, interaction):
+    async def check_requester(self, interaction: discord.Interaction) -> bool:
         if interaction.user != self.requester:
-            await INTERACTION(interaction, "You wish these eggs were yours.", True)
-            return
+            await INTERACTION(
+                interaction, "You wish these eggs were yours.", True
+            )
+            return False
+        return True
 
     @discord.ui.button(label="<", style=discord.ButtonStyle.primary)
-    async def prev_button(self, interaction:discord.Interaction, button: discord.ui.Button):
-        await self.check_requester(interaction)
+    async def prev_button(
+        self, interaction: discord.Interaction, button: discord.ui.Button
+    ):
+        if not await self.check_requester(interaction):
+            return
         await DEFER(interaction)
-        self.cp -= 1
+        self.cp = max(0, self.cp - 1)
         await self.update_message()
 
     @discord.ui.button(label=">", style=discord.ButtonStyle.primary)
-    async def next_button(self, interaction:discord.Interaction, button: discord.ui.Button):
-        await self.check_requester(interaction)
+    async def next_button(
+        self, interaction: discord.Interaction, button: discord.ui.Button
+    ):
+        if not await self.check_requester(interaction):
+            return
         await DEFER(interaction)
-        self.cp += 1
+        self.cp = min(self.max_page, self.cp + 1)
         await self.update_message()
 
 class ShowCommands(discord.ui.View):    

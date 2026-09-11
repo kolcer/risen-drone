@@ -116,33 +116,42 @@ class PersonalCog(commands.Cog):
         view.target = target
         view.requester = interaction.user
 
-        egg_roles = "## Egg Hunt 2025\n\n"
-        # Prepare list to show in PAGE 1 (2025 egg hunt)
-        for role in FUN_ROLES["Easter"]:
-            view.counter["AllEggs"] += 1
-            if str(target.id) in list_decoded_entries(role):
-                view.counter["Eggs"] += 1
-                egg_roles += "**" + str(role) + "** 🧺\n"
+        # List of pages: (Page Title, FUN_ROLES dictionary key)
+        egg_hunts = [
+            ("Egg Hunt 2025", "Easter"),
+            ("Egg Hunt 2026", "Easter26"),
+            ("Egg Hunt 2027", "Easter27"),
+        ]
+
+        target_id_str = str(target.id)
+
+        for title, role_key in egg_hunts:
+            page_found = 0
+            page_total = 0
+            egg_roles = f"## {title}\n\n"
+
+            for role in FUN_ROLES.get(role_key, []):
+                page_total += 1
+                view.counter["AllEggs"] += 1
+
+                if target_id_str in list_decoded_entries(role):
+                    page_found += 1
+                    view.counter["Eggs"] += 1
+                    egg_roles += f"**{role}** 🧺\n"
+                else:
+                    egg_roles += "**???** 🧺\n"
+
+            view.data.append(egg_roles)
+
+            # Per-page footer check
+            if page_found == page_total and page_total > 0:
+                footer_text = f"{target.name} found all the {page_found} eggs, wow!"
             else:
-                egg_roles += "**???** 🧺\n"
+                footer_text = f"{page_found} out of {page_total} eggs."
 
-        view.data[0] = egg_roles
-        view.footers[0] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
+            view.footers.append(footer_text)
 
-        egg_roles = "## Egg Hunt 2026\n\n"
-        # Prepare list to show in PAGE 2 (2026 egg hunt)
-        for role in FUN_ROLES["Easter26"]:
-            view.counter["AllEggs"] += 1
-            if str(target.id) in list_decoded_entries(role):
-                view.counter["Eggs"] += 1
-                egg_roles += "**" + str(role) + "** 🧺\n"
-            else:
-                egg_roles += "**???** 🧺\n"
-
-        view.data[1] = egg_roles
-        view.footers[1] = f"{target.name} found all the {view.counter['Eggs']} eggs, wow!" if view.counter["Eggs"] == view.counter["AllEggs"] else f"{view.counter['Eggs']} out of {view.counter['AllEggs']} eggs."
-
-        # Send view... hopefully
+        # Send view
         view.message = await FOLLOWUP(None, interaction, False, view)
         await view.update_message()
 
