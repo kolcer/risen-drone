@@ -510,6 +510,8 @@ SINGLE_WORD_TRIGGERS = {
         '<@827952429290618943>',
     "It's spelt Thief.":
         "theif",
+    "It's spelt alignment.":
+        "allignment",
 }
 
 # ^ that but its reactions instead of responses - does not have to be a single word, just a single string
