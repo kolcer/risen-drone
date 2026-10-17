@@ -125,7 +125,7 @@ def build_role_page(view, target, index):
     view.footers[index + 1] = (f"{view.counter['Locked']} / {view.counter['AllLocked']} locked roles.")
 
     # --- DEVELOPER OVERRIDE ---
-    if target.id in GIT_COMMITTERS.values():           
+    if target.id in GIT_COMMITTERS.values() or EXTRA_ROLES["admin"] in target.roles:           
         view.data[index] = 'Empty...'
         view.data[index + 1] = 'Empty...'
         view.footers[index] = "This person knows how to get the roles, what's the point?"
