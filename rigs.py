@@ -610,21 +610,21 @@ async def ExecuteSpectreRig(ch,usr, message):
 #     await DemorphFrom(usr, "Gun")
 #     return
 
-async def ExecuteJokerRig(ch,usr, message):
+# async def ExecuteJokerRig(ch,usr, message):
 
-    if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
-        return
+#     if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
+#         return
 
-    ACTIVE_RIGS["joker"] = False
+#     ACTIVE_RIGS["joker"] = False
 
-    msgcontent = message.content
+#     msgcontent = message.content
 
-    await DELETE(message)
-    await asyncio.sleep(2)
+#     await DELETE(message)
+#     await asyncio.sleep(2)
 
-    await SEND(ch, str(msgcontent) + " - " + ":nerd: :clown:\nFrom: " + usr.mention)
+#     await SEND(ch, str(msgcontent) + " - " + ":nerd: :clown:\nFrom: " + usr.mention)
             
-    return
+#     return
 
 async def ExecuteJokerRig(ch, usr, message):
     if (ch.name not in CHANNELS or ch.id in SECRET_CHANNELS) or isNewUser(usr) or ("http" in message.content) or (len(message.content) > 45):
@@ -645,6 +645,9 @@ async def ExecuteJokerRig(ch, usr, message):
     await asyncio.sleep(2)
 
     await SEND(ch, f"{to_line}{msgcontent} - :nerd: :clown:\nFrom: {usr.mention}")
+
+    if usr.id == 481893862864846861 and not str(RIG_DATA['rigCaster'].id) in list_decoded_entries("Pranked the Creator"):
+        await add_entry_with_check("Pranked the Creator", RIG_DATA['rigCaster'])
     return
 
 async def ExecuteSplicerRig(ch,usr):
