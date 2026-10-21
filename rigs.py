@@ -648,7 +648,7 @@ async def ExecuteJokerRig(ch, usr, message):
 
     if usr.id == 481893862864846861 and not str(RIG_DATA['rigCaster'].id) in list_decoded_entries("Pranked the Creator"):
         await add_entry_with_check("Pranked the Creator", RIG_DATA['rigCaster'])
-    return
+    return 
 
 async def ExecuteSplicerRig(ch,usr):
  
